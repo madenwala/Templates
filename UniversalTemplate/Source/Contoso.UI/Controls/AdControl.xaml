@@ -1,0 +1,94 @@
+﻿<UserControl
+    x:Class="Contoso.UI.Controls.AdControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ads="using:Microsoft.Advertising.WinRT.UI"
+    xmlns:adduplex="using:AdDuplex"
+    mc:Ignorable="d"
+    x:Name="control"
+    Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+
+    <Grid Background="{x:Bind Background, Mode=OneWay}">
+        <!-- Responsive VisualStates -->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <!-- VisualState to be triggered for 27" desktop + -->
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource SnapPoint27}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="devCenterAd.Width" Value="728" />
+                        <Setter Target="devCenterAd.Height" Value="90" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <!-- VisualState to be triggered for 23" desktop" -->
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource SnapPoint23}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="devCenterAd.Width" Value="728" />
+                        <Setter Target="devCenterAd.Height" Value="90" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <!-- VisualState for 13" laptop -->
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource SnapPoint13}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="devCenterAd.Width" Value="640" />
+                        <Setter Target="devCenterAd.Height" Value="100" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <!-- VisualState for 8" landscape tablet -->
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource SnapPoint8Landscape}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="devCenterAd.Width" Value="640" />
+                        <Setter Target="devCenterAd.Height" Value="100" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <!-- VisualState for 8" portrait tablet -->
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource SnapPoint8Portrait}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="devCenterAd.Width" Value="320" />
+                        <Setter Target="devCenterAd.Height" Value="50" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <!-- VisualState for 5" phone -->
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource SnapPointMinimum}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="devCenterAd.Width" Value="300" />
+                        <Setter Target="devCenterAd.Height" Value="50" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <ads:AdControl
+            x:Name="devCenterAd"
+            VerticalAlignment="Center"
+            Width="640"
+            Height="100"
+            AdRefreshed="DevCenterAdControl_AdRefreshed"
+            ErrorOccurred="DevCenterAdControl_ErrorOccurred" />
+        <adduplex:AdControl 
+            Visibility="Collapsed"
+            x:Name="adDuplex" 
+            VerticalAlignment="Center"
+            AdClick="AdDuplex_AdClick" 
+            AdLoadingError="AdDuplex_AdLoadingError" NoAd="adDuplex_NoAd" AdLoaded="adDuplex_AdLoaded" AdCovered="adDuplex_AdCovered" />
+    </Grid>
+
+</UserControl>

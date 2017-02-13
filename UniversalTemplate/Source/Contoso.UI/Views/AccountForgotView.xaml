@@ -1,0 +1,48 @@
+﻿<views:AccountForgetViewBase
+    x:Class="Contoso.UI.Views.AccountForgotView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:views="using:Contoso.UI.Views"
+    xmlns:controls="using:Contoso.UI.Controls"
+    xmlns:behaviors="using:Contoso.UI.Behaviors"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:designTime="using:Contoso.Core.ViewModels.Designer"
+    d:DataContext="{d:DesignInstance designTime:AccountForgotViewModel, IsDesignTimeCreatable=True}"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <controls:BodyPanel ContainerTemplate="{StaticResource BodyPanelScrollViewerContainerTemplate}">
+        <controls:BodyPanel.AppBar>
+            <CommandBar ClosedDisplayMode="Minimal">
+                <CommandBar.PrimaryCommands>
+                    <AppBarButton x:Name="primarySettings" x:Uid="/Contoso.Core/Resources/abtnSettings" Label="[Settings]" Icon="Setting" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToSettingsCommand}" />
+                </CommandBar.PrimaryCommands>
+                <CommandBar.SecondaryCommands>
+                    <AppBarButton x:Uid="/Contoso.Core/Resources/abtnSettings" Label="[Settings]" Icon="Setting" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToSettingsCommand}" />
+                </CommandBar.SecondaryCommands>
+            </CommandBar>
+        </controls:BodyPanel.AppBar>
+        <controls:BodyPanel.BodyContent>
+            <StackPanel MaxWidth="{StaticResource FormMaxWidth}">
+                <TextBox 
+                    x:Name="txtUsername"
+                    x:Uid="/Contoso.Core/Account/txtUsername" 
+                    Header="[Username:]" 
+                    Text="{Binding ViewModel.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                    InputScope="EmailSmtpAddress">
+                    <interactivity:Interaction.Behaviors>
+                        <behaviors:FocusOnLoadBehavior  />
+                        <behaviors:EnterKeyBehavior Command="{x:Bind ViewModel.SubmitCommand, Mode=OneWay}" />
+                    </interactivity:Interaction.Behaviors>
+                </TextBox>
+                <Button 
+                    x:Uid="/Contoso.Core/Resources/btnSubmit" 
+                    Style="{StaticResource PrimaryButtonStyle}" 
+                    Content="[Submit]" 
+                    Command="{x:Bind ViewModel.SubmitCommand, Mode=OneWay}" />
+            </StackPanel>
+        </controls:BodyPanel.BodyContent>
+    </controls:BodyPanel>
+    
+</views:AccountForgetViewBase>

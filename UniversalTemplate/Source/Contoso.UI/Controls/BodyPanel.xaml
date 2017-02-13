@@ -1,0 +1,117 @@
+﻿<controls:BodyPanelBase
+    x:Class="Contoso.UI.Controls.BodyPanel"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Contoso.UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <controls:BodyPanelBase.Resources>
+
+        <Style TargetType="controls:BodyPanel">
+            <Setter Property="Background" Value="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
+            <Setter Property="HeaderForeground" Value="{ThemeResource SystemControlForegroundAccentBrush}" />
+            <Setter Property="HeaderBackground" Value="{ThemeResource SystemControlBackgroundChromeMediumBrush}" />
+            <Setter Property="ContainerTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <ContentPresenter />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ViewHeaderStatusTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource ViewHeaderTextBlockStyle}">
+            <Setter Property="Margin" Value="12,2,12,0" />
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="Opacity" Value=".7" />
+            <Setter Property="FontWeight" Value="Normal" />
+        </Style>
+        
+    </controls:BodyPanelBase.Resources>
+
+    <Grid Background="{x:Bind Background, Mode=OneWay}">
+        <!-- Responsive VisualStates -->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <!-- VisualState for 8" tablet portrait -->
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource SnapPoint8Portrait}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="appbar.(Grid.Row)" Value="0" />
+                        <Setter Target="appbar.(Grid.Column)" Value="0" />
+                        <Setter Target="appbar.(Grid.ColumnSpan)" Value="1" />
+                        <Setter Target="appbar.HorizontalContentAlignment" Value="Right" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{StaticResource StandardElementGridLength}"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <!--Header Background-->
+        <Grid Grid.ColumnSpan="2" Background="{x:Bind HeaderBackground, Mode=OneWay}" />
+
+        <!--Title-->
+        <Button
+            Margin="{Binding ViewModel.View.Frame.IsMenuHidden, Mode=OneWay, Converter={StaticResource isMenuHiddenConverter}}"
+            HorizontalAlignment="Stretch"
+            HorizontalContentAlignment="Left" 
+            VerticalAlignment="Center" 
+            IsTabStop="False" 
+            Command="{x:Bind ViewModel.ViewScrollToTopCommand, Mode=OneWay}"
+            Style="{StaticResource TransparentButtonStyle}" >
+            <TextBlock Text="{x:Bind ViewModel.Title, Mode=OneWay, FallbackValue='N/A'}" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="12,0" />
+        </Button>
+
+        <!--Body-->
+        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+            <Grid.ChildrenTransitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition/>
+                </TransitionCollection>
+            </Grid.ChildrenTransitions>
+            <controls:BodyPanelContainer x:Name="bodyPanelContainer" Template="{x:Bind ContainerTemplate}">
+                <ContentPresenter Content="{x:Bind BodyContent}" />
+            </controls:BodyPanelContainer>
+        </Grid>
+        
+        <!--AppBar-->
+        <ContentControl 
+            x:Name="appbar" 
+            IsTabStop="False"
+            Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="2"
+            VerticalAlignment="Top"
+            Content="{x:Bind AppBar}" HorizontalContentAlignment="Stretch" />
+
+        <!--Progress Bars-->
+        <Grid Grid.ColumnSpan="2" VerticalAlignment="Top">
+            <ProgressBar 
+                Visibility="{x:Bind ViewModel.StatusIsBusy, Converter={StaticResource visConverter}, Mode=OneWay, FallbackValue=Collapsed}"
+                IsIndeterminate="{x:Bind ViewModel.StatusIsBusy, Mode=OneWay, FallbackValue=False}" />
+            <ProgressBar 
+                Visibility="{x:Bind ViewModel.StatusProgressValue, Converter={StaticResource visConverter}, Mode=OneWay, FallbackValue=Collapsed}" 
+                Value="{x:Bind ViewModel.StatusProgressValue, Mode=OneWay, Converter={StaticResource doubleConverter}}" 
+                Minimum="0" Maximum="100" Opacity=".75" />
+        </Grid>
+        
+        <!--StatusText-->
+        <StackPanel
+            Margin="{Binding ViewModel.View.Frame.IsMenuHidden, Mode=OneWay, Converter={StaticResource isMenuHiddenConverter}}"
+            VerticalAlignment="Top" Visibility="{x:Bind ViewModel.StatusIsBlocking, Converter={StaticResource visInvertedConverter}, FallbackValue=Collapsed, Mode=OneWay}">
+            <TextBlock Style="{StaticResource ViewHeaderStatusTextBlockStyle}" Text="{x:Bind ViewModel.StatusText, Mode=OneWay}" Visibility="{x:Bind ViewModel.StatusText, Mode=OneWay, Converter={StaticResource visConverter}}" />
+        </StackPanel>
+
+    </Grid>
+    
+</controls:BodyPanelBase>

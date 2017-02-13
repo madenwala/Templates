@@ -1,0 +1,61 @@
+﻿<views:DetailsViewBase
+    x:Class="Contoso.UI.Views.DetailsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:views="using:Contoso.UI.Views"
+    xmlns:models="using:Contoso.Core.Models"
+    xmlns:controls="using:Contoso.UI.Controls"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:was="using:AppStudio.Uwp.Controls"
+    xmlns:triggers="using:Contoso.UI.Triggers"
+    xmlns:behaviors="using:Contoso.UI.Behaviors"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:designTime="using:Contoso.Core.ViewModels.Designer"
+    d:DataContext="{d:DesignInstance designTime:DetailsViewModel, IsDesignTimeCreatable=True}"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <controls:BodyPanel ContainerTemplate="{StaticResource BodyPanelScrollViewerContainerTemplate}">
+        <controls:BodyPanel.AppBar>
+            <CommandBar>
+                <CommandBar.PrimaryCommands>
+                    <AppBarButton x:Uid="/Contoso.Core/Resources/abtnHome" Label="[Home]" Icon="Home" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToHomeCommand}" Visibility="{x:Bind ViewModel.ShowHomeButton, Converter={StaticResource visConverter}}" />
+                    <AppBarButton x:Uid="/Contoso.Core/Resources/abtnOpenNewWindow" x:Name="btnOpenNewWindow" Label="[Open in new window]" Icon="NewWindow" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToNewWindowCommand}" CommandParameter="{x:Bind ViewModel, Mode=OneWay}" Visibility="{x:Bind ViewModel.Platform.IsDesktop, Converter={StaticResource visConverter}}" />
+                    <AppBarButton x:Uid="/Contoso.Core/Resources/abtnPin" Label="[Pin to start]" Icon="Pin" Command="{x:Bind ViewModel.PinTileCommand}" CommandParameter="{x:Bind ViewModel.Item, Mode=OneWay}" Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource visConverter}}" />
+                    <AppBarButton x:Uid="/Contoso.Core/Resources/abtnUnpin" Label="[Unpin to start]" Icon="UnPin" Command="{x:Bind ViewModel.UnpinTileCommand}" CommandParameter="{x:Bind ViewModel.Item, Mode=OneWay}" Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource visConverter}}" />
+                    <AppBarButton x:Uid="/Contoso.Core/Resources/abtnShare" Label="[Share]" Command="{x:Bind ViewModel.Platform.SharingManager.ShareCommand}" CommandParameter="{x:Bind ViewModel.Item, Mode=OneWay}" Visibility="{x:Bind ViewModel.Platform.IsXbox, Converter={StaticResource visInvertedConverter}}">
+                        <FontIcon Glyph="&#xE72D;"/>
+                    </AppBarButton>
+                    <AppBarButton x:Uid="/Contoso.Core/Resources/abtnRefresh" Label="[Refresh]" Icon="Refresh" Command="{x:Bind ViewModel.RefreshCommand, Mode=OneWay}" />
+                </CommandBar.PrimaryCommands>
+                <CommandBar.SecondaryCommands>
+                    <AppBarButton x:Uid="/Contoso.Core/Resources/abtnSettings" Label="[Settings]" Icon="Setting" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToSettingsCommand}" />
+                </CommandBar.SecondaryCommands>
+            </CommandBar>
+        </controls:BodyPanel.AppBar>
+        <controls:BodyPanel.BodyContent>
+            <StackPanel Visibility="{x:Bind ViewModel.Item, Mode=OneWay, Converter={StaticResource visConverter}}">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup>
+                        <VisualState>
+                            <VisualState.StateTriggers>
+                                <triggers:DeviceFamilyTrigger TargetDeviceFamily="Mobile" />
+                            </VisualState.StateTriggers>
+                            <VisualState.Setters>
+                                <Setter Target="btnOpenNewWindow.Visibility" Value="Collapsed" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <TextBlock Text="{x:Bind ViewModel.Item.LineOne, Mode=OneWay}" Style="{StaticResource TitleTextBlockStyle}" />
+                <TextBlock Text="{x:Bind ViewModel.Item.LineTwo, Mode=OneWay}" />
+                <TextBlock Text="{x:Bind ViewModel.Item.LineThree, Mode=OneWay}" />
+                <TextBlock Text="{x:Bind ViewModel.Item.LineFour, Mode=OneWay}" />
+                <Button Content="Download" Command="{x:Bind ViewModel.DownloadCommand, Mode=OneWay}" IsEnabled="{x:Bind ViewModel.IsDownloadEnabled, Mode=OneWay}" />
+                <TextBlock Text="{x:Bind ViewModel.Item.LastUpdated, Mode=OneWay}" />
+            </StackPanel>
+        </controls:BodyPanel.BodyContent>
+    </controls:BodyPanel>
+    
+</views:DetailsViewBase>
