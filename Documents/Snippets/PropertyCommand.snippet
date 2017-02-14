@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Property Navigation Command</Title>
+      <Author>Mohammed Adenwala</Author>
+      <Shortcut>propn</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>ViewShortName</ID>
+          <ToolTip>Replace with the Short Name of the View used in the NavigationManager.</ToolTip>
+          <Default>NavigateTo</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="CSharp">
+        <![CDATA[private CommandBase _navigateTo$ViewShortName$Command = null;
+        public CommandBase NavigateTo$ViewShortName$Command
+        {
+            get { return Platform.Current == null ? null : _navigateTo$ViewShortName$Command ?? (_navigateTo$ViewShortName$Command = new NavigationCommand("NavigateTo$ViewShortName$Command", Platform.Current.Navigation.$ViewShortName$)); }
+        }]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Property UserControl</Title>
+      <Author>Mohammed Adenwala</Author>
+      <Shortcut>propuc</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>PropType</ID>
+          <ToolTip>Replace with a property type.</ToolTip>
+          <Default>string</Default>
+        </Literal>
+        <Literal>
+          <ID>PropName</ID>
+          <ToolTip>Replace with a property name.</ToolTip>
+          <Default>MyPropertyName</Default>
+        </Literal>
+        <Literal>
+          <ID>UserControlType</ID>
+          <ToolTip>Replace with the type of the control this property will be on.</ToolTip>
+          <Default>UserControlType</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="CSharp">
+        <![CDATA[public static readonly DependencyProperty $PropName$Property = DependencyProperty.Register("$PropName$", typeof($PropType$), typeof($UserControlType$), new PropertyMetadata(null, new PropertyChangedCallback(On$PropName$Changed)));
+        public $PropType$ $PropName$
+        {
+            get { return ($PropType$)GetValue($PropName$Property); }
+            set { SetValue($PropName$Property, value); }
+        }
+        private static void On$PropName$Changed(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+        {
+            var ctrl = sender as $UserControlType$;
+            if (ctrl != null)
+            {
+                // TODO Manage new/old values here
+                // ctrl.??? = ($PropType$)args.NewValue;
+            }
+        }]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
