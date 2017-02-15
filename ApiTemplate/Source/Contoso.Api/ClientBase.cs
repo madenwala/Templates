@@ -56,7 +56,7 @@ namespace Contoso.Api
         /// <param name="serializerType">Specifies how the data should be deserialized.</param>
         /// <returns>Instance of the type specified representing the data returned from the URL.</returns>
         /// <summary>
-        protected async Task<T> GetAsync<T>(string url, CancellationToken ct)
+        protected async Task<T> GetAsync<T>(string url, CancellationToken ct = default(CancellationToken))
         {
             if (string.IsNullOrEmpty(url))
                 throw new ArgumentNullException(nameof(url));
@@ -67,6 +67,10 @@ namespace Contoso.Api
             return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(data);
         }
 
+        #endregion
+
+        #region Post
+
         /// <summary>
         /// Posts data to the specified URL.
         /// </summary>
@@ -76,7 +80,7 @@ namespace Contoso.Api
         /// <param name="ct">Cancellation token.</param>
         /// <param name="serializerType">Specifies how the data should be deserialized.</param>
         /// <returns>Instance of the type specified representing the data returned from the URL.</returns>
-        protected async Task<T> PostAsync<T>(string url, CancellationToken ct, HttpContent contents = default(HttpContent))
+        protected async Task<T> PostAsync<T>(string url, CancellationToken ct = default(CancellationToken), HttpContent contents = default(HttpContent))
         {
             string data = await this.PostAsync(url, ct, contents);
             return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(data);
@@ -90,7 +94,7 @@ namespace Contoso.Api
         /// <param name="ct">Cancellation token.</param>
         /// <param name="serializerType">Specifies how the data should be deserialized.</param>
         /// <returns>Response contents as string else null if nothing.</returns>
-        protected async Task<string> PostAsync(string url, CancellationToken ct, HttpContent contents = default(HttpContent))
+        protected async Task<string> PostAsync(string url, CancellationToken ct = default(CancellationToken), HttpContent contents = default(HttpContent))
         {
             HttpResponseMessage response = await this.PostAsync(url, contents, ct);
             var data = await response.Content?.ReadAsStringAsync();
@@ -105,7 +109,7 @@ namespace Contoso.Api
         /// <param name="ct">Cancellation token.</param>
         /// <param name="serializerType">Specifies how the data should be deserialized.</param>
         /// <returns>Response contents as string else null if nothing.</returns>
-        protected async Task<HttpResponseMessage> PostAsync(string url, HttpContent contents, CancellationToken ct)
+        protected async Task<HttpResponseMessage> PostAsync(string url, HttpContent contents, CancellationToken ct = default(CancellationToken))
         {
             if (string.IsNullOrEmpty(url))
                 throw new ArgumentNullException(nameof(url));
