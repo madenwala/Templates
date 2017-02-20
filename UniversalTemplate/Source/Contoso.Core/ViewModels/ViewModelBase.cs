@@ -807,6 +807,7 @@ namespace Contoso.Core.ViewModels
             }
             catch (Exception ex)
             {
+                Platform.Logger.LogError(ex, $"Exception while trying to refresh {this.GetType().Name}.");
                 this.HandleException(ex);
             }
             finally

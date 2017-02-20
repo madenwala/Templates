@@ -47,6 +47,9 @@ namespace Contoso.Core.Models
         }
 
         private bool _EnableFullLogging = false;
+        /// <summary>
+        /// Gets or sets whether or not debug logging is enabled.
+        /// </summary>
         public bool EnableFullLogging
         {
             get { return _EnableFullLogging; }

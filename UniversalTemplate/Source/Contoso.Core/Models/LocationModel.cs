@@ -247,7 +247,7 @@ namespace Contoso.Core.Models
     {
     }
 
-    public class UniqueLocationModel<T> : LocationModel, IUniqueLocationModel, IEquatable<IUniqueModel>
+    public class UniqueLocationModel : LocationModel, IUniqueLocationModel, IEquatable<IUniqueModel>
     {
         #region Properties
 
@@ -282,12 +282,12 @@ namespace Contoso.Core.Models
             return this.ID.GetHashCode();
         }
 
-        public static bool operator ==(UniqueLocationModel<T> obj1, IUniqueModel obj2)
+        public static bool operator ==(UniqueLocationModel obj1, IUniqueModel obj2)
         {
             return (object)obj1 == null || (object)obj2 == null ? Equals(obj1, obj2) : obj1.Equals(obj2);
         }
 
-        public static bool operator !=(UniqueLocationModel<T> obj1, IUniqueModel obj2)
+        public static bool operator !=(UniqueLocationModel obj1, IUniqueModel obj2)
         {
             return obj1 == null || obj2 == null ? !Equals(obj1, obj2) : !obj1.Equals(obj2);
         }
@@ -297,7 +297,7 @@ namespace Contoso.Core.Models
         #endregion
     }
 
-    public class UniqueLocationModelList<TItem, TIdType> : UniqueModelList<TItem> where TItem : IUniqueLocationModel
+    public class UniqueLocationModelList<T> : UniqueModelList<T> where T : IUniqueLocationModel
     {
         #region Constructors
 
@@ -305,7 +305,7 @@ namespace Contoso.Core.Models
         {
         }
 
-        public UniqueLocationModelList(IEnumerable<TItem> items)
+        public UniqueLocationModelList(IEnumerable<T> items)
         {
             this.AddRange(items);
         }

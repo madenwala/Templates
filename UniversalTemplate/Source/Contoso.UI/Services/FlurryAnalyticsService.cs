@@ -64,9 +64,14 @@ namespace Contoso.UI.Services
                 Api.SetLocation(loc.Latitude, loc.Longitude, 0);
         }
 
-        public override void SetUsername(string username)
+        public override void SetUser(string username)
         {
             Api.SetUserId(username);
+        }
+
+        public override void SetUser(UserResponse user)
+        {
+            Api.SetUserId(user?.Email);
         }
 
         public override void Dispose()

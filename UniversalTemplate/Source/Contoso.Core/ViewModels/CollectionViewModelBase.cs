@@ -91,8 +91,11 @@ namespace Contoso.Core.ViewModels
 
         protected override async Task OnRefreshAsync(bool forceRefresh, CancellationToken ct)
         {
-            this.CurrentViewModel.UserForcedRefresh = this.UserForcedRefresh;
-            await this.CurrentViewModel.RefreshAsync(forceRefresh);
+            if (this.CurrentViewModel != null)
+            {
+                this.CurrentViewModel.UserForcedRefresh = this.UserForcedRefresh;
+                await this.CurrentViewModel.RefreshAsync(forceRefresh);
+            }
             await base.OnRefreshAsync(forceRefresh, ct);
         }
 

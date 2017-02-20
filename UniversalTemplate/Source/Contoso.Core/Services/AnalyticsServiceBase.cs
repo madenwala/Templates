@@ -55,7 +55,17 @@ namespace Contoso.Core.Services
         /// <param name="ex">The exception object</param>
         public abstract void Error(Exception ex, string message = null);
 
-        public abstract void SetUsername(string username);
+        /// <summary>
+        /// Sets the user to the analytics providers.
+        /// </summary>
+        /// <param name="user">Instance of a user information class.</param>
+        public abstract void SetUser(UserResponse user);
+
+        /// <summary>
+        /// Sets the user to the analytics providers.
+        /// </summary>
+        /// <param name="username">Username of the current user.</param>
+        public abstract void SetUser(string username);
 
         /// <summary>
         /// Sets the current location to the analytics service.
@@ -124,12 +134,20 @@ namespace Contoso.Core.Services
             Platform.Current.Logger.Log(LogLevels.Information, $"ANALYTICS: Event({eventName}, {Serializer.Serialize(properties)}, {Serializer.Serialize(metrics)})");
         }
 
-        public override void SetUsername(string username)
+        public override void SetUser(string username)
         {
 #if !DEBUG
-            this.Services.ForEach(s => s.SetUsername(username));
+            this.Services.ForEach(s => s.SetUser(username));
 #endif
-            Platform.Current.Logger.Log(LogLevels.Information, $"ANALYTICS: SetUsername({username})");
+            Platform.Current.Logger.Log(LogLevels.Information, $"ANALYTICS: SetUser({username})");
+        }
+
+        public override void SetUser(UserResponse user)
+        {
+#if !DEBUG
+            this.Services.ForEach(s => s.SetUser(user));
+#endif
+            Platform.Current.Logger.Log(LogLevels.Information, $"ANALYTICS: SetUser({user?.Email})");
         }
     }
 

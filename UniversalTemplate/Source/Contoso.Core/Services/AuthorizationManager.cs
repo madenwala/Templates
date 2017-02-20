@@ -128,7 +128,7 @@ namespace Contoso.Core.Services
             else
             {
                 // Log user
-                Platform.Current.Analytics.SetUsername(response.Email);
+                Platform.Current.Analytics.SetUser(response);
 
                 // Store user data
                 await Platform.Current.Storage.SaveFileAsync(CREDENTIAL_USER_KEYNAME, response, ApplicationData.Current.RoamingFolder, SerializerTypes.Json);

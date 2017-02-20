@@ -50,9 +50,18 @@ namespace Contoso.UI.Services
             HockeyClient.Current.TrackEvent("SetCurrentLocation", null, metrics);
         }
 
-        public override void SetUsername(string username)
+        public override void SetUser(string username)
         {
-            this.Event("Username", username);
+            HockeyClient.Current.UpdateContactInfo(username, username);
+        }
+
+        public override void SetUser(UserResponse user)
+        {
+            if (user != null)
+            {
+                this.Event("Username", user.Email);
+                HockeyClient.Current.UpdateContactInfo(user.ID, user.Email);
+            }
         }
     }
 }

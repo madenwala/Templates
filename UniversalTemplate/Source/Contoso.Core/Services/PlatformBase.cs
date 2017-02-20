@@ -142,7 +142,7 @@ namespace Contoso.Core.Services
             }
 
             // Record the userID to analytics
-            this.Analytics.SetUsername(this.AppInfo.UserID);
+            this.Analytics.SetUser(this.AppInfo.UserID);
 
             // Execute only on first runs of the platform
             if (mode == InitializationModes.New)
