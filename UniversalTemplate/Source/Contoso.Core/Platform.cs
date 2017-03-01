@@ -92,6 +92,8 @@ namespace Contoso.Core
 
             if (mode == InitializationModes.New)
             {
+                Platform.Current.Analytics.Event("OS-Version", Microsoft.Toolkit.Uwp.Helpers.SystemInformation.OperatingSystemVersion);
+
                 // Check for previous app crashes
                 await Platform.Current.Logger.CheckForFatalErrorReportsAsync(this.ViewModel);
 

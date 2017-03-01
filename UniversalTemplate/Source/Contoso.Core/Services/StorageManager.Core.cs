@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Contoso.Core.Extensions;
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;

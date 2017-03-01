@@ -1,5 +1,7 @@
 ﻿using Contoso.Core.Commands;
+using Contoso.Core.Extensions;
 using Contoso.Core.ViewModels;
+using Microsoft.Toolkit.Uwp.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -276,14 +278,14 @@ namespace Contoso.Core.Services
             }
             sb.AppendLine("INITIALIZATION MODE: " + Platform.Current.InitializationMode);
             sb.AppendLine(string.Format("CULTURE: {0}  UI CULTURE: {1}", CultureInfo.CurrentCulture.Name, CultureInfo.CurrentUICulture.Name));
-            
-            sb.AppendLine(string.Format("OS: {0} {1} ({2}) Device Form: {3}", Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily, Windows.ApplicationModel.Package.Current.Id.Architecture.ToString(), Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamilyVersion, Windows.System.Profile.AnalyticsInfo.DeviceForm));
+            sb.AppendLine(string.Format("OS: {0} {1} {2} {3}", SystemInformation.OperatingSystem, SystemInformation.OperatingSystemArchitecture, SystemInformation.OperatingSystemVersion, SystemInformation.DeviceFamily));
+            sb.AppendLine(string.Format("DEVICE: {0} {1}", SystemInformation.DeviceManufacturer, SystemInformation.DeviceModel));
 
             if (Window.Current != null)
             {
                 sb.AppendLine("USER INTERACTION MODE: " + Windows.UI.ViewManagement.UIViewSettings.GetForCurrentView().UserInteractionMode.ToString());
                 var di = DisplayInformation.GetForCurrentView();
-                sb.AppendLine(string.Format("SCREEN ORIENTATION - CURRENT: {0}  Native: {1}", di.CurrentOrientation, di.NativeOrientation));
+                sb.AppendLine(string.Format("SCREEN ORIENTATION: CURRENT--{0}  NATIVE--{1}", di.CurrentOrientation, di.NativeOrientation));
                 sb.AppendLine(string.Format("SCREEN PHYSICAL PIXELS: {0} x {1} - DPI: X: {2} Y: {3}", 
                     this.GetResolution(Window.Current.Bounds.Width, DisplayInformation.GetForCurrentView().ResolutionScale).ToString("0.#"), 
                     this.GetResolution(Window.Current.Bounds.Height, DisplayInformation.GetForCurrentView().ResolutionScale).ToString("0.#"),
@@ -291,7 +293,7 @@ namespace Contoso.Core.Services
                 sb.AppendLine(string.Format("SCREEN LOGICAL PIXELS: {0} x {1} - {2}", Window.Current.Bounds.Width.ToString("0.#"), Window.Current.Bounds.Height.ToString("0.#"), di.ResolutionScale));
             }
 
-            sb.AppendLine(string.Format("MEMORY USAGE: {0} - {1} / {2}", Windows.System.MemoryManager.AppMemoryUsageLevel, ((long)Windows.System.MemoryManager.AppMemoryUsage).ToStringAsMemory(), ((long)Windows.System.MemoryManager.AppMemoryUsageLimit).ToStringAsMemory()));
+            sb.AppendLine(string.Format("MEMORY USAGE: {0}  USAGE: {1} / {2} AVAIL: {3:N} MB", Windows.System.MemoryManager.AppMemoryUsageLevel, ((long)Windows.System.MemoryManager.AppMemoryUsage).ToStringAsMemory(), ((long)Windows.System.MemoryManager.AppMemoryUsageLimit).ToStringAsMemory(), SystemInformation.AvailableMemory));
 
             if (ex != null)
             {
