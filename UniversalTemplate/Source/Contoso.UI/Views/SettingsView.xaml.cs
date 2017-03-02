@@ -1,7 +1,9 @@
 ﻿using Contoso.Core;
 using Contoso.Core.ViewModels;
+using Contoso.UI.Controls;
 using System;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 
 namespace Contoso.UI.Views
 {
@@ -70,6 +72,12 @@ namespace Contoso.UI.Views
             e.PageState[LAST_SELECTED_INDEX] = pivot.SelectedIndex;
 
             return base.OnSaveStateAsync(e);
+        }
+
+        protected override void OnLoaded(RoutedEventArgs e)
+        {
+            pivot.Focus(FocusState.Programmatic);
+            base.OnLoaded(e);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Contoso.Core.ViewModels;
+﻿using Contoso.Core;
+using Contoso.Core.ViewModels;
 using System;
 using Windows.UI.Xaml.Controls;
 
@@ -8,7 +9,7 @@ namespace Contoso.UI.Controls
     {
     }
 
-    public sealed partial class WebViewPanel : WebViewPanelBase
+    public sealed partial class WebViewPanel : WebViewPanelBase, IViewScrollToTop
     {
         #region Constructors
 
@@ -61,6 +62,11 @@ namespace Contoso.UI.Controls
 
                 this.ViewModel.InitialNavigation();
             }
+        }
+
+        public void ScrollToTop()
+        {
+            ScrollToTopHelper.ScrollToTop(webView);
         }
 
         #endregion

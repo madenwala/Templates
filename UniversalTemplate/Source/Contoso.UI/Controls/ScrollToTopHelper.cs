@@ -27,11 +27,26 @@ namespace Contoso.UI.Controls
                 var grid = content as Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView;
                 grid.ScrollToTop();
             }
+            else if (content is WebViewPanel)
+            {
+                var control = content as WebViewPanel;
+                control.ScrollToTop();
+            }
+            else if (content is WebView)
+            {
+                var control = content as WebView;
+                // TODO scroll web view control
+            }
             else if (content is Pivot)
             {
                 var pivot = content as Pivot;
                 foreach (var pi in pivot.Items)
-                    ScrollToTop((pi as PivotItem)?.Content);
+                    ScrollToTop(pi);
+            }
+            else if (content is PivotItem)
+            {
+                var pi = content as PivotItem;
+                ScrollToTop(pi.Content ?? pi.ContentTemplateRoot);
             }
         }
     }
