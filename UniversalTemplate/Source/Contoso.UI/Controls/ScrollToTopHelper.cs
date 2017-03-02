@@ -35,10 +35,7 @@ namespace Contoso.UI.Controls
             else if (content is WebView)
             {
                 var control = content as WebView;
-                var t = control.InvokeScriptAsync("eval", new string[]
-                    {
-                        @"window.scrollTo(window.scrollX, 0)"
-                    });
+                var t = control.InvokeScriptAsync("eval", new string[] { @"window.scrollTo(0, 0)" });
             }
             else if (content is Pivot)
             {
