@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Store;
-using Windows.System;
+using Windows.Storage;
 
 namespace Contoso.Core.Services
 {
@@ -154,11 +153,16 @@ namespace Contoso.Core.Services
         {
             try
             {
+                Platform.Current.Analytics.Event("PurchaseAddOn", featureName);
                 return await CurrentApp.RequestProductPurchaseAsync(featureName);
             }
             catch
             {
                 return await CurrentAppSimulator.RequestProductPurchaseAsync(featureName);
+            }
+            finally
+            {
+                this.HasLicense(featureName);
             }
         }
 
@@ -166,10 +170,45 @@ namespace Contoso.Core.Services
         {
             try
             {
-                return _licenseInfo.ProductLicenses[featureName].IsActive;
+                var hasLicense = _licenseInfo.ProductLicenses[featureName].IsActive;
+
+                if (hasLicense)
+                    this.FeaturePurchased(featureName);
+
+                return hasLicense || this.FeaturedPreviouslyPurchased(featureName);
             }
             catch
             {
+                return false;
+            }
+        }
+
+        private void FeaturePurchased(string featureName)
+        {
+            Platform.Current.Storage.SaveSetting("InAppPurchase-" + featureName, DateTime.UtcNow, ApplicationData.Current.RoamingSettings);
+        }
+
+        private bool FeaturedPreviouslyPurchased(string featureName)
+        {
+            try
+            {
+                var key = "InAppPurchase-" + featureName;
+                if (Platform.Current.Storage.ContainsSetting(key, ApplicationData.Current.RoamingSettings))
+                {
+                    var date = Platform.Current.Storage.LoadSetting<DateTime>(key, ApplicationData.Current.RoamingSettings);
+                    if (date.AddDays(7) > DateTime.UtcNow)
+                        return true;
+                    else
+                        return false;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Platform.Current.Analytics.Error(ex, $"Failed to check if '{featureName}' feature was previously purchased.");
                 return false;
             }
         }
