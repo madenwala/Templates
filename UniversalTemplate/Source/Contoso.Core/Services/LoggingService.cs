@@ -280,6 +280,7 @@ namespace Contoso.Core.Services
             sb.AppendLine(string.Format("CULTURE: {0}  UI CULTURE: {1}", CultureInfo.CurrentCulture.Name, CultureInfo.CurrentUICulture.Name));
             sb.AppendLine(string.Format("OS: {0} {1} {2} {3}", SystemInformation.OperatingSystem, SystemInformation.OperatingSystemArchitecture, SystemInformation.OperatingSystemVersion, SystemInformation.DeviceFamily));
             sb.AppendLine(string.Format("DEVICE: {0} {1}", SystemInformation.DeviceManufacturer, SystemInformation.DeviceModel));
+            sb.AppendLine(string.Format("INTERNET: {0} AVAILABLE: {1} METERED: {2}", Microsoft.Toolkit.Uwp.ConnectionHelper.ConnectionType, Microsoft.Toolkit.Uwp.ConnectionHelper.IsInternetAvailable, Microsoft.Toolkit.Uwp.ConnectionHelper.IsInternetOnMeteredConnection));
 
             if (Window.Current != null)
             {
