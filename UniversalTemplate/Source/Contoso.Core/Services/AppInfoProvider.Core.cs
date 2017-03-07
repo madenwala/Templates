@@ -34,6 +34,17 @@ namespace Contoso.Core.Services
         #region Properties
 
         /// <summary>
+        /// Gets the AppID of the application.
+        /// </summary>
+        public string AppID
+        {
+            get
+            {
+                return Windows.ApplicationModel.Package.Current.Id.ProductId;
+            }
+        }
+
+        /// <summary>
         /// Gets version number of the application currently executing.
         /// </summary>
         public Version VersionNumber

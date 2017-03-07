@@ -39,6 +39,7 @@ namespace Contoso.UI
             Platform.Current.Navigation = new NavigationManager();
             Platform.Current.Analytics.Register(new FlurryAnalyticsService("M76D4BWBDRTWTVJZZ27P"));
             Platform.Current.Analytics.Register(new HockeyAppService(Guid.Empty.ToString(), "adenwala@outlook.com"));
+            Platform.Current.Analytics.Register(new GoogleAnalyticsService("UA-91538532-2"));
 
             AdControl.DevCenterAdAppID = "7f0c824b-5c94-4cc6-b4ea-db78b7641398";
             AdControl.DevCenterAdUnitID = "11641061";

@@ -192,6 +192,7 @@
       <DependentUpon>TextStyles.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\FlurryAnalyticsService.cs" />
+    <Compile Include="Services\GoogleAnalyticsService.cs" />
     <Compile Include="Services\HockeyAppService.cs" />
     <Compile Include="Services\NavigationManager.cs" />
     <Compile Include="Resources\Common.xaml.cs">

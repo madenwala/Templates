@@ -52,7 +52,8 @@ namespace Contoso.UI.Services
 
         public override void SetUser(string username)
         {
-            HockeyClient.Current.UpdateContactInfo(username, username);
+            if(!string.IsNullOrEmpty(username))
+                HockeyClient.Current.UpdateContactInfo(username, username);
         }
 
         public override void SetUser(UserResponse user)
