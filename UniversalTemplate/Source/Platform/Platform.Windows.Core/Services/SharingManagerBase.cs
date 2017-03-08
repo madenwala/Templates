@@ -10,14 +10,14 @@ namespace Contoso.Core.Services
         /// <summary>
         /// Gets access to the app info service of the platform currently executing.
         /// </summary>
-        public SharingManager SharingManager
+        public SharingManagerBase SharingManager
         {
-            get { return this.GetService<SharingManager>(); }
-            protected set { this.SetService<SharingManager>(value); }
+            get { return GetService<SharingManagerBase>(); }
+            protected set { SetService<SharingManagerBase>(value); }
         }
     }
 
-    public sealed partial class SharingManager : ServiceBase
+    public abstract class SharingManagerBase : ServiceBase
     {
         #region Properties
 
@@ -32,15 +32,9 @@ namespace Contoso.Core.Services
 
         #endregion
 
-        #region Constructors
-
-        internal SharingManager()
-        {
-        }
-
-        #endregion
-
         #region Methods
+
+        protected abstract void SetShareContent(DataRequest request, IModel model);
 
         /// <summary>
         /// Share a model of data with Windows.
@@ -48,17 +42,17 @@ namespace Contoso.Core.Services
         /// <param name="model"></param>
         public void Share(IModel model)
         {
-            Platform.Current.Analytics.Event("Share");
+            PlatformBase.GetService<AnalyticsManager>().Event("Share");
 
             DataTransferManager.GetForCurrentView().DataRequested += (sender, e) =>
             {
                 try
                 {
-                    this.SetShareContent(e.Request, model ?? Platform.Current.ViewModel);
+                    // TODO this.SetShareContent(e.Request, model ?? Platform.Current.ViewModel);
                 }
                 catch (Exception ex)
                 {
-                    Platform.Current.Logger.LogError(ex, "Error in OnDataRequested");
+                    PlatformBase.GetService<LoggingService>().LogError(ex, "Error in OnDataRequested");
 #if DEBUG
                     e.Request.FailWithDisplayText(ex.ToString());
 #else

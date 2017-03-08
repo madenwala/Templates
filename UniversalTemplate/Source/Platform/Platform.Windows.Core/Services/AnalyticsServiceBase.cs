@@ -11,8 +11,8 @@ namespace Contoso.Core.Services
         /// </summary>
         public AnalyticsManager Analytics
         {
-            get { return this.GetService<AnalyticsManager>(); }
-            internal set { this.SetService<AnalyticsManager>(value); }
+            get { return GetService<AnalyticsManager>(); }
+            protected set { SetService<AnalyticsManager>(value); }
         }
     }
 
@@ -58,12 +58,6 @@ namespace Contoso.Core.Services
         /// <summary>
         /// Sets the user to the analytics providers.
         /// </summary>
-        /// <param name="user">Instance of a user information class.</param>
-        public abstract void SetUser(UserResponse user);
-
-        /// <summary>
-        /// Sets the user to the analytics providers.
-        /// </summary>
         /// <param name="username">Username of the current user.</param>
         public abstract void SetUser(string username);
 
@@ -95,7 +89,7 @@ namespace Contoso.Core.Services
     /// </summary>
     public sealed class AnalyticsManager : AnalyticsServiceBase
     {
-        internal AnalyticsManager()
+        public AnalyticsManager()
         {
             this.Services = new List<AnalyticsServiceBase>();
         }
@@ -115,7 +109,7 @@ namespace Contoso.Core.Services
 #if !DEBUG
             this.Services.ForEach(s => s.NewPageView(pageType));
 #endif
-            Platform.Current.Logger.Log(LogLevels.Information, $"ANALYTICS: NewPageView({pageType.FullName})");
+            PlatformBase.GetService<LoggingService>().Log(LogLevels.Information, $"ANALYTICS: NewPageView({pageType.FullName})");
         }
 
         public override void Error(Exception ex, string message = null)
@@ -123,7 +117,7 @@ namespace Contoso.Core.Services
 #if !DEBUG
             this.Services.ForEach(s => s.Error(ex, message));
 #endif
-            Platform.Current.Logger.Log(LogLevels.Information, $"ANALYTICS: Error(\"{message}\", {ex.ToString()})");
+            PlatformBase.GetService<LoggingService>().Log(LogLevels.Information, $"ANALYTICS: Error(\"{message}\", {ex.ToString()})");
         }
 
         public override void Event(string eventName, Dictionary<string, string> properties, Dictionary<string, double> metrics = null)
@@ -131,7 +125,7 @@ namespace Contoso.Core.Services
 #if !DEBUG
             this.Services.ForEach(s => s.Event(eventName, properties, metrics));
 #endif
-            Platform.Current.Logger.Log(LogLevels.Information, $"ANALYTICS: Event({eventName}, {Serializer.Serialize(properties)}, {Serializer.Serialize(metrics)})");
+            PlatformBase.GetService<LoggingService>().Log(LogLevels.Information, $"ANALYTICS: Event({eventName}, {Serializer.Serialize(properties)}, {Serializer.Serialize(metrics)})");
         }
 
         public override void SetUser(string username)
@@ -139,15 +133,7 @@ namespace Contoso.Core.Services
 #if !DEBUG
             this.Services.ForEach(s => s.SetUser(username));
 #endif
-            Platform.Current.Logger.Log(LogLevels.Information, $"ANALYTICS: SetUser({username})");
-        }
-
-        public override void SetUser(UserResponse user)
-        {
-#if !DEBUG
-            this.Services.ForEach(s => s.SetUser(user));
-#endif
-            Platform.Current.Logger.Log(LogLevels.Information, $"ANALYTICS: SetUser({user?.Email})");
+            PlatformBase.GetService<LoggingService>().Log(LogLevels.Information, $"ANALYTICS: SetUser({username})");
         }
     }
 

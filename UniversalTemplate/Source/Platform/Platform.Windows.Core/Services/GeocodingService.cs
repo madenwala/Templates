@@ -14,8 +14,8 @@ namespace Contoso.Core.Services
         /// </summary>
         public GeocodingService Geocode
         {
-            get { return this.GetService<GeocodingService>(); }
-            protected set { this.SetService<GeocodingService>(value); }
+            get { return GetService<GeocodingService>(); }
+            protected set { SetService<GeocodingService>(value); }
         }
     }
 
@@ -24,14 +24,6 @@ namespace Contoso.Core.Services
     /// </summary>
     public sealed class GeocodingService : ServiceBase
     {
-        #region Constructors
-
-        internal GeocodingService()
-        {
-        }
-
-        #endregion
-
         #region Methods
 
         #region Public

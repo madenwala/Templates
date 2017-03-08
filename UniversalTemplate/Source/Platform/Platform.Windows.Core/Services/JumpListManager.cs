@@ -13,8 +13,8 @@ namespace Contoso.Core.Services
         /// </summary>
         public JumplistManager Jumplist
         {
-            get { return this.GetService<JumplistManager>(); }
-            protected set { this.SetService<JumplistManager>(value); }
+            get { return GetService<JumplistManager>(); }
+            protected set { SetService<JumplistManager>(value); }
         }
     }
 
@@ -33,14 +33,14 @@ namespace Contoso.Core.Services
         /// </summary>
         public CommandBase ClearCommand
         {
-            get { return _ClearJumplistCommand ?? (_ClearJumplistCommand = new NavigationCommand("Jumplist-ClearCommand", async () => await this.ClearAsync())); }
+            get { return _ClearJumplistCommand ?? (_ClearJumplistCommand = new GenericCommand("Jumplist-ClearCommand", async () => await this.ClearAsync())); }
         }
 
         #endregion
 
         #region Constructors
 
-        internal JumplistManager()
+        public JumplistManager()
         {
             if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.StartScreen.JumpList"))
                 IsSupported = JumpList.IsSupported();
@@ -101,7 +101,7 @@ namespace Contoso.Core.Services
             }
             catch(Exception ex)
             {
-                Platform.Current.Logger.LogError(ex, "Could not add to jump list!");
+                PlatformBase.GetService<LoggingService>().LogError(ex, "Could not add to jump list!");
             }
         }
 

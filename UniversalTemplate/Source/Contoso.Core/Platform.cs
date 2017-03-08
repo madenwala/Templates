@@ -16,7 +16,7 @@ namespace Contoso.Core
     /// Also provides core app functionality for initializing and suspending your application,
     /// handling exceptions, and more.
     /// </summary>
-    public sealed class Platform : PlatformBase
+    public partial class Platform : PlatformBase
     {
         #region Properties
 
@@ -53,16 +53,16 @@ namespace Contoso.Core
             this.Analytics = new AnalyticsManager();
             this.BackgroundTasks = new BackgroundTasksManager();
             this.Storage = new StorageManager();
-            this.AppInfo = new AppInfoProvider();
-            this.AuthManager = new AuthorizationManager();
+            // TODO this.AppInfo = new AppInfoProvider();
+            // TODO this.AuthManager = new AuthorizationManager();
             this.Cryptography = new CryptographyProvider();
             this.Geocode = new GeocodingService();
             this.Geolocation = new GeolocationService();
-            this.Notifications = new NotificationsService();
+            // TODO this.Notifications = new NotificationsService();
             this.Ratings = new RatingsManager();
             this.VoiceCommandManager = new VoiceCommandManager();
             this.Jumplist = new JumplistManager();
-            this.WebAccountManager = new WebAccountManager();
+            // TODO this.WebAccountManager = new WebAccountManager();
             this.SharingManager = new SharingManager();
         }
 
@@ -155,7 +155,7 @@ namespace Contoso.Core
         /// Logic performed during sign out of a user in this application.
         /// </summary>
         /// <returns>Awaitable task is returned.</returns>
-        internal override async Task SignoutAllAsync()
+        public override async Task SignoutAllAsync()
         {
             await base.SignoutAllAsync();
 
@@ -178,37 +178,40 @@ namespace Contoso.Core
         {
             try
             {
-                // Perform work that needs to be done on a background task/agent...
-                if (Platform.Current.AuthManager.IsAuthenticated() == false)
-                    return;
 
-                // SAMPLE - Load data from your API, do any background work here.
-                using (var api = new ClientApi())
-                {
-                    var data = await api.GetItems(ct);
-                    if (data != null)
-                    {
-                        var items = data.ToObservableCollection();
-                        if (items.Count > 0)
-                        {
-                            var index = DateTime.Now.Second % items.Count;
-                            Platform.Current.Notifications.DisplayToast(items[index]);
-                        }
-                    }
+                // TOOD BG sample code needs to be enabled
 
-                    ct.ThrowIfCancellationRequested();
+                //// Perform work that needs to be done on a background task/agent...
+                //if (Platform.Current.AuthManager.IsAuthenticated() == false)
+                //    return;
 
-                    if (cost <= BackgroundWorkCostValue.Medium)
-                    {
-                        // Update primary tile
-                        await Platform.Current.Notifications.CreateOrUpdateTileAsync(new ModelList<ItemModel>(data));
+                //// SAMPLE - Load data from your API, do any background work here.
+                //using (var api = new ClientApi())
+                //{
+                //    var data = await api.GetItems(ct);
+                //    if (data != null)
+                //    {
+                //        var items = data.ToObservableCollection();
+                //        if (items.Count > 0)
+                //        {
+                //            var index = DateTime.Now.Second % items.Count;
+                //            Platform.Current.Notifications.DisplayToast(items[index]);
+                //        }
+                //    }
 
-                        ct.ThrowIfCancellationRequested();
+                //    ct.ThrowIfCancellationRequested();
 
-                        // Update all tiles pinned from this application
-                        await Platform.Current.Notifications.UpdateAllSecondaryTilesAsync(ct);
-                    }
-                }
+                //    if (cost <= BackgroundWorkCostValue.Medium)
+                //    {
+                //        // Update primary tile
+                //        await Platform.Current.Notifications.CreateOrUpdateTileAsync(new ModelList<ItemModel>(data));
+
+                //        ct.ThrowIfCancellationRequested();
+
+                //        // Update all tiles pinned from this application
+                //        await Platform.Current.Notifications.UpdateAllSecondaryTilesAsync(ct);
+                //    }
+                // }
             }
             catch (OperationCanceledException)
             {

@@ -2,6 +2,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Windows.System;
 
 namespace Contoso.Core.Services
 {
@@ -12,8 +13,8 @@ namespace Contoso.Core.Services
         /// </summary>
         public RatingsManager Ratings
         {
-            get { return this.GetService<RatingsManager>(); }
-            protected set { this.SetService<RatingsManager>(value); }
+            get { return GetService<RatingsManager>(); }
+            protected set { SetService<RatingsManager>(value); }
         }
     }
 
@@ -31,14 +32,6 @@ namespace Contoso.Core.Services
 
         #endregion
 
-        #region Constructors
-
-        internal RatingsManager()
-        {
-        }
-
-        #endregion
-
         #region Methods
 
         /// <summary>
@@ -46,27 +39,27 @@ namespace Contoso.Core.Services
         /// If it determines it should, the dialog to solicit ratings will be displayed.
         /// </summary>
         /// <returns>Awaitable task is returned.</returns>
-        public async Task CheckForRatingsPromptAsync(ViewModelBase vm)
+        public async Task CheckForRatingsPromptAsync(IViewModel vm)
         {
             bool showPrompt = false;
             bool showPromptoToSendEmail = false;
 
             // PLACE YOUR CUSTOM RATE PROMPT LOGIC HERE!
-            this.LastPromptedForRating = Platform.Current.Storage.LoadSetting<DateTime>(LAST_PROMPTED_FOR_RATING);
+            this.LastPromptedForRating = PlatformBase.GetService<StorageManager>().LoadSetting<DateTime>(LAST_PROMPTED_FOR_RATING);
 
-            long launchCount = Platform.Current.Storage.LoadSetting<long>(LAUNCH_COUNT);
+            long launchCount = PlatformBase.GetService<StorageManager>().LoadSetting<long>(LAUNCH_COUNT);
             launchCount++;
             if (launchCount == 3)
             {
                 showPrompt = showPromptoToSendEmail = true;
             }
-            Platform.Current.Storage.SaveSetting(LAUNCH_COUNT, launchCount);
+            PlatformBase.GetService<StorageManager>().SaveSetting(LAUNCH_COUNT, launchCount);
 
             // If trial, not expired, and less than 2 days away from expiring, set as TRUE
             bool preTrialExpiredBasedPrompt = 
-                Platform.Current.AppInfo.IsTrial 
-                && !Platform.Current.AppInfo.IsTrialExpired 
-                && DateTime.Now.AddDays(2) > Platform.Current.AppInfo.TrialExpirationDate;
+                PlatformBase.GetService<AppInfoProviderBase>().IsTrial 
+                && !PlatformBase.GetService<AppInfoProviderBase>().IsTrialExpired 
+                && DateTime.Now.AddDays(2) > PlatformBase.GetService<AppInfoProviderBase>().TrialExpirationDate;
 
             if (preTrialExpiredBasedPrompt && this.LastPromptedForRating == DateTime.MinValue)
             {
@@ -91,25 +84,32 @@ namespace Contoso.Core.Services
         /// Displays a dialog to the user requesting the user to provide ratings/feedback for this application.
         /// </summary>
         /// <returns>Awaitable task is returned.</returns>
-        private async Task PromptForRatingAsync(ViewModelBase vm, bool showPromptoToSendEmail = false)
+        private async Task PromptForRatingAsync(IViewModel vm, bool showPromptoToSendEmail = false)
         {
             // Prompt the user to rate the app
             var result = await vm.ShowMessageBoxAsync(CancellationToken.None, Strings.Resources.PromptRateApplicationMessage, Strings.Resources.PromptRateApplicationTitle, new string[] { Strings.Resources.TextYes, Strings.Resources.TextMaybeLater }, 1);
 
             // Store the time the user was prompted
-            Platform.Current.Storage.SaveSetting(LAST_PROMPTED_FOR_RATING, DateTime.Now);
+            PlatformBase.GetService<StorageManager>().SaveSetting(LAST_PROMPTED_FOR_RATING, DateTime.Now);
 
             if (result == 0)
             {
                 // Navigate user to the platform specific rating mechanism
-                await Platform.Current.Navigation.RateApplicationAsync();
+                await this.RateApplicationAsync();
             }
             else if (showPromptoToSendEmail)
             {
-                //result = await vm.ShowMessageBoxAsync(CancellationToken.None, Strings.Resources.PromptRateApplicationEmailFeedbackMessage, Strings.Resources.PromptRateApplicationEmailFeedbackTitle, new string[] { Strings.Resources.TextYes, Strings.Resources.TextNo }, 1);
-                //if (result == 0)
-                //    await Platform.Current.Logger.SendSupportEmailAsync();
+                // TODO do I want this?
+                result = await vm.ShowMessageBoxAsync(CancellationToken.None, Strings.Resources.PromptRateApplicationEmailFeedbackMessage, Strings.Resources.PromptRateApplicationEmailFeedbackTitle, new string[] { Strings.Resources.TextYes, Strings.Resources.TextNo }, 1);
+                if (result == 0)
+                    await PlatformBase.GetService<LoggingService>().SendSupportEmailAsync();
             }
+        }
+
+        public async Task RateApplicationAsync()
+        {
+            PlatformBase.GetService<AnalyticsManager>().Event("RateApplication");
+            await Launcher.LaunchUriAsync(new Uri(string.Format("ms-windows-store:REVIEW?PFN={0}", global::Windows.ApplicationModel.Package.Current.Id.FamilyName)));
         }
 
         #endregion

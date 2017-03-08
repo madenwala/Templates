@@ -1,4 +1,5 @@
 ﻿using Contoso.Core.Models;
+using Contoso.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -7,20 +8,23 @@ using Windows.Foundation;
 using Windows.UI.Notifications;
 using Windows.UI.StartScreen;
 
-namespace Contoso.Core.Services
+namespace Contoso.Core
 {
-    public partial class PlatformBase
+    public partial class Platform : PlatformBase
     {
         /// <summary>
         /// Gets access to the notifications service of the platform currently executing. Provides you the ability to display toasts or manage tiles or etc on the executing platform.
         /// </summary>
         public NotificationsService Notifications
         {
-            get { return this.GetService<NotificationsService>(); }
-            protected set { this.SetService<NotificationsService>(value); }
+            get { return GetService<NotificationsService>(); }
+            set { SetService<NotificationsService>(value); }
         }
     }
+}
 
+namespace Contoso.Core.Services
+{
     public sealed partial class NotificationsService : ServiceBase, IServiceSignout
     {
         #region Constructors

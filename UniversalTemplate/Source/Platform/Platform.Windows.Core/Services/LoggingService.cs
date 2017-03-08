@@ -42,8 +42,8 @@ namespace Contoso.Core.Services
         /// </summary>
         public LoggingService Logger
         {
-            get { return this.GetService<LoggingService>(); }
-            protected set { this.SetService<LoggingService>(value); }
+            get { return GetService<LoggingService>(); }
+            protected set { SetService<LoggingService>(value); }
         }
     }
 
@@ -98,14 +98,14 @@ namespace Contoso.Core.Services
 
         #region Constructors
 
-        internal LoggingService()
+        public LoggingService()
         {
             this.Loggers = new List<ILogger>();
             this.Messages = new ObservableCollection<string>();
 #if DEBUG
             //this.CurrentLevel = LogLevels.Debug;
             this.Loggers.Add(new DebugLoggerProvider());
-            if(Platform.DeviceFamily == DeviceFamily.Desktop && !System.Diagnostics.Debugger.IsAttached)
+            if(PlatformBase.DeviceFamily == DeviceFamily.Desktop && !System.Diagnostics.Debugger.IsAttached)
                 this.Loggers.Add(new UwpConsoleOutputProvider());
 #else
             this.CurrentLevel = LogLevels.Warning;
@@ -162,7 +162,7 @@ namespace Contoso.Core.Services
 
             message = string.Format(CultureInfo.InvariantCulture, "{0} -- {1}", message, ex);
 
-            Platform.Current.Analytics.Error(ex, message);
+            PlatformBase.GetService<AnalyticsManager>().Error(ex, message);
             this.Log(LogLevels.Error, message);
             foreach (ILogger logger in Loggers)
                 logger.LogException(ex, message);
@@ -188,7 +188,7 @@ namespace Contoso.Core.Services
 
             message = string.Format(CultureInfo.InvariantCulture, "{0} -- FATAL EXCEPTION: {1}", message, ex);
 
-            Platform.Current.Analytics.Error(ex, message);
+            PlatformBase.GetService<AnalyticsManager>().Error(ex, message);
             this.Log(LogLevels.FatalError, message);
             foreach (ILogger logger in Loggers)
                 logger.LogExceptionFatal(ex, message);
@@ -200,7 +200,7 @@ namespace Contoso.Core.Services
             {
                 try
                 {
-                    await Platform.Current.Storage.SaveFileAsync(ERROR_REPORT_FILENAME, data, ERROR_REPORT_DATA_CONTAINER);
+                    await PlatformBase.GetService<StorageManager>().SaveFileAsync(ERROR_REPORT_FILENAME, data, ERROR_REPORT_DATA_CONTAINER);
                     tcs.SetResult(null);
                 }
                 catch (Exception taskEx)
@@ -217,32 +217,32 @@ namespace Contoso.Core.Services
         /// </summary>
         /// <param name="vm">ViewModel instance that is used to show a message box from.</param>
         /// <returns>Awaitable task is returned.</returns>
-        public async Task CheckForFatalErrorReportsAsync(ViewModelBase vm)
+        public async Task CheckForFatalErrorReportsAsync(IViewModel vm)
         {
             try
             {
-                Platform.Current.Logger.Log(LogLevels.Debug, "Checking if application crashed on previous run...");
-                if (await Platform.Current.Storage.DoesFileExistsAsync(ERROR_REPORT_FILENAME, ERROR_REPORT_DATA_CONTAINER))
+                PlatformBase.GetService<LoggingService>().Log(LogLevels.Debug, "Checking if application crashed on previous run...");
+                if (await PlatformBase.GetService<StorageManager>().DoesFileExistsAsync(ERROR_REPORT_FILENAME, ERROR_REPORT_DATA_CONTAINER))
                 {
-                    Platform.Current.Logger.Log(LogLevels.Debug, "Application crashed on previous run, prompt user to send report.");
+                    PlatformBase.GetService<LoggingService>().Log(LogLevels.Debug, "Application crashed on previous run, prompt user to send report.");
                     if (await vm.ShowMessageBoxAsync(CancellationToken.None, Strings.Resources.ApplicationProblemPromptMessage, Strings.Resources.ApplicationProblemPromptTitle, new string[] { Strings.Resources.TextYes, Strings.Resources.TextNo }) == 0)
                     {
-                        string subject = string.Format(Strings.Resources.ApplicationProblemEmailSubjectTemplate, Windows.ApplicationModel.Package.Current.DisplayName, Platform.Current.AppInfo.VersionNumber);
-                        var attachment = await Platform.Current.Storage.GetFileAsync(ERROR_REPORT_FILENAME, ERROR_REPORT_DATA_CONTAINER);
+                        string subject = string.Format(Strings.Resources.ApplicationProblemEmailSubjectTemplate, Windows.ApplicationModel.Package.Current.DisplayName, PlatformBase.GetService<AppInfoProviderBase>().VersionNumber);
+                        var attachment = await PlatformBase.GetService<StorageManager>().GetFileAsync(ERROR_REPORT_FILENAME, ERROR_REPORT_DATA_CONTAINER);
 
                         string body = Strings.Resources.ApplicationProblemEmailBodyTemplate;
-                        body += await Platform.Current.Storage.ReadFileAsStringAsync(ERROR_REPORT_FILENAME, ERROR_REPORT_DATA_CONTAINER);
-                        Platform.Current.Logger.Log(LogLevels.Information, "PREVIOUS CRASH LOGS: \t" + body);
+                        body += await PlatformBase.GetService<StorageManager>().ReadFileAsStringAsync(ERROR_REPORT_FILENAME, ERROR_REPORT_DATA_CONTAINER);
+                        PlatformBase.GetService<LoggingService>().Log(LogLevels.Information, "PREVIOUS CRASH LOGS: \t" + body);
 
-                        await Platform.Current.Navigation.SendEmailAsync(subject, body, Strings.Resources.ApplicationSupportEmailAddress, attachment);
+                        // TODO await PlatformBase.Current.Navigation.SendEmailAsync(subject, body, Strings.Resources.ApplicationSupportEmailAddress, attachment);
                     }
 
-                    await Platform.Current.Storage.DeleteFileAsync(ERROR_REPORT_FILENAME, ERROR_REPORT_DATA_CONTAINER);
+                    await PlatformBase.GetService<StorageManager>().DeleteFileAsync(ERROR_REPORT_FILENAME, ERROR_REPORT_DATA_CONTAINER);
                 }
             }
             catch(Exception ex)
             {
-                Platform.Current.Logger.LogError(ex, "Error while attempting to check for fatal error reports!");
+                PlatformBase.GetService<LoggingService>().LogError(ex, "Error while attempting to check for fatal error reports!");
             }
         }
 
@@ -251,13 +251,13 @@ namespace Contoso.Core.Services
         /// </summary>
         public async Task SendSupportEmailAsync()
         {
-            var subject = string.Format(Strings.Resources.ApplicationSupportEmailSubjectTemplate, Windows.ApplicationModel.Package.Current.DisplayName, Platform.Current.AppInfo.VersionNumber);
-            var report = Platform.Current.Logger.GenerateApplicationReport();
-            var attachment = await Platform.Current.Storage.SaveFileAsync("Application.log", report, ApplicationData.Current.TemporaryFolder);
+            var subject = string.Format(Strings.Resources.ApplicationSupportEmailSubjectTemplate, Windows.ApplicationModel.Package.Current.DisplayName, PlatformBase.GetService<AppInfoProviderBase>().VersionNumber);
+            var report = PlatformBase.GetService<LoggingService>().GenerateApplicationReport();
+            var attachment = await PlatformBase.GetService<StorageManager>().SaveFileAsync("Application.log", report, ApplicationData.Current.TemporaryFolder);
 
             var body = Strings.Resources.ApplicationSupportEmailBodyTemplate;
             body += report;
-            await Platform.Current.Navigation.SendEmailAsync(subject, body, Strings.Resources.ApplicationSupportEmailAddress, attachment);
+            // TODO await PlatformBase.Current.Navigation.SendEmailAsync(subject, body, Strings.Resources.ApplicationSupportEmailAddress, attachment);
         }
 
         /// <summary>
@@ -269,14 +269,14 @@ namespace Contoso.Core.Services
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("UTC TIME: " + DateTime.Now.ToUniversalTime().ToString());
-            if (Platform.Current.AppInfo != null)
+            if (PlatformBase.GetService<AppInfoProviderBase>() != null)
             {
-                sb.AppendLine(string.Format("APP NAME: {0} {1} {2} {3}", Windows.ApplicationModel.Package.Current.DisplayName, Platform.Current.AppInfo.VersionNumber, Platform.Current.AppInfo.IsTrial ? "TRIAL" : "", Platform.Current.AppInfo.IsTrialExpired ? "EXPIRED" : "").Trim());
-                if (Platform.Current.AppInfo.IsTrial && Platform.Current.AppInfo.TrialExpirationDate.Year != 9999)
-                    sb.AppendLine("TRIAL EXPIRATION: " + Platform.Current.AppInfo.TrialExpirationDate);
+                sb.AppendLine(string.Format("APP NAME: {0} {1} {2} {3}", Windows.ApplicationModel.Package.Current.DisplayName, PlatformBase.GetService<AppInfoProviderBase>().VersionNumber, PlatformBase.GetService<AppInfoProviderBase>().IsTrial ? "TRIAL" : "", PlatformBase.GetService<AppInfoProviderBase>().IsTrialExpired ? "EXPIRED" : "").Trim());
+                if (PlatformBase.GetService<AppInfoProviderBase>().IsTrial && PlatformBase.GetService<AppInfoProviderBase>().TrialExpirationDate.Year != 9999)
+                    sb.AppendLine("TRIAL EXPIRATION: " + PlatformBase.GetService<AppInfoProviderBase>().TrialExpirationDate);
                 sb.AppendLine("INSTALLED: " + Windows.ApplicationModel.Package.Current.InstalledDate.DateTime);
             }
-            sb.AppendLine("INITIALIZATION MODE: " + Platform.Current.InitializationMode);
+            // TODO sb.AppendLine("INITIALIZATION MODE: " + PlatformBase.Current.InitializationMode);
             sb.AppendLine(string.Format("CULTURE: {0}  UI CULTURE: {1}", CultureInfo.CurrentCulture.Name, CultureInfo.CurrentUICulture.Name));
             sb.AppendLine(string.Format("OS: {0} {1} {2} {3}", SystemInformation.OperatingSystem, SystemInformation.OperatingSystemArchitecture, SystemInformation.OperatingSystemVersion, SystemInformation.DeviceFamily));
             sb.AppendLine(string.Format("DEVICE: {0} {1}", SystemInformation.DeviceManufacturer, SystemInformation.DeviceModel));

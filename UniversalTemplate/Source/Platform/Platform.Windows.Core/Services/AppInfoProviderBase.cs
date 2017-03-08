@@ -6,22 +6,10 @@ using Windows.Storage;
 
 namespace Contoso.Core.Services
 {
-    public partial class PlatformBase
-    {
-        /// <summary>
-        /// Gets access to the app info service of the platform currently executing.
-        /// </summary>
-        public AppInfoProvider AppInfo
-        {
-            get { return this.GetService<AppInfoProvider>(); }
-            protected set { this.SetService<AppInfoProvider>(value); }
-        }
-    }
-
     /// <summary>
     /// Base class providing access to the application currently executing specific to the platform this app is executing on.
     /// </summary>
-    public sealed partial class AppInfoProvider : ServiceBase
+    public abstract class AppInfoProviderBase : ServiceBase
     {
         #region Variables
 
@@ -113,7 +101,7 @@ namespace Contoso.Core.Services
 
         #region Constructors
 
-        public AppInfoProvider()
+        public AppInfoProviderBase()
         {
             try
             {
@@ -155,16 +143,16 @@ namespace Contoso.Core.Services
                     this.UserID = Windows.Security.Cryptography.CryptographicBuffer.EncodeToBase64String(info.Id);
             }
 
-            await this.InitializeAddOnsAsync();
+            // TODO await this.InitializeAddOnsAsync();
 
             await base.OnInitializeAsync();
         }
 
-        private async Task<PurchaseResults> PurchaseAddOnAsync(string featureName)
+        protected async Task<PurchaseResults> PurchaseAddOnAsync(string featureName)
         {
             try
             {
-                Platform.Current.Analytics.Event("PurchaseAddOn", featureName);
+                PlatformBase.GetService<AnalyticsManager>().Event("PurchaseAddOn", featureName);
                 return await CurrentApp.RequestProductPurchaseAsync(featureName);
             }
             catch
@@ -177,7 +165,7 @@ namespace Contoso.Core.Services
             }
         }
 
-        private bool HasLicense(string featureName)
+        protected bool HasLicense(string featureName)
         {
             try
             {
@@ -196,7 +184,7 @@ namespace Contoso.Core.Services
 
         private void FeaturePurchased(string featureName)
         {
-            Platform.Current.Storage.SaveSetting("InAppPurchase-" + featureName, DateTime.UtcNow, ApplicationData.Current.RoamingSettings);
+            PlatformBase.GetService<StorageManager>().SaveSetting("InAppPurchase-" + featureName, DateTime.UtcNow, ApplicationData.Current.RoamingSettings);
         }
 
         private bool FeaturedPreviouslyPurchased(string featureName)
@@ -204,9 +192,9 @@ namespace Contoso.Core.Services
             try
             {
                 var key = "InAppPurchase-" + featureName;
-                if (Platform.Current.Storage.ContainsSetting(key, ApplicationData.Current.RoamingSettings))
+                if (PlatformBase.GetService<StorageManager>().ContainsSetting(key, ApplicationData.Current.RoamingSettings))
                 {
-                    var date = Platform.Current.Storage.LoadSetting<DateTime>(key, ApplicationData.Current.RoamingSettings);
+                    var date = PlatformBase.GetService<StorageManager>().LoadSetting<DateTime>(key, ApplicationData.Current.RoamingSettings);
                     if (date.AddDays(7) > DateTime.UtcNow)
                         return true;
                     else
@@ -219,7 +207,7 @@ namespace Contoso.Core.Services
             }
             catch (Exception ex)
             {
-                Platform.Current.Analytics.Error(ex, $"Failed to check if '{featureName}' feature was previously purchased.");
+                PlatformBase.GetService<AnalyticsManager>().Error(ex, $"Failed to check if '{featureName}' feature was previously purchased.");
                 return false;
             }
         }

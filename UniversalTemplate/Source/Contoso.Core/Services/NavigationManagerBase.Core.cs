@@ -1,5 +1,6 @@
 ﻿using Contoso.Core;
 using Contoso.Core.Models;
+using Contoso.Core.Services;
 using Contoso.Core.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -32,19 +33,23 @@ namespace Contoso.Core
     }
 }
 
-namespace Contoso.Core.Services
+namespace Contoso.Core
 {
-    public partial class PlatformBase
+    public partial class Platform
     {
         /// <summary>
         /// Gets the ability to navigate to different parts of an application specific to the platform currently executing.
         /// </summary>
         public NavigationManagerBase Navigation
         {
-            get { return this.GetService<NavigationManagerBase>(); }
-            set { this.SetService<NavigationManagerBase>(value); }
+            get { return GetService<NavigationManagerBase>(); }
+            set { SetService<NavigationManagerBase>(value); }
         }
     }
+}
+
+namespace Contoso.Core.Services
+{
 
     /// <summary>
     /// Base class for accessing navigation services on the platform currently executing.
@@ -467,6 +472,7 @@ namespace Contoso.Core.Services
 
         public async Task RateApplicationAsync()
         {
+            // TODO remove this
             Platform.Current.Analytics.Event("RateApplication");
             await Launcher.LaunchUriAsync(new Uri(string.Format("ms-windows-store:REVIEW?PFN={0}", global::Windows.ApplicationModel.Package.Current.Id.FamilyName)));
         }

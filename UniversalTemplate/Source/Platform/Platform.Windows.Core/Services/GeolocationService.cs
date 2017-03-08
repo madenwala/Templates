@@ -16,8 +16,8 @@ namespace Contoso.Core.Services
         /// </summary>
         public GeolocationService Geolocation
         {
-            get { return this.GetService<GeolocationService>(); }
-            protected set { this.SetService<GeolocationService>(value); }
+            get { return GetService<GeolocationService>(); }
+            protected set { SetService<GeolocationService>(value); }
         }
     }
 
@@ -53,9 +53,9 @@ namespace Contoso.Core.Services
             get
             {
                 // Return the last saved location if no location found.
-                if (_currentLocation == null)
-                    this.CurrentLocation = Platform.Current.AppSettingsLocal.LocationLastKnown;
-                
+                // TODO if (_currentLocation == null)
+                // TODO this.CurrentLocation = Platform.Current.AppSettingsLocal.LocationLastKnown;
+
                 return _currentLocation;
             }
             private set
@@ -70,7 +70,7 @@ namespace Contoso.Core.Services
                     _currentLocation.PropertyChanged += CurrentLocationInfo_PropertyChanged;
                     this.NotifyPropertyChanged(() => this.CurrentLocation);
                     this.NotifyLocationChangedEvent();
-                    Platform.Current.AppSettingsLocal.LocationLastKnown = value;
+                    // TODO Platform.Current.AppSettingsLocal.LocationLastKnown = value;
                 }
                 else
                 {
@@ -79,7 +79,7 @@ namespace Contoso.Core.Services
                     {
                         this.NotifyPropertyChanged(() => this.CurrentLocation);
                         this.NotifyLocationChangedEvent();
-                        Platform.Current.AppSettingsLocal.LocationLastKnown = value;
+                        // TODO Platform.Current.AppSettingsLocal.LocationLastKnown = value;
                     }
                 }
             }
@@ -96,14 +96,6 @@ namespace Contoso.Core.Services
         }
 
         #endregion Properties
-
-        #region Constructors
-
-        internal GeolocationService()
-        {
-        }
-
-        #endregion Constructors
 
         #region Methods
 
@@ -123,7 +115,7 @@ namespace Contoso.Core.Services
                 case GeolocationAccessStatus.Allowed:
                     try
                     {
-                        Platform.Current.Logger.Log(LogLevels.Debug, "GetSingleCoordinate Started...");
+                        PlatformBase.GetService<LoggingService>().Log(LogLevels.Debug, "GetSingleCoordinate Started...");
                         Geolocator geo = new Geolocator();
 
                         geo.DesiredAccuracy = highAccuracy ? PositionAccuracy.High : PositionAccuracy.Default;
@@ -132,33 +124,33 @@ namespace Contoso.Core.Services
 
                         // Retrieve the current user's location
                         Geoposition loc = await geo.GetGeopositionAsync(new TimeSpan(0, 0, 1), new TimeSpan(0, 0, 60)).AsTask(token.HasValue ? token.Value : CancellationToken.None);
-                        Platform.Current.Logger.Log(LogLevels.Debug, "GetSingleCoordinate Completed!");
+                        PlatformBase.GetService<LoggingService>().Log(LogLevels.Debug, "GetSingleCoordinate Completed!");
 
                         // Store location and update statuses and analytics
                         this.CurrentLocation = loc.Coordinate.AsLocationModel();
                         this.Status = geo.LocationStatus;
-                        Platform.Current.Analytics.SetCurrentLocation(this.CurrentLocation);
+                        PlatformBase.GetService<AnalyticsManager>().SetCurrentLocation(this.CurrentLocation);
 
                         // Return location found
                         return loc;
                     }
                     catch (TaskCanceledException)
                     {
-                        Platform.Current.Logger.Log(LogLevels.Debug, "GetSingleCoordinate cancelled!");
+                        PlatformBase.GetService<LoggingService>().Log(LogLevels.Debug, "GetSingleCoordinate cancelled!");
                         return null;
                     }
                     catch (Exception ex)
                     {
-                        Platform.Current.Logger.Log(LogLevels.Warning, "GetSingleCoordinate exception. Exception.Message = {0}", ex.Message);
+                        PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, "GetSingleCoordinate exception. Exception.Message = {0}", ex.Message);
                         return null;
                     }
                     
                 case GeolocationAccessStatus.Denied:
-                    Platform.Current.Logger.Log(LogLevels.Warning, "GetSingleCoordinate access denied!");
+                    PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, "GetSingleCoordinate access denied!");
                     return null;
 
                 case GeolocationAccessStatus.Unspecified:
-                    Platform.Current.Logger.Log(LogLevels.Warning, "GetSingleCoordinate unspecified error!");
+                    PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, "GetSingleCoordinate unspecified error!");
                     return null;
 
                 default:
@@ -182,7 +174,7 @@ namespace Contoso.Core.Services
                     {
                         if (_geolocator == null)
                         {
-                            Platform.Current.Logger.Log(LogLevels.Information, "StartTracking Started...");
+                            PlatformBase.GetService<LoggingService>().Log(LogLevels.Information, "StartTracking Started...");
                             _geolocator = new Geolocator();
 
                             // Set locator properties
@@ -195,31 +187,31 @@ namespace Contoso.Core.Services
                             // Watch for location change events and update properties when updated
                             _geolocator.StatusChanged += (sender, args) =>
                             {
-                                Platform.Current.Logger.Log(LogLevels.Debug, "StartTracking StatusChanged = {0}", args.Status);
+                                PlatformBase.GetService<LoggingService>().Log(LogLevels.Debug, "StartTracking StatusChanged = {0}", args.Status);
                                 this.Status = args.Status;
                             };
                             _geolocator.PositionChanged += (sender, args) =>
                             {
-                                Platform.Current.Logger.Log(LogLevels.Debug, "StartTracking PositionChanged = {0}, {1}", args.Position.Coordinate.Point.Position.Latitude, args.Position.Coordinate.Point.Position.Longitude);
+                                PlatformBase.GetService<LoggingService>().Log(LogLevels.Debug, "StartTracking PositionChanged = {0}, {1}", args.Position.Coordinate.Point.Position.Latitude, args.Position.Coordinate.Point.Position.Longitude);
                                 this.CurrentLocation = args.Position.Coordinate.AsLocationModel();
-                                Platform.Current.Analytics.SetCurrentLocation(this.CurrentLocation);
+                                PlatformBase.GetService<AnalyticsManager>().SetCurrentLocation(this.CurrentLocation);
                             };
                         }
                     }
                     catch (Exception ex)
                     {
-                        Platform.Current.Logger.LogError(ex, "StartTracking exception = {0}", ex.Message);
+                        PlatformBase.GetService<LoggingService>().LogError(ex, "StartTracking exception = {0}", ex.Message);
                         this.StopTracking();
                     }
                     break;
 
                 case GeolocationAccessStatus.Denied:
-                    Platform.Current.Logger.Log(LogLevels.Warning, "StartTracking access denied!");
+                    PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, "StartTracking access denied!");
                     this.StopTracking();
                     break;
 
                 case GeolocationAccessStatus.Unspecified:
-                    Platform.Current.Logger.Log(LogLevels.Warning, "StartTracking unspecified error!");
+                    PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, "StartTracking unspecified error!");
                     this.StopTracking();
                     break;
 
@@ -235,7 +227,7 @@ namespace Contoso.Core.Services
         {
             if (_geolocator != null)
                 _geolocator = null;
-            Platform.Current.Logger.Log(LogLevels.Information, "StopTracking Completed!");
+            PlatformBase.GetService<LoggingService>().Log(LogLevels.Information, "StopTracking Completed!");
         }
 
         /// <summary>

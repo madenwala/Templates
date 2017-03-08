@@ -12,20 +12,13 @@ namespace Contoso.Core.Services
         /// </summary>
         public VoiceCommandManager VoiceCommandManager
         {
-            get { return this.GetService<VoiceCommandManager>(); }
-            protected set { this.SetService<VoiceCommandManager>(value); }
+            get { return GetService<VoiceCommandManager>(); }
+            protected set { SetService<VoiceCommandManager>(value); }
         }
     }
 
     public sealed class VoiceCommandManager : ServiceBase, IServiceSignout
     {
-        #region Constructors
-
-        internal VoiceCommandManager()
-        {
-        }
-
-        #endregion
 
         #region Methods
 
@@ -77,7 +70,7 @@ namespace Contoso.Core.Services
             }
             catch (Exception ex)
             {
-                Platform.Current.Logger.LogError(ex, "Error while updating voice commands!");
+                PlatformBase.GetService<LoggingService>().LogError(ex, "Error while updating voice commands!");
             }
         }
 

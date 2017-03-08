@@ -1,22 +1,26 @@
 ﻿using Contoso.Core.Models;
+using Contoso.Core.Services;
 using System;
 using System.Threading.Tasks;
 using Windows.Storage;
 
-namespace Contoso.Core.Services
+namespace Contoso.Core
 {
-    public partial class PlatformBase
+    public partial class Platform : PlatformBase
     {
         /// <summary>
         /// Gets access to the cryptography provider of the platform currently executing.
         /// </summary>
         public AuthorizationManager AuthManager
         {
-            get { return this.GetService<AuthorizationManager>(); }
-            protected set { this.SetService<AuthorizationManager>(value); }
+            get { return GetService<AuthorizationManager>(); }
+            set { SetService<AuthorizationManager>(value); }
         }
     }
+}
 
+namespace Contoso.Core.Services
+{
     public sealed class AuthorizationManager : ServiceBase, IServiceSignout
     {
         #region Variables
@@ -128,7 +132,7 @@ namespace Contoso.Core.Services
             else
             {
                 // Log user
-                Platform.Current.Analytics.SetUser(response);
+                // TODO Platform.Current.Analytics.SetUser(response);
 
                 // Store user data
                 await Platform.Current.Storage.SaveFileAsync(CREDENTIAL_USER_KEYNAME, response, ApplicationData.Current.RoamingFolder, SerializerTypes.Json);

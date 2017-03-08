@@ -1,10 +1,11 @@
-﻿using Windows.ApplicationModel.Background;
+﻿using System;
+using Windows.ApplicationModel.Background;
 
 namespace Contoso.Core.Services
 {
-    public sealed partial class BackgroundTasksManager
+    public sealed class BackgroundTasksManager : BackgroundTasksManagerBase
     {
-        private void Registrations()
+        protected override void Registrations()
         {
             // Register each of your background tasks here:
             this.RegisterBackgroundTaskAsync("Contoso.BackgroundTasks.TimedWorkerTask", "ContosoTimeTriggerTask", new TimeTrigger(15, false), null);

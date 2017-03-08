@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Contoso.Core.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,20 +8,23 @@ using Windows.Security.Credentials;
 using Windows.Storage;
 using Windows.UI.ApplicationSettings;
 
-namespace Contoso.Core.Services
+namespace Contoso.Core
 {
-    public partial class PlatformBase
+    public partial class Platform : PlatformBase
     {
         /// <summary>
         /// Gets access to the app info service of the platform currently executing.
         /// </summary>
         public WebAccountManager WebAccountManager
         {
-            get { return this.GetService<WebAccountManager>(); }
-            protected set { this.SetService<WebAccountManager>(value); }
+            get { return GetService<WebAccountManager>(); }
+            set { SetService<WebAccountManager>(value); }
         }
     }
+}
 
+namespace Contoso.Core.Services
+{
     public sealed class WebAccountManager : ServiceBase, IServiceSignout
     {
         #region Enums

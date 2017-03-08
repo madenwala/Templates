@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Contoso.Core.Services;
+using System;
 using Windows.ApplicationModel;
 
 namespace Contoso.Core.Commands
@@ -106,7 +107,7 @@ namespace Contoso.Core.Commands
             {
                 // Log information
                 string name = string.Format("[{0} - CanExecute] {1}", this.GetType().Name, this.CommandName);
-                Platform.Current.Logger.Log(LogLevels.Debug, "{0} - Return Value: {1}  Parameter: {2}", name, value, parameter);
+                PlatformBase.GetService<LoggingService>().Log(LogLevels.Debug, "{0} - Return Value: {1}  Parameter: {2}", name, value, parameter);
             }
 
             return value;
@@ -118,8 +119,8 @@ namespace Contoso.Core.Commands
             {
                 // Log information
                 string name = string.Format("[{0} - Execute] {1}", this.GetType().Name, this.CommandName);
-                Platform.Current.Analytics.Event(name, parameter);
-                Platform.Current.Logger.Log(LogLevels.Information, "{0} - Parameter: {1}", name, parameter);
+                PlatformBase.GetService<AnalyticsManager>().Event(name, parameter);
+                PlatformBase.GetService<LoggingService>().Log(LogLevels.Information, "{0} - Parameter: {1}", name, parameter);
             }
 
             if (_execute != null)

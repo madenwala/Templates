@@ -18,7 +18,7 @@ namespace Contoso.Core.Services
     {
         #region Variables
 
-        private Dictionary<Type, ServiceBase> _services = new Dictionary<Type, ServiceBase>();
+        private static Dictionary<Type, ServiceBase> _services = new Dictionary<Type, ServiceBase>();
         private bool _settingsIsLocalDataDirty = false;
         private bool _settingsIsRoamingDataDirty = false;
 
@@ -142,7 +142,7 @@ namespace Contoso.Core.Services
             }
 
             // Record the userID to analytics
-            this.Analytics.SetUser(this.AppInfo.UserID);
+            this.Analytics.SetUser(GetService<AppInfoProviderBase>().UserID);
 
             // Execute only on first runs of the platform
             if (mode == InitializationModes.New)
@@ -155,7 +155,7 @@ namespace Contoso.Core.Services
 
             // Register all background agents
             if (mode != InitializationModes.Background)
-                this.BackgroundRegistrationTask = Platform.Current.BackgroundTasks.RegisterAllAsync();
+                this.BackgroundRegistrationTask = this.BackgroundTasks.RegisterAllAsync();
         }
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace Contoso.Core.Services
         /// </summary>
         public virtual void AppSuspending()
         {
-            Platform.Current.Logger.Log(LogLevels.Warning, "APP SUSPENDING - Initialization mode was {0}", this.InitializationMode);
+            this.Logger.Log(LogLevels.Warning, "APP SUSPENDING - Initialization mode was {0}", this.InitializationMode);
 
             // Save app settings
             this.SaveSettings();
@@ -217,7 +217,7 @@ namespace Contoso.Core.Services
         /// Signs a user out of the app.
         /// </summary>
         /// <returns>Awaitable task is returned.</returns>
-        internal virtual async Task SignoutAllAsync()
+        public virtual async Task SignoutAllAsync()
         {
             var services = _services.Values.Where(w => w is IServiceSignout);
             var list = new List<Task>();
@@ -233,7 +233,7 @@ namespace Contoso.Core.Services
                 }
                 catch (Exception ex)
                 {
-                    Platform.Current.Logger.LogError(ex, "Error while trying to call SignoutAsync on each of the platform services.");
+                    this.Logger.LogError(ex, "Error while trying to call SignoutAsync on each of the platform services.");
                     throw;
                 }
             });
@@ -244,7 +244,7 @@ namespace Contoso.Core.Services
         /// </summary>
         /// <typeparam name="T">Type reference of the service to retrieve.</typeparam>
         /// <returns>Instance of type T if it was already initialized or null if not found.</returns>
-        private T GetService<T>() where T : ServiceBase
+        public static T GetService<T>() where T : ServiceBase
         {
             if (_services.ContainsKey(typeof(T)))
                 return (T)_services[typeof(T)];
@@ -256,7 +256,7 @@ namespace Contoso.Core.Services
         /// Registers and intializes an instance of an adapter.
         /// </summary>
         /// <typeparam name="T">Type reference of the service to register and initialize.</typeparam>
-        private void SetService<T>(T instance) where T : ServiceBase
+        protected static void SetService<T>(T instance) where T : ServiceBase
         {
             // Check if T is already registered
             if (_services.ContainsKey(typeof(T)))

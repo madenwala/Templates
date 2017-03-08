@@ -13,8 +13,8 @@ namespace Contoso.Core.Services
         /// </summary>
         public CryptographyProvider Cryptography
         {
-            get { return this.GetService<CryptographyProvider>(); }
-            protected set { this.SetService<CryptographyProvider>(value); }
+            get { return GetService<CryptographyProvider>(); }
+            protected set { SetService<CryptographyProvider>(value); }
         }
     }
 
@@ -23,14 +23,6 @@ namespace Contoso.Core.Services
     /// </summary>
     public sealed class CryptographyProvider : ServiceBase
     {
-        #region Constructors
-
-        internal CryptographyProvider()
-        {
-        }
-
-        #endregion
-
         #region Methods
 
         /// <summary>

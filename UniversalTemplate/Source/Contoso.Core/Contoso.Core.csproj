@@ -109,109 +109,29 @@
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="project.json" />
-    <Compile Include="Commands\GenericCommand.cs" />
     <Compile Include="Data\ClientApiBase.cs" />
     <Compile Include="Data\MicrosoftApi.cs" />
-    <Compile Include="Extensions\GeocoordinateExtensions.cs" />
-    <Compile Include="Models\LocationModel.cs" />
-    <Compile Include="Models\NotifyTaskCompletion.cs" />
     <Compile Include="Platform.cs" />
-    <Compile Include="Services\AnalyticsServiceBase.cs" />
     <Compile Include="Services\BackgroundTasksManager.cs" />
-    <Compile Include="Services\CryptographyProvider.cs" />
-    <Compile Include="Services\GeocodingService.cs" />
-    <Compile Include="Services\GeolocationService.cs" />
-    <Compile Include="Services\JumpListManager.cs" />
-    <Compile Include="Services\LoggingService.cs" />
+    <Compile Include="Services\NavigationManagerBase.Core.cs" />
     <Compile Include="Services\NavigationManagerBase.cs" />
-    <Compile Include="Services\AppInfoProvider.AddOns.cs" />
-    <PRIResource Include="Strings\en-US\BackgroundTasks.resw">
-      <Generator>ReswFileCodeGenerator</Generator>
-      <LastGenOutput>BackgroundTasks.cs</LastGenOutput>
-      <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
-    </PRIResource>
-    <PRIResource Include="Strings\en-US\WebBrowser.resw">
-      <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
-      <Generator>ReswFileCodeGenerator</Generator>
-      <LastGenOutput>WebBrowser.cs</LastGenOutput>
-    </PRIResource>
-    <PRIResource Include="Strings\en-US\Search.resw">
-      <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
-      <Generator>ReswFileCodeGenerator</Generator>
-      <LastGenOutput>Search.cs</LastGenOutput>
-    </PRIResource>
-    <PRIResource Include="Strings\en-US\Location.resw">
-      <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
-      <Generator>ReswFileCodeGenerator</Generator>
-      <LastGenOutput>Location.cs</LastGenOutput>
-    </PRIResource>
-    <PRIResource Include="Strings\en-US\Resources.resw">
-      <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
-      <Generator>ReswFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.cs</LastGenOutput>
-    </PRIResource>
-    <PRIResource Include="Strings\en-US\Account.resw">
-      <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
-      <Generator>ReswFileCodeGenerator</Generator>
-      <LastGenOutput>Account.cs</LastGenOutput>
-    </PRIResource>
+    <Compile Include="Services\AppInfoProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\ClientApi.cs" />
     <Compile Include="Commands\MapCommands.cs" />
     <Compile Include="Commands\NavigationCommand.cs" />
     <Compile Include="Commands\PinTileCommand.cs" />
-    <Compile Include="Commands\ShareCommand.cs" />
     <Compile Include="Commands\WebBrowserCommand.cs" />
-    <Compile Include="Models\AppSettings.cs" />
     <Compile Include="Models\ClientApiModels.cs" />
     <Compile Include="Models\ItemModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\AppInfoProvider.Core.cs" />
     <Compile Include="Services\AuthorizationManager.cs" />
-    <Compile Include="Services\NavigationManagerBase.Core.cs" />
     <Compile Include="Services\NavigationManagerBase.Commands.cs" />
     <Compile Include="Services\NotificationsService.Core.cs" />
     <Compile Include="Services\NotificationsService.cs" />
-    <Compile Include="Services\PlatformBase.cs" />
-    <Compile Include="Services\RatingsManager.cs" />
-    <Compile Include="Services\ServiceBase.cs" />
-    <Compile Include="Services\SharingManager.Core.cs" />
     <Compile Include="Services\SharingManager.cs" />
-    <Compile Include="Services\BackgroundTasksManager.Core.cs" />
-    <Compile Include="Services\StorageManager.Core.cs" />
-    <Compile Include="Services\VoiceCommandManager.cs" />
     <Compile Include="Services\WebAccountManager.cs" />
-    <Compile Include="Strings\en-US\Account.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Account.resw</DependentUpon>
-    </Compile>
-    <Compile Include="Strings\en-US\BackgroundTasks.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BackgroundTasks.resw</DependentUpon>
-    </Compile>
-    <Compile Include="Strings\en-US\Location.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Location.resw</DependentUpon>
-    </Compile>
-    <Compile Include="Strings\en-US\Resources.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resw</DependentUpon>
-    </Compile>
-    <Compile Include="Strings\en-US\Search.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Search.resw</DependentUpon>
-    </Compile>
-    <Compile Include="Strings\en-US\WebBrowser.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WebBrowser.resw</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\DebuggingViewModel.cs" />
     <Compile Include="ViewModels\AccountForgotViewModel.cs" />
     <Compile Include="ViewModels\AccountSignInViewModel.cs" />
@@ -258,7 +178,9 @@
       <Name>Platform.Windows.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

@@ -17,7 +17,7 @@
 // 	This code contains a helper class exposing property representations
 // 	of the string resources defined in the specified .ResW file
 // 
-// 	Generated: 07/14/2016 22:52:32
+// 	Generated: 03/07/2017 18:48:10
 // </auto-generatedInfo>
 // --------------------------------------------------------------------------------------------------
 namespace Contoso.Core.Strings

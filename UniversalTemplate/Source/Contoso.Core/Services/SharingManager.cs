@@ -5,11 +5,11 @@ using Windows.ApplicationModel.DataTransfer;
 
 namespace Contoso.Core.Services
 {
-    public sealed partial class SharingManager
+    public sealed partial class SharingManager: SharingManagerBase
     {
         #region Methods
         
-        private void SetShareContent(DataRequest request, IModel model)
+        protected override void SetShareContent(DataRequest request, IModel model)
         {
             DataPackage requestData = request.Data;
 

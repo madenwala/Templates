@@ -1,4 +1,5 @@
 ﻿using Contoso.Core.Models;
+using Contoso.Core.Services;
 
 namespace Contoso.Core.Commands
 {
@@ -13,7 +14,7 @@ namespace Contoso.Core.Commands
         /// Creates a new command instance for sharing IModel objects to other apps.
         /// </summary>
         public ShareCommand()
-            : base("ShareCommand", Platform.Current.SharingManager.Share)
+            : base("ShareCommand", PlatformBase.GetService<SharingManagerBase>().Share)
         {
         }
 

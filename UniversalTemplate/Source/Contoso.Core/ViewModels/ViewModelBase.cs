@@ -20,7 +20,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Contoso.Core.ViewModels
 {
-    public abstract class ViewModelBase : ModelBase, IDisposable
+    public abstract class ViewModelBase : ModelBase, IDisposable, IViewModel
     {
         #region Variables
 
@@ -693,7 +693,7 @@ namespace Contoso.Core.ViewModels
         /// <param name="defaultIndex">Index of the default button of the dialog box.</param>
         /// <param name="ct">Cancelation token</param>
         /// <returns>Awaitable call which returns the index of the button clicked.</returns>
-        protected internal async Task<int> ShowMessageBoxAsync(CancellationToken ct, string message, string title, IList<string> buttonNames = null, int defaultIndex = 0)
+        public async Task<int> ShowMessageBoxAsync(CancellationToken ct, string message, string title, IList<string> buttonNames = null, int defaultIndex = 0)
         {
             if (string.IsNullOrEmpty(message))
                 throw new ArgumentException("The specified message cannot be null or empty.", "message");
@@ -855,7 +855,7 @@ namespace Contoso.Core.ViewModels
         /// <param name="property"></param>
         /// <param name="identifier"></param>
         /// <returns></returns>
-        protected internal Task<T> LoadFromCacheAsync<T>(Expression<Func<T>> property, string identifier = null)
+        public Task<T> LoadFromCacheAsync<T>(Expression<Func<T>> property, string identifier = null)
         {
             if (property == null)
                 return Task.FromResult<T>(default(T));
@@ -870,7 +870,7 @@ namespace Contoso.Core.ViewModels
         /// <typeparam name="T"></typeparam>
         /// <param name="key"></param>
         /// <returns></returns>
-        protected internal async Task<T> LoadFromCacheAsync<T>(string key)
+        public async Task<T> LoadFromCacheAsync<T>(string key)
         {
             try
             {
@@ -890,7 +890,7 @@ namespace Contoso.Core.ViewModels
         /// <param name="property"></param>
         /// <param name="identifier"></param>
         /// <returns></returns>
-        protected async Task SaveToCacheAsync<T>(Expression<Func<T>> property, string identifier = null)
+        public async Task SaveToCacheAsync<T>(Expression<Func<T>> property, string identifier = null)
         {
             if (property == null)
                 return;
@@ -917,7 +917,7 @@ namespace Contoso.Core.ViewModels
         /// <param name="key">Unique identifier for the data</param>
         /// <param name="data">The data to store</param>
         /// <returns></returns>
-        protected internal async Task SaveToCacheAsync<T>(string key, T data)
+        public async Task SaveToCacheAsync<T>(string key, T data)
         {
             try
             {

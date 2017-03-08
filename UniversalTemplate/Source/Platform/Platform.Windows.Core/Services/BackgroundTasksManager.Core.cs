@@ -11,17 +11,17 @@ namespace Contoso.Core.Services
         /// <summary>
         /// Gets access to the geocoding service adapter implement of the platform currently executing.
         /// </summary>
-        public BackgroundTasksManager BackgroundTasks
+        public BackgroundTasksManagerBase BackgroundTasks
         {
-            get { return this.GetService<BackgroundTasksManager>(); }
-            protected set { this.SetService<BackgroundTasksManager>(value); }
+            get { return GetService<BackgroundTasksManagerBase>(); }
+            protected set { SetService<BackgroundTasksManagerBase>(value); }
         }
     }
 
     /// <summary>
     /// Task manager is responsible for registering and unregistering all background tasks used by this application.
     /// </summary>
-    public sealed partial class BackgroundTasksManager : ServiceBase, IServiceSignout
+    public abstract class BackgroundTasksManagerBase : ServiceBase, IServiceSignout
     {
         #region Properties
 
@@ -39,32 +39,26 @@ namespace Contoso.Core.Services
 
         #endregion
 
-        #region Constructors
-
-        internal BackgroundTasksManager()
-        {
-        }
-
-        #endregion
-
         #region Methods
+
+        protected abstract void Registrations();
 
         /// <summary>
         /// Registers all background tasks related to this application.
         /// </summary>
         /// <returns>Awaitable task is returned.</returns>
-        internal async Task RegisterAllAsync()
+        public async Task RegisterAllAsync()
         {
             try
             {
-                Platform.Current.Logger.Log(LogLevels.Debug, "Registering background tasks...");
+                PlatformBase.GetService<LoggingService>().Log(LogLevels.Debug, "Registering background tasks...");
 
                 // Keep track of the previous version of the app. If the app has been updated, we must first remove the previous task registrations and then re-add them.
-                var previousVersion = Platform.Current.Storage.LoadSetting<string>("PreviousAppVersion");
-                if (previousVersion != Platform.Current.AppInfo.VersionNumber.ToString())
+                var previousVersion = PlatformBase.GetService<StorageManager>().LoadSetting<string>("PreviousAppVersion");
+                if (previousVersion != PlatformBase.GetService<AppInfoProviderBase>().VersionNumber.ToString())
                 {
                     this.RemoveAll();
-                    Platform.Current.Storage.SaveSetting("PreviousAppVersion", Platform.Current.AppInfo.VersionNumber.ToString());
+                    PlatformBase.GetService<StorageManager>().SaveSetting("PreviousAppVersion", PlatformBase.GetService<AppInfoProviderBase>().VersionNumber.ToString());
                 }
 
                 // Propmts users to give access to run background tasks.
@@ -73,28 +67,28 @@ namespace Contoso.Core.Services
                 {
                     try
                     {
-                        this.Registrations();
+                        // TODO this.Registrations();
 
                         // Flag that registration was completed
                         this.AreTasksRegistered = true;
                     }
                     catch (Exception ex)
                     {
-                        Platform.Current.Logger.LogError(ex, "Failed to register background tasks.");
+                        PlatformBase.GetService<LoggingService>().LogError(ex, "Failed to register background tasks.");
                     }
                 }
                 else
                 {
                     // User did not give the app access to run background tasks
-                    Platform.Current.Logger.Log(LogLevels.Information, "Could not register tasks because background access status is '{0}'.", backgroundAccessStatus);
+                    PlatformBase.GetService<LoggingService>().Log(LogLevels.Information, "Could not register tasks because background access status is '{0}'.", backgroundAccessStatus);
                     this.AreTasksRegistered = false;
                 }
 
-                Platform.Current.Logger.Log(LogLevels.Debug, "Completed registering background tasks!");
+                PlatformBase.GetService<LoggingService>().Log(LogLevels.Debug, "Completed registering background tasks!");
             }
             catch (Exception ex)
             {
-                Platform.Current.Logger.LogError(ex, "Error during BackgroundTaskManager.RegisterAllAsync()");
+                PlatformBase.GetService<LoggingService>().LogError(ex, "Error during BackgroundTaskManager.RegisterAllAsync()");
             }
         }
 
@@ -102,7 +96,7 @@ namespace Contoso.Core.Services
         /// Indicates whether or not the app has permissions to run background tasks.
         /// </summary>
         /// <returns>True if allowed else false.</returns>
-        internal bool CheckIfAllowed()
+        public bool CheckIfAllowed()
         {
             var status = BackgroundExecutionManager.GetAccessStatus();
 
@@ -141,7 +135,7 @@ namespace Contoso.Core.Services
         /// <param name="name">A name for the background task.</param>
         /// <param name="trigger">The trigger for the background task.</param>
         /// <param name="condition">An optional conditional event that must be true for the task to fire.</param>
-        private BackgroundTaskRegistration RegisterBackgroundTaskAsync(string taskEntryPoint, string taskName, IBackgroundTrigger trigger, IBackgroundCondition condition = null)
+        protected BackgroundTaskRegistration RegisterBackgroundTaskAsync(string taskEntryPoint, string taskName, IBackgroundTrigger trigger, IBackgroundCondition condition = null)
         {
             if (string.IsNullOrWhiteSpace(taskEntryPoint))
                 throw new ArgumentNullException(nameof(taskEntryPoint));
@@ -176,7 +170,7 @@ namespace Contoso.Core.Services
             }
             catch (Exception ex)
             {
-                Platform.Current.Logger.LogError(ex, "Error while trying to register task '{0}': {1}", taskName, ex.Message);
+                PlatformBase.GetService<LoggingService>().LogError(ex, "Error while trying to register task '{0}': {1}", taskName, ex.Message);
                 return null;
             }
         }
@@ -193,8 +187,8 @@ namespace Contoso.Core.Services
                 if (string.IsNullOrEmpty(name) || taskKeyPair.Value.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase))
                 {
                     taskKeyPair.Value.Unregister(true);
-                    Platform.Current.Storage.SaveSetting("TASK_" + taskKeyPair.Key, null, Windows.Storage.ApplicationData.Current.LocalSettings);
-                    Platform.Current.Logger.Log(LogLevels.Debug, "TaskManager removed background task '{0}'", name);
+                    PlatformBase.GetService<StorageManager>().SaveSetting("TASK_" + taskKeyPair.Key, null, Windows.Storage.ApplicationData.Current.LocalSettings);
+                    PlatformBase.GetService<LoggingService>().Log(LogLevels.Debug, "TaskManager removed background task '{0}'", name);
                 }
             }
         }
