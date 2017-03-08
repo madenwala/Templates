@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.UI", "Contoso.UI\Contoso.UI.csproj", "{7A916870-D10A-42EB-B8B8-BD3B1E53E0C5}"
 EndProject
@@ -9,16 +9,25 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.Core", "Contoso.Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.BackgroundTasks", "Contoso.BackgroundTasks\Contoso.BackgroundTasks.csproj", "{CB283AE3-3653-41EC-8E20-69722D2D33FA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platform", "Platform", "{CB5D60BA-865B-480F-A205-7410FF7925D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.Core", "Platform\Platform.Core\Platform.Core.csproj", "{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.Windows.Core", "Platform\Platform.Windows.Core\Platform.Windows.Core.csproj", "{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
 		Release|ARM = Release|ARM
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7A916870-D10A-42EB-B8B8-BD3B1E53E0C5}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{7A916870-D10A-42EB-B8B8-BD3B1E53E0C5}.Debug|ARM.ActiveCfg = Debug|ARM
 		{7A916870-D10A-42EB-B8B8-BD3B1E53E0C5}.Debug|ARM.Build.0 = Debug|ARM
 		{7A916870-D10A-42EB-B8B8-BD3B1E53E0C5}.Debug|ARM.Deploy.0 = Debug|ARM
@@ -28,6 +37,7 @@ Global
 		{7A916870-D10A-42EB-B8B8-BD3B1E53E0C5}.Debug|x86.ActiveCfg = Debug|x86
 		{7A916870-D10A-42EB-B8B8-BD3B1E53E0C5}.Debug|x86.Build.0 = Debug|x86
 		{7A916870-D10A-42EB-B8B8-BD3B1E53E0C5}.Debug|x86.Deploy.0 = Debug|x86
+		{7A916870-D10A-42EB-B8B8-BD3B1E53E0C5}.Release|Any CPU.ActiveCfg = Release|x86
 		{7A916870-D10A-42EB-B8B8-BD3B1E53E0C5}.Release|ARM.ActiveCfg = Release|ARM
 		{7A916870-D10A-42EB-B8B8-BD3B1E53E0C5}.Release|ARM.Build.0 = Release|ARM
 		{7A916870-D10A-42EB-B8B8-BD3B1E53E0C5}.Release|ARM.Deploy.0 = Release|ARM
@@ -37,47 +47,76 @@ Global
 		{7A916870-D10A-42EB-B8B8-BD3B1E53E0C5}.Release|x86.ActiveCfg = Release|x86
 		{7A916870-D10A-42EB-B8B8-BD3B1E53E0C5}.Release|x86.Build.0 = Release|x86
 		{7A916870-D10A-42EB-B8B8-BD3B1E53E0C5}.Release|x86.Deploy.0 = Release|x86
+		{9A7EBE07-4655-4EEC-B627-F8ADE0EE9953}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A7EBE07-4655-4EEC-B627-F8ADE0EE9953}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A7EBE07-4655-4EEC-B627-F8ADE0EE9953}.Debug|ARM.ActiveCfg = Debug|ARM
 		{9A7EBE07-4655-4EEC-B627-F8ADE0EE9953}.Debug|ARM.Build.0 = Debug|ARM
 		{9A7EBE07-4655-4EEC-B627-F8ADE0EE9953}.Debug|x64.ActiveCfg = Debug|x64
 		{9A7EBE07-4655-4EEC-B627-F8ADE0EE9953}.Debug|x64.Build.0 = Debug|x64
 		{9A7EBE07-4655-4EEC-B627-F8ADE0EE9953}.Debug|x86.ActiveCfg = Debug|x86
 		{9A7EBE07-4655-4EEC-B627-F8ADE0EE9953}.Debug|x86.Build.0 = Debug|x86
+		{9A7EBE07-4655-4EEC-B627-F8ADE0EE9953}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A7EBE07-4655-4EEC-B627-F8ADE0EE9953}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9A7EBE07-4655-4EEC-B627-F8ADE0EE9953}.Release|ARM.ActiveCfg = Release|ARM
 		{9A7EBE07-4655-4EEC-B627-F8ADE0EE9953}.Release|ARM.Build.0 = Release|ARM
 		{9A7EBE07-4655-4EEC-B627-F8ADE0EE9953}.Release|x64.ActiveCfg = Release|x64
 		{9A7EBE07-4655-4EEC-B627-F8ADE0EE9953}.Release|x64.Build.0 = Release|x64
 		{9A7EBE07-4655-4EEC-B627-F8ADE0EE9953}.Release|x86.ActiveCfg = Release|x86
 		{9A7EBE07-4655-4EEC-B627-F8ADE0EE9953}.Release|x86.Build.0 = Release|x86
+		{CB283AE3-3653-41EC-8E20-69722D2D33FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB283AE3-3653-41EC-8E20-69722D2D33FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB283AE3-3653-41EC-8E20-69722D2D33FA}.Debug|ARM.ActiveCfg = Debug|ARM
 		{CB283AE3-3653-41EC-8E20-69722D2D33FA}.Debug|ARM.Build.0 = Debug|ARM
 		{CB283AE3-3653-41EC-8E20-69722D2D33FA}.Debug|x64.ActiveCfg = Debug|x64
 		{CB283AE3-3653-41EC-8E20-69722D2D33FA}.Debug|x64.Build.0 = Debug|x64
 		{CB283AE3-3653-41EC-8E20-69722D2D33FA}.Debug|x86.ActiveCfg = Debug|x86
 		{CB283AE3-3653-41EC-8E20-69722D2D33FA}.Debug|x86.Build.0 = Debug|x86
+		{CB283AE3-3653-41EC-8E20-69722D2D33FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB283AE3-3653-41EC-8E20-69722D2D33FA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CB283AE3-3653-41EC-8E20-69722D2D33FA}.Release|ARM.ActiveCfg = Release|ARM
 		{CB283AE3-3653-41EC-8E20-69722D2D33FA}.Release|ARM.Build.0 = Release|ARM
 		{CB283AE3-3653-41EC-8E20-69722D2D33FA}.Release|x64.ActiveCfg = Release|x64
 		{CB283AE3-3653-41EC-8E20-69722D2D33FA}.Release|x64.Build.0 = Release|x64
 		{CB283AE3-3653-41EC-8E20-69722D2D33FA}.Release|x86.ActiveCfg = Release|x86
 		{CB283AE3-3653-41EC-8E20-69722D2D33FA}.Release|x86.Build.0 = Release|x86
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Debug|ARM.Build.0 = Debug|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Debug|x64.Build.0 = Debug|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Debug|x86.Build.0 = Debug|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Release|ARM.ActiveCfg = Release|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Release|ARM.Build.0 = Release|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Release|x64.ActiveCfg = Release|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Release|x64.Build.0 = Release|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Release|x86.ActiveCfg = Release|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Release|x86.Build.0 = Release|Any CPU
+		{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}.Debug|ARM.ActiveCfg = Debug|ARM
+		{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}.Debug|ARM.Build.0 = Debug|ARM
+		{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}.Debug|x64.ActiveCfg = Debug|x64
+		{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}.Debug|x64.Build.0 = Debug|x64
+		{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}.Debug|x86.ActiveCfg = Debug|x86
+		{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}.Debug|x86.Build.0 = Debug|x86
+		{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}.Release|ARM.ActiveCfg = Release|ARM
+		{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}.Release|ARM.Build.0 = Release|ARM
+		{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}.Release|x64.ActiveCfg = Release|x64
+		{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}.Release|x64.Build.0 = Release|x64
+		{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}.Release|x86.ActiveCfg = Release|x86
+		{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://adenwala.visualstudio.com/defaultcollection
-		SccProjectUniqueName0 = Contoso.UI\\Contoso.UI.csproj
-		SccProjectName0 = Contoso.UI
-		SccLocalPath0 = Contoso.UI
-		SccProjectUniqueName1 = Contoso.Core\\Contoso.Core.csproj
-		SccProjectName1 = Contoso.Core
-		SccLocalPath1 = Contoso.Core
-		SccProjectUniqueName2 = Contoso.BackgroundTasks\\Contoso.BackgroundTasks.csproj
-		SccProjectName2 = Contoso.BackgroundTasks
-		SccLocalPath2 = Contoso.BackgroundTasks
-		SccLocalPath3 = .
+	GlobalSection(NestedProjects) = preSolution
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3} = {CB5D60BA-865B-480F-A205-7410FF7925D9}
+		{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B} = {CB5D60BA-865B-480F-A205-7410FF7925D9}
 	EndGlobalSection
 EndGlobal
