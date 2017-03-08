@@ -107,8 +107,34 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgentSync.cs" />
+    <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="Extensions\FrameExtensions.cs" />
+    <Compile Include="Extensions\IEnumerableExtensions.cs" />
+    <Compile Include="Extensions\LongExtensions.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Extensions\PackageVersionExtensions.cs" />
+    <Compile Include="GeneralFunctions.cs" />
+    <Compile Include="Models\BackgroundTaskRunInfo.cs" />
+    <Compile Include="Models\CustomExceptions.cs" />
+    <Compile Include="Models\ModelBase.cs" />
+    <Compile Include="Models\VoiceCommandInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serializers.cs" />
+    <Compile Include="TypeUtility.cs" />
     <EmbeddedResource Include="Properties\Platform.Windows.Core.rd.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Platform.Core\Platform.Core.csproj">
+      <Project>{6909d24a-c1d4-4664-8dbd-c6bfea229bf3}</Project>
+      <Name>Platform.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\" />
+    <Folder Include="Services\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
