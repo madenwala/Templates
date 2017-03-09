@@ -16,5 +16,16 @@
     </releaseNotes>
     <copyright>Copyright 2017</copyright>
     <tags>Contoso Adenwala</tags>
+
+    <dependencies>
+      <dependency id="Newtonsoft.Json" version="9.0" />
+    </dependencies>
+    
   </metadata>
+
+  <!-- A readme.txt will be displayed when the package is installed -->
+  <files>
+    <file src="ReadMe.txt" target="" />
+  </files>
+  
 </package>

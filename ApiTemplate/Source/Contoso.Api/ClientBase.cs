@@ -48,14 +48,12 @@ namespace Contoso.Api
         #region Get
 
         /// <summary>
-        /// Gets data from the specified URL.
+        /// Gets data from a specified URL.
         /// </summary>
         /// <typeparam name="T">Type for the strongly typed class representing data returned from the URL.</typeparam>
-        /// <param name="url">URL to retrieve data from.</param>should be deserialized.</param>
-        /// <param name="retryCount">Number of retry attempts if a call fails. Default is zero.</param>
-        /// <param name="serializerType">Specifies how the data should be deserialized.</param>
+        /// <param name="url">URL to retrieve data from.</param>
+        /// <param name="ct">Cancellation token.</param>
         /// <returns>Instance of the type specified representing the data returned from the URL.</returns>
-        /// <summary>
         protected async Task<T> GetAsync<T>(string url, CancellationToken ct = default(CancellationToken))
         {
             if (string.IsNullOrEmpty(url))
@@ -78,7 +76,6 @@ namespace Contoso.Api
         /// <param name="url">URL to retrieve data from.</param>
         /// <param name="contents">Any content that should be passed into the post.</param>
         /// <param name="ct">Cancellation token.</param>
-        /// <param name="serializerType">Specifies how the data should be deserialized.</param>
         /// <returns>Instance of the type specified representing the data returned from the URL.</returns>
         protected async Task<T> PostAsync<T>(string url, CancellationToken ct = default(CancellationToken), HttpContent contents = default(HttpContent))
         {
@@ -92,7 +89,6 @@ namespace Contoso.Api
         /// <param name="url">URL to retrieve data from.</param>
         /// <param name="contents">Any content that should be passed into the post.</param>
         /// <param name="ct">Cancellation token.</param>
-        /// <param name="serializerType">Specifies how the data should be deserialized.</param>
         /// <returns>Response contents as string else null if nothing.</returns>
         protected async Task<string> PostAsync(string url, CancellationToken ct = default(CancellationToken), HttpContent contents = default(HttpContent))
         {
@@ -107,7 +103,6 @@ namespace Contoso.Api
         /// <param name="url">URL to retrieve data from.</param>
         /// <param name="contents">Any content that should be passed into the post.</param>
         /// <param name="ct">Cancellation token.</param>
-        /// <param name="serializerType">Specifies how the data should be deserialized.</param>
         /// <returns>Response contents as string else null if nothing.</returns>
         protected async Task<HttpResponseMessage> PostAsync(string url, HttpContent contents, CancellationToken ct = default(CancellationToken))
         {
