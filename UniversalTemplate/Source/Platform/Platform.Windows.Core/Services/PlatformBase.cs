@@ -249,7 +249,13 @@ namespace Contoso.Core.Services
             if (_services.ContainsKey(typeof(T)))
                 return (T)_services[typeof(T)];
             else
-                return default(T);
+            {
+                var value = _services.Values.FirstOrDefault(f => f is T);
+                if (value != null)
+                    return (T)value;
+                else
+                    return default(T);
+            }
         }
 
         /// <summary>

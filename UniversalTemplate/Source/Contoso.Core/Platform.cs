@@ -53,16 +53,16 @@ namespace Contoso.Core
             this.Analytics = new AnalyticsManager();
             this.BackgroundTasks = new BackgroundTasksManager();
             this.Storage = new StorageManager();
-            // TODO this.AppInfo = new AppInfoProvider();
-            // TODO this.AuthManager = new AuthorizationManager();
+            this.AppInfo = new AppInfoProvider();
+            this.AuthManager = new AuthorizationManager();
             this.Cryptography = new CryptographyProvider();
             this.Geocode = new GeocodingService();
             this.Geolocation = new GeolocationService();
-            // TODO this.Notifications = new NotificationsService();
+            this.Notifications = new NotificationsService();
             this.Ratings = new RatingsManager();
             this.VoiceCommandManager = new VoiceCommandManager();
             this.Jumplist = new JumplistManager();
-            // TODO this.WebAccountManager = new WebAccountManager();
+            this.WebAccountManager = new WebAccountManager();
             this.SharingManager = new SharingManager();
         }
 
