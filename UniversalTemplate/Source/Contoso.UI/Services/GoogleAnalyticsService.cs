@@ -54,9 +54,9 @@ namespace Contoso.UI.Services
             _tracker.Send(HitBuilder.CreateCustomEvent("User", username).Build());
         }
 
-        public override void SetUser(UserResponse user)
-        {
-            this.SetUser(user.DisplayName);
-        }
+        //public override void SetUser(UserResponse user)
+        //{
+        //    this.SetUser(user.DisplayName);
+        //}
     }
 }

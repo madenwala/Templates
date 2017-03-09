@@ -56,13 +56,13 @@ namespace Contoso.UI.Services
                 HockeyClient.Current.UpdateContactInfo(username, username);
         }
 
-        public override void SetUser(UserResponse user)
-        {
-            if (user != null)
-            {
-                this.Event("Username", user.Email);
-                HockeyClient.Current.UpdateContactInfo(user.ID, user.Email);
-            }
-        }
+        //public override void SetUser(UserResponse user)
+        //{
+        //    if (user != null)
+        //    {
+        //        this.Event("Username", user.Email);
+        //        HockeyClient.Current.UpdateContactInfo(user.ID, user.Email);
+        //    }
+        //}
     }
 }

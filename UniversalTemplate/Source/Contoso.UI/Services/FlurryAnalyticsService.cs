@@ -69,10 +69,10 @@ namespace Contoso.UI.Services
             Api.SetUserId(username);
         }
 
-        public override void SetUser(UserResponse user)
-        {
-            Api.SetUserId(user?.Email);
-        }
+        //public override void SetUser(UserResponse user)
+        //{
+        //    Api.SetUserId(user?.Email);
+        //}
 
         public override void Dispose()
         {
