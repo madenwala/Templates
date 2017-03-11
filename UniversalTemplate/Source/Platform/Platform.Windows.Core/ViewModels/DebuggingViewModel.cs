@@ -6,6 +6,7 @@ using System.Windows.Input;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Background;
 using System.Threading;
+using Contoso.Core.Services;
 
 namespace Contoso.Core.ViewModels
 {
@@ -48,9 +49,9 @@ namespace Contoso.Core.ViewModels
                 foreach (var registration in BackgroundTaskRegistration.AllTasks)
                 {
                     string key = "TASK_" + registration.Value.Name;
-                    if (Platform.Current.Storage.ContainsSetting(key, Windows.Storage.ApplicationData.Current.LocalSettings))
+                    if (PlatformBase.GetService<StorageManager>().ContainsSetting(key, Windows.Storage.ApplicationData.Current.LocalSettings))
                     {
-                        var info = Platform.Current.Storage.LoadSetting<BackgroundTaskRunInfo>(key, Windows.Storage.ApplicationData.Current.LocalSettings);
+                        var info = PlatformBase.GetService<StorageManager>().LoadSetting<BackgroundTaskRunInfo>(key, Windows.Storage.ApplicationData.Current.LocalSettings);
                         if (info != null)
                         {
                             info.TaskName = registration.Value.Name;

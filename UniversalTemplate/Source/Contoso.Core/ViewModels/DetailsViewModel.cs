@@ -151,19 +151,19 @@ namespace Contoso.Core.ViewModels
             if (this.Item != null)
             {
                 // Check if tile exists, clear old notifications, update for new notifications
-                if (Platform.Current.Notifications.HasTile(this.Item))
+                if (this.Platform.Notifications.HasTile(this.Item))
                 {
-                    Platform.Current.Notifications.ClearTile(this.Item);
-                    await Platform.Current.Notifications.CreateOrUpdateTileAsync(this.Item);
+                    this.Platform.Notifications.ClearTile(this.Item);
+                    await this.Platform.Notifications.CreateOrUpdateTileAsync(this.Item);
                 }
                 
                 if (!this.IsInitialized)
                 {
-                    var t = Platform.Current.Jumplist.AddItemAsync(new JumpItemInfo()
+                    var t = this.Platform.Jumplist.AddItemAsync(new JumpItemInfo()
                     {
                         Name = this.Item.LineOne,
                         Description = this.Item.LineTwo,
-                        Arguments = Platform.Current.GenerateModelArguments(this.Item)
+                        Arguments = this.Platform.GenerateModelArguments(this.Item)
                     });
                 }
             }

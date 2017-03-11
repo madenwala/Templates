@@ -1,6 +1,7 @@
 ﻿using Contoso.Core.Commands;
 using Contoso.Core.Data;
 using Contoso.Core.Models;
+using Contoso.Core.Services;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -211,14 +212,14 @@ namespace Contoso.Core.ViewModels
                     var response = await api.RegisterAsync(this, CancellationToken.None);
 
                     if (response?.AccessToken != null)
-                        await Platform.Current.AuthManager.SetUserAsync(response);
+                        await this.Platform.AuthManager.SetUserAsync(response);
                     else
                         userMessage = Strings.Account.TextAuthenticationFailed;
 
                     this.ClearStatus();
 
                     if (this.IsUserAuthenticated)
-                        Platform.Current.Navigation.Home();
+                        this.Platform.Navigation.Home();
                     else
                         await this.ShowMessageBoxAsync(CancellationToken.None, userMessage, this.Title);
                 }
@@ -235,8 +236,8 @@ namespace Contoso.Core.ViewModels
 
         private async Task LaunchWebAccountManager()
         {
-            await Platform.Current.WebAccountManager.SignoutAsync();
-            Platform.Current.WebAccountManager.Show(this.WAM_Success, this.WAM_Failed);
+            await this.Platform.WebAccountManager.SignoutAsync();
+            this.Platform.WebAccountManager.Show(this.WAM_Success, this.WAM_Failed);
         }
 
         private CancellationTokenSource _cts;
@@ -246,7 +247,7 @@ namespace Contoso.Core.ViewModels
             {
                 this.ShowBusyStatus(string.Format(Strings.Account.TextWebAccountManagerRetrievingProfile, pi.WebAccountType), true);
 
-                await Platform.Current.WebAccountManager.SignoutAsync();
+                await this.Platform.WebAccountManager.SignoutAsync();
 
                 _cts = new CancellationTokenSource();
                 using (var api = new MicrosoftApi())
@@ -257,7 +258,7 @@ namespace Contoso.Core.ViewModels
             }
             catch (Exception ex)
             {
-                Platform.Current.Logger.LogError(ex, "Failed to perform work during WAM success");
+                this.Platform.Logger.LogError(ex, "Failed to perform work during WAM success");
             }
             finally
             {
@@ -270,12 +271,12 @@ namespace Contoso.Core.ViewModels
         {
             try
             {
-                Platform.Current.Logger.LogError(result?.ResponseError.ToException(), "WAM failed to retrieve user account token.");
+                this.Platform.Logger.LogError(result?.ResponseError.ToException(), "WAM failed to retrieve user account token.");
                 await this.ShowMessageBoxAsync(CancellationToken.None, "Could not retrieve your Microsoft Account profile to pre-fill your account registration.");
             }
             catch (Exception ex)
             {
-                Platform.Current.Logger.LogError(ex, "Failed to perform work during WAM failure");
+                this.Platform.Logger.LogError(ex, "Failed to perform work during WAM failure");
             }
         }
 

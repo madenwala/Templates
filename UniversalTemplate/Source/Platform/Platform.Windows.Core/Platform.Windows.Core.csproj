@@ -104,7 +104,19 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Compile Include="Commands\PinTileCommand.cs" />
+    <Compile Include="Models\ClientApiModels.cs" />
+    <Compile Include="PlatformBase.cs" />
+    <Compile Include="Services\AuthorizationManager.cs" />
+    <Compile Include="Services\NotificationsManagerBase.cs" />
+    <Compile Include="ViewModels\CollectionViewModelBase.cs" />
+    <Compile Include="ViewModels\DebuggingViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModelBase.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="ViewModels\WebBrowserViewModel.cs" />
     <None Include="project.json" />
+    <Compile Include="Commands\WebBrowserCommand.cs" />
+    <Compile Include="Services\NavigationManagerBase.Commands.cs" />
     <PRIResource Include="Strings\en-US\WebBrowser.resw">
       <Generator>ReswFileCodeGenerator</Generator>
       <LastGenOutput>WebBrowser.cs</LastGenOutput>
@@ -140,6 +152,8 @@
     <Compile Include="AgentSync.cs" />
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\GenericCommand.cs" />
+    <Compile Include="Commands\MapCommands.cs" />
+    <Compile Include="Commands\NavigationCommand.cs" />
     <Compile Include="Commands\ShareCommand.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Extensions\FrameExtensions.cs" />
@@ -169,12 +183,14 @@
     <Compile Include="Services\Analytics\HockeyAppService.cs" />
     <Compile Include="Services\JumpListManager.cs" />
     <Compile Include="Services\LoggingService.cs" />
-    <Compile Include="Services\PlatformBase.cs" />
+    <Compile Include="Services\NavigationManagerBase.cs" />
+    <Compile Include="PlatformBase.Core.cs" />
     <Compile Include="Services\RatingsManager.cs" />
     <Compile Include="Services\ServiceBase.cs" />
     <Compile Include="Services\SharingManagerBase.cs" />
     <Compile Include="Services\StorageManagerBase.cs" />
     <Compile Include="Services\VoiceCommandManager.cs" />
+    <Compile Include="Services\WebAccountManager.cs" />
     <Compile Include="Strings\en-US\Account.cs">
       <DependentUpon>Account.resw</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -210,12 +226,12 @@
     <EmbeddedResource Include="Properties\Platform.Windows.Core.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Platform.Core\Platform.Core.csproj">
-      <Project>{6909d24a-c1d4-4664-8dbd-c6bfea229bf3}</Project>
-      <Name>Platform.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
+    <SDKReference Include="Microsoft.Services.Store.Engagement, Version=10.0">
+      <Name>Microsoft Engagement Framework</Name>
+    </SDKReference>
+    <SDKReference Include="Microsoft.VCLibs, Version=14.0">
+      <Name>Visual C++ 2015 Runtime for Universal Windows Platform Apps</Name>
+    </SDKReference>
     <SDKReference Include="WindowsMobile, Version=10.0.14393.0">
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>

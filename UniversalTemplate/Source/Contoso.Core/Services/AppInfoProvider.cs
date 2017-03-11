@@ -1,24 +1,8 @@
 ﻿using Contoso.Core.Commands;
-using Contoso.Core.Services;
 using Contoso.Core.ViewModels;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Store;
-
-namespace Contoso.Core
-{
-    public partial class Platform
-    {
-        /// <summary>
-        /// Gets access to the app info service of the platform currently executing.
-        /// </summary>
-        public AppInfoProvider AppInfo
-        {
-            get { return GetService<AppInfoProvider>(); }
-            protected set { SetService<AppInfoProvider>(value); }
-        }
-    }
-}
 
 namespace Contoso.Core.Services
 {

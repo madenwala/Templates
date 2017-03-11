@@ -8,33 +8,22 @@ using Windows.Foundation;
 using Windows.UI.Notifications;
 using Windows.UI.StartScreen;
 
-namespace Contoso.Core
+namespace Contoso.Core.Services
 {
-    public partial class Platform : PlatformBase
+    public partial class PlatformBase
     {
         /// <summary>
         /// Gets access to the notifications service of the platform currently executing. Provides you the ability to display toasts or manage tiles or etc on the executing platform.
         /// </summary>
-        public NotificationsService Notifications
+        public NotificationsManagerBase Notifications
         {
-            get { return GetService<NotificationsService>(); }
-            set { SetService<NotificationsService>(value); }
+            get { return GetService<NotificationsManagerBase>(); }
+            set { SetService<NotificationsManagerBase>(value); }
         }
+
     }
-}
-
-namespace Contoso.Core.Services
-{
-    public sealed partial class NotificationsService : ServiceBase, IServiceSignout
+    public abstract partial class NotificationsManagerBase : ServiceBase, IServiceSignout
     {
-        #region Constructors
-
-        internal NotificationsService()
-        {
-        }
-
-        #endregion
-
         #region Methods
 
         /// <summary>
@@ -47,6 +36,10 @@ namespace Contoso.Core.Services
             await base.OnInitializeAsync();
         }
 
+        public abstract Task<bool> CreateOrUpdateTileAsync(IModel model);
+
+        public abstract void DisplayToast(IModel model);
+
         #region Public
 
         /// <summary>
@@ -58,7 +51,7 @@ namespace Contoso.Core.Services
             ToastNotificationManager.History.Clear();
 
             // Clear primary tile
-            this.ClearTile(Platform.Current.ViewModel);
+            this.ClearTile(PlatformBase.Current.ViewModel);
 
             // Clear secondary tiles
             IReadOnlyList<SecondaryTile> list = await SecondaryTile.FindAllAsync();
@@ -74,7 +67,7 @@ namespace Contoso.Core.Services
         /// <returns>True if a tile exists associated to the model specified or false if no tile was found.</returns>
         public bool HasTile(IModel model)
         {
-            var tileID = Platform.Current.GenerateModelTileID(model);
+            var tileID = PlatformBase.Current.GenerateModelTileID(model);
             if (tileID == string.Empty)
                 return true;
             else if (!string.IsNullOrEmpty(tileID))
@@ -92,7 +85,7 @@ namespace Contoso.Core.Services
             var list = await SecondaryTile.FindAllAsync();
             foreach (var tile in list)
             {
-                var model = await Platform.Current.GenerateModelFromTileIdAsync(tile.TileId, ct);
+                var model = await PlatformBase.Current.GenerateModelFromTileIdAsync(tile.TileId, ct);
                 ct.ThrowIfCancellationRequested();
 
                 if (model != null)
@@ -110,7 +103,7 @@ namespace Contoso.Core.Services
         /// <param name="model">Model which contains the data necessary to find the tile to delete.</param>
         public async Task<bool> DeleteTileAsync(IModel model)
         {
-            var tileID = Platform.Current.GenerateModelTileID(model);
+            var tileID = PlatformBase.Current.GenerateModelTileID(model);
             if (!string.IsNullOrEmpty(tileID))
             {
                 SecondaryTile tile = new SecondaryTile(tileID);
@@ -127,7 +120,7 @@ namespace Contoso.Core.Services
         /// <param name="model">Model which contains the data necessary to find the tile to clear.</param>
         public void ClearTile(IModel model)
         {
-            var tileID = Platform.Current.GenerateModelTileID(model);
+            var tileID = PlatformBase.Current.GenerateModelTileID(model);
             if (tileID == string.Empty)
                 TileUpdateManager.CreateTileUpdaterForApplication().Clear();
             else if (!string.IsNullOrEmpty(tileID))
@@ -140,7 +133,7 @@ namespace Contoso.Core.Services
 
         #region Private
 
-        private class TileVisualOptions
+        protected internal class TileVisualOptions
         {
             public TileVisualOptions()
             {
@@ -157,7 +150,7 @@ namespace Contoso.Core.Services
             public Windows.UI.Popups.Placement PopupPlacement { get; set; }
         }
 
-        private async Task<bool> CreateOrUpdateSecondaryTileAsync(SecondaryTile tile, TileVisualOptions options)
+        protected async Task<bool> CreateOrUpdateSecondaryTileAsync(SecondaryTile tile, TileVisualOptions options)
         {
             if (tile == null)
                 return false;

@@ -1,6 +1,5 @@
 ﻿using Contoso.Core;
 using Contoso.Core.ViewModels;
-using Contoso.UI.Controls;
 using System;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;

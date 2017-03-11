@@ -1,4 +1,5 @@
 ﻿using Contoso.Core;
+using Contoso.Core.Services;
 using Windows.UI.Xaml.Controls;
 
 namespace Contoso.UI.Controls

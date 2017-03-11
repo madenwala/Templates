@@ -1,5 +1,6 @@
 ﻿using Contoso.Core.Commands;
 using Contoso.Core.Models;
+using Contoso.Core.Services;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -196,8 +197,8 @@ namespace Contoso.Core.ViewModels
             this.Title = title ?? Strings.Resources.TextNotApplicable;
             this.ClearStatus();
             this.ShowBrowser = true;
-            Platform.Current.Navigation.NavigateGoBackCommand.RaiseCanExecuteChanged();
-            Platform.Current.Navigation.NavigateGoForwardCommand.RaiseCanExecuteChanged();
+            PlatformBase.GetService<NavigationManagerBase>().NavigateGoBackCommand.RaiseCanExecuteChanged();
+            PlatformBase.GetService<NavigationManagerBase>().NavigateGoForwardCommand.RaiseCanExecuteChanged();
             this.BrowserHomeCommand.RaiseCanExecuteChanged();
             this.IsBrowserRefreshEnabled = true;
             this.CurrentUrl = uri.ToString();
@@ -220,8 +221,8 @@ namespace Contoso.Core.ViewModels
             this.ClearStatus();
             this.Title = Strings.Resources.TextNotApplicable;
             this.ShowBrowser = false;
-            Platform.Current.Navigation.NavigateGoBackCommand.RaiseCanExecuteChanged();
-            Platform.Current.Navigation.NavigateGoForwardCommand.RaiseCanExecuteChanged();
+            PlatformBase.GetService<NavigationManagerBase>().NavigateGoBackCommand.RaiseCanExecuteChanged();
+            PlatformBase.GetService<NavigationManagerBase>().NavigateGoForwardCommand.RaiseCanExecuteChanged();
             this.HandleException(exception, "Error navigating to " + uri.ToString());
             this.IsBrowserRefreshEnabled = true;
             this.CurrentUrl = null;

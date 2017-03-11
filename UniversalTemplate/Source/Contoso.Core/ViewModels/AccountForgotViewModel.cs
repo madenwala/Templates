@@ -1,6 +1,7 @@
 ﻿using Contoso.Core.Commands;
 using Contoso.Core.Data;
 using Contoso.Core.Models;
+using Contoso.Core.Services;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -105,7 +106,7 @@ namespace Contoso.Core.ViewModels
 
                     await this.ShowMessageBoxAsync(CancellationToken.None, response.Message, this.Title);
                     if (response?.IsValid == true)
-                        Platform.Current.Navigation.GoBack();
+                        this.Platform.Navigation.GoBack();
                 }
             }
             catch (Exception ex)

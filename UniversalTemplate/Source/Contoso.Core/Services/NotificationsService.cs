@@ -10,7 +10,7 @@ using Windows.UI.StartScreen;
 
 namespace Contoso.Core.Services
 {
-    public sealed partial class NotificationsService : ServiceBase
+    public partial class NotificationsService : NotificationsManagerBase
     {
         #region Methods
 
@@ -19,7 +19,7 @@ namespace Contoso.Core.Services
         /// implements this interface. If the platform does not support this feature, then the implementation should do nothing.
         /// </summary>
         /// <param name="model">Model which contains the data necessary to create a new tile or to find the tile to update</param>
-        public async Task<bool> CreateOrUpdateTileAsync(IModel model)
+        public override async Task<bool> CreateOrUpdateTileAsync(IModel model)
         {
             if (model == null)
                 return false;
@@ -123,7 +123,7 @@ namespace Contoso.Core.Services
         /// interface. If the platform does not support toasts, then the implementation should do nothing.
         /// </summary>
         /// <param name="model">Model which contains the data needed for the toast.</param>
-        public void DisplayToast(IModel model)
+        public override void DisplayToast(IModel model)
         {
             ToastContent tc = null;
 

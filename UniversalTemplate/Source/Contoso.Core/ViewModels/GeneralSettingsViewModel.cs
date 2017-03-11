@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Devices.Geolocation;
 using System.Threading;
+using Contoso.Core.Services;
 
 namespace Contoso.Core.ViewModels
 {
@@ -50,12 +51,12 @@ namespace Contoso.Core.ViewModels
         
         public bool IsApplicationThemeDefault
         {
-            get { return Platform.Current.AppSettingsRoaming.ApplicationTheme == (int)Windows.UI.Xaml.ElementTheme.Default; }
+            get { return this.Platform.AppSettingsRoaming.ApplicationTheme == (int)Windows.UI.Xaml.ElementTheme.Default; }
             set
             {
                 if (value)
                 {
-                    Platform.Current.AppSettingsRoaming.ApplicationTheme = (int)Windows.UI.Xaml.ElementTheme.Default;
+                    this.Platform.AppSettingsRoaming.ApplicationTheme = (int)Windows.UI.Xaml.ElementTheme.Default;
                     this.NotifyPropertyChangedOnUI(() => this.IsApplicationThemeDefault);
                 }
             }
@@ -63,12 +64,12 @@ namespace Contoso.Core.ViewModels
 
         public bool IsApplicationThemeLight
         {
-            get { return Platform.Current.AppSettingsRoaming.ApplicationTheme == (int)Windows.UI.Xaml.ElementTheme.Light; }
+            get { return this.Platform.AppSettingsRoaming.ApplicationTheme == (int)Windows.UI.Xaml.ElementTheme.Light; }
             set
             {
                 if (value)
                 {
-                    Platform.Current.AppSettingsRoaming.ApplicationTheme = (int)Windows.UI.Xaml.ElementTheme.Light;
+                    this.Platform.AppSettingsRoaming.ApplicationTheme = (int)Windows.UI.Xaml.ElementTheme.Light;
                     this.NotifyPropertyChangedOnUI(() => this.IsApplicationThemeLight);
                 }
             }
@@ -76,12 +77,12 @@ namespace Contoso.Core.ViewModels
 
         public bool IsApplicationThemeDark
         {
-            get { return Platform.Current.AppSettingsRoaming.ApplicationTheme == (int)Windows.UI.Xaml.ElementTheme.Dark; }
+            get { return this.Platform.AppSettingsRoaming.ApplicationTheme == (int)Windows.UI.Xaml.ElementTheme.Dark; }
             set
             {
                 if (value)
                 {
-                    Platform.Current.AppSettingsRoaming.ApplicationTheme = (int)Windows.UI.Xaml.ElementTheme.Dark;
+                    this.Platform.AppSettingsRoaming.ApplicationTheme = (int)Windows.UI.Xaml.ElementTheme.Dark;
                     this.NotifyPropertyChangedOnUI(() => this.IsApplicationThemeDark);
                 }
             }
@@ -98,7 +99,7 @@ namespace Contoso.Core.ViewModels
             if (DesignMode.DesignModeEnabled)
                 return;
 
-            this.AppCacheTask = new NotifyTaskCompletion<string>(async (ct) => await Platform.Current.Storage.GetAppDataCacheFolderSizeAsync());
+            this.AppCacheTask = new NotifyTaskCompletion<string>(async (ct) => await this.Platform.Storage.GetAppDataCacheFolderSizeAsync());
             this.AppCacheTask.SuccessfullyCompleted += (s, e) =>
             {
                 this.CanClearAppDataCache = true;
@@ -120,7 +121,7 @@ namespace Contoso.Core.ViewModels
 
         protected override Task OnSaveStateAsync(SaveStateEventArgs e)
         {
-            Platform.Current.SaveSettings();
+            this.Platform.SaveSettings();
             if (this.View != null)
                 this.View.GotFocus -= View_GotFocus;
             return base.OnSaveStateAsync(e);
@@ -153,7 +154,7 @@ namespace Contoso.Core.ViewModels
             }
             catch (Exception ex)
             {
-                Platform.Current.Logger.LogError(ex, "Error during UpdateRefreshLocationStatus()");
+                this.Platform.Logger.LogError(ex, "Error during UpdateRefreshLocationStatus()");
             }
         }
 
@@ -161,16 +162,16 @@ namespace Contoso.Core.ViewModels
         {
             try
             {
-                var allowed = Platform.Current.BackgroundTasks.CheckIfAllowed();
+                var allowed = this.Platform.BackgroundTasks.CheckIfAllowed();
 
                 this.BackgroundTasksStatus = !allowed ? Strings.BackgroundTasks.TextBackgroundAppDisabledStatus : string.Empty;
 
-                if (!Platform.Current.BackgroundTasks.AreTasksRegistered && allowed)
-                    await Platform.Current.BackgroundTasks.RegisterAllAsync();
+                if (!this.Platform.BackgroundTasks.AreTasksRegistered && allowed)
+                    await this.Platform.BackgroundTasks.RegisterAllAsync();
             }
             catch(Exception ex)
             {
-                Platform.Current.Logger.LogError(ex, "Error during UpdateBackgroundTasksStatus()");
+                this.Platform.Logger.LogError(ex, "Error during UpdateBackgroundTasksStatus()");
             }
         }
 
@@ -180,7 +181,7 @@ namespace Contoso.Core.ViewModels
             {
                 this.CanClearAppDataCache = false;
                 this.ClearAppDataCacheCommand.RaiseCanExecuteChanged();
-                await Platform.Current.Storage.ClearAppDataCacheFolderAsync();
+                await this.Platform.Storage.ClearAppDataCacheFolderAsync();
                 await this.AppCacheTask.RefreshAsync(true, CancellationToken.None);
             }
             finally

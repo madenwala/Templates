@@ -1,14 +1,17 @@
-﻿using Contoso.Core.Commands;
-using Contoso.Core.ViewModels;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Contoso.Core.Commands;
+using System.Reflection;
+using Windows.ApplicationModel.Activation;
+using Windows.UI.Xaml.Controls;
+using Contoso.Core.ViewModels;
 
 namespace Contoso.Core.Services
 {
-    /// <summary>
-    /// Base class for accessing navigation services on the platform currently executing.
-    /// </summary>
-    public abstract partial class NavigationManagerBase
+    public partial class NavigationManagerBase
     {
         #region Properties
 
@@ -62,24 +65,6 @@ namespace Contoso.Core.Services
         public CommandBase NavigateToSettingsCommand
         {
             get { return _navigateToSettingsCommand ?? (_navigateToSettingsCommand = new NavigationCommand("NavigateToSettingsCommand", this.Settings)); }
-        }
-
-        private CommandBase _navigateToPrivacyPolicyCommand = null;
-        /// <summary>
-        /// Command to navigate to the application's privacy policy view.
-        /// </summary>
-        public CommandBase NavigateToPrivacyPolicyCommand
-        {
-            get { return _navigateToPrivacyPolicyCommand ?? (_navigateToPrivacyPolicyCommand = new NavigationCommand("NavigateToPrivacyPolicyCommand", this.PrivacyPolicy)); }
-        }
-
-        private CommandBase _navigateToTermsOfServiceCommand = null;
-        /// <summary>
-        /// Command to navigate to the application's terms of service view.
-        /// </summary>
-        public CommandBase NavigateToTermsOfServiceCommand
-        {
-            get { return _navigateToTermsOfServiceCommand ?? (_navigateToTermsOfServiceCommand = new NavigationCommand("NavigateToTermsOfServiceCommand", this.TermsOfService)); }
         }
 
         #endregion
@@ -191,7 +176,7 @@ namespace Contoso.Core.Services
         {
             get
             {
-                return Platform.Current == null ? null : _navigateToNewWindowCommand ?? (_navigateToNewWindowCommand = new GenericCommand<ViewModelBase>("NavigateToNewWindowCommand", async (e) =>
+                return PlatformBase.Current == null ? null : _navigateToNewWindowCommand ?? (_navigateToNewWindowCommand = new GenericCommand<ViewModelBase>("NavigateToNewWindowCommand", async (e) =>
                 {
                     await this.NavigateInNewWindow(e.View.GetType(), e.ViewParameter);
                 }));
@@ -233,7 +218,7 @@ namespace Contoso.Core.Services
                 {
                     if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher"))
                     {
-                        Platform.Current.Analytics.Event("FeedbackLauncher");
+                        PlatformBase.GetService<AnalyticsManager>().Event("FeedbackLauncher");
                         await Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.GetDefault().LaunchAsync();
                     }
                     else
@@ -249,7 +234,7 @@ namespace Contoso.Core.Services
         private CommandBase _navigateToPhoneCommand = null;
         public CommandBase NavigateToPhoneCommand
         {
-            get { return _navigateToPhoneCommand ?? (_navigateToPhoneCommand = new NavigationCommand("NavigateToPhoneCommand", Platform.Current.Navigation.Phone)); }
+            get { return _navigateToPhoneCommand ?? (_navigateToPhoneCommand = new NavigationCommand("NavigateToPhoneCommand", PlatformBase.GetService<NavigationManagerBase>().Phone)); }
         }
 
         #endregion
@@ -259,7 +244,7 @@ namespace Contoso.Core.Services
         private CommandBase _navigateToTwitterScreenNameCommand = null;
         public CommandBase NavigateToTwitterScreenNameCommand
         {
-            get { return _navigateToTwitterScreenNameCommand ?? (_navigateToTwitterScreenNameCommand = new GenericCommand<string>("NavigateToTwitterScreenNameCommand", Platform.Current.Navigation.NavigateToTwitterScreenName)); }
+            get { return _navigateToTwitterScreenNameCommand ?? (_navigateToTwitterScreenNameCommand = new GenericCommand<string>("NavigateToTwitterScreenNameCommand", PlatformBase.GetService<NavigationManagerBase>().NavigateToTwitterScreenName)); }
         }
 
         #endregion

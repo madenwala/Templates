@@ -45,7 +45,7 @@ namespace Contoso.BackgroundTasks
             {
                 // Execute the background work
                 _info.StartTime = DateTime.UtcNow;
-                await Platform.Current.TimedBackgroundWorkAsync(BackgroundWorkCost.CurrentBackgroundWorkCost, cts.Token);
+                await Platform.LocalCurrent.TimedBackgroundWorkAsync(BackgroundWorkCost.CurrentBackgroundWorkCost, cts.Token);
 
                 // Task ran without error
                 _info.RunSuccessfully = true;

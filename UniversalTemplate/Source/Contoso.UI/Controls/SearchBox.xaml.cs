@@ -1,6 +1,7 @@
 ﻿using Contoso.Core;
 using Contoso.Core.Data;
 using Contoso.Core.Models;
+using Contoso.Core.Services;
 using System;
 using System.Threading;
 using Windows.UI.Xaml;

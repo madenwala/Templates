@@ -4,9 +4,9 @@ using System;
 using System.Threading.Tasks;
 using Windows.Storage;
 
-namespace Contoso.Core
+namespace Contoso.Core.Services
 {
-    public partial class Platform : PlatformBase
+    public partial class PlatformBase
     {
         /// <summary>
         /// Gets access to the cryptography provider of the platform currently executing.
@@ -17,10 +17,7 @@ namespace Contoso.Core
             set { SetService<AuthorizationManager>(value); }
         }
     }
-}
 
-namespace Contoso.Core.Services
-{
     public sealed class AuthorizationManager : ServiceBase, IServiceSignout
     {
         #region Variables
@@ -62,14 +59,6 @@ namespace Contoso.Core.Services
 
         #endregion
 
-        #region Constructors
-
-        internal AuthorizationManager()
-        {
-        }
-
-        #endregion
-
         #region Methods
 
         /// <summary>
@@ -96,16 +85,16 @@ namespace Contoso.Core.Services
         {
             // Retrieve the access token from the credential locker
             string access_token_value = null;
-            if (Platform.Current.Storage.LoadCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_ACCESSTOKEN_KEYNAME, ref access_token_value))
+            if (PlatformBase.GetService<StorageManager>().LoadCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_ACCESSTOKEN_KEYNAME, ref access_token_value))
                 this.AccessToken = access_token_value;
 
             // Retrieve the refresh token from the credential locker
             string refresh_token_value = null;
-            if (Platform.Current.Storage.LoadCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_REFRESHTOKEN_KEYNAME, ref refresh_token_value))
+            if (PlatformBase.GetService<StorageManager>().LoadCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_REFRESHTOKEN_KEYNAME, ref refresh_token_value))
                 this.RefreshToken = refresh_token_value;
 
             // Retrieve the user profile data from settings
-            this.User = await Platform.Current.Storage.LoadFileAsync<UserResponse>(CREDENTIAL_USER_KEYNAME, ApplicationData.Current.RoamingFolder, SerializerTypes.Json);
+            this.User = await PlatformBase.GetService<StorageManager>().LoadFileAsync<UserResponse>(CREDENTIAL_USER_KEYNAME, ApplicationData.Current.RoamingFolder, SerializerTypes.Json);
             if (this.User != null)
             {
                 this.User.AccessToken = this.AccessToken;
@@ -122,7 +111,7 @@ namespace Contoso.Core.Services
         /// Sets the current user of the app.
         /// </summary>
         /// <param name="response"></param>
-        internal async Task<bool> SetUserAsync(UserResponse response)
+        public async Task<bool> SetUserAsync(UserResponse response)
         {
             if (string.IsNullOrEmpty(response?.AccessToken))
             {
@@ -132,12 +121,12 @@ namespace Contoso.Core.Services
             else
             {
                 // Log user
-                // TODO Platform.Current.Analytics.SetUser(response);
+                // TODO PlatformBase.GetService<AnalyticsManager>().SetUser(response);
 
                 // Store user data
-                await Platform.Current.Storage.SaveFileAsync(CREDENTIAL_USER_KEYNAME, response, ApplicationData.Current.RoamingFolder, SerializerTypes.Json);
-                Platform.Current.Storage.SaveCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_ACCESSTOKEN_KEYNAME, response.AccessToken);
-                Platform.Current.Storage.SaveCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_REFRESHTOKEN_KEYNAME, response.RefreshToken);
+                await PlatformBase.GetService<StorageManager>().SaveFileAsync(CREDENTIAL_USER_KEYNAME, response, ApplicationData.Current.RoamingFolder, SerializerTypes.Json);
+                PlatformBase.GetService<StorageManager>().SaveCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_ACCESSTOKEN_KEYNAME, response.AccessToken);
+                PlatformBase.GetService<StorageManager>().SaveCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_REFRESHTOKEN_KEYNAME, response.RefreshToken);
 
                 // Set properties
                 this.User = response;
@@ -156,8 +145,8 @@ namespace Contoso.Core.Services
         /// <returns>Awaitable task is returned.</returns>
         public async Task SignoutAsync()
         {
-            await Platform.Current.Storage.SaveFileAsync(CREDENTIAL_USER_KEYNAME, null, ApplicationData.Current.RoamingFolder, SerializerTypes.Json);
-            Platform.Current.Storage.SaveCredential(CREDENTIAL_USER_KEYNAME, null, null);
+            await PlatformBase.GetService<StorageManager>().SaveFileAsync(CREDENTIAL_USER_KEYNAME, null, ApplicationData.Current.RoamingFolder, SerializerTypes.Json);
+            PlatformBase.GetService<StorageManager>().SaveCredential(CREDENTIAL_USER_KEYNAME, null, null);
             this.User = null;
             this.AccessToken = null;
             this.RefreshToken = null;

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.UI", "Contoso.UI\Contoso.UI.csproj", "{7A916870-D10A-42EB-B8B8-BD3B1E53E0C5}"
 EndProject
@@ -10,8 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.BackgroundTasks", "Contoso.BackgroundTasks\Contoso.BackgroundTasks.csproj", "{CB283AE3-3653-41EC-8E20-69722D2D33FA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platform", "Platform", "{CB5D60BA-865B-480F-A205-7410FF7925D9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.Core", "Platform\Platform.Core\Platform.Core.csproj", "{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.Windows.Core", "Platform\Platform.Windows.Core\Platform.Windows.Core.csproj", "{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}"
 EndProject
@@ -79,22 +77,6 @@ Global
 		{CB283AE3-3653-41EC-8E20-69722D2D33FA}.Release|x64.Build.0 = Release|x64
 		{CB283AE3-3653-41EC-8E20-69722D2D33FA}.Release|x86.ActiveCfg = Release|x86
 		{CB283AE3-3653-41EC-8E20-69722D2D33FA}.Release|x86.Build.0 = Release|x86
-		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Debug|ARM.Build.0 = Debug|Any CPU
-		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Debug|x64.Build.0 = Debug|Any CPU
-		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Debug|x86.Build.0 = Debug|Any CPU
-		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Release|ARM.ActiveCfg = Release|Any CPU
-		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Release|ARM.Build.0 = Release|Any CPU
-		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Release|x64.ActiveCfg = Release|Any CPU
-		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Release|x64.Build.0 = Release|Any CPU
-		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Release|x86.ActiveCfg = Release|Any CPU
-		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Release|x86.Build.0 = Release|Any CPU
 		{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}.Debug|ARM.ActiveCfg = Debug|ARM
@@ -116,7 +98,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3} = {CB5D60BA-865B-480F-A205-7410FF7925D9}
 		{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B} = {CB5D60BA-865B-480F-A205-7410FF7925D9}
 	EndGlobalSection
 EndGlobal

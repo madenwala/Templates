@@ -8,9 +8,9 @@ using Windows.Security.Credentials;
 using Windows.Storage;
 using Windows.UI.ApplicationSettings;
 
-namespace Contoso.Core
+namespace Contoso.Core.Services
 {
-    public partial class Platform : PlatformBase
+    public partial class PlatformBase
     {
         /// <summary>
         /// Gets access to the app info service of the platform currently executing.
@@ -21,10 +21,7 @@ namespace Contoso.Core
             set { SetService<WebAccountManager>(value); }
         }
     }
-}
 
-namespace Contoso.Core.Services
-{
     public sealed class WebAccountManager : ServiceBase, IServiceSignout
     {
         #region Enums
@@ -93,14 +90,6 @@ namespace Contoso.Core.Services
             //};
             //providerFB.RequestProperties.Add("redirect_uri", "msft-dc9fb650-0192-404e-82d8-f204246816ee://success");
             //_providers.Add(providerFB);
-        }
-
-        #endregion
-
-        #region Constructors
-
-        internal WebAccountManager()
-        {
         }
 
         #endregion
@@ -176,12 +165,12 @@ namespace Contoso.Core.Services
                 e.HeaderText = Strings.Account.TextWebAccountManagerSignUpDescription;
 
                 // You can add links such as privacy policy, help, general account settings
-                e.Commands.Add(new SettingsCommand("privacypolicy", Strings.Resources.ViewTitlePrivacyPolicy, (c) => { Platform.Current.Navigation.NavigateToPrivacyPolicyCommand.Execute(null); this.Cleanup(); }));
-                e.Commands.Add(new SettingsCommand("tos", Strings.Resources.ViewTitleTermsOfService, (c) => { Platform.Current.Navigation.NavigateToTermsOfServiceCommand.Execute(null); this.Cleanup(); }));
+                e.Commands.Add(new SettingsCommand("privacypolicy", Strings.Resources.ViewTitlePrivacyPolicy, (c) => { PlatformBase.GetService<NavigationManagerBase>().NavigateToPrivacyPolicyCommand.Execute(null); this.Cleanup(); }));
+                e.Commands.Add(new SettingsCommand("tos", Strings.Resources.ViewTitleTermsOfService, (c) => { PlatformBase.GetService<NavigationManagerBase>().NavigateToTermsOfServiceCommand.Execute(null); this.Cleanup(); }));
             }
             catch(Exception ex)
             {
-                Platform.Current.Logger.LogError(ex, "Failed to display the web account manager UI.");
+                PlatformBase.GetService<LoggingService>().LogError(ex, "Failed to display the web account manager UI.");
                 throw ex;
             }
             finally
@@ -193,7 +182,7 @@ namespace Contoso.Core.Services
         private async void OnWebAccountProviderRequested(WebAccountProviderCommand cmd)
         {
             // Retrieve the provider info instance for the requestd provider
-            var pi = Platform.Current.WebAccountManager.GetProviderInfo(cmd.WebAccountProvider.Id);
+            var pi = this.GetProviderInfo(cmd.WebAccountProvider.Id);
             if (pi == null)
                 throw new ArgumentNullException(nameof(pi));
 
@@ -225,14 +214,14 @@ namespace Contoso.Core.Services
                     wi.Token = webTokenResponse.Token;
                     this.SaveWebAccountInfo(wi);
 
-                    Platform.Current.Logger.Log(LogLevels.Information, string.Format("Web Token request successful for AccountID: {0}", wi.AccountID));
+                    PlatformBase.GetService<LoggingService>().Log(LogLevels.Information, string.Format("Web Token request successful for AccountID: {0}", wi.AccountID));
 
                     // Success Callback
                     _successHandler(pi, wi, result);
                 }
                 else
                 {
-                    Platform.Current.Logger.Log(LogLevels.Information, "Web Token request error: " + result.ResponseStatus + " Code: " + result.ResponseError.ErrorMessage);
+                    PlatformBase.GetService<LoggingService>().Log(LogLevels.Information, "Web Token request error: " + result.ResponseStatus + " Code: " + result.ResponseError.ErrorMessage);
 
                     // Failed Callback
                     _failedHandler(pi, result);
@@ -241,7 +230,7 @@ namespace Contoso.Core.Services
             }
             catch (Exception ex)
             {
-                Platform.Current.Logger.LogError(ex, "Web Token request failed");
+                PlatformBase.GetService<LoggingService>().LogError(ex, "Web Token request failed");
                 _failedHandler(pi, null);
             }
             finally
@@ -259,18 +248,18 @@ namespace Contoso.Core.Services
                 if (args.Action == WebAccountAction.Remove)
                 {
                     // Signs the provider out.
-                    Platform.Current.Logger.Log(LogLevels.Information, "Web Account Manager - Remove account called");
+                    PlatformBase.GetService<LoggingService>().Log(LogLevels.Information, "Web Account Manager - Remove account called");
                     await this.SignoutAsync(cmd.WebAccount.WebAccountProvider.Id);
                 }
                 else if (args.Action == WebAccountAction.Manage)
                 {
                     // Display user management UI for this account
-                    Platform.Current.Logger.Log(LogLevels.Information, "Web Account Manager - Manage account called");
+                    PlatformBase.GetService<LoggingService>().Log(LogLevels.Information, "Web Account Manager - Manage account called");
                 }
             }
             catch (Exception ex)
             {
-                Platform.Current.Logger.LogError(ex, "Web Token request failed");
+                PlatformBase.GetService<LoggingService>().LogError(ex, "Web Token request failed");
             }
             finally
             {
@@ -360,7 +349,7 @@ namespace Contoso.Core.Services
         /// <returns>WebAccountInfo instance if found else null.</returns>
         private WebAccountInfo GetWebAccountInfo(WebAccountTypes type)
         {
-            return Platform.Current.Storage.LoadSetting<WebAccountInfo>("WAM_" + type.ToString(), ApplicationData.Current.RoamingSettings, SerializerTypes.Json);
+            return PlatformBase.GetService<StorageManager>().LoadSetting<WebAccountInfo>("WAM_" + type.ToString(), ApplicationData.Current.RoamingSettings, SerializerTypes.Json);
         }
 
         /// <summary>
@@ -370,7 +359,7 @@ namespace Contoso.Core.Services
         /// <returns>True if stored info exists else false.</returns>
         private bool HasWebAccountInfo(WebAccountTypes type)
         {
-            return Platform.Current.Storage.ContainsSetting("WAM_" + type.ToString(), ApplicationData.Current.RoamingSettings);
+            return PlatformBase.GetService<StorageManager>().ContainsSetting("WAM_" + type.ToString(), ApplicationData.Current.RoamingSettings);
         }
 
         /// <summary>
@@ -380,7 +369,7 @@ namespace Contoso.Core.Services
         private void SaveWebAccountInfo(WebAccountInfo wi)
         {
             if(wi != null)
-                Platform.Current.Storage.SaveSetting("WAM_" + wi.Type.ToString(), wi, ApplicationData.Current.RoamingSettings, SerializerTypes.Json);
+                PlatformBase.GetService<StorageManager>().SaveSetting("WAM_" + wi.Type.ToString(), wi, ApplicationData.Current.RoamingSettings, SerializerTypes.Json);
         }
 
         /// <summary>
@@ -389,7 +378,7 @@ namespace Contoso.Core.Services
         /// <param name="type">Enum type representing the web account to delete.</param>
         private void DeleteUsersWebAccountDetails(WebAccountTypes type)
         {
-            Platform.Current.Storage.SaveSetting("WAM_" + type.ToString(), null, ApplicationData.Current.RoamingSettings, SerializerTypes.Json);
+            PlatformBase.GetService<StorageManager>().SaveSetting("WAM_" + type.ToString(), null, ApplicationData.Current.RoamingSettings, SerializerTypes.Json);
         }
 
         #endregion

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using Contoso.Core.Services;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
@@ -13,8 +14,8 @@ namespace Contoso.Core.ViewModels
         {
             get
             {
-                if (Platform.Current.AuthManager.IsAuthenticated())
-                    return string.Format(Strings.Account.TextWelcomeAuthenticated, Platform.Current.AuthManager.User?.FirstName);
+                if (this.Platform.AuthManager.IsAuthenticated())
+                    return string.Format(Strings.Account.TextWelcomeAuthenticated, this.Platform.AuthManager.User?.FirstName);
                 else
                     return Strings.Account.TextWelcomeUnauthenticated;
             }
@@ -53,7 +54,7 @@ namespace Contoso.Core.ViewModels
 
             // If the view parameter contains any navigation requests, forward on to the global navigation service
             if (e.NavigationEventArgs.NavigationMode == NavigationMode.New && e.Parameter is NavigationRequest)
-                Platform.Current.Navigation.NavigateTo(e.Parameter as NavigationRequest);
+                this.Platform.Navigation.NavigateTo(e.Parameter as NavigationRequest);
 
             return base.OnLoadStateAsync(e);
         }

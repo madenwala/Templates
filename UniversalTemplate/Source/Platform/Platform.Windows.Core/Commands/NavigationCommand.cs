@@ -1,4 +1,4 @@
-﻿using Contoso.Core.Models;
+﻿using Contoso.Core.Services;
 using System;
 
 namespace Contoso.Core.Commands
@@ -14,7 +14,7 @@ namespace Contoso.Core.Commands
         /// Command for navigating to a page based on the IModel parameter passed into the Execute method.
         /// </summary>
         public NavigationCommand()
-            : base("NavigateToModelCommand", Platform.Current.Navigation.NavigateTo, null)
+            : base("NavigateToModelCommand", PlatformBase.Current.Navigation.NavigateTo, null)
         {
         }
 

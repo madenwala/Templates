@@ -6,6 +6,18 @@ using Windows.Storage;
 
 namespace Contoso.Core.Services
 {
+    public partial class PlatformBase
+    {
+        /// <summary>
+        /// Gets access to the app info service of the platform currently executing.
+        /// </summary>
+        public AppInfoProviderBase AppInfo
+        {
+            get { return GetService<AppInfoProviderBase>(); }
+            protected set { SetService<AppInfoProviderBase>(value); }
+        }
+    }
+
     /// <summary>
     /// Base class providing access to the application currently executing specific to the platform this app is executing on.
     /// </summary>

@@ -1,6 +1,7 @@
 ﻿using Contoso.Core.Commands;
 using Contoso.Core.Data;
 using Contoso.Core.Models;
+using Contoso.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -9,7 +10,7 @@ using Windows.ApplicationModel;
 
 namespace Contoso.Core.ViewModels
 {
-    public partial class MainViewModel : ViewModelBase
+    public partial class MainViewModel : MainViewModelBase
     {
         #region Properties
 
@@ -64,7 +65,7 @@ namespace Contoso.Core.ViewModels
                 this.Items = await this.LoadFromCacheAsync(() => this.Items) ?? new UniqueModelList<ItemModel>();
 
                 // Clear primary tile
-                Platform.Current.Notifications.ClearTile(this);
+                this.Platform.Notifications.ClearTile(this);
             }
 
             await base.OnLoadStateAsync(e);
@@ -108,7 +109,7 @@ namespace Contoso.Core.ViewModels
                 list.Add(item.LineOne);
                 ct.ThrowIfCancellationRequested();
             }
-            await Platform.Current.VoiceCommandManager.UpdatePhraseListAsync("CommandSet", "Name", list);
+            await this.Platform.VoiceCommandManager.UpdatePhraseListAsync("CommandSet", "Name", list);
         }
 
         #endregion Methods

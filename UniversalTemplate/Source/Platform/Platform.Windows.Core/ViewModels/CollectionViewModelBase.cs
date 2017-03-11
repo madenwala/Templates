@@ -6,6 +6,7 @@ using Windows.ApplicationModel;
 using Windows.UI.Xaml.Navigation;
 using System.Threading;
 using Windows.UI.Xaml.Input;
+using Contoso.Core.Services;
 
 namespace Contoso.Core.ViewModels
 {
@@ -82,7 +83,7 @@ namespace Contoso.Core.ViewModels
             }
             catch (Exception ex)
             {
-                Platform.Current.Logger.LogError(ex, "Error during CollectionViewModelBase.OnSaveStateAsync calling each individual child ViewModel.SaveStateAsync");
+                PlatformBase.GetService<LoggingService>().LogError(ex, "Error during CollectionViewModelBase.OnSaveStateAsync calling each individual child ViewModel.SaveStateAsync");
                 throw;
             }
 
@@ -118,7 +119,7 @@ namespace Contoso.Core.ViewModels
 
             if (this.CurrentViewModel != null)
             {
-                Platform.Current.Logger.Log(LogLevels.Debug, "CollectionViewModelBase.SetCurrent to {0}", vm);
+                PlatformBase.GetService<LoggingService>().Log(LogLevels.Debug, "CollectionViewModelBase.SetCurrent to {0}", vm);
                 this.CurrentViewModel.PropertyChanged += CurrentVM_PropertyChanged;
                 if (this.CurrentViewModel is WebBrowserViewModel)
                     this.CopyStatus(null);
@@ -136,8 +137,8 @@ namespace Contoso.Core.ViewModels
             }
 
             // Update global navigation
-            Platform.Current.Navigation.NavigateGoBackCommand.RaiseCanExecuteChanged();
-            Platform.Current.Navigation.NavigateGoForwardCommand.RaiseCanExecuteChanged();
+            PlatformBase.GetService<NavigationManagerBase>().NavigateGoBackCommand.RaiseCanExecuteChanged();
+            PlatformBase.GetService<NavigationManagerBase>().NavigateGoForwardCommand.RaiseCanExecuteChanged();
         }
 
         protected internal override bool OnBackNavigationRequested()

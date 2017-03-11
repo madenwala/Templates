@@ -1,6 +1,6 @@
 ﻿using Contoso.Core.Commands;
-using Contoso.Core.Data;
 using Contoso.Core.Models;
+using Contoso.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +22,11 @@ namespace Contoso.Core.ViewModels
 {
     public abstract class ViewModelBase : ModelBase, IDisposable, IViewModel
     {
+        private const int E_WINHTTP_TIMEOUT = unchecked((int)0x80072ee2);
+        private const int E_WINHTTP_NAME_NOT_RESOLVED = unchecked((int)0x80072ee7);
+        private const int E_WINHTTP_CANNOT_CONNECT = unchecked((int)0x80072efd);
+        private const int E_WINHTTP_CONNECTION_ERROR = unchecked((int)0x80072efe);
+
         #region Variables
 
         private DispatcherTimer _statusTimer = null;
@@ -36,7 +41,7 @@ namespace Contoso.Core.ViewModels
         /// </summary>
         [Newtonsoft.Json.JsonIgnore()]
         [System.Runtime.Serialization.IgnoreDataMember()]
-        public Platform Platform { get { return Platform.Current; } }
+        public PlatformBase Platform { get { return PlatformBase.Current; } }
 
         /// <summary>
         /// Gets access to the dispatcher for this view or application.
@@ -95,7 +100,7 @@ namespace Contoso.Core.ViewModels
         /// </summary>
         public bool IsViewInChildFrame
         {
-            get { return Platform.Current.Navigation.IsChildFramePresent; }
+            get { return PlatformBase.GetService<NavigationManagerBase>().IsChildFramePresent; }
         }
 
         /// <summary>
@@ -105,9 +110,9 @@ namespace Contoso.Core.ViewModels
         {
             get
             {
-                return Platform.Current.ViewModel.IsInitialized == false
+                return PlatformBase.Current.ViewModel.IsInitialized == false
                     && this.IsUserAuthenticated
-                    && Platform.Current.Navigation.CanGoBack() == false;
+                    && PlatformBase.GetService<NavigationManagerBase>().CanGoBack() == false;
             }
         }
 
@@ -120,12 +125,12 @@ namespace Contoso.Core.ViewModels
             if (DesignMode.DesignModeEnabled)
                 return;
 
-            Platform.Current.Geolocation.LocationChanged += Geolocation_LocationChanged;
+            PlatformBase.GetService<GeolocationService>().LocationChanged += Geolocation_LocationChanged;
         }
 
         static ViewModelBase()
         {
-            CurrentLocationTask = new NotifyTaskCompletion<Geoposition>(async (arg) => await Platform.Current.Geolocation.GetSingleCoordinateAsync(false, 0, arg));
+            CurrentLocationTask = new NotifyTaskCompletion<Geoposition>(async (arg) => await PlatformBase.GetService<GeolocationService>().GetSingleCoordinateAsync(false, 0, arg));
             CurrentLocationTask.Refresh(true, CancellationToken.None);
         }
 
@@ -182,17 +187,17 @@ namespace Contoso.Core.ViewModels
         public async Task LoadStateAsync(Page view, LoadStateEventArgs e)
         {
             // Full screen on Xbox
-            if (Platform.DeviceFamily == DeviceFamily.Xbox && Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().IsFullScreenMode == false)
+            if (PlatformBase.DeviceFamily == DeviceFamily.Xbox && Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().IsFullScreenMode == false)
             {
                 var isFullScreen = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
-                Platform.Current.Logger.Log(LogLevels.Debug, "{0}: TryEnterFullScreenMode returned {1}", this.GetType().Name, isFullScreen);
+                PlatformBase.GetService<LoggingService>().Log(LogLevels.Debug, "{0}: TryEnterFullScreenMode returned {1}", this.GetType().Name, isFullScreen);
             }
 
             // Store properties and subscribe to events
             this.View = view;
             this.ViewParameter = e.Parameter;
-            this.IsUserAuthenticated = Platform.Current.AuthManager.IsAuthenticated();
-            Platform.Current.AuthManager.UserAuthenticatedStatusChanged += AuthenticationManager_UserAuthenticated;
+            this.IsUserAuthenticated = PlatformBase.GetService<AuthorizationManager>().IsAuthenticated();
+            PlatformBase.GetService<AuthorizationManager>().UserAuthenticatedStatusChanged += AuthenticationManager_UserAuthenticated;
             
             if (this.RequiresAuthorization)
             {
@@ -278,10 +283,10 @@ namespace Contoso.Core.ViewModels
             }
             catch(Exception ex)
             {
-                Platform.Current.Logger.LogError(ex, "Failed to save properties to {0} page state.", this.GetType().Name);
+                PlatformBase.GetService<LoggingService>().LogError(ex, "Failed to save properties to {0} page state.", this.GetType().Name);
             }
 
-            Platform.Current.AuthManager.UserAuthenticatedStatusChanged -= AuthenticationManager_UserAuthenticated;
+            PlatformBase.GetService<AuthorizationManager>().UserAuthenticatedStatusChanged -= AuthenticationManager_UserAuthenticated;
 
             // Dispose the viewmodel if navigating backwards
             if (e.NavigationEventArgs.NavigationMode == NavigationMode.Back)
@@ -296,7 +301,7 @@ namespace Contoso.Core.ViewModels
             }
             catch (Exception ex)
             {
-                Platform.Current.Logger.LogError(ex, $"Error trying to call RefreshAsync from {this.GetType().Name}.OnApplicationResume()");
+                PlatformBase.GetService<LoggingService>().LogError(ex, $"Error trying to call RefreshAsync from {this.GetType().Name}.OnApplicationResume()");
                 throw ex;
             }
         }
@@ -315,14 +320,14 @@ namespace Contoso.Core.ViewModels
             if (ex is UserUnauthorizedException)
             {
                 this.ShowBusyStatus(Strings.Account.TextUnauthorizedUser, true);
-                Platform.Current.Logger.LogError(ex, "{0}.{1} - Unauthorized user exception ({0} Parameters: {2}) {3}", this.GetType().Name, callerName, this.ViewParameter, message);
-                var t = Platform.Current.AuthManager.SetUserAsync(null);
+                PlatformBase.GetService<LoggingService>().LogError(ex, "{0}.{1} - Unauthorized user exception ({0} Parameters: {2}) {3}", this.GetType().Name, callerName, this.ViewParameter, message);
+                var t = PlatformBase.GetService<AuthorizationManager>().SetUserAsync(null);
             }
             else if (ex is UserFriendlyException)
             {
                 this.ClearStatus();
                 var bex = ex as UserFriendlyException;
-                Platform.Current.Logger.Log(LogLevels.Warning, "{0}.{1} - UserFriendlyException - {4} ({0} Parameters: {2}) {3}", this.GetType().Name, callerName, this.ViewParameter, message, bex.UserMessage);
+                PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, "{0}.{1} - UserFriendlyException - {4} ({0} Parameters: {2}) {3}", this.GetType().Name, callerName, this.ViewParameter, message, bex.UserMessage);
 
                 switch(bex.DisplayStyle)
                 {
@@ -345,24 +350,24 @@ namespace Contoso.Core.ViewModels
             else if (ex is OperationCanceledException || ex is TaskCanceledException)
             {
                 this.ShowTimedStatus(Strings.Resources.TextCancellationRequested, 3000);
-                Platform.Current.Logger.Log(LogLevels.Information, "{0}.{1} - Operation canceled ({0} Parameters: {2}) {3}", this.GetType().Name, callerName, this.ViewParameter, message);
+                PlatformBase.GetService<LoggingService>().Log(LogLevels.Information, "{0}.{1} - Operation canceled ({0} Parameters: {2}) {3}", this.GetType().Name, callerName, this.ViewParameter, message);
             }
             else
             {
                 switch (ex.HResult)
                 {
-                    case ClientApi.E_WINHTTP_CANNOT_CONNECT:
-                    case ClientApi.E_WINHTTP_CONNECTION_ERROR:
-                    case ClientApi.E_WINHTTP_NAME_NOT_RESOLVED:
-                    case ClientApi.E_WINHTTP_TIMEOUT:
+                    case E_WINHTTP_CANNOT_CONNECT:
+                    case E_WINHTTP_CONNECTION_ERROR:
+                    case E_WINHTTP_NAME_NOT_RESOLVED:
+                    case E_WINHTTP_TIMEOUT:
                     case -2146233088:
                         this.ShowStatus(Strings.Resources.TextNoInternet);
-                        Platform.Current.Logger.Log(LogLevels.Warning, "{0}.{1} - No internet ({0} Parameters: {2}) {3}", this.GetType().Name, callerName, this.ViewParameter, message);
+                        PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, "{0}.{1} - No internet ({0} Parameters: {2}) {3}", this.GetType().Name, callerName, this.ViewParameter, message);
                         break;
 
                     default:
                         this.ShowStatus(Strings.Resources.TextErrorGeneric);
-                        Platform.Current.Logger.LogError(ex, "{0}.{1} - threw {2} {3} ({0} Parameters: {4}) {5}", this.GetType().Name, callerName, ex.GetType().Name, ex.HResult, this.ViewParameter, message);
+                        PlatformBase.GetService<LoggingService>().LogError(ex, "{0}.{1} - threw {2} {3} ({0} Parameters: {4}) {5}", this.GetType().Name, callerName, ex.GetType().Name, ex.HResult, this.ViewParameter, message);
                         break;
                 }
             }
@@ -592,7 +597,7 @@ namespace Contoso.Core.ViewModels
                 var storedValue = e.PageState[pi.Name];
                 if (storedValue != null)
                 {
-                    Platform.Current.Logger.Log(LogLevels.Debug, "{0} - Restoring property {1} from page state of value {2}", this.GetType().Name, pi.Name, storedValue);
+                    PlatformBase.GetService<LoggingService>().Log(LogLevels.Debug, "{0} - Restoring property {1} from page state of value {2}", this.GetType().Name, pi.Name, storedValue);
                     this.SetPropertyValue(pi, storedValue);
                 }
             }
@@ -618,7 +623,7 @@ namespace Contoso.Core.ViewModels
             else
                 e.PageState.Add(pi.Name, value);
 
-            Platform.Current.Logger.Log(LogLevels.Debug, "{0} - Saved property {1} to page state of value {2}", this.GetType().Name, pi.Name, value);
+            PlatformBase.GetService<LoggingService>().Log(LogLevels.Debug, "{0} - Saved property {1} to page state of value {2}", this.GetType().Name, pi.Name, value);
         }
 
         #endregion Property State Methods
@@ -749,12 +754,12 @@ namespace Contoso.Core.ViewModels
             {
                 return _RefreshCommand ?? (_RefreshCommand = new GenericCommand("RefreshCommand", async () =>
                 {
-                    Platform.Current.Logger.Log(LogLevels.Warning, $"User pressed refresh on {this.GetType().Name} with paramemter {this.ViewParameter?.ToString()}");
+                    PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, $"User pressed refresh on {this.GetType().Name} with paramemter {this.ViewParameter?.ToString()}");
                     this.UserForcedRefresh = true;
                     var dic = new Dictionary<string, string>();
                     dic.Add("ViewModel", this.GetType().Name);
                     dic.Add("Parameter", this.ViewParameter?.ToString());
-                    Platform.Current.Analytics.Event("UserRefreshed", dic);
+                    PlatformBase.GetService<AnalyticsManager>().Event("UserRefreshed", dic);
                     await this.RefreshAsync(true);
                 }, () => this.IsRefreshEnabled));
             }
@@ -794,7 +799,7 @@ namespace Contoso.Core.ViewModels
         {
             if (_cts != null)
             {
-                Platform.Logger.Log(LogLevels.Debug, $"Cannot refresh {this.GetType().Name} again because it's currently being refreshed.");
+                PlatformBase.GetService<LoggingService>().Log(LogLevels.Debug, $"Cannot refresh {this.GetType().Name} again because it's currently being refreshed.");
                 return;
             }
 
@@ -807,7 +812,7 @@ namespace Contoso.Core.ViewModels
             }
             catch (Exception ex)
             {
-                Platform.Logger.LogError(ex, $"Exception while trying to refresh {this.GetType().Name}.");
+                PlatformBase.GetService<LoggingService>().LogError(ex, $"Exception while trying to refresh {this.GetType().Name}.");
                 this.HandleException(ex);
             }
             finally
@@ -874,11 +879,11 @@ namespace Contoso.Core.ViewModels
         {
             try
             {
-                return await Platform.Current.Storage.LoadFileAsync<T>(string.Format(APP_CACHE_PATH, this.GetType().Name, key), Windows.Storage.ApplicationData.Current.LocalCacheFolder);
+                return await PlatformBase.GetService<StorageManager>().LoadFileAsync<T>(string.Format(APP_CACHE_PATH, this.GetType().Name, key), Windows.Storage.ApplicationData.Current.LocalCacheFolder);
             }
             catch (Exception ex)
             {
-                Platform.Current.Logger.LogError(ex, "Error retrieving '{0}' from cache data.", key);
+                PlatformBase.GetService<LoggingService>().LogError(ex, "Error retrieving '{0}' from cache data.", key);
                 return default(T);
             }
         }
@@ -905,7 +910,7 @@ namespace Contoso.Core.ViewModels
             }
             catch (Exception ex)
             {
-                Platform.Current.Logger.LogError(ex, "Error retrieving data from '{0}' property to save to cache.", pi.Name);
+                PlatformBase.GetService<LoggingService>().LogError(ex, "Error retrieving data from '{0}' property to save to cache.", pi.Name);
             }
             await this.SaveToCacheAsync<T>(key, data);
         }
@@ -921,11 +926,11 @@ namespace Contoso.Core.ViewModels
         {
             try
             {
-                await Platform.Current.Storage.SaveFileAsync(string.Format(APP_CACHE_PATH, this.GetType().Name, key), data, Windows.Storage.ApplicationData.Current.LocalCacheFolder);
+                await PlatformBase.GetService<StorageManager>().SaveFileAsync(string.Format(APP_CACHE_PATH, this.GetType().Name, key), data, Windows.Storage.ApplicationData.Current.LocalCacheFolder);
             }
             catch (Exception ex)
             {
-                Platform.Current.Logger.LogError(ex, "Error saving '{0}' to cache data.", key);
+                PlatformBase.GetService<LoggingService>().LogError(ex, "Error saving '{0}' to cache data.", key);
             }
         }
 
@@ -995,22 +1000,23 @@ namespace Contoso.Core.ViewModels
 
         private async Task<bool> RefreshAccessTokenAsync(CancellationToken ct)
         {
-            if (Platform.Current.AuthManager.IsAuthenticated())
+            if (PlatformBase.GetService<AuthorizationManager>().IsAuthenticated())
             {
-                Platform.Current.Logger.Log(LogLevels.Information, "Attempting to refresh access token...");
+                PlatformBase.GetService<LoggingService>().Log(LogLevels.Information, "Attempting to refresh access token...");
                 try
                 {
-                    using (ClientApi api = new ClientApi(true))
-                    {
-                        var response = await api.AuthenticateAsync(Platform.Current.AuthManager.AccessToken, ct);
-                        Platform.Current.Logger.Log(LogLevels.Information, "...access token refresh complete!");
-                        var result = await Platform.Current.AuthManager.SetUserAsync(response);
-                        return result;
-                    }
+                    // TODO
+                    //using (ClientApi api = new ClientApi(true))
+                    //{
+                    //    var response = await api.AuthenticateAsync(PlatformBase.GetService<AuthorizationManager>().AccessToken, ct);
+                    //    PlatformBase.GetService<LoggingService>().Log(LogLevels.Information, "...access token refresh complete!");
+                    //    var result = await PlatformBase.GetService<AuthorizationManager>().SetUserAsync(response);
+                    //    return result;
+                    //}
                 }
                 catch(Exception ex)
                 {
-                    Platform.Current.Logger.LogError(ex, "Error while trying to refresh access token.");
+                    PlatformBase.GetService<LoggingService>().LogError(ex, "Error while trying to refresh access token.");
                 }
             }
 
@@ -1032,7 +1038,7 @@ namespace Contoso.Core.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    Platform.Current.Logger.LogError(ex, "Error while performing OnUserAuthenticatedChanged on view model '{0}' with parameters: {1}", this.GetType().Name, this.ViewParameter);
+                    PlatformBase.GetService<LoggingService>().LogError(ex, "Error while performing OnUserAuthenticatedChanged on view model '{0}' with parameters: {1}", this.GetType().Name, this.ViewParameter);
                 }
             });
         }
@@ -1080,17 +1086,17 @@ namespace Contoso.Core.ViewModels
                     this.NavigateToAccountSignoutCommand.RaiseCanExecuteChanged();
 
                     this.ShowBusyStatus(Strings.Account.TextSigningOut, true);
-                    Platform.Current.Analytics.Event("AccountSignout");
+                    PlatformBase.GetService<AnalyticsManager>().Event("AccountSignout");
 
                     // Allow the app core to signout
-                    await Platform.Current.SignoutAllAsync();
+                    await PlatformBase.Current.SignoutAllAsync();
 
                     // Navigate home after successful signout
-                    Platform.Current.Navigation.Home();
+                    PlatformBase.GetService<NavigationManagerBase>().Home();
                 }
                 catch (Exception ex)
                 {
-                    Platform.Current.Logger.LogError(ex, "Error during ViewModelBase.SignoutAsync");
+                    PlatformBase.GetService<LoggingService>().LogError(ex, "Error during ViewModelBase.SignoutAsync");
                     throw ex;
                 }
                 finally
@@ -1145,7 +1151,7 @@ namespace Contoso.Core.ViewModels
                 var profile = NetworkInformation.GetInternetConnectionProfile();
                 bool isConnected = profile?.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess;
 
-                Platform.Current.Logger.Log(LogLevels.Warning, $"NetworkStatusChanged - IsConnected: {isConnected}");
+                PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, $"NetworkStatusChanged - IsConnected: {isConnected}");
 
                 // On network access connected, execute a soft refresh to ensure everything loads automatically
                 if (isConnected)
@@ -1153,7 +1159,7 @@ namespace Contoso.Core.ViewModels
             }
             catch (Exception ex)
             {
-                Platform.Current.Logger.LogError(ex, "Failure during NetworkStatusChanged event on {0}", this.GetType().Name);
+                PlatformBase.GetService<LoggingService>().LogError(ex, "Failure during NetworkStatusChanged event on {0}", this.GetType().Name);
             }
         }
 

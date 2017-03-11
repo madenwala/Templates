@@ -11,34 +11,8 @@ using Windows.ApplicationModel.Background;
 
 namespace Contoso.Core
 {
-    /// <summary>
-    /// Singleton object which holds instances to all the services in this application.
-    /// Also provides core app functionality for initializing and suspending your application,
-    /// handling exceptions, and more.
-    /// </summary>
     public partial class Platform : PlatformBase
     {
-        #region Properties
-
-        /// <summary>
-        /// Provides access to application services.
-        /// </summary>
-        public static Platform Current { get; private set; }
-
-        private MainViewModel _ViewModel;
-        /// <summary>
-        /// Gets the MainViewModel global instance for the application.
-        /// </summary>
-        [Newtonsoft.Json.JsonIgnore()]
-        [System.Runtime.Serialization.IgnoreDataMember()]
-        public MainViewModel ViewModel
-        {
-            get { return _ViewModel; }
-            private set { this.SetProperty(ref _ViewModel, value); }
-        }
-
-        #endregion
-
         #region Constructors
 
         static Platform()
@@ -46,29 +20,21 @@ namespace Contoso.Core
             Current = new Platform();
         }
 
+        /// <summary>
+        /// Provides access to application services.
+        /// </summary>
+        public static Platform LocalCurrent { get { return Current as Platform; } }
+
         private Platform()
         {
             // Instantiate all the application services.
-            this.Logger = new LoggingService();
-            this.Analytics = new AnalyticsManager();
             this.BackgroundTasks = new BackgroundTasksManager();
-            this.Storage = new StorageManager();
             this.AppInfo = new AppInfoProvider();
-            this.AuthManager = new AuthorizationManager();
-            this.Cryptography = new CryptographyProvider();
-            this.Geocode = new GeocodingService();
-            this.Geolocation = new GeolocationService();
             this.Notifications = new NotificationsService();
-            this.Ratings = new RatingsManager();
-            this.VoiceCommandManager = new VoiceCommandManager();
-            this.Jumplist = new JumplistManager();
-            this.WebAccountManager = new WebAccountManager();
             this.SharingManager = new SharingManager();
         }
 
         #endregion
-
-        #region Methods
 
         #region Application Core
 
@@ -84,21 +50,17 @@ namespace Contoso.Core
 
             this.CheckForFullLogging();
 
-            // Your custom app logic which you want to always run at start of
-            // your app should be placed here.
-
-            if (this.ViewModel == null)
-                this.ViewModel = new MainViewModel();
+            await this.OnInitialize();
 
             if (mode == InitializationModes.New)
             {
-                Platform.Current.Analytics.Event("OS-Version", Microsoft.Toolkit.Uwp.Helpers.SystemInformation.OperatingSystemVersion);
+                this.Analytics.Event("OS-Version", Microsoft.Toolkit.Uwp.Helpers.SystemInformation.OperatingSystemVersion);
 
                 // Check for previous app crashes
-                await Platform.Current.Logger.CheckForFatalErrorReportsAsync(this.ViewModel);
+                await this.Logger.CheckForFatalErrorReportsAsync(this.ViewModel);
 
                 // Check to see if the user should be prompted to rate the application
-                await Platform.Current.Ratings.CheckForRatingsPromptAsync(this.ViewModel);
+                await this.Ratings.CheckForRatingsPromptAsync(this.ViewModel);
             }
         }
 
@@ -114,126 +76,22 @@ namespace Contoso.Core
             base.AppSuspending();
         }
 
-        /// <summary>
-        /// Global unhandled exception handler for your application.
-        /// </summary>
-        /// <param name="e"></param>
-        /// <returns>True if the exception was handled else false.</returns>
-        public bool AppUnhandledException(Exception e)
+        #endregion
+
+        #region Overrides
+
+        public override Task OnInitialize()
         {
-            if (System.Diagnostics.Debugger.IsAttached)
-            {
-                // If the Native debugger is in use, give us a clue in the Output window at least
-                System.Diagnostics.Debug.WriteLine("Unhandled exception:" + e.Message);
-                System.Diagnostics.Debug.WriteLine(e.StackTrace);
-
-                // An unhandled exception has occurred; break into the debugger
-                System.Diagnostics.Debugger.Break();
-            }
-
-            // Only log this when the debugger is not attached and you're in RELEASE mode
-            try
-            {
-                Platform.Current.Analytics.Error(e, "Unhandled Exception");
-            }
-            catch { }
-
-            try
-            {
-                Platform.Current.Logger.LogErrorFatal(e);
-            }
-            catch (Exception exLog)
-            {
-                System.Diagnostics.Debug.WriteLine("Exception logging to Logger in AppUnhandledException!");
-                System.Diagnostics.Debug.WriteLine(exLog.ToString());
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// Logic performed during sign out of a user in this application.
-        /// </summary>
-        /// <returns>Awaitable task is returned.</returns>
-        public override async Task SignoutAllAsync()
-        {
-            await base.SignoutAllAsync();
-
-            // Instantiate a new instance of settings and the MainViewModel 
-            // to ensure no previous user data is shown on the UI.
-            this.ResetAppSettings();
             this.ViewModel = new MainViewModel();
-            this.ShellMenuClose();
+            return base.OnInitialize();
         }
-
-        #endregion
-
-        #region Background Tasks
-
-        /// <summary>
-        /// Work that should be performed from the background agent.
-        /// </summary>
-        /// <returns>Awaitable task is returned.</returns>
-        public async Task TimedBackgroundWorkAsync(BackgroundWorkCostValue cost, CancellationToken ct)
-        {
-            try
-            {
-
-                // TOOD BG sample code needs to be enabled
-
-                //// Perform work that needs to be done on a background task/agent...
-                //if (Platform.Current.AuthManager.IsAuthenticated() == false)
-                //    return;
-
-                //// SAMPLE - Load data from your API, do any background work here.
-                //using (var api = new ClientApi())
-                //{
-                //    var data = await api.GetItems(ct);
-                //    if (data != null)
-                //    {
-                //        var items = data.ToObservableCollection();
-                //        if (items.Count > 0)
-                //        {
-                //            var index = DateTime.Now.Second % items.Count;
-                //            Platform.Current.Notifications.DisplayToast(items[index]);
-                //        }
-                //    }
-
-                //    ct.ThrowIfCancellationRequested();
-
-                //    if (cost <= BackgroundWorkCostValue.Medium)
-                //    {
-                //        // Update primary tile
-                //        await Platform.Current.Notifications.CreateOrUpdateTileAsync(new ModelList<ItemModel>(data));
-
-                //        ct.ThrowIfCancellationRequested();
-
-                //        // Update all tiles pinned from this application
-                //        await Platform.Current.Notifications.UpdateAllSecondaryTilesAsync(ct);
-                //    }
-                // }
-            }
-            catch (OperationCanceledException)
-            {
-                throw;
-            }
-            catch (Exception ex)
-            {
-                Platform.Current.Logger.LogErrorFatal(ex, "Failed to complete BackgroundWork from background task due to: {0}", ex.Message);
-                throw ex;
-            }
-        }
-
-        #endregion
-
-        #region Generate Models
 
         /// <summary>
         /// Creates a querystring parameter string from a model instance.
         /// </summary>
         /// <param name="model">Model to convert into a querystring.</param>
         /// <returns>Query string representing the model provided.</returns>
-        public string GenerateModelArguments(IModel model)
+        public override string GenerateModelArguments(IModel model)
         {
             if (model == null)
                 return null;
@@ -267,7 +125,7 @@ namespace Contoso.Core
         /// </summary>
         /// <param name="model">Model to convert into a unique tile ID.</param>
         /// <returns>String representing a unique tile ID for the model else null if not supported.</returns>
-        public string GenerateModelTileID(IModel model)
+        public override string GenerateModelTileID(IModel model)
         {
             // For each model you want to support, you'll want to customize the ID that gets generated to be unique.
             if (model is MainViewModel || model is ShellViewModel)
@@ -289,7 +147,7 @@ namespace Contoso.Core
         /// <param name="tileID">Tile ID to retrieve an object instance for.</param>
         /// <param name="ct">Cancelation token.</param>
         /// <returns>Object instance if found else null.</returns>
-        public async Task<IModel> GenerateModelFromTileIdAsync(string tileID, CancellationToken ct)
+        public override async Task<IModel> GenerateModelFromTileIdAsync(string tileID, CancellationToken ct)
         {
             try
             {
@@ -312,24 +170,60 @@ namespace Contoso.Core
 
         #endregion
 
-        #region Split View Menu
+        #region Background Tasks
 
         /// <summary>
-        /// Event which notifies the shell to open or close the menu.
+        /// Work that should be performed from the background agent.
         /// </summary>
-        public event EventHandler<bool> NotifyShellMenuToggle;
-
-        public void ShellMenuOpen()
+        /// <returns>Awaitable task is returned.</returns>
+        public async Task TimedBackgroundWorkAsync(BackgroundWorkCostValue cost, CancellationToken ct)
         {
-            this.NotifyShellMenuToggle?.Invoke(null, true);
-        }
+            try
+            {
+                // TOOD BG sample code needs to be enabled
 
-        public void ShellMenuClose()
-        {
-            this.NotifyShellMenuToggle?.Invoke(null, false);
-        }
+                // Perform work that needs to be done on a background task/agent...
+                if (Platform.Current.AuthManager.IsAuthenticated() == false)
+                    return;
 
-        #endregion
+                // SAMPLE - Load data from your API, do any background work here.
+                using (var api = new ClientApi())
+                {
+                    var data = await api.GetItems(ct);
+                    if (data != null)
+                    {
+                        var items = data.ToObservableCollection();
+                        if (items.Count > 0)
+                        {
+                            var index = DateTime.Now.Second % items.Count;
+                            Platform.Current.Notifications.DisplayToast(items[index]);
+                        }
+                    }
+
+                    ct.ThrowIfCancellationRequested();
+
+                    if (cost <= BackgroundWorkCostValue.Medium)
+                    {
+                        // Update primary tile
+                        await Platform.Current.Notifications.CreateOrUpdateTileAsync(new ModelList<ItemModel>(data));
+
+                        ct.ThrowIfCancellationRequested();
+
+                        // Update all tiles pinned from this application
+                        await Platform.Current.Notifications.UpdateAllSecondaryTilesAsync(ct);
+                    }
+                }
+            }
+            catch (OperationCanceledException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                PlatformBase.Current.Logger.LogErrorFatal(ex, "Failed to complete BackgroundWork from background task due to: {0}", ex.Message);
+                throw ex;
+            }
+        }
 
         #endregion
     }

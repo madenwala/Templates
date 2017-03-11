@@ -1,11 +1,8 @@
-﻿using Contoso.Core;
-using Contoso.Core.Models;
-using Contoso.Core.Services;
-using Contoso.Core.ViewModels;
+﻿using Contoso.Core.Commands;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
@@ -17,6 +14,8 @@ using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Contoso.Core.Models;
+using Contoso.Core.ViewModels;
 
 namespace Contoso.Core
 {
@@ -33,9 +32,9 @@ namespace Contoso.Core
     }
 }
 
-namespace Contoso.Core
+namespace Contoso.Core.Services
 {
-    public partial class Platform
+    public partial class PlatformBase
     {
         /// <summary>
         /// Gets the ability to navigate to different parts of an application specific to the platform currently executing.
@@ -46,16 +45,67 @@ namespace Contoso.Core
             set { SetService<NavigationManagerBase>(value); }
         }
     }
-}
 
-namespace Contoso.Core.Services
-{
-
-    /// <summary>
-    /// Base class for accessing navigation services on the platform currently executing.
-    /// </summary>
     public abstract partial class NavigationManagerBase : ServiceBase, IServiceSignout
     {
+        #region Abstract Methods
+
+        protected abstract Frame CreateFrame();
+
+        protected abstract bool OnActivation(LaunchActivatedEventArgs e);
+
+        protected abstract bool OnActivation(ToastNotificationActivatedEventArgs e);
+
+        protected abstract bool OnActivation(VoiceCommandActivatedEventArgs e);
+
+        protected abstract bool OnActivation(ProtocolActivatedEventArgs e);
+
+        protected abstract void NavigateToSecondaryWindow(NavigationRequest request);
+
+        public abstract void Home(object parameter = null);
+
+        public abstract void NavigateTo(object model);
+
+        protected abstract void WebView(object parameter);
+
+        public abstract void AccountSignin(object parameter = null);
+
+        public abstract void AccountSignup(object parameter = null);
+
+        public abstract void AccountForgot(object parameter = null);
+
+        public abstract void Settings(object parameter = null);
+
+        public abstract void Search(object parameter = null);
+
+        public abstract void Item(object parameter);
+
+        public abstract void Phone(object model);
+
+        public abstract void PrivacyPolicy(object parameter = null);
+
+        public abstract void TermsOfService(object parameter = null);
+
+        #endregion
+
+        private CommandBase _navigateToPrivacyPolicyCommand = null;
+        /// <summary>
+        /// Command to navigate to the application's privacy policy view.
+        /// </summary>
+        public CommandBase NavigateToPrivacyPolicyCommand
+        {
+            get { return _navigateToPrivacyPolicyCommand ?? (_navigateToPrivacyPolicyCommand = new NavigationCommand("NavigateToPrivacyPolicyCommand", this.PrivacyPolicy)); }
+        }
+
+        private CommandBase _navigateToTermsOfServiceCommand = null;
+        /// <summary>
+        /// Command to navigate to the application's terms of service view.
+        /// </summary>
+        public CommandBase NavigateToTermsOfServiceCommand
+        {
+            get { return _navigateToTermsOfServiceCommand ?? (_navigateToTermsOfServiceCommand = new NavigationCommand("NavigateToTermsOfServiceCommand", this.TermsOfService)); }
+        }
+
         #region Variables
 
         public static Dictionary<int, CoreApplicationView> AppWindows { get; private set; }
@@ -143,7 +193,7 @@ namespace Contoso.Core.Services
                 var view = frame.Content as IView;
                 if (frame.Content?.GetType() == pageType && view != null && object.Equals(view.ViewParameter, parameter))
                 {
-                    Platform.Current.ShellMenuClose();
+                    PlatformBase.Current.ShellMenuClose();
                     if (frame.DataContext is ViewModelBase)
                     {
                         var _ = (frame.DataContext as ViewModelBase).RefreshAsync(false);
@@ -343,7 +393,7 @@ namespace Contoso.Core.Services
         /// </summary>
         public void UpdateTitleBarBackButton()
         {
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = Platform.Current.Navigation.CanGoBack() ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = PlatformBase.GetService<NavigationManagerBase>().CanGoBack() ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
         }
 
         #endregion Navigation
@@ -371,48 +421,48 @@ namespace Contoso.Core.Services
 
             try
             {
-                Platform.Current.Analytics.Event("HandleActivation", e.Kind);
+                PlatformBase.GetService<AnalyticsManager>().Event("HandleActivation", e.Kind);
 
                 switch (e.Kind)
                 {
                     case ActivationKind.Launch:
                         var launchArg = e as LaunchActivatedEventArgs;
-                        Platform.Current.Logger.Log(LogLevels.Warning, "Calling OnActivation({0})  TileID: {1}  Arguments: {2}", e?.GetType().Name, launchArg.TileId, launchArg.Arguments);
+                        PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, "Calling OnActivation({0})  TileID: {1}  Arguments: {2}", e?.GetType().Name, launchArg.TileId, launchArg.Arguments);
                         handled = this.OnActivation(launchArg);
                         break;
 
                     case ActivationKind.VoiceCommand:
                         var voiceArgs = e as VoiceCommandActivatedEventArgs;
-                        Platform.Current.Logger.Log(LogLevels.Warning, "Calling OnActivation({0})", e?.GetType().Name);
+                        PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, "Calling OnActivation({0})", e?.GetType().Name);
                         handled = this.OnActivation(voiceArgs);
                         break;
 
                     case ActivationKind.ToastNotification:
                         var toastArgs = e as ToastNotificationActivatedEventArgs;
-                        Platform.Current.Logger.Log(LogLevels.Warning, "Calling OnActivation({0})  Arguments: {1}", e?.GetType().Name, toastArgs.Argument);
+                        PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, "Calling OnActivation({0})  Arguments: {1}", e?.GetType().Name, toastArgs.Argument);
                         handled = this.OnActivation(toastArgs);
                         break;
 
                     case ActivationKind.Protocol:
                         var protocolArgs = e as ProtocolActivatedEventArgs;
-                        Platform.Current.Logger.Log(LogLevels.Warning, "Calling OnActivation({0})  Arguments: {1}", e?.GetType().Name, protocolArgs.Uri.ToString());
+                        PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, "Calling OnActivation({0})  Arguments: {1}", e?.GetType().Name, protocolArgs.Uri.ToString());
                         handled = this.OnActivation(protocolArgs);
                         break;
 
                     default:
-                        Platform.Current.Logger.LogError(new Exception(string.Format("Can't call OnActivation({0}) as it's not implemented!", e.Kind)));
+                        PlatformBase.GetService<LoggingService>().LogError(new Exception(string.Format("Can't call OnActivation({0}) as it's not implemented!", e.Kind)));
                         handled = false;
                         break;
                 }
 
                 if (handled == false || rootFrame?.Content == null)
-                    Platform.Current.Navigation.Home();
+                    PlatformBase.GetService<NavigationManagerBase>().Home();
 
-                Platform.Current.Logger.Log(LogLevels.Information, "Completed Navigation.HandleActivation({0}) on RootFrame: {1} --- OnActivation Handled? {2}", e?.GetType().Name, rootFrame?.Content?.GetType().Name, handled);
+                PlatformBase.GetService<LoggingService>().Log(LogLevels.Information, "Completed Navigation.HandleActivation({0}) on RootFrame: {1} --- OnActivation Handled? {2}", e?.GetType().Name, rootFrame?.Content?.GetType().Name, handled);
             }
             catch (Exception ex)
             {
-                Platform.Current.Logger.LogError(ex, "Error during App Navigation.HandleActivation({0}) on RootFrame: {1}", e?.GetType().Name, rootFrame?.Content?.GetType().Name);
+                PlatformBase.GetService<LoggingService>().LogError(ex, "Error during App Navigation.HandleActivation({0}) on RootFrame: {1}", e?.GetType().Name, rootFrame?.Content?.GetType().Name);
                 throw ex;
             }
         }
@@ -422,7 +472,7 @@ namespace Contoso.Core.Services
         /// </summary>
         public void Exit()
         {
-            Platform.Current.Analytics.Event("ApplicationExit");
+            PlatformBase.GetService<AnalyticsManager>().Event("ApplicationExit");
             Application.Current.Exit();
         }
 
@@ -451,7 +501,7 @@ namespace Contoso.Core.Services
             }
             catch (Exception ex)
             {
-                Platform.Current.Logger.LogError(ex, "Could not close all secondary windows on Signout!");
+                PlatformBase.GetService<LoggingService>().LogError(ex, "Could not close all secondary windows on Signout!");
                 throw ex;
             }
         }
@@ -460,20 +510,10 @@ namespace Contoso.Core.Services
 
         #region Common Pages
 
-        public void PrivacyPolicy()
-        {
-            this.Settings(SettingsViews.PrivacyPolicy);
-        }
-
-        public void TermsOfService()
-        {
-            this.Settings(SettingsViews.TermsOfService);
-        }
-
         public async Task RateApplicationAsync()
         {
             // TODO remove this
-            Platform.Current.Analytics.Event("RateApplication");
+            PlatformBase.GetService<AnalyticsManager>().Event("RateApplication");
             await Launcher.LaunchUriAsync(new Uri(string.Format("ms-windows-store:REVIEW?PFN={0}", global::Windows.ApplicationModel.Package.Current.Id.FamilyName)));
         }
 
@@ -486,8 +526,8 @@ namespace Contoso.Core.Services
             if (loc == null)
                 throw new ArgumentNullException(nameof(loc));
 
-            Platform.Current.Analytics.Event("MapExternal-" + mapOption.ToString());
-            
+            PlatformBase.GetService<AnalyticsManager>().Event("MapExternal-" + mapOption.ToString());
+
             label = System.Net.WebUtility.HtmlEncode(label ?? loc.LocationDisplayName);
             string url = null;
 
@@ -535,7 +575,7 @@ namespace Contoso.Core.Services
             if (toRecipients == null || toRecipients.Length == 0)
                 throw new ArgumentNullException(nameof(toRecipients));
 
-            Platform.Current.Analytics.Event("SendEmail");
+            PlatformBase.GetService<AnalyticsManager>().Event("SendEmail");
             var msg = new EmailMessage();
 
             if (toRecipients != null)
@@ -613,7 +653,7 @@ namespace Contoso.Core.Services
         /// <param name="webAddress">URL to navigate to.</param>
         public void NavigateToWebBrowser(string webAddress)
         {
-            Platform.Current.Analytics.Event("NavigateToWebBrowser");
+            PlatformBase.GetService<AnalyticsManager>().Event("NavigateToWebBrowser");
             this.NavigateToWeb(webAddress, true);
         }
 
@@ -623,7 +663,7 @@ namespace Contoso.Core.Services
         /// <param name="webAddress">URL to navigate to.</param>
         public void NavigateToWebView(string webAddress)
         {
-            Platform.Current.Analytics.Event("NavigateToWebView");
+            PlatformBase.GetService<AnalyticsManager>().Event("NavigateToWebView");
             this.NavigateToWeb(webAddress, false);
         }
 
@@ -658,7 +698,7 @@ namespace Contoso.Core.Services
             if (!string.IsNullOrEmpty(screenname))
                 url += "//user?screen_name=" + (screenname.StartsWith("@") ? screenname.Substring(1) : screenname);
 
-            Platform.Current.Logger.Log(LogLevels.Warning, $"Launching Twitter @{screenname} -- {url}");
+            PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, $"Launching Twitter @{screenname} -- {url}");
             var t = Launcher.LaunchUriAsync(new Uri(url, UriKind.Absolute));
         }
 
@@ -708,7 +748,7 @@ namespace Contoso.Core.Services
                     ApplicationView.GetForCurrentView().Consolidated += View_Consolidated;
 
 
-                    Platform.Current.Logger.Log(LogLevels.Warning, $"Launched new window");
+                    PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, $"Launched new window");
                 });
 
                 // Run this on the last dispatcher so the windows get positioned correctly
@@ -723,7 +763,7 @@ namespace Contoso.Core.Services
             }
             catch (Exception ex)
             {
-                Platform.Current.Logger.LogError(ex, "Could not create new window for view type {0}.", viewType.Name);
+                PlatformBase.GetService<LoggingService>().LogError(ex, "Could not create new window for view type {0}.", viewType.Name);
                 throw ex;
             }
         }
@@ -731,7 +771,7 @@ namespace Contoso.Core.Services
         private void View_Consolidated(ApplicationView sender, ApplicationViewConsolidatedEventArgs args)
         {
             var windowID = ApplicationView.GetApplicationViewIdForWindow(CoreWindow.GetForCurrentThread());
-            Platform.Current.Logger.Log(LogLevels.Debug, $"Closed secondary window with ID {windowID}");
+            PlatformBase.GetService<LoggingService>().Log(LogLevels.Debug, $"Closed secondary window with ID {windowID}");
             AppWindows.Remove(windowID);
             ApplicationView.GetForCurrentView().Consolidated -= View_Consolidated;
             Window.Current.Close();
@@ -755,7 +795,7 @@ namespace Contoso.Core.Services
         /// <param name="e">Event data describing the conditions that led to the event.</param>
         private void HardwareButtons_BackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
         {
-            Platform.Current.Logger.Log(LogLevels.Debug, "Hardware back button pressed.");
+            PlatformBase.GetService<LoggingService>().Log(LogLevels.Debug, "Hardware back button pressed.");
             e.Handled = this.GoBack();
         }
 
@@ -792,14 +832,14 @@ namespace Contoso.Core.Services
                 if (((int)virtualKey == 166 && noModifiers) ||
                     (virtualKey == VirtualKey.Left && onlyAlt))
                 {
-                    Platform.Current.Logger.Log(LogLevels.Warning, $"Windows accelerator keyboard key pressed to go back: {virtualKey}");
+                    PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, $"Windows accelerator keyboard key pressed to go back: {virtualKey}");
                     e.Handled = this.GoBack();
                 }
                 else if (((int)virtualKey == 167 && noModifiers) ||
                     (virtualKey == VirtualKey.Right && onlyAlt))
                 {
 
-                    Platform.Current.Logger.Log(LogLevels.Warning, $"Windows accelerator key pressed to go forward: {virtualKey}");
+                    PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, $"Windows accelerator key pressed to go forward: {virtualKey}");
                     // When the next key or Alt+Right are pressed navigate forward
                     e.Handled = this.GoForward();
                 }
@@ -828,12 +868,12 @@ namespace Contoso.Core.Services
             {
                 if (backPressed)
                 {
-                    Platform.Current.Logger.Log(LogLevels.Warning, "Windows accelerator mouse key pressed to go back.");
+                    PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, "Windows accelerator mouse key pressed to go back.");
                     e.Handled = this.GoBack();
                 }
                 if (forwardPressed)
                 {
-                    Platform.Current.Logger.Log(LogLevels.Warning, "Windows accelerator mouse key pressed to go forward.");
+                    PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, "Windows accelerator mouse key pressed to go forward.");
                     e.Handled = this.GoForward();
                 }
             }
@@ -841,85 +881,85 @@ namespace Contoso.Core.Services
 
         #endregion
     }
-}
 
-#region Classes
+    #region Classes
 
-internal static class NavigationParameterSerializer
-{
-    /// <summary>
-    /// Serializes an object if its a non-primitive type.
-    /// </summary>
-    /// <param name="obj"></param>
-    /// <returns></returns>
-    internal static object Serialize(object obj)
+    public static class NavigationParameterSerializer
     {
-        if (obj == null)
-            return null;
-        else if (obj.GetType().GetTypeInfo().IsEnum)
-            // Convert enums to int
-            return (int)obj;
-        else if (TypeUtility.IsPrimitive(obj.GetType()))
-            // Return primitive types as-is
-            return obj;
-        else
+        /// <summary>
+        /// Serializes an object if its a non-primitive type.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static object Serialize(object obj)
         {
-            // Only serialize non-primitive types to string
-            var dic = new Dictionary<string, string>();
-            dic.Add("Type", obj.GetType().AssemblyQualifiedName);
-            dic.Add("Parameter", Serializer.Serialize(obj, SerializerTypes.Json));
-            return GeneralFunctions.CreateQuerystring(dic);
-        }
-    }
-
-
-    /// <summary>
-    /// Deserializes an object if its a string and has serialization info else returns the object as-is.
-    /// </summary>
-    /// <param name="parameter"></param>
-    /// <returns></returns>
-    internal static object Deserialize(object parameter)
-    {
-        if (parameter is string)
-        {
-            var p = parameter.ToString();
-            if (p.StartsWith("Type="))
+            if (obj == null)
+                return null;
+            else if (obj.GetType().GetTypeInfo().IsEnum)
+                // Convert enums to int
+                return (int)obj;
+            else if (TypeUtility.IsPrimitive(obj.GetType()))
+                // Return primitive types as-is
+                return obj;
+            else
             {
-                var dic = GeneralFunctions.ParseQuerystring(p);
-                var type = Type.GetType(dic["Type"]);
-                var data = dic["Parameter"];
-                return Newtonsoft.Json.JsonConvert.DeserializeObject(data, type);
+                // Only serialize non-primitive types to string
+                var dic = new Dictionary<string, string>();
+                dic.Add("Type", obj.GetType().AssemblyQualifiedName);
+                dic.Add("Parameter", Serializer.Serialize(obj, SerializerTypes.Json));
+                return GeneralFunctions.CreateQuerystring(dic);
             }
         }
 
-        return parameter;
-    }
-}
 
-/// <summary>
-/// Represents navigation instructions that can be serialized and performed at a later time.
-/// </summary>
-public class NavigationRequest
-{
-    public NavigationRequest()
-    {
-    }
+        /// <summary>
+        /// Deserializes an object if its a string and has serialization info else returns the object as-is.
+        /// </summary>
+        /// <param name="parameter"></param>
+        /// <returns></returns>
+        public static object Deserialize(object parameter)
+        {
+            if (parameter is string)
+            {
+                var p = parameter.ToString();
+                if (p.StartsWith("Type="))
+                {
+                    var dic = GeneralFunctions.ParseQuerystring(p);
+                    var type = Type.GetType(dic["Type"]);
+                    var data = dic["Parameter"];
+                    return Newtonsoft.Json.JsonConvert.DeserializeObject(data, type);
+                }
+            }
 
-    public NavigationRequest(Type viewType, object viewParameter = null)
-    {
-        this.ViewType = viewType.AssemblyQualifiedName;
-        this.ViewParameter = viewParameter;
+            return parameter;
+        }
     }
 
     /// <summary>
-    /// Full type name of a view/page that needs to be instantiated.
+    /// Represents navigation instructions that can be serialized and performed at a later time.
     /// </summary>
-    public string ViewType { get; set; }
+    public class NavigationRequest
+    {
+        public NavigationRequest()
+        {
+        }
 
-    /// <summary>
-    /// Object instance to pass in as a parameter.
-    /// </summary>
-    public object ViewParameter { get; set; }
+        public NavigationRequest(Type viewType, object viewParameter = null)
+        {
+            this.ViewType = viewType.AssemblyQualifiedName;
+            this.ViewParameter = viewParameter;
+        }
+
+        /// <summary>
+        /// Full type name of a view/page that needs to be instantiated.
+        /// </summary>
+        public string ViewType { get; set; }
+
+        /// <summary>
+        /// Object instance to pass in as a parameter.
+        /// </summary>
+        public object ViewParameter { get; set; }
+    }
+
+    #endregion
 }
-
-#endregion

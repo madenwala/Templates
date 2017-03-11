@@ -13,7 +13,7 @@ namespace Contoso.Core.Services
         {
             DataPackage requestData = request.Data;
 
-            Platform.Current.Logger.Log(LogLevels.Information, "SetShareContent - Model: {0}", model?.GetType().Name);
+            PlatformBase.Current.Logger.Log(LogLevels.Information, "SetShareContent - Model: {0}", model?.GetType().Name);
 
             // Sharing is based on the model data that was passed in. Perform customized sharing based on the type of the model provided.
             if (model is WebBrowserViewModel)

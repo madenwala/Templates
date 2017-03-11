@@ -1,6 +1,7 @@
 ﻿using Contoso.Core;
 using Contoso.Core.Models;
 using Contoso.Core.Services;
+using Contoso.Core.ViewModels;
 using Contoso.UI.Controls;
 using Contoso.UI.Views;
 using System;
@@ -209,5 +210,23 @@ namespace Contoso.UI.Services
         }
 
         #endregion
+
+        public override void Phone(object model)
+        {
+            if (model is ItemModel)
+            {
+                this.Phone((model as ItemModel).PhoneNumber);
+            }
+        }
+
+        public override void PrivacyPolicy(object parameter = null)
+        {
+            this.Settings(SettingsViews.PrivacyPolicy);
+        }
+
+        public override void TermsOfService(object parameter = null)
+        {
+            this.Settings(SettingsViews.TermsOfService);
+        }
     }
 }

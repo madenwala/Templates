@@ -1,6 +1,7 @@
 ﻿using Contoso.Core.Commands;
 using Contoso.Core.Data;
 using Contoso.Core.Models;
+using Contoso.Core.Services;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -120,7 +121,7 @@ namespace Contoso.Core.ViewModels
 
                     // Ensure that there is a valid token returned
                     if (!string.IsNullOrEmpty(response?.AccessToken))
-                        await Platform.Current.AuthManager.SetUserAsync(response);
+                        await this.Platform.AuthManager.SetUserAsync(response);
                     else
                         userMessage = Strings.Account.TextAuthenticationFailed;
 
@@ -128,7 +129,7 @@ namespace Contoso.Core.ViewModels
 
                     // Nav home if authenticated else display error message
                     if (this.IsUserAuthenticated)
-                        Platform.Current.Navigation.Home();
+                        this.Platform.Navigation.Home();
                     else
                         await this.ShowMessageBoxAsync(_cts.Token, userMessage, this.Title);
                 }

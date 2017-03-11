@@ -1,5 +1,6 @@
 ﻿using Contoso.Core.Commands;
 using Contoso.Core.Data;
+using Contoso.Core.Services;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -58,9 +59,9 @@ namespace Contoso.Core.ViewModels
         /// <returns></returns>
         private async Task LaunchWebAccountManager()
         {
-            await Platform.Current.WebAccountManager.SignoutAsync();
+            await this.Platform.WebAccountManager.SignoutAsync();
             this.ShowTimedStatus(Strings.Resources.TextLoading, 3000, true);
-            Platform.Current.WebAccountManager.Show(this.WAM_Success, this.WAM_Failed);
+            this.Platform.WebAccountManager.Show(this.WAM_Success, this.WAM_Failed);
         }
 
         /// <summary>
@@ -82,11 +83,11 @@ namespace Contoso.Core.ViewModels
                     var response = await api.AuthenticateAsync(info, _cts.Token);
 
                     // Authenticate the user into the app
-                    await Platform.Current.AuthManager.SetUserAsync(response);
+                    await this.Platform.AuthManager.SetUserAsync(response);
                 }
 
                 this.ClearStatus();
-                Platform.Current.Navigation.Home(this.ViewParameter);
+                this.Platform.Navigation.Home(this.ViewParameter);
             }
             catch(Exception ex)
             {
@@ -108,7 +109,7 @@ namespace Contoso.Core.ViewModels
             try
             {
                 // Failure with WAM
-                Platform.Current.Logger.LogError(result?.ResponseError.ToException(), "WAM failed to retrieve user account token.");
+                this.Platform.Logger.LogError(result?.ResponseError.ToException(), "WAM failed to retrieve user account token.");
                 await this.ShowMessageBoxAsync(CancellationToken.None, string.Format(Strings.Account.TextWebAccountManagerRegisterAccountFailure, pi.WebAccountType));
             }
             catch (Exception ex)

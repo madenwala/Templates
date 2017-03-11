@@ -1,5 +1,6 @@
 ﻿using Contoso.Core.Data;
 using Contoso.Core.Models;
+using Contoso.Core.Services;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
@@ -81,7 +82,7 @@ namespace Contoso.Core.ViewModels
                     this.ShowBusyStatus(this.Title, true);
 
                     // Call the API to perform the search
-                    Platform.Current.Analytics.Event("Search", this.SearchText);
+                    this.Platform.Analytics.Event("Search", this.SearchText);
                     using (var api = new ClientApi())
                     {
                         this.Results = new ModelList<ItemModel>(await api.SearchItems(this.SearchText, ct));

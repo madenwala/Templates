@@ -14,7 +14,7 @@ namespace Contoso.Core.Commands
         /// Creates a new command instance for sharing IModel objects to other apps.
         /// </summary>
         public ShareCommand()
-            : base("ShareCommand", PlatformBase.GetService<SharingManagerBase>().Share)
+            : base("ShareCommand", PlatformBase.Current.SharingManager.Share)
         {
         }
 

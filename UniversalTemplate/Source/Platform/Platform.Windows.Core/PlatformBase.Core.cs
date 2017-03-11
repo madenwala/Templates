@@ -27,11 +27,6 @@ namespace Contoso.Core.Services
         #region Properties
 
         /// <summary>
-        /// Gets the current device family this app is executing on.
-        /// </summary>
-        public static DeviceFamily DeviceFamily { get; private set; }
-
-        /// <summary>
         /// Gets whether or not the current device is Windows Desktop.
         /// </summary>
         public bool IsDesktop { get { return DeviceFamily == DeviceFamily.Desktop; } }
@@ -87,35 +82,6 @@ namespace Contoso.Core.Services
         }
 
         #endregion Properties
-
-        #region Constructors
-
-        static PlatformBase()
-        {
-            Debug.WriteLine("DeviceFamily: " + AnalyticsInfo.VersionInfo.DeviceFamily);
-
-            // Determine what device this is running on and store the appropriate enumeration representing that device
-            switch (AnalyticsInfo.VersionInfo.DeviceFamily)
-            {
-                case "Windows.Desktop":
-                    DeviceFamily = DeviceFamily.Desktop;
-                    break;
-                case "Windows.Mobile":
-                    DeviceFamily = DeviceFamily.Mobile;
-                    break;
-                case "Windows.Xbox":
-                    DeviceFamily = DeviceFamily.Xbox;
-                    break;
-                case "Windows.IoT":
-                    DeviceFamily = DeviceFamily.IoT;
-                    break;
-                default:
-                    DeviceFamily = DeviceFamily.Unknown;
-                    break;
-            }
-        }
-
-        #endregion
 
         #region Methods
 
@@ -211,32 +177,6 @@ namespace Contoso.Core.Services
             this.AppSettingsRoaming.PropertyChanged += AppSettingsRoaming_PropertyChanged;
 
             this.SaveSettings();
-        }
-
-        /// <summary>
-        /// Signs a user out of the app.
-        /// </summary>
-        /// <returns>Awaitable task is returned.</returns>
-        public virtual async Task SignoutAllAsync()
-        {
-            var services = _services.Values.Where(w => w is IServiceSignout);
-            var list = new List<Task>();
-
-            foreach (var service in services)
-                list.Add(((IServiceSignout)service).SignoutAsync());
-
-            await Task.Factory.StartNew(() =>
-            {
-                try
-                {
-                    Task.WaitAll(list.ToArray());
-                }
-                catch (Exception ex)
-                {
-                    this.Logger.LogError(ex, "Error while trying to call SignoutAsync on each of the platform services.");
-                    throw;
-                }
-            });
         }
 
         /// <summary>

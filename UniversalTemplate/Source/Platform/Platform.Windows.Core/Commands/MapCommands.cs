@@ -1,4 +1,5 @@
 ﻿using Contoso.Core.Models;
+using Contoso.Core.Services;
 
 namespace Contoso.Core.Commands
 {
@@ -10,7 +11,7 @@ namespace Contoso.Core.Commands
         #region Constructors
 
         public MapExternalCommand(MapExternalOptions option = MapExternalOptions.Normal)
-            : base("MapExternalCommand-" + option, (loc) => Platform.Current.Navigation.MapExternal(loc, loc?.LocationDisplayName, option))
+            : base("MapExternalCommand-" + option, (loc) => PlatformBase.GetService<NavigationManagerBase>().MapExternal(loc, loc?.LocationDisplayName, option))
         {
         }
 

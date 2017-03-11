@@ -1,4 +1,5 @@
 ﻿using Contoso.Core.Models;
+using Contoso.Core.Services;
 using System;
 
 namespace Contoso.Core.Commands
@@ -23,7 +24,7 @@ namespace Contoso.Core.Commands
         /// Creates a new command instance for pinning IModel objects to the user's start screen.
         /// </summary>
         public PinTileCommand()
-            : base("PinTileCommand", null, Platform.Current.Notifications.HasTile)
+            : base("PinTileCommand", null, PlatformBase.Current.Notifications.HasTile)
         {
         }
 
@@ -38,7 +39,7 @@ namespace Contoso.Core.Commands
             if (parameter is IModel)
             {
                 // Create tile
-                if (await Platform.Current.Notifications.CreateOrUpdateTileAsync(parameter as IModel))
+                if (await PlatformBase.Current.Notifications.CreateOrUpdateTileAsync(parameter as IModel))
                 {
                     // Tile created, execute post-create actions
                     this.RaiseCanExecuteChanged();
@@ -76,7 +77,7 @@ namespace Contoso.Core.Commands
         /// Creates a new command instance for removing IModel objects from a user's start screen.
         /// </summary>
         public UnpinTileCommand()
-            : base("UnpinTileCommand", null, Platform.Current.Notifications.HasTile)
+            : base("UnpinTileCommand", null, PlatformBase.Current.Notifications.HasTile)
         {
         }
 
@@ -91,7 +92,7 @@ namespace Contoso.Core.Commands
             if (parameter is IModel)
             {
                 // Delete tile
-                if (await Platform.Current.Notifications.DeleteTileAsync(parameter as IModel))
+                if (await PlatformBase.Current.Notifications.DeleteTileAsync(parameter as IModel))
                 {
                     // Tile was deleted, execute post delete actions
                     this.RaiseCanExecuteChanged();
