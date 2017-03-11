@@ -162,8 +162,11 @@
     <Compile Include="Services\AppInfoProviderBase.cs" />
     <Compile Include="Services\BackgroundTasksManager.Core.cs" />
     <Compile Include="Services\CryptographyProvider.cs" />
+    <Compile Include="Services\Analytics\FlurryAnalyticsService.cs" />
     <Compile Include="Services\GeocodingService.cs" />
     <Compile Include="Services\GeolocationService.cs" />
+    <Compile Include="Services\Analytics\GoogleAnalyticsService.cs" />
+    <Compile Include="Services\Analytics\HockeyAppService.cs" />
     <Compile Include="Services\JumpListManager.cs" />
     <Compile Include="Services\LoggingService.cs" />
     <Compile Include="Services\PlatformBase.cs" />
@@ -216,6 +219,11 @@
     <SDKReference Include="WindowsMobile, Version=10.0.14393.0">
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="FlurryWin8SDK">
+      <HintPath>..\..\Dependencies\FlurryWin8SDK.winmd</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

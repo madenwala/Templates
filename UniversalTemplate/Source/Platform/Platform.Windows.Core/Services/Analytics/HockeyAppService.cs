@@ -5,7 +5,7 @@ using Microsoft.HockeyApp;
 using System;
 using System.Collections.Generic;
 
-namespace Contoso.UI.Services
+namespace Contoso.Core.Services.Analytics
 {
     public sealed class HockeyAppService : AnalyticsServiceBase
     {
@@ -18,7 +18,7 @@ namespace Contoso.UI.Services
             HockeyClient.Current.Configure(key,
                 new TelemetryConfiguration() { EnableDiagnostics = true })
                 .SetContactInfo("DemoUser", supportEmailAddress)
-                .SetExceptionDescriptionLoader((Exception ex) => Platform.Current.Logger.GenerateApplicationReport(ex));
+                .SetExceptionDescriptionLoader((Exception ex) => PlatformBase.GetService<LoggingService>().GenerateApplicationReport(ex));
         }
 
         public override void NewPageView(Type pageType)

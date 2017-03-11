@@ -1,4 +1,5 @@
 ﻿using Contoso.Core;
+using Contoso.Core.Services.Analytics;
 using Contoso.UI.Controls;
 using Contoso.UI.Services;
 using System;

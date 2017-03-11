@@ -1,16 +1,13 @@
-﻿using Contoso.Core.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Contoso.Core.Models;
-using Contoso.Core;
 using GoogleAnalytics;
 
-namespace Contoso.UI.Services
+namespace Contoso.Core.Services.Analytics
 {
     public sealed class GoogleAnalyticsService : AnalyticsServiceBase
     {
-        private GoogleAnalytics.Tracker _tracker;
+        private Tracker _tracker;
 
         public GoogleAnalyticsService(string key)
         {
@@ -26,8 +23,8 @@ namespace Contoso.UI.Services
 
         protected override Task OnInitializeAsync()
         {
-            _tracker.AppId = Platform.Current.AppInfo.AppID;
-            _tracker.AppVersion = Platform.Current.AppInfo.VersionNumber.ToString();
+            _tracker.AppId = PlatformBase.GetService<AppInfoProviderBase>().AppID;
+            _tracker.AppVersion = PlatformBase.GetService<AppInfoProviderBase>().VersionNumber.ToString();
             return base.OnInitializeAsync();
         }
 

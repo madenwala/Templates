@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Contoso.UI.Services
+namespace Contoso.Core.Services.Analytics
 {
     /// <summary>
     /// Analytics wrapper for Flurry analytics service.
@@ -24,7 +24,7 @@ namespace Contoso.UI.Services
 
         protected override Task OnInitializeAsync()
         {
-            Api.SetVersion(Platform.Current.AppInfo.VersionNumber.ToString());
+            Api.SetVersion(PlatformBase.GetService<AppInfoProviderBase>().VersionNumber.ToString());
             return base.OnInitializeAsync();
         }
 
