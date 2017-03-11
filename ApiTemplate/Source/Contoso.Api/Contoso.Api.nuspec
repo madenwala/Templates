@@ -6,9 +6,9 @@
     <title>$title$</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
-    <licenseUrl>https://github.com/madenwala/Contoso.API</licenseUrl>
-    <projectUrl>https://github.com/madenwala/Contoso.API</projectUrl>
-    <iconUrl>https://github.com/madenwala/Contoso.API/blob/master/Images/Logo.jpg?raw=true</iconUrl>
+    <licenseUrl>https://github.com/madenwala/Contoso.Api</licenseUrl>
+    <projectUrl>https://github.com/madenwala/Contoso.Api</projectUrl>
+    <iconUrl>https://github.com/madenwala/Contoso.Api/blob/master/Images/Logo.jpg?raw=true</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
