@@ -157,7 +157,6 @@
     <Compile Include="Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ViewBase.cs" />
     <Compile Include="Views\WebBrowserView.xaml.cs">
       <DependentUpon>WebBrowserView.xaml</DependentUpon>
     </Compile>
@@ -354,9 +353,9 @@
       <Project>{4e4e65ea-96f5-4a3a-8e17-2fdf597e310b}</Project>
       <Name>AppFramework.Uwp.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Platform\Platform.Windows.UI.Core\AppFramework.Uwp.UI.Core.csproj">
+    <ProjectReference Include="..\Platform\Platform.Windows.UI.Core\AppFramework.Uwp.UI.csproj">
       <Project>{9e167450-febb-4f54-8fa9-4954cabd6ce5}</Project>
-      <Name>AppFramework.Uwp.UI.Core</Name>
+      <Name>AppFramework.Uwp.UI</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

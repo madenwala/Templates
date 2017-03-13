@@ -7,8 +7,8 @@
     <ProjectGuid>{9E167450-FEBB-4F54-8FA9-4954CABD6CE5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AppFramework.Uwp.UI.Core</RootNamespace>
-    <AssemblyName>AppFramework.Uwp.UI.Core</AssemblyName>
+    <RootNamespace>AppFramework.Uwp.UI</RootNamespace>
+    <AssemblyName>AppFramework.Uwp.UI</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
@@ -177,6 +177,7 @@
     <Compile Include="Triggers\NotDeviceFamilyTrigger.cs" />
     <Compile Include="Triggers\SplitViewTrigger.cs" />
     <Compile Include="Triggers\TabletModeTrigger.cs" />
+    <Compile Include="Views\ViewBase.cs" />
     <EmbeddedResource Include="Properties\Platform.Windows.UI.Core.rd.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -231,9 +232,7 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <SDKReference Include="Microsoft.Advertising.Xaml, Version=10.0">
       <Name>Microsoft Advertising SDK for XAML</Name>

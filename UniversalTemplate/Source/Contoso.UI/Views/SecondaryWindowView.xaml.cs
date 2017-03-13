@@ -1,5 +1,6 @@
 ﻿using AppFramework.Core.Services;
 using AppFramework.Core.ViewModels;
+using AppFramework.Uwp.UI.Views;
 using Contoso.Core;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;

@@ -1,4 +1,5 @@
 ﻿using AppFramework.Core.ViewModels;
+using AppFramework.Uwp.UI.Views;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 
