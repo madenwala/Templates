@@ -93,7 +93,7 @@ namespace Contoso.Core.ViewModels
                 //await this.WaitAllAsync(
                 //    ct,
                 //    this.UpdateVoiceCommandsAsync(ct),
-                //    Platform.Current.Notifications.CreateOrUpdateTileAsync(this)
+                //    this.Notifications.CreateOrUpdateTileAsync(this)
                 //    );
             }
         }

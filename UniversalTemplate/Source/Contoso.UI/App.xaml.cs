@@ -1,7 +1,9 @@
-﻿using AppFramework.Uwp.UI;
+﻿using AppFramework.Core;
+using AppFramework.Core.Services;
+using AppFramework.Core.Services.Analytics;
+using AppFramework.Uwp.UI;
 using AppFramework.Uwp.UI.Controls;
 using Contoso.Core;
-using Contoso.Core.Services.Analytics;
 using Contoso.UI.Services;
 using System;
 using System.Threading.Tasks;
@@ -28,7 +30,7 @@ namespace Contoso.UI
         /// </summary>
         public App()
         {
-            Contoso.Core.Platform.Current = new Contoso.Core.Platform();
+            Platform.Current = new Platform();
             AgentSync.Init(this);
 
             this.InitializeComponent();
@@ -39,10 +41,10 @@ namespace Contoso.UI
                 this.RequiresPointerMode = ApplicationRequiresPointerMode.WhenRequested;
 
             // Initalize the platform object which is the singleton instance to access various services
-            PlatformBase.Current.Navigation = new NavigationManager();
-            PlatformBase.Current.Analytics.Register(new FlurryAnalyticsService("M76D4BWBDRTWTVJZZ27P"));
-            PlatformBase.Current.Analytics.Register(new HockeyAppService(Guid.Empty.ToString(), "adenwala@outlook.com"));
-            PlatformBase.Current.Analytics.Register(new GoogleAnalyticsService("UA-91538532-2"));
+            Platform.Current.Navigation = new NavigationManager();
+            Platform.Current.Analytics.Register(new FlurryAnalyticsService("M76D4BWBDRTWTVJZZ27P"));
+            Platform.Current.Analytics.Register(new HockeyAppService(Guid.Empty.ToString(), "adenwala@outlook.com"));
+            Platform.Current.Analytics.Register(new GoogleAnalyticsService("UA-91538532-2"));
 
             AdControl.DevCenterAdAppID = "7f0c824b-5c94-4cc6-b4ea-db78b7641398";
             AdControl.DevCenterAdUnitID = "11641061";
@@ -63,7 +65,7 @@ namespace Contoso.UI
         /// <param name="e">Details about the launch request and process.</param>
         protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
-            PlatformBase.Current.Analytics.Event("App.OnLaunched", this.ToDictionary(e));
+            Platform.Current.Analytics.Event("App.OnLaunched", this.ToDictionary(e));
             await this.InitializeAsync(e, e.PrelaunchActivated);
 
             var t = Windows.System.Threading.ThreadPool.RunAsync(async (o) =>
@@ -77,21 +79,21 @@ namespace Contoso.UI
                 }
                 catch (Exception ex)
                 {
-                    PlatformBase.Current.Logger.LogError(ex, "Installing voice commands failed!");
+                    Platform.Current.Logger.LogError(ex, "Installing voice commands failed!");
                 }
             });
         }
 
         protected override async void OnActivated(IActivatedEventArgs e)
         {
-            PlatformBase.Current.Analytics.Event("App.OnActivated", this.ToDictionary(e));
+            Platform.Current.Analytics.Event("App.OnActivated", this.ToDictionary(e));
             await this.InitializeAsync(e);
             base.OnActivated(e);
         }
 
         protected override async void OnSearchActivated(SearchActivatedEventArgs e)
         {
-            PlatformBase.Current.Analytics.Event("App.OnSearchActivated", this.ToDictionary(e));
+            Platform.Current.Analytics.Event("App.OnSearchActivated", this.ToDictionary(e));
             await this.InitializeAsync(e);
             base.OnSearchActivated(e);
         }
@@ -123,9 +125,9 @@ namespace Contoso.UI
 
                     // Determine if the app is a new instance or being restored after app suspension
                     if (e.PreviousExecutionState == ApplicationExecutionState.ClosedByUser || e.PreviousExecutionState == ApplicationExecutionState.NotRunning)
-                        await PlatformBase.Current.AppInitializingAsync(InitializationModes.New);
+                        await Platform.Current.AppInitializingAsync(InitializationModes.New);
                     else
-                        await PlatformBase.Current.AppInitializingAsync(InitializationModes.Restore);
+                        await Platform.Current.AppInitializingAsync(InitializationModes.Restore);
                 }
 
                 bool firstWindows = false;
@@ -188,7 +190,7 @@ namespace Contoso.UI
                 if (preLaunchActivated == false)
                 {
                     // Manage activation and process arguments
-                    PlatformBase.Current.Navigation.HandleActivation(e, rootFrame);
+                    Platform.Current.Navigation.HandleActivation(e, rootFrame);
                     
                     // Ensure the current window is active
                     Window.Current.Activate();
@@ -202,7 +204,7 @@ namespace Contoso.UI
             }
             catch (Exception ex)
             {
-                PlatformBase.Current.Logger.LogErrorFatal(ex, "Error during App InitializeAsync(e)");
+                Platform.Current.Logger.LogErrorFatal(ex, "Error during App InitializeAsync(e)");
                 throw ex;
             }
         }
@@ -223,16 +225,16 @@ namespace Contoso.UI
             var deferral = e.SuspendingOperation.GetDeferral();
             try
             {
-                PlatformBase.Current.AppSuspending();
+                Platform.Current.AppSuspending();
                 await SuspensionManager.SaveAsync();
             }
             catch(SuspensionManagerException ex)
             {
-                PlatformBase.Current.Logger.LogErrorFatal(ex, "Suspension manager failed during App OnSuspending!");
+                Platform.Current.Logger.LogErrorFatal(ex, "Suspension manager failed during App OnSuspending!");
             }
             catch (Exception ex)
             {
-                PlatformBase.Current.Logger.LogErrorFatal(ex, "Error during App OnSuspending");
+                Platform.Current.Logger.LogErrorFatal(ex, "Error during App OnSuspending");
                 throw ex;
             }
             deferral.Complete();
@@ -249,7 +251,7 @@ namespace Contoso.UI
         /// <param name="e"></param>
         private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            e.Handled = PlatformBase.Current.AppUnhandledException(e.Exception);
+            e.Handled = Platform.Current.AppUnhandledException(e.Exception);
         }
 
         /// <summary>
@@ -260,7 +262,7 @@ namespace Contoso.UI
         private void TaskScheduler_UnobservedTaskException(object sender, System.Threading.Tasks.UnobservedTaskExceptionEventArgs e)
         {
             e.SetObserved();
-            PlatformBase.Current.AppUnhandledException(e.Exception);
+            Platform.Current.AppUnhandledException(e.Exception);
         }
 
         /// <summary>
@@ -270,7 +272,7 @@ namespace Contoso.UI
         /// <param name="e">Details about the binding failure</param>
         private void DebugSettings_BindingFailed(object sender, BindingFailedEventArgs e)
         {
-            PlatformBase.Current.Logger.Log(LogLevels.Error, "Binding Failed: {0}", e.Message);
+            Platform.Current.Logger.Log(LogLevels.Error, "Binding Failed: {0}", e.Message);
         }
 
         /// <summary>

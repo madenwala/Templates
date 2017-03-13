@@ -7,8 +7,9 @@
     xmlns:converters="using:AppFramework.Uwp.UI.Converters"
     xmlns:behaviors="using:AppFramework.Uwp.UI.Behaviors"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
-    xmlns:models="using:Contoso.Core.Models"
+    xmlns:models="using:AppFramework.Core.Models"
     xmlns:viewmodels="using:Contoso.Core.ViewModels"
+    xmlns:coreviewmodels="using:AppFramework.Core.ViewModels"
     xmlns:designTime="using:Contoso.Core.ViewModels.Designer"
     d:DataContext="{d:DesignInstance designTime:SettingsViewModel, IsDesignTimeCreatable=True}"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -121,7 +122,7 @@
             </ScrollViewer>
         </DataTemplate>
 
-        <DataTemplate x:Key="DebuggingDataTemplate" x:DataType="viewmodels:DebuggingViewModel">
+        <DataTemplate x:Key="DebuggingDataTemplate" x:DataType="coreviewmodels:DebuggingViewModel">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <StackPanel Margin="{StaticResource StandardContentBottomMargins}">
                     <StackPanel.ChildrenTransitions>

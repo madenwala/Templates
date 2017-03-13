@@ -1,7 +1,7 @@
 ﻿using AppFramework.Uwp.UI.Controls;
+using Contoso.Core;
 using Contoso.Core.Data;
 using Contoso.Core.Models;
-using Contoso.Core.Services;
 using System;
 using System.Threading;
 using Windows.UI.Xaml.Controls;
@@ -63,7 +63,7 @@ namespace Contoso.UI.Controls
             }
             catch(Exception ex)
             {
-                PlatformBase.Current.Logger.LogError(ex, "Could not perform search with '{0}'", sender.Text);
+                Platform.Current.Logger.LogError(ex, "Could not perform search with '{0}'", sender.Text);
             }
         }
 
@@ -73,11 +73,11 @@ namespace Contoso.UI.Controls
             {
                 var item = args.ChosenSuggestion as ItemModel;
                 sender.Text = item.LineOne;
-                PlatformBase.Current.Navigation.Item(args.ChosenSuggestion as ItemModel);
+                Platform.Current.Navigation.Item(args.ChosenSuggestion as ItemModel);
             }
             else
             {
-                PlatformBase.Current.Navigation.Search(args.QueryText);
+                Platform.Current.Navigation.Search(args.QueryText);
                 sender.Text = string.Empty;
             }
         }

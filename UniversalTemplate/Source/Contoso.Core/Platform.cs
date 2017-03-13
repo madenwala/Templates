@@ -186,7 +186,7 @@ namespace Contoso.Core
                 // TOOD BG sample code needs to be enabled
 
                 // Perform work that needs to be done on a background task/agent...
-                if (Platform.Current.AuthManager.IsAuthenticated() == false)
+                if (this.AuthManager.IsAuthenticated() == false)
                     return;
 
                 // SAMPLE - Load data from your API, do any background work here.
@@ -199,7 +199,7 @@ namespace Contoso.Core
                         if (items.Count > 0)
                         {
                             var index = DateTime.Now.Second % items.Count;
-                            Platform.Current.Notifications.DisplayToast(items[index]);
+                            this.Notifications.DisplayToast(items[index]);
                         }
                     }
 
@@ -208,12 +208,12 @@ namespace Contoso.Core
                     if (cost <= BackgroundWorkCostValue.Medium)
                     {
                         // Update primary tile
-                        await Platform.Current.Notifications.CreateOrUpdateTileAsync(new ModelList<ItemModel>(data));
+                        await this.Notifications.CreateOrUpdateTileAsync(new ModelList<ItemModel>(data));
 
                         ct.ThrowIfCancellationRequested();
 
                         // Update all tiles pinned from this application
-                        await Platform.Current.Notifications.UpdateAllSecondaryTilesAsync(ct);
+                        await this.Notifications.UpdateAllSecondaryTilesAsync(ct);
                     }
                 }
             }
@@ -223,7 +223,7 @@ namespace Contoso.Core
             }
             catch (Exception ex)
             {
-                PlatformBase.Current.Logger.LogErrorFatal(ex, "Failed to complete BackgroundWork from background task due to: {0}", ex.Message);
+                this.Logger.LogErrorFatal(ex, "Failed to complete BackgroundWork from background task due to: {0}", ex.Message);
                 throw ex;
             }
         }
