@@ -25,7 +25,7 @@
     http://go.microsoft.com/fwlink/?LinkID=391919
 -->
 <Directives xmlns="http://schemas.microsoft.com/netfx/2013/01/metadata">
-  <Library Name="Platform.Windows.Core">
+  <Library Name="Platform.Uwp.Core">
 
   	<!-- add directives for your library here -->
 

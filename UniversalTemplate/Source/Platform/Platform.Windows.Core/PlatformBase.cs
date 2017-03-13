@@ -79,7 +79,7 @@ namespace Contoso.Core.Services
         /// <summary>
         /// Provides access to application services.
         /// </summary>
-        public static PlatformBase Current { get; protected set; }
+        public static PlatformBase Current { get; set; }
 
         /// <summary>
         /// Gets the current device family this app is executing on.

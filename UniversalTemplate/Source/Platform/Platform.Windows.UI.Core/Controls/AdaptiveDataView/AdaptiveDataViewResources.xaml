@@ -1,0 +1,91 @@
+﻿<ResourceDictionary
+    x:Class="AppFramework.Uwp.UI.Controls.AdaptiveDataViewResources" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:resources="using:AppFramework.Uwp.UI.Resources"
+    xmlns:controls="using:AppFramework.Uwp.UI.Controls"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:behaviors="using:AppFramework.Uwp.UI.Behaviors">
+
+    <ResourceDictionary.MergedDictionaries>
+        <!--<resources:Common />
+        <resources:TextStyles />
+        <resources:ListStyles />-->
+        <controls:PullToRefreshListViewResources />
+    </ResourceDictionary.MergedDictionaries>
+    
+    <Style TargetType="controls:AdaptiveDataView">
+        <Setter Property="GridViewItemContainerStyle" Value="{StaticResource AdaptiveGridViewItemStyle}" />
+        <Setter Property="IsItemClickEnabled" Value="True" />
+        <Setter Property="IsSwipeEnabled" Value="False" />
+        <Setter Property="SelectionMode" Value="None" />
+        <Setter Property="NoDataMessageStyle" Value="{StaticResource StatusTextBlockStyle}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:AdaptiveDataView">
+                    <Grid x:Name="root" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup>
+                                <VisualState>
+                                    <VisualState.StateTriggers>
+                                        <AdaptiveTrigger MinWindowWidth="{StaticResource SnapPoint8Portrait}" />
+                                    </VisualState.StateTriggers>
+                                    <VisualState.Setters>
+                                        <Setter Target="gridview.Visibility" Value="Visible" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState>
+                                    <VisualState.StateTriggers>
+                                        <AdaptiveTrigger MinWindowWidth="{StaticResource SnapPointMinimum}" />
+                                    </VisualState.StateTriggers>
+                                    <VisualState.Setters>
+                                        <Setter Target="listview.Visibility" Value="Visible" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <toolkit:PullToRefreshListView 
+                            x:Name="listview" 
+                            Visibility="Collapsed" 
+                            x:DeferLoadStrategy="Lazy"
+                            Style="{TemplateBinding ListViewStyle}" 
+                            ItemsSource="{TemplateBinding ItemsSource}" 
+                            ItemTemplate="{TemplateBinding ListViewItemTemplate}"
+                            ItemContainerStyle="{TemplateBinding ListViewItemContainerStyle}"
+                            Header="{TemplateBinding Header}"
+                            HeaderTemplate="{TemplateBinding HeaderTemplate}"
+                            Footer="{TemplateBinding Footer}"
+                            FooterTemplate="{TemplateBinding FooterTemplate}"
+                            IsItemClickEnabled="{TemplateBinding IsItemClickEnabled}"
+                            IsSwipeEnabled="{TemplateBinding IsSwipeEnabled}"
+                            SelectionMode="{TemplateBinding SelectionMode}"
+                            RefreshCommand="{TemplateBinding RefreshCommand}"
+                            PullThreshold="{StaticResource PullToRefreshPullThreshold}"
+                            behaviors:ListViewCommandBehavior.Command="{TemplateBinding ClickCommand}" />
+                        <GridView 
+                            x:Name="gridview" 
+                            Visibility="Collapsed" 
+                            x:DeferLoadStrategy="Lazy" 
+                            Style="{TemplateBinding GridViewStyle}" 
+                            ItemsSource="{TemplateBinding ItemsSource}" 
+                            ItemTemplate="{TemplateBinding GridViewItemTemplate}"  
+                            ItemContainerStyle="{TemplateBinding GridViewItemContainerStyle}"
+                            Header="{TemplateBinding Header}"
+                            HeaderTemplate="{TemplateBinding HeaderTemplate}"
+                            Footer="{TemplateBinding Footer}"
+                            FooterTemplate="{TemplateBinding FooterTemplate}"
+                            IsItemClickEnabled="{TemplateBinding IsItemClickEnabled}"
+                            IsSwipeEnabled="{TemplateBinding IsSwipeEnabled}"
+                            SelectionMode="{TemplateBinding SelectionMode}"
+                            behaviors:ListViewCommandBehavior.Command="{TemplateBinding ClickCommand}" />
+                        <TextBlock 
+                            Text="{TemplateBinding NoDataMessage}" 
+                            Style="{TemplateBinding NoDataMessageStyle}"
+                            Visibility="{TemplateBinding NoDataMessageVisibility}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>

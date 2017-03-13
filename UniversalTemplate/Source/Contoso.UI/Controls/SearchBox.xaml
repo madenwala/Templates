@@ -2,7 +2,7 @@
     x:Class="Contoso.UI.Controls.SearchBox"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="using:Contoso.UI.Controls"
+    xmlns:controls="using:AppFramework.Uwp.UI.Controls"
     xmlns:models="using:Contoso.Core.Models"
     xmlns:designTime="using:Contoso.Core.ViewModels.Designer"
     d:DataContext="{d:DesignInstance designTime:MainViewModel, IsDesignTimeCreatable=True}"

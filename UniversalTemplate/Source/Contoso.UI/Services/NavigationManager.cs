@@ -1,8 +1,8 @@
-﻿using Contoso.Core;
+﻿using AppFramework.Uwp.UI.Controls;
+using Contoso.Core;
 using Contoso.Core.Models;
 using Contoso.Core.Services;
 using Contoso.Core.ViewModels;
-using Contoso.UI.Controls;
 using Contoso.UI.Views;
 using System;
 using System.Linq;
@@ -27,7 +27,7 @@ namespace Contoso.UI.Services
         {
             var handled = this.HandleArgumentsActivation(e.Arguments);
 
-            if (handled == false && Platform.Current.InitializationMode == InitializationModes.Restore)
+            if (handled == false && Core.Services.PlatformBase.Current.InitializationMode == InitializationModes.Restore)
                 handled = true;
 
             return handled;
@@ -80,7 +80,7 @@ namespace Contoso.UI.Services
             if (string.IsNullOrWhiteSpace(arguments))
                 return false;
 
-            Platform.Current.Logger.Log(LogLevels.Information, "HandleArgumentsActivation: {0}", arguments);
+            Core.Services.PlatformBase.Current.Logger.Log(LogLevels.Information, "HandleArgumentsActivation: {0}", arguments);
 
             try
             {
@@ -105,7 +105,7 @@ namespace Contoso.UI.Services
             }
             catch (Exception ex)
             {
-                Platform.Current.Logger.LogError(ex, "Could not parse argument '{0}' passed into app.", arguments);
+                Core.Services.PlatformBase.Current.Logger.LogError(ex, "Could not parse argument '{0}' passed into app.", arguments);
                 return false;
             }
         }
@@ -116,7 +116,7 @@ namespace Contoso.UI.Services
         
         public override void Home(object parameter = null)
         {
-            if(Platform.Current.AuthManager.IsAuthenticated() == false)
+            if(Core.Services.PlatformBase.Current.AuthManager.IsAuthenticated() == false)
             {
                 this.Navigate(this.ParentFrame, typeof(WelcomeView), parameter);
                 this.ClearBackstack();

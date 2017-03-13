@@ -25,7 +25,7 @@ namespace Contoso.Core
         /// </summary>
         public static Platform LocalCurrent { get { return Current as Platform; } }
 
-        private Platform()
+        public Platform()
         {
             // Instantiate all the application services.
             this.BackgroundTasks = new BackgroundTasksManager();

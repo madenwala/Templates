@@ -155,9 +155,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Platform\Platform.Windows.Core\Platform.Windows.Core.csproj">
+    <ProjectReference Include="..\Platform\Platform.Windows.Core\AppFramework.Uwp.Core.csproj">
       <Project>{4e4e65ea-96f5-4a3a-8e17-2fdf597e310b}</Project>
-      <Name>Platform.Windows.Core</Name>
+      <Name>AppFramework.Uwp.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

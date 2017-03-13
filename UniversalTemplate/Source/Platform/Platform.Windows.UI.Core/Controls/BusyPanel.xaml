@@ -1,0 +1,31 @@
+﻿<UserControl
+    x:Class="AppFramework.Uwp.UI.Controls.BusyPanel"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    
+    <Grid>
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Opacity=".85" />
+        <StackPanel VerticalAlignment="Center" Margin="0,0,0,48">
+            <ProgressRing IsEnabled="{x:Bind ViewModel.StatusIsBusy, Mode=OneWay}" 
+                          IsActive="{x:Bind ViewModel.StatusIsBusy, Mode=OneWay}" />
+            <TextBlock 
+                TextAlignment="Center" 
+                TextWrapping="Wrap" 
+                Margin="12,0" 
+                Text="{x:Bind ViewModel.StatusText, Mode=OneWay}" 
+                Style="{StaticResource BodyTextBlockStyle}" />
+            <Button 
+                x:Uid="/Contoso.Core/Resources/btnCancel" 
+                Content="[Cancel]" 
+                HorizontalAlignment="Center" 
+                Command="{x:Bind ViewModel.StatusIsBlockingCancelableCommand, Mode=OneWay}" 
+                Visibility="{x:Bind ViewModel.StatusIsBlockingCancelable, Mode=OneWay, Converter={StaticResource visConverter}}" />
+        </StackPanel>
+    </Grid>
+
+</UserControl>
