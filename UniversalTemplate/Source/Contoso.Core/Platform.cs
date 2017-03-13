@@ -27,7 +27,7 @@ namespace Contoso.Core
         /// </summary>
         public static Platform LocalCurrent { get { return Current as Platform; } }
 
-        public Platform()
+        public Platform() : base(typeof(MainViewModel))
         {
             // Instantiate all the application services.
             this.BackgroundTasks = new BackgroundTasksManager();
@@ -51,8 +51,6 @@ namespace Contoso.Core
             await base.AppInitializingAsync(mode);
 
             this.CheckForFullLogging();
-
-            await this.OnInitialize();
 
             if (mode == InitializationModes.New)
             {
@@ -81,12 +79,6 @@ namespace Contoso.Core
         #endregion
 
         #region Overrides
-
-        public override Task OnInitialize()
-        {
-            this.ViewModel = new MainViewModel();
-            return base.OnInitialize();
-        }
 
         /// <summary>
         /// Creates a querystring parameter string from a model instance.

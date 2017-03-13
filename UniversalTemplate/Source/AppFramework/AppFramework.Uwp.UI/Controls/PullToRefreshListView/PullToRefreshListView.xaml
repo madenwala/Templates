@@ -7,18 +7,16 @@
     xmlns:controls="using:AppFramework.Uwp.UI.Controls"
     xmlns:behaviors="using:AppFramework.Uwp.UI.Behaviors">
 
-    <!--<ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary.MergedDictionaries>
         <resources:Common />
-        <resources:TextStyles />
-        <resources:ListStyles />
-    </ResourceDictionary.MergedDictionaries>-->
+    </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="controls:PullToRefreshListView">
-        <Setter Property="NoDataMessageStyle" Value="{StaticResource StatusTextBlockStyle}" />
+        <!--<Setter Property="NoDataMessageStyle" Value="{StaticResource StatusTextBlockStyle}" />-->
         <Setter Property="IsItemClickEnabled" Value="True" />
         <Setter Property="IsSwipeEnabled" Value="False" />
         <Setter Property="SelectionMode" Value="None" />
-        <Setter Property="PullThreshold" Value="{StaticResource PullToRefreshPullThreshold}" />
+        <Setter Property="PullThreshold" Value="100" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:PullToRefreshListView">

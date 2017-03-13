@@ -170,6 +170,9 @@
     <Compile Include="Extensions\ScrollViewerExtensions.cs" />
     <Compile Include="Extensions\SizeExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Common.xaml.cs">
+      <DependentUpon>Common.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SuspensionManager.cs" />
     <Compile Include="Triggers\ContinuumMobileAvailableTrigger.cs" />
     <Compile Include="Triggers\ContinuumMobileExecutingTrigger.cs" />
@@ -222,6 +225,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\WebViewPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Common.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

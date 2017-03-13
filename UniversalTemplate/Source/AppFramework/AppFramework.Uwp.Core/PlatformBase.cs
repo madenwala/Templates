@@ -27,17 +27,19 @@ namespace AppFramework.Core
         private bool _settingsIsLocalDataDirty = false;
         private bool _settingsIsRoamingDataDirty = false;
 
+        private Type _mainViewModelType;
+
         #endregion Variables
 
         #region Properties
 
-        private MainViewModelBase _ViewModel;
+        private ViewModelBase _ViewModel;
         /// <summary>
         /// Gets the MainViewModel global instance for the application.
         /// </summary>
         [Newtonsoft.Json.JsonIgnore()]
         [System.Runtime.Serialization.IgnoreDataMember()]
-        public MainViewModelBase ViewModel
+        public ViewModelBase ViewModel
         {
             get { return _ViewModel; }
             protected set { this.SetProperty(ref _ViewModel, value); }
@@ -102,8 +104,10 @@ namespace AppFramework.Core
 
         #region Constructors
 
-        protected PlatformBase()
+        protected PlatformBase(Type mainViewModelType)
         {
+            _mainViewModelType = mainViewModelType;
+
             // Instantiate all the application services.
             this.Logger = new LoggingService();
             this.Analytics = new AnalyticsManager();
@@ -194,6 +198,9 @@ namespace AppFramework.Core
             // Register all background agents
             if (mode != InitializationModes.Background)
                 this.BackgroundRegistrationTask = this.BackgroundTasks.RegisterAllAsync();
+
+            if (this.ViewModel == null)
+                this.ViewModel = Activator.CreateInstance(_mainViewModelType) as ViewModelBase;
         }
 
         /// <summary>
@@ -383,19 +390,11 @@ namespace AppFramework.Core
             // Instantiate a new instance of settings and the MainViewModel 
             // to ensure no previous user data is shown on the UI.
             this.ResetAppSettings();
-            await this.OnInitialize();
+
+            this.ViewModel = Activator.CreateInstance(_mainViewModelType) as ViewModelBase;
             this.ShellMenuClose();
         }
-
-        /// <summary>
-        /// Signs a user out of the app.
-        /// </summary>
-        /// <returns>Awaitable task is returned.</returns>
-        public virtual Task OnInitialize()
-        {
-            return Task.CompletedTask;
-        }
-
+        
         #endregion
 
         #region Generate Models

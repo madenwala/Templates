@@ -30,13 +30,13 @@
 
     <!--PullToRefresh Styles-->
     <x:Double x:Key="PullToRefreshPullThreshold">100</x:Double>
-    <!--<Style TargetType="controls:PullToRefreshListView">
+    <Style TargetType="controls:PullToRefreshListView">
         <Setter Property="IsSwipeEnabled" Value="False" />
         <Setter Property="IsItemClickEnabled" Value="True" />
         <Setter Property="SelectionMode" Value="None" />
         <Setter Property="PullThreshold" Value="{StaticResource PullToRefreshPullThreshold}" />
-        <Setter Property="StatusMessageStyle" Value="{StaticResource StatusTextBlockStyle}" />
-    </Style>-->
+        <Setter Property="NoDataMessageStyle" Value="{StaticResource StatusTextBlockStyle}" />
+    </Style>
     <Style TargetType="toolkit:PullToRefreshListView">
         <Setter Property="IsSwipeEnabled" Value="False" />
         <Setter Property="IsItemClickEnabled" Value="True" />

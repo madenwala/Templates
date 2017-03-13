@@ -8,12 +8,17 @@
     xmlns:behaviors="using:AppFramework.Uwp.UI.Behaviors">
 
     <ResourceDictionary.MergedDictionaries>
-        <!--<resources:Common />
+        <resources:Common />
+        <!--
         <resources:TextStyles />
         <resources:ListStyles />-->
         <controls:PullToRefreshListViewResources />
     </ResourceDictionary.MergedDictionaries>
-    
+
+    <!--Snap points for responsive design-->
+    <x:Double x:Key="SnapPoint8Portrait">640</x:Double>
+    <x:Double x:Key="SnapPointMinimum">0</x:Double>
+
     <Style TargetType="controls:AdaptiveDataView">
         <Setter Property="GridViewItemContainerStyle" Value="{StaticResource AdaptiveGridViewItemStyle}" />
         <Setter Property="IsItemClickEnabled" Value="True" />

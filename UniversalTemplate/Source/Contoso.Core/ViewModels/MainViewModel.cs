@@ -11,7 +11,7 @@ using Windows.ApplicationModel;
 
 namespace Contoso.Core.ViewModels
 {
-    public partial class MainViewModel : MainViewModelBase
+    public partial class MainViewModel : ViewModelBase
     {
         #region Properties
 
