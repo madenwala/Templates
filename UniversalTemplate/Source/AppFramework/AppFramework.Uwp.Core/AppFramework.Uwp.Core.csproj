@@ -241,6 +241,12 @@
       <HintPath>..\..\Dependencies\FlurryWin8SDK.winmd</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AppFramework.Core\AppFramework.Core.csproj">
+      <Project>{6909d24a-c1d4-4664-8dbd-c6bfea229bf3}</Project>
+      <Name>AppFramework.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

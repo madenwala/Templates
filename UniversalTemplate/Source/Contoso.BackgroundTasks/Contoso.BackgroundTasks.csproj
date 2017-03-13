@@ -116,13 +116,17 @@
     <Compile Include="TimedWorkerTask.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AppFramework\AppFramework.Core\AppFramework.Core.csproj">
+      <Project>{6909d24a-c1d4-4664-8dbd-c6bfea229bf3}</Project>
+      <Name>AppFramework.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AppFramework\AppFramework.Uwp.Core\AppFramework.Uwp.Core.csproj">
+      <Project>{4e4e65ea-96f5-4a3a-8e17-2fdf597e310b}</Project>
+      <Name>AppFramework.Uwp.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Contoso.Core\Contoso.Core.csproj">
       <Project>{9a7ebe07-4655-4eec-b627-f8ade0ee9953}</Project>
       <Name>Contoso.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Platform\Platform.Windows.Core\AppFramework.Uwp.Core.csproj">
-      <Project>{4e4e65ea-96f5-4a3a-8e17-2fdf597e310b}</Project>
-      <Name>AppFramework.Uwp.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

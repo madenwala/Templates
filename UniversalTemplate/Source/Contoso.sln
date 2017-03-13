@@ -11,9 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.BackgroundTasks", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppFramework", "AppFramework", "{CB5D60BA-865B-480F-A205-7410FF7925D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFramework.Uwp.Core", "Platform\Platform.Windows.Core\AppFramework.Uwp.Core.csproj", "{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFramework.Core", "AppFramework\AppFramework.Core\AppFramework.Core.csproj", "{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFramework.Uwp.UI", "Platform\Platform.Windows.UI.Core\AppFramework.Uwp.UI.csproj", "{9E167450-FEBB-4F54-8FA9-4954CABD6CE5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFramework.Uwp.Core", "AppFramework\AppFramework.Uwp.Core\AppFramework.Uwp.Core.csproj", "{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFramework.Uwp.UI", "AppFramework\AppFramework.Uwp.UI\AppFramework.Uwp.UI.csproj", "{9E167450-FEBB-4F54-8FA9-4954CABD6CE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,6 +81,22 @@ Global
 		{CB283AE3-3653-41EC-8E20-69722D2D33FA}.Release|x64.Build.0 = Release|x64
 		{CB283AE3-3653-41EC-8E20-69722D2D33FA}.Release|x86.ActiveCfg = Release|x86
 		{CB283AE3-3653-41EC-8E20-69722D2D33FA}.Release|x86.Build.0 = Release|x86
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Debug|ARM.Build.0 = Debug|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Debug|x64.Build.0 = Debug|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Debug|x86.Build.0 = Debug|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Release|ARM.ActiveCfg = Release|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Release|ARM.Build.0 = Release|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Release|x64.ActiveCfg = Release|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Release|x64.Build.0 = Release|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Release|x86.ActiveCfg = Release|Any CPU
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}.Release|x86.Build.0 = Release|Any CPU
 		{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}.Debug|ARM.ActiveCfg = Debug|ARM
@@ -116,6 +134,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3} = {CB5D60BA-865B-480F-A205-7410FF7925D9}
 		{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B} = {CB5D60BA-865B-480F-A205-7410FF7925D9}
 		{9E167450-FEBB-4F54-8FA9-4954CABD6CE5} = {CB5D60BA-865B-480F-A205-7410FF7925D9}
 	EndGlobalSection

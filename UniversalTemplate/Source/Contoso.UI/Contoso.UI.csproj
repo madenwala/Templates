@@ -341,6 +341,18 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AppFramework\AppFramework.Core\AppFramework.Core.csproj">
+      <Project>{6909d24a-c1d4-4664-8dbd-c6bfea229bf3}</Project>
+      <Name>AppFramework.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AppFramework\AppFramework.Uwp.Core\AppFramework.Uwp.Core.csproj">
+      <Project>{4e4e65ea-96f5-4a3a-8e17-2fdf597e310b}</Project>
+      <Name>AppFramework.Uwp.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AppFramework\AppFramework.Uwp.UI\AppFramework.Uwp.UI.csproj">
+      <Project>{9e167450-febb-4f54-8fa9-4954cabd6ce5}</Project>
+      <Name>AppFramework.Uwp.UI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Contoso.BackgroundTasks\Contoso.BackgroundTasks.csproj">
       <Project>{cb283ae3-3653-41ec-8e20-69722d2d33fa}</Project>
       <Name>Contoso.BackgroundTasks</Name>
@@ -348,14 +360,6 @@
     <ProjectReference Include="..\Contoso.Core\Contoso.Core.csproj">
       <Project>{9a7ebe07-4655-4eec-b627-f8ade0ee9953}</Project>
       <Name>Contoso.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Platform\Platform.Windows.Core\AppFramework.Uwp.Core.csproj">
-      <Project>{4e4e65ea-96f5-4a3a-8e17-2fdf597e310b}</Project>
-      <Name>AppFramework.Uwp.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Platform\Platform.Windows.UI.Core\AppFramework.Uwp.UI.csproj">
-      <Project>{9e167450-febb-4f54-8fa9-4954cabd6ce5}</Project>
-      <Name>AppFramework.Uwp.UI</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -377,9 +381,7 @@
       <HintPath>..\Dependencies\FlurryWin8SDK.winmd</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="PlatformBase\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
