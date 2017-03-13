@@ -1,8 +1,9 @@
 ﻿using AppFramework.Core.Models;
+using AppFramework.Core.Services;
 using System;
 using System.Collections.Generic;
 
-namespace AppFramework.Core.Services
+namespace AppFramework.Core
 {
     public partial class PlatformBase
     {
@@ -15,7 +16,10 @@ namespace AppFramework.Core.Services
             protected set { SetService<AnalyticsManager>(value); }
         }
     }
+}
 
+namespace AppFramework.Core.Services
+{
     /// <summary>
     /// Base class providing access to the analytics service for the platform currently executing.
     /// </summary>

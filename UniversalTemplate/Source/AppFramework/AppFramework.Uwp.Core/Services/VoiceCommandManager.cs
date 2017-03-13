@@ -1,9 +1,10 @@
-﻿using System;
+﻿using AppFramework.Core.Services;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.VoiceCommands;
 
-namespace AppFramework.Core.Services
+namespace AppFramework.Core
 {
     public partial class PlatformBase
     {
@@ -16,7 +17,10 @@ namespace AppFramework.Core.Services
             protected set { SetService<VoiceCommandManager>(value); }
         }
     }
+}
 
+namespace AppFramework.Core.Services
+{
     public sealed class VoiceCommandManager : ServiceBase, IServiceSignout
     {
 

@@ -1,5 +1,4 @@
 ﻿using AppFramework.Core;
-using AppFramework.Core.Services;
 using AppFramework.Core.ViewModels;
 using System;
 using Windows.UI.Xaml.Controls;
@@ -27,7 +26,7 @@ namespace AppFramework.Uwp.UI.Controls
                     }
                     catch (Exception ex)
                     {
-                        AppFramework.Core.Services.PlatformBase.Current.Logger.LogError(ex, "Error while loading child ViewModel of type {1} in CollectionViewModel type {0}", parentVM.GetType().Name, vm.GetType().Name);
+                        PlatformBase.Current.Logger.LogError(ex, "Error while loading child ViewModel of type {1} in CollectionViewModel type {0}", parentVM.GetType().Name, vm.GetType().Name);
                     }
                 }
             }

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using AppFramework.Core.Services;
+using System;
 using System.Threading.Tasks;
 using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.DataProtection;
 using Windows.Storage.Streams;
 
-namespace AppFramework.Core.Services
+namespace AppFramework.Core
 {
     public partial class PlatformBase
     {
@@ -17,7 +18,10 @@ namespace AppFramework.Core.Services
             protected set { SetService<CryptographyProvider>(value); }
         }
     }
+}
 
+namespace AppFramework.Core.Services
+{
     /// <summary>
     /// Interface used to access the cryptography functions of the executing platform. Additional details of encryption implementation method: http://msdn.microsoft.com/en-us/library/windows/apps/windows.security.cryptography.dataprotection.dataprotectionprovider.aspx
     /// </summary>

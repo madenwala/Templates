@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using AppFramework.Core.Models;
 
 namespace AppFramework.Uwp.UI.Controls
 {

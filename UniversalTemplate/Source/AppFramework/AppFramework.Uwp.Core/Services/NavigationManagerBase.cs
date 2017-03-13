@@ -16,23 +16,9 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using AppFramework.Core.Models;
 using AppFramework.Core.ViewModels;
+using AppFramework.Core.Services;
 
 namespace AppFramework.Core
-{
-    public interface IViewScrollToTop
-    {
-        void ScrollToTop();
-    }
-
-    public interface IView : IViewScrollToTop
-    {
-        object ViewParameter { get; }
-        bool OnForwardNavigationRequested();
-        bool OnBackNavigationRequested();
-    }
-}
-
-namespace AppFramework.Core.Services
 {
     public partial class PlatformBase
     {
@@ -45,6 +31,10 @@ namespace AppFramework.Core.Services
             set { SetService<NavigationManagerBase>(value); }
         }
     }
+}
+
+namespace AppFramework.Core.Services
+{
 
     public abstract partial class NavigationManagerBase : ServiceBase, IServiceSignout
     {

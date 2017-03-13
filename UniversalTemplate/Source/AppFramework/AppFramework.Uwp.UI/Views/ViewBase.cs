@@ -1,4 +1,5 @@
 ﻿using AppFramework.Core;
+using AppFramework.Core.Models;
 using AppFramework.Core.Services;
 using AppFramework.Core.ViewModels;
 using AppFramework.Uwp.UI.Controls;

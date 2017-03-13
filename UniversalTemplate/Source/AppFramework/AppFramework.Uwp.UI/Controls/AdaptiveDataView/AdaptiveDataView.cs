@@ -1,4 +1,4 @@
-﻿using AppFramework.Core;
+﻿using AppFramework.Core.Models;
 using System;
 using System.Collections;
 using System.Collections.Specialized;

@@ -8,7 +8,7 @@ using Windows.Security.Credentials;
 using Windows.Storage;
 using Windows.UI.ApplicationSettings;
 
-namespace AppFramework.Core.Services
+namespace AppFramework.Core
 {
     public partial class PlatformBase
     {
@@ -21,7 +21,10 @@ namespace AppFramework.Core.Services
             set { SetService<WebAccountManager>(value); }
         }
     }
+}
 
+namespace AppFramework.Core.Services
+{
     public sealed class WebAccountManager : ServiceBase, IServiceSignout
     {
         #region Enums

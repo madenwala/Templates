@@ -172,7 +172,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AnalyticsServiceBase.cs" />
     <Compile Include="Services\AppInfoProviderBase.cs" />
-    <Compile Include="Services\BackgroundTasksManager.Core.cs" />
+    <Compile Include="Services\BackgroundTasksManager.cs" />
     <Compile Include="Services\CryptographyProvider.cs" />
     <Compile Include="Services\Analytics\FlurryAnalyticsService.cs" />
     <Compile Include="Services\GeocodingService.cs" />
@@ -182,7 +182,6 @@
     <Compile Include="Services\JumpListManager.cs" />
     <Compile Include="Services\LoggingService.cs" />
     <Compile Include="Services\NavigationManagerBase.cs" />
-    <Compile Include="PlatformBase.Core.cs" />
     <Compile Include="Services\RatingsManager.cs" />
     <Compile Include="Services\ServiceBase.cs" />
     <Compile Include="Services\SharingManagerBase.cs" />

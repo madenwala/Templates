@@ -1,5 +1,4 @@
 ﻿using AppFramework.Core;
-using AppFramework.Core.Services;
 using System;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
@@ -28,7 +27,7 @@ namespace AppFramework.Uwp.UI.Triggers
 
         private void UpdateTrigger()
         {
-            this.SetActive(ProjectionManager.ProjectionDisplayAvailable && AppFramework.Core.Services.PlatformBase.Current.IsMobile);
+            this.SetActive(ProjectionManager.ProjectionDisplayAvailable && PlatformBase.Current.IsMobile);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AppFramework.Core;
+using AppFramework.Core.Models;
 using Windows.UI.Xaml.Controls;
 
 namespace AppFramework.Uwp.UI.Controls

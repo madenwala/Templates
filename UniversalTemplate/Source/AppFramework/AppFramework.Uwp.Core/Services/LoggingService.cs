@@ -1,5 +1,6 @@
 ﻿using AppFramework.Core.Commands;
 using AppFramework.Core.Extensions;
+using AppFramework.Core.Services;
 using AppFramework.Core.ViewModels;
 using Microsoft.Toolkit.Uwp.Helpers;
 using System;
@@ -33,7 +34,7 @@ namespace AppFramework.Core
     }
 }
 
-namespace AppFramework.Core.Services
+namespace AppFramework.Core
 {
     public partial class PlatformBase
     {
@@ -46,7 +47,10 @@ namespace AppFramework.Core.Services
             protected set { SetService<LoggingService>(value); }
         }
     }
+}
 
+namespace AppFramework.Core.Services
+{
     public sealed class LoggingService : ServiceBase
     {
         #region Constants 

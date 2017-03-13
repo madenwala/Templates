@@ -37,6 +37,7 @@
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\LongExtensions.cs" />
+    <Compile Include="Models\IView.cs" />
     <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Models\UniqueModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

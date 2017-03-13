@@ -1,10 +1,11 @@
-﻿using AppFramework.Core.ViewModels;
+﻿using AppFramework.Core.Services;
+using AppFramework.Core.ViewModels;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.System;
 
-namespace AppFramework.Core.Services
+namespace AppFramework.Core
 {
     public partial class PlatformBase
     {
@@ -17,7 +18,10 @@ namespace AppFramework.Core.Services
             protected set { SetService<RatingsManager>(value); }
         }
     }
+}
 
+namespace AppFramework.Core.Services
+{
     /// <summary>
     /// Used to determine when and if a user should be prompted to rate the application being executed.
     /// </summary>

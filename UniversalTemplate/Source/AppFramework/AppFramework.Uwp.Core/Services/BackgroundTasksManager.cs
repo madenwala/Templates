@@ -1,10 +1,11 @@
 ﻿using AppFramework.Core.Commands;
+using AppFramework.Core.Services;
 using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using Windows.System;
 
-namespace AppFramework.Core.Services
+namespace AppFramework.Core
 {
     public partial class PlatformBase
     {
@@ -17,7 +18,10 @@ namespace AppFramework.Core.Services
             protected set { SetService<BackgroundTasksManagerBase>(value); }
         }
     }
+}
 
+namespace AppFramework.Core.Services
+{
     /// <summary>
     /// Task manager is responsible for registering and unregistering all background tasks used by this application.
     /// </summary>

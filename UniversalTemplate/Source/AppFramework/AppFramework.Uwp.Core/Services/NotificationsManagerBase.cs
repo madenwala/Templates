@@ -8,7 +8,7 @@ using Windows.Foundation;
 using Windows.UI.Notifications;
 using Windows.UI.StartScreen;
 
-namespace AppFramework.Core.Services
+namespace AppFramework.Core
 {
     public partial class PlatformBase
     {
@@ -22,6 +22,10 @@ namespace AppFramework.Core.Services
         }
 
     }
+}
+
+namespace AppFramework.Core.Services
+{
     public abstract partial class NotificationsManagerBase : ServiceBase, IServiceSignout
     {
         #region Methods

@@ -4,7 +4,7 @@ using System;
 using System.Threading.Tasks;
 using Windows.Storage;
 
-namespace AppFramework.Core.Services
+namespace AppFramework.Core
 {
     public partial class PlatformBase
     {
@@ -17,7 +17,10 @@ namespace AppFramework.Core.Services
             set { SetService<AuthorizationManager>(value); }
         }
     }
+}
 
+namespace AppFramework.Core.Services
+{
     public sealed class AuthorizationManager : ServiceBase, IServiceSignout
     {
         #region Variables

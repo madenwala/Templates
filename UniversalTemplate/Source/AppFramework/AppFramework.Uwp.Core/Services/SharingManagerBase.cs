@@ -1,9 +1,10 @@
 ﻿using AppFramework.Core.Commands;
 using AppFramework.Core.Models;
+using AppFramework.Core.Services;
 using System;
 using Windows.ApplicationModel.DataTransfer;
 
-namespace AppFramework.Core.Services
+namespace AppFramework.Core
 {
     public partial class PlatformBase
     {
@@ -16,7 +17,10 @@ namespace AppFramework.Core.Services
             protected set { SetService<SharingManagerBase>(value); }
         }
     }
+}
 
+namespace AppFramework.Core.Services
+{
     public abstract class SharingManagerBase : ServiceBase
     {
         #region Properties

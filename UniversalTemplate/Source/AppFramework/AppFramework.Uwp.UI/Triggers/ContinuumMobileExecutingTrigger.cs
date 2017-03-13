@@ -1,5 +1,4 @@
 ﻿using AppFramework.Core;
-using AppFramework.Core.Services;
 using Windows.UI.Xaml;
 
 namespace AppFramework.Uwp.UI.Triggers
@@ -17,7 +16,7 @@ namespace AppFramework.Uwp.UI.Triggers
 
         private void UpdateTrigger()
         {
-            if (AppFramework.Core.Services.PlatformBase.Current.IsMobileContinuumDesktop)
+            if (PlatformBase.Current.IsMobileContinuumDesktop)
                 this.SetActive(true);
             else
                 this.SetActive(false);

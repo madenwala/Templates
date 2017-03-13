@@ -1,4 +1,5 @@
 ﻿using AppFramework.Core;
+using AppFramework.Core.Models;
 using AppFramework.Core.ViewModels;
 using System;
 using Windows.UI.Xaml.Controls;

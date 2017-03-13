@@ -1,10 +1,11 @@
-﻿using System;
+﻿using AppFramework.Core.Services;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Store;
 using Windows.Storage;
 
-namespace AppFramework.Core.Services
+namespace AppFramework.Core
 {
     public partial class PlatformBase
     {
@@ -17,7 +18,10 @@ namespace AppFramework.Core.Services
             protected set { SetService<AppInfoProviderBase>(value); }
         }
     }
+}
 
+namespace AppFramework.Core.Services
+{
     /// <summary>
     /// Base class providing access to the application currently executing specific to the platform this app is executing on.
     /// </summary>

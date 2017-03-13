@@ -1,5 +1,6 @@
 ﻿using AppFramework.Core.Commands;
 using AppFramework.Core.Models;
+using AppFramework.Core.Services;
 using System;
 using System.ComponentModel;
 using System.Threading;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.System;
 
-namespace AppFramework.Core.Services
+namespace AppFramework.Core
 {
     public partial class PlatformBase
     {
@@ -20,7 +21,10 @@ namespace AppFramework.Core.Services
             protected set { SetService<GeolocationService>(value); }
         }
     }
+}
 
+namespace AppFramework.Core.Services
+{
     public sealed class GeolocationService : ServiceBase
     {
         #region Variables

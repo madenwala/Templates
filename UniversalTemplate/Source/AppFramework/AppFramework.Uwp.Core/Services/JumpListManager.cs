@@ -1,10 +1,11 @@
 ﻿using AppFramework.Core.Commands;
+using AppFramework.Core.Services;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.StartScreen;
 
-namespace AppFramework.Core.Services
+namespace AppFramework.Core
 {
     public partial class PlatformBase
     {
@@ -17,7 +18,10 @@ namespace AppFramework.Core.Services
             protected set { SetService<JumplistManager>(value); }
         }
     }
+}
 
+namespace AppFramework.Core.Services
+{
     /// <summary>
     /// Base class providing access to the application currently executing specific to the platform this app is executing on.
     /// </summary>

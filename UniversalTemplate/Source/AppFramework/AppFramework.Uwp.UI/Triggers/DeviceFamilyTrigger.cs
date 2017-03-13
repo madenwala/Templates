@@ -1,5 +1,4 @@
 ﻿using AppFramework.Core;
-using AppFramework.Core.Services;
 using Windows.UI.Xaml;
 
 namespace AppFramework.Uwp.UI.Triggers
@@ -13,7 +12,7 @@ namespace AppFramework.Uwp.UI.Triggers
         {
             set
             {
-                this.SetActive(AppFramework.Core.Services.PlatformBase.DeviceFamily == value);
+                this.SetActive(PlatformBase.DeviceFamily == value);
             }
         }
     }
