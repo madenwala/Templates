@@ -1,4 +1,6 @@
-﻿using Contoso.Core.Data;
+﻿using AppFramework.Core.Strings;
+using AppFramework.Core.ViewModels;
+using Contoso.Core.Data;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
@@ -14,7 +16,7 @@ namespace Contoso.Core.ViewModels
         /// </summary>
         public override string Title
         {
-            get { return Strings.Resources.ApplicationName; }
+            get { return Resources.ApplicationName; }
         }
 
         #endregion
@@ -46,7 +48,7 @@ namespace Contoso.Core.ViewModels
         {
             if (forceRefresh)
             {
-                this.ShowBusyStatus(Strings.Resources.TextLoading, true);
+                this.ShowBusyStatus(Resources.TextLoading, true);
 
                 using (var client = new ClientApi())
                 {

@@ -1,13 +1,13 @@
-﻿using Contoso.Core;
-using Contoso.Core.Models;
-using Contoso.Core.Services;
+﻿using AppFramework.Core;
+using AppFramework.Core.Models;
+using AppFramework.Core.Services;
 using FlurryWin8SDK;
 using FlurryWin8SDK.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Contoso.Core.Services.Analytics
+namespace AppFramework.Core.Services.Analytics
 {
     /// <summary>
     /// Analytics wrapper for Flurry analytics service.

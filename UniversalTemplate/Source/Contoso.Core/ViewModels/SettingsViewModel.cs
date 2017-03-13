@@ -1,4 +1,6 @@
-﻿using Windows.ApplicationModel;
+﻿using AppFramework.Core.Strings;
+using AppFramework.Core.ViewModels;
+using Windows.ApplicationModel;
 
 namespace Contoso.Core.ViewModels
 {
@@ -52,7 +54,7 @@ namespace Contoso.Core.ViewModels
 
         public SettingsViewModel()
         {
-            this.Title = Strings.Resources.ViewTitleSettings;
+            this.Title = Resources.ViewTitleSettings;
 
             if (DesignMode.DesignModeEnabled)
                 return;

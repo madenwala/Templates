@@ -1,4 +1,6 @@
-﻿using Contoso.Core;
+﻿using AppFramework.Core;
+using AppFramework.Core.Models;
+using Contoso.Core;
 using Contoso.Core.Models;
 using System;
 using System.Threading;

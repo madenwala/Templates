@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.VoiceCommands;
 
-namespace Contoso.Core.Services
+namespace AppFramework.Core.Services
 {
     public partial class PlatformBase
     {

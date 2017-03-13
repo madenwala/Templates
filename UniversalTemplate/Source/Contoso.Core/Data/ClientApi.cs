@@ -8,6 +8,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Windows.Web.Http;
 using Windows.Storage.Streams;
+using AppFramework.Core.Models;
+using AppFramework.Core.Services;
 
 namespace Contoso.Core.Data
 {
@@ -138,13 +140,13 @@ namespace Contoso.Core.Data
         /// <param name="wi">Web account info object instance representing an authenticated WAM user.</param>
         /// <param name="ct">Cancellation token.</param>
         /// <returns>Response object from the server.</returns>
-        internal async Task<UserResponse> AuthenticateAsync(Services.WebAccountManager.WebAccountInfo wi, CancellationToken ct)
+        internal async Task<UserResponse> AuthenticateAsync(WebAccountManager.WebAccountInfo wi, CancellationToken ct)
         {
             // This logic below should be server side. Token should be used to retrieve MSA and then check to see if Contoso account exists else register new account.
 
             switch (wi.Type)
             {
-                case Services.WebAccountManager.WebAccountTypes.Microsoft:
+                case WebAccountManager.WebAccountTypes.Microsoft:
                     {
                         // Retrieve MSA profile data
                         MicrosoftAccountDetails msa = null;

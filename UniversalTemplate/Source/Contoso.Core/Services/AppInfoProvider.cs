@@ -1,5 +1,7 @@
-﻿using Contoso.Core.Commands;
-using Contoso.Core.ViewModels;
+﻿using AppFramework.Core.Commands;
+using AppFramework.Core.Services;
+using AppFramework.Core.Strings;
+using AppFramework.Core.ViewModels;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Store;
@@ -70,7 +72,7 @@ namespace Contoso.Core.Services
             if (this.IsProPackEnabled == false)
             {
                 var msg = "To use this feature, you must purchase the Pro-Feature Pack add-on. Would you like to see more details about what else you get in the PRO upgrade?";
-                var selected = await vm.ShowMessageBoxAsync(ct, msg, "Upgrade Required", new string[] { Strings.Resources.TextYes, Strings.Resources.TextNo }, 1);
+                var selected = await vm.ShowMessageBoxAsync(ct, msg, "Upgrade Required", new string[] { Resources.TextYes, Resources.TextNo }, 1);
                 if (selected == 0)
                 {
                     Platform.Current.Analytics.Event("ProPackPromptToUpgradeResponse", selected == 0 ? "Yes" : "No");

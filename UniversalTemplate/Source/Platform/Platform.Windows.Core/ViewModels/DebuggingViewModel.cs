@@ -1,14 +1,14 @@
-﻿using Contoso.Core.Commands;
-using Contoso.Core.Models;
+﻿using AppFramework.Core.Commands;
+using AppFramework.Core.Models;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Background;
 using System.Threading;
-using Contoso.Core.Services;
+using AppFramework.Core.Services;
 
-namespace Contoso.Core.ViewModels
+namespace AppFramework.Core.ViewModels
 {
     public partial class DebuggingViewModel : ViewModelBase
     {
@@ -78,9 +78,9 @@ namespace Contoso.Core.ViewModels
     }
 }
 
-namespace Contoso.Core.ViewModels.Designer
+namespace AppFramework.Core.ViewModels.Designer
 {
-    public sealed class DebuggingViewModel : Contoso.Core.ViewModels.DebuggingViewModel
+    public sealed class DebuggingViewModel : AppFramework.Core.ViewModels.DebuggingViewModel
     {
         public DebuggingViewModel()
         {

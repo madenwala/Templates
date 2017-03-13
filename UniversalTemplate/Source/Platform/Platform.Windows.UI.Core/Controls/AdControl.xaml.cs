@@ -1,5 +1,5 @@
-﻿using Contoso.Core;
-using Contoso.Core.Services;
+﻿using AppFramework.Core;
+using AppFramework.Core.Services;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -39,28 +39,28 @@ namespace AppFramework.Uwp.UI.Controls
 
         private void DevCenterAdControl_ErrorOccurred(object sender, Microsoft.Advertising.WinRT.UI.AdErrorEventArgs e)
         {
-            Contoso.Core.Services.PlatformBase.Current.Logger.Log(LogLevels.Error, $"DevCenterAdControl_ErrorOccurred: {e.ErrorCode} - {e.ErrorMessage}");
+            PlatformBase.Current.Logger.Log(LogLevels.Error, $"DevCenterAdControl_ErrorOccurred: {e.ErrorCode} - {e.ErrorMessage}");
             var dic = new System.Collections.Generic.Dictionary<string, string>();
             dic.Add("ErrorCode", e.ErrorCode.ToString());
             dic.Add("ErrorMessage", e.ErrorMessage);
-            Contoso.Core.Services.PlatformBase.Current.Analytics.Event("DevCenterAdControl_ErrorOccurred", dic);
+            AppFramework.Core.Services.PlatformBase.Current.Analytics.Event("DevCenterAdControl_ErrorOccurred", dic);
             devCenterAd.Visibility = Visibility.Collapsed;
             adDuplex.Visibility = Visibility.Visible;
         }
 
         private void DevCenterAdControl_AdRefreshed(object sender, RoutedEventArgs e)
         {
-            Contoso.Core.Services.PlatformBase.Current.Logger.Log(LogLevels.Information, $"DevCenter Ad control refreshed");
+            AppFramework.Core.Services.PlatformBase.Current.Logger.Log(LogLevels.Information, $"DevCenter Ad control refreshed");
             devCenterAd.Visibility = Visibility.Visible;
         }
 
         private void AdDuplex_AdLoadingError(object sender, AdDuplex.Common.Models.AdLoadingErrorEventArgs e)
         {
-            Contoso.Core.Services.PlatformBase.Current.Logger.Log(LogLevels.Error, $"AdDuplex_AdLoadingError: {e.Error.Message}");
+            AppFramework.Core.Services.PlatformBase.Current.Logger.Log(LogLevels.Error, $"AdDuplex_AdLoadingError: {e.Error.Message}");
             var dic = new System.Collections.Generic.Dictionary<string, string>();
             dic.Add("Error", e.Error.ToString());
             dic.Add("ErrorMessage", e.Error.Message);
-            Contoso.Core.Services.PlatformBase.Current.Analytics.Event("AdDuplex_AdLoadingError", dic);
+            AppFramework.Core.Services.PlatformBase.Current.Analytics.Event("AdDuplex_AdLoadingError", dic);
             adDuplex.Visibility = Visibility.Collapsed;
             devCenterAd.Visibility = Visibility.Visible;
             try
@@ -73,14 +73,14 @@ namespace AppFramework.Uwp.UI.Controls
 
         private void AdDuplex_AdClick(object sender, AdDuplex.Banners.Models.AdClickEventArgs e)
         {
-            Contoso.Core.Services.PlatformBase.Current.Analytics.Event("AdDuplex_AdClick");
-            Contoso.Core.Services.PlatformBase.Current.Logger.Log(LogLevels.Information, $"AdDuplex_AdClick");
+            AppFramework.Core.Services.PlatformBase.Current.Analytics.Event("AdDuplex_AdClick");
+            AppFramework.Core.Services.PlatformBase.Current.Logger.Log(LogLevels.Information, $"AdDuplex_AdClick");
         }
 
         private void adDuplex_NoAd(object sender, AdDuplex.Common.Models.NoAdEventArgs args)
         {
-            Contoso.Core.Services.PlatformBase.Current.Analytics.Event("AdDuplex_NoAd");
-            Contoso.Core.Services.PlatformBase.Current.Logger.Log(LogLevels.Information, $"AdDuplex_NoAd");
+            AppFramework.Core.Services.PlatformBase.Current.Analytics.Event("AdDuplex_NoAd");
+            AppFramework.Core.Services.PlatformBase.Current.Logger.Log(LogLevels.Information, $"AdDuplex_NoAd");
             adDuplex.Visibility = Visibility.Collapsed;
             devCenterAd.Visibility = Visibility.Visible;
             try
@@ -94,12 +94,12 @@ namespace AppFramework.Uwp.UI.Controls
         private void adDuplex_AdLoaded(object sender, AdDuplex.Banners.Models.BannerAdLoadedEventArgs args)
         {
             devCenterAd.Visibility = Visibility.Visible;
-            Contoso.Core.Services.PlatformBase.Current.Logger.Log(LogLevels.Information, $"AdDuplex Ad control loaded");
+            AppFramework.Core.Services.PlatformBase.Current.Logger.Log(LogLevels.Information, $"AdDuplex Ad control loaded");
         }
 
         private void adDuplex_AdCovered(object sender, AdDuplex.Banners.Core.AdCoveredEventArgs args)
         {
-            Contoso.Core.Services.PlatformBase.Current.Logger.Log(LogLevels.Information, $"AdDuplex_AdCovered");
+            AppFramework.Core.Services.PlatformBase.Current.Logger.Log(LogLevels.Information, $"AdDuplex_AdCovered");
         }
     }
 }

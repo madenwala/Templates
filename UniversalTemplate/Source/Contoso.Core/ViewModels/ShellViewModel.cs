@@ -1,4 +1,6 @@
-﻿using Contoso.Core.Services;
+﻿using AppFramework.Core.Services;
+using AppFramework.Core.Strings;
+using AppFramework.Core.ViewModels;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.UI.Xaml.Input;
@@ -15,9 +17,9 @@ namespace Contoso.Core.ViewModels
             get
             {
                 if (this.Platform.AuthManager.IsAuthenticated())
-                    return string.Format(Strings.Account.TextWelcomeAuthenticated, this.Platform.AuthManager.User?.FirstName);
+                    return string.Format(Account.TextWelcomeAuthenticated, this.Platform.AuthManager.User?.FirstName);
                 else
-                    return Strings.Account.TextWelcomeUnauthenticated;
+                    return Account.TextWelcomeUnauthenticated;
             }
         }
 
@@ -34,7 +36,7 @@ namespace Contoso.Core.ViewModels
 
         public ShellViewModel()
         {
-            this.Title = Strings.Resources.ViewTitleWelcome;
+            this.Title = Resources.ViewTitleWelcome;
 
             if (DesignMode.DesignModeEnabled)
                 return;

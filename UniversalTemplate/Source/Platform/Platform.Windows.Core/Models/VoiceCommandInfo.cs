@@ -2,7 +2,7 @@
 using System.Linq;
 using Windows.Media.SpeechRecognition;
 
-namespace Contoso.Core.Models
+namespace AppFramework.Core.Models
 {
     /// <summary>
     /// Wrapper for SpeechRecognitionResult class instance improving access to the key data needed to process voice.

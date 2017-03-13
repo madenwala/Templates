@@ -1,8 +1,9 @@
-﻿using Contoso.Core.Commands;
+﻿using AppFramework.Core.Commands;
+using AppFramework.Core.Models;
+using AppFramework.Core.Strings;
+using AppFramework.Core.ViewModels;
 using Contoso.Core.Data;
 using Contoso.Core.Models;
-using Contoso.Core.Services;
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -33,7 +34,7 @@ namespace Contoso.Core.ViewModels
 
         public MainViewModel()
         {
-            this.Title = Strings.Resources.ViewTitleWelcome;
+            this.Title = Resources.ViewTitleWelcome;
 
             if (DesignMode.DesignModeEnabled)
                 return;
@@ -43,7 +44,7 @@ namespace Contoso.Core.ViewModels
             {
                 try
                 {
-                    this.ShowBusyStatus(Strings.Resources.TextSorting);
+                    this.ShowBusyStatus(Resources.TextSorting);
                     await this.Items.SortAsync(propertyName);
                 }
                 finally
@@ -78,7 +79,7 @@ namespace Contoso.Core.ViewModels
                 //await this.GetCurrentLocationAsync(false, ct);
                 this.HasLocationChanged = false;
 
-                this.ShowBusyStatus(Strings.Resources.TextLoading, this.Items == null || this.Items.Count == 0);
+                this.ShowBusyStatus(Resources.TextLoading, this.Items == null || this.Items.Count == 0);
                 using (var api = new ClientApi())
                 {
                     this.Items.UpdateRange(await api.GetItems(ct), true);

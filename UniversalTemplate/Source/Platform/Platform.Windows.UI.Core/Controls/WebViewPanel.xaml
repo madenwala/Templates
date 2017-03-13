@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="using:AppFramework.Uwp.UI.Controls"
-    xmlns:designTime="using:Contoso.Core.ViewModels.Designer"
+    xmlns:designTime="using:AppFramework.Core.ViewModels.Designer"
     d:DataContext="{d:DesignInstance designTime:WebBrowserViewModel, IsDesignTimeCreatable=True}"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -36,13 +36,13 @@
 
         <CommandBar Grid.Row="1" Visibility="{x:Bind ViewModel.ShowNavigation, Mode=OneWay, Converter={StaticResource visConverter}}">
             <CommandBar.PrimaryCommands>
-                <AppBarButton x:Uid="/Contoso.Core/WebBrowser/abtnGoBack" Label="[Go back]" Icon="Back" Command="{x:Bind ViewModel.Platform.Navigation.NavigateGoBackCommand}" />
-                <AppBarButton x:Uid="/Contoso.Core/Resources/abtnHome" Label="[Home]" Icon="Home" Command="{x:Bind ViewModel.BrowserHomeCommand}" />
-                <AppBarButton x:Uid="/Contoso.Core/Resources/abtnRefresh" Label="[Refresh]" Icon="Refresh" Command="{x:Bind ViewModel.BrowserRefreshCommand}" />
-                <AppBarButton x:Uid="/Contoso.Core/WebBrowser/abtnGoForward" Label="[Go forward]" Icon="Forward" Command="{x:Bind ViewModel.Platform.Navigation.NavigateGoForwardCommand}" />
+                <AppBarButton x:Uid="/AppFramework.Core/WebBrowser/abtnGoBack" Label="[Go back]" Icon="Back" Command="{x:Bind ViewModel.Platform.Navigation.NavigateGoBackCommand}" />
+                <AppBarButton x:Uid="/AppFramework.Core/Resources/abtnHome" Label="[Home]" Icon="Home" Command="{x:Bind ViewModel.BrowserHomeCommand}" />
+                <AppBarButton x:Uid="/AppFramework.Core/Resources/abtnRefresh" Label="[Refresh]" Icon="Refresh" Command="{x:Bind ViewModel.BrowserRefreshCommand}" />
+                <AppBarButton x:Uid="/AppFramework.Core/WebBrowser/abtnGoForward" Label="[Go forward]" Icon="Forward" Command="{x:Bind ViewModel.Platform.Navigation.NavigateGoForwardCommand}" />
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
-                <AppBarButton x:Uid="/Contoso.Core/Resources/abtnShare" 
+                <AppBarButton x:Uid="/AppFramework.Core/Resources/abtnShare" 
                               Label="[Share]" 
                               Command="{x:Bind ViewModel.Platform.SharingManager.ShareCommand}" 
                               CommandParameter="{x:Bind ViewModel, Mode=OneWay}" 
@@ -50,7 +50,7 @@
                               IsEnabled="{x:Bind ViewModel.CurrentUrl, Mode=OneWay, Converter={StaticResource boolConverter}}" >
                     <FontIcon Glyph="&#xE72D;"/>
                 </AppBarButton>
-                <AppBarButton x:Uid="/Contoso.Core/WebBrowser/abtnOpenInExternalBrowser" 
+                <AppBarButton x:Uid="/AppFramework.Core/WebBrowser/abtnOpenInExternalBrowser" 
                               Label="[Open in external browser]" 
                               Command="{x:Bind ViewModel.Platform.Navigation.NavigateToWebBrowserCommand}" 
                               CommandParameter="{x:Bind ViewModel.CurrentUrl, Mode=OneWay}" 

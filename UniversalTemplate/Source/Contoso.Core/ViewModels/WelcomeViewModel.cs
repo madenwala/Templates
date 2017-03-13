@@ -1,6 +1,8 @@
-﻿using Contoso.Core.Commands;
+﻿using AppFramework.Core.Commands;
+using AppFramework.Core.Services;
+using AppFramework.Core.Strings;
+using AppFramework.Core.ViewModels;
 using Contoso.Core.Data;
-using Contoso.Core.Services;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -34,7 +36,7 @@ namespace Contoso.Core.ViewModels
 
         public WelcomeViewModel()
         {
-            this.Title = Strings.Resources.ViewTitleWelcome;
+            this.Title = Resources.ViewTitleWelcome;
 
             if (DesignMode.DesignModeEnabled)
                 return;
@@ -60,7 +62,7 @@ namespace Contoso.Core.ViewModels
         private async Task LaunchWebAccountManager()
         {
             await this.Platform.WebAccountManager.SignoutAsync();
-            this.ShowTimedStatus(Strings.Resources.TextLoading, 3000, true);
+            this.ShowTimedStatus(Resources.TextLoading, 3000, true);
             this.Platform.WebAccountManager.Show(this.WAM_Success, this.WAM_Failed);
         }
 
@@ -70,11 +72,11 @@ namespace Contoso.Core.ViewModels
         /// <param name="pi">Details of the WAM provider choosen</param>
         /// <param name="info">Details of the WAM authenticated account</param>
         /// <param name="result">WebTokenRequestResult instance containing token info.</param>
-        private async void WAM_Success(Services.WebAccountManager.WebAccountProviderInfo pi, Services.WebAccountManager.WebAccountInfo info, WebTokenRequestResult result)
+        private async void WAM_Success(WebAccountManager.WebAccountProviderInfo pi, WebAccountManager.WebAccountInfo info, WebTokenRequestResult result)
         {
             try
             {
-                this.ShowBusyStatus(Strings.Account.TextAuthenticating, true);
+                this.ShowBusyStatus(Account.TextAuthenticating, true);
 
                 // Create an account with the API
                 _cts = new CancellationTokenSource();                
@@ -104,13 +106,13 @@ namespace Contoso.Core.ViewModels
         /// </summary>
         /// <param name="pi"></param>
         /// <param name="result"></param>
-        private async void WAM_Failed(Services.WebAccountManager.WebAccountProviderInfo pi, WebTokenRequestResult result)
+        private async void WAM_Failed(WebAccountManager.WebAccountProviderInfo pi, WebTokenRequestResult result)
         {
             try
             {
                 // Failure with WAM
                 this.Platform.Logger.LogError(result?.ResponseError.ToException(), "WAM failed to retrieve user account token.");
-                await this.ShowMessageBoxAsync(CancellationToken.None, string.Format(Strings.Account.TextWebAccountManagerRegisterAccountFailure, pi.WebAccountType));
+                await this.ShowMessageBoxAsync(CancellationToken.None, string.Format(Account.TextWebAccountManagerRegisterAccountFailure, pi.WebAccountType));
             }
             catch (Exception ex)
             {

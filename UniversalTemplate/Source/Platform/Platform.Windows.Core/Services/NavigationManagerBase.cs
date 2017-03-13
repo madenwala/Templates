@@ -1,4 +1,4 @@
-﻿using Contoso.Core.Commands;
+﻿using AppFramework.Core.Commands;
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -14,10 +14,10 @@ using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Contoso.Core.Models;
-using Contoso.Core.ViewModels;
+using AppFramework.Core.Models;
+using AppFramework.Core.ViewModels;
 
-namespace Contoso.Core
+namespace AppFramework.Core
 {
     public interface IViewScrollToTop
     {
@@ -32,7 +32,7 @@ namespace Contoso.Core
     }
 }
 
-namespace Contoso.Core.Services
+namespace AppFramework.Core.Services
 {
     public partial class PlatformBase
     {

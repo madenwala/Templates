@@ -1,9 +1,9 @@
-﻿using Contoso.Core.Commands;
-using Contoso.Core.Models;
+﻿using AppFramework.Core.Commands;
+using AppFramework.Core.Models;
 using System;
 using Windows.ApplicationModel.DataTransfer;
 
-namespace Contoso.Core.Services
+namespace AppFramework.Core.Services
 {
     public partial class PlatformBase
     {

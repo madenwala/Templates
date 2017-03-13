@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using Windows.Foundation;
 using Windows.UI;
 
-namespace Contoso.Core
+namespace AppFramework.Core
 {
     public static partial class GeneralFunctions
     {

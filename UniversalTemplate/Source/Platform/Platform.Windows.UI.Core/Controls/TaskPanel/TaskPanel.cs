@@ -1,4 +1,4 @@
-﻿using Contoso.Core.Models;
+﻿using AppFramework.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

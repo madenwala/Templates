@@ -1,4 +1,6 @@
-﻿using Windows.ApplicationModel;
+﻿using AppFramework.Core.Strings;
+using AppFramework.Core.ViewModels;
+using Windows.ApplicationModel;
 
 namespace Contoso.Core.ViewModels
 {
@@ -11,7 +13,7 @@ namespace Contoso.Core.ViewModels
         /// </summary>
         public override string Title
         {
-            get { return Strings.Resources.ViewTitlePrivacyPolicy; }
+            get { return Resources.ViewTitlePrivacyPolicy; }
         }
 
         #endregion Properties

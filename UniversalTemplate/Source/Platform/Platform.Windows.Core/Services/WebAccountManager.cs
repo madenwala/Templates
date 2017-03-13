@@ -1,4 +1,4 @@
-﻿using Contoso.Core.Services;
+﻿using AppFramework.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using Windows.Security.Credentials;
 using Windows.Storage;
 using Windows.UI.ApplicationSettings;
 
-namespace Contoso.Core.Services
+namespace AppFramework.Core.Services
 {
     public partial class PlatformBase
     {

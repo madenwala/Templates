@@ -1,5 +1,5 @@
-﻿using Contoso.Core.Models;
-using Contoso.Core.ViewModels;
+﻿using AppFramework.Core.Models;
+using AppFramework.Core.ViewModels;
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using Windows.System.Profile;
 
-namespace Contoso.Core.Services
+namespace AppFramework.Core.Services
 {
     /// <summary>
     /// Singleton object which holds instances to all the services in this application.

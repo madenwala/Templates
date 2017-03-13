@@ -1,5 +1,5 @@
-﻿using Contoso.Core.Commands;
-using Contoso.Core.Models;
+﻿using AppFramework.Core.Commands;
+using AppFramework.Core.Models;
 using System;
 using System.ComponentModel;
 using System.Threading;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.System;
 
-namespace Contoso.Core.Services
+namespace AppFramework.Core.Services
 {
     public partial class PlatformBase
     {

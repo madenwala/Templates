@@ -1,6 +1,6 @@
-﻿using Contoso.Core.Commands;
-using Contoso.Core.Extensions;
-using Contoso.Core.ViewModels;
+﻿using AppFramework.Core.Commands;
+using AppFramework.Core.Extensions;
+using AppFramework.Core.ViewModels;
 using Microsoft.Toolkit.Uwp.Helpers;
 using System;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ using Windows.Storage;
 using Windows.System;
 using Windows.UI.Xaml;
 
-namespace Contoso.Core
+namespace AppFramework.Core
 {
     /// <summary>
     /// Enumeration describing the level/type of information being logged
@@ -33,7 +33,7 @@ namespace Contoso.Core
     }
 }
 
-namespace Contoso.Core.Services
+namespace AppFramework.Core.Services
 {
     public partial class PlatformBase
     {

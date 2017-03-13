@@ -1,4 +1,4 @@
-﻿using Contoso.Core;
+﻿using AppFramework.Core;
 using Windows.UI.Xaml.Controls;
 
 namespace AppFramework.Uwp.UI.Controls

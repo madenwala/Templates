@@ -1,11 +1,12 @@
-﻿using Contoso.Core.Commands;
-using Contoso.Core.Models;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Devices.Geolocation;
 using System.Threading;
-using Contoso.Core.Services;
+using AppFramework.Core.Strings;
+using AppFramework.Core.ViewModels;
+using AppFramework.Core.Models;
+using AppFramework.Core.Commands;
 
 namespace Contoso.Core.ViewModels
 {
@@ -13,7 +14,7 @@ namespace Contoso.Core.ViewModels
     {
         #region Properties
 
-        public string TwitterAddress { get { return Strings.Resources.ApplicationSupportTwitterUsername; } }
+        public string TwitterAddress { get { return Resources.ApplicationSupportTwitterUsername; } }
 
         private string _BackgroundTasksStatus;
         public string BackgroundTasksStatus
@@ -94,7 +95,7 @@ namespace Contoso.Core.ViewModels
 
         public GeneralSettingsViewModel()
         {
-            this.Title = Strings.Resources.TextTitleGeneral;
+            this.Title = Resources.TextTitleGeneral;
 
             if (DesignMode.DesignModeEnabled)
                 return;
@@ -150,7 +151,7 @@ namespace Contoso.Core.ViewModels
             try
             {
                 var accessStatus = await Geolocator.RequestAccessAsync();
-                this.LocationServicesStatus = accessStatus == GeolocationAccessStatus.Denied ? Strings.Location.TextLocationServicesDisabledStatus : string.Empty;
+                this.LocationServicesStatus = accessStatus == GeolocationAccessStatus.Denied ? Location.TextLocationServicesDisabledStatus : string.Empty;
             }
             catch (Exception ex)
             {
@@ -164,7 +165,7 @@ namespace Contoso.Core.ViewModels
             {
                 var allowed = this.Platform.BackgroundTasks.CheckIfAllowed();
 
-                this.BackgroundTasksStatus = !allowed ? Strings.BackgroundTasks.TextBackgroundAppDisabledStatus : string.Empty;
+                this.BackgroundTasksStatus = !allowed ? BackgroundTasks.TextBackgroundAppDisabledStatus : string.Empty;
 
                 if (!this.Platform.BackgroundTasks.AreTasksRegistered && allowed)
                     await this.Platform.BackgroundTasks.RegisterAllAsync();

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Contoso.Core.ViewModels
+namespace AppFramework.Core.ViewModels
 {
     public abstract class MainViewModelBase : ViewModelBase
     {

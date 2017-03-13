@@ -1,11 +1,11 @@
-﻿using Contoso.Core;
-using Contoso.Core.Models;
-using Contoso.Core.Services;
+﻿using AppFramework.Core;
+using AppFramework.Core.Models;
+using AppFramework.Core.Services;
 using Microsoft.HockeyApp;
 using System;
 using System.Collections.Generic;
 
-namespace Contoso.Core.Services.Analytics
+namespace AppFramework.Core.Services.Analytics
 {
     public sealed class HockeyAppService : AnalyticsServiceBase
     {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppFramework.Core.Models;
+using System;
 
 namespace Contoso.Core.Models
 {

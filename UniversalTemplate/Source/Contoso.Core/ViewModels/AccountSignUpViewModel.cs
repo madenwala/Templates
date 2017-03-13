@@ -1,7 +1,10 @@
-﻿using Contoso.Core.Commands;
+﻿using AppFramework.Core.Commands;
+using AppFramework.Core.Models;
+using AppFramework.Core.Services;
+using AppFramework.Core.Strings;
+using AppFramework.Core.ViewModels;
 using Contoso.Core.Data;
 using Contoso.Core.Models;
-using Contoso.Core.Services;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -137,7 +140,7 @@ namespace Contoso.Core.ViewModels
 
         public AccountSignUpViewModel()
         {
-            this.Title = Strings.Account.ViewTitleSignUp;
+            this.Title = Account.ViewTitleSignUp;
 
             if (DesignMode.DesignModeEnabled)
                 return;
@@ -204,7 +207,7 @@ namespace Contoso.Core.ViewModels
             try
             {
                 this.IsSubmitEnabled = false;
-                this.ShowBusyStatus(Strings.Account.TextCreatingAccount, true);
+                this.ShowBusyStatus(Account.TextCreatingAccount, true);
 
                 using (var api = new ClientApi())
                 {
@@ -214,7 +217,7 @@ namespace Contoso.Core.ViewModels
                     if (response?.AccessToken != null)
                         await this.Platform.AuthManager.SetUserAsync(response);
                     else
-                        userMessage = Strings.Account.TextAuthenticationFailed;
+                        userMessage = Account.TextAuthenticationFailed;
 
                     this.ClearStatus();
 
@@ -241,11 +244,11 @@ namespace Contoso.Core.ViewModels
         }
 
         private CancellationTokenSource _cts;
-        private async void WAM_Success(Services.WebAccountManager.WebAccountProviderInfo pi, Services.WebAccountManager.WebAccountInfo wad, WebTokenRequestResult result)
+        private async void WAM_Success(WebAccountManager.WebAccountProviderInfo pi, WebAccountManager.WebAccountInfo wad, WebTokenRequestResult result)
         {
             try
             {
-                this.ShowBusyStatus(string.Format(Strings.Account.TextWebAccountManagerRetrievingProfile, pi.WebAccountType), true);
+                this.ShowBusyStatus(string.Format(Account.TextWebAccountManagerRetrievingProfile, pi.WebAccountType), true);
 
                 await this.Platform.WebAccountManager.SignoutAsync();
 
@@ -267,7 +270,7 @@ namespace Contoso.Core.ViewModels
             }
         }
 
-        private async void WAM_Failed(Services.WebAccountManager.WebAccountProviderInfo pi, WebTokenRequestResult result)
+        private async void WAM_Failed(WebAccountManager.WebAccountProviderInfo pi, WebTokenRequestResult result)
         {
             try
             {

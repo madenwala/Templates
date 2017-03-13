@@ -1,9 +1,9 @@
-﻿using Contoso.Core;
+﻿using AppFramework.Core.Services;
+using AppFramework.Core.ViewModels;
 using Contoso.Core.ViewModels;
 using System.Threading.Tasks;
-using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml;
-using Contoso.Core.Services;
+using Windows.UI.Xaml.Navigation;
 
 namespace Contoso.UI.Views
 {
@@ -21,7 +21,7 @@ namespace Contoso.UI.Views
         protected override Task OnLoadStateAsync(LoadStateEventArgs e)
         {
             if (e.NavigationEventArgs.NavigationMode == NavigationMode.New || this.ViewModel == null)
-                this.SetViewModel(Core.Services.PlatformBase.Current.ViewModel as MainViewModel); // TODO
+                this.SetViewModel(PlatformBase.Current.ViewModel as MainViewModel); // TODO
 
             return base.OnLoadStateAsync(e);
         }

@@ -1,10 +1,10 @@
-﻿using Contoso.Core.ViewModels;
+﻿using AppFramework.Core.ViewModels;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.System;
 
-namespace Contoso.Core.Services
+namespace AppFramework.Core.Services
 {
     public partial class PlatformBase
     {

@@ -1,10 +1,10 @@
-﻿using Contoso.Core.Commands;
+﻿using AppFramework.Core.Commands;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.StartScreen;
 
-namespace Contoso.Core.Services
+namespace AppFramework.Core.Services
 {
     public partial class PlatformBase
     {

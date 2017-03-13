@@ -1,5 +1,5 @@
-﻿using Contoso.Core;
-using Contoso.Core.ViewModels;
+﻿using AppFramework.Core;
+using AppFramework.Core.ViewModels;
 using System;
 using Windows.UI.Xaml.Controls;
 

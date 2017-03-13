@@ -1,4 +1,4 @@
-﻿namespace Contoso.Core.Extensions
+﻿namespace AppFramework.Core.Extensions
 {
     public static class LongExtensions
     {

@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Contoso.Core.Models
+namespace AppFramework.Core.Models
 {
     /// <summary>
     /// Interface that any model containing latitude/longitude should implement.

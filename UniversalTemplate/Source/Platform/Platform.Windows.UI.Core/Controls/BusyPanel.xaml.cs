@@ -1,4 +1,4 @@
-﻿using Contoso.Core.ViewModels;
+﻿using AppFramework.Core.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 

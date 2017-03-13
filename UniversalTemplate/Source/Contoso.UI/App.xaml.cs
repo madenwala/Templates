@@ -39,10 +39,10 @@ namespace Contoso.UI
                 this.RequiresPointerMode = ApplicationRequiresPointerMode.WhenRequested;
 
             // Initalize the platform object which is the singleton instance to access various services
-            Core.Services.PlatformBase.Current.Navigation = new NavigationManager();
-            Core.Services.PlatformBase.Current.Analytics.Register(new FlurryAnalyticsService("M76D4BWBDRTWTVJZZ27P"));
-            Core.Services.PlatformBase.Current.Analytics.Register(new HockeyAppService(Guid.Empty.ToString(), "adenwala@outlook.com"));
-            Core.Services.PlatformBase.Current.Analytics.Register(new GoogleAnalyticsService("UA-91538532-2"));
+            PlatformBase.Current.Navigation = new NavigationManager();
+            PlatformBase.Current.Analytics.Register(new FlurryAnalyticsService("M76D4BWBDRTWTVJZZ27P"));
+            PlatformBase.Current.Analytics.Register(new HockeyAppService(Guid.Empty.ToString(), "adenwala@outlook.com"));
+            PlatformBase.Current.Analytics.Register(new GoogleAnalyticsService("UA-91538532-2"));
 
             AdControl.DevCenterAdAppID = "7f0c824b-5c94-4cc6-b4ea-db78b7641398";
             AdControl.DevCenterAdUnitID = "11641061";
@@ -63,7 +63,7 @@ namespace Contoso.UI
         /// <param name="e">Details about the launch request and process.</param>
         protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
-            Core.Services.PlatformBase.Current.Analytics.Event("App.OnLaunched", this.ToDictionary(e));
+            PlatformBase.Current.Analytics.Event("App.OnLaunched", this.ToDictionary(e));
             await this.InitializeAsync(e, e.PrelaunchActivated);
 
             var t = Windows.System.Threading.ThreadPool.RunAsync(async (o) =>
@@ -77,21 +77,21 @@ namespace Contoso.UI
                 }
                 catch (Exception ex)
                 {
-                    Core.Services.PlatformBase.Current.Logger.LogError(ex, "Installing voice commands failed!");
+                    PlatformBase.Current.Logger.LogError(ex, "Installing voice commands failed!");
                 }
             });
         }
 
         protected override async void OnActivated(IActivatedEventArgs e)
         {
-            Core.Services.PlatformBase.Current.Analytics.Event("App.OnActivated", this.ToDictionary(e));
+            PlatformBase.Current.Analytics.Event("App.OnActivated", this.ToDictionary(e));
             await this.InitializeAsync(e);
             base.OnActivated(e);
         }
 
         protected override async void OnSearchActivated(SearchActivatedEventArgs e)
         {
-            Core.Services.PlatformBase.Current.Analytics.Event("App.OnSearchActivated", this.ToDictionary(e));
+            PlatformBase.Current.Analytics.Event("App.OnSearchActivated", this.ToDictionary(e));
             await this.InitializeAsync(e);
             base.OnSearchActivated(e);
         }
@@ -123,9 +123,9 @@ namespace Contoso.UI
 
                     // Determine if the app is a new instance or being restored after app suspension
                     if (e.PreviousExecutionState == ApplicationExecutionState.ClosedByUser || e.PreviousExecutionState == ApplicationExecutionState.NotRunning)
-                        await Core.Services.PlatformBase.Current.AppInitializingAsync(InitializationModes.New);
+                        await PlatformBase.Current.AppInitializingAsync(InitializationModes.New);
                     else
-                        await Core.Services.PlatformBase.Current.AppInitializingAsync(InitializationModes.Restore);
+                        await PlatformBase.Current.AppInitializingAsync(InitializationModes.Restore);
                 }
 
                 bool firstWindows = false;
@@ -165,7 +165,7 @@ namespace Contoso.UI
                 }
 
                 // XBOX
-                if (Core.Services.PlatformBase.DeviceFamily == DeviceFamily.Xbox && Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationView"))
+                if (PlatformBase.DeviceFamily == DeviceFamily.Xbox && Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationView"))
                     ApplicationView.GetForCurrentView().SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
 
                 // Customizing the TitleBar colors
@@ -175,7 +175,7 @@ namespace Contoso.UI
                     titleBar.BackgroundColor = titleBar.ButtonBackgroundColor = (Windows.UI.Color)App.Current.Resources["SystemAccentColor"]; //SystemChromeMediumColor                    
                     titleBar.ForegroundColor = titleBar.ButtonForegroundColor = (Windows.UI.Color)App.Current.Resources["SystemAccentForegroundColor"];
                 }
-                if (Core.Services.PlatformBase.DeviceFamily == DeviceFamily.Mobile)
+                if (PlatformBase.DeviceFamily == DeviceFamily.Mobile)
                 {
                     StatusBar.GetForCurrentView().BackgroundOpacity = 1;
                     StatusBar.GetForCurrentView().BackgroundColor = (Windows.UI.Color)App.Current.Resources["SystemAccentColor"]; //SystemChromeMediumColor
@@ -188,7 +188,7 @@ namespace Contoso.UI
                 if (preLaunchActivated == false)
                 {
                     // Manage activation and process arguments
-                    Core.Services.PlatformBase.Current.Navigation.HandleActivation(e, rootFrame);
+                    PlatformBase.Current.Navigation.HandleActivation(e, rootFrame);
                     
                     // Ensure the current window is active
                     Window.Current.Activate();
@@ -202,7 +202,7 @@ namespace Contoso.UI
             }
             catch (Exception ex)
             {
-                Core.Services.PlatformBase.Current.Logger.LogErrorFatal(ex, "Error during App InitializeAsync(e)");
+                PlatformBase.Current.Logger.LogErrorFatal(ex, "Error during App InitializeAsync(e)");
                 throw ex;
             }
         }
@@ -223,16 +223,16 @@ namespace Contoso.UI
             var deferral = e.SuspendingOperation.GetDeferral();
             try
             {
-                Core.Services.PlatformBase.Current.AppSuspending();
+                PlatformBase.Current.AppSuspending();
                 await SuspensionManager.SaveAsync();
             }
             catch(SuspensionManagerException ex)
             {
-                Core.Services.PlatformBase.Current.Logger.LogErrorFatal(ex, "Suspension manager failed during App OnSuspending!");
+                PlatformBase.Current.Logger.LogErrorFatal(ex, "Suspension manager failed during App OnSuspending!");
             }
             catch (Exception ex)
             {
-                Core.Services.PlatformBase.Current.Logger.LogErrorFatal(ex, "Error during App OnSuspending");
+                PlatformBase.Current.Logger.LogErrorFatal(ex, "Error during App OnSuspending");
                 throw ex;
             }
             deferral.Complete();
@@ -249,7 +249,7 @@ namespace Contoso.UI
         /// <param name="e"></param>
         private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            e.Handled = Core.Services.PlatformBase.Current.AppUnhandledException(e.Exception);
+            e.Handled = PlatformBase.Current.AppUnhandledException(e.Exception);
         }
 
         /// <summary>
@@ -260,7 +260,7 @@ namespace Contoso.UI
         private void TaskScheduler_UnobservedTaskException(object sender, System.Threading.Tasks.UnobservedTaskExceptionEventArgs e)
         {
             e.SetObserved();
-            Core.Services.PlatformBase.Current.AppUnhandledException(e.Exception);
+            PlatformBase.Current.AppUnhandledException(e.Exception);
         }
 
         /// <summary>
@@ -270,7 +270,7 @@ namespace Contoso.UI
         /// <param name="e">Details about the binding failure</param>
         private void DebugSettings_BindingFailed(object sender, BindingFailedEventArgs e)
         {
-            Core.Services.PlatformBase.Current.Logger.Log(LogLevels.Error, "Binding Failed: {0}", e.Message);
+            PlatformBase.Current.Logger.Log(LogLevels.Error, "Binding Failed: {0}", e.Message);
         }
 
         /// <summary>

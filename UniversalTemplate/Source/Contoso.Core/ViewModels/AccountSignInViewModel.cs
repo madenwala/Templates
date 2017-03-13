@@ -1,7 +1,8 @@
-﻿using Contoso.Core.Commands;
+﻿using AppFramework.Core.Commands;
+using AppFramework.Core.Models;
+using AppFramework.Core.Strings;
+using AppFramework.Core.ViewModels;
 using Contoso.Core.Data;
-using Contoso.Core.Models;
-using Contoso.Core.Services;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -73,7 +74,7 @@ namespace Contoso.Core.ViewModels
 
         public AccountSignInViewModel()
         {
-            this.Title = Strings.Account.ViewTitleSignIn;
+            this.Title = Account.ViewTitleSignIn;
 
             if (DesignMode.DesignModeEnabled)
                 return;
@@ -112,7 +113,7 @@ namespace Contoso.Core.ViewModels
             {
                 this.IsSubmitEnabled = false;
                 _cts = new CancellationTokenSource();
-                this.ShowBusyStatus(Strings.Account.TextAuthenticating, true, true);
+                this.ShowBusyStatus(Account.TextAuthenticating, true, true);
 
                 using (var api = new ClientApi())
                 {
@@ -123,7 +124,7 @@ namespace Contoso.Core.ViewModels
                     if (!string.IsNullOrEmpty(response?.AccessToken))
                         await this.Platform.AuthManager.SetUserAsync(response);
                     else
-                        userMessage = Strings.Account.TextAuthenticationFailed;
+                        userMessage = Account.TextAuthenticationFailed;
 
                     this.ClearStatus();
 

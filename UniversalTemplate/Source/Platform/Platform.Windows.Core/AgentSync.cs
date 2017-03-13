@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using Windows.UI.Xaml;
 
-namespace Contoso.Core
+namespace AppFramework.Core
 {
     /// <summary>
     /// AgentSync is used to determine if the main app or a background task is running. You can use this to

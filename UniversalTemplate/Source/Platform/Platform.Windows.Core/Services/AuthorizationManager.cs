@@ -1,10 +1,10 @@
-﻿using Contoso.Core.Models;
-using Contoso.Core.Services;
+﻿using AppFramework.Core.Models;
+using AppFramework.Core.Services;
 using System;
 using System.Threading.Tasks;
 using Windows.Storage;
 
-namespace Contoso.Core.Services
+namespace AppFramework.Core.Services
 {
     public partial class PlatformBase
     {

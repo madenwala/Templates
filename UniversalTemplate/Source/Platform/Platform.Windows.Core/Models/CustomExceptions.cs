@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Contoso.Core.Models
+namespace AppFramework.Core.Models
 {
     public class UserFriendlyException : Exception
     {

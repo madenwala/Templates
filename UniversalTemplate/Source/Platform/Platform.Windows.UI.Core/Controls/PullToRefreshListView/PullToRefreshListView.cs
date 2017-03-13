@@ -1,5 +1,5 @@
 ﻿using System;
-using Contoso.Core;
+using AppFramework.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using System.Windows.Input;
@@ -238,7 +238,7 @@ namespace AppFramework.Uwp.UI.Controls
         {
             this.DefaultStyleKey = typeof(PullToRefreshListView);
             this.IsTabStop = false;
-            this.NoDataMessage = Contoso.Core.Strings.Resources.TextListNoData;
+            this.NoDataMessage = AppFramework.Core.Strings.Resources.TextListNoData;
         }
 
         #endregion

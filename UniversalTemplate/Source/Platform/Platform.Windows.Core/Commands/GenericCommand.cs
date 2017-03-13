@@ -1,8 +1,8 @@
-﻿using Contoso.Core.Services;
+﻿using AppFramework.Core.Services;
 using System;
 using Windows.ApplicationModel;
 
-namespace Contoso.Core.Commands
+namespace AppFramework.Core.Commands
 {
     /// <summary>
     /// Command used in data binding. GenericCommand is wired up with logging and analytics calls.

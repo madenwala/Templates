@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using GoogleAnalytics;
 
-namespace Contoso.Core.Services.Analytics
+namespace AppFramework.Core.Services.Analytics
 {
     public sealed class GoogleAnalyticsService : AnalyticsServiceBase
     {

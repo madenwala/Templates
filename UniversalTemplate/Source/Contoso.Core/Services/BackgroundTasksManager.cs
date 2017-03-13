@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppFramework.Core.Services;
+using System;
 using Windows.ApplicationModel.Background;
 
 namespace Contoso.Core.Services

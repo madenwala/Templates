@@ -40,7 +40,7 @@
                             PullThreshold="{TemplateBinding PullThreshold}"
                             behaviors:ListViewCommandBehavior.Command="{TemplateBinding ClickCommand}">
                             <toolkit:PullToRefreshListView.PullToRefreshContent>
-                                <TextBlock x:Uid="/Contoso.Core/Resources/txtPullToRefresh" Text="[Pull to refresh]" Style="{StaticResource SubtleTextBlockStyle}" />
+                                <TextBlock x:Uid="/AppFramework.Core/Resources/txtPullToRefresh" Text="[Pull to refresh]" Style="{StaticResource SubtleTextBlockStyle}" />
                             </toolkit:PullToRefreshListView.PullToRefreshContent>
                         </toolkit:PullToRefreshListView>
                         <TextBlock 

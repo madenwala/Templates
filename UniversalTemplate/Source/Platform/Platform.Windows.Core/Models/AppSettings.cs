@@ -1,6 +1,6 @@
 ﻿using Windows.UI.Xaml;
 
-namespace Contoso.Core.Models
+namespace AppFramework.Core.Models
 {
     /// <summary>
     /// Container class for local application settings.  Create all your local app setting properties here.

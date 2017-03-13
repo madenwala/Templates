@@ -1,4 +1,4 @@
-﻿using Contoso.Core.ViewModels;
+﻿using AppFramework.Core.ViewModels;
 
 namespace AppFramework.Uwp.UI.Controls
 {

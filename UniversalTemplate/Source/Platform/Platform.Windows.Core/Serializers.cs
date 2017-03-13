@@ -2,7 +2,7 @@
 using System.IO;
 using System.Runtime.Serialization;
 
-namespace Contoso.Core
+namespace AppFramework.Core
 {
     #region Enums
 

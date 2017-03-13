@@ -1,12 +1,12 @@
-﻿using Contoso.Core.Commands;
-using Contoso.Core.Models;
-using Contoso.Core.Services;
+﻿using AppFramework.Core.Commands;
+using AppFramework.Core.Models;
+using AppFramework.Core.Services;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 
-namespace Contoso.Core.ViewModels
+namespace AppFramework.Core.ViewModels
 {
     public partial class WebBrowserViewModel : ViewModelBase
     {
@@ -295,9 +295,9 @@ namespace Contoso.Core.ViewModels
     }
 }
 
-namespace Contoso.Core.ViewModels.Designer
+namespace AppFramework.Core.ViewModels.Designer
 {
-    public sealed class WebBrowserViewModel : Contoso.Core.ViewModels.WebBrowserViewModel
+    public sealed class WebBrowserViewModel : AppFramework.Core.ViewModels.WebBrowserViewModel
     {
         public WebBrowserViewModel()
             : base()

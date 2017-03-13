@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Contoso.Core.Commands;
+using AppFramework.Core.Commands;
 using System.Reflection;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml.Controls;
-using Contoso.Core.ViewModels;
+using AppFramework.Core.ViewModels;
 
-namespace Contoso.Core.Services
+namespace AppFramework.Core.Services
 {
     public partial class NavigationManagerBase
     {

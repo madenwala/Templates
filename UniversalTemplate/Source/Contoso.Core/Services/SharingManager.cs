@@ -1,4 +1,9 @@
-﻿using Contoso.Core.Models;
+﻿using AppFramework.Core;
+using AppFramework.Core.Models;
+using AppFramework.Core.Services;
+using AppFramework.Core.Strings;
+using AppFramework.Core.ViewModels;
+using Contoso.Core.Models;
 using Contoso.Core.ViewModels;
 using System;
 using Windows.ApplicationModel.DataTransfer;
@@ -13,7 +18,7 @@ namespace Contoso.Core.Services
         {
             DataPackage requestData = request.Data;
 
-            PlatformBase.Current.Logger.Log(LogLevels.Information, "SetShareContent - Model: {0}", model?.GetType().Name);
+            Platform.Current.Logger.Log(LogLevels.Information, "SetShareContent - Model: {0}", model?.GetType().Name);
 
             // Sharing is based on the model data that was passed in. Perform customized sharing based on the type of the model provided.
             if (model is WebBrowserViewModel)
@@ -35,10 +40,10 @@ namespace Contoso.Core.Services
             }
             else
             {
-                requestData.Properties.Title = Core.Strings.Resources.ApplicationName;
-                requestData.Properties.Description = Core.Strings.Resources.ApplicationDescription;
+                requestData.Properties.Title = Resources.ApplicationName;
+                requestData.Properties.Description = Resources.ApplicationDescription;
                 requestData.Properties.ContentSourceApplicationLink = new Uri(Platform.Current.AppInfo.StoreURL, UriKind.Absolute);
-                string body = string.Format(Core.Strings.Resources.ApplicationSharingBodyText, Core.Strings.Resources.ApplicationName, Platform.Current.AppInfo.StoreURL);
+                string body = string.Format(Resources.ApplicationSharingBodyText, Resources.ApplicationName, Platform.Current.AppInfo.StoreURL);
                 requestData.SetText(body);
             }
         }

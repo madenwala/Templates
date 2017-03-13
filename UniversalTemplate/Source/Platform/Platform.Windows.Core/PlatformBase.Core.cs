@@ -1,4 +1,4 @@
-﻿using Contoso.Core.Models;
+﻿using AppFramework.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ using Windows.Storage;
 using Windows.System.Profile;
 using Windows.UI.ViewManagement;
 
-namespace Contoso.Core.Services
+namespace AppFramework.Core.Services
 {
     /// <summary>
     /// Base class used to manage application executing and to access all platform adapters available to the solution.

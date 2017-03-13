@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Contoso.Core.ViewModels
+namespace AppFramework.Core.ViewModels
 {
     public interface IViewModel
     {

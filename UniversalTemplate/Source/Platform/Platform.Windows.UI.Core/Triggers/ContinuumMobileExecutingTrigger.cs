@@ -1,5 +1,5 @@
-﻿using Contoso.Core;
-using Contoso.Core.Services;
+﻿using AppFramework.Core;
+using AppFramework.Core.Services;
 using Windows.UI.Xaml;
 
 namespace AppFramework.Uwp.UI.Triggers
@@ -17,7 +17,7 @@ namespace AppFramework.Uwp.UI.Triggers
 
         private void UpdateTrigger()
         {
-            if (Contoso.Core.Services.PlatformBase.Current.IsMobileContinuumDesktop)
+            if (AppFramework.Core.Services.PlatformBase.Current.IsMobileContinuumDesktop)
                 this.SetActive(true);
             else
                 this.SetActive(false);

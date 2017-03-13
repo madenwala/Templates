@@ -20,7 +20,7 @@
                 Text="{x:Bind ViewModel.StatusText, Mode=OneWay}" 
                 Style="{StaticResource BodyTextBlockStyle}" />
             <Button 
-                x:Uid="/Contoso.Core/Resources/btnCancel" 
+                x:Uid="/AppFramework.Core/Resources/btnCancel" 
                 Content="[Cancel]" 
                 HorizontalAlignment="Center" 
                 Command="{x:Bind ViewModel.StatusIsBlockingCancelableCommand, Mode=OneWay}" 

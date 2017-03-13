@@ -1,7 +1,7 @@
-﻿using Contoso.Core.Models;
-using Contoso.Core.Services;
+﻿using AppFramework.Core.Models;
+using AppFramework.Core.Services;
 
-namespace Contoso.Core.Commands
+namespace AppFramework.Core.Commands
 {
     /// <summary>
     /// Command for launching an external maps app passing an ILocationModel command parameter instance passed to this command.

@@ -1,4 +1,4 @@
-﻿namespace Contoso.Core
+﻿namespace AppFramework.Core
 {
     #region Enumerations
 

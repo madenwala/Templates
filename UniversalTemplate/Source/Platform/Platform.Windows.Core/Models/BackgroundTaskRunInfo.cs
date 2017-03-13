@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Contoso.Core.Models
+namespace AppFramework.Core.Models
 {
     /// <summary>
     /// Used to hold background tasks execution status information.

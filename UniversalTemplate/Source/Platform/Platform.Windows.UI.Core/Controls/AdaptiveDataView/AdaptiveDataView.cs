@@ -1,4 +1,4 @@
-﻿using Contoso.Core;
+﻿using AppFramework.Core;
 using System;
 using System.Collections;
 using System.Collections.Specialized;
@@ -266,7 +266,7 @@ namespace AppFramework.Uwp.UI.Controls
         {
             this.DefaultStyleKey = typeof(AdaptiveDataView);
             this.IsTabStop = false;
-            this.NoDataMessage = Contoso.Core.Strings.Resources.TextListNoData;
+            this.NoDataMessage = AppFramework.Core.Strings.Resources.TextListNoData;
         }
 
         #endregion

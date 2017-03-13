@@ -1,4 +1,4 @@
-﻿using Contoso.Core;
+﻿using AppFramework.Core;
 using System;
 using Windows.UI;
 using Windows.UI.Xaml.Data;

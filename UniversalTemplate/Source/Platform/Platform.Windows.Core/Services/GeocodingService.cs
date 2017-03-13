@@ -1,11 +1,11 @@
-﻿using Contoso.Core.Models;
+﻿using AppFramework.Core.Models;
 using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.Services.Maps;
 
-namespace Contoso.Core.Services
+namespace AppFramework.Core.Services
 {
     public partial class PlatformBase
     {

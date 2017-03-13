@@ -1,9 +1,9 @@
-﻿using Contoso.Core.ViewModels;
+﻿using AppFramework.Core.ViewModels;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Contoso.Core.Models
+namespace AppFramework.Core.Models
 {
     public interface INotifyTaskCompletion
     {

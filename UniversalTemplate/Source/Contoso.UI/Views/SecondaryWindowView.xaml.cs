@@ -1,6 +1,6 @@
-﻿using Contoso.Core;
-using Contoso.Core.Services;
-using Contoso.Core.ViewModels;
+﻿using AppFramework.Core.Services;
+using AppFramework.Core.ViewModels;
+using Contoso.Core;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 

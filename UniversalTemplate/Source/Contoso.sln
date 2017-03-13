@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.Core", "Contoso.Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.BackgroundTasks", "Contoso.BackgroundTasks\Contoso.BackgroundTasks.csproj", "{CB283AE3-3653-41EC-8E20-69722D2D33FA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platform", "Platform", "{CB5D60BA-865B-480F-A205-7410FF7925D9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppFramework", "AppFramework", "{CB5D60BA-865B-480F-A205-7410FF7925D9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFramework.Uwp.Core", "Platform\Platform.Windows.Core\AppFramework.Uwp.Core.csproj", "{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}"
 EndProject

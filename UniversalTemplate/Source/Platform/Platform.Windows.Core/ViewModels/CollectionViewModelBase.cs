@@ -1,4 +1,4 @@
-﻿using Contoso.Core.Models;
+﻿using AppFramework.Core.Models;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,9 +6,9 @@ using Windows.ApplicationModel;
 using Windows.UI.Xaml.Navigation;
 using System.Threading;
 using Windows.UI.Xaml.Input;
-using Contoso.Core.Services;
+using AppFramework.Core.Services;
 
-namespace Contoso.Core.ViewModels
+namespace AppFramework.Core.ViewModels
 {
     /// <summary>
     /// ViewModelBase for views that need to display multiple separate sub-views which might have their own ViewModel instances. This 

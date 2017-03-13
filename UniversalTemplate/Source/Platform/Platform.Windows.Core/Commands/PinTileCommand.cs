@@ -1,8 +1,8 @@
-﻿using Contoso.Core.Models;
-using Contoso.Core.Services;
+﻿using AppFramework.Core.Models;
+using AppFramework.Core.Services;
 using System;
 
-namespace Contoso.Core.Commands
+namespace AppFramework.Core.Commands
 {
     /// <summary>
     /// Command for pinning tiles.

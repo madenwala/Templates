@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI.Xaml.Data;
 
-namespace Contoso.Core.Models
+namespace AppFramework.Core.Models
 {
     /// <summary>
     /// Interface that all model objects should implement.

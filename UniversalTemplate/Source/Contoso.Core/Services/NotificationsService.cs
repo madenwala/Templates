@@ -1,4 +1,6 @@
-﻿using Contoso.Core.Models;
+﻿using AppFramework.Core.Models;
+using AppFramework.Core.Services;
+using Contoso.Core.Models;
 using Contoso.Core.ViewModels;
 using NotificationsExtensions.Tiles;
 using NotificationsExtensions.Toasts;

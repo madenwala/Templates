@@ -1,7 +1,7 @@
-﻿using Contoso.Core;
-using Contoso.Core.Services;
-using Contoso.Core.ViewModels;
+﻿using AppFramework.Core.Services;
+using AppFramework.Core.ViewModels;
 using AppFramework.Uwp.UI;
+using Contoso.Core.ViewModels;
 using System;
 using System.Threading.Tasks;
 using Windows.UI.Core;
@@ -37,13 +37,13 @@ namespace Contoso.UI.Views
                 bodyFrame.Navigated -= BodyFrame_Navigated;
             };
 
-            Core.Services.PlatformBase.Current.NotifyShellMenuToggle += Current_NotifyShellMenuToggle;
+            PlatformBase.Current.NotifyShellMenuToggle += Current_NotifyShellMenuToggle;
         }
 
         ~ShellView()
         {
-            if (Core.Services.PlatformBase.Current != null)
-                Core.Services.PlatformBase.Current.NotifyShellMenuToggle -= Current_NotifyShellMenuToggle;
+            if (PlatformBase.Current != null)
+                PlatformBase.Current.NotifyShellMenuToggle -= Current_NotifyShellMenuToggle;
         }
 
         #endregion

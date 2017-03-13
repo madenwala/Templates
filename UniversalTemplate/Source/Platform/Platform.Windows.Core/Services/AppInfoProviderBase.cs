@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.Store;
 using Windows.Storage;
 
-namespace Contoso.Core.Services
+namespace AppFramework.Core.Services
 {
     public partial class PlatformBase
     {

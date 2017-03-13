@@ -1,5 +1,5 @@
-﻿using Contoso.Core.Models;
-using Contoso.Core.Services;
+﻿using AppFramework.Core.Models;
+using AppFramework.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -8,7 +8,7 @@ using Windows.Foundation;
 using Windows.UI.Notifications;
 using Windows.UI.StartScreen;
 
-namespace Contoso.Core.Services
+namespace AppFramework.Core.Services
 {
     public partial class PlatformBase
     {

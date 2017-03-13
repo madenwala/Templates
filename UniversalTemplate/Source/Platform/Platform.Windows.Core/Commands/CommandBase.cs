@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Contoso.Core.Commands
+namespace AppFramework.Core.Commands
 {
     /// <summary>
     /// Base class for commands.

@@ -1,7 +1,7 @@
-﻿using Contoso.Core.Services;
+﻿using AppFramework.Core.Services;
 using System;
 
-namespace Contoso.Core.Commands
+namespace AppFramework.Core.Commands
 {
     /// <summary>
     /// Command for navigating to a page.

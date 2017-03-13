@@ -1,7 +1,8 @@
-﻿using Contoso.Core.Commands;
+﻿using AppFramework.Core.Commands;
+using AppFramework.Core.Models;
+using AppFramework.Core.Strings;
+using AppFramework.Core.ViewModels;
 using Contoso.Core.Data;
-using Contoso.Core.Models;
-using Contoso.Core.Services;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -52,7 +53,7 @@ namespace Contoso.Core.ViewModels
 
         public AccountForgotViewModel()
         {
-            this.Title = Strings.Account.ViewTitleForgotPassword;
+            this.Title = Account.ViewTitleForgotPassword;
 
             if (DesignMode.DesignModeEnabled)
                 return;
@@ -96,7 +97,7 @@ namespace Contoso.Core.ViewModels
             try
             {
                 this.IsSubmitEnabled = false;
-                this.ShowBusyStatus(Strings.Account.TextValidatingUsername, true);
+                this.ShowBusyStatus(Account.TextValidatingUsername, true);
 
                 using (var api = new ClientApi())
                 {

@@ -1,6 +1,6 @@
-﻿using Contoso.Core.Commands;
-using Contoso.Core.Models;
-using Contoso.Core.Services;
+﻿using AppFramework.Core.Commands;
+using AppFramework.Core.Models;
+using AppFramework.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +18,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace Contoso.Core.ViewModels
+namespace AppFramework.Core.ViewModels
 {
     public abstract class ViewModelBase : ModelBase, IDisposable, IViewModel
     {

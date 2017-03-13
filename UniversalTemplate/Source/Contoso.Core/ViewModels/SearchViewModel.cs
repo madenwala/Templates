@@ -1,6 +1,8 @@
-﻿using Contoso.Core.Data;
+﻿using AppFramework.Core.Models;
+using AppFramework.Core.Strings;
+using AppFramework.Core.ViewModels;
+using Contoso.Core.Data;
 using Contoso.Core.Models;
-using Contoso.Core.Services;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
@@ -39,7 +41,7 @@ namespace Contoso.Core.ViewModels
 
         public SearchViewModel()
         {
-            this.Title = Strings.Search.ButtonTextSearch;
+            this.Title = Search.ButtonTextSearch;
 
             if (DesignMode.DesignModeEnabled)
                 return;
@@ -78,7 +80,7 @@ namespace Contoso.Core.ViewModels
                     _parameterChanged = false;
 
                     // Show the busy status
-                    this.Title = string.Format(Strings.Search.TextSearching, this.SearchText);
+                    this.Title = string.Format(Search.TextSearching, this.SearchText);
                     this.ShowBusyStatus(this.Title, true);
 
                     // Call the API to perform the search
@@ -89,14 +91,14 @@ namespace Contoso.Core.ViewModels
                     }
 
                     // Update the page title
-                    this.Title = string.Format(Strings.Search.TextSearchResultsCount, this.Results.Count, this.SearchText);
+                    this.Title = string.Format(Search.TextSearchResultsCount, this.Results.Count, this.SearchText);
                 }
             }
             else
             {
                 // No results, clear page
                 this.Results = null;
-                this.Title = Strings.Search.ButtonTextSearch;
+                this.Title = Search.ButtonTextSearch;
             }
         }
 

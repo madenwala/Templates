@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 
-namespace Contoso.Core
+namespace AppFramework.Core
 {
     /// <summary>
     /// TypeUtility tests types to see if they are primitive types.

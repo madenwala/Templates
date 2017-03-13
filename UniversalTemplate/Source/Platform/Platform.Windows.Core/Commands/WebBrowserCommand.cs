@@ -1,6 +1,6 @@
-﻿using Contoso.Core.Services;
+﻿using AppFramework.Core.Services;
 
-namespace Contoso.Core.Commands
+namespace AppFramework.Core.Commands
 {
     /// <summary>
     /// Command for navigating to an internal web browser to display a webpage within the app.

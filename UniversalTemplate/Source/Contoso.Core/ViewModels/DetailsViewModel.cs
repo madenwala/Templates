@@ -1,7 +1,10 @@
-﻿using Contoso.Core.Commands;
+﻿using AppFramework.Core.Commands;
+using AppFramework.Core.Models;
+using AppFramework.Core.Services;
+using AppFramework.Core.Strings;
+using AppFramework.Core.ViewModels;
 using Contoso.Core.Data;
 using Contoso.Core.Models;
-using Contoso.Core.Services;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -63,7 +66,7 @@ namespace Contoso.Core.ViewModels
 
             this.RequiresAuthorization = true;
 
-            this.Title = Strings.Resources.TextNotApplicable;
+            this.Title = Resources.TextNotApplicable;
             this.ID = id;
             this.RequiresAuthorization = true;
             this.PinTileCommand = new PinTileCommand();
@@ -122,9 +125,9 @@ namespace Contoso.Core.ViewModels
                 try
                 {
                     if (this.Item == null)
-                        this.Title = Strings.Resources.TextLoading;
+                        this.Title = Resources.TextLoading;
 
-                    this.ShowBusyStatus(Strings.Resources.TextLoading, this.Item == null);
+                    this.ShowBusyStatus(Resources.TextLoading, this.Item == null);
                     using (var api = new ClientApi())
                     {
                         this.Item = await api.GetItemByID(this.ID, ct);
@@ -138,7 +141,7 @@ namespace Contoso.Core.ViewModels
 
             if (this.Item == null)
             {
-                this.Title = Strings.Resources.TextNotApplicable;
+                this.Title = Resources.TextNotApplicable;
                 throw new ArgumentException("No item to display.");
             }
         }
@@ -177,7 +180,7 @@ namespace Contoso.Core.ViewModels
                 
                 for (double p = 0; p <= 100; p++)
                 {
-                    this.ShowBusyStatus(Strings.Resources.TextDownloading);
+                    this.ShowBusyStatus(Resources.TextDownloading);
                     this.StatusProgressValue = p;
                     await Task.Delay(100);
                 }

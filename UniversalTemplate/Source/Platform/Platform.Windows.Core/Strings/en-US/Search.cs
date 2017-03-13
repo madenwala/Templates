@@ -20,7 +20,7 @@
 // 	Generated: 03/07/2017 18:48:11
 // </auto-generatedInfo>
 // --------------------------------------------------------------------------------------------------
-namespace Contoso.Core.Strings
+namespace AppFramework.Core.Strings
 {
     using Windows.ApplicationModel.Resources;
     
