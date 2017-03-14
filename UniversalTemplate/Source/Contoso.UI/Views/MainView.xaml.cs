@@ -1,5 +1,4 @@
-﻿using AppFramework.Core.ViewModels;
-using AppFramework.Uwp.UI.Views;
+﻿using AppFramework.Core;
 using Contoso.Core;
 using Contoso.Core.ViewModels;
 using System.Threading.Tasks;
@@ -23,7 +22,7 @@ namespace Contoso.UI.Views
         {
             if (e.NavigationEventArgs.NavigationMode == NavigationMode.New || this.ViewModel == null)
                 this.SetViewModel(Platform.Current.ViewModel as MainViewModel); // TODO
-
+            
             return base.OnLoadStateAsync(e);
         }
 

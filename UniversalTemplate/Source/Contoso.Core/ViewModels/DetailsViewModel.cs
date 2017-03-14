@@ -1,8 +1,8 @@
-﻿using AppFramework.Core.Commands;
+﻿using AppFramework.Core;
+using AppFramework.Core.Commands;
 using AppFramework.Core.Models;
 using AppFramework.Core.Services;
 using AppFramework.Core.Strings;
-using AppFramework.Core.ViewModels;
 using Contoso.Core.Data;
 using Contoso.Core.Models;
 using System;

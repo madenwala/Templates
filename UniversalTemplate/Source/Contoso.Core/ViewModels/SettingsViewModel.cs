@@ -1,5 +1,4 @@
 ﻿using AppFramework.Core.Strings;
-using AppFramework.Core.ViewModels;
 using Windows.ApplicationModel;
 
 namespace Contoso.Core.ViewModels
@@ -12,7 +11,7 @@ namespace Contoso.Core.ViewModels
         PrivacyPolicy
     }
 
-    public partial class SettingsViewModel : CollectionViewModelBase
+    public partial class SettingsViewModel : AppFramework.Core.ViewModels.CollectionViewModelBase
     {
         #region Properties
 
@@ -40,9 +39,9 @@ namespace Contoso.Core.ViewModels
 #if !DEBUG
         private DebuggingViewModel _DebuggingViewModel = null;
 #else
-        private DebuggingViewModel _DebuggingViewModel = new DebuggingViewModel();
+        private AppFramework.Core.ViewModels.DebuggingViewModel _DebuggingViewModel = new AppFramework.Core.ViewModels.DebuggingViewModel();
 #endif
-        public DebuggingViewModel DebugVM
+        public AppFramework.Core.ViewModels.DebuggingViewModel DebugVM
         {
             get { return _DebuggingViewModel; }
             private set { this.SetProperty(ref _DebuggingViewModel, value); }

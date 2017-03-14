@@ -1,11 +1,11 @@
-﻿using AppFramework.Core.ViewModels;
-using AppFramework.Uwp.UI.Views;
+﻿using AppFramework.Core;
+using Contoso.Core.ViewModels;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 
 namespace Contoso.UI.Views
 {
-    public abstract class WebBrowserViewBase : ViewBase<WebBrowserViewModel>
+    public abstract class WebBrowserViewBase : ViewBase<WebViewModelBase>
     {
     }
 
@@ -21,11 +21,13 @@ namespace Contoso.UI.Views
         {
             if (e.NavigationEventArgs.NavigationMode == NavigationMode.New || this.ViewModel == null)
             {
-                WebBrowserViewModel vm;
-                if (e.NavigationEventArgs.Parameter is WebBrowserViewModel)
-                    vm = e.NavigationEventArgs.Parameter as WebBrowserViewModel;
-                else
-                    vm = new WebBrowserViewModel();
+                WebViewModelBase vm = null;
+                if (e.NavigationEventArgs.Parameter is WebViewModelBase)
+                    vm = e.NavigationEventArgs.Parameter as WebViewModelBase;
+
+                // TODO pass in any parameter as a string
+                //else
+                //    vm = new WebViewModelBase();
                 this.SetViewModel(vm);
             }
 

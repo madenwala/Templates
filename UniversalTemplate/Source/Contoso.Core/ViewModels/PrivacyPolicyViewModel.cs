@@ -1,10 +1,9 @@
 ﻿using AppFramework.Core.Strings;
-using AppFramework.Core.ViewModels;
 using Windows.ApplicationModel;
 
 namespace Contoso.Core.ViewModels
 {
-    public partial class PrivacyPolicyViewModel : WebBrowserViewModel
+    public partial class PrivacyPolicyViewModel : WebViewModelBase
     {
         #region Properties
 

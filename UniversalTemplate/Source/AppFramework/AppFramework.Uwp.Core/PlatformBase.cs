@@ -24,14 +24,13 @@ namespace AppFramework.Core
         #region Variables
 
         private static Dictionary<Type, ServiceBase> _services = new Dictionary<Type, ServiceBase>();
-        private bool _settingsIsLocalDataDirty = false;
-        private bool _settingsIsRoamingDataDirty = false;
-
         private Type _mainViewModelType;
 
         #endregion Variables
 
         #region Properties
+
+        public event EventHandler OnAppSettingsReset;
 
         private ViewModelBase _ViewModel;
         /// <summary>
@@ -43,6 +42,26 @@ namespace AppFramework.Core
         {
             get { return _ViewModel; }
             protected set { this.SetProperty(ref _ViewModel, value); }
+        }
+
+        private AppSettingsLocalBase _AppSettingsLocal;
+        /// <summary>
+        /// Gets local app settings for this app.
+        /// </summary>
+        public AppSettingsLocalBase AppSettingsLocal
+        {
+            get { return _AppSettingsLocal; }
+            protected internal set { this.SetProperty(ref _AppSettingsLocal, value); }
+        }
+
+        private AppSettingsRoamingBase _AppSettingsRoaming;
+        /// <summary>
+        /// Gets roaming app settings for this app.
+        /// </summary>
+        public AppSettingsRoamingBase AppSettingsRoaming
+        {
+            get { return _AppSettingsRoaming; }
+            protected internal set { this.SetProperty(ref _AppSettingsRoaming, value); }
         }
 
         /// <summary>
@@ -69,26 +88,6 @@ namespace AppFramework.Core
         /// Indicates the initialization mode of this app instance.
         /// </summary>
         public InitializationModes InitializationMode { get; private set; }
-
-        private AppSettingsLocal _AppSettingsLocal;
-        /// <summary>
-        /// Gets local app settings for this app.
-        /// </summary>
-        public AppSettingsLocal AppSettingsLocal
-        {
-            get { return _AppSettingsLocal; }
-            private set { this.SetProperty(ref _AppSettingsLocal, value); }
-        }
-
-        private AppSettingsRoaming _AppSettingsRoaming;
-        /// <summary>
-        /// Gets roaming app settings for this app.
-        /// </summary>
-        public AppSettingsRoaming AppSettingsRoaming
-        {
-            get { return _AppSettingsRoaming; }
-            private set { this.SetProperty(ref _AppSettingsRoaming, value); }
-        }
 
         private Task _BackgroundRegistrationTask;
         /// <summary>
@@ -171,10 +170,7 @@ namespace AppFramework.Core
             this.InitializationMode = mode;
             this.Logger.Log(LogLevels.Warning, "APP INITIALIZING - Initialization mode is {0}", this.InitializationMode);
 
-            this.AppSettingsLocal = this.Storage.LoadSetting<AppSettingsLocal>("AppSettingsLocal", ApplicationData.Current.LocalSettings) ?? new AppSettingsLocal();
-            this.AppSettingsLocal.PropertyChanged += AppSettingsLocal_PropertyChanged;
-            this.AppSettingsRoaming = this.Storage.LoadSetting<AppSettingsRoaming>("AppSettingsRoaming", ApplicationData.Current.RoamingSettings) ?? new AppSettingsRoaming();
-            this.AppSettingsRoaming.PropertyChanged += AppSettingsRoaming_PropertyChanged;
+            this.AppSettingsInitializing();
 
             // Initializes all service
             foreach (var service in _services)
@@ -184,12 +180,13 @@ namespace AppFramework.Core
             }
 
             // Record the userID to analytics
-            this.Analytics.SetUser(GetService<AppInfoProviderBase>().UserID);
+            this.Analytics.SetUser(this.AppInfo.UserID);
 
             // Execute only on first runs of the platform
             if (mode == InitializationModes.New)
             {
-                // Provide platform languages to analytics
+                // Provide platform info to analytics
+                this.Analytics.Event("OS-Version", Microsoft.Toolkit.Uwp.Helpers.SystemInformation.OperatingSystemVersion);
                 this.Analytics.Event("CurrentCulture", System.Globalization.CultureInfo.CurrentCulture.Name);
                 this.Analytics.Event("CurrentUICulture", System.Globalization.CultureInfo.CurrentUICulture.Name);
             }
@@ -201,7 +198,18 @@ namespace AppFramework.Core
 
             if (this.ViewModel == null)
                 this.ViewModel = Activator.CreateInstance(_mainViewModelType) as ViewModelBase;
+            
+            if (mode == InitializationModes.New)
+            {
+                // Check for previous app crashes
+                await this.Logger.CheckForFatalErrorReportsAsync(this.ViewModel);
+
+                // Check to see if the user should be prompted to rate the application
+                await this.Ratings.CheckForRatingsPromptAsync(this.ViewModel);
+            }
         }
+
+        internal abstract void AppSettingsInitializing();
 
         /// <summary>
         /// Global suspension of the app and any custom logic to execute on suspend of the app.
@@ -212,51 +220,17 @@ namespace AppFramework.Core
 
             // Save app settings
             this.SaveSettings();
-
-            if (this.AppSettingsLocal != null)
-                this.AppSettingsLocal.PropertyChanged -= AppSettingsLocal_PropertyChanged;
-            if (this.AppSettingsRoaming != null)
-                this.AppSettingsRoaming.PropertyChanged -= AppSettingsRoaming_PropertyChanged;
         }
 
         /// <summary>
         /// Saves any app settings only if the data had changed.
         /// </summary>
-        public void SaveSettings(bool forceSave = false)
-        {
-            if (_settingsIsLocalDataDirty || forceSave)
-            {
-                this.Storage.SaveSetting("AppSettingsLocal", this.AppSettingsLocal, ApplicationData.Current.LocalSettings);
-                _settingsIsLocalDataDirty = false;
-            }
-
-            if (_settingsIsRoamingDataDirty || forceSave)
-            {
-                this.Storage.SaveSetting("AppSettingsRoaming", this.AppSettingsRoaming, ApplicationData.Current.RoamingSettings);
-                _settingsIsRoamingDataDirty = false;
-            }
-        }
+        public abstract void SaveSettings(bool forceSave = false);
 
         /// <summary>
         /// Reset all the app settings back to their defaults.
         /// </summary>
-        protected void ResetAppSettings()
-        {
-            if (this.AppSettingsLocal != null)
-                this.AppSettingsLocal.PropertyChanged -= AppSettingsLocal_PropertyChanged;
-            if (this.AppSettingsRoaming != null)
-                this.AppSettingsRoaming.PropertyChanged -= AppSettingsRoaming_PropertyChanged;
-
-            _settingsIsLocalDataDirty = true;
-            _settingsIsRoamingDataDirty = true;
-
-            this.AppSettingsLocal = new AppSettingsLocal();
-            this.AppSettingsLocal.PropertyChanged += AppSettingsLocal_PropertyChanged;
-            this.AppSettingsRoaming = new AppSettingsRoaming();
-            this.AppSettingsRoaming.PropertyChanged += AppSettingsRoaming_PropertyChanged;
-
-            this.SaveSettings();
-        }
+        internal abstract void ResetAppSettings();
 
         /// <summary>
         /// Retrieve an instance of a type registered as a platform service.
@@ -315,12 +289,9 @@ namespace AppFramework.Core
             }
         }
 
-        protected void CheckForFullLogging()
+        internal void FireOnAppSettingsResetEvent()
         {
-            if (this.AppSettingsRoaming.EnableFullLogging)
-                this.Logger.CurrentLevel = LogLevels.Debug;
-            else
-                this.Logger.CurrentLevel = LogLevels.Warning;
+            this.OnAppSettingsReset?.Invoke(null, null);
         }
 
         #region Application Core
@@ -443,6 +414,95 @@ namespace AppFramework.Core
         #endregion
 
         #endregion Methods
+    }
+
+    public abstract class PlatformNewBase<VM, L, R> : PlatformBase
+        where VM : ViewModelBase
+        where L : AppSettingsLocalBase
+        where R : AppSettingsRoamingBase
+    {
+        private bool _settingsIsLocalDataDirty = false;
+        private bool _settingsIsRoamingDataDirty = false;
+
+        public PlatformNewBase() : base(typeof(VM))
+        {
+        }
+
+        internal override void AppSettingsInitializing()
+        {
+            if (this.AppSettingsLocal == null)
+            {
+                this.AppSettingsLocal = this.Storage.LoadSetting<L>("AppSettingsLocal", ApplicationData.Current.LocalSettings) ?? Activator.CreateInstance<L>();
+                this.AppSettingsLocal.PropertyChanged += AppSettingsLocal_PropertyChanged;
+            }
+            if (this.AppSettingsRoaming == null)
+            {
+                this.AppSettingsRoaming = this.Storage.LoadSetting<R>("AppSettingsRoaming", ApplicationData.Current.RoamingSettings) ?? Activator.CreateInstance<R>();
+                this.AppSettingsRoaming.PropertyChanged += AppSettingsRoaming_PropertyChanged;
+            }
+
+            this.CheckForFullLogging();
+            this.FireOnAppSettingsResetEvent();
+        }
+
+        /// <summary>
+        /// Reset all the app settings back to their defaults.
+        /// </summary>
+        internal override void ResetAppSettings()
+        {
+            if (this.AppSettingsLocal != null)
+                this.AppSettingsLocal.PropertyChanged -= AppSettingsLocal_PropertyChanged;
+            if (this.AppSettingsRoaming != null)
+                this.AppSettingsRoaming.PropertyChanged -= AppSettingsRoaming_PropertyChanged;
+
+            _settingsIsLocalDataDirty = true;
+            _settingsIsRoamingDataDirty = true;
+
+            this.AppSettingsLocal = Activator.CreateInstance<L>();
+            this.AppSettingsLocal.PropertyChanged += AppSettingsLocal_PropertyChanged;
+            this.AppSettingsRoaming = Activator.CreateInstance<R>();
+            this.AppSettingsRoaming.PropertyChanged += AppSettingsRoaming_PropertyChanged;
+
+            this.SaveSettings();
+            this.CheckForFullLogging();
+            this.FireOnAppSettingsResetEvent();
+        }
+
+        /// <summary>
+        /// Saves any app settings only if the data had changed.
+        /// </summary>
+        public override void SaveSettings(bool forceSave = false)
+        {
+            if (_settingsIsLocalDataDirty || forceSave)
+            {
+                this.Storage.SaveSetting("AppSettingsLocal", this.AppSettingsLocal, ApplicationData.Current.LocalSettings);
+                _settingsIsLocalDataDirty = false;
+            }
+
+            if (_settingsIsRoamingDataDirty || forceSave)
+            {
+                this.Storage.SaveSetting("AppSettingsRoaming", this.AppSettingsRoaming, ApplicationData.Current.RoamingSettings);
+                _settingsIsRoamingDataDirty = false;
+            }
+        }
+
+        public override void AppSuspending()
+        {
+            base.AppSuspending();
+            
+            if (this.AppSettingsLocal != null)
+                this.AppSettingsLocal.PropertyChanged -= AppSettingsLocal_PropertyChanged;
+            if (this.AppSettingsRoaming != null)
+                this.AppSettingsRoaming.PropertyChanged -= AppSettingsRoaming_PropertyChanged;
+        }
+
+        private void CheckForFullLogging()
+        {
+            if (this.AppSettingsRoaming.EnableFullLogging)
+                this.Logger.CurrentLevel = LogLevels.Debug;
+            else
+                this.Logger.CurrentLevel = LogLevels.Warning;
+        }
 
         #region Event Handlers
 

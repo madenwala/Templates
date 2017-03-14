@@ -1,6 +1,6 @@
-﻿using AppFramework.Core.Services;
+﻿using AppFramework.Core;
+using AppFramework.Core.Services;
 using AppFramework.Core.Strings;
-using AppFramework.Core.ViewModels;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.UI.Xaml.Input;

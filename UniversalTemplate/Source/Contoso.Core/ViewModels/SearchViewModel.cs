@@ -1,6 +1,6 @@
-﻿using AppFramework.Core.Models;
+﻿using AppFramework.Core;
+using AppFramework.Core.Models;
 using AppFramework.Core.Strings;
-using AppFramework.Core.ViewModels;
 using Contoso.Core.Data;
 using Contoso.Core.Models;
 using System.Threading;

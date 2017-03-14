@@ -1184,7 +1184,10 @@ namespace AppFramework.Core.ViewModels
 
         #endregion Methods
     }
+}
 
+namespace AppFramework.Core
+{
     #region Classes
 
     /// <summary>

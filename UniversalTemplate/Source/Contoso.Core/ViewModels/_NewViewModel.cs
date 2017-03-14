@@ -1,5 +1,5 @@
-﻿using AppFramework.Core.Strings;
-using AppFramework.Core.ViewModels;
+﻿using AppFramework.Core;
+using AppFramework.Core.Strings;
 using Contoso.Core.Data;
 using System.Threading;
 using System.Threading.Tasks;

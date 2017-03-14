@@ -1,12 +1,12 @@
-﻿using System;
+﻿using AppFramework.Core;
+using AppFramework.Core.Commands;
+using AppFramework.Core.Models;
+using AppFramework.Core.Strings;
+using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Devices.Geolocation;
-using System.Threading;
-using AppFramework.Core.Strings;
-using AppFramework.Core.ViewModels;
-using AppFramework.Core.Models;
-using AppFramework.Core.Commands;
 
 namespace Contoso.Core.ViewModels
 {

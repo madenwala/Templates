@@ -5,7 +5,7 @@ namespace AppFramework.Core.Models
     /// <summary>
     /// Container class for local application settings.  Create all your local app setting properties here.
     /// </summary>
-    public sealed class AppSettingsLocal : ModelBase
+    public abstract class AppSettingsLocalBase : ModelBase
     {
         #region Properties
 
@@ -32,7 +32,7 @@ namespace AppFramework.Core.Models
     /// <summary>
     /// Container class for roaming application settings.  Create all your roaming app setting properties here.
     /// </summary>
-    public sealed class AppSettingsRoaming : ModelBase
+    public abstract class AppSettingsRoamingBase : ModelBase
     {
         #region Properties
 

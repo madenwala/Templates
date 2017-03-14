@@ -13,7 +13,7 @@ using Windows.ApplicationModel.Background;
 
 namespace Contoso.Core
 {
-    public partial class Platform : PlatformBase
+    public partial class Platform : PlatformNewBase<MainViewModel, AppSettingsLocal, AppSettingsRoaming>
     {
         #region Constructors
 
@@ -27,7 +27,7 @@ namespace Contoso.Core
         /// </summary>
         public static Platform LocalCurrent { get { return Current as Platform; } }
 
-        public Platform() : base(typeof(MainViewModel))
+        public Platform()
         {
             // Instantiate all the application services.
             this.BackgroundTasks = new BackgroundTasksManager();
@@ -50,18 +50,8 @@ namespace Contoso.Core
             // Call to base.AppInitializing is required to be executed first so all adapters and the framework are properly initialized
             await base.AppInitializingAsync(mode);
 
-            this.CheckForFullLogging();
-
-            if (mode == InitializationModes.New)
-            {
-                this.Analytics.Event("OS-Version", Microsoft.Toolkit.Uwp.Helpers.SystemInformation.OperatingSystemVersion);
-
-                // Check for previous app crashes
-                await this.Logger.CheckForFatalErrorReportsAsync(this.ViewModel);
-
-                // Check to see if the user should be prompted to rate the application
-                await this.Ratings.CheckForRatingsPromptAsync(this.ViewModel);
-            }
+            // Your custom app logic which you want to always run at suspend of
+            // your app should be placed here.
         }
 
         /// <summary>
