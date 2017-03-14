@@ -35,7 +35,6 @@ namespace AppFramework.Core
 
 namespace AppFramework.Core.Services
 {
-
     public abstract partial class NavigationManagerBase : ServiceBase, IServiceSignout
     {
         #region Abstract Methods
