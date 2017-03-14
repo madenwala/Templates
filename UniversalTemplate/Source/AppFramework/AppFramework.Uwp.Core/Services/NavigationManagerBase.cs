@@ -383,7 +383,7 @@ namespace AppFramework.Core.Services
         /// </summary>
         public void UpdateTitleBarBackButton()
         {
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = PlatformBase.GetService<NavigationManagerBase>().CanGoBack() ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = PlatformBase.Current.Navigation.CanGoBack() ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
         }
 
         #endregion Navigation
@@ -411,48 +411,48 @@ namespace AppFramework.Core.Services
 
             try
             {
-                PlatformBase.GetService<AnalyticsManager>().Event("HandleActivation", e.Kind);
+                PlatformBase.Current.Analytics.Event("HandleActivation", e.Kind);
 
                 switch (e.Kind)
                 {
                     case ActivationKind.Launch:
                         var launchArg = e as LaunchActivatedEventArgs;
-                        PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, "Calling OnActivation({0})  TileID: {1}  Arguments: {2}", e?.GetType().Name, launchArg.TileId, launchArg.Arguments);
+                        PlatformBase.Current.Logger.Log(LogLevels.Warning, "Calling OnActivation({0})  TileID: {1}  Arguments: {2}", e?.GetType().Name, launchArg.TileId, launchArg.Arguments);
                         handled = this.OnActivation(launchArg);
                         break;
 
                     case ActivationKind.VoiceCommand:
                         var voiceArgs = e as VoiceCommandActivatedEventArgs;
-                        PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, "Calling OnActivation({0})", e?.GetType().Name);
+                        PlatformBase.Current.Logger.Log(LogLevels.Warning, "Calling OnActivation({0})", e?.GetType().Name);
                         handled = this.OnActivation(voiceArgs);
                         break;
 
                     case ActivationKind.ToastNotification:
                         var toastArgs = e as ToastNotificationActivatedEventArgs;
-                        PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, "Calling OnActivation({0})  Arguments: {1}", e?.GetType().Name, toastArgs.Argument);
+                        PlatformBase.Current.Logger.Log(LogLevels.Warning, "Calling OnActivation({0})  Arguments: {1}", e?.GetType().Name, toastArgs.Argument);
                         handled = this.OnActivation(toastArgs);
                         break;
 
                     case ActivationKind.Protocol:
                         var protocolArgs = e as ProtocolActivatedEventArgs;
-                        PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, "Calling OnActivation({0})  Arguments: {1}", e?.GetType().Name, protocolArgs.Uri.ToString());
+                        PlatformBase.Current.Logger.Log(LogLevels.Warning, "Calling OnActivation({0})  Arguments: {1}", e?.GetType().Name, protocolArgs.Uri.ToString());
                         handled = this.OnActivation(protocolArgs);
                         break;
 
                     default:
-                        PlatformBase.GetService<LoggingService>().LogError(new Exception(string.Format("Can't call OnActivation({0}) as it's not implemented!", e.Kind)));
+                        PlatformBase.Current.Logger.LogError(new Exception(string.Format("Can't call OnActivation({0}) as it's not implemented!", e.Kind)));
                         handled = false;
                         break;
                 }
 
                 if (handled == false || rootFrame?.Content == null)
-                    PlatformBase.GetService<NavigationManagerBase>().Home();
+                    PlatformBase.Current.Navigation.Home();
 
-                PlatformBase.GetService<LoggingService>().Log(LogLevels.Information, "Completed Navigation.HandleActivation({0}) on RootFrame: {1} --- OnActivation Handled? {2}", e?.GetType().Name, rootFrame?.Content?.GetType().Name, handled);
+                PlatformBase.Current.Logger.Log(LogLevels.Information, "Completed Navigation.HandleActivation({0}) on RootFrame: {1} --- OnActivation Handled? {2}", e?.GetType().Name, rootFrame?.Content?.GetType().Name, handled);
             }
             catch (Exception ex)
             {
-                PlatformBase.GetService<LoggingService>().LogError(ex, "Error during App Navigation.HandleActivation({0}) on RootFrame: {1}", e?.GetType().Name, rootFrame?.Content?.GetType().Name);
+                PlatformBase.Current.Logger.LogError(ex, "Error during App Navigation.HandleActivation({0}) on RootFrame: {1}", e?.GetType().Name, rootFrame?.Content?.GetType().Name);
                 throw ex;
             }
         }
@@ -462,7 +462,7 @@ namespace AppFramework.Core.Services
         /// </summary>
         public void Exit()
         {
-            PlatformBase.GetService<AnalyticsManager>().Event("ApplicationExit");
+            PlatformBase.Current.Analytics.Event("ApplicationExit");
             Application.Current.Exit();
         }
 
@@ -491,7 +491,7 @@ namespace AppFramework.Core.Services
             }
             catch (Exception ex)
             {
-                PlatformBase.GetService<LoggingService>().LogError(ex, "Could not close all secondary windows on Signout!");
+                PlatformBase.Current.Logger.LogError(ex, "Could not close all secondary windows on Signout!");
                 throw ex;
             }
         }
@@ -503,7 +503,7 @@ namespace AppFramework.Core.Services
         public async Task RateApplicationAsync()
         {
             // TODO remove this
-            PlatformBase.GetService<AnalyticsManager>().Event("RateApplication");
+            PlatformBase.Current.Analytics.Event("RateApplication");
             await Launcher.LaunchUriAsync(new Uri(string.Format("ms-windows-store:REVIEW?PFN={0}", global::Windows.ApplicationModel.Package.Current.Id.FamilyName)));
         }
 
@@ -516,7 +516,7 @@ namespace AppFramework.Core.Services
             if (loc == null)
                 throw new ArgumentNullException(nameof(loc));
 
-            PlatformBase.GetService<AnalyticsManager>().Event("MapExternal-" + mapOption.ToString());
+            PlatformBase.Current.Analytics.Event("MapExternal-" + mapOption.ToString());
 
             label = System.Net.WebUtility.HtmlEncode(label ?? loc.LocationDisplayName);
             string url = null;
@@ -565,7 +565,7 @@ namespace AppFramework.Core.Services
             if (toRecipients == null || toRecipients.Length == 0)
                 throw new ArgumentNullException(nameof(toRecipients));
 
-            PlatformBase.GetService<AnalyticsManager>().Event("SendEmail");
+            PlatformBase.Current.Analytics.Event("SendEmail");
             var msg = new EmailMessage();
 
             if (toRecipients != null)
@@ -643,7 +643,7 @@ namespace AppFramework.Core.Services
         /// <param name="webAddress">URL to navigate to.</param>
         public void NavigateToWebBrowser(string webAddress)
         {
-            PlatformBase.GetService<AnalyticsManager>().Event("NavigateToWebBrowser");
+            PlatformBase.Current.Analytics.Event("NavigateToWebBrowser");
             this.NavigateToWeb(webAddress, true);
         }
 
@@ -653,7 +653,7 @@ namespace AppFramework.Core.Services
         /// <param name="webAddress">URL to navigate to.</param>
         public void NavigateToWebView(string webAddress)
         {
-            PlatformBase.GetService<AnalyticsManager>().Event("NavigateToWebView");
+            PlatformBase.Current.Analytics.Event("NavigateToWebView");
             this.NavigateToWeb(webAddress, false);
         }
 
@@ -688,7 +688,7 @@ namespace AppFramework.Core.Services
             if (!string.IsNullOrEmpty(screenname))
                 url += "//user?screen_name=" + (screenname.StartsWith("@") ? screenname.Substring(1) : screenname);
 
-            PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, $"Launching Twitter @{screenname} -- {url}");
+            PlatformBase.Current.Logger.Log(LogLevels.Warning, $"Launching Twitter @{screenname} -- {url}");
             var t = Launcher.LaunchUriAsync(new Uri(url, UriKind.Absolute));
         }
 
@@ -738,7 +738,7 @@ namespace AppFramework.Core.Services
                     ApplicationView.GetForCurrentView().Consolidated += View_Consolidated;
 
 
-                    PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, $"Launched new window");
+                    PlatformBase.Current.Logger.Log(LogLevels.Warning, $"Launched new window");
                 });
 
                 // Run this on the last dispatcher so the windows get positioned correctly
@@ -753,7 +753,7 @@ namespace AppFramework.Core.Services
             }
             catch (Exception ex)
             {
-                PlatformBase.GetService<LoggingService>().LogError(ex, "Could not create new window for view type {0}.", viewType.Name);
+                PlatformBase.Current.Logger.LogError(ex, "Could not create new window for view type {0}.", viewType.Name);
                 throw ex;
             }
         }
@@ -761,7 +761,7 @@ namespace AppFramework.Core.Services
         private void View_Consolidated(ApplicationView sender, ApplicationViewConsolidatedEventArgs args)
         {
             var windowID = ApplicationView.GetApplicationViewIdForWindow(CoreWindow.GetForCurrentThread());
-            PlatformBase.GetService<LoggingService>().Log(LogLevels.Debug, $"Closed secondary window with ID {windowID}");
+            PlatformBase.Current.Logger.Log(LogLevels.Debug, $"Closed secondary window with ID {windowID}");
             AppWindows.Remove(windowID);
             ApplicationView.GetForCurrentView().Consolidated -= View_Consolidated;
             Window.Current.Close();
@@ -785,7 +785,7 @@ namespace AppFramework.Core.Services
         /// <param name="e">Event data describing the conditions that led to the event.</param>
         private void HardwareButtons_BackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
         {
-            PlatformBase.GetService<LoggingService>().Log(LogLevels.Debug, "Hardware back button pressed.");
+            PlatformBase.Current.Logger.Log(LogLevels.Debug, "Hardware back button pressed.");
             e.Handled = this.GoBack();
         }
 
@@ -822,14 +822,14 @@ namespace AppFramework.Core.Services
                 if (((int)virtualKey == 166 && noModifiers) ||
                     (virtualKey == VirtualKey.Left && onlyAlt))
                 {
-                    PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, $"Windows accelerator keyboard key pressed to go back: {virtualKey}");
+                    PlatformBase.Current.Logger.Log(LogLevels.Warning, $"Windows accelerator keyboard key pressed to go back: {virtualKey}");
                     e.Handled = this.GoBack();
                 }
                 else if (((int)virtualKey == 167 && noModifiers) ||
                     (virtualKey == VirtualKey.Right && onlyAlt))
                 {
 
-                    PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, $"Windows accelerator key pressed to go forward: {virtualKey}");
+                    PlatformBase.Current.Logger.Log(LogLevels.Warning, $"Windows accelerator key pressed to go forward: {virtualKey}");
                     // When the next key or Alt+Right are pressed navigate forward
                     e.Handled = this.GoForward();
                 }
@@ -858,12 +858,12 @@ namespace AppFramework.Core.Services
             {
                 if (backPressed)
                 {
-                    PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, "Windows accelerator mouse key pressed to go back.");
+                    PlatformBase.Current.Logger.Log(LogLevels.Warning, "Windows accelerator mouse key pressed to go back.");
                     e.Handled = this.GoBack();
                 }
                 if (forwardPressed)
                 {
-                    PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, "Windows accelerator mouse key pressed to go forward.");
+                    PlatformBase.Current.Logger.Log(LogLevels.Warning, "Windows accelerator mouse key pressed to go forward.");
                     e.Handled = this.GoForward();
                 }
             }

@@ -48,6 +48,14 @@ namespace AppFramework.Core.Services
             }
         }
 
+        public string AppName
+        {
+            get
+            {
+                return Windows.ApplicationModel.Package.Current.Id.Name;
+            }
+        }
+
         /// <summary>
         /// Gets version number of the application currently executing.
         /// </summary>
@@ -168,7 +176,7 @@ namespace AppFramework.Core.Services
         {
             try
             {
-                PlatformBase.GetService<AnalyticsManager>().Event("PurchaseAddOn", featureName);
+                PlatformBase.Current.Analytics.Event("PurchaseAddOn", featureName);
                 return await CurrentApp.RequestProductPurchaseAsync(featureName);
             }
             catch
@@ -200,7 +208,7 @@ namespace AppFramework.Core.Services
 
         private void FeaturePurchased(string featureName)
         {
-            PlatformBase.GetService<StorageManager>().SaveSetting("InAppPurchase-" + featureName, DateTime.UtcNow, ApplicationData.Current.RoamingSettings);
+            PlatformBase.Current.Storage.SaveSetting("InAppPurchase-" + featureName, DateTime.UtcNow, ApplicationData.Current.RoamingSettings);
         }
 
         private bool FeaturedPreviouslyPurchased(string featureName)
@@ -208,9 +216,9 @@ namespace AppFramework.Core.Services
             try
             {
                 var key = "InAppPurchase-" + featureName;
-                if (PlatformBase.GetService<StorageManager>().ContainsSetting(key, ApplicationData.Current.RoamingSettings))
+                if (PlatformBase.Current.Storage.ContainsSetting(key, ApplicationData.Current.RoamingSettings))
                 {
-                    var date = PlatformBase.GetService<StorageManager>().LoadSetting<DateTime>(key, ApplicationData.Current.RoamingSettings);
+                    var date = PlatformBase.Current.Storage.LoadSetting<DateTime>(key, ApplicationData.Current.RoamingSettings);
                     if (date.AddDays(7) > DateTime.UtcNow)
                         return true;
                     else
@@ -223,7 +231,7 @@ namespace AppFramework.Core.Services
             }
             catch (Exception ex)
             {
-                PlatformBase.GetService<AnalyticsManager>().Error(ex, $"Failed to check if '{featureName}' feature was previously purchased.");
+                PlatformBase.Current.Analytics.Error(ex, $"Failed to check if '{featureName}' feature was previously purchased.");
                 return false;
             }
         }

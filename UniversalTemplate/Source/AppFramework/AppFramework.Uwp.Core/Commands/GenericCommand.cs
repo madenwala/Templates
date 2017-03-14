@@ -107,7 +107,7 @@ namespace AppFramework.Core.Commands
             {
                 // Log information
                 string name = string.Format("[{0} - CanExecute] {1}", this.GetType().Name, this.CommandName);
-                PlatformBase.GetService<LoggingService>().Log(LogLevels.Debug, "{0} - Return Value: {1}  Parameter: {2}", name, value, parameter);
+                PlatformBase.Current.Logger.Log(LogLevels.Debug, "{0} - Return Value: {1}  Parameter: {2}", name, value, parameter);
             }
 
             return value;
@@ -119,8 +119,8 @@ namespace AppFramework.Core.Commands
             {
                 // Log information
                 string name = string.Format("[{0} - Execute] {1}", this.GetType().Name, this.CommandName);
-                PlatformBase.GetService<AnalyticsManager>().Event(name, parameter);
-                PlatformBase.GetService<LoggingService>().Log(LogLevels.Information, "{0} - Parameter: {1}", name, parameter);
+                PlatformBase.Current.Analytics.Event(name, parameter);
+                PlatformBase.Current.Logger.Log(LogLevels.Information, "{0} - Parameter: {1}", name, parameter);
             }
 
             if (_execute != null)

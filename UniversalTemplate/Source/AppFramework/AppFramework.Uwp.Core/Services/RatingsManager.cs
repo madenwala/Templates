@@ -49,21 +49,21 @@ namespace AppFramework.Core.Services
             bool showPromptoToSendEmail = false;
 
             // PLACE YOUR CUSTOM RATE PROMPT LOGIC HERE!
-            this.LastPromptedForRating = PlatformBase.GetService<StorageManager>().LoadSetting<DateTime>(LAST_PROMPTED_FOR_RATING);
+            this.LastPromptedForRating = PlatformBase.Current.Storage.LoadSetting<DateTime>(LAST_PROMPTED_FOR_RATING);
 
-            long launchCount = PlatformBase.GetService<StorageManager>().LoadSetting<long>(LAUNCH_COUNT);
+            long launchCount = PlatformBase.Current.Storage.LoadSetting<long>(LAUNCH_COUNT);
             launchCount++;
             if (launchCount == 3)
             {
                 showPrompt = showPromptoToSendEmail = true;
             }
-            PlatformBase.GetService<StorageManager>().SaveSetting(LAUNCH_COUNT, launchCount);
+            PlatformBase.Current.Storage.SaveSetting(LAUNCH_COUNT, launchCount);
 
             // If trial, not expired, and less than 2 days away from expiring, set as TRUE
             bool preTrialExpiredBasedPrompt = 
-                PlatformBase.GetService<AppInfoProviderBase>().IsTrial 
-                && !PlatformBase.GetService<AppInfoProviderBase>().IsTrialExpired 
-                && DateTime.Now.AddDays(2) > PlatformBase.GetService<AppInfoProviderBase>().TrialExpirationDate;
+                PlatformBase.Current.AppInfo.IsTrial 
+                && !PlatformBase.Current.AppInfo.IsTrialExpired 
+                && DateTime.Now.AddDays(2) > PlatformBase.Current.AppInfo.TrialExpirationDate;
 
             if (preTrialExpiredBasedPrompt && this.LastPromptedForRating == DateTime.MinValue)
             {
@@ -94,7 +94,7 @@ namespace AppFramework.Core.Services
             var result = await vm.ShowMessageBoxAsync(CancellationToken.None, Strings.Resources.PromptRateApplicationMessage, Strings.Resources.PromptRateApplicationTitle, new string[] { Strings.Resources.TextYes, Strings.Resources.TextMaybeLater }, 1);
 
             // Store the time the user was prompted
-            PlatformBase.GetService<StorageManager>().SaveSetting(LAST_PROMPTED_FOR_RATING, DateTime.Now);
+            PlatformBase.Current.Storage.SaveSetting(LAST_PROMPTED_FOR_RATING, DateTime.Now);
 
             if (result == 0)
             {
@@ -106,13 +106,13 @@ namespace AppFramework.Core.Services
                 // TODO do I want this?
                 result = await vm.ShowMessageBoxAsync(CancellationToken.None, Strings.Resources.PromptRateApplicationEmailFeedbackMessage, Strings.Resources.PromptRateApplicationEmailFeedbackTitle, new string[] { Strings.Resources.TextYes, Strings.Resources.TextNo }, 1);
                 if (result == 0)
-                    await PlatformBase.GetService<LoggingService>().SendSupportEmailAsync();
+                    await PlatformBase.Current.Logger.SendSupportEmailAsync();
             }
         }
 
         public async Task RateApplicationAsync()
         {
-            PlatformBase.GetService<AnalyticsManager>().Event("RateApplication");
+            PlatformBase.Current.Analytics.Event("RateApplication");
             await Launcher.LaunchUriAsync(new Uri(string.Format("ms-windows-store:REVIEW?PFN={0}", global::Windows.ApplicationModel.Package.Current.Id.FamilyName)));
         }
 

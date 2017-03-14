@@ -113,7 +113,7 @@ namespace AppFramework.Core.Services
 #if !DEBUG
             this.Services.ForEach(s => s.NewPageView(pageType));
 #endif
-            PlatformBase.GetService<LoggingService>().Log(LogLevels.Information, $"ANALYTICS: NewPageView({pageType.FullName})");
+            PlatformBase.Current.Logger.Log(LogLevels.Information, $"ANALYTICS: NewPageView({pageType.FullName})");
         }
 
         public override void Error(Exception ex, string message = null)
@@ -121,7 +121,7 @@ namespace AppFramework.Core.Services
 #if !DEBUG
             this.Services.ForEach(s => s.Error(ex, message));
 #endif
-            PlatformBase.GetService<LoggingService>().Log(LogLevels.Information, $"ANALYTICS: Error(\"{message}\", {ex.ToString()})");
+            PlatformBase.Current.Logger.Log(LogLevels.Information, $"ANALYTICS: Error(\"{message}\", {ex.ToString()})");
         }
 
         public override void Event(string eventName, Dictionary<string, string> properties, Dictionary<string, double> metrics = null)
@@ -129,7 +129,7 @@ namespace AppFramework.Core.Services
 #if !DEBUG
             this.Services.ForEach(s => s.Event(eventName, properties, metrics));
 #endif
-            PlatformBase.GetService<LoggingService>().Log(LogLevels.Information, $"ANALYTICS: Event({eventName}, {Serializer.Serialize(properties)}, {Serializer.Serialize(metrics)})");
+            PlatformBase.Current.Logger.Log(LogLevels.Information, $"ANALYTICS: Event({eventName}, {Serializer.Serialize(properties)}, {Serializer.Serialize(metrics)})");
         }
 
         public override void SetUser(string username)
@@ -137,7 +137,7 @@ namespace AppFramework.Core.Services
 #if !DEBUG
             this.Services.ForEach(s => s.SetUser(username));
 #endif
-            PlatformBase.GetService<LoggingService>().Log(LogLevels.Information, $"ANALYTICS: SetUser({username})");
+            PlatformBase.Current.Logger.Log(LogLevels.Information, $"ANALYTICS: SetUser({username})");
         }
     }
 

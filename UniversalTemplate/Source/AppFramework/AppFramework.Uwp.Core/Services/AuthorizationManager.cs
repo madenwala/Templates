@@ -88,16 +88,16 @@ namespace AppFramework.Core.Services
         {
             // Retrieve the access token from the credential locker
             string access_token_value = null;
-            if (PlatformBase.GetService<StorageManager>().LoadCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_ACCESSTOKEN_KEYNAME, ref access_token_value))
+            if (PlatformBase.Current.Storage.LoadCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_ACCESSTOKEN_KEYNAME, ref access_token_value))
                 this.AccessToken = access_token_value;
 
             // Retrieve the refresh token from the credential locker
             string refresh_token_value = null;
-            if (PlatformBase.GetService<StorageManager>().LoadCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_REFRESHTOKEN_KEYNAME, ref refresh_token_value))
+            if (PlatformBase.Current.Storage.LoadCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_REFRESHTOKEN_KEYNAME, ref refresh_token_value))
                 this.RefreshToken = refresh_token_value;
 
             // Retrieve the user profile data from settings
-            this.User = await PlatformBase.GetService<StorageManager>().LoadFileAsync<UserResponse>(CREDENTIAL_USER_KEYNAME, ApplicationData.Current.RoamingFolder, SerializerTypes.Json);
+            this.User = await PlatformBase.Current.Storage.LoadFileAsync<UserResponse>(CREDENTIAL_USER_KEYNAME, ApplicationData.Current.RoamingFolder, SerializerTypes.Json);
             if (this.User != null)
             {
                 this.User.AccessToken = this.AccessToken;
@@ -124,12 +124,12 @@ namespace AppFramework.Core.Services
             else
             {
                 // Log user
-                // TODO PlatformBase.GetService<AnalyticsManager>().SetUser(response);
+                // TODO PlatformBase.Current.Analytics.SetUser(response);
 
                 // Store user data
-                await PlatformBase.GetService<StorageManager>().SaveFileAsync(CREDENTIAL_USER_KEYNAME, response, ApplicationData.Current.RoamingFolder, SerializerTypes.Json);
-                PlatformBase.GetService<StorageManager>().SaveCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_ACCESSTOKEN_KEYNAME, response.AccessToken);
-                PlatformBase.GetService<StorageManager>().SaveCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_REFRESHTOKEN_KEYNAME, response.RefreshToken);
+                await PlatformBase.Current.Storage.SaveFileAsync(CREDENTIAL_USER_KEYNAME, response, ApplicationData.Current.RoamingFolder, SerializerTypes.Json);
+                PlatformBase.Current.Storage.SaveCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_ACCESSTOKEN_KEYNAME, response.AccessToken);
+                PlatformBase.Current.Storage.SaveCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_REFRESHTOKEN_KEYNAME, response.RefreshToken);
 
                 // Set properties
                 this.User = response;
@@ -148,8 +148,8 @@ namespace AppFramework.Core.Services
         /// <returns>Awaitable task is returned.</returns>
         public async Task SignoutAsync()
         {
-            await PlatformBase.GetService<StorageManager>().SaveFileAsync(CREDENTIAL_USER_KEYNAME, null, ApplicationData.Current.RoamingFolder, SerializerTypes.Json);
-            PlatformBase.GetService<StorageManager>().SaveCredential(CREDENTIAL_USER_KEYNAME, null, null);
+            await PlatformBase.Current.Storage.SaveFileAsync(CREDENTIAL_USER_KEYNAME, null, ApplicationData.Current.RoamingFolder, SerializerTypes.Json);
+            PlatformBase.Current.Storage.SaveCredential(CREDENTIAL_USER_KEYNAME, null, null);
             this.User = null;
             this.AccessToken = null;
             this.RefreshToken = null;

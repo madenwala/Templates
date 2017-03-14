@@ -49,9 +49,9 @@ namespace AppFramework.Core.ViewModels
                 foreach (var registration in BackgroundTaskRegistration.AllTasks)
                 {
                     string key = "TASK_" + registration.Value.Name;
-                    if (PlatformBase.GetService<StorageManager>().ContainsSetting(key, Windows.Storage.ApplicationData.Current.LocalSettings))
+                    if (PlatformBase.Current.Storage.ContainsSetting(key, Windows.Storage.ApplicationData.Current.LocalSettings))
                     {
-                        var info = PlatformBase.GetService<StorageManager>().LoadSetting<BackgroundTaskRunInfo>(key, Windows.Storage.ApplicationData.Current.LocalSettings);
+                        var info = PlatformBase.Current.Storage.LoadSetting<BackgroundTaskRunInfo>(key, Windows.Storage.ApplicationData.Current.LocalSettings);
                         if (info != null)
                         {
                             info.TaskName = registration.Value.Name;

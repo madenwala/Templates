@@ -83,7 +83,7 @@ namespace AppFramework.Core.ViewModels
             }
             catch (Exception ex)
             {
-                PlatformBase.GetService<LoggingService>().LogError(ex, "Error during CollectionViewModelBase.OnSaveStateAsync calling each individual child ViewModel.SaveStateAsync");
+                PlatformBase.Current.Logger.LogError(ex, "Error during CollectionViewModelBase.OnSaveStateAsync calling each individual child ViewModel.SaveStateAsync");
                 throw;
             }
 
@@ -119,7 +119,7 @@ namespace AppFramework.Core.ViewModels
 
             if (this.CurrentViewModel != null)
             {
-                PlatformBase.GetService<LoggingService>().Log(LogLevels.Debug, "CollectionViewModelBase.SetCurrent to {0}", vm);
+                PlatformBase.Current.Logger.Log(LogLevels.Debug, "CollectionViewModelBase.SetCurrent to {0}", vm);
                 this.CurrentViewModel.PropertyChanged += CurrentVM_PropertyChanged;
                 if (this.CurrentViewModel is WebBrowserViewModel)
                     this.CopyStatus(null);
@@ -137,8 +137,8 @@ namespace AppFramework.Core.ViewModels
             }
 
             // Update global navigation
-            PlatformBase.GetService<NavigationManagerBase>().NavigateGoBackCommand.RaiseCanExecuteChanged();
-            PlatformBase.GetService<NavigationManagerBase>().NavigateGoForwardCommand.RaiseCanExecuteChanged();
+            PlatformBase.Current.Navigation.NavigateGoBackCommand.RaiseCanExecuteChanged();
+            PlatformBase.Current.Navigation.NavigateGoForwardCommand.RaiseCanExecuteChanged();
         }
 
         protected internal override bool OnBackNavigationRequested()

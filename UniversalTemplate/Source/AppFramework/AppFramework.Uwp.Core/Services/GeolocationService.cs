@@ -119,7 +119,7 @@ namespace AppFramework.Core.Services
                 case GeolocationAccessStatus.Allowed:
                     try
                     {
-                        PlatformBase.GetService<LoggingService>().Log(LogLevels.Debug, "GetSingleCoordinate Started...");
+                        PlatformBase.Current.Logger.Log(LogLevels.Debug, "GetSingleCoordinate Started...");
                         Geolocator geo = new Geolocator();
 
                         geo.DesiredAccuracy = highAccuracy ? PositionAccuracy.High : PositionAccuracy.Default;
@@ -128,33 +128,33 @@ namespace AppFramework.Core.Services
 
                         // Retrieve the current user's location
                         Geoposition loc = await geo.GetGeopositionAsync(new TimeSpan(0, 0, 1), new TimeSpan(0, 0, 60)).AsTask(token.HasValue ? token.Value : CancellationToken.None);
-                        PlatformBase.GetService<LoggingService>().Log(LogLevels.Debug, "GetSingleCoordinate Completed!");
+                        PlatformBase.Current.Logger.Log(LogLevels.Debug, "GetSingleCoordinate Completed!");
 
                         // Store location and update statuses and analytics
                         this.CurrentLocation = loc.Coordinate.AsLocationModel();
                         this.Status = geo.LocationStatus;
-                        PlatformBase.GetService<AnalyticsManager>().SetCurrentLocation(this.CurrentLocation);
+                        PlatformBase.Current.Analytics.SetCurrentLocation(this.CurrentLocation);
 
                         // Return location found
                         return loc;
                     }
                     catch (TaskCanceledException)
                     {
-                        PlatformBase.GetService<LoggingService>().Log(LogLevels.Debug, "GetSingleCoordinate cancelled!");
+                        PlatformBase.Current.Logger.Log(LogLevels.Debug, "GetSingleCoordinate cancelled!");
                         return null;
                     }
                     catch (Exception ex)
                     {
-                        PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, "GetSingleCoordinate exception. Exception.Message = {0}", ex.Message);
+                        PlatformBase.Current.Logger.Log(LogLevels.Warning, "GetSingleCoordinate exception. Exception.Message = {0}", ex.Message);
                         return null;
                     }
                     
                 case GeolocationAccessStatus.Denied:
-                    PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, "GetSingleCoordinate access denied!");
+                    PlatformBase.Current.Logger.Log(LogLevels.Warning, "GetSingleCoordinate access denied!");
                     return null;
 
                 case GeolocationAccessStatus.Unspecified:
-                    PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, "GetSingleCoordinate unspecified error!");
+                    PlatformBase.Current.Logger.Log(LogLevels.Warning, "GetSingleCoordinate unspecified error!");
                     return null;
 
                 default:
@@ -178,7 +178,7 @@ namespace AppFramework.Core.Services
                     {
                         if (_geolocator == null)
                         {
-                            PlatformBase.GetService<LoggingService>().Log(LogLevels.Information, "StartTracking Started...");
+                            PlatformBase.Current.Logger.Log(LogLevels.Information, "StartTracking Started...");
                             _geolocator = new Geolocator();
 
                             // Set locator properties
@@ -191,31 +191,31 @@ namespace AppFramework.Core.Services
                             // Watch for location change events and update properties when updated
                             _geolocator.StatusChanged += (sender, args) =>
                             {
-                                PlatformBase.GetService<LoggingService>().Log(LogLevels.Debug, "StartTracking StatusChanged = {0}", args.Status);
+                                PlatformBase.Current.Logger.Log(LogLevels.Debug, "StartTracking StatusChanged = {0}", args.Status);
                                 this.Status = args.Status;
                             };
                             _geolocator.PositionChanged += (sender, args) =>
                             {
-                                PlatformBase.GetService<LoggingService>().Log(LogLevels.Debug, "StartTracking PositionChanged = {0}, {1}", args.Position.Coordinate.Point.Position.Latitude, args.Position.Coordinate.Point.Position.Longitude);
+                                PlatformBase.Current.Logger.Log(LogLevels.Debug, "StartTracking PositionChanged = {0}, {1}", args.Position.Coordinate.Point.Position.Latitude, args.Position.Coordinate.Point.Position.Longitude);
                                 this.CurrentLocation = args.Position.Coordinate.AsLocationModel();
-                                PlatformBase.GetService<AnalyticsManager>().SetCurrentLocation(this.CurrentLocation);
+                                PlatformBase.Current.Analytics.SetCurrentLocation(this.CurrentLocation);
                             };
                         }
                     }
                     catch (Exception ex)
                     {
-                        PlatformBase.GetService<LoggingService>().LogError(ex, "StartTracking exception = {0}", ex.Message);
+                        PlatformBase.Current.Logger.LogError(ex, "StartTracking exception = {0}", ex.Message);
                         this.StopTracking();
                     }
                     break;
 
                 case GeolocationAccessStatus.Denied:
-                    PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, "StartTracking access denied!");
+                    PlatformBase.Current.Logger.Log(LogLevels.Warning, "StartTracking access denied!");
                     this.StopTracking();
                     break;
 
                 case GeolocationAccessStatus.Unspecified:
-                    PlatformBase.GetService<LoggingService>().Log(LogLevels.Warning, "StartTracking unspecified error!");
+                    PlatformBase.Current.Logger.Log(LogLevels.Warning, "StartTracking unspecified error!");
                     this.StopTracking();
                     break;
 
@@ -231,7 +231,7 @@ namespace AppFramework.Core.Services
         {
             if (_geolocator != null)
                 _geolocator = null;
-            PlatformBase.GetService<LoggingService>().Log(LogLevels.Information, "StopTracking Completed!");
+            PlatformBase.Current.Logger.Log(LogLevels.Information, "StopTracking Completed!");
         }
 
         /// <summary>

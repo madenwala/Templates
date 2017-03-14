@@ -237,7 +237,7 @@ namespace AppFramework.Core
         /// </summary>
         /// <typeparam name="T">Type reference of the service to retrieve.</typeparam>
         /// <returns>Instance of type T if it was already initialized or null if not found.</returns>
-        internal static T GetService<T>() where T : ServiceBase
+        private static T GetService<T>() where T : ServiceBase
         {
             if (_services.ContainsKey(typeof(T)))
                 return (T)_services[typeof(T)];
@@ -255,7 +255,7 @@ namespace AppFramework.Core
         /// Registers and intializes an instance of an adapter.
         /// </summary>
         /// <typeparam name="T">Type reference of the service to register and initialize.</typeparam>
-        internal static void SetService<T>(T instance) where T : ServiceBase
+        private static void SetService<T>(T instance) where T : ServiceBase
         {
             // Check if T is already registered
             if (_services.ContainsKey(typeof(T)))
@@ -316,13 +316,13 @@ namespace AppFramework.Core
             // Only log this when the debugger is not attached and you're in RELEASE mode
             try
             {
-                PlatformBase.GetService<AnalyticsManager>().Error(e, "Unhandled Exception");
+                PlatformBase.Current.Analytics.Error(e, "Unhandled Exception");
             }
             catch { }
 
             try
             {
-                PlatformBase.GetService<LoggingService>().LogErrorFatal(e);
+                PlatformBase.Current.Logger.LogErrorFatal(e);
             }
             catch (Exception exLog)
             {

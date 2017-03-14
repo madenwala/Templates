@@ -1,6 +1,8 @@
 ﻿using AppFramework.Core.Commands;
 using AppFramework.Core.Models;
 using AppFramework.Core.Services;
+using AppFramework.Core.Strings;
+using AppFramework.Core.ViewModels;
 using System;
 using Windows.ApplicationModel.DataTransfer;
 
@@ -46,17 +48,45 @@ namespace AppFramework.Core.Services
         /// <param name="model"></param>
         public void Share(IModel model)
         {
-            PlatformBase.GetService<AnalyticsManager>().Event("Share");
+            PlatformBase.Current.Analytics.Event("Share");
 
             DataTransferManager.GetForCurrentView().DataRequested += (sender, e) =>
             {
                 try
                 {
-                    // TODO this.SetShareContent(e.Request, model ?? Platform.Current.ViewModel);
+                    PlatformBase.Current.Logger.Log(LogLevels.Information, "SetShareContent - Model: {0}", model?.GetType().Name);
+
+                    if (model is WebBrowserViewModel)
+                    {
+                        var vm = model as WebBrowserViewModel;
+                        e.Request.Data.Properties.Title = vm.Title;
+                        e.Request.Data.SetWebLink(new Uri(vm.CurrentUrl, UriKind.Absolute));
+                    }
+                    else
+                    {
+                        try
+                        {
+                            this.SetShareContent(e.Request, model ?? PlatformBase.Current.ViewModel);
+                        }
+                        catch(Exception ex)
+                        {
+                            PlatformBase.Current.Logger.LogError(ex, "Failure while calling SetShareContent");
+                            throw ex;
+                        }
+                    }
+
+                    if (string.IsNullOrEmpty(e.Request.Data.Properties.Title))
+                    {
+                        e.Request.Data.Properties.Title = PlatformBase.Current.AppInfo.AppName;
+                        e.Request.Data.Properties.Description = Resources.ApplicationDescription;
+                        e.Request.Data.Properties.ContentSourceApplicationLink = new Uri(PlatformBase.Current.AppInfo.StoreURL, UriKind.Absolute);
+                        string body = string.Format(Resources.ApplicationSharingBodyText, PlatformBase.Current.AppInfo.AppName, PlatformBase.Current.AppInfo.StoreURL);
+                        e.Request.Data.SetText(body);
+                    }
                 }
                 catch (Exception ex)
                 {
-                    PlatformBase.GetService<LoggingService>().LogError(ex, "Error in OnDataRequested");
+                    PlatformBase.Current.Logger.LogError(ex, "Error in OnDataRequested");
 #if DEBUG
                     e.Request.FailWithDisplayText(ex.ToString());
 #else

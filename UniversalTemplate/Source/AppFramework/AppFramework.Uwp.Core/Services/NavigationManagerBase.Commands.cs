@@ -218,7 +218,7 @@ namespace AppFramework.Core.Services
                 {
                     if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher"))
                     {
-                        PlatformBase.GetService<AnalyticsManager>().Event("FeedbackLauncher");
+                        PlatformBase.Current.Analytics.Event("FeedbackLauncher");
                         await Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.GetDefault().LaunchAsync();
                     }
                     else
@@ -234,7 +234,7 @@ namespace AppFramework.Core.Services
         private CommandBase _navigateToPhoneCommand = null;
         public CommandBase NavigateToPhoneCommand
         {
-            get { return _navigateToPhoneCommand ?? (_navigateToPhoneCommand = new NavigationCommand("NavigateToPhoneCommand", PlatformBase.GetService<NavigationManagerBase>().Phone)); }
+            get { return _navigateToPhoneCommand ?? (_navigateToPhoneCommand = new NavigationCommand("NavigateToPhoneCommand", PlatformBase.Current.Navigation.Phone)); }
         }
 
         #endregion
@@ -244,7 +244,7 @@ namespace AppFramework.Core.Services
         private CommandBase _navigateToTwitterScreenNameCommand = null;
         public CommandBase NavigateToTwitterScreenNameCommand
         {
-            get { return _navigateToTwitterScreenNameCommand ?? (_navigateToTwitterScreenNameCommand = new GenericCommand<string>("NavigateToTwitterScreenNameCommand", PlatformBase.GetService<NavigationManagerBase>().NavigateToTwitterScreenName)); }
+            get { return _navigateToTwitterScreenNameCommand ?? (_navigateToTwitterScreenNameCommand = new GenericCommand<string>("NavigateToTwitterScreenNameCommand", PlatformBase.Current.Navigation.NavigateToTwitterScreenName)); }
         }
 
         #endregion
