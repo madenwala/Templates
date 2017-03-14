@@ -497,17 +497,6 @@ namespace AppFramework.Core.Services
 
         #endregion
 
-        #region Common Pages
-
-        public async Task RateApplicationAsync()
-        {
-            // TODO remove this
-            PlatformBase.Current.Analytics.Event("RateApplication");
-            await Launcher.LaunchUriAsync(new Uri(string.Format("ms-windows-store:REVIEW?PFN={0}", global::Windows.ApplicationModel.Package.Current.Id.FamilyName)));
-        }
-
-        #endregion
-
         #region Maps
 
         public void MapExternal(ILocationModel loc, string label = null, MapExternalOptions mapOption = MapExternalOptions.Normal, double zoomLevel = 16)

@@ -187,15 +187,6 @@ namespace AppFramework.Core.Services
 
         #region Feedback Commands
 
-        private CommandBase _navigateToRateAppCommand = null;
-        /// <summary>
-        /// Command to navigate to the platform's rate application functionality.
-        /// </summary>
-        public CommandBase NavigateToRateAppCommand
-        {
-            get { return _navigateToRateAppCommand ?? (_navigateToRateAppCommand = new NavigationCommand("NavigateToRateAppCommand", async () => await this.RateApplicationAsync())); }
-        }
-
         public bool IsFeedbackEnabled
         {
             // Microsoft Store Engagement and Monetization SDK

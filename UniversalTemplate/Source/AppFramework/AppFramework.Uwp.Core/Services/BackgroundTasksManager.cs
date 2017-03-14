@@ -71,7 +71,7 @@ namespace AppFramework.Core.Services
                 {
                     try
                     {
-                        // TODO this.Registrations();
+                        this.Registrations();
 
                         // Flag that registration was completed
                         this.AreTasksRegistered = true;

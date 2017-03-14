@@ -1,6 +1,7 @@
 ﻿using AppFramework.Core.Commands;
 using AppFramework.Core.Extensions;
 using AppFramework.Core.Services;
+using AppFramework.Core.Strings;
 using AppFramework.Core.ViewModels;
 using Microsoft.Toolkit.Uwp.Helpers;
 using System;
@@ -261,7 +262,8 @@ namespace AppFramework.Core.Services
 
             var body = Strings.Resources.ApplicationSupportEmailBodyTemplate;
             body += report;
-            // TODO await PlatformBase.Current.Navigation.SendEmailAsync(subject, body, Strings.Resources.ApplicationSupportEmailAddress, attachment);
+            // TODO move app support email address to app info provider
+            await PlatformBase.Current.Navigation.SendEmailAsync(subject, body, Resources.ApplicationSupportEmailAddress, attachment);
         }
 
         /// <summary>
@@ -280,7 +282,7 @@ namespace AppFramework.Core.Services
                     sb.AppendLine("TRIAL EXPIRATION: " + PlatformBase.Current.AppInfo.TrialExpirationDate);
                 sb.AppendLine("INSTALLED: " + Windows.ApplicationModel.Package.Current.InstalledDate.DateTime);
             }
-            // TODO sb.AppendLine("INITIALIZATION MODE: " + PlatformBase.Current.InitializationMode);
+            sb.AppendLine("INITIALIZATION MODE: " + PlatformBase.Current.InitializationMode);
             sb.AppendLine(string.Format("CULTURE: {0}  UI CULTURE: {1}", CultureInfo.CurrentCulture.Name, CultureInfo.CurrentUICulture.Name));
             sb.AppendLine(string.Format("OS: {0} {1} {2} {3}", SystemInformation.OperatingSystem, SystemInformation.OperatingSystemArchitecture, SystemInformation.OperatingSystemVersion, SystemInformation.DeviceFamily));
             sb.AppendLine(string.Format("DEVICE: {0} {1}", SystemInformation.DeviceManufacturer, SystemInformation.DeviceModel));

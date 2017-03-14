@@ -122,7 +122,7 @@
                             Content="&#xE939;" /> <!-- Feedback &#xE939; Smile &#xE76E; />-->
                         <Button
                             x:Uid="/Contoso.Core/Resources/pbtnRateApp"
-                            Command="{x:Bind ViewModel.Platform.Navigation.NavigateToRateAppCommand}"
+                            Command="{x:Bind ViewModel.Platform.Ratings.NavigateToRateAppCommand}"
                             Style="{StaticResource SplitViewPaneButtonStyle}" >
                             <SymbolIcon>Like</SymbolIcon>
                         </Button>
