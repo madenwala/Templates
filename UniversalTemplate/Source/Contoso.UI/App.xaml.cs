@@ -1,5 +1,4 @@
 ﻿using AppFramework.Core;
-using AppFramework.Core.Services;
 using AppFramework.Core.Services.Analytics;
 using AppFramework.Uwp.UI;
 using AppFramework.Uwp.UI.Controls;
