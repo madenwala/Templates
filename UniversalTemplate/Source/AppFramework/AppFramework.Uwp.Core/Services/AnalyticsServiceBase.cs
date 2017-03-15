@@ -118,14 +118,20 @@ namespace AppFramework.Core.Services
 
         public override void Error(Exception ex, string message = null)
         {
+            if (ex == null)
+                throw new ArgumentNullException(nameof(ex));
+
 #if !DEBUG
             this.Services.ForEach(s => s.Error(ex, message));
 #endif
-            PlatformBase.Current.Logger.Log(LogLevels.Information, $"ANALYTICS: Error(\"{message}\", {ex.ToString()})");
+                PlatformBase.Current.Logger.Log(LogLevels.Information, $"ANALYTICS: Error(\"{message}\", {ex.ToString()})");
         }
 
         public override void Event(string eventName, Dictionary<string, string> properties, Dictionary<string, double> metrics = null)
         {
+            if (string.IsNullOrWhiteSpace(eventName))
+                throw new ArgumentNullException(nameof(eventName));
+
 #if !DEBUG
             this.Services.ForEach(s => s.Event(eventName, properties, metrics));
 #endif
@@ -134,10 +140,11 @@ namespace AppFramework.Core.Services
 
         public override void SetUser(string username)
         {
-#if !DEBUG
-            this.Services.ForEach(s => s.SetUser(username));
-#endif
-            PlatformBase.Current.Logger.Log(LogLevels.Information, $"ANALYTICS: SetUser({username})");
+            if (!string.IsNullOrWhiteSpace(username))
+            {
+                this.Services.ForEach(s => s.SetUser(username));
+                PlatformBase.Current.Logger.Log(LogLevels.Information, $"ANALYTICS: SetUser({username})");
+            }
         }
     }
 

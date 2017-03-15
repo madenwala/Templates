@@ -179,8 +179,8 @@ namespace AppFramework.Core
                 await this.CheckInitializationAsync(service.Value);
             }
 
-            // Record the userID to analytics
-            this.Analytics.SetUser(this.AppInfo.UserID);
+            //// Record the userID to analytics
+            //this.Analytics.SetUser(this.AppInfo.UserID);
 
             // Execute only on first runs of the platform
             if (mode == InitializationModes.New)
@@ -303,14 +303,14 @@ namespace AppFramework.Core
         /// <returns>True if the exception was handled else false.</returns>
         public bool AppUnhandledException(Exception e)
         {
-            if (System.Diagnostics.Debugger.IsAttached)
+            if (Debugger.IsAttached)
             {
                 // If the Native debugger is in use, give us a clue in the Output window at least
-                System.Diagnostics.Debug.WriteLine("Unhandled exception:" + e.Message);
-                System.Diagnostics.Debug.WriteLine(e.StackTrace);
+                Debug.WriteLine("Unhandled exception:" + e.Message);
+                Debug.WriteLine(e.StackTrace);
 
                 // An unhandled exception has occurred; break into the debugger
-                System.Diagnostics.Debugger.Break();
+                Debugger.Break();
             }
 
             // Only log this when the debugger is not attached and you're in RELEASE mode
@@ -326,8 +326,8 @@ namespace AppFramework.Core
             }
             catch (Exception exLog)
             {
-                System.Diagnostics.Debug.WriteLine("Exception logging to Logger in AppUnhandledException!");
-                System.Diagnostics.Debug.WriteLine(exLog.ToString());
+                Debug.WriteLine("Exception logging to Logger in AppUnhandledException!");
+                Debug.WriteLine(exLog.ToString());
             }
 
             return false;

@@ -102,6 +102,7 @@ namespace AppFramework.Core.Services
             {
                 this.User.AccessToken = this.AccessToken;
                 this.User.RefreshToken = this.RefreshToken;
+                PlatformBase.Current.Analytics.SetUser(this.User.Email);
             }
             
             // Notify any subscribers that authentication status has changed
@@ -124,7 +125,7 @@ namespace AppFramework.Core.Services
             else
             {
                 // Log user
-                // TODO PlatformBase.Current.Analytics.SetUser(response);
+                PlatformBase.Current.Analytics.SetUser(response?.Email);
 
                 // Store user data
                 await PlatformBase.Current.Storage.SaveFileAsync(CREDENTIAL_USER_KEYNAME, response, ApplicationData.Current.RoamingFolder, SerializerTypes.Json);
