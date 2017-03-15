@@ -56,13 +56,10 @@ namespace AppFramework.Core.Services.Analytics
                 HockeyClient.Current.UpdateContactInfo(username, username);
         }
 
-        //public override void SetUser(UserResponse user)
-        //{
-        //    if (user != null)
-        //    {
-        //        this.Event("Username", user.Email);
-        //        HockeyClient.Current.UpdateContactInfo(user.ID, user.Email);
-        //    }
-        //}
+        public override void SetUser(IUserInformation user)
+        {
+            if(user != null)
+                HockeyClient.Current.UpdateContactInfo(user.DisplayName, user.Email);
+        }
     }
 }

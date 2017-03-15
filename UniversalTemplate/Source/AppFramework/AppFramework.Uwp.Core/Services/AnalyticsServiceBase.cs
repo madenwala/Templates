@@ -66,6 +66,16 @@ namespace AppFramework.Core.Services
         public abstract void SetUser(string username);
 
         /// <summary>
+        /// Sets the user to the analytics providers.
+        /// </summary>
+        /// <param name="user">User object representing the current user.</param>
+        public virtual void SetUser(IUserInformation user)
+        {
+            if (user != null)
+                this.SetUser(user.UserID);
+        }
+
+        /// <summary>
         /// Sets the current location to the analytics service.
         /// </summary>
         /// <param name="loc">Location value to log</param>

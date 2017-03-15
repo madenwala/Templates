@@ -1,5 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace AppFramework.Core.Models
 {
@@ -23,7 +22,7 @@ namespace AppFramework.Core.Models
     /// <summary>
     /// Response object from the authentication end point.
     /// </summary>
-    public class UserResponse : ResponseBase
+    public class UserResponse : ResponseBase, IUserInformation
     {
         private string _AccessToken;
         public string AccessToken
@@ -40,7 +39,7 @@ namespace AppFramework.Core.Models
         }
 
         private string _ID;
-        public string ID
+        public string UserID
         {
             get { return _ID; }
             set { this.SetProperty(ref _ID, value); }

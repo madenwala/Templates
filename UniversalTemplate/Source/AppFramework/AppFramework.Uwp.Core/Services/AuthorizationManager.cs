@@ -102,7 +102,7 @@ namespace AppFramework.Core.Services
             {
                 this.User.AccessToken = this.AccessToken;
                 this.User.RefreshToken = this.RefreshToken;
-                PlatformBase.Current.Analytics.SetUser(this.User.Email);
+                PlatformBase.Current.Analytics.SetUser(this.User);
             }
             
             // Notify any subscribers that authentication status has changed
@@ -114,10 +114,10 @@ namespace AppFramework.Core.Services
         /// <summary>
         /// Sets the current user of the app.
         /// </summary>
-        /// <param name="response"></param>
-        public async Task<bool> SetUserAsync(UserResponse response)
+        /// <param name="user"></param>
+        public async Task<bool> SetUserAsync(UserResponse user)
         {
-            if (string.IsNullOrEmpty(response?.AccessToken))
+            if (string.IsNullOrEmpty(user?.AccessToken))
             {
                 await this.SignoutAsync();
                 return false;
@@ -125,17 +125,17 @@ namespace AppFramework.Core.Services
             else
             {
                 // Log user
-                PlatformBase.Current.Analytics.SetUser(response?.Email);
+                PlatformBase.Current.Analytics.SetUser(user);
 
                 // Store user data
-                await PlatformBase.Current.Storage.SaveFileAsync(CREDENTIAL_USER_KEYNAME, response, ApplicationData.Current.RoamingFolder, SerializerTypes.Json);
-                PlatformBase.Current.Storage.SaveCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_ACCESSTOKEN_KEYNAME, response.AccessToken);
-                PlatformBase.Current.Storage.SaveCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_REFRESHTOKEN_KEYNAME, response.RefreshToken);
+                await PlatformBase.Current.Storage.SaveFileAsync(CREDENTIAL_USER_KEYNAME, user, ApplicationData.Current.RoamingFolder, SerializerTypes.Json);
+                PlatformBase.Current.Storage.SaveCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_ACCESSTOKEN_KEYNAME, user.AccessToken);
+                PlatformBase.Current.Storage.SaveCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_REFRESHTOKEN_KEYNAME, user.RefreshToken);
 
                 // Set properties
-                this.User = response;
-                this.AccessToken = response.AccessToken;
-                this.RefreshToken = response.RefreshToken;
+                this.User = user;
+                this.AccessToken = user.AccessToken;
+                this.RefreshToken = user.RefreshToken;
 
                 // Notify any subscribers that authentication status has changed
                 this.NotifyUserAuthenticated();

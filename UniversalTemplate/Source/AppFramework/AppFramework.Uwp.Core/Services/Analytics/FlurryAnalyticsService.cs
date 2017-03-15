@@ -66,13 +66,9 @@ namespace AppFramework.Core.Services.Analytics
 
         public override void SetUser(string username)
         {
-            Api.SetUserId(username);
+            if(!string.IsNullOrEmpty(username))
+                Api.SetUserId(username);
         }
-
-        //public override void SetUser(UserResponse user)
-        //{
-        //    Api.SetUserId(user?.Email);
-        //}
 
         public override void Dispose()
         {

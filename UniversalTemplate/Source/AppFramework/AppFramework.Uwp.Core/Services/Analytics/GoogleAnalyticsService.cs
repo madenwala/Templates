@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AppFramework.Core.Models;
 using GoogleAnalytics;
 
 namespace AppFramework.Core.Services.Analytics
@@ -48,12 +49,8 @@ namespace AppFramework.Core.Services.Analytics
 
         public override void SetUser(string username)
         {
-            _tracker.Send(HitBuilder.CreateCustomEvent("User", username).Build());
+            if(!string.IsNullOrWhiteSpace(username))
+                _tracker.Send(HitBuilder.CreateCustomEvent("User", username).Build());
         }
-
-        //public override void SetUser(UserResponse user)
-        //{
-        //    this.SetUser(user.DisplayName);
-        //}
     }
 }
