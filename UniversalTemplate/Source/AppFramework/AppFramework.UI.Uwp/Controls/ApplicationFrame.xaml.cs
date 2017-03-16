@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace AppFramework.UI.Uwp.Controls
+namespace AppFramework.UI.Controls
 {    /// <summary>
      /// An empty page that can be used on its own or navigated to within a Frame.
      /// </summary>

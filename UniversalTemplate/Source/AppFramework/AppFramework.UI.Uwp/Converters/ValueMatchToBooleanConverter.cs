@@ -1,7 +1,7 @@
 ﻿using System;
 using Windows.UI.Xaml.Data;
 
-namespace AppFramework.UI.Uwp.Converters
+namespace AppFramework.UI.Converters
 {
     public class ValueMatchToBooleanConverter : IValueConverter
     {

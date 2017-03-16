@@ -1,7 +1,7 @@
 ﻿using AppFramework.Core;
 using Windows.UI.Xaml;
 
-namespace AppFramework.UI.Uwp.Triggers
+namespace AppFramework.UI.Triggers
 {
     /// <summary>
     /// Trigger for when you need do perform specific customizations NOT on the specified device family.

@@ -4,7 +4,7 @@ using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 
-namespace AppFramework.UI.Uwp.Triggers
+namespace AppFramework.UI.Triggers
 {
     /// <summary>
     /// Trigger for determinging when continuum on Windows Mobile is available for consumption.

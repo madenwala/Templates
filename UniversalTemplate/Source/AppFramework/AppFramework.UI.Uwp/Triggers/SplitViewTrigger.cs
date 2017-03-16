@@ -1,7 +1,7 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace AppFramework.UI.Uwp.Triggers
+namespace AppFramework.UI.Triggers
 {
     public sealed class SplitViewChangeHeaderBackgroundTrigger : StateTriggerBase
     {

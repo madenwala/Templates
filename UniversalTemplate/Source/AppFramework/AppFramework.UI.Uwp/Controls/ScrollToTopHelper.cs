@@ -2,7 +2,7 @@
 using AppFramework.Core.Models;
 using Windows.UI.Xaml.Controls;
 
-namespace AppFramework.UI.Uwp.Controls
+namespace AppFramework.UI.Controls
 {
     public static class ScrollToTopHelper
     {

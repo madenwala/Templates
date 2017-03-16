@@ -6,7 +6,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using System.Runtime.InteropServices;
 
-namespace AppFramework.UI.Uwp.Controls
+namespace AppFramework.UI.Controls
 {
     public class WrapPanel : Panel
     {
@@ -21,11 +21,11 @@ namespace AppFramework.UI.Uwp.Controls
         #region public double ItemHeight
         /// <summary>
         /// Gets or sets the height of the layout area for each item that is
-        /// contained in a <see cref="T:AppFramework.UI.Uwp.Controls.WrapPanel" />.
+        /// contained in a <see cref="T:AppFramework.UI.Controls.WrapPanel" />.
         /// </summary>
         /// <value>
         /// The height applied to the layout area of each item that is contained
-        /// within a <see cref="T:AppFramework.UI.Uwp.Controls.WrapPanel" />.  The
+        /// within a <see cref="T:AppFramework.UI.Controls.WrapPanel" />.  The
         /// default value is <see cref="F:System.Double.NaN" />.
         /// </value>
         public double ItemHeight
@@ -36,12 +36,12 @@ namespace AppFramework.UI.Uwp.Controls
 
         /// <summary>
         /// Identifies the
-        /// <see cref="P:AppFramework.UI.Uwp.Controls.WrapPanel.ItemHeight" />
+        /// <see cref="P:AppFramework.UI.Controls.WrapPanel.ItemHeight" />
         /// dependency property.
         /// </summary>
         /// <value>
         /// The identifier for the
-        /// <see cref="P:AppFramework.UI.Uwp.Controls.WrapPanel.ItemHeight" />
+        /// <see cref="P:AppFramework.UI.Controls.WrapPanel.ItemHeight" />
         /// dependency property
         /// </value>
         public static readonly DependencyProperty ItemHeightProperty =
@@ -55,11 +55,11 @@ namespace AppFramework.UI.Uwp.Controls
         #region public double ItemWidth
         /// <summary>
         /// Gets or sets the width of the layout area for each item that is
-        /// contained in a <see cref="T:AppFramework.UI.Uwp.Controls.WrapPanel" />.
+        /// contained in a <see cref="T:AppFramework.UI.Controls.WrapPanel" />.
         /// </summary>
         /// <value>
         /// The width that applies to the layout area of each item that is
-        /// contained in a <see cref="T:AppFramework.UI.Uwp.Controls.WrapPanel" />.
+        /// contained in a <see cref="T:AppFramework.UI.Controls.WrapPanel" />.
         /// The default value is <see cref="F:System.Double.NaN" />.
         /// </value>
         public double ItemWidth
@@ -70,12 +70,12 @@ namespace AppFramework.UI.Uwp.Controls
 
         /// <summary>
         /// Identifies the
-        /// <see cref="P:AppFramework.UI.Uwp.Controls.WrapPanel.ItemWidth" />
+        /// <see cref="P:AppFramework.UI.Controls.WrapPanel.ItemWidth" />
         /// dependency property.
         /// </summary>
         /// <value>
         /// The identifier for the
-        /// <see cref="P:AppFramework.UI.Uwp.Controls.WrapPanel.ItemWidth" />
+        /// <see cref="P:AppFramework.UI.Controls.WrapPanel.ItemWidth" />
         /// dependency property.
         /// </value>
         public static readonly DependencyProperty ItemWidthProperty =
@@ -103,12 +103,12 @@ namespace AppFramework.UI.Uwp.Controls
 
         /// <summary>
         /// Identifies the
-        /// <see cref="P:AppFramework.UI.Uwp.Controls.WrapPanel.Orientation" />
+        /// <see cref="P:AppFramework.UI.Controls.WrapPanel.Orientation" />
         /// dependency property.
         /// </summary>
         /// <value>
         /// The identifier for the
-        /// <see cref="P:AppFramework.UI.Uwp.Controls.WrapPanel.Orientation" />
+        /// <see cref="P:AppFramework.UI.Controls.WrapPanel.Orientation" />
         /// dependency property.
         /// </value>
         public static readonly DependencyProperty OrientationProperty =
@@ -197,9 +197,9 @@ namespace AppFramework.UI.Uwp.Controls
 
         /// <summary>
         /// Measures the child elements of a
-        /// <see cref="T:AppFramework.UI.Uwp.Controls.WrapPanel" /> in anticipation
+        /// <see cref="T:AppFramework.UI.Controls.WrapPanel" /> in anticipation
         /// of arranging them during the
-        /// <see cref="M:AppFramework.UI.Uwp.Controls.WrapPanel.ArrangeOverride(Windows.Foundation.Size)" />
+        /// <see cref="M:AppFramework.UI.Controls.WrapPanel.ArrangeOverride(Windows.Foundation.Size)" />
         /// pass.
         /// </summary>
         /// <param name="constraint">
@@ -207,7 +207,7 @@ namespace AppFramework.UI.Uwp.Controls
         /// </param>
         /// <returns>
         /// The size required by the
-        /// <see cref="T:AppFramework.UI.Uwp.Controls.WrapPanel" /> and its 
+        /// <see cref="T:AppFramework.UI.Controls.WrapPanel" /> and its 
         /// elements.
         /// </returns>
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "Compat with WPF.")]
@@ -283,17 +283,17 @@ namespace AppFramework.UI.Uwp.Controls
 
         /// <summary>
         /// Arranges and sizes the
-        /// <see cref="T:AppFramework.UI.Uwp.Controls.WrapPanel" /> control and its
+        /// <see cref="T:AppFramework.UI.Controls.WrapPanel" /> control and its
         /// child elements.
         /// </summary>
         /// <param name="finalSize">
         /// The area within the parent that the
-        /// <see cref="T:AppFramework.UI.Uwp.Controls.WrapPanel" /> should use 
+        /// <see cref="T:AppFramework.UI.Controls.WrapPanel" /> should use 
         /// arrange itself and its children.
         /// </param>
         /// <returns>
         /// The actual size used by the
-        /// <see cref="T:AppFramework.UI.Uwp.Controls.WrapPanel" />.
+        /// <see cref="T:AppFramework.UI.Controls.WrapPanel" />.
         /// </returns>
         protected override Size ArrangeOverride(Size finalSize)
         {

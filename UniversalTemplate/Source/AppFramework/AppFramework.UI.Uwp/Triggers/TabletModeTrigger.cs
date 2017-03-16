@@ -2,7 +2,7 @@
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 
-namespace AppFramework.UI.Uwp.Triggers
+namespace AppFramework.UI.Triggers
 {
     /// <summary>
     /// Trigger to determine when a user enters tablet mode.

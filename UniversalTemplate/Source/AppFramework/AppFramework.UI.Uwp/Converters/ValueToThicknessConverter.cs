@@ -1,6 +1,6 @@
 ﻿using Windows.UI.Xaml;
 
-namespace AppFramework.UI.Uwp.Converters
+namespace AppFramework.UI.Converters
 {
     public sealed class ValueToThicknessConverter : BooleanToObjectConverter<Thickness>
     {

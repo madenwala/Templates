@@ -1,4 +1,4 @@
-﻿namespace AppFramework.UI.Uwp.Resources
+﻿namespace AppFramework.UI.Resources
 {
     public partial class Common
     {

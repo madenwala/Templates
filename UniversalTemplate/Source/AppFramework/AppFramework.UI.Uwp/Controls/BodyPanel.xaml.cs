@@ -6,7 +6,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
-namespace AppFramework.UI.Uwp.Controls
+namespace AppFramework.UI.Controls
 {
     public abstract class BodyPanelBase : ViewControlBase<ViewModelBase>
     {

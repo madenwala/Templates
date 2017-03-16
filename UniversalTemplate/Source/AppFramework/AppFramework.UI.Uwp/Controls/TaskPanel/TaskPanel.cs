@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace AppFramework.UI.Uwp.Controls
+namespace AppFramework.UI.Controls
 {
     public sealed class TaskPanel : ContentControl
     {

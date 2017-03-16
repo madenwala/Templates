@@ -1,7 +1,7 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace AppFramework.UI.Uwp.Controls
+namespace AppFramework.UI.Controls
 {
     /// <summary>
     /// User control used in the ShellView page's SplitView control's pane.  Each instance represents a navigation button for the main navigation menu.

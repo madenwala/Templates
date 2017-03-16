@@ -1,6 +1,6 @@
 ﻿using Windows.UI.Xaml.Media;
 
-namespace AppFramework.UI.Uwp.Converters
+namespace AppFramework.UI.Converters
 {
     public sealed class ValueToBrushConverter : BooleanToObjectConverter<Brush>
     {

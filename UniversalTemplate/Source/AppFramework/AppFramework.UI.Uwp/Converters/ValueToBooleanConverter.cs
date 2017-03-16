@@ -2,7 +2,7 @@
 using System.Collections;
 using Windows.UI.Xaml.Data;
 
-namespace AppFramework.UI.Uwp.Converters
+namespace AppFramework.UI.Converters
 {
     public class ValueToBooleanConverter : IValueConverter
     {

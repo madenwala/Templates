@@ -4,7 +4,7 @@ using Windows.UI;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 
-namespace AppFramework.UI.Uwp.Converters
+namespace AppFramework.UI.Converters
 {
     public sealed class ColorToBrushConverter : IValueConverter
     {

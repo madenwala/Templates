@@ -1,4 +1,4 @@
-﻿namespace AppFramework.UI.Uwp.Controls
+﻿namespace AppFramework.UI.Controls
 {
     public partial class SplitViewButtonResources
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AppFramework.UI.Uwp.Converters
+namespace AppFramework.UI.Converters
 {
 
     public abstract class BooleanToObjectConverter<T> : ValueToBooleanConverter

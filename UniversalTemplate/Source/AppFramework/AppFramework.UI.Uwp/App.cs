@@ -1,7 +1,6 @@
 ﻿using AppFramework.Core;
 using AppFramework.Core.Services;
-using AppFramework.UI.Uwp;
-using AppFramework.UI.Uwp.Controls;
+using AppFramework.UI.Controls;
 using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
@@ -12,7 +11,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace AppFramework.UI.Uwp
+namespace AppFramework.UI
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.

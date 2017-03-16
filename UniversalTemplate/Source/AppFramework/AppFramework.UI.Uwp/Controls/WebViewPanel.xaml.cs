@@ -4,7 +4,7 @@ using AppFramework.Core.ViewModels;
 using System;
 using Windows.UI.Xaml.Controls;
 
-namespace AppFramework.UI.Uwp.Controls
+namespace AppFramework.UI.Controls
 {
     public abstract class WebViewPanelBase : ViewControlBase<WebBrowserViewModel>
     {

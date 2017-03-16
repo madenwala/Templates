@@ -3,7 +3,7 @@ using System.Windows.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace AppFramework.UI.Uwp.Behaviors
+namespace AppFramework.UI.Behaviors
 {
     /// <summary>
     /// Creates an attached property for all ListViewBase controls allowing binding  a command object to it's ItemClick event.

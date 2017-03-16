@@ -7,7 +7,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace AppFramework.UI.Uwp.Controls
+namespace AppFramework.UI.Controls
 {
     [TemplatePart(Name = PART_ROOT, Type = typeof(Grid))]
     [TemplatePart(Name = PART_LISTVIEW, Type = typeof(ListView))]

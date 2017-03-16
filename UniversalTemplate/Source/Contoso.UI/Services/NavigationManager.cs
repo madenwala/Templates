@@ -21,7 +21,7 @@ namespace Contoso.UI.Services
 
         protected override Frame CreateFrame()
         {
-            return new AppFramework.UI.Uwp.Controls.ApplicationFrame();
+            return new AppFramework.UI.Controls.ApplicationFrame();
         }
 
         #endregion

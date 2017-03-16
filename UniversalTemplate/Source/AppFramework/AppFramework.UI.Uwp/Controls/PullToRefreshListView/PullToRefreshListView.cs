@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using AppFramework.Core.Models;
 
-namespace AppFramework.UI.Uwp.Controls
+namespace AppFramework.UI.Controls
 {
     [TemplatePart(Name = PART_LISTVIEW, Type = typeof(ListView))]
     public sealed class PullToRefreshListView : Control, IViewScrollToTop

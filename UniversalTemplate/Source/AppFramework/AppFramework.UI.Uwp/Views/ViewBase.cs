@@ -1,7 +1,7 @@
 ﻿using AppFramework.Core;
 using AppFramework.Core.Models;
 using AppFramework.Core.ViewModels;
-using AppFramework.UI.Uwp.Controls;
+using AppFramework.UI.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +12,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace AppFramework.UI.Uwp.Views
+namespace AppFramework.UI.Views
 {
     /// <summary>
     /// Base class for all pages in your application.

@@ -3,7 +3,7 @@ using AppFramework.Core.ViewModels;
 using System;
 using Windows.UI.Xaml.Controls;
 
-namespace AppFramework.UI.Uwp.Controls
+namespace AppFramework.UI.Controls
 {
     public sealed class Pivot : Windows.UI.Xaml.Controls.Pivot
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using Windows.UI.Xaml;
 
-namespace AppFramework.UI.Uwp.Converters
+namespace AppFramework.UI.Converters
 {
     public sealed class ValueMatchToVisibilityConverter : ValueMatchToBooleanConverter
     {

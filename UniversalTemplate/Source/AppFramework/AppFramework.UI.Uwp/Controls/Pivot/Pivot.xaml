@@ -1,9 +1,9 @@
 ﻿<ResourceDictionary
-    x:Class="AppFramework.UI.Uwp.Controls.PivotResources" 
+    x:Class="AppFramework.UI.Controls.PivotResources" 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="using:AppFramework.UI.Uwp.Controls"
-    xmlns:resources="using:AppFramework.UI.Uwp.Resources">
+    xmlns:controls="using:AppFramework.UI.Controls"
+    xmlns:resources="using:AppFramework.UI.Resources">
 
     <ResourceDictionary.MergedDictionaries>
         <resources:Common />

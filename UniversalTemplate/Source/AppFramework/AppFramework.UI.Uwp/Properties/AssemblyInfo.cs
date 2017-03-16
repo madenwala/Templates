@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("AppFramework.UI.Uwp.Core")]
+[assembly: AssemblyTitle("AppFramework.UI.Uwp")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("AppFramework.UI.Uwp.Core")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
+[assembly: AssemblyProduct("AppFramework.UI.Uwp")]
+[assembly: AssemblyCopyright("Copyright © Mohammed Adenwala")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

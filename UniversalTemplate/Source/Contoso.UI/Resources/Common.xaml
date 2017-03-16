@@ -2,8 +2,8 @@
     x:Class="Contoso.UI.Resources.Common" 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="using:AppFramework.UI.Uwp.Controls"
-    xmlns:converters="using:AppFramework.UI.Uwp.Converters">
+    xmlns:controls="using:AppFramework.UI.Controls"
+    xmlns:converters="using:AppFramework.UI.Converters">
 
     <!-- Themes. Note "Default" is the dark theme, but the default theme is "Light" on Windows -->
     <ResourceDictionary.ThemeDictionaries>

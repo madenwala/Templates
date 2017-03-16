@@ -1,8 +1,8 @@
 ﻿<ResourceDictionary
-    x:Class="AppFramework.UI.Uwp.Controls.SplitViewButtonResources" 
+    x:Class="AppFramework.UI.Controls.SplitViewButtonResources" 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="using:AppFramework.UI.Uwp.Controls">
+    xmlns:controls="using:AppFramework.UI.Controls">
 
     <!-- SplitViewButton -->
     <Style TargetType="controls:SplitViewButton">

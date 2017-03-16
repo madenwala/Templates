@@ -1,8 +1,8 @@
 ﻿<Frame
-    x:Class="AppFramework.UI.Uwp.Controls.ApplicationFrame"
+    x:Class="AppFramework.UI.Controls.ApplicationFrame"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="using:AppFramework.UI.Uwp.Controls"
+    xmlns:controls="using:AppFramework.UI.Controls"
     xmlns:designTime="using:AppFramework.Core.ViewModels.Designer"
     d:DataContext="{d:DesignInstance designTime:MainViewModel, IsDesignTimeCreatable=True}"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"

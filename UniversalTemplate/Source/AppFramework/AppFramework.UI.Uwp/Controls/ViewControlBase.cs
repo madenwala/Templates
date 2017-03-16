@@ -1,6 +1,6 @@
 ﻿using AppFramework.Core.ViewModels;
 
-namespace AppFramework.UI.Uwp.Controls
+namespace AppFramework.UI.Controls
 {
     /// <summary>
     /// Base class for custom controls.  Provides plumbing for view model support and x:Bind just like the ViewBase.

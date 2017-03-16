@@ -7,7 +7,7 @@
     <ProjectGuid>{9E167450-FEBB-4F54-8FA9-4954CABD6CE5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AppFramework.UI.Uwp</RootNamespace>
+    <RootNamespace>AppFramework.UI</RootNamespace>
     <AssemblyName>AppFramework.UI.Uwp</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
