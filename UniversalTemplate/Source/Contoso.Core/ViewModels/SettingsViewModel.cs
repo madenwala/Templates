@@ -39,9 +39,9 @@ namespace Contoso.Core.ViewModels
 #if !DEBUG
         private DebuggingViewModel _DebuggingViewModel = null;
 #else
-        private AppFramework.Core.ViewModels.DebuggingViewModel _DebuggingViewModel = new AppFramework.Core.ViewModels.DebuggingViewModel();
+        private DebuggingViewModel _DebuggingViewModel = new DebuggingViewModel();
 #endif
-        public AppFramework.Core.ViewModels.DebuggingViewModel DebugVM
+        public DebuggingViewModel DebugVM
         {
             get { return _DebuggingViewModel; }
             private set { this.SetProperty(ref _DebuggingViewModel, value); }
