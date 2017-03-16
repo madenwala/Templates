@@ -4,7 +4,7 @@ using Windows.ApplicationModel;
 
 namespace Contoso.Core.ViewModels
 {
-    public partial class TermsOfServiceViewModel : WebBrowserViewModel
+    public partial class TermsOfServiceViewModel : WebViewModel
     {
         #region Properties
 

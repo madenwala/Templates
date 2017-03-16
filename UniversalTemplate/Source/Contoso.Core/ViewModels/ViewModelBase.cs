@@ -33,7 +33,7 @@ namespace Contoso.Core.ViewModels
         #endregion
     }
 
-    public abstract class WebViewModelBase : AppFramework.Core.ViewModels.WebBrowserViewModel
+    public class WebViewModel : AppFramework.Core.ViewModels.WebBrowserViewModel
     {
         #region Properties
 
@@ -45,7 +45,7 @@ namespace Contoso.Core.ViewModels
 
         #region Constructors
 
-        public WebViewModelBase(bool showNavigation = true) : base(showNavigation)
+        public WebViewModel(bool showNavigation = true) : base(showNavigation)
         {
             this.PlatformBase.OnAppSettingsReset += (o, e) =>
             {

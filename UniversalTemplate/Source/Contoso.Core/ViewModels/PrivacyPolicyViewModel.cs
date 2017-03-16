@@ -3,7 +3,7 @@ using Windows.ApplicationModel;
 
 namespace Contoso.Core.ViewModels
 {
-    public partial class PrivacyPolicyViewModel : WebViewModelBase
+    public partial class PrivacyPolicyViewModel : WebViewModel
     {
         #region Properties
 

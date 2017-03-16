@@ -5,7 +5,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Contoso.UI.Views
 {
-    public abstract class WebBrowserViewBase : ViewBase<WebViewModelBase>
+    public abstract class WebBrowserViewBase : ViewBase<WebViewModel>
     {
     }
 
@@ -21,13 +21,11 @@ namespace Contoso.UI.Views
         {
             if (e.NavigationEventArgs.NavigationMode == NavigationMode.New || this.ViewModel == null)
             {
-                WebViewModelBase vm = null;
-                if (e.NavigationEventArgs.Parameter is WebViewModelBase)
-                    vm = e.NavigationEventArgs.Parameter as WebViewModelBase;
-
-                // TODO pass in any parameter as a string
-                //else
-                //    vm = new WebViewModelBase();
+                WebViewModel vm = null;
+                if (e.NavigationEventArgs.Parameter is WebViewModel)
+                    vm = e.NavigationEventArgs.Parameter as WebViewModel;
+                else
+                    vm = new WebViewModel();
                 this.SetViewModel(vm);
             }
 

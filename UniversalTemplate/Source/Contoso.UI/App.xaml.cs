@@ -19,8 +19,6 @@ namespace Contoso.UI
         /// </summary>
         public App()
         {
-            Platform.Current = new Platform();
-
             this.InitializeComponent();
 
             // Initalize the platform object which is the singleton instance to access various services
