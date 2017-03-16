@@ -239,7 +239,7 @@ namespace AppFramework.Core.Services
                         body += await PlatformBase.Current.Storage.ReadFileAsStringAsync(ERROR_REPORT_FILENAME, ERROR_REPORT_DATA_CONTAINER);
                         PlatformBase.Current.Logger.Log(LogLevels.Information, "PREVIOUS CRASH LOGS: \t" + body);
 
-                        // TODO await PlatformBase.Current.Navigation.SendEmailAsync(subject, body, Strings.Resources.ApplicationSupportEmailAddress, attachment);
+                        await PlatformBase.Current.NavigationBase.SendEmailAsync(subject, body, Strings.Resources.ApplicationSupportEmailAddress, attachment);
                     }
 
                     await PlatformBase.Current.Storage.DeleteFileAsync(ERROR_REPORT_FILENAME, ERROR_REPORT_DATA_CONTAINER);

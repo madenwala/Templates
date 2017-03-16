@@ -111,13 +111,13 @@ namespace AppFramework.Core.Services
                 // Navigate user to the platform specific rating mechanism
                 await this.RateApplicationAsync();
             }
-            else if (showPromptoToSendEmail)
-            {
-                // TODO do I want this?
-                result = await vm.ShowMessageBoxAsync(CancellationToken.None, Strings.Resources.PromptRateApplicationEmailFeedbackMessage, Strings.Resources.PromptRateApplicationEmailFeedbackTitle, new string[] { Strings.Resources.TextYes, Strings.Resources.TextNo }, 1);
-                if (result == 0)
-                    await PlatformBase.Current.Logger.SendSupportEmailAsync();
-            }
+            //else if (showPromptoToSendEmail)
+            //{
+            //    // TODO do I want this?
+            //    result = await vm.ShowMessageBoxAsync(CancellationToken.None, Strings.Resources.PromptRateApplicationEmailFeedbackMessage, Strings.Resources.PromptRateApplicationEmailFeedbackTitle, new string[] { Strings.Resources.TextYes, Strings.Resources.TextNo }, 1);
+            //    if (result == 0)
+            //        await PlatformBase.Current.Logger.SendSupportEmailAsync();
+            //}
         }
 
         public async Task RateApplicationAsync()

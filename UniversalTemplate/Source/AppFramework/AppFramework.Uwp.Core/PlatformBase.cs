@@ -424,6 +424,17 @@ namespace AppFramework.Core
         private bool _settingsIsLocalDataDirty = false;
         private bool _settingsIsRoamingDataDirty = false;
 
+        /// <summary>
+        /// Gets the MainViewModel global instance for the application.
+        /// </summary>
+        [Newtonsoft.Json.JsonIgnore()]
+        [System.Runtime.Serialization.IgnoreDataMember()]
+        public new VM ViewModel
+        {
+            get { return base.ViewModel as VM; }
+            protected set { base.ViewModel = value; }
+        }
+
         public PlatformNewBase() : base(typeof(VM))
         {
         }

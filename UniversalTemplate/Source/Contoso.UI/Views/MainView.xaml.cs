@@ -21,7 +21,7 @@ namespace Contoso.UI.Views
         protected override Task OnLoadStateAsync(LoadStateEventArgs e)
         {
             if (e.NavigationEventArgs.NavigationMode == NavigationMode.New || this.ViewModel == null)
-                this.SetViewModel(Platform.Current.ViewModel as MainViewModel); // TODO
+                this.SetViewModel(Platform.Current.ViewModel);
             
             return base.OnLoadStateAsync(e);
         }
