@@ -139,20 +139,20 @@
 
                     <Button Content="Test application crash" Command="{x:Bind ViewModel.TestAppCrashCommand}" />
 
-                    <TextBlock Opacity=".6" Style="{StaticResource CaptionTextBlockStyle}">Auth Token</TextBlock>
-                    <TextBlock Text="{x:Bind ViewModel.Platform.AuthManager.User.AccessToken, Mode=OneWay}"/>
+                    <!--<TextBlock Opacity=".6" Style="{StaticResource CaptionTextBlockStyle}">Auth Token</TextBlock>
+                    <TextBlock Text="{x:Bind ViewModel.Platform.AuthManager.CurrentUser.AccessToken, Mode=OneWay}"/>
 
                     <TextBlock Opacity=".6" Style="{StaticResource CaptionTextBlockStyle}">Auth Refresh Token</TextBlock>
-                    <TextBlock Text="{x:Bind ViewModel.Platform.AuthManager.User.RefreshToken, Mode=OneWay}"/>
+                    <TextBlock Text="{x:Bind ViewModel.Platform.AuthManager.CurrentUser.RefreshToken, Mode=OneWay}"/>
 
                     <TextBlock Opacity=".6" Style="{StaticResource CaptionTextBlockStyle}">Display Name</TextBlock>
-                    <TextBlock Text="{x:Bind ViewModel.Platform.AuthManager.User.DisplayName, Mode=OneWay}"/>
+                    <TextBlock Text="{x:Bind ViewModel.Platform.AuthManager.CurrentUser.DisplayName, Mode=OneWay}"/>
 
                     <TextBlock Opacity=".6" Style="{StaticResource CaptionTextBlockStyle}">ID</TextBlock>
-                    <TextBlock Text="{x:Bind ViewModel.Platform.AuthManager.User.UserID, Mode=OneWay}"/>
+                    <TextBlock Text="{x:Bind ViewModel.Platform.AuthManager.CurrentUser.UserID, Mode=OneWay}"/>
 
                     <TextBlock Opacity=".6" Style="{StaticResource CaptionTextBlockStyle}">Email</TextBlock>
-                    <TextBlock Text="{x:Bind ViewModel.Platform.AuthManager.User.Email, Mode=OneWay}"/>
+                    <TextBlock Text="{x:Bind ViewModel.Platform.AuthManager.CurrentUser.Email, Mode=OneWay}"/>-->
 
                     <Border Height="{StaticResource SpacerHeight}" />
                     <Border Height="{StaticResource SpacerHeight}" />

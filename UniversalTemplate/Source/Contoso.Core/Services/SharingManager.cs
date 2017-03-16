@@ -6,7 +6,7 @@ using Windows.ApplicationModel.DataTransfer;
 
 namespace Contoso.Core.Services
 {
-    public sealed partial class SharingManager: SharingManagerBase
+    internal sealed partial class SharingManager: SharingManagerBase
     {
         #region Methods
         

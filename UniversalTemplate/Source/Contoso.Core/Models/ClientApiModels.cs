@@ -1,6 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using AppFramework.Core.Models;
+using Newtonsoft.Json;
 
-namespace AppFramework.Core.Models
+namespace Contoso.Core.Models
 {
     /// <summary>
     /// Base class for any response object returned by your client API.

@@ -1,12 +1,16 @@
-﻿using AppFramework.Core.Models;
-using AppFramework.Core.Services;
+﻿using AppFramework.Core;
+using AppFramework.Core.Models;
+using Contoso.Core.Data;
+using Contoso.Core.Models;
+using Contoso.Core.Services;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.Storage;
 
-namespace AppFramework.Core
+namespace Contoso.Core
 {
-    public partial class PlatformBase
+    public partial class Platform
     {
         /// <summary>
         /// Gets access to the cryptography provider of the platform currently executing.
@@ -19,25 +23,25 @@ namespace AppFramework.Core
     }
 }
 
-namespace AppFramework.Core.Services
+namespace Contoso.Core.Services
 {
-    public sealed class AuthorizationManager : ServiceBase, IServiceSignout
+    public sealed class AuthorizationManager : AppFramework.Core.Services.AuthorizationManagerBase
     {
         #region Variables
-        
+
         private const string CREDENTIAL_USER_KEYNAME = "ContosoUser";
         private const string CREDENTIAL_ACCESSTOKEN_KEYNAME = "ContosoAccessToken";
         private const string CREDENTIAL_REFRESHTOKEN_KEYNAME = "ContosoAccessToken";
 
         #endregion
 
-        #region Events
-
-        public event EventHandler<bool> UserAuthenticatedStatusChanged;
-
-        #endregion
-
         #region Properties
+        
+        public new UserResponse CurrentUser
+        {
+            get { return base.CurrentUser as UserResponse; }
+            private set { base.CurrentUser = value; }
+        }
 
         private string _AccessToken;
         public string AccessToken
@@ -53,13 +57,6 @@ namespace AppFramework.Core.Services
             private set { this.SetProperty(ref _RefreshToken, value); }
         }
 
-        private UserResponse _User;
-        public UserResponse User
-        {
-            get { return _User; }
-            private set { this.SetProperty(ref _User, value); }
-        }
-
         #endregion
 
         #region Methods
@@ -68,17 +65,10 @@ namespace AppFramework.Core.Services
         /// Indicates whether or not a user is authenticated into this app.
         /// </summary>
         /// <returns>True if the user is authenticated else false.</returns>
-        public bool IsAuthenticated()
+        public override bool IsAuthenticated()
         {
-            return !string.IsNullOrEmpty(this.User?.AccessToken);
-        }
-
-        /// <summary>
-        /// Notify any subscribers that the user authentication status has changed.
-        /// </summary>
-        private void NotifyUserAuthenticated()
-        {
-            this.UserAuthenticatedStatusChanged?.Invoke(null, this.IsAuthenticated());
+            var user = this.CurrentUser as UserResponse;
+            return !string.IsNullOrEmpty(user?.AccessToken);
         }
 
         /// <summary>
@@ -88,23 +78,24 @@ namespace AppFramework.Core.Services
         {
             // Retrieve the access token from the credential locker
             string access_token_value = null;
-            if (PlatformBase.Current.Storage.LoadCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_ACCESSTOKEN_KEYNAME, ref access_token_value))
+            if (Platform.Current.Storage.LoadCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_ACCESSTOKEN_KEYNAME, ref access_token_value))
                 this.AccessToken = access_token_value;
 
             // Retrieve the refresh token from the credential locker
             string refresh_token_value = null;
-            if (PlatformBase.Current.Storage.LoadCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_REFRESHTOKEN_KEYNAME, ref refresh_token_value))
+            if (Platform.Current.Storage.LoadCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_REFRESHTOKEN_KEYNAME, ref refresh_token_value))
                 this.RefreshToken = refresh_token_value;
 
             // Retrieve the user profile data from settings
-            this.User = await PlatformBase.Current.Storage.LoadFileAsync<UserResponse>(CREDENTIAL_USER_KEYNAME, ApplicationData.Current.RoamingFolder, SerializerTypes.Json);
-            if (this.User != null)
+            this.CurrentUser = await Platform.Current.Storage.LoadFileAsync<UserResponse>(CREDENTIAL_USER_KEYNAME, ApplicationData.Current.RoamingFolder, SerializerTypes.Json);
+            if (this.CurrentUser != null)
             {
-                this.User.AccessToken = this.AccessToken;
-                this.User.RefreshToken = this.RefreshToken;
-                PlatformBase.Current.Analytics.SetUser(this.User);
+                var user = this.CurrentUser as UserResponse;
+                user.AccessToken = this.AccessToken;
+                user.RefreshToken = this.RefreshToken;
+                Platform.Current.Analytics.SetUser(user);
             }
-            
+
             // Notify any subscribers that authentication status has changed
             this.NotifyUserAuthenticated();
 
@@ -114,9 +105,11 @@ namespace AppFramework.Core.Services
         /// <summary>
         /// Sets the current user of the app.
         /// </summary>
-        /// <param name="user"></param>
-        public async Task<bool> SetUserAsync(UserResponse user)
+        /// <param name="userInformation"></param>
+        public override async Task<bool> SetUserAsync(IUserInformation userInformation)
         {
+            var user = userInformation as UserResponse;
+
             if (string.IsNullOrEmpty(user?.AccessToken))
             {
                 await this.SignoutAsync();
@@ -133,7 +126,7 @@ namespace AppFramework.Core.Services
                 PlatformBase.Current.Storage.SaveCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_REFRESHTOKEN_KEYNAME, user.RefreshToken);
 
                 // Set properties
-                this.User = user;
+                this.CurrentUser = user;
                 this.AccessToken = user.AccessToken;
                 this.RefreshToken = user.RefreshToken;
 
@@ -147,14 +140,30 @@ namespace AppFramework.Core.Services
         /// Signs the user out of the application and removes and credential data from storage / credential locker.
         /// </summary>
         /// <returns>Awaitable task is returned.</returns>
-        public async Task SignoutAsync()
+        public override async Task SignoutAsync()
         {
             await PlatformBase.Current.Storage.SaveFileAsync(CREDENTIAL_USER_KEYNAME, null, ApplicationData.Current.RoamingFolder, SerializerTypes.Json);
             PlatformBase.Current.Storage.SaveCredential(CREDENTIAL_USER_KEYNAME, null, null);
-            this.User = null;
+            this.CurrentUser = null;
             this.AccessToken = null;
             this.RefreshToken = null;
             this.NotifyUserAuthenticated();
+        }
+
+        protected override async Task<IUserInformation> GetRefreshAccessToken(CancellationToken ct)
+        {
+            try
+            {
+                using (ClientApi api = new ClientApi(true))
+                {
+                    return await api.AuthenticateAsync(Platform.Current.AuthManager.AccessToken, ct);
+                }
+            }
+            catch (Exception ex)
+            {
+                Platform.Current.Logger.LogError(ex, "Could not retrieve refresh token.");
+                return null;
+            }
         }
 
         #endregion

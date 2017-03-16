@@ -112,7 +112,9 @@
     <Compile Include="Data\ClientApiBase.cs" />
     <Compile Include="Data\MicrosoftApi.cs" />
     <Compile Include="Models\AppSettings.cs" />
+    <Compile Include="Models\ClientApiModels.cs" />
     <Compile Include="Platform.cs" />
+    <Compile Include="Services\AuthorizationManager.cs" />
     <Compile Include="Services\BackgroundTasksManager.cs" />
     <Compile Include="Services\AppInfoProvider.cs" />
   </ItemGroup>

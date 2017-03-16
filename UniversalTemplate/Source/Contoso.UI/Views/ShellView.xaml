@@ -134,8 +134,8 @@
                         BorderThickness="0,2,0,0">
                         <controls:SplitViewButton x:Uid="/Contoso.Core/Resources/svbSignIn" GroupName="ShellNav" Content="[Sign in]" Symbol="Contact" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToAccountSignInCommand}" Visibility="{x:Bind ViewModel.IsUserAuthenticated, Mode=OneWay, Converter={StaticResource visInvertedConverter}}" />
                         <controls:SplitViewButton x:Uid="/Contoso.Core/Resources/svbSignout" GroupName="ShellNav" Symbol="Contact" SymbolAlwaysVisible="True" Command="{x:Bind ViewModel.NavigateToAccountSignoutCommand}" Visibility="{x:Bind ViewModel.IsUserAuthenticated, Mode=OneWay, Converter={StaticResource visConverter}}">
-                            <controls:SplitViewButton.Icon>
-                                <Ellipse Width="32" Height="32" Visibility="{x:Bind ViewModel.Platform.AuthManager.User.ProfileImageURL, Mode=OneWay, Converter={StaticResource visConverter}}">
+                            <!--<controls:SplitViewButton.Icon>
+                                <Ellipse Width="32" Height="32" Visibility="{x:Bind ViewModel.Platform.AuthManager.CurrentUser.ProfileImageURL, Mode=OneWay, Converter={StaticResource visConverter}}">
                                     <Ellipse.Fill>
                                         <ImageBrush>
                                             <ImageBrush.ImageSource>
@@ -144,7 +144,7 @@
                                         </ImageBrush>
                                     </Ellipse.Fill>
                                 </Ellipse>
-                            </controls:SplitViewButton.Icon>
+                            </controls:SplitViewButton.Icon>-->
                             <StackPanel>
                                 <TextBlock Foreground="{ThemeResource SystemAccentColor}" Text="{x:Bind ViewModel.WelcomeMessage, Mode=OneWay}" Style="{StaticResource CaptionTextBlockStyle}" />
                                 <TextBlock x:Uid="/Contoso.Core/Resources/tbSignOut" Text="[Sign out]" />

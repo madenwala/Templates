@@ -107,13 +107,12 @@
     <Compile Include="Commands\PinTileCommand.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="GeneralFunctions.cs" />
-    <Compile Include="Models\ClientApiModels.cs" />
     <Compile Include="Models\LocationModelList.cs" />
     <Compile Include="Models\LocationModelBase.cs" />
     <Compile Include="Models\ModelLists.cs" />
     <Compile Include="Models\UniqueLocationModelBase.cs" />
     <Compile Include="PlatformBase.cs" />
-    <Compile Include="Services\AuthorizationManager.cs" />
+    <Compile Include="Services\AuthorizationManagerBase.cs" />
     <Compile Include="Services\NotificationsManagerBase.cs" />
     <Compile Include="ViewModels\CollectionViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />

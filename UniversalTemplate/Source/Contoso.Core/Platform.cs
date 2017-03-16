@@ -30,6 +30,7 @@ namespace Contoso.Core
         public Platform()
         {
             // Instantiate all the application services.
+            this.AuthManager = new AuthorizationManager();
             this.BackgroundTasks = new BackgroundTasksManager();
             this.AppInfo = new AppInfoProvider();
             this.Notifications = new NotificationsService();
