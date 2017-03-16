@@ -232,7 +232,7 @@ namespace AppFramework.Core.ViewModels
                     this.LoadPropertyFromState(e, pair.Value);
             }
 
-            // Fire load state on inherited view model instances
+            // Notify load state on inherited view model instances
             await this.OnLoadStateAsync(e);
 
             // Refresh Data

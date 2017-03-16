@@ -289,7 +289,7 @@ namespace AppFramework.Core
             }
         }
 
-        internal void FireOnAppSettingsResetEvent()
+        internal void NotifyOnAppSettingsResetEvent()
         {
             this.OnAppSettingsReset?.Invoke(null, null);
         }
@@ -453,7 +453,7 @@ namespace AppFramework.Core
             }
 
             this.CheckForFullLogging();
-            this.FireOnAppSettingsResetEvent();
+            this.NotifyOnAppSettingsResetEvent();
         }
 
         /// <summary>
@@ -476,7 +476,7 @@ namespace AppFramework.Core
 
             this.SaveSettings();
             this.CheckForFullLogging();
-            this.FireOnAppSettingsResetEvent();
+            this.NotifyOnAppSettingsResetEvent();
         }
 
         /// <summary>
