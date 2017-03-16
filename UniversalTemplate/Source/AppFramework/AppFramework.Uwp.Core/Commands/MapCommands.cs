@@ -11,7 +11,7 @@ namespace AppFramework.Core.Commands
         #region Constructors
 
         public MapExternalCommand(MapExternalOptions option = MapExternalOptions.Normal)
-            : base("MapExternalCommand-" + option, (loc) => PlatformBase.Current.NavigationBase.MapExternal(loc, loc?.LocationDisplayName, option))
+            : base("MapExternalCommand-" + option, (loc) => PlatformBase.Current.Navigation.MapExternal(loc, loc?.LocationDisplayName, option))
         {
         }
 

@@ -92,7 +92,7 @@ namespace AppFramework.Uwp.UI.Views
         private void ViewBase_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             // Update visibility of the BACK button in the titlebar area
-            PlatformBase.Current.NavigationBase.UpdateTitleBarBackButton();
+            PlatformBase.Current.Navigation.UpdateTitleBarBackButton();
 
             this.OnLoaded(e);
         }

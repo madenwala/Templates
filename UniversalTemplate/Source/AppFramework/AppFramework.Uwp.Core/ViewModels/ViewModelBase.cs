@@ -100,7 +100,7 @@ namespace AppFramework.Core.ViewModels
         /// </summary>
         public bool IsViewInChildFrame
         {
-            get { return this.PlatformBase.NavigationBase.IsChildFramePresent; }
+            get { return this.PlatformBase.Navigation.IsChildFramePresent; }
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace AppFramework.Core.ViewModels
             {
                 return PlatformBase.Current.ViewModel.IsInitialized == false
                     && this.IsUserAuthenticated
-                    && this.PlatformBase.NavigationBase.CanGoBack() == false;
+                    && this.PlatformBase.Navigation.CanGoBack() == false;
             }
         }
 
@@ -1092,7 +1092,7 @@ namespace AppFramework.Core.ViewModels
                     await PlatformBase.Current.SignoutAllAsync();
 
                     // Navigate home after successful signout
-                    this.PlatformBase.NavigationBase.Home();
+                    this.PlatformBase.Navigation.Home();
                 }
                 catch (Exception ex)
                 {

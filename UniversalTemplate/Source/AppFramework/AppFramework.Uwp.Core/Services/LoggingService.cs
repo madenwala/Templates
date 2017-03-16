@@ -263,7 +263,7 @@ namespace AppFramework.Core.Services
             var body = Strings.Resources.ApplicationSupportEmailBodyTemplate;
             body += report;
             // TODO move app support email address to app info provider
-            await PlatformBase.Current.NavigationBase.SendEmailAsync(subject, body, Resources.ApplicationSupportEmailAddress, attachment);
+            await PlatformBase.Current.Navigation.SendEmailAsync(subject, body, Resources.ApplicationSupportEmailAddress, attachment);
         }
 
         /// <summary>

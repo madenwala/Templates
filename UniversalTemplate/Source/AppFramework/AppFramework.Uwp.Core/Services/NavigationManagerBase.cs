@@ -25,7 +25,7 @@ namespace AppFramework.Core
         /// <summary>
         /// Gets the ability to navigate to different parts of an application specific to the platform currently executing.
         /// </summary>
-        public NavigationManagerBase NavigationBase
+        public NavigationManagerBase Navigation
         {
             get { return GetService<NavigationManagerBase>(); }
         }

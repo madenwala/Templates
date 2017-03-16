@@ -153,7 +153,7 @@ namespace AppFramework.Uwp.UI
                 if (preLaunchActivated == false)
                 {
                     // Manage activation and process arguments
-                    PlatformBase.Current.NavigationBase.HandleActivation(e, rootFrame);
+                    PlatformBase.Current.Navigation.HandleActivation(e, rootFrame);
 
                     // Ensure the current window is active
                     Window.Current.Activate();

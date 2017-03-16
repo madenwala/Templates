@@ -8,7 +8,7 @@ namespace Contoso.Core
         /// <summary>
         /// Gets the ability to navigate to different parts of an application specific to the platform currently executing.
         /// </summary>
-        public NavigationManagerBase Navigation
+        public new NavigationManagerBase Navigation
         {
             get { return GetService<NavigationManagerBase>(); }
             set { SetService<NavigationManagerBase>(value); }
