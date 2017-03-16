@@ -116,7 +116,6 @@
     <Compile Include="Services\AuthorizationManager.cs" />
     <Compile Include="Services\NotificationsManagerBase.cs" />
     <Compile Include="ViewModels\CollectionViewModelBase.cs" />
-    <Compile Include="ViewModels\DebuggingViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\WebBrowserViewModel.cs" />
     <None Include="project.json" />

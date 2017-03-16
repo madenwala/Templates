@@ -1,14 +1,13 @@
 ﻿using AppFramework.Core.Commands;
 using AppFramework.Core.Models;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Background;
-using System.Threading;
-using AppFramework.Core.Services;
 
-namespace AppFramework.Core.ViewModels
+namespace Contoso.Core.ViewModels
 {
     public partial class DebuggingViewModel : ViewModelBase
     {
@@ -49,9 +48,9 @@ namespace AppFramework.Core.ViewModels
                 foreach (var registration in BackgroundTaskRegistration.AllTasks)
                 {
                     string key = "TASK_" + registration.Value.Name;
-                    if (PlatformBase.Current.Storage.ContainsSetting(key, Windows.Storage.ApplicationData.Current.LocalSettings))
+                    if (this.Platform.Storage.ContainsSetting(key, Windows.Storage.ApplicationData.Current.LocalSettings))
                     {
-                        var info = PlatformBase.Current.Storage.LoadSetting<BackgroundTaskRunInfo>(key, Windows.Storage.ApplicationData.Current.LocalSettings);
+                        var info = this.Platform.Storage.LoadSetting<BackgroundTaskRunInfo>(key, Windows.Storage.ApplicationData.Current.LocalSettings);
                         if (info != null)
                         {
                             info.TaskName = registration.Value.Name;
@@ -78,9 +77,9 @@ namespace AppFramework.Core.ViewModels
     }
 }
 
-namespace AppFramework.Core.ViewModels.Designer
+namespace Contoso.Core.ViewModels.Designer
 {
-    public sealed class DebuggingViewModel : AppFramework.Core.ViewModels.DebuggingViewModel
+    public sealed class DebuggingViewModel : Contoso.Core.ViewModels.DebuggingViewModel
     {
         public DebuggingViewModel()
         {
