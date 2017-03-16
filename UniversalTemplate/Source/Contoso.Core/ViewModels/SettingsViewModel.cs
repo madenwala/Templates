@@ -11,7 +11,7 @@ namespace Contoso.Core.ViewModels
         PrivacyPolicy
     }
 
-    public partial class SettingsViewModel : CollectionViewModelBase
+    public partial class SettingsViewModel : AppFramework.Core.ViewModels.CollectionViewModelBase
     {
         #region Properties
 
