@@ -148,7 +148,7 @@ namespace AppFramework.Uwp.UI
                 }
 
                 // Customize the UI
-                this.OnCustomizeUI();
+                this.CustomizeApplicationUI();
 
                 if (preLaunchActivated == false)
                 {
@@ -173,7 +173,7 @@ namespace AppFramework.Uwp.UI
             }
         }
 
-        protected virtual void OnCustomizeUI()
+        protected virtual void CustomizeApplicationUI()
         {
             // XBOX
             if (PlatformBase.DeviceFamily == DeviceFamily.Xbox && Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationView"))

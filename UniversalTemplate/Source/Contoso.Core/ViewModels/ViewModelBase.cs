@@ -37,6 +37,13 @@ namespace Contoso.Core.ViewModels
     {
         #region Properties
 
+        /// <summary>
+        /// Gets access to all the platform services.
+        /// </summary>
+        [Newtonsoft.Json.JsonIgnore()]
+        [System.Runtime.Serialization.IgnoreDataMember()]
+        public Platform Platform { get { return Platform.Current; } }
+
         public AppSettingsLocal AppSettingsLocal { get { return this.PlatformBase.AppSettingsLocal as AppSettingsLocal; } }
 
         public AppSettingsRoaming AppSettingsRoaming { get { return this.PlatformBase.AppSettingsRoaming as AppSettingsRoaming; } }
