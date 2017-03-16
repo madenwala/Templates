@@ -1,5 +1,5 @@
 ﻿using AppFramework.Core.Services.Analytics;
-using AppFramework.Uwp.UI.Controls;
+using AppFramework.UI.Uwp.Controls;
 using Contoso.Core;
 
 namespace Contoso.UI
@@ -7,7 +7,7 @@ namespace Contoso.UI
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    sealed partial class App : AppFramework.Uwp.UI.App
+    sealed partial class App : AppFramework.UI.Uwp.App
     {
         #region Constructor
 

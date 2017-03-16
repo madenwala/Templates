@@ -342,17 +342,17 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AppFramework\AppFramework.Core.Uwp\AppFramework.Core.Uwp.csproj">
+      <Project>{4e4e65ea-96f5-4a3a-8e17-2fdf597e310b}</Project>
+      <Name>AppFramework.Core.Uwp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AppFramework\AppFramework.Core\AppFramework.Core.csproj">
       <Project>{6909d24a-c1d4-4664-8dbd-c6bfea229bf3}</Project>
       <Name>AppFramework.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AppFramework\AppFramework.Uwp.Core\AppFramework.Uwp.Core.csproj">
-      <Project>{4e4e65ea-96f5-4a3a-8e17-2fdf597e310b}</Project>
-      <Name>AppFramework.Uwp.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AppFramework\AppFramework.Uwp.UI\AppFramework.Uwp.UI.csproj">
+    <ProjectReference Include="..\AppFramework\AppFramework.UI.Uwp\AppFramework.UI.Uwp.csproj">
       <Project>{9e167450-febb-4f54-8fa9-4954cabd6ce5}</Project>
-      <Name>AppFramework.Uwp.UI</Name>
+      <Name>AppFramework.UI.Uwp</Name>
     </ProjectReference>
     <ProjectReference Include="..\Contoso.BackgroundTasks\Contoso.BackgroundTasks.csproj">
       <Project>{cb283ae3-3653-41ec-8e20-69722d2d33fa}</Project>

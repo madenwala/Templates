@@ -1,4 +1,4 @@
-﻿using AppFramework.Uwp.UI.Controls;
+﻿using AppFramework.UI.Uwp.Controls;
 using Contoso.Core;
 using Contoso.Core.Data;
 using Contoso.Core.Models;

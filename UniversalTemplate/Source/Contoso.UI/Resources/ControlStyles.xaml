@@ -4,8 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:models="using:Contoso.Core.Models"
     xmlns:viewmodels="using:Contoso.Core.ViewModels"
-    xmlns:behaviors="using:AppFramework.Uwp.UI.Behaviors"
-    xmlns:controls="using:AppFramework.Uwp.UI.Controls">
+    xmlns:behaviors="using:AppFramework.UI.Uwp.Behaviors"
+    xmlns:controls="using:AppFramework.UI.Uwp.Controls">
 
     <ResourceDictionary.MergedDictionaries>
         <controls:SplitViewButtonResources />

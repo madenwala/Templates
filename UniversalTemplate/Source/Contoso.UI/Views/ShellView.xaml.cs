@@ -1,5 +1,5 @@
 ﻿using AppFramework.Core;
-using AppFramework.Uwp.UI;
+using AppFramework.UI.Uwp;
 using Contoso.Core;
 using Contoso.Core.ViewModels;
 using System;

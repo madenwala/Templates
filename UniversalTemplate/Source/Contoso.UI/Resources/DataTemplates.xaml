@@ -4,9 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:viewmodels="using:Contoso.Core.ViewModels"
     xmlns:models="using:Contoso.Core.Models"
-    xmlns:controls="using:AppFramework.Uwp.UI.Controls"
-    xmlns:triggers="using:AppFramework.Uwp.UI.Triggers"
-    xmlns:behaviors="using:AppFramework.Uwp.UI.Behaviors"
+    xmlns:controls="using:AppFramework.UI.Uwp.Controls"
+    xmlns:triggers="using:AppFramework.UI.Uwp.Triggers"
+    xmlns:behaviors="using:AppFramework.UI.Uwp.Behaviors"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     >
 

@@ -13,9 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppFramework", "AppFramewor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFramework.Core", "AppFramework\AppFramework.Core\AppFramework.Core.csproj", "{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFramework.Uwp.Core", "AppFramework\AppFramework.Uwp.Core\AppFramework.Uwp.Core.csproj", "{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFramework.Core.Uwp", "AppFramework\AppFramework.Core.Uwp\AppFramework.Core.Uwp.csproj", "{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFramework.Uwp.UI", "AppFramework\AppFramework.Uwp.UI\AppFramework.Uwp.UI.csproj", "{9E167450-FEBB-4F54-8FA9-4954CABD6CE5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFramework.UI.Uwp", "AppFramework\AppFramework.UI.Uwp\AppFramework.UI.Uwp.csproj", "{9E167450-FEBB-4F54-8FA9-4954CABD6CE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
