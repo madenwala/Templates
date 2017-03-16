@@ -73,11 +73,11 @@ namespace Contoso.UI.Controls
             {
                 var item = args.ChosenSuggestion as ItemModel;
                 sender.Text = item.LineOne;
-                Platform.LocalCurrent.Navigation.Item(args.ChosenSuggestion as ItemModel);
+                Platform.Current.Navigation.Item(args.ChosenSuggestion as ItemModel);
             }
             else
             {
-                Platform.LocalCurrent.Navigation.Search(args.QueryText);
+                Platform.Current.Navigation.Search(args.QueryText);
                 sender.Text = string.Empty;
             }
         }

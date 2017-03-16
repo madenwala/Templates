@@ -19,13 +19,13 @@ namespace Contoso.Core
 
         static Platform()
         {
-            Current = new Platform();
+            PlatformBase.Current = new Platform();
         }
 
         /// <summary>
         /// Provides access to application services.
         /// </summary>
-        public static Platform LocalCurrent { get { return Current as Platform; } }
+        public new static Platform Current { get { return PlatformBase.Current as Platform; } set { PlatformBase.Current = value; } }
 
         public Platform()
         {

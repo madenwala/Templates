@@ -11,7 +11,7 @@ namespace Contoso.Core.ViewModels
         /// </summary>
         [Newtonsoft.Json.JsonIgnore()]
         [System.Runtime.Serialization.IgnoreDataMember()]
-        public Platform Platform { get { return Platform.LocalCurrent; } }
+        public Platform Platform { get { return Platform.Current; } }
 
         public AppSettingsLocal AppSettingsLocal { get { return this.Platform.AppSettingsLocal as AppSettingsLocal; } }
 
