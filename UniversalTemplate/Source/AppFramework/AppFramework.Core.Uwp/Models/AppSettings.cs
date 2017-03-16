@@ -19,13 +19,6 @@ namespace AppFramework.Core.Models
             set { this.SetProperty(ref _LocationLastKnown, value); }
         }
 
-        private bool _OverrideTitleSafeBorders = false;
-        public bool OverrideTitleSafeBorders
-        {
-            get { return _OverrideTitleSafeBorders; }
-            private set { this.SetProperty(ref _OverrideTitleSafeBorders, value); }
-        }
-
         #endregion
     }
 

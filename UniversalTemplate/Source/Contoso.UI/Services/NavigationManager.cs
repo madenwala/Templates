@@ -15,7 +15,7 @@ namespace Contoso.UI.Services
     /// <summary>
     /// NavigationManager instance with implementations specific to this application.
     /// </summary>
-    public sealed class NavigationManager : Contoso.Core.Services.NavigationManagerBase
+    public sealed class NavigationManager : NavigationManagerBase
     {
         #region Frame Customizations
 
