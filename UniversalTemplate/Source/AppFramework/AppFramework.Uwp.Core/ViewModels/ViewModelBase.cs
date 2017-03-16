@@ -41,7 +41,7 @@ namespace AppFramework.Core.ViewModels
         /// </summary>
         [Newtonsoft.Json.JsonIgnore()]
         [System.Runtime.Serialization.IgnoreDataMember()]
-        public PlatformBase Platform { get { return PlatformBase.Current; } }
+        public PlatformBase PlatformBase { get { return PlatformBase.Current; } }
 
         /// <summary>
         /// Gets access to the dispatcher for this view or application.
@@ -100,7 +100,7 @@ namespace AppFramework.Core.ViewModels
         /// </summary>
         public bool IsViewInChildFrame
         {
-            get { return PlatformBase.Current.Navigation.IsChildFramePresent; }
+            get { return this.PlatformBase.NavigationBase.IsChildFramePresent; }
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace AppFramework.Core.ViewModels
             {
                 return PlatformBase.Current.ViewModel.IsInitialized == false
                     && this.IsUserAuthenticated
-                    && PlatformBase.Current.Navigation.CanGoBack() == false;
+                    && this.PlatformBase.NavigationBase.CanGoBack() == false;
             }
         }
 
@@ -1092,7 +1092,7 @@ namespace AppFramework.Core.ViewModels
                     await PlatformBase.Current.SignoutAllAsync();
 
                     // Navigate home after successful signout
-                    PlatformBase.Current.Navigation.Home();
+                    this.PlatformBase.NavigationBase.Home();
                 }
                 catch (Exception ex)
                 {

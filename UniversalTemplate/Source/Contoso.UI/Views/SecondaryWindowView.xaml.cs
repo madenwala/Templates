@@ -1,5 +1,5 @@
 ﻿using AppFramework.Core;
-using AppFramework.Core.Services;
+using AppFramework.Core.Models;
 using Contoso.Core;
 using Contoso.Core.ViewModels;
 using System.Threading.Tasks;
@@ -51,7 +51,7 @@ namespace Contoso.UI.Views
         protected override async Task OnLoadStateAsync(LoadStateEventArgs e)
         {
             if (e.NavigationEventArgs.NavigationMode == NavigationMode.New && e.Parameter is NavigationRequest)
-                Platform.Current.Navigation.NavigateTo(e.Parameter as NavigationRequest);
+                Platform.LocalCurrent.Navigation.NavigateTo(e.Parameter as NavigationRequest);
 
             await base.OnLoadStateAsync(e);
         }

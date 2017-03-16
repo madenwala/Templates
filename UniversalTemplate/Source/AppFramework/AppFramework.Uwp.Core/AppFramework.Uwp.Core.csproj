@@ -121,7 +121,6 @@
     <Compile Include="ViewModels\WebBrowserViewModel.cs" />
     <None Include="project.json" />
     <Compile Include="Commands\WebBrowserCommand.cs" />
-    <Compile Include="Services\NavigationManagerBase.Commands.cs" />
     <PRIResource Include="Strings\en-US\WebBrowser.resw">
       <Generator>ReswFileCodeGenerator</Generator>
       <LastGenOutput>WebBrowser.cs</LastGenOutput>

@@ -237,7 +237,7 @@ namespace AppFramework.Core
         /// </summary>
         /// <typeparam name="T">Type reference of the service to retrieve.</typeparam>
         /// <returns>Instance of type T if it was already initialized or null if not found.</returns>
-        private static T GetService<T>() where T : ServiceBase
+        protected static T GetService<T>() where T : ServiceBase
         {
             if (_services.ContainsKey(typeof(T)))
                 return (T)_services[typeof(T)];
@@ -255,7 +255,7 @@ namespace AppFramework.Core
         /// Registers and intializes an instance of an adapter.
         /// </summary>
         /// <typeparam name="T">Type reference of the service to register and initialize.</typeparam>
-        private static void SetService<T>(T instance) where T : ServiceBase
+        protected static void SetService<T>(T instance) where T : ServiceBase
         {
             // Check if T is already registered
             if (_services.ContainsKey(typeof(T)))

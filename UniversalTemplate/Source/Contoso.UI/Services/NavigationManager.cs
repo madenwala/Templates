@@ -1,7 +1,5 @@
 ﻿using AppFramework.Core;
 using AppFramework.Core.Models;
-using AppFramework.Core.Services;
-using AppFramework.Uwp.UI.Controls;
 using Contoso.Core;
 using Contoso.Core.Models;
 using Contoso.Core.Services;
@@ -17,8 +15,17 @@ namespace Contoso.UI.Services
     /// <summary>
     /// NavigationManager instance with implementations specific to this application.
     /// </summary>
-    public sealed partial class NavigationManager : NavigationManagerBase
+    public sealed class NavigationManager : Contoso.Core.Services.NavigationManagerBase
     {
+        #region Frame Customizations
+
+        protected override Frame CreateFrame()
+        {
+            return new AppFramework.Uwp.UI.Controls.ApplicationFrame();
+        }
+
+        #endregion
+
         #region Handle Activation Methods
 
         /// <summary>
@@ -91,12 +98,10 @@ namespace Contoso.UI.Services
 
                 if (dic.ContainsKey("model"))
                 {
-                    switch (dic["model"].ToLower())
+                    if(nameof(ItemModel).Equals(dic["model"], StringComparison.CurrentCultureIgnoreCase))
                     {
-                        case "itemmodel":
-                            this.Item(dic["ID"]);
-                            return true;
-
+                        this.Item(dic["ID"]);
+                        return true;
                     }
                     throw new NotImplementedException(string.Format("No action implemented for model type ", dic["model"]));
                 }
@@ -203,17 +208,6 @@ namespace Contoso.UI.Services
                 this.Home(new NavigationRequest(typeof(DetailsView), parameter));
         }
 
-        #endregion
-
-        #region Frame Customizations
-
-        protected override Frame CreateFrame()
-        {
-            return new ApplicationFrame();
-        }
-
-        #endregion
-
         public override void Phone(object model)
         {
             if (model is ItemModel)
@@ -231,5 +225,7 @@ namespace Contoso.UI.Services
         {
             this.Settings(SettingsViews.TermsOfService);
         }
+
+        #endregion
     }
 }

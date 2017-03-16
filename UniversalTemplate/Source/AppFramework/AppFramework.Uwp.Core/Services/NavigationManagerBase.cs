@@ -1,8 +1,11 @@
 ﻿using AppFramework.Core.Commands;
+using AppFramework.Core.Models;
+using AppFramework.Core.Services;
+using AppFramework.Core.ViewModels;
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
@@ -14,9 +17,6 @@ using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using AppFramework.Core.Models;
-using AppFramework.Core.ViewModels;
-using AppFramework.Core.Services;
 
 namespace AppFramework.Core
 {
@@ -25,76 +25,17 @@ namespace AppFramework.Core
         /// <summary>
         /// Gets the ability to navigate to different parts of an application specific to the platform currently executing.
         /// </summary>
-        public NavigationManagerBase Navigation
+        public NavigationManagerBase NavigationBase
         {
             get { return GetService<NavigationManagerBase>(); }
-            set { SetService<NavigationManagerBase>(value); }
         }
     }
 }
 
 namespace AppFramework.Core.Services
 {
-    public abstract partial class NavigationManagerBase : ServiceBase, IServiceSignout
+    public abstract class NavigationManagerBase : ServiceBase, IServiceSignout
     {
-        #region Abstract Methods
-
-        protected abstract Frame CreateFrame();
-
-        protected abstract bool OnActivation(LaunchActivatedEventArgs e);
-
-        protected abstract bool OnActivation(ToastNotificationActivatedEventArgs e);
-
-        protected abstract bool OnActivation(VoiceCommandActivatedEventArgs e);
-
-        protected abstract bool OnActivation(ProtocolActivatedEventArgs e);
-
-        protected abstract void NavigateToSecondaryWindow(NavigationRequest request);
-
-        public abstract void Home(object parameter = null);
-
-        public abstract void NavigateTo(object model);
-
-        protected abstract void WebView(object parameter);
-
-        public abstract void AccountSignin(object parameter = null);
-
-        public abstract void AccountSignup(object parameter = null);
-
-        public abstract void AccountForgot(object parameter = null);
-
-        public abstract void Settings(object parameter = null);
-
-        public abstract void Search(object parameter = null);
-
-        public abstract void Item(object parameter);
-
-        public abstract void Phone(object model);
-
-        public abstract void PrivacyPolicy(object parameter = null);
-
-        public abstract void TermsOfService(object parameter = null);
-
-        #endregion
-
-        private CommandBase _navigateToPrivacyPolicyCommand = null;
-        /// <summary>
-        /// Command to navigate to the application's privacy policy view.
-        /// </summary>
-        public CommandBase NavigateToPrivacyPolicyCommand
-        {
-            get { return _navigateToPrivacyPolicyCommand ?? (_navigateToPrivacyPolicyCommand = new NavigationCommand("NavigateToPrivacyPolicyCommand", this.PrivacyPolicy)); }
-        }
-
-        private CommandBase _navigateToTermsOfServiceCommand = null;
-        /// <summary>
-        /// Command to navigate to the application's terms of service view.
-        /// </summary>
-        public CommandBase NavigateToTermsOfServiceCommand
-        {
-            get { return _navigateToTermsOfServiceCommand ?? (_navigateToTermsOfServiceCommand = new NavigationCommand("NavigateToTermsOfServiceCommand", this.TermsOfService)); }
-        }
-
         #region Variables
 
         public static Dictionary<int, CoreApplicationView> AppWindows { get; private set; }
@@ -149,21 +90,6 @@ namespace AppFramework.Core.Services
         #endregion
 
         #region Methods
-
-        /// <summary>
-        /// Initialization logic which is called on launch of this application.
-        /// </summary>
-        protected override Task OnInitializeAsync()
-        {
-            // Register for phone hardware back button press
-            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
-                Windows.Phone.UI.Input.HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-
-            /// Register the main window of the application
-            this.RegisterCoreWindow();
-
-            return base.OnInitializeAsync();
-        }
 
         #region Navigation
 
@@ -272,6 +198,15 @@ namespace AppFramework.Core.Services
             return false;
         }
 
+        private CommandBase _navigateGoBackCommand = null;
+        /// <summary>
+        /// Command to access backwards page navigation..
+        /// </summary>
+        public CommandBase NavigateGoBackCommand
+        {
+            get { return _navigateGoBackCommand ?? (_navigateGoBackCommand = new NavigationCommand("NavigateGoBackCommand", () => this.GoBack(), this.CanGoBack)); }
+        }
+
         /// <summary>
         /// Navigates forward one page. Will also check to see if the frame contains a WebView and if the WebView can go forward, it will perform forward on that WebView instead.
         /// </summary>
@@ -319,6 +254,15 @@ namespace AppFramework.Core.Services
 
             // Nothing can go forward, return false.
             return false;
+        }
+
+        private CommandBase _navigateGoForwardCommand = null;
+        /// <summary>
+        /// Command to access forard page navigation.
+        /// </summary>
+        public CommandBase NavigateGoForwardCommand
+        {
+            get { return _navigateGoForwardCommand ?? (_navigateGoForwardCommand = new NavigationCommand("NavigateGoForwardCommand", () => this.GoForward(), this.CanGoForward)); }
         }
 
         /// <summary>
@@ -382,12 +326,27 @@ namespace AppFramework.Core.Services
         /// </summary>
         public void UpdateTitleBarBackButton()
         {
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = PlatformBase.Current.Navigation.CanGoBack() ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = this.CanGoBack() ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
         }
 
         #endregion Navigation
 
         #region Activation/Deactivation
+
+        /// <summary>
+        /// Initialization logic which is called on launch of this application.
+        /// </summary>
+        protected override Task OnInitializeAsync()
+        {
+            // Register for phone hardware back button press
+            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
+                Windows.Phone.UI.Input.HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+
+            /// Register the main window of the application
+            this.RegisterCoreWindow();
+
+            return base.OnInitializeAsync();
+        }
 
         /// <summary>
         /// Registers the window with all window events.
@@ -398,6 +357,8 @@ namespace AppFramework.Core.Services
             Window.Current.CoreWindow.Dispatcher.AcceleratorKeyActivated += CoreDispatcher_AcceleratorKeyActivated;
             Window.Current.CoreWindow.PointerPressed += this.CoreWindow_PointerPressed;
         }
+
+        protected abstract Frame CreateFrame();
 
         /// <summary>
         /// Handle activation of the event and any navigation necessary.
@@ -445,7 +406,7 @@ namespace AppFramework.Core.Services
                 }
 
                 if (handled == false || rootFrame?.Content == null)
-                    PlatformBase.Current.Navigation.Home();
+                    this.Home();
 
                 PlatformBase.Current.Logger.Log(LogLevels.Information, "Completed Navigation.HandleActivation({0}) on RootFrame: {1} --- OnActivation Handled? {2}", e?.GetType().Name, rootFrame?.Content?.GetType().Name, handled);
             }
@@ -455,6 +416,14 @@ namespace AppFramework.Core.Services
                 throw ex;
             }
         }
+
+        protected abstract bool OnActivation(LaunchActivatedEventArgs e);
+
+        protected abstract bool OnActivation(ToastNotificationActivatedEventArgs e);
+
+        protected abstract bool OnActivation(VoiceCommandActivatedEventArgs e);
+
+        protected abstract bool OnActivation(ProtocolActivatedEventArgs e);
 
         /// <summary>
         /// Exits an application.
@@ -532,6 +501,33 @@ namespace AppFramework.Core.Services
                         break;
                     }
             }
+        }
+
+        private CommandBase _navigateToMapExternalCommand = null;
+        /// <summary>
+        /// Command to access the external maps view.
+        /// </summary>
+        public CommandBase NavigateToMapExternalCommand
+        {
+            get { return _navigateToMapExternalCommand ?? (_navigateToMapExternalCommand = new MapExternalCommand()); }
+        }
+
+        private CommandBase _navigateToMapExternalDrivingCommand = null;
+        /// <summary>
+        /// Command to access the device's map driving directions view.
+        /// </summary>
+        public CommandBase NavigateToMapExternalDrivingCommand
+        {
+            get { return _navigateToMapExternalDrivingCommand ?? (_navigateToMapExternalDrivingCommand = new MapExternalCommand(MapExternalOptions.DrivingDirections)); }
+        }
+
+        private CommandBase _navigateToMapExternalWalkingCommand = null;
+        /// <summary>
+        /// Command to access the device's map walking directions view.
+        /// </summary>
+        public CommandBase NavigateToMapExternalWalkingCommand
+        {
+            get { return _navigateToMapExternalWalkingCommand ?? (_navigateToMapExternalWalkingCommand = new MapExternalCommand(MapExternalOptions.WalkingDirections)); }
         }
 
         #endregion
@@ -615,15 +611,25 @@ namespace AppFramework.Core.Services
 
         #region Phone
 
+        public abstract void Phone(object model);
+
         public void Phone(string phoneNumber, string displayName = null)
         {
             phoneNumber = GeneralFunctions.ConvertPhoneLettersToNumbers(phoneNumber);
             Windows.ApplicationModel.Calls.PhoneCallManager.ShowPhoneCallUI(phoneNumber, displayName);
         }
 
+        private CommandBase _navigateToPhoneCommand = null;
+        public CommandBase NavigateToPhoneCommand
+        {
+            get { return _navigateToPhoneCommand ?? (_navigateToPhoneCommand = new NavigationCommand("NavigateToPhoneCommand", this.Phone)); }
+        }
+
         #endregion
 
         #region Web
+
+        protected abstract void WebView(object parameter);
 
         /// <summary>
         /// Navigates to an external web browser.
@@ -666,6 +672,24 @@ namespace AppFramework.Core.Services
             }
         }
 
+        private CommandBase _navigateToWebViewCommand = null;
+        /// <summary>
+        /// Command to navigate to the internal web view.
+        /// </summary>
+        public CommandBase NavigateToWebViewCommand
+        {
+            get { return _navigateToWebViewCommand ?? (_navigateToWebViewCommand = new WebViewCommand()); }
+        }
+
+        private CommandBase _navigateToWebBrowserCommand = null;
+        /// <summary>
+        /// Command to navigate to the external web browser.
+        /// </summary>
+        public CommandBase NavigateToWebBrowserCommand
+        {
+            get { return _navigateToWebBrowserCommand ?? (_navigateToWebBrowserCommand = new WebBrowserCommand()); }
+        }
+
         #endregion
 
         #region App Links
@@ -683,6 +707,8 @@ namespace AppFramework.Core.Services
         #endregion
 
         #region Secondary Windows
+
+        protected abstract void NavigateToSecondaryWindow(NavigationRequest request);
 
         /// <summary>
         /// Navigates to a page specified in the navigation request object.
@@ -753,6 +779,126 @@ namespace AppFramework.Core.Services
             AppWindows.Remove(windowID);
             ApplicationView.GetForCurrentView().Consolidated -= View_Consolidated;
             Window.Current.Close();
+        }
+
+        private CommandBase _navigateToNewWindowCommand = null;
+        /// <summary>
+        /// Command to navigate to the account forgot crentials view.
+        /// </summary>
+        public CommandBase NavigateToNewWindowCommand
+        {
+            get
+            {
+                return PlatformBase.Current == null ? null : _navigateToNewWindowCommand ?? (_navigateToNewWindowCommand = new GenericCommand<ViewModelBase>("NavigateToNewWindowCommand", async (e) =>
+                {
+                    await this.NavigateInNewWindow(e.View.GetType(), e.ViewParameter);
+                }));
+            }
+        }
+
+        #endregion
+
+        #region Feedback Commands
+
+        public bool IsFeedbackEnabled
+        {
+            // Microsoft Store Engagement and Monetization SDK
+            // https://visualstudiogallery.msdn.microsoft.com/229b7858-2c6a-4073-886e-cbb79e851211/view/Reviews?sortBy=RatingDescending
+            get
+            {
+                if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher"))
+                    return Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.IsSupported();
+                else
+                    return false;
+            }
+        }
+
+        private CommandBase _navigateToFeedbackCommand = null;
+        public CommandBase NavigateToFeedbackCommand
+        {
+            get
+            {
+                return _navigateToFeedbackCommand ?? (_navigateToFeedbackCommand = new GenericCommand("NavigateToFeedbackCommand", async () =>
+                {
+                    if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher"))
+                    {
+                        PlatformBase.Current.Analytics.Event("FeedbackLauncher");
+                        await Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.GetDefault().LaunchAsync();
+                    }
+                    else
+                        await Task.CompletedTask;
+                }, () => this.IsFeedbackEnabled));
+            }
+        }
+
+        #endregion
+
+        #region Twitter Commands
+
+        private CommandBase _navigateToTwitterScreenNameCommand = null;
+        public CommandBase NavigateToTwitterScreenNameCommand
+        {
+            get { return _navigateToTwitterScreenNameCommand ?? (_navigateToTwitterScreenNameCommand = new GenericCommand<string>("NavigateToTwitterScreenNameCommand", this.NavigateToTwitterScreenName)); }
+        }
+
+        #endregion
+
+        #region Common Pages
+
+        public abstract void Home(object parameter = null);
+
+        private CommandBase _navigateToHomeCommand = null;
+        /// <summary>
+        /// Command to access backwards page navigation..
+        /// </summary>
+        public CommandBase NavigateToHomeCommand
+        {
+            get { return _navigateToHomeCommand ?? (_navigateToHomeCommand = new NavigationCommand("NavigateToHomeCommand", this.Home)); }
+        }
+
+        public abstract void NavigateTo(object model);
+
+        private CommandBase _navigateToModelCommand = null;
+        /// <summary>
+        /// Command to access navigating to an instance of a model (Navigation manager handles actually forwarding to the appropriate view for 
+        /// the model pass into a parameter. 
+        /// </summary>
+        public CommandBase NavigateToModelCommand
+        {
+            get { return _navigateToModelCommand ?? (_navigateToModelCommand = new NavigationCommand()); }
+        }
+
+        public abstract void Settings(object parameter = null);
+
+        private CommandBase _navigateToSettingsCommand = null;
+        /// <summary>
+        /// Command to navigate to the settings view.
+        /// </summary>
+        public CommandBase NavigateToSettingsCommand
+        {
+            get { return _navigateToSettingsCommand ?? (_navigateToSettingsCommand = new NavigationCommand("NavigateToSettingsCommand", this.Settings)); }
+        }
+
+        public abstract void PrivacyPolicy(object parameter = null);
+
+        private CommandBase _navigateToPrivacyPolicyCommand = null;
+        /// <summary>
+        /// Command to navigate to the application's privacy policy view.
+        /// </summary>
+        public CommandBase NavigateToPrivacyPolicyCommand
+        {
+            get { return _navigateToPrivacyPolicyCommand ?? (_navigateToPrivacyPolicyCommand = new NavigationCommand("NavigateToPrivacyPolicyCommand", this.PrivacyPolicy)); }
+        }
+
+        public abstract void TermsOfService(object parameter = null);
+
+        private CommandBase _navigateToTermsOfServiceCommand = null;
+        /// <summary>
+        /// Command to navigate to the application's terms of service view.
+        /// </summary>
+        public CommandBase NavigateToTermsOfServiceCommand
+        {
+            get { return _navigateToTermsOfServiceCommand ?? (_navigateToTermsOfServiceCommand = new NavigationCommand("NavigateToTermsOfServiceCommand", this.TermsOfService)); }
         }
 
         #endregion
@@ -862,7 +1008,7 @@ namespace AppFramework.Core.Services
 
     #region Classes
 
-    public static class NavigationParameterSerializer
+    internal static class NavigationParameterSerializer
     {
         /// <summary>
         /// Serializes an object if its a non-primitive type.
@@ -913,10 +1059,15 @@ namespace AppFramework.Core.Services
         }
     }
 
+    #endregion
+}
+
+namespace AppFramework.Core.Models
+{
     /// <summary>
     /// Represents navigation instructions that can be serialized and performed at a later time.
     /// </summary>
-    public class NavigationRequest
+    public sealed class NavigationRequest
     {
         public NavigationRequest()
         {
@@ -938,6 +1089,4 @@ namespace AppFramework.Core.Services
         /// </summary>
         public object ViewParameter { get; set; }
     }
-
-    #endregion
 }

@@ -1,5 +1,5 @@
 ﻿using AppFramework.Core;
-using AppFramework.Core.Services;
+using AppFramework.Core.Models;
 using AppFramework.Core.Strings;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;

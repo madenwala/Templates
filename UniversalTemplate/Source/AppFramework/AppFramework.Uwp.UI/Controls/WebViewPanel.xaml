@@ -36,15 +36,15 @@
 
         <CommandBar Grid.Row="1" Visibility="{x:Bind ViewModel.ShowNavigation, Mode=OneWay, Converter={StaticResource visConverter}}">
             <CommandBar.PrimaryCommands>
-                <AppBarButton x:Uid="/AppFramework.Core/WebBrowser/abtnGoBack" Label="[Go back]" Icon="Back" Command="{x:Bind ViewModel.Platform.Navigation.NavigateGoBackCommand}" />
+                <AppBarButton x:Uid="/AppFramework.Core/WebBrowser/abtnGoBack" Label="[Go back]" Icon="Back" Command="{x:Bind ViewModel.PlatformBase.NavigationBase.NavigateGoBackCommand}" />
                 <AppBarButton x:Uid="/AppFramework.Core/Resources/abtnHome" Label="[Home]" Icon="Home" Command="{x:Bind ViewModel.BrowserHomeCommand}" />
                 <AppBarButton x:Uid="/AppFramework.Core/Resources/abtnRefresh" Label="[Refresh]" Icon="Refresh" Command="{x:Bind ViewModel.BrowserRefreshCommand}" />
-                <AppBarButton x:Uid="/AppFramework.Core/WebBrowser/abtnGoForward" Label="[Go forward]" Icon="Forward" Command="{x:Bind ViewModel.Platform.Navigation.NavigateGoForwardCommand}" />
+                <AppBarButton x:Uid="/AppFramework.Core/WebBrowser/abtnGoForward" Label="[Go forward]" Icon="Forward" Command="{x:Bind ViewModel.PlatformBase.NavigationBase.NavigateGoForwardCommand}" />
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton x:Uid="/AppFramework.Core/Resources/abtnShare" 
                               Label="[Share]" 
-                              Command="{x:Bind ViewModel.Platform.SharingManager.ShareCommand}" 
+                              Command="{x:Bind ViewModel.PlatformBase.SharingManager.ShareCommand}" 
                               CommandParameter="{x:Bind ViewModel, Mode=OneWay}" 
                               Visibility="{x:Bind ViewModel.IsSharingAllowed, Mode=OneWay, Converter={StaticResource visConverter}}" 
                               IsEnabled="{x:Bind ViewModel.CurrentUrl, Mode=OneWay, Converter={StaticResource boolConverter}}" >
@@ -52,7 +52,7 @@
                 </AppBarButton>
                 <AppBarButton x:Uid="/AppFramework.Core/WebBrowser/abtnOpenInExternalBrowser" 
                               Label="[Open in external browser]" 
-                              Command="{x:Bind ViewModel.Platform.Navigation.NavigateToWebBrowserCommand}" 
+                              Command="{x:Bind ViewModel.PlatformBase.NavigationBase.NavigateToWebBrowserCommand}" 
                               CommandParameter="{x:Bind ViewModel.CurrentUrl, Mode=OneWay}" 
                               Visibility="{x:Bind ViewModel.IsOpenInExternalBrowserVisible, Mode=OneWay, Converter={StaticResource visConverter}}"
                               IsEnabled="{x:Bind ViewModel.CurrentUrl, Mode=OneWay, Converter={StaticResource boolConverter}}" />

@@ -6,6 +6,13 @@ namespace Contoso.Core.ViewModels
     {
         #region Properties
 
+        /// <summary>
+        /// Gets access to all the platform services.
+        /// </summary>
+        [Newtonsoft.Json.JsonIgnore()]
+        [System.Runtime.Serialization.IgnoreDataMember()]
+        public Platform Platform { get { return Platform.LocalCurrent; } }
+
         public AppSettingsLocal AppSettingsLocal { get { return this.Platform.AppSettingsLocal as AppSettingsLocal; } }
 
         public AppSettingsRoaming AppSettingsRoaming { get { return this.Platform.AppSettingsRoaming as AppSettingsRoaming; } }
@@ -30,9 +37,9 @@ namespace Contoso.Core.ViewModels
     {
         #region Properties
 
-        public AppSettingsLocal AppSettingsLocal { get { return this.Platform.AppSettingsLocal as AppSettingsLocal; } }
+        public AppSettingsLocal AppSettingsLocal { get { return this.PlatformBase.AppSettingsLocal as AppSettingsLocal; } }
 
-        public AppSettingsRoaming AppSettingsRoaming { get { return this.Platform.AppSettingsRoaming as AppSettingsRoaming; } }
+        public AppSettingsRoaming AppSettingsRoaming { get { return this.PlatformBase.AppSettingsRoaming as AppSettingsRoaming; } }
 
         #endregion
 
@@ -40,7 +47,7 @@ namespace Contoso.Core.ViewModels
 
         public WebViewModelBase(bool showNavigation = true) : base(showNavigation)
         {
-            this.Platform.OnAppSettingsReset += (o, e) =>
+            this.PlatformBase.OnAppSettingsReset += (o, e) =>
             {
                 this.NotifyPropertyChanged(() => this.AppSettingsLocal);
                 this.NotifyPropertyChanged(() => this.AppSettingsRoaming);

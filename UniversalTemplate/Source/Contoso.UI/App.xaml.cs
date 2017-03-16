@@ -24,7 +24,7 @@ namespace Contoso.UI
             this.InitializeComponent();
 
             // Initalize the platform object which is the singleton instance to access various services
-            Platform.Current.Navigation = new NavigationManager();
+            Platform.LocalCurrent.Navigation = new NavigationManager();
             Platform.Current.Analytics.Register(new FlurryAnalyticsService("M76D4BWBDRTWTVJZZ27P"));
             Platform.Current.Analytics.Register(new HockeyAppService("f83e8cf6e95047d5ba8dfee810a94754", "adenwala@outlook.com"));
             Platform.Current.Analytics.Register(new GoogleAnalyticsService("UA-91538532-2"));

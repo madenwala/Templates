@@ -168,8 +168,8 @@ namespace AppFramework.Core.Services
                 e.HeaderText = Strings.Account.TextWebAccountManagerSignUpDescription;
 
                 // You can add links such as privacy policy, help, general account settings
-                e.Commands.Add(new SettingsCommand("privacypolicy", Strings.Resources.ViewTitlePrivacyPolicy, (c) => { PlatformBase.Current.Navigation.NavigateToPrivacyPolicyCommand.Execute(null); this.Cleanup(); }));
-                e.Commands.Add(new SettingsCommand("tos", Strings.Resources.ViewTitleTermsOfService, (c) => { PlatformBase.Current.Navigation.NavigateToTermsOfServiceCommand.Execute(null); this.Cleanup(); }));
+                e.Commands.Add(new SettingsCommand("privacypolicy", Strings.Resources.ViewTitlePrivacyPolicy, (c) => { PlatformBase.Current.NavigationBase.NavigateToPrivacyPolicyCommand.Execute(null); this.Cleanup(); }));
+                e.Commands.Add(new SettingsCommand("tos", Strings.Resources.ViewTitleTermsOfService, (c) => { PlatformBase.Current.NavigationBase.NavigateToTermsOfServiceCommand.Execute(null); this.Cleanup(); }));
             }
             catch(Exception ex)
             {

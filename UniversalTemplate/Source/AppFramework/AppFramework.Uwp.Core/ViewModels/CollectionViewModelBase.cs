@@ -137,8 +137,8 @@ namespace AppFramework.Core.ViewModels
             }
 
             // Update global navigation
-            PlatformBase.Current.Navigation.NavigateGoBackCommand.RaiseCanExecuteChanged();
-            PlatformBase.Current.Navigation.NavigateGoForwardCommand.RaiseCanExecuteChanged();
+            this.PlatformBase.NavigationBase.NavigateGoBackCommand.RaiseCanExecuteChanged();
+            this.PlatformBase.NavigationBase.NavigateGoForwardCommand.RaiseCanExecuteChanged();
         }
 
         protected internal override bool OnBackNavigationRequested()
