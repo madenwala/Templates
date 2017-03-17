@@ -2,7 +2,7 @@
 
 namespace Contoso.UI.Views
 {
-    public abstract class ViewBase<TViewModel> : AppFramework.UI.Views.ViewBase<TViewModel> where TViewModel : ViewModelBase
+    public abstract class ViewBase<TViewModel> : AppFramework.UI.Views.ViewBase<TViewModel> where TViewModel : IViewModel
     {
     }
 }
