@@ -29,8 +29,6 @@ namespace AppFramework.Core.Services
     {
         #region Variables
 
-        public const string PROTOCOL_PREFIX = "contoso://";
-
         private LicenseInformation _licenseInfo = null;
 
         #endregion
@@ -40,32 +38,20 @@ namespace AppFramework.Core.Services
         /// <summary>
         /// Gets the AppID of the application.
         /// </summary>
-        public string AppID
-        {
-            get
-            {
-                return Windows.ApplicationModel.Package.Current.Id.ProductId;
-            }
-        }
+        public string AppID { get { return Windows.ApplicationModel.Package.Current.Id.ProductId; } }
 
-        public string AppName
-        {
-            get
-            {
-                return Windows.ApplicationModel.Package.Current.Id.Name;
-            }
-        }
+        public virtual string AppName { get { return Windows.ApplicationModel.Package.Current.Id.Name; } }
+
+        public abstract string AppDescription { get; }
+
+        public abstract string AppSupportEmailAddress { get; }
+
+        public abstract string ProtocolPrefix { get; }
 
         /// <summary>
         /// Gets version number of the application currently executing.
         /// </summary>
-        public Version VersionNumber
-        {
-            get
-            {
-                return Windows.ApplicationModel.Package.Current.Id.Version.ToVersion();
-            }
-        }
+        public Version VersionNumber { get { return Windows.ApplicationModel.Package.Current.Id.Version.ToVersion(); } }
         
         /// <summary>
         /// Creates a deep link to your application with the specified arguments.
@@ -84,7 +70,7 @@ namespace AppFramework.Core.Services
         /// <returns>String representing the deep link.</returns>
         public string GetDeepLink(string arguments)
         {
-            return PROTOCOL_PREFIX + arguments;
+            return ProtocolPrefix + arguments;
         }
 
         /// <summary>

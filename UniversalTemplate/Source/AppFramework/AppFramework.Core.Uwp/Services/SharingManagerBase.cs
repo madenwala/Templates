@@ -78,7 +78,7 @@ namespace AppFramework.Core.Services
                     if (string.IsNullOrEmpty(e.Request.Data.Properties.Title))
                     {
                         e.Request.Data.Properties.Title = PlatformBase.Current.AppInfo.AppName;
-                        e.Request.Data.Properties.Description = Resources.ApplicationDescription;
+                        e.Request.Data.Properties.Description = PlatformBase.Current.AppInfo.AppDescription;
                         e.Request.Data.Properties.ContentSourceApplicationLink = new Uri(PlatformBase.Current.AppInfo.StoreURL, UriKind.Absolute);
                         string body = string.Format(Resources.ApplicationSharingBodyText, PlatformBase.Current.AppInfo.AppName, PlatformBase.Current.AppInfo.StoreURL);
                         e.Request.Data.SetText(body);

@@ -1,9 +1,9 @@
 ﻿using AppFramework.Core;
 using AppFramework.Core.Commands;
 using AppFramework.Core.Models;
-using AppFramework.Core.Strings;
 using Contoso.Core.Data;
 using Contoso.Core.Models;
+using Contoso.Core.Strings;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;

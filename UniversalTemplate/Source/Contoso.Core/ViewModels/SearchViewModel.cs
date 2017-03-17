@@ -1,8 +1,8 @@
 ﻿using AppFramework.Core;
 using AppFramework.Core.Models;
-using AppFramework.Core.Strings;
 using Contoso.Core.Data;
 using Contoso.Core.Models;
+using Contoso.Core.Strings;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;

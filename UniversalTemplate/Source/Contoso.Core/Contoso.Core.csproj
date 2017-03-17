@@ -117,6 +117,31 @@
     <Compile Include="Services\AuthorizationManager.cs" />
     <Compile Include="Services\BackgroundTasksManager.cs" />
     <Compile Include="Services\AppInfoProvider.cs" />
+    <PRIResource Include="Strings\en-US\Search.resw">
+      <Generator>ReswFileCodeGenerator</Generator>
+      <LastGenOutput>Search.cs</LastGenOutput>
+      <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
+    </PRIResource>
+    <PRIResource Include="Strings\en-US\Resources.resw">
+      <Generator>ReswFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.cs</LastGenOutput>
+      <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
+    </PRIResource>
+    <PRIResource Include="Strings\en-US\Location.resw">
+      <Generator>ReswFileCodeGenerator</Generator>
+      <LastGenOutput>Location.cs</LastGenOutput>
+      <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
+    </PRIResource>
+    <PRIResource Include="Strings\en-US\BackgroundTasks.resw">
+      <Generator>ReswFileCodeGenerator</Generator>
+      <LastGenOutput>BackgroundTasks.cs</LastGenOutput>
+      <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
+    </PRIResource>
+    <PRIResource Include="Strings\en-US\Account.resw">
+      <Generator>ReswFileCodeGenerator</Generator>
+      <LastGenOutput>Account.cs</LastGenOutput>
+      <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
+    </PRIResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\ClientApi.cs" />
@@ -125,6 +150,31 @@
     <Compile Include="Services\NavigationManagerBase.cs" />
     <Compile Include="Services\NotificationsService.cs" />
     <Compile Include="Services\SharingManager.cs" />
+    <Compile Include="Strings\en-US\Account.cs">
+      <DependentUpon>Account.resw</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Strings\en-US\BackgroundTasks.cs">
+      <DependentUpon>BackgroundTasks.resw</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Strings\en-US\Location.cs">
+      <DependentUpon>Location.resw</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Strings\en-US\Resources.cs">
+      <DependentUpon>Resources.resw</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Strings\en-US\Search.cs">
+      <DependentUpon>Search.resw</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="ViewModels\AccountForgotViewModel.cs" />
     <Compile Include="ViewModels\AccountSignInViewModel.cs" />
     <Compile Include="ViewModels\AccountSignUpViewModel.cs" />

@@ -165,7 +165,7 @@ namespace AppFramework.Core.Services
                     }
                 }
 
-                e.HeaderText = Strings.Account.TextWebAccountManagerSignUpDescription;
+                e.HeaderText = string.Format(Strings.Account.TextWebAccountManagerSignUpDescription, PlatformBase.Current.AppInfo.AppName);
 
                 // You can add links such as privacy policy, help, general account settings
                 e.Commands.Add(new SettingsCommand("privacypolicy", Strings.Resources.ViewTitlePrivacyPolicy, (c) => { PlatformBase.Current.NavigationBase.NavigateToPrivacyPolicyCommand.Execute(null); this.Cleanup(); }));

@@ -17,20 +17,20 @@
 // 	This code contains a helper class exposing property representations
 // 	of the string resources defined in the specified .ResW file
 // 
-// 	Generated: 03/07/2017 18:48:11
+// 	Generated: 03/17/2017 06:01:04
 // </auto-generatedInfo>
 // --------------------------------------------------------------------------------------------------
-namespace AppFramework.Core.Strings
+namespace Contoso.Core.Strings
 {
     using Windows.ApplicationModel.Resources;
     
     
-    public partial class Search
+    public partial class BackgroundTasks
     {
         
         private static ResourceLoader resourceLoader;
         
-        static Search()
+        static BackgroundTasks()
         {
             string executingAssemblyName;
             executingAssemblyName = Windows.UI.Xaml.Application.Current.GetType().AssemblyQualifiedName;
@@ -38,50 +38,28 @@ namespace AppFramework.Core.Strings
             executingAssemblySplit = executingAssemblyName.Split(',');
             executingAssemblyName = executingAssemblySplit[1];
             string currentAssemblyName;
-            currentAssemblyName = typeof(Search).AssemblyQualifiedName;
+            currentAssemblyName = typeof(BackgroundTasks).AssemblyQualifiedName;
             string[] currentAssemblySplit;
             currentAssemblySplit = currentAssemblyName.Split(',');
             currentAssemblyName = currentAssemblySplit[1];
             if (executingAssemblyName.Equals(currentAssemblyName))
             {
-                resourceLoader = ResourceLoader.GetForCurrentView("Search");
+                resourceLoader = ResourceLoader.GetForCurrentView("BackgroundTasks");
             }
             else
             {
-                resourceLoader = ResourceLoader.GetForCurrentView(currentAssemblyName + "/Search");
+                resourceLoader = ResourceLoader.GetForCurrentView(currentAssemblyName + "/BackgroundTasks");
             }
         }
         
         /// <summary>
-        /// Localized resource similar to "Search"
+        /// Localized resource similar to "Background tasks have not been enabled for this app. Use the manage button and ensure this app has been enabled to run in the background."
         /// </summary>
-        public static string ButtonTextSearch
+        public static string TextBackgroundAppDisabledStatus
         {
             get
             {
-                return resourceLoader.GetString("ButtonTextSearch");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Searching '{0}'..."
-        /// </summary>
-        public static string TextSearching
-        {
-            get
-            {
-                return resourceLoader.GetString("TextSearching");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "{0} search results for '{1}'"
-        /// </summary>
-        public static string TextSearchResultsCount
-        {
-            get
-            {
-                return resourceLoader.GetString("TextSearchResultsCount");
+                return resourceLoader.GetString("TextBackgroundAppDisabledStatus");
             }
         }
     }

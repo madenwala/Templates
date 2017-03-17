@@ -117,22 +117,85 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="TextDeterminingLocation" xml:space="preserve">
-    <value>Finding your location...</value>
+  <data name="txtUsername.Header" xml:space="preserve">
+    <value>Username:</value>
   </data>
-  <data name="TextDistanceAwayDisplay" xml:space="preserve">
-    <value>{0} {1} away</value>
+  <data name="TextAuthenticationFailed" xml:space="preserve">
+    <value>Authentication failed. Try again later.</value>
   </data>
-  <data name="TextKilomentersLong" xml:space="preserve">
-    <value>Kilometers</value>
+  <data name="TextCreatingAccount" xml:space="preserve">
+    <value>Creating account...</value>
   </data>
-  <data name="TextKilomentersShort" xml:space="preserve">
-    <value>km</value>
+  <data name="TextUsernameNotFound" xml:space="preserve">
+    <value>Username was not found!</value>
   </data>
-  <data name="TextMilesLong" xml:space="preserve">
-    <value>Miles</value>
+  <data name="TextValidatingUsername" xml:space="preserve">
+    <value>Validating username...</value>
   </data>
-  <data name="TextMilesShort" xml:space="preserve">
-    <value>mi</value>
+  <data name="TextWebAccountManagerRegisterAccountFailure" xml:space="preserve">
+    <value>An error occurred while attempting to use your {0} profile to register an account. Please try again later.</value>
+  </data>
+  <data name="TextWebAccountManagerRetrievingProfile" xml:space="preserve">
+    <value>Retrieving your {0} profile...</value>
+  </data>
+  <data name="TextWelcomeAuthenticated" xml:space="preserve">
+    <value>Welcome {0}!</value>
+  </data>
+  <data name="TextWelcomeUnauthenticated" xml:space="preserve">
+    <value>Welcome!</value>
+  </data>
+  <data name="ViewTitleForgotPassword" xml:space="preserve">
+    <value>Forgot Password</value>
+  </data>
+  <data name="ViewTitleSignIn" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="ViewTitleSignUp" xml:space="preserve">
+    <value>Sign Up</value>
+  </data>
+  <data name="btnSignin.Content" xml:space="preserve">
+    <value>Sign in</value>
+  </data>
+  <data name="txtPassword.Header" xml:space="preserve">
+    <value>Password:</value>
+  </data>
+  <data name="btnRegister.Content" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="lnkForgotPassword.Content" xml:space="preserve">
+    <value>Forgot your password?</value>
+  </data>
+  <data name="txtAddress1.Header" xml:space="preserve">
+    <value>Address 1:</value>
+  </data>
+  <data name="txtAddress2.Header" xml:space="preserve">
+    <value>Address 2:</value>
+  </data>
+  <data name="txtCity.Header" xml:space="preserve">
+    <value>City:</value>
+  </data>
+  <data name="txtFirstName.Header" xml:space="preserve">
+    <value>First name:</value>
+  </data>
+  <data name="txtLastName.Header" xml:space="preserve">
+    <value>Last name:</value>
+  </data>
+  <data name="txtPassword2.Header" xml:space="preserve">
+    <value>Confirm password:</value>
+  </data>
+  <data name="txtPostalCode.Header" xml:space="preserve">
+    <value>Zip code:</value>
+  </data>
+  <data name="txtState.Header" xml:space="preserve">
+    <value>State:</value>
+  </data>
+  <data name="tbWelcomeDescription.Text" xml:space="preserve">
+    <value>Welcome to Contoso! Register for an account to enjoy all the service offerings we provide.</value>
+  </data>
+  <data name="btnSignout.Content" xml:space="preserve">
+    <value>Sign out</value>
+  </data>
+  <data name="TextAuthenticating" xml:space="preserve">
+    <value>Authenticating...</value>
   </data>
 </root>

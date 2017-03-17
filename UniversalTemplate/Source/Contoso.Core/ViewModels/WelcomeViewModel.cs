@@ -1,7 +1,7 @@
 ﻿using AppFramework.Core;
 using AppFramework.Core.Commands;
 using AppFramework.Core.Services;
-using AppFramework.Core.Strings;
+using Contoso.Core.Strings;
 using Contoso.Core.Data;
 using System;
 using System.Threading;

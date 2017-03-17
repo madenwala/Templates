@@ -239,7 +239,7 @@ namespace AppFramework.Core.Services
                         body += await PlatformBase.Current.Storage.ReadFileAsStringAsync(ERROR_REPORT_FILENAME, ERROR_REPORT_DATA_CONTAINER);
                         PlatformBase.Current.Logger.Log(LogLevels.Information, "PREVIOUS CRASH LOGS: \t" + body);
 
-                        await PlatformBase.Current.EmailProvider.SendEmailAsync(subject, body, Strings.Resources.ApplicationSupportEmailAddress, attachment);
+                        await PlatformBase.Current.EmailProvider.SendEmailAsync(subject, body, PlatformBase.Current.AppInfo.AppSupportEmailAddress, attachment);
                     }
 
                     await PlatformBase.Current.Storage.DeleteFileAsync(ERROR_REPORT_FILENAME, ERROR_REPORT_DATA_CONTAINER);
@@ -263,7 +263,7 @@ namespace AppFramework.Core.Services
             var body = Strings.Resources.ApplicationSupportEmailBodyTemplate;
             body += report;
             // TODO move app support email address to app info provider
-            await PlatformBase.Current.EmailProvider.SendEmailAsync(subject, body, Resources.ApplicationSupportEmailAddress, attachment);
+            await PlatformBase.Current.EmailProvider.SendEmailAsync(subject, body, PlatformBase.Current.AppInfo.AppSupportEmailAddress, attachment);
         }
 
         /// <summary>

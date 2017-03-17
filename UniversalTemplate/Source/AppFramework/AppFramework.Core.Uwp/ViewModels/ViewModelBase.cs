@@ -668,7 +668,7 @@ namespace AppFramework.Core.ViewModels
         /// <returns>Awaitable call which returns the index of the button clicked.</returns>
         protected internal Task<int> ShowMessageBoxAsync(CancellationToken ct, string message)
         {
-            return this.ShowMessageBoxAsync(ct, message, Strings.Resources.ApplicationName);
+            return this.ShowMessageBoxAsync(ct, message, PlatformBase.Current.AppInfo.AppName);
         }
 
         /// <summary>
@@ -693,7 +693,7 @@ namespace AppFramework.Core.ViewModels
         /// <returns>Awaitable call which returns the index of the button clicked.</returns>
         protected internal Task<int> ShowMessageBoxAsync(CancellationToken ct, string message, IList<string> buttonNames = null, int defaultIndex = 0)
         {
-            return this.ShowMessageBoxAsync(ct, message, Strings.Resources.ApplicationName, buttonNames, defaultIndex);
+            return this.ShowMessageBoxAsync(ct, message, PlatformBase.Current.AppInfo.AppName, buttonNames, defaultIndex);
         }
 
         /// <summary>
@@ -712,7 +712,7 @@ namespace AppFramework.Core.ViewModels
 
             // Set a default title if no title was specified.
             if (string.IsNullOrWhiteSpace(title))
-                title = Strings.Resources.ApplicationName;
+                title = PlatformBase.Current.AppInfo.AppName;
 
             int result = defaultIndex;
             MessageDialog dialog = new MessageDialog(message, title);

@@ -3,7 +3,7 @@ using Windows.System;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
-namespace Contoso.Behaviors
+namespace AppFramework.UI.Behaviors
 {
     public class GameControllerListViewFocusBehavior : Behavior<ListView>
     {

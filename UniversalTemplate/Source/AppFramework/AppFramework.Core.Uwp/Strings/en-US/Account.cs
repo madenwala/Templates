@@ -17,7 +17,7 @@
 // 	This code contains a helper class exposing property representations
 // 	of the string resources defined in the specified .ResW file
 // 
-// 	Generated: 03/07/2017 18:48:10
+// 	Generated: 03/17/2017 06:17:22
 // </auto-generatedInfo>
 // --------------------------------------------------------------------------------------------------
 namespace AppFramework.Core.Strings
@@ -64,24 +64,13 @@ namespace AppFramework.Core.Strings
         }
         
         /// <summary>
-        /// Localized resource similar to "Authentication failed. Try again later."
+        /// Localized resource similar to "N/A"
         /// </summary>
-        public static string TextAuthenticationFailed
+        public static string TextNotApplicable
         {
             get
             {
-                return resourceLoader.GetString("TextAuthenticationFailed");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Creating account..."
-        /// </summary>
-        public static string TextCreatingAccount
-        {
-            get
-            {
-                return resourceLoader.GetString("TextCreatingAccount");
+                return resourceLoader.GetString("TextNotApplicable");
             }
         }
         
@@ -119,116 +108,6 @@ namespace AppFramework.Core.Strings
         }
         
         /// <summary>
-        /// Localized resource similar to "Username was not found!"
-        /// </summary>
-        public static string TextUsernameNotFound
-        {
-            get
-            {
-                return resourceLoader.GetString("TextUsernameNotFound");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Validating username..."
-        /// </summary>
-        public static string TextValidatingUsername
-        {
-            get
-            {
-                return resourceLoader.GetString("TextValidatingUsername");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "An error occurred while attempting to use your {0} profile to register an account. Please try again later."
-        /// </summary>
-        public static string TextWebAccountManagerRegisterAccountFailure
-        {
-            get
-            {
-                return resourceLoader.GetString("TextWebAccountManagerRegisterAccountFailure");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Retrieving your {0} profile..."
-        /// </summary>
-        public static string TextWebAccountManagerRetrievingProfile
-        {
-            get
-            {
-                return resourceLoader.GetString("TextWebAccountManagerRetrievingProfile");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Sign-In / Sign-Up with an account that you can associate with Contoso."
-        /// </summary>
-        public static string TextWebAccountManagerSignUpDescription
-        {
-            get
-            {
-                return resourceLoader.GetString("TextWebAccountManagerSignUpDescription");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Welcome {0}!"
-        /// </summary>
-        public static string TextWelcomeAuthenticated
-        {
-            get
-            {
-                return resourceLoader.GetString("TextWelcomeAuthenticated");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Welcome!"
-        /// </summary>
-        public static string TextWelcomeUnauthenticated
-        {
-            get
-            {
-                return resourceLoader.GetString("TextWelcomeUnauthenticated");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Forgot Password"
-        /// </summary>
-        public static string ViewTitleForgotPassword
-        {
-            get
-            {
-                return resourceLoader.GetString("ViewTitleForgotPassword");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Sign In"
-        /// </summary>
-        public static string ViewTitleSignIn
-        {
-            get
-            {
-                return resourceLoader.GetString("ViewTitleSignIn");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Sign Up"
-        /// </summary>
-        public static string ViewTitleSignUp
-        {
-            get
-            {
-                return resourceLoader.GetString("ViewTitleSignUp");
-            }
-        }
-        
-        /// <summary>
         /// Localized resource similar to "Unauthorized user..."
         /// </summary>
         public static string TextUnauthorizedUser
@@ -236,6 +115,17 @@ namespace AppFramework.Core.Strings
             get
             {
                 return resourceLoader.GetString("TextUnauthorizedUser");
+            }
+        }
+        
+        /// <summary>
+        /// Localized resource similar to "Sign-In / Sign-Up with an account that you can associate with {0}."
+        /// </summary>
+        public static string TextWebAccountManagerSignUpDescription
+        {
+            get
+            {
+                return resourceLoader.GetString("TextWebAccountManagerSignUpDescription");
             }
         }
     }

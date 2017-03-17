@@ -17,7 +17,7 @@
 // 	This code contains a helper class exposing property representations
 // 	of the string resources defined in the specified .ResW file
 // 
-// 	Generated: 03/07/2017 18:48:11
+// 	Generated: 03/17/2017 06:04:49
 // </auto-generatedInfo>
 // --------------------------------------------------------------------------------------------------
 namespace AppFramework.Core.Strings
@@ -75,17 +75,6 @@ namespace AppFramework.Core.Strings
         }
         
         /// <summary>
-        /// Localized resource similar to "Determining address..."
-        /// </summary>
-        public static string TextGeocodingAddress
-        {
-            get
-            {
-                return resourceLoader.GetString("TextGeocodingAddress");
-            }
-        }
-        
-        /// <summary>
         /// Localized resource similar to "Kilometers"
         /// </summary>
         public static string TextKilomentersLong
@@ -104,28 +93,6 @@ namespace AppFramework.Core.Strings
             get
             {
                 return resourceLoader.GetString("TextKilomentersShort");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Location access has not been enabled for this app. Use the manage button and ensure this app has been enabled to use location services."
-        /// </summary>
-        public static string TextLocationServicesDisabledStatus
-        {
-            get
-            {
-                return resourceLoader.GetString("TextLocationServicesDisabledStatus");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Location services is turned off or not enabled for this application. Please enable location from your device settings."
-        /// </summary>
-        public static string TextLocationServicesNotEnabled
-        {
-            get
-            {
-                return resourceLoader.GetString("TextLocationServicesNotEnabled");
             }
         }
         

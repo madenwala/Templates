@@ -17,20 +17,20 @@
 // 	This code contains a helper class exposing property representations
 // 	of the string resources defined in the specified .ResW file
 // 
-// 	Generated: 03/07/2017 18:48:10
+// 	Generated: 03/17/2017 06:04:49
 // </auto-generatedInfo>
 // --------------------------------------------------------------------------------------------------
-namespace AppFramework.Core.Strings
+namespace Contoso.Core.Strings
 {
     using Windows.ApplicationModel.Resources;
     
     
-    public partial class BackgroundTasks
+    public partial class Location
     {
         
         private static ResourceLoader resourceLoader;
         
-        static BackgroundTasks()
+        static Location()
         {
             string executingAssemblyName;
             executingAssemblyName = Windows.UI.Xaml.Application.Current.GetType().AssemblyQualifiedName;
@@ -38,28 +38,61 @@ namespace AppFramework.Core.Strings
             executingAssemblySplit = executingAssemblyName.Split(',');
             executingAssemblyName = executingAssemblySplit[1];
             string currentAssemblyName;
-            currentAssemblyName = typeof(BackgroundTasks).AssemblyQualifiedName;
+            currentAssemblyName = typeof(Location).AssemblyQualifiedName;
             string[] currentAssemblySplit;
             currentAssemblySplit = currentAssemblyName.Split(',');
             currentAssemblyName = currentAssemblySplit[1];
             if (executingAssemblyName.Equals(currentAssemblyName))
             {
-                resourceLoader = ResourceLoader.GetForCurrentView("BackgroundTasks");
+                resourceLoader = ResourceLoader.GetForCurrentView("Location");
             }
             else
             {
-                resourceLoader = ResourceLoader.GetForCurrentView(currentAssemblyName + "/BackgroundTasks");
+                resourceLoader = ResourceLoader.GetForCurrentView(currentAssemblyName + "/Location");
             }
         }
         
         /// <summary>
-        /// Localized resource similar to "Background tasks have not been enabled for this app. Use the manage button and ensure this app has been enabled to run in the background."
+        /// Localized resource similar to "Determining address..."
         /// </summary>
-        public static string TextBackgroundAppDisabledStatus
+        public static string TextGeocodingAddress
         {
             get
             {
-                return resourceLoader.GetString("TextBackgroundAppDisabledStatus");
+                return resourceLoader.GetString("TextGeocodingAddress");
+            }
+        }
+        
+        /// <summary>
+        /// Localized resource similar to "Location access has not been enabled for this app. Use the manage button and ensure this app has been enabled to use location services."
+        /// </summary>
+        public static string TextLocationServicesDisabledStatus
+        {
+            get
+            {
+                return resourceLoader.GetString("TextLocationServicesDisabledStatus");
+            }
+        }
+        
+        /// <summary>
+        /// Localized resource similar to "Location services is turned off or not enabled for this application. Please enable location from your device settings."
+        /// </summary>
+        public static string TextLocationServicesNotEnabled
+        {
+            get
+            {
+                return resourceLoader.GetString("TextLocationServicesNotEnabled");
+            }
+        }
+        
+        /// <summary>
+        /// Localized resource similar to "Finding your location..."
+        /// </summary>
+        public static string TextDeterminingLocation
+        {
+            get
+            {
+                return resourceLoader.GetString("TextDeterminingLocation");
             }
         }
     }

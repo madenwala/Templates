@@ -17,20 +17,20 @@
 // 	This code contains a helper class exposing property representations
 // 	of the string resources defined in the specified .ResW file
 // 
-// 	Generated: 03/17/2017 06:12:38
+// 	Generated: 03/17/2017 06:00:07
 // </auto-generatedInfo>
 // --------------------------------------------------------------------------------------------------
-namespace AppFramework.Core.Strings
+namespace Contoso.Core.Strings
 {
     using Windows.ApplicationModel.Resources;
     
     
-    public partial class WebBrowser
+    public partial class Search
     {
         
         private static ResourceLoader resourceLoader;
         
-        static WebBrowser()
+        static Search()
         {
             string executingAssemblyName;
             executingAssemblyName = Windows.UI.Xaml.Application.Current.GetType().AssemblyQualifiedName;
@@ -38,61 +38,50 @@ namespace AppFramework.Core.Strings
             executingAssemblySplit = executingAssemblyName.Split(',');
             executingAssemblyName = executingAssemblySplit[1];
             string currentAssemblyName;
-            currentAssemblyName = typeof(WebBrowser).AssemblyQualifiedName;
+            currentAssemblyName = typeof(Search).AssemblyQualifiedName;
             string[] currentAssemblySplit;
             currentAssemblySplit = currentAssemblyName.Split(',');
             currentAssemblyName = currentAssemblySplit[1];
             if (executingAssemblyName.Equals(currentAssemblyName))
             {
-                resourceLoader = ResourceLoader.GetForCurrentView("WebBrowser");
+                resourceLoader = ResourceLoader.GetForCurrentView("Search");
             }
             else
             {
-                resourceLoader = ResourceLoader.GetForCurrentView(currentAssemblyName + "/WebBrowser");
+                resourceLoader = ResourceLoader.GetForCurrentView(currentAssemblyName + "/Search");
             }
         }
         
         /// <summary>
-        /// Localized resource similar to "Go back"
+        /// Localized resource similar to "Search"
         /// </summary>
-        public static string TextGoBack
+        public static string ButtonTextSearch
         {
             get
             {
-                return resourceLoader.GetString("TextGoBack");
+                return resourceLoader.GetString("ButtonTextSearch");
             }
         }
         
         /// <summary>
-        /// Localized resource similar to "Go forward"
+        /// Localized resource similar to "Searching '{0}'..."
         /// </summary>
-        public static string TextGoForward
+        public static string TextSearching
         {
             get
             {
-                return resourceLoader.GetString("TextGoForward");
+                return resourceLoader.GetString("TextSearching");
             }
         }
         
         /// <summary>
-        /// Localized resource similar to "Web Browser"
+        /// Localized resource similar to "{0} search results for '{1}'"
         /// </summary>
-        public static string TextWebDefaultTitle
+        public static string TextSearchResultsCount
         {
             get
             {
-                return resourceLoader.GetString("TextWebDefaultTitle");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Could not load the requested page. Try again later."
-        /// </summary>
-        public static string TextWebErrorGeneric
-        {
-            get
-            {
-                return resourceLoader.GetString("TextWebErrorGeneric");
+                return resourceLoader.GetString("TextSearchResultsCount");
             }
         }
     }

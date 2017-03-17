@@ -1,7 +1,7 @@
 ﻿using AppFramework.Core.Commands;
 using AppFramework.Core.Services;
-using AppFramework.Core.Strings;
 using AppFramework.Core.ViewModels;
+using Contoso.Core.Strings;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Store;
@@ -10,9 +10,13 @@ namespace Contoso.Core.Services
 {
     public sealed class AppInfoProvider: AppInfoProviderBase
     {
+        public override string AppName => Resources.ApplicationName;
+        public override string AppDescription => Resources.ApplicationDescription;
+        public override string AppSupportEmailAddress => Resources.ApplicationSupportEmailAddress;
+        public override string ProtocolPrefix => "contoso://";
+
         private const string PROPACK_FEATURE_NAME = "ProPack";
-
-
+        
         private bool _IsProPackEnabled;
         public bool IsProPackEnabled
         {
@@ -72,7 +76,7 @@ namespace Contoso.Core.Services
             if (this.IsProPackEnabled == false)
             {
                 var msg = "To use this feature, you must purchase the Pro-Feature Pack add-on. Would you like to see more details about what else you get in the PRO upgrade?";
-                var selected = await vm.ShowMessageBoxAsync(ct, msg, "Upgrade Required", new string[] { Resources.TextYes, Resources.TextNo }, 1);
+                var selected = await vm.ShowMessageBoxAsync(ct, msg, "Upgrade Required", new string[] { AppFramework.Core.Strings.Resources.TextYes, AppFramework.Core.Strings.Resources.TextNo }, 1);
                 if (selected == 0)
                 {
                     Platform.Current.Analytics.Event("ProPackPromptToUpgradeResponse", selected == 0 ? "Yes" : "No");

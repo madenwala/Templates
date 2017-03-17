@@ -138,4 +138,13 @@
   <data name="TextWebErrorGeneric" xml:space="preserve">
     <value>Could not load the requested page. Try again later.</value>
   </data>
+  <data name="abtnHome.Label" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="abtnRefresh.Label" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="abtnShare.Label" xml:space="preserve">
+    <value>Share</value>
+  </data>
 </root>

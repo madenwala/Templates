@@ -17,7 +17,7 @@
 // 	This code contains a helper class exposing property representations
 // 	of the string resources defined in the specified .ResW file
 // 
-// 	Generated: 03/07/2017 18:48:11
+// 	Generated: 03/17/2017 06:12:01
 // </auto-generatedInfo>
 // --------------------------------------------------------------------------------------------------
 namespace AppFramework.Core.Strings
@@ -49,28 +49,6 @@ namespace AppFramework.Core.Strings
             else
             {
                 resourceLoader = ResourceLoader.GetForCurrentView(currentAssemblyName + "/Resources");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Welcome to Contoso!"
-        /// </summary>
-        public static string ApplicationDescription
-        {
-            get
-            {
-                return resourceLoader.GetString("ApplicationDescription");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Contoso"
-        /// </summary>
-        public static string ApplicationName
-        {
-            get
-            {
-                return resourceLoader.GetString("ApplicationName");
             }
         }
         
@@ -136,17 +114,6 @@ namespace AppFramework.Core.Strings
         }
         
         /// <summary>
-        /// Localized resource similar to "adenwala@outlook.com"
-        /// </summary>
-        public static string ApplicationSupportEmailAddress
-        {
-            get
-            {
-                return resourceLoader.GetString("ApplicationSupportEmailAddress");
-            }
-        }
-        
-        /// <summary>
         /// Localized resource similar to "Please provide and feedback you'd like to share with support:
         ///--------------------
         ///
@@ -171,28 +138,6 @@ namespace AppFramework.Core.Strings
             get
             {
                 return resourceLoader.GetString("ApplicationSupportEmailSubjectTemplate");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "@madenwal"
-        /// </summary>
-        public static string ApplicationSupportTwitterUsername
-        {
-            get
-            {
-                return resourceLoader.GetString("ApplicationSupportTwitterUsername");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Theme will be applied the next time you launch the application."
-        /// </summary>
-        public static string ApplicationThemeStatus
-        {
-            get
-            {
-                return resourceLoader.GetString("ApplicationThemeStatus");
             }
         }
         
@@ -241,50 +186,6 @@ namespace AppFramework.Core.Strings
         }
         
         /// <summary>
-        /// Localized resource similar to "LeftToRight"
-        /// </summary>
-        public static string ResourceFlowDirection
-        {
-            get
-            {
-                return resourceLoader.GetString("ResourceFlowDirection");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "en-US"
-        /// </summary>
-        public static string ResourceLanguage
-        {
-            get
-            {
-                return resourceLoader.GetString("ResourceLanguage");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "About"
-        /// </summary>
-        public static string TextAbout
-        {
-            get
-            {
-                return resourceLoader.GetString("TextAbout");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Allow"
-        /// </summary>
-        public static string TextAllow
-        {
-            get
-            {
-                return resourceLoader.GetString("TextAllow");
-            }
-        }
-        
-        /// <summary>
         /// Localized resource similar to "Cancel"
         /// </summary>
         public static string TextCancel
@@ -307,28 +208,6 @@ namespace AppFramework.Core.Strings
         }
         
         /// <summary>
-        /// Localized resource similar to "Details"
-        /// </summary>
-        public static string TextDetails
-        {
-            get
-            {
-                return resourceLoader.GetString("TextDetails");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Downloading..."
-        /// </summary>
-        public static string TextDownloading
-        {
-            get
-            {
-                return resourceLoader.GetString("TextDownloading");
-            }
-        }
-        
-        /// <summary>
         /// Localized resource similar to "An unexpected error has occured. We apologize for any inconveniences here and we will be working to resolve this soon."
         /// </summary>
         public static string TextErrorGeneric
@@ -340,13 +219,13 @@ namespace AppFramework.Core.Strings
         }
         
         /// <summary>
-        /// Localized resource similar to "Home"
+        /// Localized resource similar to "No items to display."
         /// </summary>
-        public static string TextHome
+        public static string TextListNoData
         {
             get
             {
-                return resourceLoader.GetString("TextHome");
+                return resourceLoader.GetString("TextListNoData");
             }
         }
         
@@ -384,6 +263,17 @@ namespace AppFramework.Core.Strings
         }
         
         /// <summary>
+        /// Localized resource similar to "No internet connection available. Connect to internet and try again."
+        /// </summary>
+        public static string TextNoInternet
+        {
+            get
+            {
+                return resourceLoader.GetString("TextNoInternet");
+            }
+        }
+        
+        /// <summary>
         /// Localized resource similar to "N/A"
         /// </summary>
         public static string TextNotApplicable
@@ -406,149 +296,6 @@ namespace AppFramework.Core.Strings
         }
         
         /// <summary>
-        /// Localized resource similar to "Pin to Start"
-        /// </summary>
-        public static string TextPinToStart
-        {
-            get
-            {
-                return resourceLoader.GetString("TextPinToStart");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Please wait..."
-        /// </summary>
-        public static string TextPleaseWait
-        {
-            get
-            {
-                return resourceLoader.GetString("TextPleaseWait");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Privacy Statement"
-        /// </summary>
-        public static string TextPrivacyStatement
-        {
-            get
-            {
-                return resourceLoader.GetString("TextPrivacyStatement");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Anonymous usage data may be collected to improve the application.  Outside of that, this app does not collection any information about you nor transmit any information except that which you would normally expect in any web request (such as IP address). If you choose to enable location services, then you last known location is stored in the app anonymously so that the app loads quicker the next time it is launched."
-        /// </summary>
-        public static string TextPrivacyStatementDescription
-        {
-            get
-            {
-                return resourceLoader.GetString("TextPrivacyStatementDescription");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Rate Application"
-        /// </summary>
-        public static string TextRateApp
-        {
-            get
-            {
-                return resourceLoader.GetString("TextRateApp");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Refresh"
-        /// </summary>
-        public static string TextRefresh
-        {
-            get
-            {
-                return resourceLoader.GetString("TextRefresh");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Settings"
-        /// </summary>
-        public static string TextSettings
-        {
-            get
-            {
-                return resourceLoader.GetString("TextSettings");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Share"
-        /// </summary>
-        public static string TextShare
-        {
-            get
-            {
-                return resourceLoader.GetString("TextShare");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Sort"
-        /// </summary>
-        public static string TextSort
-        {
-            get
-            {
-                return resourceLoader.GetString("TextSort");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Sorting..."
-        /// </summary>
-        public static string TextSorting
-        {
-            get
-            {
-                return resourceLoader.GetString("TextSorting");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Submit"
-        /// </summary>
-        public static string TextSubmit
-        {
-            get
-            {
-                return resourceLoader.GetString("TextSubmit");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "General"
-        /// </summary>
-        public static string TextTitleGeneral
-        {
-            get
-            {
-                return resourceLoader.GetString("TextTitleGeneral");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Unpin from Start"
-        /// </summary>
-        public static string TextUnpinFromStart
-        {
-            get
-            {
-                return resourceLoader.GetString("TextUnpinFromStart");
-            }
-        }
-        
-        /// <summary>
         /// Localized resource similar to "Yes"
         /// </summary>
         public static string TextYes
@@ -556,17 +303,6 @@ namespace AppFramework.Core.Strings
             get
             {
                 return resourceLoader.GetString("TextYes");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "About"
-        /// </summary>
-        public static string ViewTitleAbout
-        {
-            get
-            {
-                return resourceLoader.GetString("ViewTitleAbout");
             }
         }
         
@@ -582,17 +318,6 @@ namespace AppFramework.Core.Strings
         }
         
         /// <summary>
-        /// Localized resource similar to "Settings"
-        /// </summary>
-        public static string ViewTitleSettings
-        {
-            get
-            {
-                return resourceLoader.GetString("ViewTitleSettings");
-            }
-        }
-        
-        /// <summary>
         /// Localized resource similar to "Terms of Service"
         /// </summary>
         public static string ViewTitleTermsOfService
@@ -600,83 +325,6 @@ namespace AppFramework.Core.Strings
             get
             {
                 return resourceLoader.GetString("ViewTitleTermsOfService");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Welcome!"
-        /// </summary>
-        public static string ViewTitleWelcome
-        {
-            get
-            {
-                return resourceLoader.GetString("ViewTitleWelcome");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "No internet connection available. Connect to internet and try again."
-        /// </summary>
-        public static string TextNoInternet
-        {
-            get
-            {
-                return resourceLoader.GetString("TextNoInternet");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Requesting..."
-        /// </summary>
-        public static string TextRequesting
-        {
-            get
-            {
-                return resourceLoader.GetString("TextRequesting");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Retrieving more data..."
-        /// </summary>
-        public static string TextRetrievingMoreData
-        {
-            get
-            {
-                return resourceLoader.GetString("TextRetrievingMoreData");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Pull to Refresh"
-        /// </summary>
-        public static string TextPullToRefresh
-        {
-            get
-            {
-                return resourceLoader.GetString("TextPullToRefresh");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "Release to Refresh"
-        /// </summary>
-        public static string TextReleaseToRefresh
-        {
-            get
-            {
-                return resourceLoader.GetString("TextReleaseToRefresh");
-            }
-        }
-        
-        /// <summary>
-        /// Localized resource similar to "No items to display."
-        /// </summary>
-        public static string TextListNoData
-        {
-            get
-            {
-                return resourceLoader.GetString("TextListNoData");
             }
         }
     }

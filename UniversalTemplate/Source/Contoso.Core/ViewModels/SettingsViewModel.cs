@@ -1,4 +1,4 @@
-﻿using AppFramework.Core.Strings;
+﻿using Contoso.Core.Strings;
 using Windows.ApplicationModel;
 
 namespace Contoso.Core.ViewModels

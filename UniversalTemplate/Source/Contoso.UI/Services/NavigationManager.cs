@@ -60,7 +60,7 @@ namespace Contoso.UI.Services
         /// <returns></returns>
         protected override bool OnActivation(ProtocolActivatedEventArgs e)
         {
-            return this.HandleArgumentsActivation(e.Uri.AbsoluteUri.Replace(AppInfoProvider.PROTOCOL_PREFIX, "").Split(':').Last());
+            return this.HandleArgumentsActivation(e.Uri.AbsoluteUri.Replace(PlatformBase.Current.AppInfo.ProtocolPrefix, "").Split(':').Last());
         }
 
         /// <summary>
