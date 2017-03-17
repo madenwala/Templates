@@ -11,7 +11,7 @@ namespace Contoso.Core
         public NavigationManagerBase Navigation
         {
             get { return GetService<NavigationManagerBase>(); }
-            set { SetService<NavigationManagerBase>(value); }
+            set { SetService(value); }
         }
     }
 }

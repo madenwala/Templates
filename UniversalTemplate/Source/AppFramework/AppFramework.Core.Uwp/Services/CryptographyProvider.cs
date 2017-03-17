@@ -15,7 +15,7 @@ namespace AppFramework.Core
         public CryptographyProvider Cryptography
         {
             get { return GetService<CryptographyProvider>(); }
-            protected set { SetService<CryptographyProvider>(value); }
+            private set { SetService(value); }
         }
     }
 }

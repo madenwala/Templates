@@ -13,7 +13,7 @@ using Windows.ApplicationModel.Background;
 
 namespace Contoso.Core
 {
-    public partial class Platform : PlatformNewBase<MainViewModel, AppSettingsLocal, AppSettingsRoaming>
+    public sealed partial class Platform : PlatformNewBase<MainViewModel, AppSettingsLocal, AppSettingsRoaming>
     {
         #region Constructors
 

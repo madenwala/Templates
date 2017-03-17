@@ -18,7 +18,7 @@ namespace AppFramework.Core
         public NotificationsManagerBase Notifications
         {
             get { return GetService<NotificationsManagerBase>(); }
-            set { SetService<NotificationsManagerBase>(value); }
+            protected set { SetService(value); }
         }
 
     }

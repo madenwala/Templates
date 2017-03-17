@@ -15,7 +15,7 @@ namespace AppFramework.Core
         public JumplistManager Jumplist
         {
             get { return GetService<JumplistManager>(); }
-            protected set { SetService<JumplistManager>(value); }
+            private set { SetService(value); }
         }
     }
 }

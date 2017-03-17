@@ -39,11 +39,11 @@ namespace Contoso.Core.Models
             set { this.SetProperty(ref _RefreshToken, value); }
         }
 
-        private string _ID;
+        private string _userID;
         public string UserID
         {
-            get { return _ID; }
-            set { this.SetProperty(ref _ID, value); }
+            get { return _userID; }
+            set { this.SetProperty(ref _userID, value); }
         }
 
         private string _Email;

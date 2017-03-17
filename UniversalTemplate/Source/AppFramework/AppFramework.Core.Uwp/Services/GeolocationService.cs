@@ -18,7 +18,7 @@ namespace AppFramework.Core
         public GeolocationService Geolocation
         {
             get { return GetService<GeolocationService>(); }
-            protected set { SetService<GeolocationService>(value); }
+            private set { SetService(value); }
         }
     }
 }

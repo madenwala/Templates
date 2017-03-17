@@ -257,12 +257,12 @@ namespace AppFramework.Core
         /// <typeparam name="T">Type reference of the service to register and initialize.</typeparam>
         protected internal static void SetService<T>(T instance) where T : ServiceBase
         {
-            // Check if T is already registered
-            if (_services.ContainsKey(typeof(T)))
+            // Shutdown the old instance of T
+            var services = _services.Values.Where(f => f is T);
+            foreach(var service in services)
             {
-                // Shutdown the old instance of T
-                var service = _services[typeof(T)];
-                _services.Remove(typeof(T));
+                Type key = _services.FirstOrDefault(f => f.Value == service).Key;
+                _services.Remove(key);
             }
 
             _services.Add(typeof(T), instance);

@@ -18,7 +18,7 @@ namespace AppFramework.Core
         public WebAccountManager WebAccountManager
         {
             get { return GetService<WebAccountManager>(); }
-            set { SetService<WebAccountManager>(value); }
+            private set { SetService(value); }
         }
     }
 }

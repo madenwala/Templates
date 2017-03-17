@@ -15,7 +15,7 @@ namespace AppFramework.Core
         public BackgroundTasksManagerBase BackgroundTasks
         {
             get { return GetService<BackgroundTasksManagerBase>(); }
-            protected set { SetService<BackgroundTasksManagerBase>(value); }
+            protected set { SetService(value); }
         }
     }
 }

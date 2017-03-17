@@ -16,7 +16,7 @@ namespace AppFramework.Core
         public SharingManagerBase SharingManager
         {
             get { return GetService<SharingManagerBase>(); }
-            protected set { SetService<SharingManagerBase>(value); }
+            protected set { SetService(value); }
         }
     }
 }

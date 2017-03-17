@@ -16,7 +16,7 @@ namespace AppFramework.Core
         public RatingsManager Ratings
         {
             get { return GetService<RatingsManager>(); }
-            protected set { SetService<RatingsManager>(value); }
+            private set { SetService(value); }
         }
     }
 }

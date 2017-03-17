@@ -14,7 +14,7 @@ namespace AppFramework.Core
         public VoiceCommandManager VoiceCommandManager
         {
             get { return GetService<VoiceCommandManager>(); }
-            protected set { SetService<VoiceCommandManager>(value); }
+            private set { SetService(value); }
         }
     }
 }

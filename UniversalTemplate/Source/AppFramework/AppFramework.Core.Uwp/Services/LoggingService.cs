@@ -45,7 +45,7 @@ namespace AppFramework.Core
         public LoggingService Logger
         {
             get { return GetService<LoggingService>(); }
-            protected set { SetService<LoggingService>(value); }
+            private set { SetService(value); }
         }
     }
 }

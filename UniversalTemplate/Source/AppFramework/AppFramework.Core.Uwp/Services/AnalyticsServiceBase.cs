@@ -13,7 +13,7 @@ namespace AppFramework.Core
         public AnalyticsManager Analytics
         {
             get { return GetService<AnalyticsManager>(); }
-            protected set { SetService<AnalyticsManager>(value); }
+            private set { SetService(value); }
         }
     }
 }

@@ -14,7 +14,7 @@ namespace AppFramework.Core
         public EmailProvider EmailProvider
         {
             get { return GetService<EmailProvider>(); }
-            protected set { SetService<EmailProvider>(value); }
+            private set { SetService(value); }
         }
     }
 }

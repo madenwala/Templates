@@ -16,7 +16,7 @@ namespace AppFramework.Core
         public GeocodingService Geocode
         {
             get { return GetService<GeocodingService>(); }
-            protected set { SetService<GeocodingService>(value); }
+            private set { SetService(value); }
         }
     }
 }

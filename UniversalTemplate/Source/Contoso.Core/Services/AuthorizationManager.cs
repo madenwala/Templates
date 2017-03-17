@@ -15,10 +15,10 @@ namespace Contoso.Core
         /// <summary>
         /// Gets access to the cryptography provider of the platform currently executing.
         /// </summary>
-        public AuthorizationManager AuthManager
+        public new AuthorizationManager AuthManager
         {
             get { return GetService<AuthorizationManager>(); }
-            set { SetService<AuthorizationManager>(value); }
+            private set { SetService(value); }
         }
     }
 }

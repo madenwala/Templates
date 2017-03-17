@@ -1,7 +1,23 @@
 ﻿using AppFramework.Core.Models;
+using AppFramework.Core.Services;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+
+namespace AppFramework.Core
+{
+    public partial class PlatformBase
+    {
+        /// <summary>
+        /// Gets access to the cryptography provider of the platform currently executing.
+        /// </summary>
+        public AuthorizationManagerBase AuthManager
+        {
+            get { return GetService<AuthorizationManagerBase>(); }
+            protected set { SetService(value); }
+        }
+    }
+}
 
 namespace AppFramework.Core.Services
 {

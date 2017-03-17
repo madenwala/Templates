@@ -16,7 +16,7 @@ namespace AppFramework.Core
         public AppInfoProviderBase AppInfo
         {
             get { return GetService<AppInfoProviderBase>(); }
-            protected set { SetService<AppInfoProviderBase>(value); }
+            protected set { SetService(value); }
         }
     }
 }

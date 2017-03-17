@@ -18,7 +18,7 @@ namespace AppFramework.Core
         public StorageManager Storage
         {
             get { return GetService<StorageManager>(); }
-            protected set { SetService<StorageManager>(value); }
+            private set { SetService(value); }
         }
     }
 }
