@@ -18,7 +18,7 @@ namespace AppFramework.UI.Views
     /// Base class for all pages in your application.
     /// </summary>
     /// <typeparam name="TViewModel"></typeparam>
-    public abstract class ViewBase<TViewModel> : Page, IView, INotifyPropertyChanged, IViewScrollToTop where TViewModel : ViewModelBase
+    public abstract class ViewBase<TViewModel> : Page, IView, INotifyPropertyChanged, IViewScrollToTop where TViewModel : IViewModel
     {
         #region Properties
 
