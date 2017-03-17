@@ -27,7 +27,7 @@ namespace Contoso.Core
         /// </summary>
         public new static Platform Current { get { return PlatformBase.Current as Platform; } private set { PlatformBase.Current = value; } }
 
-        public Platform()
+        private Platform()
         {
             // Instantiate all the application services.
             this.AuthManager = new AuthorizationManager();
