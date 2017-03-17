@@ -1,6 +1,7 @@
 ﻿using AppFramework.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Store;
 using Windows.Storage;
@@ -52,26 +53,6 @@ namespace AppFramework.Core.Services
         /// Gets version number of the application currently executing.
         /// </summary>
         public Version VersionNumber { get { return Windows.ApplicationModel.Package.Current.Id.Version.ToVersion(); } }
-        
-        /// <summary>
-        /// Creates a deep link to your application with the specified arguments.
-        /// </summary>
-        /// <param name="arguments">Dictionary of different parameters to create a query string for the arguments.</param>
-        /// <returns>String representing the deep link.</returns>
-        public string GetDeepLink(Dictionary<string, string> arguments = null)
-        {
-            return this.GetDeepLink(GeneralFunctions.CreateQuerystring(arguments));
-        }
-
-        /// <summary>
-        /// Creates a deep link to your application with the specified arguments.
-        /// </summary>
-        /// <param name="arguments">String representation of the arguments.</param>
-        /// <returns>String representing the deep link.</returns>
-        public string GetDeepLink(string arguments)
-        {
-            return ProtocolPrefix + arguments;
-        }
 
         /// <summary>
         /// Gets the deep link URL to where this application can be downloaded from.
@@ -141,7 +122,7 @@ namespace AppFramework.Core.Services
 
         protected override async Task OnInitializeAsync()
         {
-            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.System.Profile.SystemIdentification"))
+            if (string.IsNullOrEmpty(this.UserID) && Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.System.Profile.SystemIdentification"))
             {
                 //var users = await User.FindAllAsync(UserType.LocalUser, UserAuthenticationStatus.LocallyAuthenticated);
                 //var user = users.FirstOrDefault();
@@ -153,12 +134,55 @@ namespace AppFramework.Core.Services
                     this.UserID = Windows.Security.Cryptography.CryptographicBuffer.EncodeToBase64String(info.Id);
             }
 
-            // TODO await this.InitializeAddOnsAsync();
-
             await base.OnInitializeAsync();
         }
 
-        protected async Task<PurchaseResults> PurchaseAddOnAsync(string featureName)
+        /// <summary>
+        /// Creates a deep link to your application with the specified arguments.
+        /// </summary>
+        /// <param name="arguments">Dictionary of different parameters to create a query string for the arguments.</param>
+        /// <returns>String representing the deep link.</returns>
+        public string GetDeepLink(Dictionary<string, string> arguments = null)
+        {
+            return this.GetDeepLink(GeneralFunctions.CreateQuerystring(arguments));
+        }
+
+        /// <summary>
+        /// Creates a deep link to your application with the specified arguments.
+        /// </summary>
+        /// <param name="arguments">String representation of the arguments.</param>
+        /// <returns>String representing the deep link.</returns>
+        public string GetDeepLink(string arguments)
+        {
+            return ProtocolPrefix + arguments;
+        }
+
+        #region Store AddOns
+
+        protected async Task<bool> PurchaseFeatureAsync(string featureName)
+        {
+            var result = await this.RequestProductPurchaseAsync(featureName);
+
+            await this.OnInitializeAsync();
+
+            PlatformBase.Current.Analytics.Event("STORE_PURCHASE_STATUS-" + featureName, result.Status.ToString());
+            switch (result.Status)
+            {
+                case ProductPurchaseStatus.AlreadyPurchased:
+                case ProductPurchaseStatus.Succeeded:
+                    return true;
+
+                case ProductPurchaseStatus.NotPurchased:
+                    return false;
+
+                case ProductPurchaseStatus.NotFulfilled:
+                default:
+                    await PlatformBase.Current.ViewModel.ShowMessageBoxAsync(CancellationToken.None, string.Format("Could not purchase Pro-Feature Pack add-on right now. Store return back an error. Please try again later."), "Failed to purchase add-on");
+                    return false;
+            }
+        }
+
+        private async Task<PurchaseResults> RequestProductPurchaseAsync(string featureName)
         {
             try
             {
@@ -221,6 +245,8 @@ namespace AppFramework.Core.Services
                 return false;
             }
         }
+
+        #endregion Store AddOns
 
         #endregion
     }

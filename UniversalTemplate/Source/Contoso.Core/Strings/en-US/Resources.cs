@@ -17,7 +17,7 @@
 // 	This code contains a helper class exposing property representations
 // 	of the string resources defined in the specified .ResW file
 // 
-// 	Generated: 03/17/2017 06:02:20
+// 	Generated: 03/17/2017 06:55:26
 // </auto-generatedInfo>
 // --------------------------------------------------------------------------------------------------
 namespace Contoso.Core.Strings
@@ -445,6 +445,39 @@ namespace Contoso.Core.Strings
             get
             {
                 return resourceLoader.GetString("ViewTitleTermsOfService");
+            }
+        }
+        
+        /// <summary>
+        /// Localized resource similar to "No"
+        /// </summary>
+        public static string TextNo
+        {
+            get
+            {
+                return resourceLoader.GetString("TextNo");
+            }
+        }
+        
+        /// <summary>
+        /// Localized resource similar to "OK"
+        /// </summary>
+        public static string TextOk
+        {
+            get
+            {
+                return resourceLoader.GetString("TextOk");
+            }
+        }
+        
+        /// <summary>
+        /// Localized resource similar to "Yes"
+        /// </summary>
+        public static string TextYes
+        {
+            get
+            {
+                return resourceLoader.GetString("TextYes");
             }
         }
     }
