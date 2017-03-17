@@ -113,6 +113,7 @@
     <Compile Include="Models\UniqueLocationModelBase.cs" />
     <Compile Include="PlatformBase.cs" />
     <Compile Include="Services\AuthorizationManagerBase.cs" />
+    <Compile Include="Services\EmailProvider.cs" />
     <Compile Include="Services\NotificationsManagerBase.cs" />
     <Compile Include="ViewModels\CollectionViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />

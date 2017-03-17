@@ -118,6 +118,7 @@ namespace AppFramework.Core
             this.VoiceCommandManager = new VoiceCommandManager();
             this.Jumplist = new JumplistManager();
             this.WebAccountManager = new WebAccountManager();
+            this.EmailProvider = new EmailProvider();
         }
 
         static PlatformBase()
