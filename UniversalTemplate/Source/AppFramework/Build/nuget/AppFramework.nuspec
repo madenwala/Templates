@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata minClientVersion="2.5">    
+    <id>AppFramwork</id>
+    <version>0.0.0-SpecifyVersionOnCommandline</version>
+    <title>AppFramework SDK</title>
+    <authors>Mohammed Adenwala</authors>
+    <owners>Mohammed Adenwala</owners>
+    <licenseUrl>https://github.com/madenwala/Templates/tree/master/UniversalTemplate</licenseUrl>
+    <projectUrl>https://github.com/madenwala/Templates/tree/master/UniversalTemplate</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>AppFramework for building UWP applications</description>
+    <copyright>Copyright 2017</copyright>
+    <tags>Adenwala</tags>    
+    <releaseNotes>More info at https://github.com/madenwala/Templates/tree/master/UniversalTemplate </releaseNotes> 
+    <!--<iconUrl>http://githubusercontent.com/dotnet/WinGASDK/master/TODO_logo_240.png</iconUrl>-->
+  </metadata>  
+
+<files> 
+
+<!-- The lib file gets copied as a reference -->
+  <file target="lib\uap10.0\"	src="AppFramework.Core\bin\release\AppFramework.Core.dll" />
+  <file target="lib\uap10.0\"	src="AppFramework.Core.Uwp\bin\release\AppFramework.Core.Uwp.dll" />
+  <file target="lib\uap10.0\"	src="AppFramework.UI.Uwp\bin\release\AppFramework.UI.Uwp.dll" />
+  
+<!-- intellisense files -->
+  <file target="lib\uap10.0\"	src="AppFramework.Core\bin\release\AppFramework.Core.xml" />
+  <file target="lib\uap10.0\"	src="AppFramework.Core.Uwp\bin\release\AppFramework.Core.Uwp.xml" />
+  <file target="lib\uap10.0\"	src="AppFramework.UI.Uwp\bin\release\AppFramework.UI.Uwp.xml" />
+
+<!-- pdb files  -->
+  <file target="lib\uap10.0\"	src="AppFramework.Core\bin\release\AppFramework.Core.pdb" />
+  <file target="lib\uap10.0\"	src="AppFramework.Core.Uwp\bin\release\AppFramework.Core.Uwp.pdb" />
+  <file target="lib\uap10.0\"	src="AppFramework.UI.Uwp\bin\release\AppFramework.UI.Uwp.pdb" />
+
+</files> 
+ 
+</package>
