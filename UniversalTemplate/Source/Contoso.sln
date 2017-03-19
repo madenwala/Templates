@@ -20,9 +20,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{6B25CDC8-41D7-459D-8763-2625074D0567}"
 	ProjectSection(SolutionItems) = preProject
 		AppFramework\Build\AppFramework.nuspec = AppFramework\Build\AppFramework.nuspec
-		AppFramework\Build\Build-AppFramework.cmd = AppFramework\Build\Build-AppFramework.cmd
+		AppFramework\Build\Build-NuGet-Package.cmd = AppFramework\Build\Build-NuGet-Package.cmd
 		AppFramework\Build\Build.cmd = AppFramework\Build\Build.cmd
-		AppFramework\Build\download-nuget.cmd = AppFramework\Build\download-nuget.cmd
+		AppFramework\Build\Download-NuGet.cmd = AppFramework\Build\Download-NuGet.cmd
 		AppFramework\Build\nuget.exe = AppFramework\Build\nuget.exe
 		AppFramework\Build\VERSION = AppFramework\Build\VERSION
 	EndProjectSection

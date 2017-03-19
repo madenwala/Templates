@@ -23,7 +23,7 @@ IF %ERRORLEVEL% NEQ 0 (
 SET PACKAGENAME=AppFramework
 SET /p VERSION=<VERSION
 SET BIN=bin
-SET OUTDIR=..\..\Output
+SET OUTDIR=Output
  
 
 IF NOT "%1" == "" (
@@ -32,7 +32,7 @@ IF NOT "%1" == "" (
 
 SET NUGET_ARGS=^
     -nopackageanalysis ^
-    -basepath ..\..\ ^
+    -basepath ..\ ^
     -outputdirectory %OUTDIR% ^
     -version %VERSION% 
      
