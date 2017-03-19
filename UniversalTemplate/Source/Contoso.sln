@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.UI", "Contoso.UI\Contoso.UI.csproj", "{7A916870-D10A-42EB-B8B8-BD3B1E53E0C5}"
 EndProject
@@ -16,6 +16,15 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFramework.Core.Uwp", "AppFramework\AppFramework.Core.Uwp\AppFramework.Core.Uwp.csproj", "{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFramework.UI.Uwp", "AppFramework\AppFramework.UI.Uwp\AppFramework.UI.Uwp.csproj", "{9E167450-FEBB-4F54-8FA9-4954CABD6CE5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{6B25CDC8-41D7-459D-8763-2625074D0567}"
+	ProjectSection(SolutionItems) = preProject
+		AppFramework\Build\AppFramework.nuspec = AppFramework\Build\AppFramework.nuspec
+		AppFramework\Build\Build-AppFramework.cmd = AppFramework\Build\Build-AppFramework.cmd
+		AppFramework\Build\download-nuget.cmd = AppFramework\Build\download-nuget.cmd
+		AppFramework\Build\nuget.exe = AppFramework\Build\nuget.exe
+		AppFramework\Build\VERSION = AppFramework\Build\VERSION
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -137,5 +146,6 @@ Global
 		{6909D24A-C1D4-4664-8DBD-C6BFEA229BF3} = {CB5D60BA-865B-480F-A205-7410FF7925D9}
 		{4E4E65EA-96F5-4A3A-8E17-2FDF597E310B} = {CB5D60BA-865B-480F-A205-7410FF7925D9}
 		{9E167450-FEBB-4F54-8FA9-4954CABD6CE5} = {CB5D60BA-865B-480F-A205-7410FF7925D9}
+		{6B25CDC8-41D7-459D-8763-2625074D0567} = {CB5D60BA-865B-480F-A205-7410FF7925D9}
 	EndGlobalSection
 EndGlobal
