@@ -7,8 +7,8 @@
     <ProjectGuid>{68AA8291-6B51-48AC-9CD2-3BF74A61EF9B}</ProjectGuid>
     <OutputType>winmdobj</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Contoso.Core.BackgroundTasks</RootNamespace>
-    <AssemblyName>Contoso.Core.BackgroundTasks.Uwp</AssemblyName>
+    <RootNamespace>Contoso.BackgroundTasks</RootNamespace>
+    <AssemblyName>Contoso.BackgroundTasks.Uwp</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimedWorkerTask.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Contoso.Core.Uwp\Contoso.Core.Uwp.csproj">
