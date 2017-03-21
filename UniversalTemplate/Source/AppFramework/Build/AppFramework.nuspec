@@ -43,23 +43,23 @@
   </metadata>
 
   <files>
-
+    
     <!-- The lib file gets copied as a reference -->
     <file target="lib\uap10.0\"	src="..\Dependencies\FlurryWin8SDK.winmd" />
     <file target="lib\uap10.0\"	src="AppFramework.Core\bin\release\AppFramework.Core.dll" />
+
+    <file target="lib\uap10.0\AppFramework.Core.Uwp.dll" src="Build\AppFramework.Core.Uwp.dll" />  <!-- this one is changed by corflags command https://github.com/NuGet/Home/issues/1221 -->
+    <file target="lib\uap10.0\AppFramework.UI.Uwp.dll" src="Build\AppFramework.UI.Uwp.dll" />  <!-- this one is changed by corflags command https://github.com/NuGet/Home/issues/1221 -->
     
     <file target="runtimes\win10-x64\lib\uap10.0\"	src="AppFramework.Core.Uwp\bin\x64\release\AppFramework.Core.Uwp.dll" />
-    <file target="runtimes\win10-x64\lib\uap10.0\"	src="AppFramework.UI.Uwp\bin\x64\release\AppFramework.UI.Uwp.dll" />
+    <file target="runtimes\win10-x64\lib\uap10.0\"	src="AppFramework.UI.Uwp\bin\x64\release\AppFramework.UI.Uwp.dll" />    
     <file target="runtimes\win10-x86\lib\uap10.0\"	src="AppFramework.Core.Uwp\bin\x86\release\AppFramework.Core.Uwp.dll" />
-    <file target="runtimes\win10-x86\lib\uap10.0\"	src="AppFramework.UI.Uwp\bin\x86\release\AppFramework.UI.Uwp.dll" />
+    <file target="runtimes\win10-x86\lib\uap10.0\"	src="AppFramework.UI.Uwp\bin\x86\release\AppFramework.UI.Uwp.dll" />    
     <file target="runtimes\win10-arm\lib\uap10.0\"	src="AppFramework.Core.Uwp\bin\ARM\release\AppFramework.Core.Uwp.dll" />
     <file target="runtimes\win10-arm\lib\uap10.0\"	src="AppFramework.UI.Uwp\bin\ARM\release\AppFramework.UI.Uwp.dll" />
-
-    
-    
+           
     <!-- intellisense files -->
     <file target="lib\uap10.0\"	src="AppFramework.Core\bin\release\AppFramework.Core.xml" />
-    
     <file target="runtimes\win10-x64\lib\uap10.0\"	src="AppFramework.Core.Uwp\bin\x64\release\AppFramework.Core.Uwp.xml" />
     <file target="runtimes\win10-x64\lib\uap10.0\"	src="AppFramework.UI.Uwp\bin\x64\release\AppFramework.UI.Uwp.xml" />
     <file target="runtimes\win10-x86\lib\uap10.0\"	src="AppFramework.Core.Uwp\bin\x86\release\AppFramework.Core.Uwp.xml" />
@@ -67,19 +67,14 @@
     <file target="runtimes\win10-arm\lib\uap10.0\"	src="AppFramework.Core.Uwp\bin\ARM\release\AppFramework.Core.Uwp.xml" />
     <file target="runtimes\win10-arm\lib\uap10.0\"	src="AppFramework.UI.Uwp\bin\ARM\release\AppFramework.UI.Uwp.xml" />
 
-    
-    
     <!-- pdb files  -->
     <file target="lib\uap10.0\"	src="AppFramework.Core\bin\release\AppFramework.Core.pdb" />
-    
     <file target="runtimes\win10-x64\lib\uap10.0\"	src="AppFramework.Core.Uwp\bin\x64\release\AppFramework.Core.Uwp.pdb" />
     <file target="runtimes\win10-x64\lib\uap10.0\"	src="AppFramework.UI.Uwp\bin\x64\release\AppFramework.UI.Uwp.pdb" />
     <file target="runtimes\win10-x86\lib\uap10.0\"	src="AppFramework.Core.Uwp\bin\x86\release\AppFramework.Core.Uwp.pdb" />
     <file target="runtimes\win10-x86\lib\uap10.0\"	src="AppFramework.UI.Uwp\bin\x86\release\AppFramework.UI.Uwp.pdb" />
     <file target="runtimes\win10-arm\lib\uap10.0\"	src="AppFramework.Core.Uwp\bin\ARM\release\AppFramework.Core.Uwp.pdb" />
     <file target="runtimes\win10-arm\lib\uap10.0\"	src="AppFramework.UI.Uwp\bin\ARM\release\AppFramework.UI.Uwp.pdb" />
-
-    
     
     <!-- pri files  -->
     <file target="runtimes\win10-x64\lib\uap10.0\"	src="AppFramework.Core.Uwp\bin\x64\release\AppFramework.Core.Uwp.pri" />
