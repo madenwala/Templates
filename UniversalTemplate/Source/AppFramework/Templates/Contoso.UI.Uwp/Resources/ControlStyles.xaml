@@ -7,14 +7,6 @@
     xmlns:behaviors="using:AppFramework.UI.Behaviors"
     xmlns:controls="using:AppFramework.UI.Controls">
 
-    <ResourceDictionary.MergedDictionaries>
-        <controls:SplitViewButtonResources />
-        <controls:PivotResources />
-        <controls:PullToRefreshListViewResources />
-        <controls:AdaptiveDataViewResources />
-        <controls:TaskPanelResources />
-    </ResourceDictionary.MergedDictionaries>
-
     <!--Frame Styles-->
     <Style x:Key="AdFrameStyle" TargetType="Frame">
         <Setter Property="Template">

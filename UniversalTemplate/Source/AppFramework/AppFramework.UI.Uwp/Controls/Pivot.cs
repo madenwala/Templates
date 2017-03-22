@@ -1,7 +1,6 @@
 ﻿using AppFramework.Core;
 using AppFramework.Core.ViewModels;
 using System;
-using Windows.UI.Xaml.Controls;
 
 namespace AppFramework.UI.Controls
 {
@@ -9,10 +8,11 @@ namespace AppFramework.UI.Controls
     {
         public Pivot()
         {
+            this.DefaultStyleKey = typeof(Pivot);
             this.PivotItemLoading += Pivot_PivotItemLoading;
         }
 
-        private async void Pivot_PivotItemLoading(Windows.UI.Xaml.Controls.Pivot sender, PivotItemEventArgs args)
+        private async void Pivot_PivotItemLoading(Windows.UI.Xaml.Controls.Pivot sender, Windows.UI.Xaml.Controls.PivotItemEventArgs args)
         {
             var parentVM = this.DataContext as CollectionViewModelBase;
             if (parentVM != null)

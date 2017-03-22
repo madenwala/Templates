@@ -26,6 +26,7 @@
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\AppFramework.UI.Uwp.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -47,6 +48,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
+    <DocumentationFile>bin\x86\Debug\AppFramework.UI.Uwp.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <PlatformTarget>x86</PlatformTarget>
@@ -70,6 +72,7 @@
     <PlatformTarget>ARM</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
+    <DocumentationFile>bin\ARM\Debug\AppFramework.UI.Uwp.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
     <PlatformTarget>ARM</PlatformTarget>
@@ -94,6 +97,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
+    <DocumentationFile>bin\x64\Debug\AppFramework.UI.Uwp.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <PlatformTarget>x64</PlatformTarget>
@@ -117,10 +121,7 @@
     <Compile Include="Behaviors\FocusOnLoadBehavior.cs" />
     <Compile Include="Behaviors\GameControllerListViewViewFocusBehavior.cs" />
     <Compile Include="Behaviors\ListViewCommandBehavior.cs" />
-    <Compile Include="Controls\AdaptiveDataView\AdaptiveDataView.cs" />
-    <Compile Include="Controls\AdaptiveDataView\AdaptiveDataViewResources.xaml.cs">
-      <DependentUpon>AdaptiveDataViewResources.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Controls\AdaptiveDataView.cs" />
     <Compile Include="Controls\AdControl.xaml.cs">
       <DependentUpon>AdControl.xaml</DependentUpon>
     </Compile>
@@ -134,23 +135,12 @@
       <DependentUpon>BusyPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ContentControlBase.cs" />
-    <Compile Include="Controls\Pivot\Pivot.cs" />
-    <Compile Include="Controls\Pivot\Pivot.xaml.cs">
-      <DependentUpon>Pivot.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\PullToRefreshListView\PullToRefreshListView.cs" />
-    <Compile Include="Controls\PullToRefreshListView\PullToRefreshListView.xaml.cs">
-      <DependentUpon>PullToRefreshListView.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Controls\MyControl.cs" />
+    <Compile Include="Controls\Pivot.cs" />
+    <Compile Include="Controls\PullToRefreshListView.cs" />
     <Compile Include="Controls\ScrollToTopHelper.cs" />
-    <Compile Include="Controls\SplitViewButton\SplitViewButton.cs" />
-    <Compile Include="Controls\SplitViewButton\SplitViewButton.xaml.cs">
-      <DependentUpon>SplitViewButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\TaskPanel\TaskPanel.cs" />
-    <Compile Include="Controls\TaskPanel\TaskPanelResources.xaml.cs">
-      <DependentUpon>TaskPanelResources.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Controls\SplitViewButton.cs" />
+    <Compile Include="Controls\TaskPanel.cs" />
     <Compile Include="Controls\UserControlBase.cs" />
     <Compile Include="Controls\ViewControlBase.cs" />
     <Compile Include="Controls\WebViewPanel.xaml.cs">
@@ -190,11 +180,6 @@
     <EmbeddedResource Include="Properties\Platform.Windows.UI.Core.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Controls\AdaptiveDataView\AdaptiveDataViewResources.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Page>
     <Page Include="Controls\AdControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -211,30 +196,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Pivot\Pivot.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Page>
-    <Page Include="Controls\PullToRefreshListView\PullToRefreshListView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Page>
-    <Page Include="Controls\SplitViewButton\SplitViewButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Page>
-    <Page Include="Controls\TaskPanel\TaskPanelResources.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Controls\WebViewPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Common.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -260,6 +230,7 @@
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

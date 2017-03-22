@@ -31,5 +31,14 @@ namespace AppFramework.UI.Controls
         }
 
         #endregion
+
+        #region Constructors
+        
+        public TaskPanel()
+        {
+            this.DefaultStyleKey = typeof(TaskPanel);
+        }
+
+        #endregion
     }
 }
