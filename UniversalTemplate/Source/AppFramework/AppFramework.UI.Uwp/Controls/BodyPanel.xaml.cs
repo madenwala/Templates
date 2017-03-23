@@ -1,5 +1,4 @@
-﻿using AppFramework.Core;
-using AppFramework.Core.Models;
+﻿using AppFramework.Core.Models;
 using AppFramework.Core.ViewModels;
 using Windows.UI;
 using Windows.UI.Xaml;
@@ -82,42 +81,6 @@ namespace AppFramework.UI.Controls
         public void ScrollToTop()
         {
             bodyPanelContainer.ScrollToTop();
-        }
-
-        #endregion
-    }
-
-    [TemplatePart(Name = PART_SCROLLVIEWER, Type = typeof(ScrollViewer))]
-    public sealed class BodyPanelContainer : ContentControl, IViewScrollToTop
-    {
-        #region Variables
-
-        const string PART_SCROLLVIEWER = "scrollViewer";
-
-        private ScrollViewer _scrollViewer;
-
-        #endregion
-
-        #region Constructors
-
-        public BodyPanelContainer()
-        {
-            this.IsTabStop = false;
-        }
-
-        #endregion
-
-        #region Methods
-
-        protected override void OnApplyTemplate()
-        {
-            _scrollViewer = this.GetTemplateChild(PART_SCROLLVIEWER) as ScrollViewer;
-            base.OnApplyTemplate();
-        }
-
-        public void ScrollToTop()
-        {
-            ScrollToTopHelper.ScrollToTop(_scrollViewer ?? (this.Content as ContentPresenter)?.Content ?? this.Content);
         }
 
         #endregion

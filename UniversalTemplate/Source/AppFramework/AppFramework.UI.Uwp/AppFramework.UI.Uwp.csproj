@@ -130,6 +130,7 @@
     <Compile Include="Controls\BodyPanel.xaml.cs">
       <DependentUpon>BodyPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BodyPanelContainer.cs" />
     <Compile Include="Controls\BusyPanel.cs" />
     <Compile Include="Controls\ContentControlBase.cs" />
     <Compile Include="Controls\MyControl.cs" />
