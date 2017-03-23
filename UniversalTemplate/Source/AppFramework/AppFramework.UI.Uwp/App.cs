@@ -256,7 +256,7 @@ namespace AppFramework.UI
         /// <param name="e">Details about the binding failure</param>
         private void DebugSettings_BindingFailed(object sender, BindingFailedEventArgs e)
         {
-            PlatformBase.Current.Logger.Log(LogLevels.Error, "Binding Failed: {0}", e.Message);
+            PlatformBase.Current.Logger.Log(LogLevels.Error, e.Message);
         }
 
         /// <summary>

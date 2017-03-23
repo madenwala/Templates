@@ -8,6 +8,21 @@ using System.Threading;
 using System.Threading.Tasks;
 using Windows.Storage;
 
+namespace Contoso.Core
+{
+    public partial class Platform
+    {
+        /// <summary>
+        /// Gets access to the cryptography provider of the platform currently executing.
+        /// </summary>
+        public new AuthorizationManager AuthManager
+        {
+            get { return GetService<AuthorizationManager>(); }
+            protected set { SetService(value); }
+        }
+    }
+}
+
 namespace Contoso.Core.Services
 {
     public sealed class AuthorizationManager : AppFramework.Core.Services.AuthorizationManagerBase
