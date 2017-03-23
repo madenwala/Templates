@@ -9,6 +9,17 @@
     mc:Ignorable="d"
     x:Name="control"
     Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+
+    <UserControl.Resources>
+        <!--Snap points for responsive design-->
+        <x:Double x:Key="SnapPoint27">2560</x:Double>
+        <x:Double x:Key="SnapPoint23">1920</x:Double>
+        <x:Double x:Key="SnapPoint13">1366</x:Double>
+        <x:Double x:Key="SnapPoint8Landscape">1024</x:Double>
+        <x:Double x:Key="SnapPoint8Portrait">640</x:Double>
+        <x:Double x:Key="SnapPointMinimum">0</x:Double>
+        
+    </UserControl.Resources>
     
     <Grid Background="{x:Bind Background, Mode=OneWay}">
         <!-- Responsive VisualStates -->
