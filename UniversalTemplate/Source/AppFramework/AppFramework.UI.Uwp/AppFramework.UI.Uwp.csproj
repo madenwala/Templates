@@ -127,9 +127,7 @@
     </Compile>
     <Compile Include="Controls\AdSupportedApplicationFrame.cs" />
     <Compile Include="Controls\ApplicationFrame.cs" />
-    <Compile Include="Controls\BodyPanel.xaml.cs">
-      <DependentUpon>BodyPanel.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Controls\BodyPanel.cs" />
     <Compile Include="Controls\BodyPanelContainer.cs" />
     <Compile Include="Controls\BusyPanel.cs" />
     <Compile Include="Controls\ContentControlBase.cs" />
@@ -179,10 +177,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\AdControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\BodyPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
