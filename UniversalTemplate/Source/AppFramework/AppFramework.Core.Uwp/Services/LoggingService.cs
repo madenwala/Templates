@@ -110,7 +110,7 @@ namespace AppFramework.Core.Services
 #if DEBUG
             //this.CurrentLevel = LogLevels.Debug;
             this.Loggers.Add(new DebugLoggerProvider());
-            if(PlatformBase.DeviceFamily == DeviceFamily.Desktop && !System.Diagnostics.Debugger.IsAttached)
+            //if(PlatformBase.DeviceFamily == DeviceFamily.Desktop && !System.Diagnostics.Debugger.IsAttached)
                 this.Loggers.Add(new UwpConsoleOutputProvider());
 #else
             this.CurrentLevel = LogLevels.Warning;

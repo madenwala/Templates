@@ -48,6 +48,7 @@ namespace AppFramework.Core.Strings
             }
             else
             {
+                PlatformBase.Current.Logger.Log(LogLevels.Warning, currentAssemblyName + "/Resources");
                 resourceLoader = ResourceLoader.GetForCurrentView(currentAssemblyName + "/Resources");
             }
         }
