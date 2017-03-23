@@ -340,7 +340,8 @@
                             PullThreshold="{TemplateBinding PullThreshold}"
                             behaviors:ListViewCommandBehavior.Command="{TemplateBinding ClickCommand}">
                             <toolkit:PullToRefreshListView.PullToRefreshContent>
-                                <TextBlock x:Uid="/AppFramework.Core.Uwp/Resources/txtPullToRefresh" Text="[Pull to refresh]" Style="{StaticResource SubtleTextBlockStyle}" />
+                                <TextBlock Text="[Pull to refresh]" Style="{StaticResource SubtleTextBlockStyle}" />
+                                <!--TODO x:Uid="/AppFramework.Core.Uwp/Resources/txtPullToRefresh"-->
                             </toolkit:PullToRefreshListView.PullToRefreshContent>
                         </toolkit:PullToRefreshListView>
                         <TextBlock 
@@ -360,11 +361,12 @@
                 <ControlTemplate>
                     <StackPanel>
                         <StackPanel Margin="0,12,0,24" Visibility="{Binding IsFaulted, Mode=OneWay, Converter={StaticResource visConverter}, FallbackValue=Collapsed}">
-                            <TextBlock x:Uid="/Contoso.Core/Resources/tbTryAgain" Style="{StaticResource ErrorTextBlockStyle}" Text="[An expected error has occurred.]" />
+                            <TextBlock Style="{StaticResource ErrorTextBlockStyle}" Text="[An expected error has occurred.]" />
+                            <!--TODO x:Uid="/Contoso.Core/Resources/tbTryAgain"-->
                             <Button 
-                                x:Uid="/Contoso.Core/Resources/btnTryAgain"
                                 Style="{StaticResource PrimaryButtonStyle}"
                                 IsEnabled="{Binding IsCompleted, Mode=OneWay}" Content="[Try again]" Click="btnTryAgain_Click" />
+                            <!-- TODO x:Uid="/Contoso.Core/Resources/btnTryAgain"-->
                         </StackPanel>
                         <ProgressRing 
                             IsActive="{Binding IsNotCompleted, Mode=OneWay, FallbackValue=False}" 

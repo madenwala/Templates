@@ -123,6 +123,9 @@
     <Compile Include="Services\AuthorizationManagerBase.cs" />
     <Compile Include="Services\EmailProvider.cs" />
     <Compile Include="Services\NotificationsManagerBase.cs" />
+    <Compile Include="Strings\Account.cs" />
+    <Compile Include="Strings\Location.cs" />
+    <Compile Include="Strings\Resources.cs" />
     <Compile Include="ViewModels\CollectionViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\WebBrowserViewModel.cs" />
@@ -131,21 +134,6 @@
     <PRIResource Include="Strings\en-US\WebBrowser.resw">
       <Generator>ReswFileCodeGenerator</Generator>
       <LastGenOutput>WebBrowser.cs</LastGenOutput>
-      <CustomToolNamespace>AppFramework.Core.Strings</CustomToolNamespace>
-    </PRIResource>
-    <PRIResource Include="Strings\en-US\Resources.resw">
-      <Generator>ReswFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.cs</LastGenOutput>
-      <CustomToolNamespace>AppFramework.Core.Strings</CustomToolNamespace>
-    </PRIResource>
-    <PRIResource Include="Strings\en-US\Location.resw">
-      <Generator>ReswFileCodeGenerator</Generator>
-      <LastGenOutput>Location.cs</LastGenOutput>
-      <CustomToolNamespace>AppFramework.Core.Strings</CustomToolNamespace>
-    </PRIResource>
-    <PRIResource Include="Strings\en-US\Account.resw">
-      <Generator>ReswFileCodeGenerator</Generator>
-      <LastGenOutput>Account.cs</LastGenOutput>
       <CustomToolNamespace>AppFramework.Core.Strings</CustomToolNamespace>
     </PRIResource>
   </ItemGroup>
@@ -183,21 +171,6 @@
     <Compile Include="Services\StorageManagerBase.cs" />
     <Compile Include="Services\VoiceCommandManager.cs" />
     <Compile Include="Services\WebAccountManager.cs" />
-    <Compile Include="Strings\en-US\Account.cs">
-      <DependentUpon>Account.resw</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Strings\en-US\Location.cs">
-      <DependentUpon>Location.resw</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Strings\en-US\Resources.cs">
-      <DependentUpon>Resources.resw</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Strings\en-US\WebBrowser.cs">
       <DependentUpon>WebBrowser.resw</DependentUpon>
       <AutoGen>True</AutoGen>
