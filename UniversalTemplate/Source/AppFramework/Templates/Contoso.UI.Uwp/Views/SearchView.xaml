@@ -17,7 +17,7 @@
         <controls:BodyPanel.AppBar>
             <CommandBar>
                 <CommandBar.PrimaryCommands>
-                    <AppBarButton x:Uid="/Contoso.Core/Resources/abtnRefresh" Label="[Refresh]" Icon="Refresh" Command="{x:Bind ViewModel.RefreshCommand, Mode=OneWay}" />
+                    <AppBarButton x:Uid="/Contoso.Core.Uwp/Resources/abtnRefresh" Label="[Refresh]" Icon="Refresh" Command="{x:Bind ViewModel.RefreshCommand, Mode=OneWay}" />
                 </CommandBar.PrimaryCommands>
             </CommandBar>
         </controls:BodyPanel.AppBar>

@@ -11,7 +11,7 @@
     x:Name="userControl"
     mc:Ignorable="d">
 
-    <AutoSuggestBox x:Uid="/Contoso.Core/Resources/asbSearch"
+    <AutoSuggestBox x:Uid="/Contoso.Core.Uwp/Resources/asbSearch"
                     QueryIcon="Find" Margin="0"
                     PlaceholderText="[Search...]"
                     VerticalAlignment="Center"

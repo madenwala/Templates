@@ -90,8 +90,8 @@
 
                     <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
                         <StackPanel>
-                            <controls:SplitViewButton GroupName="ShellNav" x:Uid="/Contoso.Core/Resources/svbHome" x:Name="btnHome" Content="[Home]" Symbol="Home" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToHomeCommand}" />
-                            <controls:SplitViewButton GroupName="ShellNav" x:Uid="/Contoso.Core/Resources/svbSearch" x:Name="btnSearch" Symbol="Find" Click="btnSearch_Click">
+                            <controls:SplitViewButton GroupName="ShellNav" x:Uid="/Contoso.Core.Uwp/Resources/svbHome" x:Name="btnHome" Content="[Home]" Symbol="Home" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToHomeCommand}" />
+                            <controls:SplitViewButton GroupName="ShellNav" x:Uid="/Contoso.Core.Uwp/Resources/svbSearch" x:Name="btnSearch" Symbol="Find" Click="btnSearch_Click">
                                 <interactivity:Interaction.Behaviors>
                                     <interactions:EventTriggerBehavior EventName="Checked" SourceObject="{Binding ElementName=btnSearch}">
                                         <interactions:ChangePropertyAction TargetObject="{Binding ElementName=searchBox}" PropertyName="IsEnabled" Value="True" />
@@ -101,7 +101,7 @@
                                     </interactions:EventTriggerBehavior>
                                 </interactivity:Interaction.Behaviors>
                                 <Grid>
-                                    <TextBlock x:Uid="/Contoso.Core/Search/tbSearch" Text="[Search]" Visibility="{x:Bind btnSearch.IsChecked, Mode=OneWay, Converter={StaticResource visInvertedConverter}}" />
+                                    <TextBlock x:Uid="/Contoso.Core.Uwp/Search/tbSearch" Text="[Search]" Visibility="{x:Bind btnSearch.IsChecked, Mode=OneWay, Converter={StaticResource visInvertedConverter}}" />
                                     <localControls:SearchBox x:Name="searchBox" Visibility="{x:Bind btnSearch.IsChecked, Mode=OneWay, Converter={StaticResource visConverter}}" />
                                 </Grid>
                             </controls:SplitViewButton>
@@ -115,13 +115,13 @@
                         Visibility="{x:Bind ViewModel.IsMenuOpen, Mode=OneWay, Converter={StaticResource visConverter}}" 
                         BorderBrush="{ThemeResource SystemControlBackgroundChromeMediumBrush}" BorderThickness="0,2,0,0">
                         <Button
-                            x:Uid="/Contoso.Core/Resources/pbtnFeedback"
+                            x:Uid="/Contoso.Core.Uwp/Resources/pbtnFeedback"
                             Command="{x:Bind ViewModel.Platform.Navigation.NavigateToFeedbackCommand}"
                             Visibility="{x:Bind ViewModel.Platform.Navigation.IsFeedbackEnabled, Converter={StaticResource visConverter}}"
                             Style="{StaticResource SplitViewPaneButtonStyle}" 
                             Content="&#xE939;" /> <!-- Feedback &#xE939; Smile &#xE76E; />-->
                         <Button
-                            x:Uid="/Contoso.Core/Resources/pbtnRateApp"
+                            x:Uid="/Contoso.Core.Uwp/Resources/pbtnRateApp"
                             Command="{x:Bind ViewModel.Platform.Ratings.NavigateToRateAppCommand}"
                             Style="{StaticResource SplitViewPaneButtonStyle}" >
                             <SymbolIcon>Like</SymbolIcon>
@@ -132,8 +132,8 @@
                         Grid.Row="3" 
                         BorderBrush="{ThemeResource SystemControlBackgroundChromeMediumBrush}" 
                         BorderThickness="0,2,0,0">
-                        <controls:SplitViewButton x:Uid="/Contoso.Core/Resources/svbSignIn" GroupName="ShellNav" Content="[Sign in]" Symbol="Contact" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToAccountSignInCommand}" Visibility="{x:Bind ViewModel.IsUserAuthenticated, Mode=OneWay, Converter={StaticResource visInvertedConverter}}" />
-                        <controls:SplitViewButton x:Uid="/Contoso.Core/Resources/svbSignout" GroupName="ShellNav" Symbol="Contact" SymbolAlwaysVisible="True" Command="{x:Bind ViewModel.NavigateToAccountSignoutCommand}" Visibility="{x:Bind ViewModel.IsUserAuthenticated, Mode=OneWay, Converter={StaticResource visConverter}}">
+                        <controls:SplitViewButton x:Uid="/Contoso.Core.Uwp/Resources/svbSignIn" GroupName="ShellNav" Content="[Sign in]" Symbol="Contact" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToAccountSignInCommand}" Visibility="{x:Bind ViewModel.IsUserAuthenticated, Mode=OneWay, Converter={StaticResource visInvertedConverter}}" />
+                        <controls:SplitViewButton x:Uid="/Contoso.Core.Uwp/Resources/svbSignout" GroupName="ShellNav" Symbol="Contact" SymbolAlwaysVisible="True" Command="{x:Bind ViewModel.NavigateToAccountSignoutCommand}" Visibility="{x:Bind ViewModel.IsUserAuthenticated, Mode=OneWay, Converter={StaticResource visConverter}}">
                             <controls:SplitViewButton.Icon>
                                 <Ellipse Width="32" Height="32" Visibility="{Binding ViewModel.Platform.AuthManager.CurrentUser.ProfileImageURL, Mode=OneWay, Converter={StaticResource visConverter}}">
                                     <Ellipse.Fill>
@@ -147,15 +147,15 @@
                             </controls:SplitViewButton.Icon>
                             <StackPanel>
                                 <TextBlock Foreground="{ThemeResource SystemAccentColor}" Text="{x:Bind ViewModel.WelcomeMessage, Mode=OneWay}" Style="{StaticResource CaptionTextBlockStyle}" />
-                                <TextBlock x:Uid="/Contoso.Core/Resources/tbSignOut" Text="[Sign out]" />
+                                <TextBlock x:Uid="/Contoso.Core.Uwp/Resources/tbSignOut" Text="[Sign out]" />
                             </StackPanel>
                         </controls:SplitViewButton>
-                        <controls:SplitViewButton x:Uid="/Contoso.Core/Resources/svbSettings" GroupName="ShellNav" x:Name="btnSettings" Content="[Settings]" Symbol="Setting" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToSettingsCommand}" />
+                        <controls:SplitViewButton x:Uid="/Contoso.Core.Uwp/Resources/svbSettings" GroupName="ShellNav" x:Name="btnSettings" Content="[Settings]" Symbol="Setting" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToSettingsCommand}" />
                     </StackPanel>
                 </Grid>
             </SplitView.Pane>
 
-            <controls:ApplicationFrame x:Name="bodyFrame" Style="{StaticResource AdFrameStyle}" />
+            <controls:AdSupportedApplicationFrame x:Name="bodyFrame" />
 
         </SplitView>
 

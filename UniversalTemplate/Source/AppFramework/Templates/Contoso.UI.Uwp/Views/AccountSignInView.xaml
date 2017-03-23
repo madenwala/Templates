@@ -16,21 +16,21 @@
         <controls:BodyPanel.AppBar>
             <CommandBar ClosedDisplayMode="Minimal">
                 <CommandBar.SecondaryCommands>
-                    <AppBarButton x:Uid="/Contoso.Core/Resources/abtnSettings" Label="[Settings]" Icon="Setting" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToSettingsCommand}" />
+                    <AppBarButton x:Uid="/Contoso.Core.Uwp/Resources/abtnSettings" Label="[Settings]" Icon="Setting" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToSettingsCommand}" />
                 </CommandBar.SecondaryCommands>
             </CommandBar>
         </controls:BodyPanel.AppBar>
         <controls:BodyPanel.BodyContent>
             <StackPanel MaxWidth="{StaticResource FormMaxWidth}">
                 <HyperlinkButton
-                    x:Uid="/Contoso.Core/Account/lnkForgotPassword"
+                    x:Uid="/Contoso.Core.Uwp/Account/lnkForgotPassword"
                     Content="[Forgot your password?]" 
                     Command="{x:Bind ViewModel.Platform.Navigation.NavigateToAccountForgotCommand}" 
                     CommandParameter="{x:Bind ViewModel.Username, Mode=OneWay}" />
 
                 <TextBox 
                     x:Name="txtUsername"
-                    x:Uid="/Contoso.Core/Account/txtUsername" 
+                    x:Uid="/Contoso.Core.Uwp/Account/txtUsername" 
                     Header="[E-mail or username:]" 
                     Text="{x:Bind ViewModel.Username, Mode=TwoWay}" 
                     InputScope="EmailSmtpAddress">
@@ -41,7 +41,7 @@
                 </TextBox>
 
                 <PasswordBox 
-                    x:Uid="/Contoso.Core/Account/txtPassword" 
+                    x:Uid="/Contoso.Core.Uwp/Account/txtPassword" 
                     x:Name="txtPassword" 
                     Header="[Password:]"
                     Password="{x:Bind ViewModel.Password, Mode=TwoWay}">
@@ -51,7 +51,7 @@
                 </PasswordBox>
 
                 <Button 
-                    x:Uid="/Contoso.Core/Account/btnSignin"
+                    x:Uid="/Contoso.Core.Uwp/Account/btnSignin"
                     Content="[Sign in]" 
                     Style="{StaticResource PrimaryButtonStyle}" 
                     Command="{x:Bind ViewModel.SubmitCommand, Mode=OneWay}" />

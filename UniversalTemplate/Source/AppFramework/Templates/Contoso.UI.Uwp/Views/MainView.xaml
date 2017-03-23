@@ -20,7 +20,7 @@
         <controls:BodyPanel.AppBar>
             <CommandBar>
                 <CommandBar.PrimaryCommands>
-                    <AppBarButton x:Uid="/Contoso.Core/Resources/abtnSort" Label="[Sort]" Icon="Sort">
+                    <AppBarButton x:Uid="/Contoso.Core.Uwp/Resources/abtnSort" Label="[Sort]" Icon="Sort">
                         <AppBarButton.Flyout>
                             <MenuFlyout>
                                 <MenuFlyoutItem Text="[Line 1]" Command="{x:Bind ViewModel.SortCommand}" CommandParameter="LineOne" />
@@ -28,10 +28,10 @@
                             </MenuFlyout>
                         </AppBarButton.Flyout>
                     </AppBarButton>
-                    <AppBarButton x:Uid="/Contoso.Core/Resources/abtnRefresh" Label="[Refresh]" Icon="Refresh" Command="{x:Bind ViewModel.RefreshCommand, Mode=OneWay}" />
+                    <AppBarButton x:Uid="/Contoso.Core.Uwp/Resources/abtnRefresh" Label="[Refresh]" Icon="Refresh" Command="{x:Bind ViewModel.RefreshCommand, Mode=OneWay}" />
                 </CommandBar.PrimaryCommands>
                 <CommandBar.SecondaryCommands>
-                    <AppBarButton x:Uid="/Contoso.Core/Resources/abtnSettings" Label="[Settings]" Icon="Setting" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToSettingsCommand}" />
+                    <AppBarButton x:Uid="/Contoso.Core.Uwp/Resources/abtnSettings" Label="[Settings]" Icon="Setting" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToSettingsCommand}" />
                 </CommandBar.SecondaryCommands>
             </CommandBar>
         </controls:BodyPanel.AppBar>

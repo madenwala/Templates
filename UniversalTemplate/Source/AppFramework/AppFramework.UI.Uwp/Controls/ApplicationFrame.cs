@@ -5,10 +5,8 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace AppFramework.UI.Controls
-{    /// <summary>
-     /// An empty page that can be used on its own or navigated to within a Frame.
-     /// </summary>
-    public sealed partial class ApplicationFrame : Frame
+{
+    public class ApplicationFrame : Frame
     {
         #region Properties
 
@@ -28,7 +26,7 @@ namespace AppFramework.UI.Controls
 
         public ApplicationFrame()
         {
-            this.InitializeComponent();
+            this.DefaultStyleKey = typeof(ApplicationFrame);
 
             this.Loaded += ApplicationFrame_Loaded;
             this.Unloaded += ApplicationFrame_Unloaded;

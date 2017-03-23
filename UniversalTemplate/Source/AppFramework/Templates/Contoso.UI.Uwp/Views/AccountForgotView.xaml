@@ -16,10 +16,10 @@
         <controls:BodyPanel.AppBar>
             <CommandBar ClosedDisplayMode="Minimal">
                 <CommandBar.PrimaryCommands>
-                    <AppBarButton x:Name="primarySettings" x:Uid="/Contoso.Core/Resources/abtnSettings" Label="[Settings]" Icon="Setting" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToSettingsCommand}" />
+                    <AppBarButton x:Name="primarySettings" x:Uid="/Contoso.Core.Uwp/Resources/abtnSettings" Label="[Settings]" Icon="Setting" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToSettingsCommand}" />
                 </CommandBar.PrimaryCommands>
                 <CommandBar.SecondaryCommands>
-                    <AppBarButton x:Uid="/Contoso.Core/Resources/abtnSettings" Label="[Settings]" Icon="Setting" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToSettingsCommand}" />
+                    <AppBarButton x:Uid="/Contoso.Core.Uwp/Resources/abtnSettings" Label="[Settings]" Icon="Setting" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToSettingsCommand}" />
                 </CommandBar.SecondaryCommands>
             </CommandBar>
         </controls:BodyPanel.AppBar>
@@ -27,7 +27,7 @@
             <StackPanel MaxWidth="{StaticResource FormMaxWidth}">
                 <TextBox 
                     x:Name="txtUsername"
-                    x:Uid="/Contoso.Core/Account/txtUsername" 
+                    x:Uid="/Contoso.Core.Uwp/Account/txtUsername" 
                     Header="[Username:]" 
                     Text="{Binding ViewModel.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                     InputScope="EmailSmtpAddress">
@@ -37,7 +37,7 @@
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
                 <Button 
-                    x:Uid="/Contoso.Core/Resources/btnSubmit" 
+                    x:Uid="/Contoso.Core.Uwp/Resources/btnSubmit" 
                     Style="{StaticResource PrimaryButtonStyle}" 
                     Content="[Submit]" 
                     Command="{x:Bind ViewModel.SubmitCommand, Mode=OneWay}" />

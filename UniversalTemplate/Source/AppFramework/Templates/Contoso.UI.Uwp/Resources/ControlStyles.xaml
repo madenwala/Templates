@@ -7,30 +7,6 @@
     xmlns:behaviors="using:AppFramework.UI.Behaviors"
     xmlns:controls="using:AppFramework.UI.Controls">
 
-    <!--Frame Styles-->
-    <Style x:Key="AdFrameStyle" TargetType="Frame">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Frame">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Border x:Name="ClientArea" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="Transparent" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
-                            <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Border>
-                        <controls:BusyPanel 
-                            ViewModel="{Binding ViewModel, Mode=OneWay}"
-                            Visibility="{Binding ViewModel.StatusIsBlocking, Mode=OneWay, Converter={StaticResource visConverter}, FallbackValue=Collapsed}" />
-                        <controls:AdControl
-                            Grid.Row="1" />
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
     <!--BodyPanel-->
     <ControlTemplate x:Key="BodyPanelScrollViewerContainerTemplate">
         <ScrollViewer x:Name="scrollViewer" VerticalScrollBarVisibility="Auto">

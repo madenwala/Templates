@@ -14,7 +14,7 @@
         <controls:BodyPanel.AppBar>
             <CommandBar ClosedDisplayMode="Minimal">
                 <CommandBar.SecondaryCommands>
-                    <AppBarButton x:Uid="/Contoso.Core/Resources/abtnSettings" Label="[Settings]" Icon="Setting" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToSettingsCommand}" />
+                    <AppBarButton x:Uid="/Contoso.Core.Uwp/Resources/abtnSettings" Label="[Settings]" Icon="Setting" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToSettingsCommand}" />
                 </CommandBar.SecondaryCommands>
             </CommandBar>
         </controls:BodyPanel.AppBar>
@@ -24,8 +24,8 @@
                     <Image Height="24" Source="ms-appx:///Assets/MicrosoftLogo.png" />
                 </Button>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" MaxWidth="480">
-                    <Button x:Uid="/Contoso.Core/Account/btnSignin" x:Name="btnSignIn" Width="100" Margin="4" Content="[Sign in]" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToAccountSignInCommand}" />
-                    <Button x:Uid="/Contoso.Core/Account/btnRegister" Width="100" Margin="4" Content="[Register]" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToAccountSignUpCommand}" />
+                    <Button x:Uid="/Contoso.Core.Uwp/Account/btnSignin" x:Name="btnSignIn" Width="100" Margin="4" Content="[Sign in]" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToAccountSignInCommand}" />
+                    <Button x:Uid="/Contoso.Core.Uwp/Account/btnRegister" Width="100" Margin="4" Content="[Register]" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToAccountSignUpCommand}" />
                 </StackPanel>
             </StackPanel>
         </controls:BodyPanel.BodyContent>

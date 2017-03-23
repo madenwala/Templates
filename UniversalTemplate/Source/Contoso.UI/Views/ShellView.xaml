@@ -155,7 +155,7 @@
                 </Grid>
             </SplitView.Pane>
 
-            <controls:ApplicationFrame x:Name="bodyFrame" Style="{StaticResource AdFrameStyle}" />
+            <controls:AdSupportedApplicationFrame x:Name="bodyFrame" />
 
         </SplitView>
 

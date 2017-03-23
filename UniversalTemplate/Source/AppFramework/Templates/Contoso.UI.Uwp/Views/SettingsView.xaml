@@ -39,12 +39,12 @@
                         </TransitionCollection>
                     </StackPanel.ChildrenTransitions>
 
-                    <TextBlock x:Uid="/Contoso.Core/Resources/tbVersion" Text="[Version]" Style="{StaticResource SubtitleTextBlockStyle}" />
+                    <TextBlock x:Uid="/Contoso.Core.Uwp/Resources/tbVersion" Text="[Version]" Style="{StaticResource SubtitleTextBlockStyle}" />
                     <TextBlock Text="{x:Bind ViewModel.Platform.AppInfo.VersionNumber}" />
 
                     <Border Height="{StaticResource SpacerHeight}" />
 
-                    <TextBlock x:Uid="/Contoso.Core/Resources/tbSupport" Text="[Support]" Style="{StaticResource SubtitleTextBlockStyle}" />
+                    <TextBlock x:Uid="/Contoso.Core.Uwp/Resources/tbSupport" Text="[Support]" Style="{StaticResource SubtitleTextBlockStyle}" />
                     <HyperlinkButton 
                         Command="{x:Bind ViewModel.Platform.Navigation.NavigateToWebViewCommand}"
                         CommandParameter="http://www.adenwala.com"
@@ -54,65 +54,65 @@
                         CommandParameter="{x:Bind ViewModel.TwitterAddress, Mode=OneTime}"
                         Content="{x:Bind ViewModel.TwitterAddress, Mode=OneTime}" />
                     <HyperlinkButton
-                        x:Uid="/Contoso.Core/Resources/lnkSendSupportEmail"
+                        x:Uid="/Contoso.Core.Uwp/Resources/lnkSendSupportEmail"
                         Command="{x:Bind ViewModel.Platform.Logger.SendSupportEmailCommand}" 
                         Content="[Send us an e-mail]" />
                     <HyperlinkButton 
-                        x:Uid="/Contoso.Core/Resources/btnSubmitFeedback" 
+                        x:Uid="/Contoso.Core.Uwp/Resources/btnSubmitFeedback" 
                         Content="[App Feedback]" 
                         Command="{x:Bind ViewModel.Platform.Navigation.NavigateToFeedbackCommand}" 
                         Visibility="{x:Bind ViewModel.Platform.Navigation.IsFeedbackEnabled, Converter={StaticResource visConverter}}" />
 
                     <Border Height="{StaticResource SpacerHeight}" />
 
-                    <TextBlock x:Uid="/Contoso.Core/Resources/tbManage" Text="[Manage]" Style="{StaticResource SubtitleTextBlockStyle}" />
+                    <TextBlock x:Uid="/Contoso.Core.Uwp/Resources/tbManage" Text="[Manage]" Style="{StaticResource SubtitleTextBlockStyle}" />
                     <controls:WrapPanel Orientation="Horizontal">
-                        <Button x:Uid="/Contoso.Core/Account/btnSignout" Content="[Sign out]" Command="{x:Bind ViewModel.NavigateToAccountSignoutCommand}" Visibility="{x:Bind ViewModel.IsUserAuthenticated, Mode=OneWay, Converter={StaticResource visConverter}}" />
-                        <Button x:Uid="/Contoso.Core/Resources/btnRateApp" Content="[Rate application]" Command="{x:Bind ViewModel.Platform.Ratings.NavigateToRateAppCommand}" />
-                        <Button x:Uid="/Contoso.Core/Resources/btnClearJumplist" Content="[Clear Jumplist]" Command="{x:Bind ViewModel.Platform.Jumplist.ClearCommand}" Visibility="{x:Bind ViewModel.Platform.Jumplist.IsSupported, Converter={StaticResource visConverter}}" />
+                        <Button x:Uid="/Contoso.Core.Uwp/Account/btnSignout" Content="[Sign out]" Command="{x:Bind ViewModel.NavigateToAccountSignoutCommand}" Visibility="{x:Bind ViewModel.IsUserAuthenticated, Mode=OneWay, Converter={StaticResource visConverter}}" />
+                        <Button x:Uid="/Contoso.Core.Uwp/Resources/btnRateApp" Content="[Rate application]" Command="{x:Bind ViewModel.Platform.Ratings.NavigateToRateAppCommand}" />
+                        <Button x:Uid="/Contoso.Core.Uwp/Resources/btnClearJumplist" Content="[Clear Jumplist]" Command="{x:Bind ViewModel.Platform.Jumplist.ClearCommand}" Visibility="{x:Bind ViewModel.Platform.Jumplist.IsSupported, Converter={StaticResource visConverter}}" />
                         <Button Content="{x:Bind ViewModel.AppCacheTask.Result, Mode=OneWay, Converter={StaticResource stringFormatConverter}, ConverterParameter='Clear Cache \{0\}', FallbackValue='ClearCACHE'}" Command="{x:Bind ViewModel.ClearAppDataCacheCommand}" />
                     </controls:WrapPanel>
                     
                     <Border Height="{StaticResource SpacerHeight}" />
 
-                    <TextBlock x:Uid="/Contoso.Core/Resources/tbAppTheme" Text="[Application Theme]" Style="{StaticResource SubtitleTextBlockStyle}" />
-                    <RadioButton x:Uid="/Contoso.Core/Resources/rdoAppThemeDefault" GroupName="AppTheme" IsChecked="{x:Bind ViewModel.IsApplicationThemeDefault, Mode=TwoWay, Converter={StaticResource boolConverter}}" Content="[Default]" />
-                    <RadioButton x:Uid="/Contoso.Core/Resources/rdoAppThemeLight" GroupName="AppTheme" IsChecked="{x:Bind ViewModel.IsApplicationThemeLight, Mode=TwoWay, Converter={StaticResource boolConverter}}" Content="[Light]" />
-                    <RadioButton x:Uid="/Contoso.Core/Resources/rdoAppThemeDark" GroupName="AppTheme" IsChecked="{x:Bind ViewModel.IsApplicationThemeDark, Mode=TwoWay, Converter={StaticResource boolConverter}}" Content="[Dark]" />
+                    <TextBlock x:Uid="/Contoso.Core.Uwp/Resources/tbAppTheme" Text="[Application Theme]" Style="{StaticResource SubtitleTextBlockStyle}" />
+                    <RadioButton x:Uid="/Contoso.Core.Uwp/Resources/rdoAppThemeDefault" GroupName="AppTheme" IsChecked="{x:Bind ViewModel.IsApplicationThemeDefault, Mode=TwoWay, Converter={StaticResource boolConverter}}" Content="[Default]" />
+                    <RadioButton x:Uid="/Contoso.Core.Uwp/Resources/rdoAppThemeLight" GroupName="AppTheme" IsChecked="{x:Bind ViewModel.IsApplicationThemeLight, Mode=TwoWay, Converter={StaticResource boolConverter}}" Content="[Light]" />
+                    <RadioButton x:Uid="/Contoso.Core.Uwp/Resources/rdoAppThemeDark" GroupName="AppTheme" IsChecked="{x:Bind ViewModel.IsApplicationThemeDark, Mode=TwoWay, Converter={StaticResource boolConverter}}" Content="[Dark]" />
 
                     <Border Height="{StaticResource SpacerHeight}" />
 
-                    <TextBlock x:Uid="/Contoso.Core/Location/tbLocationServices" Text="[Location Services]" Style="{StaticResource SubtitleTextBlockStyle}" />
+                    <TextBlock x:Uid="/Contoso.Core.Uwp/Location/tbLocationServices" Text="[Location Services]" Style="{StaticResource SubtitleTextBlockStyle}" />
                     <TextBlock 
                         Style="{StaticResource ErrorTextBlockStyle}" 
                         Visibility="{x:Bind ViewModel.LocationServicesStatus, Mode=OneWay, Converter={StaticResource visConverter}}"
                         Text="{x:Bind ViewModel.LocationServicesStatus, Mode=OneWay}" />
                     <Button  
-                        x:Uid="/Contoso.Core/Resources/btnManage"
+                        x:Uid="/Contoso.Core.Uwp/Resources/btnManage"
                         Content="[Manage]"
                         Command="{x:Bind ViewModel.Platform.Geolocation.ManageLocationServicesCommand}" />
 
                     <Border Height="{StaticResource SpacerHeight}" />
 
-                    <TextBlock x:Uid="/Contoso.Core/Resources/tbBackgroundTasks" Text="[Background Tasks]" Style="{StaticResource SubtitleTextBlockStyle}" />
+                    <TextBlock x:Uid="/Contoso.Core.Uwp/Resources/tbBackgroundTasks" Text="[Background Tasks]" Style="{StaticResource SubtitleTextBlockStyle}" />
                     <TextBlock 
                         Style="{StaticResource ErrorTextBlockStyle}" 
                         Visibility="{x:Bind ViewModel.BackgroundTasksStatus, Mode=OneWay, Converter={StaticResource visConverter}}" 
                         Text="{x:Bind ViewModel.BackgroundTasksStatus, Mode=OneWay}" />
                     <Button 
-                        x:Uid="/Contoso.Core/Resources/btnManage"
+                        x:Uid="/Contoso.Core.Uwp/Resources/btnManage"
                         Content="[Manage]"
                         Command="{x:Bind ViewModel.Platform.BackgroundTasks.ManageBackgroundTasksCommand}" />
 
 
                     <Border Height="{StaticResource SpacerHeight}" />
-                    <TextBlock x:Uid="/Contoso.Core/Resources/tbAppDiagnostics" Text="[Application Diagnostics]" Style="{StaticResource SubtitleTextBlockStyle}" />
+                    <TextBlock x:Uid="/Contoso.Core.Uwp/Resources/tbAppDiagnostics" Text="[Application Diagnostics]" Style="{StaticResource SubtitleTextBlockStyle}" />
                     <CheckBox 
-                        x:Uid="/Contoso.Core/Resources/chkEnableFullDebugging"
+                        x:Uid="/Contoso.Core.Uwp/Resources/chkEnableFullDebugging"
                         IsChecked="{x:Bind ViewModel.Platform.AppSettingsRoaming.EnableFullLogging, Mode=TwoWay, Converter={StaticResource boolConverter}}" 
                         Content="Enable full logging" />
                     <TextBlock 
-                        x:Uid="/Contoso.Core/Resources/tbEnableFullDebuggingDescription"
+                        x:Uid="/Contoso.Core.Uwp/Resources/tbEnableFullDebuggingDescription"
                         Style="{StaticResource SubtleTextBlockStyle}"
                         Text="[Description]" />
 
@@ -200,12 +200,12 @@
                             <EntranceThemeTransition/>
                         </TransitionCollection>
                     </StackPanel.ChildrenTransitions>
-                    <TextBlock x:Uid="/Contoso.Core/Resources/tbCortanaHeader" Style="{StaticResource SubtitleTextBlockStyle}">[Tips for using Cortana]</TextBlock>
-                    <TextBlock x:Uid="/Contoso.Core/Resources/tbCortanaBody" Style="{StaticResource BodyTextBlockStyle}">[Start all voice and typed questions for Cortana with "<Run Foreground="{StaticResource SystemControlHighlightAccentBrush}">Show me...</Run>"]<LineBreak/></TextBlock>
+                    <TextBlock x:Uid="/Contoso.Core.Uwp/Resources/tbCortanaHeader" Style="{StaticResource SubtitleTextBlockStyle}">[Tips for using Cortana]</TextBlock>
+                    <TextBlock x:Uid="/Contoso.Core.Uwp/Resources/tbCortanaBody" Style="{StaticResource BodyTextBlockStyle}">[Start all voice and typed questions for Cortana with "<Run Foreground="{StaticResource SystemControlHighlightAccentBrush}">Show me...</Run>"]<LineBreak/></TextBlock>
 
-                    <TextBlock x:Uid="/Contoso.Core/Resources/tbCortanaExamplesHeader" Style="{StaticResource SubtitleTextBlockStyle}">[For example, you can ask:]</TextBlock>
+                    <TextBlock x:Uid="/Contoso.Core.Uwp/Resources/tbCortanaExamplesHeader" Style="{StaticResource SubtitleTextBlockStyle}">[For example, you can ask:]</TextBlock>
 
-                    <TextBlock x:Uid="/Contoso.Core/Resources/tbCortanaExamplesBody" Style="{StaticResource BodyTextBlockStyle}" Foreground="{StaticResource SystemControlHighlightAccentBrush}">
+                    <TextBlock x:Uid="/Contoso.Core.Uwp/Resources/tbCortanaExamplesBody" Style="{StaticResource BodyTextBlockStyle}" Foreground="{StaticResource SystemControlHighlightAccentBrush}">
                     [<Run>Show me details of Runtime Two</Run><LineBreak />
                     <Run>Show me details of Runtime Four</Run><LineBreak />
                     <Run>Show me details of Runtime 6</Run><LineBreak />
@@ -221,7 +221,7 @@
         <controls:BodyPanel.BodyContent>
             <controls:Pivot x:Name="pivot">
                 <PivotItem DataContext="{x:Bind ViewModel.GeneralVM, Mode=OneWay}" Header="{x:Bind ViewModel.GeneralVM.Title}" ContentTemplate="{StaticResource GeneralSettingsDataTemplate}" />
-                <PivotItem x:Uid="/Contoso.Core/Resources/piCortana" Header="[Cortana]" ContentTemplate="{StaticResource CortanaDataTemplate}" />
+                <PivotItem x:Uid="/Contoso.Core.Uwp/Resources/piCortana" Header="[Cortana]" ContentTemplate="{StaticResource CortanaDataTemplate}" />
                 <PivotItem DataContext="{x:Bind ViewModel.PrivacyVM}" Header="{x:Bind ViewModel.PrivacyVM.Title}" ContentTemplate="{StaticResource WebBrowserDataTemplate}" Margin="0" />
                 <PivotItem DataContext="{x:Bind ViewModel.TosVM}" Header="{x:Bind ViewModel.TosVM.Title}" ContentTemplate="{StaticResource WebBrowserDataTemplate}" Margin="0" />
                 <PivotItem x:Name="piDebug" DataContext="{x:Bind ViewModel.DebugVM}" Header="{x:Bind ViewModel.DebugVM.Title}" ContentTemplate="{StaticResource DebuggingDataTemplate}" />

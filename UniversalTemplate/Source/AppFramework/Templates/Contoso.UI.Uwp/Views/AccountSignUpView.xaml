@@ -16,88 +16,88 @@
         <controls:BodyPanel.AppBar>
             <CommandBar ClosedDisplayMode="Minimal">
                 <CommandBar.SecondaryCommands>
-                    <AppBarButton x:Uid="/Contoso.Core/Resources/abtnSettings" Label="[Settings]" Icon="Setting" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToSettingsCommand}" />
+                    <AppBarButton x:Uid="/Contoso.Core.Uwp/Resources/abtnSettings" Label="[Settings]" Icon="Setting" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToSettingsCommand}" />
                 </CommandBar.SecondaryCommands>
             </CommandBar>
         </controls:BodyPanel.AppBar>
         <controls:BodyPanel.BodyContent>
             <StackPanel MaxWidth="{StaticResource FormMaxWidth}">
                 <TextBlock
-                        x:Uid="/Contoso.Core/Account/tbWelcomeDescription" 
+                        x:Uid="/Contoso.Core.Uwp/Account/tbWelcomeDescription" 
                         Style="{StaticResource BodyTextBlockStyle}" 
                         TextWrapping="Wrap">
                         [Welcome to Contoso! Register for an account to enjoy all the service offerings we provide.]
                 </TextBlock>
 
-                <HyperlinkButton x:Uid="/Contoso.Core/Resources/lnkTermsOfService" Content="[Terms of service]" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToTermsOfServiceCommand}" />
-                <HyperlinkButton x:Uid="/Contoso.Core/Resources/lnkPrivacyPolicy" Content="[Privacy policy]" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToPrivacyPolicyCommand}" />
+                <HyperlinkButton x:Uid="/Contoso.Core.Uwp/Resources/lnkTermsOfService" Content="[Terms of service]" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToTermsOfServiceCommand}" />
+                <HyperlinkButton x:Uid="/Contoso.Core.Uwp/Resources/lnkPrivacyPolicy" Content="[Privacy policy]" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToPrivacyPolicyCommand}" />
 
                 <Button Style="{StaticResource TransparentButtonStyle}" Command="{x:Bind ViewModel.LaunchWebAccountManagerCommand, Mode=OneWay}">
                     <Image Height="24" Source="ms-appx:///Assets/MicrosoftLogo.png" Margin="0,12" />
                 </Button>
 
-                <TextBox x:Uid="/Contoso.Core/Account/txtFirstName" x:Name="txtFirstName" Header="[First Name:]" Text="{x:Bind ViewModel.FirstName, Mode=TwoWay}" InputScope="PersonalFullName">
+                <TextBox x:Uid="/Contoso.Core.Uwp/Account/txtFirstName" x:Name="txtFirstName" Header="[First Name:]" Text="{x:Bind ViewModel.FirstName, Mode=TwoWay}" InputScope="PersonalFullName">
                     <interactivity:Interaction.Behaviors>
                         <behaviors:FocusOnLoadBehavior />
                         <behaviors:EnterKeyBehavior />
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
 
-                <TextBox x:Uid="/Contoso.Core/Account/txtLastName" Header="[Last Name:]" Text="{x:Bind ViewModel.LastName, Mode=TwoWay}" InputScope="PersonalFullName">
+                <TextBox x:Uid="/Contoso.Core.Uwp/Account/txtLastName" Header="[Last Name:]" Text="{x:Bind ViewModel.LastName, Mode=TwoWay}" InputScope="PersonalFullName">
                     <interactivity:Interaction.Behaviors>
                         <behaviors:EnterKeyBehavior />
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
 
-                <TextBox x:Uid="/Contoso.Core/Account/txtUsername" Header="[E-mail or username]" Text="{x:Bind ViewModel.Username, Mode=TwoWay}" InputScope="EmailSmtpAddress">
+                <TextBox x:Uid="/Contoso.Core.Uwp/Account/txtUsername" Header="[E-mail or username]" Text="{x:Bind ViewModel.Username, Mode=TwoWay}" InputScope="EmailSmtpAddress">
                     <interactivity:Interaction.Behaviors>
                         <behaviors:EnterKeyBehavior />
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
 
-                <TextBox x:Uid="/Contoso.Core/Account/txtAddress1" Header="[Address 1]" Text="{x:Bind ViewModel.Address1, Mode=TwoWay}" InputScope="Maps">
+                <TextBox x:Uid="/Contoso.Core.Uwp/Account/txtAddress1" Header="[Address 1]" Text="{x:Bind ViewModel.Address1, Mode=TwoWay}" InputScope="Maps">
                     <interactivity:Interaction.Behaviors>
                         <behaviors:EnterKeyBehavior />
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
 
-                <TextBox x:Uid="/Contoso.Core/Account/txtAddress2" Header="[Address 2]" Text="{x:Bind ViewModel.Address2, Mode=TwoWay}" InputScope="Maps">
+                <TextBox x:Uid="/Contoso.Core.Uwp/Account/txtAddress2" Header="[Address 2]" Text="{x:Bind ViewModel.Address2, Mode=TwoWay}" InputScope="Maps">
                     <interactivity:Interaction.Behaviors>
                         <behaviors:EnterKeyBehavior />
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
 
-                <TextBox x:Uid="/Contoso.Core/Account/txtCity" Header="[City]" Text="{x:Bind ViewModel.City, Mode=TwoWay}" InputScope="Maps">
+                <TextBox x:Uid="/Contoso.Core.Uwp/Account/txtCity" Header="[City]" Text="{x:Bind ViewModel.City, Mode=TwoWay}" InputScope="Maps">
                     <interactivity:Interaction.Behaviors>
                         <behaviors:EnterKeyBehavior />
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
 
-                <TextBox x:Uid="/Contoso.Core/Account/txtState" Header="[State]" Text="{x:Bind ViewModel.State, Mode=TwoWay}" InputScope="Maps">
+                <TextBox x:Uid="/Contoso.Core.Uwp/Account/txtState" Header="[State]" Text="{x:Bind ViewModel.State, Mode=TwoWay}" InputScope="Maps">
                     <interactivity:Interaction.Behaviors>
                         <behaviors:EnterKeyBehavior />
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
 
-                <TextBox x:Uid="/Contoso.Core/Account/txtPostalCode" Header="[Zip Code]" Text="{x:Bind ViewModel.PostalCode, Mode=TwoWay}" InputScope="Maps">
+                <TextBox x:Uid="/Contoso.Core.Uwp/Account/txtPostalCode" Header="[Zip Code]" Text="{x:Bind ViewModel.PostalCode, Mode=TwoWay}" InputScope="Maps">
                     <interactivity:Interaction.Behaviors>
                         <behaviors:EnterKeyBehavior />
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
 
-                <PasswordBox x:Uid="/Contoso.Core/Account/txtPassword" Header="[Password]" Password="{x:Bind ViewModel.Password1, Mode=TwoWay}">
+                <PasswordBox x:Uid="/Contoso.Core.Uwp/Account/txtPassword" Header="[Password]" Password="{x:Bind ViewModel.Password1, Mode=TwoWay}">
                     <interactivity:Interaction.Behaviors>
                         <behaviors:EnterKeyBehavior />
                     </interactivity:Interaction.Behaviors>
                 </PasswordBox>
 
-                <PasswordBox x:Uid="/Contoso.Core/Account/txtPassword2" Header="[Confirm Password]" Password="{x:Bind ViewModel.Password2, Mode=TwoWay}">
+                <PasswordBox x:Uid="/Contoso.Core.Uwp/Account/txtPassword2" Header="[Confirm Password]" Password="{x:Bind ViewModel.Password2, Mode=TwoWay}">
                     <interactivity:Interaction.Behaviors>
                         <behaviors:EnterKeyBehavior Command="{x:Bind ViewModel.SubmitCommand, Mode=OneWay}" />
                     </interactivity:Interaction.Behaviors>
                 </PasswordBox>
 
-                <Button x:Uid="/Contoso.Core/Account/btnRegister" Content="[Register]" Style="{StaticResource PrimaryButtonStyle}" Command="{x:Bind ViewModel.SubmitCommand, Mode=OneWay}" />
+                <Button x:Uid="/Contoso.Core.Uwp/Account/btnRegister" Content="[Register]" Style="{StaticResource PrimaryButtonStyle}" Command="{x:Bind ViewModel.SubmitCommand, Mode=OneWay}" />
 
             </StackPanel>
         </controls:BodyPanel.BodyContent>
