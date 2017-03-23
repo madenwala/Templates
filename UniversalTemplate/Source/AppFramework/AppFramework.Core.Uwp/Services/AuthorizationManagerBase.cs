@@ -14,7 +14,7 @@ namespace AppFramework.Core
         public AuthorizationManagerBase AuthManager
         {
             get { return GetService<AuthorizationManagerBase>(); }
-            protected set { SetService(value); }
+            set { SetService(value); }
         }
     }
 }
