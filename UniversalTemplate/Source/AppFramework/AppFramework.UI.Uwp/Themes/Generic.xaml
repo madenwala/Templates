@@ -456,4 +456,33 @@
         </Setter>
     </Style>
 
+    <!--BusyPanel-->
+    <Style TargetType="controls:BusyPanel">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:BusyPanel">
+                    <Grid>
+                        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Opacity=".85" />
+                        <StackPanel VerticalAlignment="Center" Margin="0,0,0,48">
+                            <ProgressRing 
+                                IsEnabled="{TemplateBinding IsActive}" 
+                                IsActive="{TemplateBinding IsActive}" />
+                            <TextBlock 
+                                TextAlignment="Center" 
+                                TextWrapping="Wrap" 
+                                Margin="12,0" 
+                                Text="{TemplateBinding StatusText}" 
+                                Style="{TemplateBinding Style}" />
+                            <Button
+                                HorizontalAlignment="Center"
+                                Content="{TemplateBinding CustomButtonText}" 
+                                Command="{TemplateBinding CustomButtonCommand}"
+                                Visibility="{TemplateBinding CustomButtonVisibility}" />
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

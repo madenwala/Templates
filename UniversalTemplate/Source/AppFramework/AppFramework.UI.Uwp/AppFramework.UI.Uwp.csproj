@@ -131,9 +131,7 @@
     <Compile Include="Controls\BodyPanel.xaml.cs">
       <DependentUpon>BodyPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BusyPanel.xaml.cs">
-      <DependentUpon>BusyPanel.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Controls\BusyPanel.cs" />
     <Compile Include="Controls\ContentControlBase.cs" />
     <Compile Include="Controls\MyControl.cs" />
     <Compile Include="Controls\Pivot.cs" />
@@ -189,10 +187,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\BodyPanel.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\BusyPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

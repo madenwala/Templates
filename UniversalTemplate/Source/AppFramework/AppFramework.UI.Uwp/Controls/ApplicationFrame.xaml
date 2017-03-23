@@ -18,9 +18,14 @@
                             <Border x:Name="ClientArea" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="Transparent" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
                                 <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                             </Border>
-                            <controls:BusyPanel 
-                                ViewModel="{Binding ViewModel, Mode=OneWay}"
-                                Visibility="{Binding ViewModel.StatusIsBlocking, Mode=OneWay, Converter={StaticResource visConverter}, FallbackValue=Collapsed}" />
+                            <controls:BusyPanel
+                                IsActive="{Binding ViewModel.StatusIsBusy, Mode=OneWay}"
+                                StatusText="{Binding ViewModel.StatusText, Mode=OneWay}"
+                                StatusTextStyle="{StaticResource BodyTextBlockStyle}"
+                                Visibility="{Binding ViewModel.StatusIsBlocking, Mode=OneWay, Converter={StaticResource visConverter}, FallbackValue=Collapsed}" 
+                                CustomButtonCommand="{Binding ViewModel.StatusIsBlockingCancelableCommand, Mode=OneWay}"
+                                CustomButtonVisibility="{Binding ViewModel.StatusIsBlockingCancelable, Mode=OneWay, Converter={StaticResource visConverter}}"
+                                />
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
