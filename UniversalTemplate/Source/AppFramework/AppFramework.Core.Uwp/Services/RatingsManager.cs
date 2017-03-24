@@ -31,7 +31,7 @@ namespace AppFramework.Core.Services
         #region Properties
 
         private const string LAST_PROMPTED_FOR_RATING = "LastPromptedForRating";
-        private const string LAUNCH_COUNT = "LaunchCount";
+        //private const string LAUNCH_COUNT = "LaunchCount";
 
         private DateTime LastPromptedForRating { get; set; }
 
@@ -56,18 +56,13 @@ namespace AppFramework.Core.Services
         public async Task CheckForRatingsPromptAsync(IViewModel vm)
         {
             bool showPrompt = false;
-            bool showPromptoToSendEmail = false;
 
             // PLACE YOUR CUSTOM RATE PROMPT LOGIC HERE!
-            this.LastPromptedForRating = PlatformBase.Current.Storage.LoadSetting<DateTime>(LAST_PROMPTED_FOR_RATING);
+            this.LastPromptedForRating = PlatformBase.Current.Storage.LoadSetting<DateTime>(LAST_PROMPTED_FOR_RATING, Windows.Storage.ApplicationData.Current.RoamingSettings);
 
-            long launchCount = PlatformBase.Current.Storage.LoadSetting<long>(LAUNCH_COUNT);
-            launchCount++;
-            if (launchCount == 3)
-            {
-                showPrompt = showPromptoToSendEmail = true;
-            }
-            PlatformBase.Current.Storage.SaveSetting(LAUNCH_COUNT, launchCount);
+            //long launchCount = PlatformBase.Current.Storage.LoadSetting<long>(LAUNCH_COUNT);
+            //launchCount++;
+            //PlatformBase.Current.Storage.SaveSetting(LAUNCH_COUNT, launchCount);
 
             // If trial, not expired, and less than 2 days away from expiring, set as TRUE
             bool preTrialExpiredBasedPrompt = 
@@ -79,7 +74,7 @@ namespace AppFramework.Core.Services
             {
                 showPrompt = true;
             }
-            else if (this.LastPromptedForRating != DateTime.MinValue && this.LastPromptedForRating.AddDays(21) < DateTime.Now)
+            else if (this.LastPromptedForRating != DateTime.MinValue && this.LastPromptedForRating.AddDays(35) < DateTime.Now)
             {
                 // Every X days after the last prompt, set as TRUE
                 showPrompt = true;
@@ -91,14 +86,14 @@ namespace AppFramework.Core.Services
             }
 
             if(showPrompt)
-                await this.PromptForRatingAsync(vm, showPromptoToSendEmail);
+                await this.PromptForRatingAsync(vm);
         }
 
         /// <summary>
         /// Displays a dialog to the user requesting the user to provide ratings/feedback for this application.
         /// </summary>
         /// <returns>Awaitable task is returned.</returns>
-        private async Task PromptForRatingAsync(IViewModel vm, bool showPromptoToSendEmail = false)
+        private async Task PromptForRatingAsync(IViewModel vm)
         {
             // Prompt the user to rate the app
             var result = await vm.ShowMessageBoxAsync(CancellationToken.None, Strings.Resources.PromptRateApplicationMessage, Strings.Resources.PromptRateApplicationTitle, new string[] { Strings.Resources.TextYes, Strings.Resources.TextMaybeLater }, 1);
@@ -111,13 +106,6 @@ namespace AppFramework.Core.Services
                 // Navigate user to the platform specific rating mechanism
                 await this.RateApplicationAsync();
             }
-            //else if (showPromptoToSendEmail)
-            //{
-            //    // TODO do I want this?
-            //    result = await vm.ShowMessageBoxAsync(CancellationToken.None, Strings.Resources.PromptRateApplicationEmailFeedbackMessage, Strings.Resources.PromptRateApplicationEmailFeedbackTitle, new string[] { Strings.Resources.TextYes, Strings.Resources.TextNo }, 1);
-            //    if (result == 0)
-            //        await PlatformBase.Current.Logger.SendSupportEmailAsync();
-            //}
         }
 
         public async Task RateApplicationAsync()
