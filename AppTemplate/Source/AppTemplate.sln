@@ -11,17 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFramework.Core.Uwp", "Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFramework.UI.Uwp", "AppFramework\AppFramework.UI.Uwp\AppFramework.UI.Uwp.csproj", "{9E167450-FEBB-4F54-8FA9-4954CABD6CE5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{6B25CDC8-41D7-459D-8763-2625074D0567}"
-	ProjectSection(SolutionItems) = preProject
-		Build\AppFramework.nuspec = Build\AppFramework.nuspec
-		Build\Build-NuGet-Package.cmd = Build\Build-NuGet-Package.cmd
-		Build\Build.cmd = Build\Build.cmd
-		C:\Windows\System32\cmd.exe = C:\Windows\System32\cmd.exe
-		Build\Download-NuGet.cmd = Build\Download-NuGet.cmd
-		Build\nuget.exe = Build\nuget.exe
-		Build\VERSION = Build\VERSION
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGetReferenced", "NuGetReferenced", "{05D999C1-BCBF-4CE3-B327-A9B9502180B9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DirectReferenced", "DirectReferenced", "{777AA50C-1715-4F19-98EA-7F3594D58B48}"
@@ -37,6 +26,16 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.BackgroundTasks.Uwp", "NuGetReferened\Contoso.BackgroundTasks\Contoso.BackgroundTasks.Uwp.csproj", "{D4785F25-1C67-4914-B049-6AA70D447212}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.UI.Uwp", "NuGetReferened\Contoso.UI\Contoso.UI.Uwp.csproj", "{545A7CD0-EBF7-4829-BBAA-5318A6B381AF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{A48D194A-6B9B-4D7A-85D0-4F56A1D7B175}"
+	ProjectSection(SolutionItems) = preProject
+		AppFramework\Build\AppFramework.nuspec = AppFramework\Build\AppFramework.nuspec
+		AppFramework\Build\Build-NuGet-Package.cmd = AppFramework\Build\Build-NuGet-Package.cmd
+		AppFramework\Build\Build.cmd = AppFramework\Build\Build.cmd
+		AppFramework\Build\Download-NuGet.cmd = AppFramework\Build\Download-NuGet.cmd
+		AppFramework\Build\nuget.exe = AppFramework\Build\nuget.exe
+		AppFramework\Build\VERSION = AppFramework\Build\VERSION
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -216,5 +215,6 @@ Global
 		{15297ADB-484A-42A5-B537-B220F9CFB6E0} = {05D999C1-BCBF-4CE3-B327-A9B9502180B9}
 		{D4785F25-1C67-4914-B049-6AA70D447212} = {05D999C1-BCBF-4CE3-B327-A9B9502180B9}
 		{545A7CD0-EBF7-4829-BBAA-5318A6B381AF} = {05D999C1-BCBF-4CE3-B327-A9B9502180B9}
+		{A48D194A-6B9B-4D7A-85D0-4F56A1D7B175} = {CB5D60BA-865B-480F-A205-7410FF7925D9}
 	EndGlobalSection
 EndGlobal

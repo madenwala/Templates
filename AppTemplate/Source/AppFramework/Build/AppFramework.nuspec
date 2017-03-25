@@ -44,15 +44,12 @@
 
   <files>
 
-    <!--file target="build\native\AppFramework.targets" src="Build\AppFramework.targets" />
-    <file target="build\uap\AppFramework.targets" src="Build\AppFramework.targets" /-->
-    
     <!-- XAML controls -->
-    <file target="lib\uap10.0\Themes" src="AppFramework.UI.Uwp\Themes\Generic.xaml" />
-    <file target="lib\uap10.0\Themes" src="AppFramework.UI.Uwp\Themes\Generic.xaml" />
+    <file target="lib\uap10.0\ManagedPackage\Themes" src="AppFramework.UI.Uwp\Themes\Generic.xaml" />
     
     <!-- The lib file gets copied as a reference -->
     <file target="lib\uap10.0\"	src="..\Dependencies\FlurryWin8SDK.winmd" />
+    
     <file target="lib\uap10.0\"	src="AppFramework.Core\bin\debug\AppFramework.Core.dll" />
     <file target="runtimes\win10-x64\lib\uap10.0\"	src="AppFramework.Core\bin\debug\AppFramework.Core.dll" />
     <file target="runtimes\win10-x86\lib\uap10.0\"	src="AppFramework.Core\bin\debug\AppFramework.Core.dll" />
@@ -71,27 +68,27 @@
     <!-- intellisense files -->
     <file target="lib\uap10.0\"	src="AppFramework.Core\bin\debug\AppFramework.Core.xml" />
     <file target="runtimes\win10-x64\lib\uap10.0\"	src="AppFramework.Core.Uwp\bin\x64\debug\AppFramework.Core.Uwp.xml" />
-    <file target="runtimes\win10-x64\lib\uap10.0\"	src="AppFramework.UI.Uwp\bin\x64\debug\AppFramework.UI.Uwp.xml" />
     <file target="runtimes\win10-x86\lib\uap10.0\"	src="AppFramework.Core.Uwp\bin\x86\debug\AppFramework.Core.Uwp.xml" />
-    <file target="runtimes\win10-x86\lib\uap10.0\"	src="AppFramework.UI.Uwp\bin\x86\debug\AppFramework.UI.Uwp.xml" />
     <file target="runtimes\win10-arm\lib\uap10.0\"	src="AppFramework.Core.Uwp\bin\ARM\debug\AppFramework.Core.Uwp.xml" />
+    <file target="runtimes\win10-x64\lib\uap10.0\"	src="AppFramework.UI.Uwp\bin\x64\debug\AppFramework.UI.Uwp.xml" />
+    <file target="runtimes\win10-x86\lib\uap10.0\"	src="AppFramework.UI.Uwp\bin\x86\debug\AppFramework.UI.Uwp.xml" />
     <file target="runtimes\win10-arm\lib\uap10.0\"	src="AppFramework.UI.Uwp\bin\ARM\debug\AppFramework.UI.Uwp.xml" />
 
     <!-- pdb files  -->
     <file target="lib\uap10.0\"	src="AppFramework.Core\bin\debug\AppFramework.Core.pdb" />
     <file target="runtimes\win10-x64\lib\uap10.0\"	src="AppFramework.Core.Uwp\bin\x64\debug\AppFramework.Core.Uwp.pdb" />
-    <file target="runtimes\win10-x64\lib\uap10.0\"	src="AppFramework.UI.Uwp\bin\x64\debug\AppFramework.UI.Uwp.pdb" />
     <file target="runtimes\win10-x86\lib\uap10.0\"	src="AppFramework.Core.Uwp\bin\x86\debug\AppFramework.Core.Uwp.pdb" />
-    <file target="runtimes\win10-x86\lib\uap10.0\"	src="AppFramework.UI.Uwp\bin\x86\debug\AppFramework.UI.Uwp.pdb" />
     <file target="runtimes\win10-arm\lib\uap10.0\"	src="AppFramework.Core.Uwp\bin\ARM\debug\AppFramework.Core.Uwp.pdb" />
+    <file target="runtimes\win10-x64\lib\uap10.0\"	src="AppFramework.UI.Uwp\bin\x64\debug\AppFramework.UI.Uwp.pdb" />
+    <file target="runtimes\win10-x86\lib\uap10.0\"	src="AppFramework.UI.Uwp\bin\x86\debug\AppFramework.UI.Uwp.pdb" />
     <file target="runtimes\win10-arm\lib\uap10.0\"	src="AppFramework.UI.Uwp\bin\ARM\debug\AppFramework.UI.Uwp.pdb" />
     
     <!-- pri files  -->
     <file target="runtimes\win10-x64\lib\uap10.0\"	src="AppFramework.Core.Uwp\bin\x64\debug\AppFramework.Core.Uwp.pri" />
-    <file target="runtimes\win10-x64\lib\uap10.0\"	src="AppFramework.UI.Uwp\bin\x64\debug\AppFramework.UI.Uwp.pri" />
     <file target="runtimes\win10-x86\lib\uap10.0\"	src="AppFramework.Core.Uwp\bin\x86\debug\AppFramework.Core.Uwp.pri" />
-    <file target="runtimes\win10-x86\lib\uap10.0\"	src="AppFramework.UI.Uwp\bin\x86\debug\AppFramework.UI.Uwp.pri" />
     <file target="runtimes\win10-arm\lib\uap10.0\"	src="AppFramework.Core.Uwp\bin\ARM\debug\AppFramework.Core.Uwp.pri" />
+    <file target="runtimes\win10-x64\lib\uap10.0\"	src="AppFramework.UI.Uwp\bin\x64\debug\AppFramework.UI.Uwp.pri" />
+    <file target="runtimes\win10-x86\lib\uap10.0\"	src="AppFramework.UI.Uwp\bin\x86\debug\AppFramework.UI.Uwp.pri" />
     <file target="runtimes\win10-arm\lib\uap10.0\"	src="AppFramework.UI.Uwp\bin\ARM\debug\AppFramework.UI.Uwp.pri" />
 
   </files>

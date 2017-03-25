@@ -104,9 +104,153 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <PRIResource Include="..\..\DirectReferenced\Contoso.Core\Strings\en-US\Account.resw">
+      <Link>Strings\en-US\Account.resw</Link>
+      <Generator>ReswFileCodeGenerator</Generator>
+      <LastGenOutput>Account.cs</LastGenOutput>
+      <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
+    </PRIResource>
+    <PRIResource Include="..\..\DirectReferenced\Contoso.Core\Strings\en-US\BackgroundTasks.resw">
+      <Link>Strings\en-US\BackgroundTasks.resw</Link>
+      <Generator>ReswFileCodeGenerator</Generator>
+      <LastGenOutput>BackgroundTasks.cs</LastGenOutput>
+      <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
+    </PRIResource>
+    <PRIResource Include="..\..\DirectReferenced\Contoso.Core\Strings\en-US\Location.resw">
+      <Link>Strings\en-US\Location.resw</Link>
+      <Generator>ReswFileCodeGenerator</Generator>
+      <LastGenOutput>Location.cs</LastGenOutput>
+      <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
+    </PRIResource>
+    <PRIResource Include="..\..\DirectReferenced\Contoso.Core\Strings\en-US\Resources.resw">
+      <Link>Strings\en-US\Resources.resw</Link>
+      <Generator>ReswFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.cs</LastGenOutput>
+      <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
+    </PRIResource>
+    <PRIResource Include="..\..\DirectReferenced\Contoso.Core\Strings\en-US\Search.resw">
+      <Link>Strings\en-US\Search.resw</Link>
+      <Generator>ReswFileCodeGenerator</Generator>
+      <LastGenOutput>Search.cs</LastGenOutput>
+      <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
+    </PRIResource>
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\Data\ClientApi.cs">
+      <Link>Data\ClientApi.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\Data\ClientApiBase.cs">
+      <Link>Data\ClientApiBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\Data\MicrosoftApi.cs">
+      <Link>Data\MicrosoftApi.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\Models\AppSettings.cs">
+      <Link>Models\AppSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\Models\ClientApiModels.cs">
+      <Link>Models\ClientApiModels.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\Models\ItemModel.cs">
+      <Link>Models\ItemModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\Platform.cs">
+      <Link>Platform.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\Services\AppInfoProvider.cs">
+      <Link>Services\AppInfoProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\Services\AuthorizationManager.cs">
+      <Link>Services\AuthorizationManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\Services\BackgroundTasksManager.cs">
+      <Link>Services\BackgroundTasksManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\Services\NavigationManagerBase.cs">
+      <Link>Services\NavigationManagerBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\Services\NotificationsService.cs">
+      <Link>Services\NotificationsService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\Services\SharingManager.cs">
+      <Link>Services\SharingManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\Strings\en-US\Account.cs">
+      <Link>Strings\en-US\Account.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Account.resw</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\Strings\en-US\BackgroundTasks.cs">
+      <Link>Strings\en-US\BackgroundTasks.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BackgroundTasks.resw</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\Strings\en-US\Location.cs">
+      <Link>Strings\en-US\Location.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Location.resw</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\Strings\en-US\Resources.cs">
+      <Link>Strings\en-US\Resources.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resw</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\Strings\en-US\Search.cs">
+      <Link>Strings\en-US\Search.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Search.resw</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\ViewModels\AccountForgotViewModel.cs">
+      <Link>ViewModels\AccountForgotViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\ViewModels\AccountSignInViewModel.cs">
+      <Link>ViewModels\AccountSignInViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\ViewModels\AccountSignUpViewModel.cs">
+      <Link>ViewModels\AccountSignUpViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\ViewModels\DebuggingViewModel.cs">
+      <Link>ViewModels\DebuggingViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\ViewModels\DetailsViewModel.cs">
+      <Link>ViewModels\DetailsViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\ViewModels\GeneralSettingsViewModel.cs">
+      <Link>ViewModels\GeneralSettingsViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\ViewModels\MainViewModel.cs">
+      <Link>ViewModels\MainViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\ViewModels\PrivacyPolicyViewModel.cs">
+      <Link>ViewModels\PrivacyPolicyViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\ViewModels\SearchViewModel.cs">
+      <Link>ViewModels\SearchViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\ViewModels\SettingsViewModel.cs">
+      <Link>ViewModels\SettingsViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\ViewModels\ShellViewModel.cs">
+      <Link>ViewModels\ShellViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\ViewModels\TermsOfServiceViewModel.cs">
+      <Link>ViewModels\TermsOfServiceViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\ViewModels\ViewModelBase.cs">
+      <Link>ViewModels\ViewModelBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\ViewModels\WelcomeViewModel.cs">
+      <Link>ViewModels\WelcomeViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\ViewModels\_NewViewModel.cs">
+      <Link>ViewModels\_NewViewModel.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Contoso.Core.rd.xml" />
   </ItemGroup>

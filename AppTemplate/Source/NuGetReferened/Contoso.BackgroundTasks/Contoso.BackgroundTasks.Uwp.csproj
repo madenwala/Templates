@@ -108,6 +108,9 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\DirectReferenced\Contoso.BackgroundTasks\TimedWorkerTask.cs">
+      <Link>TimedWorkerTask.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
