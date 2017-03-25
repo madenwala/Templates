@@ -1,9 +1,0 @@
-﻿<ResourceDictionary
-    x:Class="Contoso.UI.Resources.DeviceSpecificOverrides" 
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:models="using:Contoso.Core.Models"
-    xmlns:viewmodels="using:Contoso.Core.ViewModels"
-    xmlns:controls="using:AppFramework.UI.Controls">
-    
-</ResourceDictionary>
