@@ -93,9 +93,9 @@
 
     <!--xr files-->
     <file target="lib\uap10.0\AppFramework.UI.Uwp\"	src="AppFramework.UI.Uwp\bin\x86\debug\AppFramework.UI.Uwp.xr.xml" />
-    <!--<file target="runtimes\win10-x64\lib\uap10.0\AppFramework.UI.Uwp\"	src="AppFramework.UI.Uwp\bin\x64\debug\AppFramework.UI.Uwp\AppFramework.UI.Uwp.xr.xml" />
-    <file target="runtimes\win10-x86\lib\uap10.0\AppFramework.UI.Uwp\"	src="AppFramework.UI.Uwp\bin\x86\debug\AppFramework.UI.Uwp\AppFramework.UI.Uwp.xr.xml" />
-    <file target="runtimes\win10-arm\lib\uap10.0\AppFramework.UI.Uwp\"	src="AppFramework.UI.Uwp\bin\ARM\debug\AppFramework.UI.Uwp\AppFramework.UI.Uwp.xr.xml" />-->
+    <file target="runtimes\win10-x64\lib\uap10.0\AppFramework.UI.Uwp\"	src="AppFramework.UI.Uwp\bin\x64\debug\AppFramework.UI.Uwp\AppFramework.UI.Uwp.xr.xml" />
+    <file target="runtimes\win10-x86\lib\uap10.0\AppFramework.UI.Uwp\"	src="AppFramework.UI.Uwp\bin\x86\debug\AppFramework.UI.Uwp.xr.xml" />
+    <file target="runtimes\win10-arm\lib\uap10.0\AppFramework.UI.Uwp\"	src="AppFramework.UI.Uwp\bin\ARM\debug\AppFramework.UI.Uwp.xr.xml" />
     
   </files>
 
