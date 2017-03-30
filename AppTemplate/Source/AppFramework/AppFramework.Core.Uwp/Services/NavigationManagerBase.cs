@@ -96,7 +96,7 @@ namespace AppFramework.Core.Services
             this.Navigate(this.Frame, pageType, parameter);
         }
 
-        protected void Navigate(Frame frame, Type pageType, object parameter = null)
+        protected async void Navigate(Frame frame, Type pageType, object parameter = null)
         {
             if (frame == null)
                 frame = this.Frame;
@@ -107,10 +107,9 @@ namespace AppFramework.Core.Services
                 if (frame.Content?.GetType() == pageType && view != null && object.Equals(view.ViewParameter, parameter))
                 {
                     PlatformBase.Current.ShellMenuClose();
-                    if (frame.DataContext is ViewModelBase)
-                    {
-                        var _ = (frame.DataContext as ViewModelBase).RefreshAsync(false);
-                    }
+                    view.ScrollToTop();
+                    if (frame.DataContext is ViewModelBase vm)
+                        await vm.RefreshAsync(false);
                     return;
                 }
                 frame.Navigate(pageType, this.SerializeParameter(parameter));
