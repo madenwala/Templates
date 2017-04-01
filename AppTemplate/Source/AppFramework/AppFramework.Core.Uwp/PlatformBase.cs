@@ -365,7 +365,7 @@ namespace AppFramework.Core
             this.ViewModel = Activator.CreateInstance(_mainViewModelType) as ViewModelBase;
             this.ShellMenuClose();
         }
-        
+
         #endregion
 
         #region Generate Models
@@ -375,7 +375,39 @@ namespace AppFramework.Core
         /// </summary>
         /// <param name="model">Model to convert into a querystring.</param>
         /// <returns>Query string representing the model provided.</returns>
-        public abstract string GenerateModelArguments(IModel model);
+        public string GenerateModelArguments(IModel model)
+        {
+            if (model == null)
+                return null;
+
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            dic.Add("model", model.GetType().Name);
+
+            // For each model you want to support, you'll add any custom properties 
+            // to the dictionary based on the type of object
+            if (model is IUniqueModel m)
+                dic.Add("ID", m.ID);
+
+            try
+            {
+                this.OnGenerateModelArguments(dic, model);
+            }
+            catch(Exception ex)
+            {
+                this.Logger.LogError(ex, "Error generating querystring with OnGenerateModelArguments implementation.");
+            }
+
+            // Create a querystring from the dictionary collection
+            return GeneralFunctions.CreateQuerystring(dic);
+        }
+
+        /// <summary>
+        /// Creates a querystring parameter string from a model instance.
+        /// </summary>
+        /// <param name="dic">Dictionary of parameters to add to the querystring.</param>
+        /// <param name="model">Model to convert into a querystring.</param>
+        /// <returns>Query string representing the model provided.</returns>
+        protected abstract void OnGenerateModelArguments(Dictionary<string, string> dic, IModel model);
 
         /// <summary>
         /// Generates a unique tile ID used for secondary tiles based on a model instance.

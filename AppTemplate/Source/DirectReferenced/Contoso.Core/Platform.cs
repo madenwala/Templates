@@ -15,17 +15,21 @@ namespace Contoso.Core
 {
     public sealed partial class Platform : PlatformNewBase<MainViewModel, AppSettingsLocal, AppSettingsRoaming>
     {
+        #region Properties
+
+        /// <summary>
+        /// Provides access to application services.
+        /// </summary>
+        public new static Platform Current { get { return PlatformBase.Current as Platform; } private set { PlatformBase.Current = value; } }
+
+        #endregion
+
         #region Constructors
 
         static Platform()
         {
             PlatformBase.Current = new Platform();
         }
-
-        /// <summary>
-        /// Provides access to application services.
-        /// </summary>
-        public new static Platform Current { get { return PlatformBase.Current as Platform; } private set { PlatformBase.Current = value; } }
 
         private Platform()
         {
@@ -76,33 +80,14 @@ namespace Contoso.Core
         /// </summary>
         /// <param name="model">Model to convert into a querystring.</param>
         /// <returns>Query string representing the model provided.</returns>
-        public override string GenerateModelArguments(IModel model)
+        protected override void OnGenerateModelArguments(Dictionary<string, string> dic, IModel model)
         {
-            if (model == null)
-                return null;
-
-            Dictionary<string, string> dic = new Dictionary<string, string>();
-            dic.Add("model", model.GetType().Name);
-
-            // For each model you want to support, you'll add any custom properties 
+            // For each model you support, add any custom properties 
             // to the dictionary based on the type of object
-            if (model is ItemModel)
+            if (model is ItemModel itemModel)
             {
-                var item = model as ItemModel;
-                dic.Add("ID", item.ID.ToString());
+                dic.Add("LineOne", itemModel.LineOne);
             }
-            else if (model is UniqueModelBase)
-            {
-                var item = model as UniqueModelBase;
-                dic.Add("ID", item.ID);
-            }
-            else
-            {
-                return null;
-            }
-
-            // Create a querystring from the dictionary collection
-            return GeneralFunctions.CreateQuerystring(dic);
         }
 
         /// <summary>
