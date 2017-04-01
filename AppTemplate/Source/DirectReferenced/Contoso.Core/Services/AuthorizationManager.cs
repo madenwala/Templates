@@ -59,6 +59,14 @@ namespace Contoso.Core.Services
 
         #endregion
 
+        #region Constructors
+
+        internal AuthorizationManager()
+        {
+        }
+
+        #endregion
+
         #region Methods
 
         /// <summary>
@@ -90,10 +98,9 @@ namespace Contoso.Core.Services
             this.CurrentUser = await Platform.Current.Storage.LoadFileAsync<UserResponse>(CREDENTIAL_USER_KEYNAME, ApplicationData.Current.RoamingFolder, SerializerTypes.Json);
             if (this.CurrentUser != null)
             {
-                var user = this.CurrentUser as UserResponse;
-                user.AccessToken = this.AccessToken;
-                user.RefreshToken = this.RefreshToken;
-                Platform.Current.Analytics.SetUser(user);
+                this.CurrentUser.AccessToken = this.AccessToken;
+                this.CurrentUser.RefreshToken = this.RefreshToken;
+                Platform.Current.Analytics.SetUser(this.CurrentUser);
             }
 
             // Notify any subscribers that authentication status has changed

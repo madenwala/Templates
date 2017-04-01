@@ -20,9 +20,7 @@ namespace Contoso.Core.Services
 {
     public abstract class NavigationManagerBase : AppFramework.Core.Services.NavigationManagerBase
     {
-        public abstract void Item(object parameter);
-
-        #region Search Commands
+        #region Search
 
         public abstract void Search(object parameter = null);
 
@@ -71,6 +69,12 @@ namespace Contoso.Core.Services
         {
             get { return _navigateToAccountForgotCommand ?? (_navigateToAccountForgotCommand = new NavigationCommand("NavigateToAccountForgotCommand", this.AccountForgot)); }
         }
+
+        #endregion
+
+        #region Other
+
+        public abstract void Item(object parameter);
 
         #endregion
     }

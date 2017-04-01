@@ -18,6 +18,16 @@ namespace Contoso.Core.Services
 
         #endregion
 
+        #region Constructors
+
+        internal AppInfoProvider()
+        {
+        }
+
+        #endregion
+
+        #region Methods
+
         #region Add-Ons
 
         private const string PROPACK_FEATURE_NAME = "ProPack";
@@ -58,5 +68,7 @@ namespace Contoso.Core.Services
 
             return this.IsProPackEnabled;
         }
+
+        #endregion
     }
 }
