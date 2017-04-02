@@ -8,7 +8,7 @@ namespace Contoso.Core.Data
     /// <summary>
     /// API access to Microsoft account data.
     /// </summary>
-    public class MicrosoftApi : ClientApiBase
+    internal class MicrosoftApi : ClientApiBase
     {
         #region Variables
 

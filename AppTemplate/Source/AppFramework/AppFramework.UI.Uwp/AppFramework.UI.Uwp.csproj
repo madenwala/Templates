@@ -125,8 +125,6 @@
     <Compile Include="Controls\AdControl.xaml.cs">
       <DependentUpon>AdControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AdSupportedApplicationFrame.cs" />
-    <Compile Include="Controls\ApplicationFrame.cs" />
     <Compile Include="Controls\BodyPanel.cs" />
     <Compile Include="Controls\BodyPanelContainer.cs" />
     <Compile Include="Controls\BusyPanel.cs" />

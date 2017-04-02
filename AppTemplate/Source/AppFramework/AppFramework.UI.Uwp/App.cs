@@ -172,7 +172,7 @@ namespace AppFramework.UI
             }
         }
 
-        protected virtual void CustomizeApplicationUI()
+        private void CustomizeApplicationUI()
         {
             // XBOX
             if (PlatformBase.DeviceFamily == DeviceFamily.Xbox && Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationView"))
@@ -191,6 +191,19 @@ namespace AppFramework.UI
                 StatusBar.GetForCurrentView().BackgroundColor = (Windows.UI.Color)Application.Current.Resources["SystemAccentColor"]; //SystemChromeMediumColor
                 StatusBar.GetForCurrentView().ForegroundColor = (Windows.UI.Color)Application.Current.Resources["SystemAccentForegroundColor"];
             }
+
+            try
+            {
+                this.OnCustomizeApplicationUI();
+            }
+            catch(Exception ex)
+            {
+                PlatformBase.Current.Logger.LogError(ex, "Failed to execute OnCustomizeApplicationUI");
+            }
+        }
+
+        protected virtual void OnCustomizeApplicationUI()
+        {
         }
 
         #endregion

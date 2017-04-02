@@ -395,6 +395,7 @@ namespace AppFramework.Core
             catch(Exception ex)
             {
                 this.Logger.LogError(ex, "Error generating querystring with OnGenerateModelArguments implementation.");
+                throw ex;
             }
 
             // Create a querystring from the dictionary collection
@@ -407,7 +408,9 @@ namespace AppFramework.Core
         /// <param name="dic">Dictionary of parameters to add to the querystring.</param>
         /// <param name="model">Model to convert into a querystring.</param>
         /// <returns>Query string representing the model provided.</returns>
-        protected abstract void OnGenerateModelArguments(Dictionary<string, string> dic, IModel model);
+        protected virtual void OnGenerateModelArguments(Dictionary<string, string> dic, IModel model)
+        {
+        }
 
         /// <summary>
         /// Generates a unique tile ID used for secondary tiles based on a model instance.

@@ -112,6 +112,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Compile Include="ApplicationFrame.cs" />
     <Compile Include="Commands\PinTileCommand.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="GeneralFunctions.cs" />

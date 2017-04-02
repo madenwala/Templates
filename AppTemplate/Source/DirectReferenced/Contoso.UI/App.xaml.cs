@@ -38,12 +38,10 @@ namespace Contoso.UI
 
         #region Methods
 
-        protected override void CustomizeApplicationUI()
+        protected override void OnCustomizeApplicationUI()
         {
             if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationView"))
                 Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().SetPreferredMinSize(new Windows.Foundation.Size(320, 200));
-
-            base.CustomizeApplicationUI();
         }
 
         #endregion

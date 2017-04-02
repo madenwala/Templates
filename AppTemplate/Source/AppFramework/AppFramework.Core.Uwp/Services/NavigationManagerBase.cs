@@ -2,6 +2,7 @@
 using AppFramework.Core.Models;
 using AppFramework.Core.Services;
 using AppFramework.Core.ViewModels;
+using AppFramework.UI.Controls;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -355,7 +356,14 @@ namespace AppFramework.Core.Services
             Window.Current.CoreWindow.PointerPressed += this.CoreWindow_PointerPressed;
         }
 
-        protected abstract Frame CreateFrame();
+        /// <summary>
+        /// Creates an instance of a ApplicationFrame object.
+        /// </summary>
+        /// <returns></returns>
+        protected Frame CreateFrame()
+        {
+            return new ApplicationFrame();
+        }
 
         /// <summary>
         /// Handle activation of the event and any navigation necessary.
@@ -414,13 +422,80 @@ namespace AppFramework.Core.Services
             }
         }
 
-        protected abstract bool OnActivation(LaunchActivatedEventArgs e);
+        /// <summary>
+        /// Handles actions from primary and secondary tiles and jump lists.
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private bool OnActivation(LaunchActivatedEventArgs e)
+        {
+            var handled = this.HandleArgumentsActivation(e.Arguments);
 
-        protected abstract bool OnActivation(ToastNotificationActivatedEventArgs e);
+            if (handled == false && PlatformBase.Current.InitializationMode == InitializationModes.Restore)
+                handled = true;
 
-        protected abstract bool OnActivation(VoiceCommandActivatedEventArgs e);
+            return handled;
+        }
 
-        protected abstract bool OnActivation(ProtocolActivatedEventArgs e);
+        /// <summary>
+        /// Handles activations from toasts activations.
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private bool OnActivation(ToastNotificationActivatedEventArgs e)
+        {
+            return this.HandleArgumentsActivation(e.Argument);
+        }
+
+        /// <summary>
+        /// Handles protocol activation i.e. contoso:4
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private bool OnActivation(ProtocolActivatedEventArgs e)
+        {
+            return this.HandleArgumentsActivation(e.Uri.AbsoluteUri.Replace(PlatformBase.Current.AppInfo.ProtocolPrefix, "").Split(':').Last());
+        }
+
+        /// <summary>
+        /// Handles voice commands from Cortana integration
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private bool OnActivation(VoiceCommandActivatedEventArgs e)
+        {
+            var info = new VoiceCommandInfo(e.Result);
+            return OnVoiceActivation(info);
+        }
+
+        protected virtual bool OnVoiceActivation(VoiceCommandInfo info)
+        {
+            return false;
+        }
+
+        private bool HandleArgumentsActivation(string arguments)
+        {
+            if (string.IsNullOrWhiteSpace(arguments))
+                return false;
+
+            PlatformBase.Current.Logger.Log(LogLevels.Information, "HandleArgumentsActivation: {0}", arguments);
+
+            try
+            {
+                var dic = GeneralFunctions.ParseQuerystring(arguments);
+                return this.OnHandleArgumentsActivation(arguments, dic);
+            }
+            catch (Exception ex)
+            {
+                PlatformBase.Current.Logger.LogError(ex, "Could not parse argument '{0}' passed into app.", arguments);
+                return false;
+            }
+        }
+
+        protected virtual bool OnHandleArgumentsActivation(string arguments, IDictionary<string, string> dic)
+        {
+            return false;
+        }
 
         /// <summary>
         /// Exits an application.

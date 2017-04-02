@@ -1253,12 +1253,46 @@
             Registers the window with all window events.
             </summary>
         </member>
+        <member name="M:AppFramework.Core.Services.NavigationManagerBase.CreateFrame">
+            <summary>
+            Creates an instance of a ApplicationFrame object.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:AppFramework.Core.Services.NavigationManagerBase.HandleActivation(Windows.ApplicationModel.Activation.IActivatedEventArgs,Windows.UI.Xaml.Controls.Frame)">
             <summary>
             Handle activation of the event and any navigation necessary.
             </summary>
             <param name="e">Activation args.</param>
             <param name="rootFrame">Root frame of the app.</param>
+        </member>
+        <member name="M:AppFramework.Core.Services.NavigationManagerBase.OnActivation(Windows.ApplicationModel.Activation.LaunchActivatedEventArgs)">
+            <summary>
+            Handles actions from primary and secondary tiles and jump lists.
+            </summary>
+            <param name="e"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AppFramework.Core.Services.NavigationManagerBase.OnActivation(Windows.ApplicationModel.Activation.ToastNotificationActivatedEventArgs)">
+            <summary>
+            Handles activations from toasts activations.
+            </summary>
+            <param name="e"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AppFramework.Core.Services.NavigationManagerBase.OnActivation(Windows.ApplicationModel.Activation.ProtocolActivatedEventArgs)">
+            <summary>
+            Handles protocol activation i.e. contoso:4
+            </summary>
+            <param name="e"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AppFramework.Core.Services.NavigationManagerBase.OnActivation(Windows.ApplicationModel.Activation.VoiceCommandActivatedEventArgs)">
+            <summary>
+            Handles voice commands from Cortana integration
+            </summary>
+            <param name="e"></param>
+            <returns></returns>
         </member>
         <member name="M:AppFramework.Core.Services.NavigationManagerBase.Exit">
             <summary>

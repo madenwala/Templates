@@ -103,4 +103,16 @@ namespace AppFramework.UI.Controls
 
         #endregion
     }
+    
+    public sealed class AdSupportedApplicationFrame : ApplicationFrame
+    {
+        #region Constructors
+
+        public AdSupportedApplicationFrame()
+        {
+            this.DefaultStyleKey = typeof(AdSupportedApplicationFrame);
+        }
+
+        #endregion
+    }
 }

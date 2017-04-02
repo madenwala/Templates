@@ -1,14 +1,11 @@
-﻿using AppFramework.Core;
-using AppFramework.Core.Models;
+﻿using AppFramework.Core.Models;
 using Contoso.Core;
 using Contoso.Core.Models;
 using Contoso.Core.Services;
 using Contoso.Core.ViewModels;
 using Contoso.UI.Views;
 using System;
-using System.Linq;
-using Windows.ApplicationModel.Activation;
-using Windows.UI.Xaml.Controls;
+using System.Collections.Generic;
 
 namespace Contoso.UI.Services
 {
@@ -17,60 +14,10 @@ namespace Contoso.UI.Services
     /// </summary>
     public sealed class NavigationManager : NavigationManagerBase
     {
-        #region Frame Customizations
-
-        protected override Frame CreateFrame()
-        {
-            return new AppFramework.UI.Controls.ApplicationFrame();
-        }
-
-        #endregion
-
         #region Handle Activation Methods
-
-        /// <summary>
-        /// Handles actions from primary and secondary tiles and jump lists.
-        /// </summary>
-        /// <param name="e"></param>
-        /// <returns></returns>
-        protected override bool OnActivation(LaunchActivatedEventArgs e)
+        
+        protected override bool OnVoiceActivation(VoiceCommandInfo info)
         {
-            var handled = this.HandleArgumentsActivation(e.Arguments);
-
-            if (handled == false && Platform.Current.InitializationMode == InitializationModes.Restore)
-                handled = true;
-
-            return handled;
-        }
-
-        /// <summary>
-        /// Handles activations from toasts activations.
-        /// </summary>
-        /// <param name="e"></param>
-        /// <returns></returns>
-        protected override bool OnActivation(ToastNotificationActivatedEventArgs e)
-        {
-            return this.HandleArgumentsActivation(e.Argument);
-        }
-
-        /// <summary>
-        /// Handles protocol activation i.e. contoso:4
-        /// </summary>
-        /// <param name="e"></param>
-        /// <returns></returns>
-        protected override bool OnActivation(ProtocolActivatedEventArgs e)
-        {
-            return this.HandleArgumentsActivation(e.Uri.AbsoluteUri.Replace(PlatformBase.Current.AppInfo.ProtocolPrefix, "").Split(':').Last());
-        }
-
-        /// <summary>
-        /// Handles voice commands from Cortana integration
-        /// </summary>
-        /// <param name="e"></param>
-        /// <returns></returns>
-        protected override bool OnActivation(VoiceCommandActivatedEventArgs e)
-        {
-            var info = new VoiceCommandInfo(e.Result);
             switch (info.VoiceCommandName)
             {
                 case "showByName":
@@ -81,47 +28,32 @@ namespace Contoso.UI.Services
 
                 default:
                     // If we can't determine what page to launch, go to the default entry point.
-                    return false;
+                    return base.OnVoiceActivation(info);
             }
         }
 
-        private bool HandleArgumentsActivation(string arguments)
+        protected override bool OnHandleArgumentsActivation(string arguments, IDictionary<string, string> dic)
         {
-            if (string.IsNullOrWhiteSpace(arguments))
-                return false;
-
-            Platform.Current.Logger.Log(LogLevels.Information, "HandleArgumentsActivation: {0}", arguments);
-
-            try
+            if (dic.ContainsKey("model"))
             {
-                var dic = GeneralFunctions.ParseQuerystring(arguments);
-
-                if (dic.ContainsKey("model"))
+                if (nameof(ItemModel).Equals(dic["model"], StringComparison.CurrentCultureIgnoreCase))
                 {
-                    if(nameof(ItemModel).Equals(dic["model"], StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        this.Item(dic["ID"]);
-                        return true;
-                    }
-                    throw new NotImplementedException(string.Format("No action implemented for model type ", dic["model"]));
-                }
-                else
-                {
-                    this.Item(arguments.Replace("/", ""));
+                    this.Item(dic["ID"]);
                     return true;
                 }
+                throw new NotImplementedException(string.Format("No action implemented for model type ", dic["model"]));
             }
-            catch (Exception ex)
+            else
             {
-                Platform.Current.Logger.LogError(ex, "Could not parse argument '{0}' passed into app.", arguments);
-                return false;
+                this.Item(arguments.Replace("/", ""));
+                return true;
             }
         }
 
-        #endregion Handle Activation
+        #endregion
 
         #region Navigation Methods
-        
+
         public override void Home(object parameter = null)
         {
             if(Platform.Current.AuthManager.IsAuthenticated() == false)
@@ -210,10 +142,8 @@ namespace Contoso.UI.Services
 
         public override void Phone(object model)
         {
-            if (model is ItemModel)
-            {
-                this.Phone((model as ItemModel).PhoneNumber);
-            }
+            if (model is ItemModel item)
+                this.Phone(item.PhoneNumber);
         }
 
         public override void PrivacyPolicy(object parameter = null)

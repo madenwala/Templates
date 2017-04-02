@@ -18,7 +18,7 @@ namespace Contoso.Core
         public new AuthorizationManager AuthManager
         {
             get { return GetService<AuthorizationManager>(); }
-            private set { SetService(value); }
+            protected set { SetService(value); }
         }
     }
 }
