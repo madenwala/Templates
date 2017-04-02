@@ -163,6 +163,9 @@ namespace Contoso.Core.ViewModels
         {
             try
             {
+                if (this.Platform.BackgroundTasks == null)
+                    return;
+
                 var allowed = this.Platform.BackgroundTasks.CheckIfAllowed();
 
                 this.BackgroundTasksStatus = !allowed ? BackgroundTasks.TextBackgroundAppDisabledStatus : string.Empty;

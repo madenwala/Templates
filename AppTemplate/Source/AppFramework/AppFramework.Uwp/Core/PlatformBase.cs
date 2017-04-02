@@ -193,7 +193,7 @@ namespace AppFramework.Core
             this.Logger.Log(LogLevels.Debug, "Initializing services is complete!");
 
             // Register all background agents
-            if (mode != InitializationModes.Background)
+            if (mode != InitializationModes.Background && this.BackgroundTasks != null)
                 this.BackgroundRegistrationTask = this.BackgroundTasks.RegisterAllAsync();
 
             if (this.ViewModel == null)
@@ -334,7 +334,7 @@ namespace AppFramework.Core
         /// </summary>
         /// <param name="e"></param>
         /// <returns>True if the exception was handled else false.</returns>
-        public bool AppUnhandledException(Exception e)
+        internal bool AppUnhandledException(Exception e)
         {
             if (Debugger.IsAttached)
             {

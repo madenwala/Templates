@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{65F2272C-D17A-45BE-982A-C6637407657A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AppFramework.Uwp</RootNamespace>
+    <AssemblyName>AppFramework.Uwp</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\AppFramework.Uwp.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\AppFramework.Uwp.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <DocumentationFile>bin\x86\Debug\AppFramework.Uwp.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <DocumentationFile>bin\x86\Release\AppFramework.Uwp.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <DocumentationFile>bin\ARM\Debug\AppFramework.Uwp.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <DocumentationFile>bin\ARM\Release\AppFramework.Uwp.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <DocumentationFile>bin\x64\Debug\AppFramework.Uwp.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <DocumentationFile>bin\x64\Release\AppFramework.Uwp.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <PRIResource Include="Core\Strings\en-US\WebBrowser.resw">
+      <Generator>ReswFileCodeGenerator</Generator>
+      <LastGenOutput>WebBrowser.cs</LastGenOutput>
+      <CustomToolNamespace>AppFramework.Core.Strings</CustomToolNamespace>
+    </PRIResource>
+    <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\AgentSync.cs" />
+    <Compile Include="UI\Controls\ApplicationFrame.cs" />
+    <Compile Include="Core\Commands\GenericCommand.cs" />
+    <Compile Include="Core\Commands\MapCommands.cs" />
+    <Compile Include="Core\Commands\NavigationCommand.cs" />
+    <Compile Include="Core\Commands\PinTileCommand.cs" />
+    <Compile Include="Core\Commands\ShareCommand.cs" />
+    <Compile Include="Core\Commands\WebBrowserCommand.cs" />
+    <Compile Include="Core\Enums.cs" />
+    <Compile Include="Core\Extensions\FrameExtensions.cs" />
+    <Compile Include="Core\Extensions\GeocoordinateExtensions.cs" />
+    <Compile Include="Core\Extensions\ObjectExtensions.cs" />
+    <Compile Include="Core\Extensions\PackageVersionExtensions.cs" />
+    <Compile Include="Core\GeneralFunctions.cs" />
+    <Compile Include="Core\Models\AppSettings.cs" />
+    <Compile Include="Core\Models\BackgroundTaskRunInfo.cs" />
+    <Compile Include="Core\Models\CustomExceptions.cs" />
+    <Compile Include="Core\Models\LocationModelBase.cs" />
+    <Compile Include="Core\Models\LocationModelList.cs" />
+    <Compile Include="Core\Models\ModelLists.cs" />
+    <Compile Include="Core\Models\NotifyTaskCompletion.cs" />
+    <Compile Include="Core\Models\UniqueLocationModelBase.cs" />
+    <Compile Include="Core\Models\VoiceCommandInfo.cs" />
+    <Compile Include="Core\PlatformBase.cs" />
+    <Compile Include="Core\Services\AnalyticsServiceBase.cs" />
+    <Compile Include="Core\Services\Analytics\FlurryAnalyticsService.cs" />
+    <Compile Include="Core\Services\Analytics\GoogleAnalyticsService.cs" />
+    <Compile Include="Core\Services\Analytics\HockeyAppService.cs" />
+    <Compile Include="Core\Services\AppInfoProviderBase.cs" />
+    <Compile Include="Core\Services\AuthorizationManagerBase.cs" />
+    <Compile Include="Core\Services\BackgroundTasksManager.cs" />
+    <Compile Include="Core\Services\CryptographyProvider.cs" />
+    <Compile Include="Core\Services\EmailProvider.cs" />
+    <Compile Include="Core\Services\GeocodingService.cs" />
+    <Compile Include="Core\Services\GeolocationService.cs" />
+    <Compile Include="Core\Services\JumpListManager.cs" />
+    <Compile Include="Core\Services\LoggingService.cs" />
+    <Compile Include="Core\Services\NavigationManagerBase.cs" />
+    <Compile Include="Core\Services\NotificationsManagerBase.cs" />
+    <Compile Include="Core\Services\RatingsManager.cs" />
+    <Compile Include="Core\Services\ServiceBase.cs" />
+    <Compile Include="Core\Services\SharingManagerBase.cs" />
+    <Compile Include="Core\Services\StorageManagerBase.cs" />
+    <Compile Include="Core\Services\VoiceCommandManager.cs" />
+    <Compile Include="Core\Services\WebAccountManager.cs" />
+    <Compile Include="Core\Strings\Account.cs" />
+    <Compile Include="Core\Strings\en-US\WebBrowser.cs">
+      <DependentUpon>WebBrowser.resw</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Core\Strings\Location.cs" />
+    <Compile Include="Core\Strings\Resources.cs" />
+    <Compile Include="Core\ViewModels\CollectionViewModelBase.cs" />
+    <Compile Include="Core\ViewModels\IViewModel.cs" />
+    <Compile Include="Core\ViewModels\ViewModelBase.cs" />
+    <Compile Include="Core\ViewModels\WebBrowserViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\App.cs" />
+    <Compile Include="UI\Behaviors\EnterKeyBehavior.cs" />
+    <Compile Include="UI\Behaviors\FocusOnLoadBehavior.cs" />
+    <Compile Include="UI\Behaviors\GameControllerListViewViewFocusBehavior.cs" />
+    <Compile Include="UI\Behaviors\ListViewCommandBehavior.cs" />
+    <Compile Include="UI\Controls\AdaptiveDataView.cs" />
+    <Compile Include="UI\Controls\AdControl.xaml.cs">
+      <DependentUpon>AdControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\BodyPanel.cs" />
+    <Compile Include="UI\Controls\BodyPanelContainer.cs" />
+    <Compile Include="UI\Controls\BusyPanel.cs" />
+    <Compile Include="UI\Controls\ContentControlBase.cs" />
+    <Compile Include="UI\Controls\MyControl.cs" />
+    <Compile Include="UI\Controls\Pivot.cs" />
+    <Compile Include="UI\Controls\PullToRefreshListView.cs" />
+    <Compile Include="UI\Controls\ScrollToTopHelper.cs" />
+    <Compile Include="UI\Controls\SplitViewButton.cs" />
+    <Compile Include="UI\Controls\TaskPanel.cs" />
+    <Compile Include="UI\Controls\UserControlBase.cs" />
+    <Compile Include="UI\Controls\ViewControlBase.cs" />
+    <Compile Include="UI\Controls\WebViewPanel.xaml.cs">
+      <DependentUpon>WebViewPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\WrapPanel.cs" />
+    <Compile Include="UI\Converters\BooleanToObjectConverter.cs" />
+    <Compile Include="UI\Converters\ColorToBrushConverter.cs" />
+    <Compile Include="UI\Converters\StringCasingConverter.cs" />
+    <Compile Include="UI\Converters\StringFormatConverter.cs" />
+    <Compile Include="UI\Converters\ValueMatchToBooleanConverter.cs" />
+    <Compile Include="UI\Converters\ValueMatchToVisibilityConverter.cs" />
+    <Compile Include="UI\Converters\ValueToBooleanConverter.cs" />
+    <Compile Include="UI\Converters\ValueToBrushConverter.cs" />
+    <Compile Include="UI\Converters\ValueToDoubleConverter.cs" />
+    <Compile Include="UI\Converters\ValueToOpacityConverter.cs" />
+    <Compile Include="UI\Converters\ValueToStyleConverter.cs" />
+    <Compile Include="UI\Converters\ValueToThicknessConverter.cs" />
+    <Compile Include="UI\Converters\ValueToVisibilityConverter.cs" />
+    <Compile Include="UI\Extensions\AdaptiveGridViewExtensions.cs" />
+    <Compile Include="UI\Extensions\DependencyObjectExtensions.cs" />
+    <Compile Include="UI\Extensions\ListViewBaseExtensions.cs" />
+    <Compile Include="UI\Extensions\ScrollViewerExtensions.cs" />
+    <Compile Include="UI\Extensions\SizeExtensions.cs" />
+    <Compile Include="UI\Resources\Common.xaml.cs">
+      <DependentUpon>Common.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SuspensionManager.cs" />
+    <Compile Include="UI\Triggers\ContinuumMobileAvailableTrigger.cs" />
+    <Compile Include="UI\Triggers\ContinuumMobileExecutingTrigger.cs" />
+    <Compile Include="UI\Triggers\DeviceFamilyTrigger.cs" />
+    <Compile Include="UI\Triggers\NotDeviceFamilyTrigger.cs" />
+    <Compile Include="UI\Triggers\SplitViewTrigger.cs" />
+    <Compile Include="UI\Triggers\TabletModeTrigger.cs" />
+    <Compile Include="UI\Views\ViewBase.cs" />
+    <EmbeddedResource Include="Properties\AppFramework.Uwp.rd.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="UI\Controls\AdControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Controls\WebViewPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Resources\Common.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AppFramework\AppFramework.csproj">
+      <Project>{9f2d031a-595c-4c7d-b92c-686785b1c837}</Project>
+      <Name>AppFramework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="FlurryWin8SDK">
+      <HintPath>..\..\Dependencies\FlurryWin8SDK.winmd</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="Microsoft.Advertising.Xaml, Version=10.0">
+      <Name>Microsoft Advertising SDK for XAML</Name>
+    </SDKReference>
+    <SDKReference Include="Microsoft.Services.Store.Engagement, Version=10.0">
+      <Name>Microsoft Engagement Framework</Name>
+    </SDKReference>
+    <SDKReference Include="Microsoft.VCLibs, Version=14.0">
+      <Name>Visual C++ 2015 Runtime for Universal Windows Platform Apps</Name>
+    </SDKReference>
+    <SDKReference Include="WindowsMobile, Version=10.0.10240.0">
+      <Name>Windows Mobile Extensions for the UWP</Name>
+    </SDKReference>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
