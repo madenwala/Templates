@@ -165,7 +165,7 @@ namespace AppFramework.Core
         /// </summary>
         /// <param name="mode">Specifies the mode of this app instance and how it's executing.</param>
         /// <returns>Awaitable task is returned.</returns>
-        public virtual async Task AppInitializingAsync(InitializationModes mode)
+        public async Task AppInitializingAsync(InitializationModes mode)
         {
             this.InitializationMode = mode;
             this.Logger.Log(LogLevels.Warning, "APP INITIALIZING - Initialization mode is {0}", this.InitializationMode);
@@ -207,6 +207,21 @@ namespace AppFramework.Core
                 // Check to see if the user should be prompted to rate the application
                 await this.Ratings.CheckForRatingsPromptAsync(this.ViewModel);
             }
+
+            try
+            {
+                await this.OnAppInitializingAsync(mode);
+            }
+            catch(Exception ex)
+            {
+                this.Logger.LogError(ex, "Error while excuting OnAppInitializingAsync");
+                throw ex;
+            }
+        }
+
+        protected virtual Task OnAppInitializingAsync(InitializationModes mode)
+        {
+            return Task.CompletedTask;
         }
 
         internal abstract void AppSettingsInitializing();
@@ -216,10 +231,28 @@ namespace AppFramework.Core
         /// </summary>
         public virtual void AppSuspending()
         {
+            // TODO dont make this method virtual 
+
             this.Logger.Log(LogLevels.Warning, "APP SUSPENDING - Initialization mode was {0}", this.InitializationMode);
 
-            // Save app settings
-            this.SaveSettings();
+            try
+            {
+                this.OnAppSuspending();
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex, "Error while excuting OnAppSuspending");
+                throw ex;
+            }
+            finally
+            {
+                // Save app settings
+                this.SaveSettings();
+            }
+        }
+
+        protected virtual void OnAppSuspending()
+        {
         }
 
         /// <summary>
@@ -337,7 +370,7 @@ namespace AppFramework.Core
         /// Logic performed during sign out of a user in this application.
         /// </summary>
         /// <returns>Awaitable task is returned.</returns>
-        public async Task SignoutAllAsync()
+        internal async Task SignoutAllAsync()
         {
             var services = _services.Values.Where(w => w is IServiceSignout);
             var list = new List<Task>();
@@ -521,13 +554,13 @@ namespace AppFramework.Core
         {
             if (_settingsIsLocalDataDirty || forceSave)
             {
-                this.Storage.SaveSetting("AppSettingsLocal", this.AppSettingsLocal, ApplicationData.Current.LocalSettings);
+                this.Storage.SaveSetting(nameof(AppSettingsLocal), this.AppSettingsLocal, ApplicationData.Current.LocalSettings);
                 _settingsIsLocalDataDirty = false;
             }
 
             if (_settingsIsRoamingDataDirty || forceSave)
             {
-                this.Storage.SaveSetting("AppSettingsRoaming", this.AppSettingsRoaming, ApplicationData.Current.RoamingSettings);
+                this.Storage.SaveSetting(nameof(AppSettingsRoaming), this.AppSettingsRoaming, ApplicationData.Current.RoamingSettings);
                 _settingsIsRoamingDataDirty = false;
             }
         }

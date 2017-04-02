@@ -50,25 +50,20 @@ namespace Contoso.Core
         /// </summary>
         /// <param name="mode">Mode indicates how this app instance is being run.</param>
         /// <returns>Awaitable task is returned.</returns>
-        public override async Task AppInitializingAsync(InitializationModes mode)
+        protected override Task OnAppInitializingAsync(InitializationModes mode)
         {
-            // Call to base.AppInitializing is required to be executed first so all adapters and the framework are properly initialized
-            await base.AppInitializingAsync(mode);
-
-            // Your custom app logic which you want to always run at suspend of
+            // Your custom app logic which you want to run on launch of
             // your app should be placed here.
+            return Task.CompletedTask;
         }
 
         /// <summary>
         /// Logic performed during suspend of the application.
         /// </summary>
-        public override void AppSuspending()
+        protected override void OnAppSuspending()
         {
-            // Your custom app logic which you want to always run at suspend of
+            // Your custom app logic which you want to run on suspend of
             // your app should be placed here.
-
-            // Call to base.AppSuspending is required to be executed last so all adapters and the framework are properly shutdown or saved
-            base.AppSuspending();
         }
 
         #endregion
@@ -150,8 +145,6 @@ namespace Contoso.Core
         {
             try
             {
-                // TOOD BG sample code needs to be enabled
-
                 // Perform work that needs to be done on a background task/agent...
                 if (this.AuthManager.IsAuthenticated() == false)
                     return;
