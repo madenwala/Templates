@@ -14,7 +14,7 @@ namespace AppFramework.Core
         public AuthorizationManagerBase AuthManager
         {
             get { return GetService<AuthorizationManagerBase>(); }
-            protected set { SetService(value); }
+            set { SetService(value); }
         }
     }
 }
@@ -25,6 +25,9 @@ namespace AppFramework.Core.Services
     {
         #region Events
 
+        /// <summary>
+        /// Event used to notify subscribed objects of when a user logs in or out.
+        /// </summary>
         public event EventHandler<bool> UserAuthenticatedStatusChanged;
 
         #endregion
@@ -32,6 +35,9 @@ namespace AppFramework.Core.Services
         #region Properties
 
         private IUserInformation _currentUser;
+        /// <summary>
+        /// Gets or sets the current user object representing a logged in user.
+        /// </summary>
         public IUserInformation CurrentUser
         {
             get { return _currentUser; }
@@ -67,11 +73,13 @@ namespace AppFramework.Core.Services
         /// </summary>
         /// <returns>Awaitable task is returned.</returns>
         public abstract Task SignoutAsync();
-        
-        protected internal virtual Task<IUserInformation> GetRefreshAccessToken(CancellationToken ct)
-        {
-            return Task.FromResult<IUserInformation>(null);
-        }
+
+        /// <summary>
+        /// Gets a refresh token on launches of this app if the user was previously authenticated.
+        /// </summary>
+        /// <param name="ct">Cancellation token.</param>
+        /// <returns>User object representing the logged in user.</returns>
+        protected internal abstract Task<IUserInformation> GetRefreshAccessToken(CancellationToken ct);
 
         #endregion
     }

@@ -170,7 +170,7 @@ namespace AppFramework.Core
             this.InitializationMode = mode;
             this.Logger.Log(LogLevels.Warning, "APP INITIALIZING - Initialization mode is {0}", this.InitializationMode);
 
-            this.AppSettingsInitializing();
+            this.OnAppSettingsInitializing();
 
             // Initializes all service
             foreach (var service in _services)
@@ -224,7 +224,7 @@ namespace AppFramework.Core
             return Task.CompletedTask;
         }
 
-        internal abstract void AppSettingsInitializing();
+        internal abstract void OnAppSettingsInitializing();
 
         /// <summary>
         /// Global suspension of the app and any custom logic to execute on suspend of the app.
@@ -507,7 +507,7 @@ namespace AppFramework.Core
         {
         }
 
-        internal override void AppSettingsInitializing()
+        internal override void OnAppSettingsInitializing()
         {
             if (this.AppSettingsLocal == null)
             {
