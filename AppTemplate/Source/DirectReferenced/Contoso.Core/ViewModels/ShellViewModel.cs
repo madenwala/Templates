@@ -16,7 +16,7 @@ namespace Contoso.Core.ViewModels
         {
             get
             {
-                if (this.Platform.AuthManager.IsAuthenticated())
+                if (this.Platform.AuthManager?.IsAuthenticated() == true)
                     return string.Format(Account.TextWelcomeAuthenticated, this.Platform.AuthManager.CurrentUser?.DisplayName);
                 else
                     return Account.TextWelcomeUnauthenticated;

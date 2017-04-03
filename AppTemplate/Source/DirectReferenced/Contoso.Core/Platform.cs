@@ -146,7 +146,7 @@ namespace Contoso.Core
             try
             {
                 // Perform work that needs to be done on a background task/agent...
-                if (this.AuthManager.IsAuthenticated() == false)
+                if (this.AuthManager?.IsAuthenticated() != true)
                     return;
 
                 // SAMPLE - Load data from your API, do any background work here.

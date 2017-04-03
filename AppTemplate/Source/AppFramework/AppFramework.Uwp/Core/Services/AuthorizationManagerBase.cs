@@ -38,7 +38,7 @@ namespace AppFramework.Core.Services
         /// <summary>
         /// Gets or sets the current user object representing a logged in user.
         /// </summary>
-        public IUserInformation CurrentUser
+        public virtual IUserInformation CurrentUser
         {
             get { return _currentUser; }
             protected set { this.SetProperty(ref _currentUser, value); }

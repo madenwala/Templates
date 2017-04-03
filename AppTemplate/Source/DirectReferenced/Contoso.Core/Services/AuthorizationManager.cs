@@ -37,10 +37,19 @@ namespace Contoso.Core.Services
 
         #region Properties
         
-        public new UserResponse CurrentUser
+        public UserResponse CurrentUserData
         {
             get { return base.CurrentUser as UserResponse; }
-            private set { base.CurrentUser = value; }
+        }
+
+        public override IUserInformation CurrentUser
+        {
+            get => base.CurrentUser;
+            protected set
+            {
+                base.CurrentUser = value;
+                this.NotifyPropertyChanged(() => this.CurrentUserData);
+            }
         }
 
         private string _AccessToken;
@@ -98,8 +107,8 @@ namespace Contoso.Core.Services
             this.CurrentUser = await Platform.Current.Storage.LoadFileAsync<UserResponse>(CREDENTIAL_USER_KEYNAME, ApplicationData.Current.RoamingFolder, SerializerTypes.Json);
             if (this.CurrentUser != null)
             {
-                this.CurrentUser.AccessToken = this.AccessToken;
-                this.CurrentUser.RefreshToken = this.RefreshToken;
+                this.CurrentUserData.AccessToken = this.AccessToken;
+                this.CurrentUserData.RefreshToken = this.RefreshToken;
                 Platform.Current.Analytics.SetUser(this.CurrentUser);
             }
 
@@ -163,7 +172,7 @@ namespace Contoso.Core.Services
             {
                 using (ClientApi api = new ClientApi(true))
                 {
-                    return await api.AuthenticateAsync(this.CurrentUser.AccessToken, ct);
+                    return await api.AuthenticateAsync(this.CurrentUserData.AccessToken, ct);
                 }
             }
             catch (Exception ex)

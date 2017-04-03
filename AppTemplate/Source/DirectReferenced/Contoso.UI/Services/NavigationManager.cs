@@ -56,7 +56,7 @@ namespace Contoso.UI.Services
 
         public override void Home(object parameter = null)
         {
-            if(Platform.Current.AuthManager.IsAuthenticated() == false)
+            if(Platform.Current.AuthManager?.IsAuthenticated() != true)
             {
                 this.Navigate(this.ParentFrame, typeof(WelcomeView), parameter);
                 this.ClearBackstack();
