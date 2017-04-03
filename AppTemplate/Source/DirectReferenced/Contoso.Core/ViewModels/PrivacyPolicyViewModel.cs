@@ -29,7 +29,7 @@ namespace Contoso.Core.ViewModels
 
         #region Methods
 
-        public override void InitialNavigation()
+        protected override void InitialNavigation()
         {
             this.NavigateTo("http://go.microsoft.com/fwlink/?LinkId=521839");
         }

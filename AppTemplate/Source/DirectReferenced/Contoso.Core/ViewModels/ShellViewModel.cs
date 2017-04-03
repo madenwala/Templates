@@ -61,7 +61,7 @@ namespace Contoso.Core.ViewModels
             return base.OnLoadStateAsync(e);
         }
 
-        public override void OnHandleKeyUp(KeyRoutedEventArgs e)
+        protected override void OnHandleKeyUp(KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.GamepadMenu || e.Key == Windows.System.VirtualKey.Home)
             {

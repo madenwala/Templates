@@ -59,7 +59,7 @@ namespace AppFramework.Core
         /// </summary>
         /// <param name="querystring">Query string to parse.</param>
         /// <returns>Dictionary of key value pairs found within the query string.</returns>
-        public static IDictionary<string, string> ParseQuerystring(string querystring)
+        internal static IDictionary<string, string> ParseQuerystring(string querystring)
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();
             if (!string.IsNullOrWhiteSpace(querystring))
@@ -76,7 +76,7 @@ namespace AppFramework.Core
         /// </summary>
         /// <param name="parameters">Key/value pairs of parameters.</param>
         /// <returns>Query string from all the key/value pair data supplied in the dictionary.</returns>
-        public static string CreateQuerystring(IDictionary<string, string> parameters)
+        internal static string CreateQuerystring(IDictionary<string, string> parameters)
         {
             if (parameters == null || parameters.Count == 0)
                 return null;
@@ -95,14 +95,14 @@ namespace AppFramework.Core
         /// <param name="key">Value representing the unique key</param>
         /// <param name="value">Value belonging to the key</param>
         /// <returns>Dictionary object instance.</returns>
-        public static Dictionary<T, S> CreateDictionary<T, S>(T key, S value)
+        internal static Dictionary<T, S> CreateDictionary<T, S>(T key, S value)
         {
             var dic = new Dictionary<T, S>();
             dic.Add(key, value);
             return dic;
         }
 
-        public static string ConvertPhoneLettersToNumbers(string phone)
+        internal static string ConvertPhoneLettersToNumbers(string phone)
         {
             try
             {

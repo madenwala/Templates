@@ -108,6 +108,10 @@ namespace AppFramework.Core.Services
             }
         }
 
+        /// <summary>
+        /// Takes the user to the rate application dialog.
+        /// </summary>
+        /// <returns></returns>
         public async Task RateApplicationAsync()
         {
             PlatformBase.Current.Analytics.Event("RateApplication");

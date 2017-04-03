@@ -1,6 +1,6 @@
 ﻿using Windows.Foundation;
 
-public static class SizeExtensions
+internal static class SizeExtensions
 {
     public static Size ByFactorUniform(this Size size, double factor)
     {

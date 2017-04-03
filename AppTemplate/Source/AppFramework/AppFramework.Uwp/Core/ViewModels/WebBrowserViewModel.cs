@@ -1,6 +1,5 @@
 ﻿using AppFramework.Core.Commands;
 using AppFramework.Core.Models;
-using AppFramework.Core.Services;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -132,7 +131,7 @@ namespace AppFramework.Core.ViewModels
         /// <summary>
         /// Initial page that should be navigated on launch of the application. 
         /// </summary>
-        public virtual void InitialNavigation()
+        protected internal virtual void InitialNavigation()
         {
             if (this.ViewParameter is string)
                 this.NavigateTo(this.ViewParameter.ToString());
@@ -175,7 +174,7 @@ namespace AppFramework.Core.ViewModels
         /// </summary>
         /// <param name="uri"></param>
         /// <returns></returns>
-        public bool Navigating(Uri uri)
+        internal bool Navigating(Uri uri)
         {
             this.HasNavigationFailed = false;
             this.ShowBusyStatus(Strings.Resources.TextLoading);
@@ -192,7 +191,7 @@ namespace AppFramework.Core.ViewModels
         /// </summary>
         /// <param name="uri"></param>
         /// <param name="title"></param>
-        public void Navigated(Uri uri, string title = null)
+        internal void Navigated(Uri uri, string title = null)
         {
             this.Title = title ?? Strings.Resources.TextNotApplicable;
             this.ClearStatus();
@@ -215,7 +214,7 @@ namespace AppFramework.Core.ViewModels
         /// <param name="uri"></param>
         /// <param name="exception"></param>
         /// <param name="title"></param>
-        public void NavigationFailed(Uri uri, Exception exception, string title = null)
+        internal void NavigationFailed(Uri uri, Exception exception, string title = null)
         {
             this.HasNavigationFailed = true;
             this.ClearStatus();
@@ -233,7 +232,7 @@ namespace AppFramework.Core.ViewModels
         /// </summary>
         /// <param name="canGoBack"></param>
         /// <param name="canGoForward"></param>
-        public void SetBrowserFunctions(Func<bool> canGoBack, Func<bool> canGoForward)
+        internal void SetBrowserFunctions(Func<bool> canGoBack, Func<bool> canGoForward)
         {
             if (canGoBack != null) this.BrowserCanGoBack = canGoBack;
             if (canGoForward != null) this.BrowserCanGoForward = canGoForward;
@@ -242,7 +241,7 @@ namespace AppFramework.Core.ViewModels
         /// <summary>
         /// Refreshes the web browser.
         /// </summary>
-        public void BrowserRefresh()
+        protected void BrowserRefresh()
         {
             this.RefreshRequested?.Invoke(this.BrowserInstance, new EventArgs());
         }
@@ -250,7 +249,7 @@ namespace AppFramework.Core.ViewModels
         /// <summary>
         /// Navigates the web browser backwards.
         /// </summary>
-        public void BrowserGoBack()
+        protected void BrowserGoBack()
         {
             this.GoBackwardsRequested?.Invoke(this.BrowserInstance, new EventArgs());
         }
@@ -258,7 +257,7 @@ namespace AppFramework.Core.ViewModels
         /// <summary>
         /// Navigates the web browser forward.
         /// </summary>
-        public void BrowserGoForward()
+        protected internal void BrowserGoForward()
         {
             this.GoForwardRequested?.Invoke(this.BrowserInstance, new EventArgs());
         }
@@ -266,7 +265,7 @@ namespace AppFramework.Core.ViewModels
         /// <summary>
         /// Navigates the web browser to the home page.
         /// </summary>
-        public void BrowserGoHome()
+        protected void BrowserGoHome()
         {
             this.GoHomeRequested?.Invoke(this.BrowserInstance, new EventArgs());
         }
@@ -275,7 +274,7 @@ namespace AppFramework.Core.ViewModels
         /// Navigate to a specific web page.
         /// </summary>
         /// <param name="url">URL to navigate to.</param>
-        public void NavigateTo(string url)
+        protected void NavigateTo(string url)
         {
             if (!string.IsNullOrEmpty(url))
                 this.NavigateToRequested?.Invoke(this.BrowserInstance, url);

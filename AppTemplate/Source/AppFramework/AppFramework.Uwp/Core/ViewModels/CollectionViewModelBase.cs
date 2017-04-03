@@ -151,7 +151,7 @@ namespace AppFramework.Core.ViewModels
             return this.CurrentViewModel?.OnForwardNavigationRequested() ?? base.OnForwardNavigationRequested();
         }
 
-        protected internal override void ViewScrollToTop()
+        internal override void ViewScrollToTop()
         {
             foreach (var vm in this.ViewModels)
                 if (vm != null && vm.IsInitialized)
@@ -166,13 +166,13 @@ namespace AppFramework.Core.ViewModels
             base.CancelStatus();
         }
 
-        public override void OnHandleKeyDown(KeyRoutedEventArgs e)
+        protected internal override void OnHandleKeyDown(KeyRoutedEventArgs e)
         {
             this.CurrentViewModel?.OnHandleKeyDown(e);
             base.OnHandleKeyDown(e);
         }
 
-        public override void OnHandleKeyUp(KeyRoutedEventArgs e)
+        protected internal override void OnHandleKeyUp(KeyRoutedEventArgs e)
         {
             this.CurrentViewModel?.OnHandleKeyUp(e);
             base.OnHandleKeyUp(e);

@@ -1,5 +1,4 @@
 ﻿using Contoso.Core.Strings;
-using AppFramework.Core.ViewModels;
 using Windows.ApplicationModel;
 
 namespace Contoso.Core.ViewModels
@@ -30,7 +29,7 @@ namespace Contoso.Core.ViewModels
 
         #region Methods
 
-        public override void InitialNavigation()
+        protected override void InitialNavigation()
         {
             this.NavigateTo("http://go.microsoft.com/fwlink/?LinkID=206977");
         }

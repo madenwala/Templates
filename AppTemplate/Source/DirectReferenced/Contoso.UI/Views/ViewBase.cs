@@ -1,8 +1,6 @@
-﻿using AppFramework.Core.ViewModels;
-
-namespace Contoso.UI.Views
+﻿namespace Contoso.UI.Views
 {
-    public abstract class ViewBase<TViewModel> : AppFramework.UI.Views.ViewBase<TViewModel> where TViewModel : IViewModel
+    public abstract class ViewBase<TViewModel> : AppFramework.UI.Views.ViewBase<TViewModel> where TViewModel : AppFramework.Core.ViewModels.ViewModelBase
     {
     }
 }

@@ -134,7 +134,7 @@ namespace Contoso.Core.ViewModels
             return base.OnRefreshAsync(forceRefresh, ct);
         }
 
-        public override void OnApplicationResuming()
+        protected override void OnApplicationResuming()
         {
             this.View_GotFocus(null, null);
             base.OnApplicationResuming();

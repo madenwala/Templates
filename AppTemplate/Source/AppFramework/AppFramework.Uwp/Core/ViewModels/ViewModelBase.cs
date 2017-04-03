@@ -98,7 +98,7 @@ namespace AppFramework.Core.ViewModels
         /// <summary>
         /// Gets a boolean indicating whether or not the view instance is in a child frame of the window.
         /// </summary>
-        public bool IsViewInChildFrame
+        protected bool IsViewInChildFrame
         {
             get { return this.PlatformBase.NavigationBase.IsChildFramePresent; }
         }
@@ -184,7 +184,7 @@ namespace AppFramework.Core.ViewModels
         /// <param name="view">View that is being shown.</param>
         /// <param name="e">Arguments containing navigation and page state data.</param>
         /// <returns>Awaitable task is returned.</returns>
-        public async Task LoadStateAsync(Page view, LoadStateEventArgs e)
+        internal async Task LoadStateAsync(Page view, LoadStateEventArgs e)
         {
             // Full screen on Xbox
             if (PlatformBase.DeviceFamily == DeviceFamily.Xbox && Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().IsFullScreenMode == false)
@@ -251,7 +251,6 @@ namespace AppFramework.Core.ViewModels
         /// Inherited view model instances perform any load state logic.
         /// </summary>
         /// <param name="e">Event args with all navigation data.</param>
-        /// <param name="isFirstRun">True if this is the first execution of the view/viewmodel</param>
         /// <returns>Awaitable task is returned.</returns>
         protected virtual Task OnLoadStateAsync(LoadStateEventArgs e)
         {
@@ -273,7 +272,7 @@ namespace AppFramework.Core.ViewModels
         /// </summary>
         /// <param name="e">Event args with all navigation data.</param>
         /// <returns>Awaitable task is returned.</returns>
-        public async Task SaveStateAsync(SaveStateEventArgs e)
+        internal async Task SaveStateAsync(SaveStateEventArgs e)
         {
             await this.OnSaveStateAsync(e);
 
@@ -300,7 +299,7 @@ namespace AppFramework.Core.ViewModels
                 this.Dispose();
         }
 
-        public virtual async void OnApplicationResuming()
+        protected internal virtual async void OnApplicationResuming()
         {
             try
             {
@@ -772,7 +771,7 @@ namespace AppFramework.Core.ViewModels
             }
         }
 
-        protected internal bool UserForcedRefresh { protected get; set; }
+        internal bool UserForcedRefresh { get; set; }
         
         private bool _IsRefreshEnabled = true;
         /// <summary>
@@ -792,7 +791,7 @@ namespace AppFramework.Core.ViewModels
         /// Refreshes data on the entire page. 
         /// </summary>
         /// <returns>Task for the operation.</returns>
-        private Task RefreshAsync()
+        protected internal Task RefreshAsync()
         {
             return this.RefreshAsync(!this.IsInitialized);
         }
@@ -802,7 +801,7 @@ namespace AppFramework.Core.ViewModels
         /// </summary>
         /// <param name="forceRefresh">Flag indicating a force refresh else refresh only if necessary.</param>
         /// <returns>Task for the operation.</returns>
-        public async Task RefreshAsync(bool forceRefresh)
+        protected internal async Task RefreshAsync(bool forceRefresh)
         {
             if (_cts != null)
             {
@@ -833,6 +832,7 @@ namespace AppFramework.Core.ViewModels
         /// <summary>
         /// Inherited view models can implement their own logic as to what happens when a page refresh is requested.
         /// </summary>
+        /// <param name="forceRefresh"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
         protected virtual Task OnRefreshAsync(bool forceRefresh, CancellationToken ct)
@@ -867,7 +867,7 @@ namespace AppFramework.Core.ViewModels
         /// <param name="property"></param>
         /// <param name="identifier"></param>
         /// <returns></returns>
-        public Task<T> LoadFromCacheAsync<T>(Expression<Func<T>> property, string identifier = null)
+        protected Task<T> LoadFromCacheAsync<T>(Expression<Func<T>> property, string identifier = null)
         {
             if (property == null)
                 return Task.FromResult<T>(default(T));
@@ -882,7 +882,7 @@ namespace AppFramework.Core.ViewModels
         /// <typeparam name="T"></typeparam>
         /// <param name="key"></param>
         /// <returns></returns>
-        public async Task<T> LoadFromCacheAsync<T>(string key)
+        protected internal async Task<T> LoadFromCacheAsync<T>(string key)
         {
             try
             {
@@ -902,7 +902,7 @@ namespace AppFramework.Core.ViewModels
         /// <param name="property"></param>
         /// <param name="identifier"></param>
         /// <returns></returns>
-        public async Task SaveToCacheAsync<T>(Expression<Func<T>> property, string identifier = null)
+        protected async Task SaveToCacheAsync<T>(Expression<Func<T>> property, string identifier = null)
         {
             if (property == null)
                 return;
@@ -929,7 +929,7 @@ namespace AppFramework.Core.ViewModels
         /// <param name="key">Unique identifier for the data</param>
         /// <param name="data">The data to store</param>
         /// <returns></returns>
-        public async Task SaveToCacheAsync<T>(string key, T data)
+        protected internal async Task SaveToCacheAsync<T>(string key, T data)
         {
             try
             {
@@ -977,10 +977,10 @@ namespace AppFramework.Core.ViewModels
 
         #region Keyboard Methods
 
-        public virtual void OnHandleKeyUp(Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        protected internal virtual void OnHandleKeyUp(Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
         {
         }
-        public virtual void OnHandleKeyDown(Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        protected internal virtual void OnHandleKeyDown(Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
         {
         }
 
@@ -1003,7 +1003,7 @@ namespace AppFramework.Core.ViewModels
         /// <summary>
         /// True or false indicating whether or not this view model requires the user to be authenticated.
         /// </summary>
-        public bool RequiresAuthorization { get; protected set; }
+        protected bool RequiresAuthorization { get; set; }
 
         private async Task<bool> RefreshAccessTokenAsync(CancellationToken ct)
         {
@@ -1123,14 +1123,14 @@ namespace AppFramework.Core.ViewModels
         }
 
         private static NotifyTaskCompletion<Geoposition> CurrentLocationTask { get; set; }
-        
-        public Task<ILocationModel> GetCurrentLocationAsync(bool highAccuracy, CancellationToken ct)
+
+        protected Task<ILocationModel> GetCurrentLocationAsync(bool highAccuracy, CancellationToken ct)
         {
             CurrentLocationTask.Refresh(this.UserForcedRefresh, ct);
             return this.WaitForCurrentLocationAsync(ct);
         }
 
-        public async Task<ILocationModel> WaitForCurrentLocationAsync(CancellationToken ct)
+        protected async Task<ILocationModel> WaitForCurrentLocationAsync(CancellationToken ct)
         {
             if (!CurrentLocationTask.IsCompleted)
             {
@@ -1176,7 +1176,7 @@ namespace AppFramework.Core.ViewModels
             get { return _viewScrollToTopCommand ?? (_viewScrollToTopCommand = new GenericCommand("ViewScrollToTopCommand_" + this.GetType().Name, this.ViewScrollToTop)); }
         }
 
-        protected internal virtual void ViewScrollToTop()
+        internal virtual void ViewScrollToTop()
         {
             var view = this.View as IView;
             if (view != null)
@@ -1229,7 +1229,7 @@ namespace AppFramework.Core
         /// A dictionary of state preserved by this page during an earlier
         /// session.  This will be null the first time a page is visited.
         /// </param>
-        public LoadStateEventArgs(NavigationEventArgs e, IDictionary<string, object> pageState, bool isViewInitialized)
+        internal LoadStateEventArgs(NavigationEventArgs e, IDictionary<string, object> pageState, bool isViewInitialized)
             : base()
         {
             this.NavigationEventArgs = e;
@@ -1265,7 +1265,7 @@ namespace AppFramework.Core
         /// Initializes a new instance of the <see cref="SaveStateEventArgs"/> class.
         /// </summary>
         /// <param name="pageState">An empty dictionary to be populated with serializable state.</param>
-        public SaveStateEventArgs(NavigationEventArgs e, IDictionary<string, object> pageState)
+        internal SaveStateEventArgs(NavigationEventArgs e, IDictionary<string, object> pageState)
             : base()
         {
             this.NavigationEventArgs = e;

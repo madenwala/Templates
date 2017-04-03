@@ -30,7 +30,7 @@ namespace AppFramework.UI
         /// <see cref="DataContractSerializer"/> and should be as compact as possible.  Strings
         /// and other self-contained data types are strongly recommended.
         /// </summary>
-        public static Dictionary<string, object> SessionState
+        internal static Dictionary<string, object> SessionState
         {
             get { return _sessionState; }
         }
@@ -40,7 +40,7 @@ namespace AppFramework.UI
         /// reading and writing session state.  Initially empty, additional types may be
         /// added to customize the serialization process.
         /// </summary>
-        public static List<Type> KnownTypes
+        internal static List<Type> KnownTypes
         {
             get { return _knownTypes; }
         }
@@ -52,7 +52,7 @@ namespace AppFramework.UI
         /// to save its state.
         /// </summary>
         /// <returns>An asynchronous task that reflects when session state has been saved.</returns>
-        public static async Task SaveAsync()
+        internal static async Task SaveAsync()
         {
             try
             {
@@ -95,7 +95,7 @@ namespace AppFramework.UI
         /// <returns>An asynchronous task that reflects when session state has been read.  The
         /// content of <see cref="SessionState"/> should not be relied upon until this task
         /// completes.</returns>
-        public static async Task RestoreAsync(String sessionBaseKey = null)
+        internal static async Task RestoreAsync(String sessionBaseKey = null)
         {
             _sessionState = new Dictionary<String, Object>();
 
@@ -201,7 +201,7 @@ namespace AppFramework.UI
         /// <param name="frame">The instance for which session state is desired.</param>
         /// <returns>A collection of state subject to the same serialization mechanism as
         /// <see cref="SessionState"/>.</returns>
-        public static Dictionary<String, Object> SessionStateForFrame(Frame frame)
+        internal static Dictionary<String, Object> SessionStateForFrame(Frame frame)
         {
             var frameState = (Dictionary<String, Object>)frame.GetValue(FrameSessionStateProperty);
 
@@ -240,7 +240,7 @@ namespace AppFramework.UI
         }
     }
 
-    public class SuspensionManagerException : Exception
+    internal class SuspensionManagerException : Exception
     {
         public SuspensionManagerException()
         {
