@@ -1,52 +1,50 @@
-﻿using AppFramework.Core;
-using AppFramework.Core.Models;
-using Windows.UI.Xaml.Controls;
+﻿using AppFramework.Core.Models;
 
 namespace AppFramework.UI.Controls
 {
+    /// <summary>
+    /// Helper class to scroll a control or object to its default position.
+    /// </summary>
     public static class ScrollToTopHelper
     {
+        /// <summary>
+        /// Scrolls a control or object that can be scrolled to its default top position.
+        /// </summary>
+        /// <param name="content"></param>
         public static void ScrollToTop(object content)
         {
-            if (content is IViewScrollToTop)
+            if (content is IViewScrollToTop i)
             {
-                var i = content as IViewScrollToTop;
                 i.ScrollToTop();
             }
-            else if (content is ListViewBase)
+            else if (content is Windows.UI.Xaml.Controls.ListViewBase list)
             {
-                var list = content as ListViewBase;
                 list.ScrollToTop();
             }
-            else if (content is ScrollViewer)
+            else if (content is Windows.UI.Xaml.Controls.ScrollViewer sv)
             {
-                var sv = content as ScrollViewer;
                 sv.ScrollToTop();
             }
-            else if (content is Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView)
+            else if (content is Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView grid)
             {
-                var grid = content as Microsoft.Toolkit.Uwp.UI.Controls.AdaptiveGridView;
                 grid.ScrollToTop();
             }
-            else if (content is WebViewPanel)
+            else if (content is WebViewPanel wvp)
             {
-                var control = content as WebViewPanel;
-                control.ScrollToTop();
+                wvp.ScrollToTop();
             }
-            else if (content is WebView)
+            else if (content is Windows.UI.Xaml.Controls.WebView wv)
             {
-                var control = content as WebView;
-                var t = control.InvokeScriptAsync("eval", new string[] { @"window.scrollTo(0, 0)" });
+                var t = wv.InvokeScriptAsync("eval", new string[] { @"window.scrollTo(0, 0)" });
             }
-            else if (content is Pivot)
+            else if (content is Windows.UI.Xaml.Controls.Pivot pivot)
             {
-                var pivot = content as Pivot;
-                foreach (var pi in pivot.Items)
-                    ScrollToTop(pi);
+                if(pivot.Items != null)
+                    foreach (var pi in pivot.Items)
+                        ScrollToTop(pi);
             }
-            else if (content is PivotItem)
+            else if (content is Windows.UI.Xaml.Controls.PivotItem pi)
             {
-                var pi = content as PivotItem;
                 ScrollToTop(pi.Content ?? pi.ContentTemplateRoot);
             }
         }
