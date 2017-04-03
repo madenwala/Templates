@@ -1540,6 +1540,12 @@
             </summary>
             <returns>Awaitable task is returned.</returns>
         </member>
+        <member name="M:AppFramework.Core.Services.RatingsManager.RateApplicationAsync">
+            <summary>
+            Takes the user to the rate application dialog.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="P:AppFramework.Core.Services.ServiceBase.Initialized">
             <summary>
             Indicates whether or not this adapter has been initialized by the PlatformAdaptereCore Initialization method.
@@ -1948,7 +1954,6 @@
             Inherited view model instances perform any load state logic.
             </summary>
             <param name="e">Event args with all navigation data.</param>
-            <param name="isFirstRun">True if this is the first execution of the view/viewmodel</param>
             <returns>Awaitable task is returned.</returns>
         </member>
         <member name="M:AppFramework.Core.ViewModels.ViewModelBase.OnSaveStateAsync(AppFramework.Core.SaveStateEventArgs)">
@@ -2129,6 +2134,7 @@
             <summary>
             Inherited view models can implement their own logic as to what happens when a page refresh is requested.
             </summary>
+            <param name="forceRefresh"></param>
             <param name="ct"></param>
             <returns></returns>
         </member>
@@ -2419,6 +2425,17 @@
             <param name="propertyName">Name of the property used to notify listeners.  This
             value is optional and can be provided automatically when invoked from compilers
             that support <see cref="T:System.Runtime.CompilerServices.CallerMemberNameAttribute"/>.</param>
+        </member>
+        <member name="T:AppFramework.UI.Controls.ScrollToTopHelper">
+            <summary>
+            Helper class to scroll a control or object to its default position.
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.Controls.ScrollToTopHelper.ScrollToTop(System.Object)">
+            <summary>
+            Scrolls a control or object that can be scrolled to its default top position.
+            </summary>
+            <param name="content"></param>
         </member>
         <member name="T:AppFramework.UI.Controls.SplitViewButton">
             <summary>
