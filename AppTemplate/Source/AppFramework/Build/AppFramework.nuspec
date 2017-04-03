@@ -44,6 +44,8 @@
 
   <files>
 
+    <file target="build\native\AppFramework.targets" src="Build\AppFramework.targets" />
+    
     <!-- XAML controls -->
     <file target="lib\uap10.0\AppFramework\Themes\" src="AppFramework.Uwp\Themes\*.xaml" />
     

@@ -24,6 +24,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{A48D194A-6B9B-4D7A-85D0-4F56A1D7B175}"
 	ProjectSection(SolutionItems) = preProject
 		AppFramework\Build\AppFramework.nuspec = AppFramework\Build\AppFramework.nuspec
+		AppFramework\Build\AppFramework.targets = AppFramework\Build\AppFramework.targets
 		AppFramework\Build\Build-NuGet-Package.cmd = AppFramework\Build\Build-NuGet-Package.cmd
 		AppFramework\Build\Build.cmd = AppFramework\Build\Build.cmd
 		AppFramework\Build\Download-NuGet.cmd = AppFramework\Build\Download-NuGet.cmd
