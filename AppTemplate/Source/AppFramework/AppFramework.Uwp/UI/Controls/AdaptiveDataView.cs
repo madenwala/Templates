@@ -277,10 +277,10 @@ namespace AppFramework.UI.Controls
         {
             foreach(var control in _root.Children)
             {
-                if (control is ListViewBase)
-                    (control as ListViewBase).ScrollToTop();
-                else if (control is IViewScrollToTop)
-                    (control as IViewScrollToTop).ScrollToTop();
+                if (control is ListViewBase list)
+                    list.ScrollToTop();
+                else if (control is IViewScrollToTop ctrl)
+                    ctrl.ScrollToTop();
             }
         }
 

@@ -1,7 +1,7 @@
 ﻿using AppFramework.Core.Models;
 using Windows.Devices.Geolocation;
 
-public static class GeocoordinateExtensions
+internal static class GeocoordinateExtensions
 {
     /// <summary>
     /// Converts this Geocoordinate object into a LocationModel instance.

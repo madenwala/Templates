@@ -216,7 +216,6 @@
     <Compile Include="UI\Converters\ValueToStyleConverter.cs" />
     <Compile Include="UI\Converters\ValueToThicknessConverter.cs" />
     <Compile Include="UI\Converters\ValueToVisibilityConverter.cs" />
-    <Compile Include="UI\Extensions\AdaptiveGridViewExtensions.cs" />
     <Compile Include="UI\Extensions\DependencyObjectExtensions.cs" />
     <Compile Include="UI\Extensions\ListViewBaseExtensions.cs" />
     <Compile Include="UI\Extensions\ScrollViewerExtensions.cs" />

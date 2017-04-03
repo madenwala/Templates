@@ -22,10 +22,14 @@ namespace AppFramework.Core.ViewModels
 {
     public abstract class ViewModelBase : ModelBase, IDisposable, IViewModel
     {
+        #region Constants
+
         private const int E_WINHTTP_TIMEOUT = unchecked((int)0x80072ee2);
         private const int E_WINHTTP_NAME_NOT_RESOLVED = unchecked((int)0x80072ee7);
         private const int E_WINHTTP_CANNOT_CONNECT = unchecked((int)0x80072efd);
         private const int E_WINHTTP_CONNECTION_ERROR = unchecked((int)0x80072efe);
+
+        #endregion
 
         #region Variables
 
@@ -791,7 +795,7 @@ namespace AppFramework.Core.ViewModels
         /// Refreshes data on the entire page. 
         /// </summary>
         /// <returns>Task for the operation.</returns>
-        protected internal Task RefreshAsync()
+        public Task RefreshAsync()
         {
             return this.RefreshAsync(!this.IsInitialized);
         }
@@ -801,7 +805,7 @@ namespace AppFramework.Core.ViewModels
         /// </summary>
         /// <param name="forceRefresh">Flag indicating a force refresh else refresh only if necessary.</param>
         /// <returns>Task for the operation.</returns>
-        protected internal async Task RefreshAsync(bool forceRefresh)
+        public async Task RefreshAsync(bool forceRefresh)
         {
             if (_cts != null)
             {
@@ -814,6 +818,11 @@ namespace AppFramework.Core.ViewModels
                 this.IsRefreshEnabled = false;
                 _cts = new CancellationTokenSource();
                 await this.OnRefreshAsync(forceRefresh, _cts.Token);
+                this.ClearStatus();
+            }
+            catch(TaskCanceledException)
+            {
+                PlatformBase.Logger.Log(LogLevels.Warning, $"RefreshAsync cancelled on {this.GetType().Name}");
                 this.ClearStatus();
             }
             catch (Exception ex)

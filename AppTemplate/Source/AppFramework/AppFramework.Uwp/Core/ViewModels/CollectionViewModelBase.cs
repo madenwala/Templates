@@ -104,7 +104,7 @@ namespace AppFramework.Core.ViewModels
         /// Sets the current ViewModel that is active and visible.
         /// </summary>
         /// <param name="vm"></param>
-        public async Task SetCurrentAsync(ViewModelBase vm)
+        internal async Task SetCurrentAsync(ViewModelBase vm)
         {
             if (vm == this)
                 return;

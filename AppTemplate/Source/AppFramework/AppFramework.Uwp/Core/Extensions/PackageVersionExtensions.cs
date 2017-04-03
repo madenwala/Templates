@@ -1,7 +1,7 @@
 ﻿using System;
 using Windows.ApplicationModel;
 
-public static class PackageVersionExtensions
+internal static class PackageVersionExtensions
 {
     /// <summary>
     /// Converts this PackageVersion instance into a Version instance.

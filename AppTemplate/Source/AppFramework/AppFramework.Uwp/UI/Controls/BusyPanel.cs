@@ -55,9 +55,13 @@ namespace AppFramework.UI.Controls
 
         #endregion
 
+        #region Constructors
+
         public BusyPanel()
         {
             this.DefaultStyleKey = typeof(BusyPanel);
         }
+
+        #endregion
     }
 }

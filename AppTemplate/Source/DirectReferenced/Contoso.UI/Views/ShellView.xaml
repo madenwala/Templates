@@ -135,11 +135,11 @@
                         <controls:SplitViewButton x:Uid="/Contoso.Core/Resources/svbSignIn" GroupName="ShellNav" Content="[Sign in]" Symbol="Contact" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToAccountSignInCommand}" Visibility="{x:Bind ViewModel.IsUserAuthenticated, Mode=OneWay, Converter={StaticResource visInvertedConverter}}" />
                         <controls:SplitViewButton x:Uid="/Contoso.Core/Resources/svbSignout" GroupName="ShellNav" Symbol="Contact" SymbolAlwaysVisible="True" Command="{x:Bind ViewModel.NavigateToAccountSignoutCommand}" Visibility="{x:Bind ViewModel.IsUserAuthenticated, Mode=OneWay, Converter={StaticResource visConverter}}">
                             <controls:SplitViewButton.Icon>
-                                <Ellipse Width="32" Height="32" Visibility="{Binding ViewModel.Platform.AuthManager.CurrentUser.ProfileImageURL, Mode=OneWay, Converter={StaticResource visConverter}}">
+                                <Ellipse Width="32" Height="32" Visibility="{x:Bind ViewModel.IsUserAuthenticated, Mode=OneWay, Converter={StaticResource visConverter}}">
                                     <Ellipse.Fill>
                                         <ImageBrush>
                                             <ImageBrush.ImageSource>
-                                                <BitmapImage DecodePixelHeight="32" DecodePixelWidth="32" UriSource="{Binding ViewModel.Platform.AuthManager.CurrentUser.ProfileImageURL, Mode=OneWay}" />
+                                                <BitmapImage DecodePixelHeight="32" DecodePixelWidth="32" UriSource="{Binding ViewModel.Platform.AuthManager.CurrentUser.ProfileImageURL, Mode=OneWay, FallbackValue={x:Null}}" />
                                             </ImageBrush.ImageSource>
                                         </ImageBrush>
                                     </Ellipse.Fill>
