@@ -775,7 +775,10 @@ namespace AppFramework.Core.ViewModels
             }
         }
 
-        internal bool UserForcedRefresh { get; set; }
+        /// <summary>
+        /// Gets or sets whether or not the user forced a refresh on the view.
+        /// </summary>
+        public bool UserForcedRefresh { get; internal set; }
         
         private bool _IsRefreshEnabled = true;
         /// <summary>
