@@ -47,21 +47,6 @@ namespace AppFramework.UI
         {
             PlatformBase.Current.Analytics.Event("App.OnLaunched", this.ToDictionary(e));
             await this.InitializeAsync(e, e.PrelaunchActivated);
-
-            var t = Windows.System.Threading.ThreadPool.RunAsync(async (o) =>
-            {
-                try
-                {
-                    // Install the VCD. Since there's no simple way to test that the VCD has been imported, or that it's your most recent
-                    // version, it's not unreasonable to do this upon app load.
-                    var vcd = await Package.Current.InstalledLocation.GetFileAsync(@"Resources\VCD.xml");
-                    await Windows.ApplicationModel.VoiceCommands.VoiceCommandDefinitionManager.InstallCommandDefinitionsFromStorageFileAsync(vcd);
-                }
-                catch (Exception ex)
-                {
-                    PlatformBase.Current.Logger.LogError(ex, "Installing voice commands failed!");
-                }
-            });
         }
 
         protected override async void OnActivated(IActivatedEventArgs e)

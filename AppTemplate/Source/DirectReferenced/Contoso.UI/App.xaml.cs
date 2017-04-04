@@ -2,6 +2,9 @@
 using AppFramework.UI.Controls;
 using Contoso.Core;
 using Contoso.UI.Services;
+using System;
+using Windows.ApplicationModel;
+using Windows.ApplicationModel.Activation;
 
 namespace Contoso.UI
 {
@@ -37,6 +40,26 @@ namespace Contoso.UI
         #endregion
 
         #region Methods
+
+        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        {
+            base.OnLaunched(e);
+
+            var t = Windows.System.Threading.ThreadPool.RunAsync(async (o) =>
+            {
+                try
+                {
+                    // Install the VCD. Since there's no simple way to test that the VCD has been imported, or that it's your most recent
+                    // version, it's not unreasonable to do this upon app load.
+                    var vcd = await Package.Current.InstalledLocation.GetFileAsync(@"Resources\VCD.xml");
+                    await Windows.ApplicationModel.VoiceCommands.VoiceCommandDefinitionManager.InstallCommandDefinitionsFromStorageFileAsync(vcd);
+                }
+                catch (Exception ex)
+                {
+                    Platform.Current.Logger.LogError(ex, "Installing voice commands failed!");
+                }
+            });
+        }
 
         protected override void OnCustomizeApplicationUI()
         {

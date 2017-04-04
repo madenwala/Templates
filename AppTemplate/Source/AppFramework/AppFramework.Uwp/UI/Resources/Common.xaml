@@ -32,10 +32,16 @@
     <x:Double x:Key="SnapPoint8Portrait">640</x:Double>
     <x:Double x:Key="SnapPointMinimum">0</x:Double>
 
-
     <GridLength x:Key="StandardElementGridLength">48</GridLength>
 
-
+    <Style x:Key="StatusTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
+        <Setter Property="Margin" Value="12,0" />
+        <Setter Property="Opacity" Value=".7" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="TextAlignment" Value="Center" />
+    </Style>
     <Style x:Key="ViewHeaderTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
         <Setter Property="Margin" Value="12,8,8,8" />
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
@@ -123,8 +129,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-
 
 
     <Style TargetType="controls:MyControl">
@@ -434,13 +438,37 @@
     </Style>
     <Style TargetType="controls:Pivot" BasedOn="{StaticResource StylizedPivot}" />
 
+    <!--List/Grid Styles-->
+    <Style TargetType="ListView">
+        <Setter Property="IsSwipeEnabled" Value="False" />
+        <Setter Property="IsItemClickEnabled" Value="True" />
+        <Setter Property="SelectionMode" Value="None" />
+    </Style>
+    <Style TargetType="GridView">
+        <Setter Property="IsSwipeEnabled" Value="False" />
+        <Setter Property="IsItemClickEnabled" Value="True" />
+        <Setter Property="SelectionMode" Value="None" />
+    </Style>
+    <Style TargetType="toolkit:AdaptiveGridView">
+        <Setter Property="IsSwipeEnabled" Value="False" />
+        <Setter Property="IsItemClickEnabled" Value="True" />
+        <Setter Property="SelectionMode" Value="None" />
+    </Style>
+
     <!--Pull To Refresh-->
+    <x:Double x:Key="PullToRefreshPullThreshold">100</x:Double>
+    <Style TargetType="toolkit:PullToRefreshListView">
+        <Setter Property="IsSwipeEnabled" Value="False" />
+        <Setter Property="IsItemClickEnabled" Value="True" />
+        <Setter Property="SelectionMode" Value="None" />
+        <Setter Property="PullThreshold" Value="{StaticResource PullToRefreshPullThreshold}" />
+    </Style>
     <Style TargetType="controls:PullToRefreshListView">
-        <!--<Setter Property="NoDataMessageStyle" Value="{StaticResource StatusTextBlockStyle}" />-->
+        <Setter Property="NoDataMessageStyle" Value="{StaticResource StatusTextBlockStyle}" />
         <Setter Property="IsItemClickEnabled" Value="True" />
         <Setter Property="IsSwipeEnabled" Value="False" />
         <Setter Property="SelectionMode" Value="None" />
-        <Setter Property="PullThreshold" Value="100" />
+        <Setter Property="PullThreshold" Value="{StaticResource PullToRefreshPullThreshold}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:PullToRefreshListView">
