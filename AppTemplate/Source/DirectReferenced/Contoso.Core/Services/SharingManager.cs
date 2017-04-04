@@ -19,10 +19,10 @@ namespace Contoso.Core.Services
             {
                 var args = Platform.Current.GenerateModelArguments(model);
                 var url = Platform.Current.AppInfo.GetDeepLink(args);
+                dataPackage.Properties.ContentSourceApplicationLink = new Uri(url.Replace("//", ""), UriKind.Absolute);
                 var m = model as ItemModel;
                 dataPackage.Properties.Title = m.LineOne;
                 dataPackage.Properties.Description = m.LineTwo;
-                dataPackage.Properties.ContentSourceApplicationLink = new Uri(url.Replace("//", ""), UriKind.Absolute);
                 string body = m.LineOne + Environment.NewLine + m.LineTwo + Environment.NewLine + m.LineThree + Environment.NewLine + m.LineFour;
                 dataPackage.SetText(body);
             }

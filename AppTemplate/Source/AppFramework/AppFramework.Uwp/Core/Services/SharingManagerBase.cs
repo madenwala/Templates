@@ -40,6 +40,11 @@ namespace AppFramework.Core.Services
 
         #region Methods
 
+        /// <summary>
+        /// Method to populate DataRequest object which is then shared with the OS sharing feature.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="model"></param>
         protected abstract void SetShareContent(DataRequest request, IModel model);
 
         /// <summary>
@@ -66,6 +71,12 @@ namespace AppFramework.Core.Services
                     {
                         try
                         {
+                            var args = PlatformBase.Current.GenerateModelArguments(model);
+                            var url = PlatformBase.Current.AppInfo.GetDeepLink(args);
+                            e.Request.Data.Properties.Title = PlatformBase.Current.AppInfo.AppName;
+                            if(url != null)
+                                e.Request.Data.Properties.ContentSourceApplicationLink = new Uri(url.Replace("//", ""), UriKind.Absolute);
+
                             this.SetShareContent(e.Request, model ?? PlatformBase.Current.ViewModel);
                         }
                         catch(Exception ex)
@@ -98,5 +109,27 @@ namespace AppFramework.Core.Services
         }
 
         #endregion Sharing
+    }
+
+    internal sealed class DefaultSharingManager : SharingManagerBase
+    {
+        internal DefaultSharingManager()
+        {
+        }
+
+        /// <summary>
+        /// Shares the sz
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="model"></param>
+        protected override void SetShareContent(DataRequest request, IModel model)
+        {
+            DataPackage dataPackage = request.Data;
+            dataPackage.Properties.Title = PlatformBase.Current.AppInfo.AppName;
+            dataPackage.Properties.Description = PlatformBase.Current.AppInfo.AppDescription;
+            // TODO localize
+            string body = $"Download {PlatformBase.Current.AppInfo.AppName} from the Windows Store!";
+            dataPackage.SetText(body);
+        }
     }
 }

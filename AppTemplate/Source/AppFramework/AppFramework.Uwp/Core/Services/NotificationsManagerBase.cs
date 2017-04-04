@@ -202,4 +202,20 @@ namespace AppFramework.Core.Services
 
         #endregion
     }
+
+    internal sealed class DefaultNotificationsManager : NotificationsManagerBase
+    {
+        internal DefaultNotificationsManager()
+        {
+        }
+
+        public override Task<bool> CreateOrUpdateTileAsync(IModel model)
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public override void DisplayToast(IModel model)
+        {
+        }
+    }
 }

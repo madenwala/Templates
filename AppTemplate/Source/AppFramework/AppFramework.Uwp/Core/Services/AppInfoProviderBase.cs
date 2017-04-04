@@ -15,7 +15,13 @@ namespace AppFramework.Core
         /// </summary>
         public AppInfoProviderBase AppInfo
         {
-            get { return GetService<AppInfoProviderBase>(); }
+            get
+            {
+                var service = GetService<AppInfoProviderBase>();
+                if (service == null)
+                    throw new ArgumentNullException("Platform.AppInfo was never set!");
+                return service;
+            }
             protected set { SetService(value); }
         }
     }

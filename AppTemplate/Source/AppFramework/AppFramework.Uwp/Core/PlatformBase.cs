@@ -119,6 +119,8 @@ namespace AppFramework.Core
             this.Jumplist = new JumplistManager();
             this.WebAccountManager = new WebAccountManager();
             this.EmailProvider = new EmailProvider();
+            this.SharingManager = new DefaultSharingManager();
+            this.Notifications = new DefaultNotificationsManager();
         }
 
         static PlatformBase()
@@ -450,7 +452,13 @@ namespace AppFramework.Core
         /// </summary>
         /// <param name="model">Model to convert into a unique tile ID.</param>
         /// <returns>String representing a unique tile ID for the model else null if not supported.</returns>
-        public abstract string GenerateModelTileID(IModel model);
+        public virtual string GenerateModelTileID(IModel model)
+        {
+            if (model == this.ViewModel)
+                return string.Empty;
+            else
+                return null;
+        }
 
         /// <summary>
         /// Converts a tile ID back into an object instance.
@@ -458,7 +466,10 @@ namespace AppFramework.Core
         /// <param name="tileID">Tile ID to retrieve an object instance for.</param>
         /// <param name="ct">Cancelation token.</param>
         /// <returns>Object instance if found else null.</returns>
-        public abstract Task<IModel> GenerateModelFromTileIdAsync(string tileID, CancellationToken ct);
+        public virtual Task<IModel> GenerateModelFromTileIdAsync(string tileID, CancellationToken ct)
+        {
+            return Task.FromResult<IModel>(null);
+        }
 
         #endregion
 

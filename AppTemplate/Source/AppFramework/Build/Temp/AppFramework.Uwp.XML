@@ -1576,10 +1576,24 @@
             Command to navigate to the share functionality.
             </summary>
         </member>
+        <member name="M:AppFramework.Core.Services.SharingManagerBase.SetShareContent(Windows.ApplicationModel.DataTransfer.DataRequest,AppFramework.Core.Models.IModel)">
+            <summary>
+            Method to populate DataRequest object which is then shared with the OS sharing feature.
+            </summary>
+            <param name="request"></param>
+            <param name="model"></param>
+        </member>
         <member name="M:AppFramework.Core.Services.SharingManagerBase.Share(AppFramework.Core.Models.IModel)">
             <summary>
             Share a model of data with Windows.
             </summary>
+            <param name="model"></param>
+        </member>
+        <member name="M:AppFramework.Core.Services.DefaultSharingManager.SetShareContent(Windows.ApplicationModel.DataTransfer.DataRequest,AppFramework.Core.Models.IModel)">
+            <summary>
+            Shares the sz
+            </summary>
+            <param name="request"></param>
             <param name="model"></param>
         </member>
         <member name="T:AppFramework.Core.Services.StorageManager">
