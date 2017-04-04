@@ -23,6 +23,13 @@ namespace AppFramework.Core.Services
 {
     public sealed class VoiceCommandManager : ServiceBase, IServiceSignout
     {
+        #region Constructors
+
+        internal VoiceCommandManager()
+        {
+        }
+
+        #endregion
 
         #region Methods
 

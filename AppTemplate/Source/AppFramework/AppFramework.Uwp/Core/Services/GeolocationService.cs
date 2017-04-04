@@ -101,6 +101,14 @@ namespace AppFramework.Core.Services
 
         #endregion Properties
 
+        #region Constructors
+
+        internal GeolocationService()
+        {
+        }
+
+        #endregion
+
         #region Methods
 
         /// <summary>

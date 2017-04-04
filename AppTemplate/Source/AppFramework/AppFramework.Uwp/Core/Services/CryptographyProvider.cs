@@ -27,6 +27,14 @@ namespace AppFramework.Core.Services
     /// </summary>
     public sealed class CryptographyProvider : ServiceBase
     {
+        #region Constructors
+
+        internal CryptographyProvider()
+        {
+        }
+
+        #endregion
+
         #region Methods
 
         /// <summary>

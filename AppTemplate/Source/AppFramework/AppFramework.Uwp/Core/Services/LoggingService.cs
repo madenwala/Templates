@@ -105,6 +105,9 @@ namespace AppFramework.Core.Services
 
         public LoggingService()
         {
+            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+                return;
+
             this.Loggers = new List<ILogger>();
             this.Messages = new ObservableCollection<string>();
 #if DEBUG
@@ -409,6 +412,8 @@ namespace AppFramework.Core.Services
 
             public UwpConsoleOutputProvider()
             {
+                if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+                    return;
                 this.Initialize();
             }
 

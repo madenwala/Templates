@@ -103,7 +103,7 @@ namespace AppFramework.Core.Services
     /// </summary>
     public sealed class AnalyticsManager : AnalyticsServiceBase
     {
-        public AnalyticsManager()
+        internal AnalyticsManager()
         {
             this.Services = new List<AnalyticsServiceBase>();
         }

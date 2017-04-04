@@ -46,6 +46,8 @@ namespace AppFramework.Core.Services
 
         public JumplistManager()
         {
+            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+                return;
             if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.StartScreen.JumpList"))
                 IsSupported = JumpList.IsSupported();
         }

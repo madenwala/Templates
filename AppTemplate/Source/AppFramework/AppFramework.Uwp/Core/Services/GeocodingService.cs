@@ -28,6 +28,14 @@ namespace AppFramework.Core.Services
     /// </summary>
     public sealed class GeocodingService : ServiceBase
     {
+        #region Constructors
+
+        internal GeocodingService()
+        {
+        }
+
+        #endregion
+
         #region Methods
 
         #region Public

@@ -30,6 +30,14 @@ namespace AppFramework.Core.Services
     /// </summary>
     public sealed class StorageManager : ServiceBase, IServiceSignout
     {
+        #region Constructors
+
+        internal StorageManager()
+        {
+        }
+
+        #endregion
+
         #region Methods
 
         #region Credentials

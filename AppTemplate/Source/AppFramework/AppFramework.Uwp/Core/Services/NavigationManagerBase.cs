@@ -83,6 +83,8 @@ namespace AppFramework.Core.Services
 
         static NavigationManagerBase()
         {
+            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+                return;
             AppWindows = new Dictionary<int, CoreApplicationView>();
         }
 

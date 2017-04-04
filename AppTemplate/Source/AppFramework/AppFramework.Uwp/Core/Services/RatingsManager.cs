@@ -46,6 +46,14 @@ namespace AppFramework.Core.Services
 
         #endregion
 
+        #region Constructors
+
+        internal RatingsManager()
+        {
+        }
+
+        #endregion
+
         #region Methods
 
         /// <summary>

@@ -50,16 +50,16 @@
     <file target="ref\uap10.0\AppFramework\Themes\" src="AppFramework.Uwp\Themes\*.xaml" />
     
     <!-- The lib file gets copied as a reference -->
-    <file target="ref\uap10.0\AppFramework.Uwp\"	src="AppFramework.Uwp\bin\x86\debug\*.xr.xml" />
+    <file target="ref\uap10.0\AppFramework.Uwp\"	src="AppFramework.Uwp\bin\x86\release\*.xr.xml" />
     <!--<file target="ref\uap10.0\" src="AppFramework.Uwp\bin\x86\debug\*" />-->
     
     <!-- Change DLLs to have their platform version removed by using the corflags command https://github.com/NuGet/Home/issues/1221 -->
     <file target="ref\uap10.0\" src="Build\Temp\*" />
     
     <!--Copy all the output to each platform folder-->
-    <file target="runtimes\win10-x64\lib\uap10.0\"	src="AppFramework.Uwp\bin\x64\debug\*" />
-    <file target="runtimes\win10-x86\lib\uap10.0\"	src="AppFramework.Uwp\bin\x86\debug\*" />
-    <file target="runtimes\win10-arm\lib\uap10.0\"	src="AppFramework.Uwp\bin\arm\debug\*" />
+    <file target="runtimes\win10-x64\lib\uap10.0\"	src="AppFramework.Uwp\bin\x64\release\*" />
+    <file target="runtimes\win10-x86\lib\uap10.0\"	src="AppFramework.Uwp\bin\x86\release\*" />
+    <file target="runtimes\win10-arm\lib\uap10.0\"	src="AppFramework.Uwp\bin\arm\release\*" />
         
   </files>
 
