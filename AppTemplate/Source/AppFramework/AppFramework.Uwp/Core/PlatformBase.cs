@@ -51,7 +51,7 @@ namespace AppFramework.Core
         public AppSettingsLocalBase AppSettingsLocal
         {
             get { return _AppSettingsLocal; }
-            protected internal set { this.SetProperty(ref _AppSettingsLocal, value); }
+            protected set { this.SetProperty(ref _AppSettingsLocal, value); }
         }
 
         private AppSettingsRoamingBase _AppSettingsRoaming;
@@ -61,7 +61,7 @@ namespace AppFramework.Core
         public AppSettingsRoamingBase AppSettingsRoaming
         {
             get { return _AppSettingsRoaming; }
-            protected internal set { this.SetProperty(ref _AppSettingsRoaming, value); }
+            protected set { this.SetProperty(ref _AppSettingsRoaming, value); }
         }
 
         /// <summary>
@@ -503,6 +503,22 @@ namespace AppFramework.Core
             protected set { base.ViewModel = value; }
         }
 
+        /// <summary>
+        /// Gets local app settings for this app.
+        /// </summary>
+        public new L AppSettingsLocal
+        {
+            get { return base.AppSettingsLocal as L; }
+        }
+
+        /// <summary>
+        /// Gets roaming app settings for this app.
+        /// </summary>
+        public new R AppSettingsRoaming
+        {
+            get { return base.AppSettingsRoaming as R; }
+        }
+
         public PlatformNewBase() : base(typeof(VM))
         {
         }
@@ -511,12 +527,12 @@ namespace AppFramework.Core
         {
             if (this.AppSettingsLocal == null)
             {
-                this.AppSettingsLocal = this.Storage.LoadSetting<L>("AppSettingsLocal", ApplicationData.Current.LocalSettings) ?? Activator.CreateInstance<L>();
+                base.AppSettingsLocal = this.Storage.LoadSetting<L>("AppSettingsLocal", ApplicationData.Current.LocalSettings) ?? Activator.CreateInstance<L>();
                 this.AppSettingsLocal.PropertyChanged += AppSettingsLocal_PropertyChanged;
             }
             if (this.AppSettingsRoaming == null)
             {
-                this.AppSettingsRoaming = this.Storage.LoadSetting<R>("AppSettingsRoaming", ApplicationData.Current.RoamingSettings) ?? Activator.CreateInstance<R>();
+                base.AppSettingsRoaming = this.Storage.LoadSetting<R>("AppSettingsRoaming", ApplicationData.Current.RoamingSettings) ?? Activator.CreateInstance<R>();
                 this.AppSettingsRoaming.PropertyChanged += AppSettingsRoaming_PropertyChanged;
             }
 
@@ -537,9 +553,9 @@ namespace AppFramework.Core
             _settingsIsLocalDataDirty = true;
             _settingsIsRoamingDataDirty = true;
 
-            this.AppSettingsLocal = Activator.CreateInstance<L>();
+            base.AppSettingsLocal = Activator.CreateInstance<L>();
             this.AppSettingsLocal.PropertyChanged += AppSettingsLocal_PropertyChanged;
-            this.AppSettingsRoaming = Activator.CreateInstance<R>();
+            base.AppSettingsRoaming = Activator.CreateInstance<R>();
             this.AppSettingsRoaming.PropertyChanged += AppSettingsRoaming_PropertyChanged;
 
             this.SaveSettings();

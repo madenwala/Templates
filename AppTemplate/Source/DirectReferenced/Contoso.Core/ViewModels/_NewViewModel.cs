@@ -48,7 +48,7 @@ namespace Contoso.Core.ViewModels
         {
             if (forceRefresh)
             {
-                this.ShowBusyStatus(Resources.TextLoading, true);
+                this.ShowBusyStatus(Resources.TextLoading, true || this.UserForcedRefresh);
 
                 using (var client = new ClientApi())
                 {
