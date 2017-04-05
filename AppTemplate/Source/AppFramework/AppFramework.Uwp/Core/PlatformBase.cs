@@ -293,7 +293,7 @@ namespace AppFramework.Core
         protected internal static void SetService<T>(T instance) where T : ServiceBase
         {
             // Shutdown the old instance of T
-            var services = _services.Values.Where(f => f is T);
+            var services = _services.Values.Where(f => f is T).ToArray();
             foreach(var service in services)
             {
                 Type key = _services.FirstOrDefault(f => f.Value == service).Key;
