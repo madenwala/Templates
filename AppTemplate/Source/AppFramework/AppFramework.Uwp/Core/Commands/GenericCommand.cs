@@ -1,5 +1,4 @@
-﻿using AppFramework.Core.Services;
-using System;
+﻿using System;
 using Windows.ApplicationModel;
 
 namespace AppFramework.Core.Commands
@@ -92,23 +91,48 @@ namespace AppFramework.Core.Commands
 
         #region Methods
 
+        private bool _disable = false;
+
+        /// <summary>
+        /// Overrides CanExecute to FALSE to prevent any execution of this command despite the CanExecute logic provided to this command instance.
+        /// </summary>
+        public void Disable()
+        {
+            _disable = true;
+            this.RaiseCanExecuteChanged();
+        }
+
+        /// <summary>
+        /// Enables the CanExecute method provided to this command instance to execute.
+        /// </summary>
+        public void Enable()
+        {
+            _disable = false;
+            this.RaiseCanExecuteChanged();
+        }
+
         public override bool CanExecute(object parameter)
         {
             bool value = false;
 
-            if (_canExecute != null && parameter is T)
+            if(_disable)
+            {
+                return false;
+            }
+            else if (_canExecute != null && parameter is T)
+            {
+                if (!DesignMode.DesignModeEnabled)
+                {
+                    // Log information
+                    string name = string.Format("[{0} - CanExecute] {1}", this.GetType().Name, this.CommandName);
+                    PlatformBase.Current.Logger.Log(LogLevels.Debug, "{0} - Return Value: {1}  Parameter: {2}", name, value, parameter);
+                }
                 value = _canExecute((T)parameter);
+            }
             else if (_canExecute != null)
                 value = _canExecute(default(T));
             else
                 value = true;
-
-            if (!DesignMode.DesignModeEnabled)
-            {
-                // Log information
-                string name = string.Format("[{0} - CanExecute] {1}", this.GetType().Name, this.CommandName);
-                PlatformBase.Current.Logger.Log(LogLevels.Debug, "{0} - Return Value: {1}  Parameter: {2}", name, value, parameter);
-            }
 
             return value;
         }

@@ -1,10 +1,9 @@
 ﻿using AppFramework.Core.Models;
-using AppFramework.Core.Services;
 
 namespace AppFramework.Core.Commands
 {
     /// <summary>
-    /// 
+    /// Command for sharing content to the OS.
     /// </summary>
     public sealed class ShareCommand : GenericCommand<IModel>
     {

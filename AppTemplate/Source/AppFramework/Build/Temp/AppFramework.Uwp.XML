@@ -75,6 +75,16 @@
             <param name="execute">The logic to run when execute is called. Execute parameter object must be of the generic type specified else it will be ignored.</param>
             <param name="canExecute">The function which determines if this command can run or not. CanExecute parameter object must be of the generic type specified else it will be ignored</param>
         </member>
+        <member name="M:AppFramework.Core.Commands.GenericCommand`1.Disable">
+            <summary>
+            Overrides CanExecute to FALSE to prevent any execution of this command despite the CanExecute logic provided to this command instance.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.Commands.GenericCommand`1.Enable">
+            <summary>
+            Enables the CanExecute method provided to this command instance to execute.
+            </summary>
+        </member>
         <member name="T:AppFramework.Core.Commands.MapExternalCommand">
             <summary>
             Command for launching an external maps app passing an ILocationModel command parameter instance passed to this command.
@@ -138,7 +148,7 @@
         </member>
         <member name="T:AppFramework.Core.Commands.ShareCommand">
             <summary>
-            
+            Command for sharing content to the OS.
             </summary>
         </member>
         <member name="M:AppFramework.Core.Commands.ShareCommand.#ctor">
