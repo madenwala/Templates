@@ -49,6 +49,27 @@ namespace AppFramework.Core.Commands
 
         #endregion
 
+        #region Properties
+
+        private bool _IsEnabled = true;
+        /// <summary>
+        /// Gets or sets whether or not this command instance is enabled to execute the provided CanExecute function. If false, CanExecute will always return false. If true, the provided CanExecute method will determine if CanExecute is true/false.
+        /// </summary>
+        public bool IsEnabled
+        {
+            get { return _IsEnabled; }
+            set
+            {
+                if (_IsEnabled != value)
+                {
+                    _IsEnabled = value;
+                    this.RaiseCanExecuteChanged();
+                }
+            }
+        }
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -91,31 +112,11 @@ namespace AppFramework.Core.Commands
 
         #region Methods
 
-        private bool _disable = false;
-
-        /// <summary>
-        /// Overrides CanExecute to FALSE to prevent any execution of this command despite the CanExecute logic provided to this command instance.
-        /// </summary>
-        public void Disable()
-        {
-            _disable = true;
-            this.RaiseCanExecuteChanged();
-        }
-
-        /// <summary>
-        /// Enables the CanExecute method provided to this command instance to execute.
-        /// </summary>
-        public void Enable()
-        {
-            _disable = false;
-            this.RaiseCanExecuteChanged();
-        }
-
         public override bool CanExecute(object parameter)
         {
             bool value = false;
 
-            if(_disable)
+            if(this.IsEnabled == false)
             {
                 return false;
             }
