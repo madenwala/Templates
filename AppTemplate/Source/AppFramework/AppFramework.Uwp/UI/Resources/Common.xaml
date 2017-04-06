@@ -635,6 +635,7 @@
 
     <!--ApplicationFrame-->
     <Style TargetType="controls:ApplicationFrame">
+        <Setter Property="IsTabStop" Value="False" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Margin" Value="0" />
@@ -665,6 +666,7 @@
 
     <!--AdSupportedApplicationFrame-->
     <Style TargetType="controls:AdSupportedApplicationFrame">
+        <Setter Property="IsTabStop" Value="False" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Margin" Value="0" />
@@ -698,7 +700,9 @@
         </Setter>
     </Style>
 
+    <!--BodyPanel-->
     <Style TargetType="controls:BodyPanel">
+        <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Background" Value="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
         <Setter Property="HeaderForeground" Value="{ThemeResource SystemControlForegroundAccentBrush}" />
         <Setter Property="HeaderBackground" Value="{ThemeResource SystemControlBackgroundChromeMediumBrush}" />

@@ -27,7 +27,6 @@ namespace AppFramework.UI.Controls
         public ApplicationFrame()
         {
             this.DefaultStyleKey = typeof(ApplicationFrame);
-
             this.Loaded += ApplicationFrame_Loaded;
             this.Unloaded += ApplicationFrame_Unloaded;
         }
