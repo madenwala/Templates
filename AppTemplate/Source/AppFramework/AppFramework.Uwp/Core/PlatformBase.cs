@@ -478,7 +478,7 @@ namespace AppFramework.Core
         /// <summary>
         /// Event which notifies the shell to open or close the menu.
         /// </summary>
-        public event EventHandler<bool> NotifyShellMenuToggle;
+        public event EventHandler<bool?> NotifyShellMenuToggle;
 
         public void ShellMenuOpen()
         {
@@ -488,6 +488,11 @@ namespace AppFramework.Core
         public void ShellMenuClose()
         {
             this.NotifyShellMenuToggle?.Invoke(null, false);
+        }
+
+        public void ShellMenuToggle()
+        {
+            this.NotifyShellMenuToggle?.Invoke(null, null);
         }
 
         #endregion

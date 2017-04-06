@@ -113,10 +113,15 @@ namespace Contoso.UI.Views
             });
         }
 
-        private void Current_NotifyShellMenuToggle(object sender, bool e)
+        private void Current_NotifyShellMenuToggle(object sender, bool? e)
         {
             if (svMain.DisplayMode != SplitViewDisplayMode.Inline && svMain.DisplayMode != SplitViewDisplayMode.CompactInline)
-                this.ViewModel.IsMenuOpen = e;
+            {
+                if(e == null)
+                    this.ViewModel.IsMenuOpen = !this.ViewModel.IsMenuOpen;
+                else
+                    this.ViewModel.IsMenuOpen = e.Value;
+            }
         }
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
