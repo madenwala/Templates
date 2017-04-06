@@ -120,10 +120,6 @@
       <Project>{65f2272c-d17a-45be-982a-c6637407657a}</Project>
       <Name>AppFramework.Uwp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\AppFramework\AppFramework\AppFramework.csproj">
-      <Project>{9f2d031a-595c-4c7d-b92c-686785b1c837}</Project>
-      <Name>AppFramework</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Contoso.Core\Contoso.Core.csproj">
       <Project>{9a7ebe07-4655-4eec-b627-f8ade0ee9953}</Project>
       <Name>Contoso.Core</Name>

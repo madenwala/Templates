@@ -121,6 +121,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\AgentSync.cs" />
+    <Compile Include="Core\Commands\CommandBase.cs" />
+    <Compile Include="Core\Extensions\IEnumerableExtensions.cs" />
+    <Compile Include="Core\Extensions\LongExtensions.cs" />
+    <Compile Include="Core\Models\IUserInformation.cs" />
+    <Compile Include="Core\Models\IView.cs" />
+    <Compile Include="Core\Models\ModelBase.cs" />
+    <Compile Include="Core\Models\UniqueModelBase.cs" />
+    <Compile Include="Core\Serializers.cs" />
+    <Compile Include="Core\TypeUtility.cs" />
     <Compile Include="UI\Controls\ApplicationFrame.cs" />
     <Compile Include="Core\Commands\GenericCommand.cs" />
     <Compile Include="Core\Commands\MapCommands.cs" />
@@ -255,12 +264,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AppFramework\AppFramework.csproj">
-      <Project>{9f2d031a-595c-4c7d-b92c-686785b1c837}</Project>
-      <Name>AppFramework</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FlurryWin8SDK">

@@ -32,6 +32,23 @@
             </summary>
             <returns>True if the application is launched/running else false.</returns>
         </member>
+        <member name="T:AppFramework.Core.Commands.CommandBase">
+            <summary>
+            Base class for commands.
+            </summary>
+        </member>
+        <member name="E:AppFramework.Core.Commands.CommandBase.CanExecuteChanged">
+            <summary>
+            Raised when RaiseCanExecuteChanged is called.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.Commands.CommandBase.RaiseCanExecuteChanged">
+            <summary>
+            Method used to raise the <see cref="E:AppFramework.Core.Commands.CommandBase.CanExecuteChanged"/> event
+            to indicate that the return value of the <see cref="M:AppFramework.Core.Commands.CommandBase.CanExecute(System.Object)"/>
+            method has changed.
+            </summary>
+        </member>
         <member name="T:AppFramework.Core.Commands.GenericCommand">
             <summary>
             Command used in data binding. GenericCommand is wired up with logging and analytics calls.
@@ -171,82 +188,85 @@
             Create an instance of the command for external webpage browsing.
             </summary>
         </member>
-        <member name="T:AppFramework.Core.InitializationModes">
+        <member name="M:AppFramework.Core.Extensions.LongExtensions.ToStringAsMemory(System.Int64)">
             <summary>
-            Enumeration used to indicate if core code is executing in a new instance of the application, 
-            if it were resumed, or if executing in the background.
+            Converts a long to memory formatted string in bytes/KB/MB/GB.
+            </summary>
+            <param name="sizeInBytes"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AppFramework.Core.Models.IModel">
+            <summary>
+            Interface that all model objects should implement.
             </summary>
         </member>
-        <member name="F:AppFramework.Core.InitializationModes.New">
+        <member name="T:AppFramework.Core.Models.ModelBase">
             <summary>
-            New instance of the application launched.
+            Implementation of <see cref="T:System.ComponentModel.INotifyPropertyChanged"/> to simplify models.
             </summary>
         </member>
-        <member name="F:AppFramework.Core.InitializationModes.Restore">
+        <member name="E:AppFramework.Core.Models.ModelBase.PropertyChanged">
             <summary>
-            App restored from a suspended state.
+            Multicast event for property change notifications.
             </summary>
         </member>
-        <member name="F:AppFramework.Core.InitializationModes.Background">
+        <member name="M:AppFramework.Core.Models.ModelBase.SetProperty``1(``0@,``0,System.String)">
             <summary>
-            App background task launched.
+            Checks if a property already matches a desired value.  Sets the property and
+            notifies listeners only when necessary.
             </summary>
+            <typeparam name="T">Type of the property.</typeparam>
+            <param name="storage">Reference to a property with both getter and setter.</param>
+            <param name="value">Desired value for the property.</param>
+            <param name="propertyName">Name of the property used to notify listeners.  This
+            value is optional and can be provided automatically when invoked from compilers that
+            support CallerMemberName.</param>
+            <returns>True if the value was changed, false if the existing value matched the
+            desired value.</returns>
         </member>
-        <member name="T:AppFramework.Core.DeviceFamily">
+        <member name="M:AppFramework.Core.Models.ModelBase.NotifyPropertyChanged(System.String)">
             <summary>
-            Device families supported by Windows.
+            Notifies listeners that a property value has changed.
             </summary>
+            <param name="propertyName">Optional name of the property used to notify listeners.  This
+            value is optional and can be provided automatically when invoked from compilers
+            that support <see cref="T:System.Runtime.CompilerServices.CallerMemberNameAttribute"/>.</param>
         </member>
-        <member name="T:AppFramework.Core.MapExternalOptions">
+        <member name="M:AppFramework.Core.Models.ModelBase.NotifyPropertyChanged``1(System.Linq.Expressions.Expression{System.Func{``0}})">
             <summary>
-            Enumeration representing each way maps can be displayed.
+            Notifies listeners that a property value has changed.
             </summary>
+            <typeparam name="T">Type of the property in the expression.</typeparam>
+            <param name="property">Expression to retrieve the property. Example: () => this.FirstName</param>
         </member>
-        <member name="F:AppFramework.Core.MapExternalOptions.Normal">
+        <member name="M:AppFramework.Core.Models.ModelBase.GetPropertyName``1(System.Linq.Expressions.Expression{System.Func{``0}})">
             <summary>
-            Standard directions
+            Gets the string name of a property expression.
             </summary>
+            <typeparam name="T">Type of the property in the expression.</typeparam>
+            <param name="property">Expression to retrieve the property. Example: () => this.FirstName</param>
+            <returns>String value representing the property name.</returns>
         </member>
-        <member name="F:AppFramework.Core.MapExternalOptions.DrivingDirections">
+        <member name="M:AppFramework.Core.Models.ModelBase.GetMememberExpression``1(System.Linq.Expressions.Expression{System.Func{``0}})">
             <summary>
-            Directions for driving
+            Gets the MemberExpression from a property expression.
             </summary>
+            <typeparam name="T">Type of the property in the expression.</typeparam>
+            <param name="property">Expression to retrieve the property. Example: () => this.FirstName</param>
+            <returns>MemberExpression instance presenting the property expression.</returns>
         </member>
-        <member name="F:AppFramework.Core.MapExternalOptions.WalkingDirections">
+        <member name="M:AppFramework.Core.Models.ModelBase.GetPropertyInfo``1(System.Linq.Expressions.Expression{System.Func{``0}})">
             <summary>
-            Directions for walking
+            Retrieves a PropertyInfo object representing the property in the specified expression.
             </summary>
+            <typeparam name="T">Type of the property in the expression.</typeparam>
+            <param name="property">Expression to retrieve the property. Example: () => this.FirstName</param>
+            <returns>PropertyInfo object of the expression property else null if not found.</returns>
         </member>
-        <member name="M:AppFramework.Core.GeneralFunctions.HexToColor(System.String)">
+        <member name="T:AppFramework.Core.Models.UniqueModelBase">
             <summary>
-            Converts a string hex color value to a Windows.UI.Color object instance.
+            Implementation of <see cref="!:INotifyPropertyChanged"/> to simplify models that have a unique ID to represent the model.
             </summary>
-            <param name="hexColor">Hex value of the color.</param>
-            <returns>Windows.UI.Color instance for the specified hex color value.</returns>
-        </member>
-        <member name="M:AppFramework.Core.GeneralFunctions.ParseQuerystring(System.String)">
-            <summary>
-            Parses a query string into a dictionary of key/value pairs of each parameter in the string.
-            </summary>
-            <param name="querystring">Query string to parse.</param>
-            <returns>Dictionary of key value pairs found within the query string.</returns>
-        </member>
-        <member name="M:AppFramework.Core.GeneralFunctions.CreateQuerystring(System.Collections.Generic.IDictionary{System.String,System.String})">
-            <summary>
-            Converts a dictionary of key/value pairs into a query string.
-            </summary>
-            <param name="parameters">Key/value pairs of parameters.</param>
-            <returns>Query string from all the key/value pair data supplied in the dictionary.</returns>
-        </member>
-        <member name="M:AppFramework.Core.GeneralFunctions.CreateDictionary``2(``0,``1)">
-            <summary>
-            Creates a dictionary object with an initial key/value pair entry.
-            </summary>
-            <typeparam name="T">Type of the key</typeparam>
-            <typeparam name="S">Type of the value</typeparam>
-            <param name="key">Value representing the unique key</param>
-            <param name="value">Value belonging to the key</param>
-            <returns>Dictionary object instance.</returns>
         </member>
         <member name="T:AppFramework.Core.Models.AppSettingsLocalBase">
             <summary>
@@ -515,6 +535,173 @@
             <summary>
             Object instance to pass in as a parameter.
             </summary>
+        </member>
+        <member name="T:AppFramework.Core.SerializerTypes">
+            <summary>
+            Serialization methods the application supports.
+            </summary>
+        </member>
+        <member name="F:AppFramework.Core.SerializerTypes.Default">
+            <summary>
+            Use the default serializer for the application.
+            </summary>
+        </member>
+        <member name="F:AppFramework.Core.SerializerTypes.Json">
+            <summary>
+            Use the JSON serializer.
+            </summary>
+        </member>
+        <member name="F:AppFramework.Core.SerializerTypes.Xml">
+            <summary>
+            Use the XML serializer.
+            </summary>
+        </member>
+        <member name="T:AppFramework.Core.Serializer">
+            <summary>
+            Serialize and deserialize objects.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Serializer.DefaultSerializerType">
+            <summary>
+            Get or set the default serialization method for the application. If an object that needs serialization/deserialization does not explictly
+            request a particular serializer, the default serializer will be used.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.Serializer.Serialize(System.Object,AppFramework.Core.SerializerTypes)">
+            <summary>
+            Serialize an object to string.
+            </summary>
+            <param name="obj">Object to serialize.</param>
+            <param name="serializerType">Use the default serializer or specific a particular serializer.</param>
+            <returns>String returned from the serializer.</returns>
+        </member>
+        <member name="M:AppFramework.Core.Serializer.Deserialize``1(System.String,AppFramework.Core.SerializerTypes)">
+            <summary>
+            Deserializes a string back into an instance of an object.
+            </summary>
+            <typeparam name="T">Type of the object to be returned.</typeparam>
+            <param name="data">String data to be deserialized.</param>
+            <param name="serializerType">Use the default serializer or specific a particular serializer.</param>
+            <returns>Object instance from the deserialized data string.</returns>
+        </member>
+        <member name="M:AppFramework.Core.Serializer.DeserializeFromXml``1(System.String)">
+            <summary>
+            Deserializes an XML string back into an object instance.
+            </summary>
+            <typeparam name="T">Type of the object to be returned.</typeparam>
+            <param name="xml">XML string to be deserialized.</param>
+            <returns>Object instance deserialized from the string data.</returns>
+        </member>
+        <member name="M:AppFramework.Core.Serializer.SerializeToXml(System.Object)">
+            <summary>
+            Serializes an object to XML.
+            </summary>
+            <param name="obj">Object to be serialized.</param>
+            <returns>String representing the serialized object.</returns>
+        </member>
+        <member name="M:AppFramework.Core.Serializer.DeserializeFromJson``1(System.String)">
+            <summary>
+            Deserializes a JSON string into an object instance.
+            </summary>
+            <typeparam name="T">Type of the object to be returned.</typeparam>
+            <param name="json">JSON string representing an object.</param>
+            <returns>Instance of an object from the JSON string.</returns>
+        </member>
+        <member name="M:AppFramework.Core.Serializer.SerializeToJson(System.Object)">
+            <summary>
+            Serializes an object into a JSON string.
+            </summary>
+            <param name="obj">Object instance to serialize.</param>
+            <returns>JSON string representing the object instance.</returns>
+        </member>
+        <member name="T:AppFramework.Core.TypeUtility">
+            <summary>
+            TypeUtility tests types to see if they are primitive types.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.TypeUtility.IsPrimitive(System.Type)">
+            <summary>
+            Tests a type to see if its a primitive type.
+            </summary>
+            <param name="type">Type to check if primitive.</param>
+            <returns>True if the specified type is a primitive else false.</returns>
+        </member>
+        <member name="T:AppFramework.Core.InitializationModes">
+            <summary>
+            Enumeration used to indicate if core code is executing in a new instance of the application, 
+            if it were resumed, or if executing in the background.
+            </summary>
+        </member>
+        <member name="F:AppFramework.Core.InitializationModes.New">
+            <summary>
+            New instance of the application launched.
+            </summary>
+        </member>
+        <member name="F:AppFramework.Core.InitializationModes.Restore">
+            <summary>
+            App restored from a suspended state.
+            </summary>
+        </member>
+        <member name="F:AppFramework.Core.InitializationModes.Background">
+            <summary>
+            App background task launched.
+            </summary>
+        </member>
+        <member name="T:AppFramework.Core.DeviceFamily">
+            <summary>
+            Device families supported by Windows.
+            </summary>
+        </member>
+        <member name="T:AppFramework.Core.MapExternalOptions">
+            <summary>
+            Enumeration representing each way maps can be displayed.
+            </summary>
+        </member>
+        <member name="F:AppFramework.Core.MapExternalOptions.Normal">
+            <summary>
+            Standard directions
+            </summary>
+        </member>
+        <member name="F:AppFramework.Core.MapExternalOptions.DrivingDirections">
+            <summary>
+            Directions for driving
+            </summary>
+        </member>
+        <member name="F:AppFramework.Core.MapExternalOptions.WalkingDirections">
+            <summary>
+            Directions for walking
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.GeneralFunctions.HexToColor(System.String)">
+            <summary>
+            Converts a string hex color value to a Windows.UI.Color object instance.
+            </summary>
+            <param name="hexColor">Hex value of the color.</param>
+            <returns>Windows.UI.Color instance for the specified hex color value.</returns>
+        </member>
+        <member name="M:AppFramework.Core.GeneralFunctions.ParseQuerystring(System.String)">
+            <summary>
+            Parses a query string into a dictionary of key/value pairs of each parameter in the string.
+            </summary>
+            <param name="querystring">Query string to parse.</param>
+            <returns>Dictionary of key value pairs found within the query string.</returns>
+        </member>
+        <member name="M:AppFramework.Core.GeneralFunctions.CreateQuerystring(System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Converts a dictionary of key/value pairs into a query string.
+            </summary>
+            <param name="parameters">Key/value pairs of parameters.</param>
+            <returns>Query string from all the key/value pair data supplied in the dictionary.</returns>
+        </member>
+        <member name="M:AppFramework.Core.GeneralFunctions.CreateDictionary``2(``0,``1)">
+            <summary>
+            Creates a dictionary object with an initial key/value pair entry.
+            </summary>
+            <typeparam name="T">Type of the key</typeparam>
+            <typeparam name="S">Type of the value</typeparam>
+            <param name="key">Value representing the unique key</param>
+            <param name="value">Value belonging to the key</param>
+            <returns>Dictionary object instance.</returns>
         </member>
         <member name="T:AppFramework.Core.PlatformBase">
             <summary>
@@ -3082,6 +3269,22 @@
             <summary>
             GetXmlnsDefinitions()
             </summary>
+        </member>
+        <member name="M:IEnumerableExtensions.ToObservableCollection``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Convert this collection into an ObservableCollection instance.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="collection"></param>
+            <returns>ObservableCollection instance containing items of the type specified.</returns>
+        </member>
+        <member name="M:IEnumerableExtensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
+            <summary>
+            Performs an action on each item within the collection.
+            </summary>
+            <typeparam name="T">Type of the item in the collection.</typeparam>
+            <param name="source">Collection source.</param>
+            <param name="action">Action to perform on each item.</param>
         </member>
         <member name="M:GeocoordinateExtensions.AsLocationModel(Windows.Devices.Geolocation.Geocoordinate)">
             <summary>

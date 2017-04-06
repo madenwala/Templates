@@ -344,10 +344,6 @@
       <Project>{65f2272c-d17a-45be-982a-c6637407657a}</Project>
       <Name>AppFramework.Uwp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\AppFramework\AppFramework\AppFramework.csproj">
-      <Project>{9f2d031a-595c-4c7d-b92c-686785b1c837}</Project>
-      <Name>AppFramework</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Contoso.BackgroundTasks\Contoso.BackgroundTasks.csproj">
       <Project>{cb283ae3-3653-41ec-8e20-69722d2d33fa}</Project>
       <Name>Contoso.BackgroundTasks</Name>

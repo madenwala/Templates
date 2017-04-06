@@ -1,5 +1,3 @@
-msbuild ..\..\AppFramework\AppFramework\AppFramework.csproj /p:Configuration="Release" /p:Platform="AnyCPU"
-
 msbuild ..\..\AppFramework\AppFramework.Uwp\AppFramework.Uwp.csproj /p:Configuration="Release" /p:Platform="x64"
 msbuild ..\..\AppFramework\AppFramework.Uwp\AppFramework.Uwp.csproj /p:Configuration="Release" /p:Platform="x86"
 msbuild ..\..\AppFramework\AppFramework.Uwp\AppFramework.Uwp.csproj /p:Configuration="Release" /p:Platform="arm"
