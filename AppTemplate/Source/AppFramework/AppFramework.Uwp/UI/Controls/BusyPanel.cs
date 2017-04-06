@@ -44,7 +44,7 @@ namespace AppFramework.UI.Controls
             get { return (string)GetValue(CustomButtonTextProperty); }
             set { SetValue(CustomButtonTextProperty, value); }
         }
-        public static readonly DependencyProperty CustomButtonTextProperty = DependencyProperty.Register(nameof(CustomButtonText), typeof(string), typeof(BusyPanel), new PropertyMetadata("[Cancel]"));
+        public static readonly DependencyProperty CustomButtonTextProperty = DependencyProperty.Register(nameof(CustomButtonText), typeof(string), typeof(BusyPanel), new PropertyMetadata(AppFramework.Core.Strings.Resources.TextCancel));
 
         public Visibility CustomButtonVisibility
         {

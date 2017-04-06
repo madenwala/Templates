@@ -61,17 +61,6 @@ namespace Contoso.Core.ViewModels
             return base.OnLoadStateAsync(e);
         }
 
-        protected override void OnHandleKeyUp(KeyRoutedEventArgs e)
-        {
-            if (e.Key == Windows.System.VirtualKey.GamepadMenu || e.Key == Windows.System.VirtualKey.Home)
-            {
-                this.IsMenuOpen = !this.IsMenuOpen;
-                e.Handled = true;
-            }
-
-            base.OnHandleKeyUp(e);
-        }
-
         protected override async Task OnUserAuthenticatedChanged()
         {
             if (this.RequiresAuthorization && this.IsUserAuthenticated == false)

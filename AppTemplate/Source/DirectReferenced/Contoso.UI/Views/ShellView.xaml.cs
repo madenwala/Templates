@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 
 namespace Contoso.UI.Views
@@ -122,6 +123,17 @@ namespace Contoso.UI.Views
                 else
                     this.ViewModel.IsMenuOpen = e.Value;
             }
+        }
+
+        protected override void OnKeyUp(KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.GamepadMenu || e.Key == Windows.System.VirtualKey.Home)
+            {
+                this.Current_NotifyShellMenuToggle(null, null);
+                e.Handled = true;
+            }
+
+            base.OnKeyUp(e);
         }
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
