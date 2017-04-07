@@ -1,4 +1,5 @@
-﻿using AppFramework.Core.Models;
+﻿using AppFramework.Core.Extensions;
+using AppFramework.Core.Models;
 using AppFramework.Core.Services;
 using System;
 using System.Linq;

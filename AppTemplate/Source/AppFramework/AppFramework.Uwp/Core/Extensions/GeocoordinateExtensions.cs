@@ -1,50 +1,53 @@
 ﻿using AppFramework.Core.Models;
 using Windows.Devices.Geolocation;
 
-internal static class GeocoordinateExtensions
+namespace AppFramework.Core.Extensions
 {
-    /// <summary>
-    /// Converts this Geocoordinate object into a LocationModel instance.
-    /// </summary>
-    /// <param name="coord">Geocoordinate to convert to LocationModel.</param>
-    /// <returns>LocationModel instance representing this Geocoordinate.</returns>
-    public static LocationModel AsLocationModel(this Geocoordinate coord)
+    internal static class GeocoordinateExtensions
     {
-        if (coord != null)
+        /// <summary>
+        /// Converts this Geocoordinate object into a LocationModel instance.
+        /// </summary>
+        /// <param name="coord">Geocoordinate to convert to LocationModel.</param>
+        /// <returns>LocationModel instance representing this Geocoordinate.</returns>
+        public static LocationModel AsLocationModel(this Geocoordinate coord)
         {
-            return new LocationModel()
+            if (coord != null)
             {
-                Latitude = coord.Point.Position.Latitude,
-                Longitude = coord.Point.Position.Longitude
+                return new LocationModel()
+                {
+                    Latitude = coord.Point.Position.Latitude,
+                    Longitude = coord.Point.Position.Longitude
+                };
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Converts a ILocationModel into a BasicGeoposition object.
+        /// </summary>
+        /// <param name="loc">ILocationModel to convert to BasicGeoposition.</param>
+        /// <returns>BasicGeoposition instance representing this ILocationModel.</returns>
+        public static BasicGeoposition AsBasicGeoposition(this ILocationModel loc)
+        {
+            return new BasicGeoposition()
+            {
+                Latitude = loc.Latitude,
+                Longitude = loc.Longitude
             };
         }
-        else
+
+        /// <summary>
+        /// Converts a ILocationModel into a GeoPoint object.
+        /// </summary>
+        /// <param name="loc">ILocationModel to convert to Geopoint.</param>
+        /// <returns>Geopoint instance representing this ILocationModel.</returns>
+        public static Geopoint AsGeoPoint(this ILocationModel loc)
         {
-            return null;
+            return new Geopoint(loc.AsBasicGeoposition());
         }
-    }
-
-    /// <summary>
-    /// Converts a ILocationModel into a BasicGeoposition object.
-    /// </summary>
-    /// <param name="loc">ILocationModel to convert to BasicGeoposition.</param>
-    /// <returns>BasicGeoposition instance representing this ILocationModel.</returns>
-    public static BasicGeoposition AsBasicGeoposition(this ILocationModel loc)
-    {
-        return new BasicGeoposition()
-        {
-            Latitude = loc.Latitude,
-            Longitude = loc.Longitude
-        };
-    }
-
-    /// <summary>
-    /// Converts a ILocationModel into a GeoPoint object.
-    /// </summary>
-    /// <param name="loc">ILocationModel to convert to Geopoint.</param>
-    /// <returns>Geopoint instance representing this ILocationModel.</returns>
-    public static Geopoint AsGeoPoint(this ILocationModel loc)
-    {
-        return new Geopoint(loc.AsBasicGeoposition());
     }
 }

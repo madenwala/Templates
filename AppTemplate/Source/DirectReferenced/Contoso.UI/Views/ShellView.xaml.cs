@@ -1,4 +1,5 @@
 ﻿using AppFramework.Core;
+using AppFramework.Core.Extensions;
 using AppFramework.UI;
 using Contoso.Core;
 using Contoso.Core.ViewModels;

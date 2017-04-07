@@ -26,21 +26,17 @@ namespace AppFramework.UI.Behaviors
 
         private static void OnCommandPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
         {
-            if (sender is ListViewBase)
+            if (sender is AdaptiveGridView grid)
             {
-                var control = (ListViewBase)sender;
-
                 // Remove the old click handler if there was a previous command
                 if (args.OldValue != null)
-                    control.ItemClick -= OnItemClick;
+                    grid.ItemClick -= OnItemClick;
 
                 if (args.NewValue != null)
-                    control.ItemClick += OnItemClick;
+                    grid.ItemClick += OnItemClick;
             }
-            else if (sender is AdaptiveGridView)
+            else if (sender is ListViewBase control)
             {
-                var control = (AdaptiveGridView)sender;
-
                 // Remove the old click handler if there was a previous command
                 if (args.OldValue != null)
                     control.ItemClick -= OnItemClick;
@@ -52,11 +48,9 @@ namespace AppFramework.UI.Behaviors
 
         private static void OnItemClick(object sender, ItemClickEventArgs e)
         {
-            if (sender is Control)
+            if (sender is Control control)
             {
-                var control = (Control)sender;
                 var command = GetCommand(control);
-
                 if (command != null && command.CanExecute(e.ClickedItem))
                     command.Execute(e.ClickedItem);
             }

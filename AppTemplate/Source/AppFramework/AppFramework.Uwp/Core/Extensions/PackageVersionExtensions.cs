@@ -1,14 +1,17 @@
 ﻿using System;
 using Windows.ApplicationModel;
 
-internal static class PackageVersionExtensions
+namespace AppFramework.Core.Extensions
 {
-    /// <summary>
-    /// Converts this PackageVersion instance into a Version instance.
-    /// </summary>
-    /// <returns>Version instance with the version numbers.</returns>
-    public static Version ToVersion(this PackageVersion pv)
+    internal static class PackageVersionExtensions
     {
-        return new Version(pv.Major, pv.Minor, pv.Build, pv.Revision);
+        /// <summary>
+        /// Converts this PackageVersion instance into a Version instance.
+        /// </summary>
+        /// <returns>Version instance with the version numbers.</returns>
+        public static Version ToVersion(this PackageVersion pv)
+        {
+            return new Version(pv.Major, pv.Minor, pv.Build, pv.Revision);
+        }
     }
 }

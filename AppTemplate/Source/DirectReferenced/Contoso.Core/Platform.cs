@@ -1,4 +1,5 @@
 ﻿using AppFramework.Core;
+using AppFramework.Core.Extensions;
 using AppFramework.Core.Models;
 using Contoso.Core.Data;
 using Contoso.Core.Models;
