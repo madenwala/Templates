@@ -3,7 +3,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace AppFramework.UI.Resources
 {
-    internal partial class Common
+    public partial class Common
     {
         public Common()
         {
