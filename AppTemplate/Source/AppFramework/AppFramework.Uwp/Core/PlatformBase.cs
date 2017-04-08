@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Background;
 using Windows.Storage;
 using Windows.System.Profile;
 using Windows.UI.ViewManagement;
@@ -498,6 +499,78 @@ namespace AppFramework.Core
         #endregion
 
         #endregion Methods
+
+        /// <summary>
+        /// Executes background task work. This call wraps the work with error handling, deferrals, and instantiating all the appropriate services needed by AppFramework.
+        /// </summary>
+        /// <param name="taskInstance">Background task instance.</param>
+        /// <param name="work">The work that needs to be performed.</param>
+        public async void ExecuteBackgroundWork(IBackgroundTaskInstance taskInstance, Action<CancellationToken> work)
+        {
+#if !DEBUG
+            // Check if the app is alread in the foreground and if so, don't run the agent
+            if (AgentSync.IsApplicationLaunched())
+                return;
+#endif
+            BackgroundTaskRunInfo _info = new BackgroundTaskRunInfo();
+
+            // Get a deferral, to prevent the task from closing prematurely 
+            // while asynchronous code is still running.
+            BackgroundTaskDeferral deferral = taskInstance.GetDeferral();
+
+            try
+            {
+                // Execute the background work
+                _info.StartTime = DateTime.UtcNow;
+
+                // Initialize the app
+                await PlatformBase.Current.AppInitializingAsync(InitializationModes.Background);
+                PlatformBase.Current.Logger.Log(LogLevels.Information, "Starting background task '{0}'...", taskInstance.Task.Name);
+
+                CancellationTokenSource cts = new CancellationTokenSource();
+
+                taskInstance.Canceled += (sender, reason) =>
+                {
+                    PlatformBase.Current.Logger.Log(LogLevels.Warning, "Background task '{0}' is being cancelled due to '{1}'...", taskInstance.Task.Name, reason);
+
+                    // Store info on why this task was cancelled
+                    _info.CancelReason = reason.ToString();
+                    _info.EndTime = DateTime.UtcNow;
+
+                    // Cancel/dispose the token
+                    cts?.Cancel();
+                    cts?.Dispose();
+                };
+
+                work(cts.Token);
+
+                // Task ran without error
+                _info.RunSuccessfully = true;
+                PlatformBase.Current.Logger.Log(LogLevels.Information, "Completed execution of background task '{0}'!", taskInstance.Task.Name);
+            }
+            catch (OperationCanceledException)
+            {
+                // Task was aborted via the cancelation token
+                PlatformBase.Current.Logger.Log(LogLevels.Warning, "Background task '{0}' had an OperationCanceledException with reason '{1}'.", taskInstance.Task.Name, _info.CancelReason);
+            }
+            catch (Exception ex)
+            {
+                // Task threw an exception, store/log the error details
+                _info.ExceptionDetails = ex.ToString();
+                PlatformBase.Current.Logger.LogErrorFatal(ex, "Background task '{0}' failed with exception to run to completion: {1}", taskInstance.Task.Name, ex.Message);
+            }
+            finally
+            {
+                _info.EndTime = DateTime.UtcNow;
+
+                // Store the task status information
+                PlatformBase.Current.Storage.SaveSetting("TASK_" + taskInstance.Task.Name, _info, ApplicationData.Current.LocalSettings);
+
+                // Shutdown the task
+                PlatformBase.Current.AppSuspending();
+                deferral.Complete();
+            }
+        }
     }
 
     public abstract class PlatformNewBase<VM, L, R> : PlatformBase

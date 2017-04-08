@@ -142,7 +142,7 @@ namespace Contoso.Core
         /// Work that should be performed from the background agent.
         /// </summary>
         /// <returns>Awaitable task is returned.</returns>
-        public async Task TimedBackgroundWorkAsync(BackgroundWorkCostValue cost, CancellationToken ct)
+        public async Task TimedBackgroundWorkAsync(CancellationToken ct)
         {
             try
             {
@@ -166,7 +166,7 @@ namespace Contoso.Core
 
                     ct.ThrowIfCancellationRequested();
 
-                    if (cost <= BackgroundWorkCostValue.Medium)
+                    if (BackgroundWorkCost.CurrentBackgroundWorkCost <= BackgroundWorkCostValue.Medium)
                     {
                         // Update primary tile
                         await this.Notifications.CreateOrUpdateTileAsync(new ModelList<ItemModel>(data));

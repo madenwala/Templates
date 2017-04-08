@@ -906,6 +906,13 @@
             Event which notifies the shell to open or close the menu.
             </summary>
         </member>
+        <member name="M:AppFramework.Core.PlatformBase.ExecuteBackgroundWork(Windows.ApplicationModel.Background.IBackgroundTaskInstance,System.Action{System.Threading.CancellationToken})">
+            <summary>
+            Executes background task work. This call wraps the work with error handling, deferrals, and instantiating all the appropriate services needed by AppFramework.
+            </summary>
+            <param name="taskInstance">Background task instance.</param>
+            <param name="work">The work that needs to be performed.</param>
+        </member>
         <member name="P:AppFramework.Core.PlatformBase.Analytics">
             <summary>
             Gets access to the analytics service of the platform currently executing.
