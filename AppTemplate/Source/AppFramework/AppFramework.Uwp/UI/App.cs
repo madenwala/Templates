@@ -45,20 +45,20 @@ namespace AppFramework.UI
         /// <param name="e">Details about the launch request and process.</param>
         protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
-            PlatformBase.Current.Analytics.Event("App.OnLaunched", this.ToDictionary(e));
+            PlatformCore.Current.Analytics.Event("App.OnLaunched", this.ToDictionary(e));
             await this.InitializeAsync(e, e.PrelaunchActivated);
         }
 
         protected override async void OnActivated(IActivatedEventArgs e)
         {
-            PlatformBase.Current.Analytics.Event("App.OnActivated", this.ToDictionary(e));
+            PlatformCore.Current.Analytics.Event("App.OnActivated", this.ToDictionary(e));
             await this.InitializeAsync(e);
             base.OnActivated(e);
         }
 
         protected override async void OnSearchActivated(SearchActivatedEventArgs e)
         {
-            PlatformBase.Current.Analytics.Event("App.OnSearchActivated", this.ToDictionary(e));
+            PlatformCore.Current.Analytics.Event("App.OnSearchActivated", this.ToDictionary(e));
             await this.InitializeAsync(e);
             base.OnSearchActivated(e);
         }
@@ -90,9 +90,9 @@ namespace AppFramework.UI
 
                     // Determine if the app is a new instance or being restored after app suspension
                     if (e.PreviousExecutionState == ApplicationExecutionState.ClosedByUser || e.PreviousExecutionState == ApplicationExecutionState.NotRunning)
-                        await PlatformBase.Current.AppInitializingAsync(InitializationModes.New);
+                        await PlatformCore.Current.AppInitializingAsync(InitializationModes.New);
                     else
-                        await PlatformBase.Current.AppInitializingAsync(InitializationModes.Restore);
+                        await PlatformCore.Current.AppInitializingAsync(InitializationModes.Restore);
                 }
 
                 bool firstWindows = false;
@@ -137,7 +137,7 @@ namespace AppFramework.UI
                 if (preLaunchActivated == false)
                 {
                     // Manage activation and process arguments
-                    PlatformBase.Current.NavigationBase.HandleActivation(e, rootFrame);
+                    PlatformCore.Current.NavigationBase.HandleActivation(e, rootFrame);
 
                     // Ensure the current window is active
                     Window.Current.Activate();
@@ -152,7 +152,7 @@ namespace AppFramework.UI
             }
             catch (Exception ex)
             {
-                PlatformBase.Current.Logger.LogErrorFatal(ex, "Error during App InitializeAsync(e)");
+                PlatformCore.Current.Logger.LogErrorFatal(ex, "Error during App InitializeAsync(e)");
                 throw ex;
             }
         }
@@ -160,7 +160,7 @@ namespace AppFramework.UI
         private void CustomizeApplicationUI()
         {
             // XBOX
-            if (PlatformBase.DeviceFamily == DeviceFamily.Xbox && Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationView"))
+            if (PlatformCore.DeviceFamily == DeviceFamily.Xbox && Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationView"))
                 ApplicationView.GetForCurrentView().SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
 
             // Customizing the TitleBar colors
@@ -170,7 +170,7 @@ namespace AppFramework.UI
                 titleBar.BackgroundColor = titleBar.ButtonBackgroundColor = (Windows.UI.Color)Application.Current.Resources["SystemAccentColor"]; //SystemChromeMediumColor                    
                 titleBar.ForegroundColor = titleBar.ButtonForegroundColor = (Windows.UI.Color)Application.Current.Resources["SystemAccentForegroundColor"];
             }
-            if (PlatformBase.DeviceFamily == DeviceFamily.Mobile)
+            if (PlatformCore.DeviceFamily == DeviceFamily.Mobile)
             {
                 StatusBar.GetForCurrentView().BackgroundOpacity = 1;
                 StatusBar.GetForCurrentView().BackgroundColor = (Windows.UI.Color)Application.Current.Resources["SystemAccentColor"]; //SystemChromeMediumColor
@@ -183,7 +183,7 @@ namespace AppFramework.UI
             }
             catch(Exception ex)
             {
-                PlatformBase.Current.Logger.LogError(ex, "Failed to execute OnCustomizeApplicationUI");
+                PlatformCore.Current.Logger.LogError(ex, "Failed to execute OnCustomizeApplicationUI");
             }
         }
 
@@ -207,16 +207,16 @@ namespace AppFramework.UI
             var deferral = e.SuspendingOperation.GetDeferral();
             try
             {
-                PlatformBase.Current.AppSuspending();
+                PlatformCore.Current.AppSuspending();
                 await SuspensionManager.SaveAsync();
             }
             catch (SuspensionManagerException ex)
             {
-                PlatformBase.Current.Logger.LogErrorFatal(ex, "Suspension manager failed during App OnSuspending!");
+                PlatformCore.Current.Logger.LogErrorFatal(ex, "Suspension manager failed during App OnSuspending!");
             }
             catch (Exception ex)
             {
-                PlatformBase.Current.Logger.LogErrorFatal(ex, "Error during App OnSuspending");
+                PlatformCore.Current.Logger.LogErrorFatal(ex, "Error during App OnSuspending");
                 throw ex;
             }
             deferral.Complete();
@@ -233,7 +233,7 @@ namespace AppFramework.UI
         /// <param name="e"></param>
         private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            e.Handled = PlatformBase.Current.AppUnhandledException(e.Exception);
+            e.Handled = PlatformCore.Current.AppUnhandledException(e.Exception);
         }
 
         /// <summary>
@@ -244,7 +244,7 @@ namespace AppFramework.UI
         private void TaskScheduler_UnobservedTaskException(object sender, System.Threading.Tasks.UnobservedTaskExceptionEventArgs e)
         {
             e.SetObserved();
-            PlatformBase.Current.AppUnhandledException(e.Exception);
+            PlatformCore.Current.AppUnhandledException(e.Exception);
         }
 
         /// <summary>
@@ -254,7 +254,7 @@ namespace AppFramework.UI
         /// <param name="e">Details about the binding failure</param>
         private void DebugSettings_BindingFailed(object sender, BindingFailedEventArgs e)
         {
-            PlatformBase.Current.Logger.Log(LogLevels.Error, e.Message);
+            PlatformCore.Current.Logger.Log(LogLevels.Error, e.Message);
         }
 
         /// <summary>

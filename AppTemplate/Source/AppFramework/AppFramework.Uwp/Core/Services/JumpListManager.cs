@@ -7,7 +7,7 @@ using Windows.UI.StartScreen;
 
 namespace AppFramework.Core
 {
-    public partial class PlatformBase
+    public partial class PlatformCore
     {
         /// <summary>
         /// Gets access to the app info service of the platform currently executing.
@@ -107,7 +107,7 @@ namespace AppFramework.Core.Services
             }
             catch(Exception ex)
             {
-                PlatformBase.Current.Logger.LogError(ex, "Could not add to jump list!");
+                PlatformCore.Current.Logger.LogError(ex, "Could not add to jump list!");
             }
         }
 

@@ -755,130 +755,130 @@
             <param name="value">Value belonging to the key</param>
             <returns>Dictionary object instance.</returns>
         </member>
-        <member name="T:AppFramework.Core.PlatformBase">
+        <member name="T:AppFramework.Core.PlatformCore">
             <summary>
             Base class used to manage application execution and to access all services available to the solution.
             Provides core app functionality for initializing and suspending your application,
             handling exceptions, and more.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.ViewModel">
+        <member name="P:AppFramework.Core.PlatformCore.ViewModel">
             <summary>
             Gets the MainViewModel global instance for the application.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.AppSettingsLocal">
+        <member name="P:AppFramework.Core.PlatformCore.AppSettingsLocal">
             <summary>
             Gets local app settings for this app.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.AppSettingsRoaming">
+        <member name="P:AppFramework.Core.PlatformCore.AppSettingsRoaming">
             <summary>
             Gets roaming app settings for this app.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.IsDesktop">
+        <member name="P:AppFramework.Core.PlatformCore.IsDesktop">
             <summary>
             Gets whether or not the current device is Windows Desktop.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.IsMobile">
+        <member name="P:AppFramework.Core.PlatformCore.IsMobile">
             <summary>
             Gets whether or not the current device is Windows Mobile.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.IsXbox">
+        <member name="P:AppFramework.Core.PlatformCore.IsXbox">
             <summary>
             Gets whether or not the current device is Xbox.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.IsMobileContinuumDesktop">
+        <member name="P:AppFramework.Core.PlatformCore.IsMobileContinuumDesktop">
             <summary>
             Gets whether or not the current device is executing on Windows Mobile Continuum Desktop.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.InitializationMode">
+        <member name="P:AppFramework.Core.PlatformCore.InitializationMode">
             <summary>
             Indicates the initialization mode of this app instance.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.BackgroundRegistrationTask">
+        <member name="P:AppFramework.Core.PlatformCore.BackgroundRegistrationTask">
             <summary>
             Gets the task object which registers all the background tasks in the application.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.Current">
+        <member name="P:AppFramework.Core.PlatformCore.Current">
             <summary>
             Provides access to application services.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.DeviceFamily">
+        <member name="P:AppFramework.Core.PlatformCore.DeviceFamily">
             <summary>
             Gets the current device family this app is executing on.
             </summary>
         </member>
-        <member name="M:AppFramework.Core.PlatformBase.AppInitializingAsync(AppFramework.Core.InitializationModes)">
+        <member name="M:AppFramework.Core.PlatformCore.AppInitializingAsync(AppFramework.Core.InitializationModes)">
             <summary>
             Global initialization of the app and loads all app settings and initializes all services.
             </summary>
             <param name="mode">Specifies the mode of this app instance and how it's executing.</param>
             <returns>Awaitable task is returned.</returns>
         </member>
-        <member name="M:AppFramework.Core.PlatformBase.AppSuspending">
+        <member name="M:AppFramework.Core.PlatformCore.AppSuspending">
             <summary>
             Global suspension of the app and any custom logic to execute on suspend of the app.
             </summary>
         </member>
-        <member name="M:AppFramework.Core.PlatformBase.SaveSettings(System.Boolean)">
+        <member name="M:AppFramework.Core.PlatformCore.SaveSettings(System.Boolean)">
             <summary>
             Saves any app settings only if the data had changed.
             </summary>
         </member>
-        <member name="M:AppFramework.Core.PlatformBase.ResetAppSettings">
+        <member name="M:AppFramework.Core.PlatformCore.ResetAppSettings">
             <summary>
             Reset all the app settings back to their defaults.
             </summary>
         </member>
-        <member name="M:AppFramework.Core.PlatformBase.GetService``1">
+        <member name="M:AppFramework.Core.PlatformCore.GetService``1">
             <summary>
             Retrieve an instance of a type registered as a platform service.
             </summary>
             <typeparam name="T">Type reference of the service to retrieve.</typeparam>
             <returns>Instance of type T if it was already initialized or null if not found.</returns>
         </member>
-        <member name="M:AppFramework.Core.PlatformBase.SetService``1(``0)">
+        <member name="M:AppFramework.Core.PlatformCore.SetService``1(``0)">
             <summary>
             Registers and intializes an instance of an adapter.
             </summary>
             <typeparam name="T">Type reference of the service to register and initialize.</typeparam>
         </member>
-        <member name="M:AppFramework.Core.PlatformBase.CheckInitializationAsync(AppFramework.Core.Services.ServiceBase)">
+        <member name="M:AppFramework.Core.PlatformCore.CheckInitializationAsync(AppFramework.Core.Services.ServiceBase)">
             <summary>
             Initializes a service if not already initialized.
             </summary>
             <param name="service">Service instance to intialize.</param>
         </member>
-        <member name="M:AppFramework.Core.PlatformBase.AppUnhandledException(System.Exception)">
+        <member name="M:AppFramework.Core.PlatformCore.AppUnhandledException(System.Exception)">
             <summary>
             Global unhandled exception handler for your application.
             </summary>
             <param name="e"></param>
             <returns>True if the exception was handled else false.</returns>
         </member>
-        <member name="M:AppFramework.Core.PlatformBase.SignoutAllAsync">
+        <member name="M:AppFramework.Core.PlatformCore.SignoutAllAsync">
             <summary>
             Logic performed during sign out of a user in this application.
             </summary>
             <returns>Awaitable task is returned.</returns>
         </member>
-        <member name="M:AppFramework.Core.PlatformBase.GenerateModelArguments(AppFramework.Core.Models.IModel)">
+        <member name="M:AppFramework.Core.PlatformCore.GenerateModelArguments(AppFramework.Core.Models.IModel)">
             <summary>
             Creates a querystring parameter string from a model instance.
             </summary>
             <param name="model">Model to convert into a querystring.</param>
             <returns>Query string representing the model provided.</returns>
         </member>
-        <member name="M:AppFramework.Core.PlatformBase.OnGenerateModelArguments(System.Collections.Generic.Dictionary{System.String,System.String},AppFramework.Core.Models.IModel)">
+        <member name="M:AppFramework.Core.PlatformCore.OnGenerateModelArguments(System.Collections.Generic.Dictionary{System.String,System.String},AppFramework.Core.Models.IModel)">
             <summary>
             Creates a querystring parameter string from a model instance.
             </summary>
@@ -886,14 +886,14 @@
             <param name="model">Model to convert into a querystring.</param>
             <returns>Query string representing the model provided.</returns>
         </member>
-        <member name="M:AppFramework.Core.PlatformBase.GenerateModelTileID(AppFramework.Core.Models.IModel)">
+        <member name="M:AppFramework.Core.PlatformCore.GenerateModelTileID(AppFramework.Core.Models.IModel)">
             <summary>
             Generates a unique tile ID used for secondary tiles based on a model instance.
             </summary>
             <param name="model">Model to convert into a unique tile ID.</param>
             <returns>String representing a unique tile ID for the model else null if not supported.</returns>
         </member>
-        <member name="M:AppFramework.Core.PlatformBase.GenerateModelFromTileIdAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:AppFramework.Core.PlatformCore.GenerateModelFromTileIdAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Converts a tile ID back into an object instance.
             </summary>
@@ -901,124 +901,124 @@
             <param name="ct">Cancelation token.</param>
             <returns>Object instance if found else null.</returns>
         </member>
-        <member name="E:AppFramework.Core.PlatformBase.NotifyShellMenuToggle">
+        <member name="E:AppFramework.Core.PlatformCore.NotifyShellMenuToggle">
             <summary>
             Event which notifies the shell to open or close the menu.
             </summary>
         </member>
-        <member name="M:AppFramework.Core.PlatformBase.ExecuteBackgroundWork(Windows.ApplicationModel.Background.IBackgroundTaskInstance,System.Action{System.Threading.CancellationToken})">
+        <member name="M:AppFramework.Core.PlatformCore.ExecuteBackgroundWork(Windows.ApplicationModel.Background.IBackgroundTaskInstance,System.Action{System.Threading.CancellationToken})">
             <summary>
             Executes background task work. This call wraps the work with error handling, deferrals, and instantiating all the appropriate services needed by AppFramework.
             </summary>
             <param name="taskInstance">Background task instance.</param>
             <param name="work">The work that needs to be performed.</param>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.Analytics">
+        <member name="P:AppFramework.Core.PlatformCore.Analytics">
             <summary>
             Gets access to the analytics service of the platform currently executing.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.AppInfo">
+        <member name="P:AppFramework.Core.PlatformCore.AppInfo">
             <summary>
             Gets access to the app info service of the platform currently executing.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.AuthManager">
+        <member name="P:AppFramework.Core.PlatformCore.AuthManager">
             <summary>
             Gets access to the cryptography provider of the platform currently executing.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.BackgroundTasks">
+        <member name="P:AppFramework.Core.PlatformCore.BackgroundTasks">
             <summary>
             Gets access to the geocoding service adapter implement of the platform currently executing.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.Cryptography">
+        <member name="P:AppFramework.Core.PlatformCore.Cryptography">
             <summary>
             Gets access to the cryptography provider of the platform currently executing.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.EmailProvider">
+        <member name="P:AppFramework.Core.PlatformCore.EmailProvider">
             <summary>
             Gets access to the app info service of the platform currently executing.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.Geocode">
+        <member name="P:AppFramework.Core.PlatformCore.Geocode">
             <summary>
             Gets access to the geocoding service adapter implement of the platform currently executing.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.Geolocation">
+        <member name="P:AppFramework.Core.PlatformCore.Geolocation">
             <summary>
             Gets access to the location service of the platform currently executing.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.Jumplist">
+        <member name="P:AppFramework.Core.PlatformCore.Jumplist">
             <summary>
             Gets access to the app info service of the platform currently executing.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.Logger">
+        <member name="P:AppFramework.Core.PlatformCore.Logger">
             <summary>
             Gets access to the logging service of the platform currently executing.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.NavigationBase">
+        <member name="P:AppFramework.Core.PlatformCore.NavigationBase">
             <summary>
             Gets the ability to navigate to different parts of an application specific to the platform currently executing.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.Notifications">
+        <member name="P:AppFramework.Core.PlatformCore.Notifications">
             <summary>
             Gets access to the notifications service of the platform currently executing. Provides you the ability to display toasts or manage tiles or etc on the executing platform.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.Ratings">
+        <member name="P:AppFramework.Core.PlatformCore.Ratings">
             <summary>
             Gets access to the ratings manager used to help promote users to rate your application.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.SharingManager">
+        <member name="P:AppFramework.Core.PlatformCore.SharingManager">
             <summary>
             Gets access to the app info service of the platform currently executing.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.Storage">
+        <member name="P:AppFramework.Core.PlatformCore.Storage">
             <summary>
             Gets access to the storage system of the platform currently executing.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.VoiceCommandManager">
+        <member name="P:AppFramework.Core.PlatformCore.VoiceCommandManager">
             <summary>
             Gets access to the app info service of the platform currently executing.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.WebAccountManager">
+        <member name="P:AppFramework.Core.PlatformCore.WebAccountManager">
             <summary>
             Gets access to the app info service of the platform currently executing.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformNewBase`3.ViewModel">
+        <member name="P:AppFramework.Core.PlatformBase`3.ViewModel">
             <summary>
             Gets the MainViewModel global instance for the application.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformNewBase`3.AppSettingsLocal">
+        <member name="P:AppFramework.Core.PlatformBase`3.AppSettingsLocal">
             <summary>
             Gets local app settings for this app.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformNewBase`3.AppSettingsRoaming">
+        <member name="P:AppFramework.Core.PlatformBase`3.AppSettingsRoaming">
             <summary>
             Gets roaming app settings for this app.
             </summary>
         </member>
-        <member name="M:AppFramework.Core.PlatformNewBase`3.ResetAppSettings">
+        <member name="M:AppFramework.Core.PlatformBase`3.ResetAppSettings">
             <summary>
             Reset all the app settings back to their defaults.
             </summary>
         </member>
-        <member name="M:AppFramework.Core.PlatformNewBase`3.SaveSettings(System.Boolean)">
+        <member name="M:AppFramework.Core.PlatformBase`3.SaveSettings(System.Boolean)">
             <summary>
             Saves any app settings only if the data had changed.
             </summary>

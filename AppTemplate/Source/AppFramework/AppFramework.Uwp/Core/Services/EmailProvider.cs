@@ -6,7 +6,7 @@ using Windows.Storage;
 
 namespace AppFramework.Core
 {
-    public partial class PlatformBase
+    public partial class PlatformCore
     {
         /// <summary>
         /// Gets access to the app info service of the platform currently executing.
@@ -48,7 +48,7 @@ namespace AppFramework.Core.Services
             if (toRecipients == null || toRecipients.Length == 0)
                 throw new ArgumentNullException(nameof(toRecipients));
 
-            PlatformBase.Current.Analytics.Event("SendEmail");
+            PlatformCore.Current.Analytics.Event("SendEmail");
             var msg = new EmailMessage();
 
             if (toRecipients != null)

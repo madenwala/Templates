@@ -20,7 +20,7 @@ namespace AppFramework.Core
     /// Provides core app functionality for initializing and suspending your application,
     /// handling exceptions, and more.
     /// </summary>
-    public abstract partial class PlatformBase : ModelBase
+    public abstract partial class PlatformCore : ModelBase
     {
         #region Variables
 
@@ -104,7 +104,7 @@ namespace AppFramework.Core
 
         #region Constructors
 
-        protected PlatformBase(Type mainViewModelType)
+        protected PlatformCore(Type mainViewModelType)
         {
             _mainViewModelType = mainViewModelType;
 
@@ -124,7 +124,7 @@ namespace AppFramework.Core
             this.Notifications = new DefaultNotificationsManager();
         }
 
-        static PlatformBase()
+        static PlatformCore()
         {
             Debug.WriteLine("DeviceFamily: " + AnalyticsInfo.VersionInfo.DeviceFamily);
 
@@ -152,7 +152,7 @@ namespace AppFramework.Core
         /// <summary>
         /// Provides access to application services.
         /// </summary>
-        public static PlatformBase Current { get; set; }
+        public static PlatformCore Current { get; protected set; }
 
         /// <summary>
         /// Gets the current device family this app is executing on.
@@ -352,13 +352,13 @@ namespace AppFramework.Core
             // Only log this when the debugger is not attached and you're in RELEASE mode
             try
             {
-                PlatformBase.Current.Analytics.Error(e, "Unhandled Exception");
+                PlatformCore.Current.Analytics.Error(e, "Unhandled Exception");
             }
             catch { }
 
             try
             {
-                PlatformBase.Current.Logger.LogErrorFatal(e);
+                PlatformCore.Current.Logger.LogErrorFatal(e);
             }
             catch (Exception exLog)
             {
@@ -524,14 +524,14 @@ namespace AppFramework.Core
                 _info.StartTime = DateTime.UtcNow;
 
                 // Initialize the app
-                await PlatformBase.Current.AppInitializingAsync(InitializationModes.Background);
-                PlatformBase.Current.Logger.Log(LogLevels.Information, "Starting background task '{0}'...", taskInstance.Task.Name);
+                await PlatformCore.Current.AppInitializingAsync(InitializationModes.Background);
+                PlatformCore.Current.Logger.Log(LogLevels.Information, "Starting background task '{0}'...", taskInstance.Task.Name);
 
                 CancellationTokenSource cts = new CancellationTokenSource();
 
                 taskInstance.Canceled += (sender, reason) =>
                 {
-                    PlatformBase.Current.Logger.Log(LogLevels.Warning, "Background task '{0}' is being cancelled due to '{1}'...", taskInstance.Task.Name, reason);
+                    PlatformCore.Current.Logger.Log(LogLevels.Warning, "Background task '{0}' is being cancelled due to '{1}'...", taskInstance.Task.Name, reason);
 
                     // Store info on why this task was cancelled
                     _info.CancelReason = reason.ToString();
@@ -546,34 +546,34 @@ namespace AppFramework.Core
 
                 // Task ran without error
                 _info.RunSuccessfully = true;
-                PlatformBase.Current.Logger.Log(LogLevels.Information, "Completed execution of background task '{0}'!", taskInstance.Task.Name);
+                PlatformCore.Current.Logger.Log(LogLevels.Information, "Completed execution of background task '{0}'!", taskInstance.Task.Name);
             }
             catch (OperationCanceledException)
             {
                 // Task was aborted via the cancelation token
-                PlatformBase.Current.Logger.Log(LogLevels.Warning, "Background task '{0}' had an OperationCanceledException with reason '{1}'.", taskInstance.Task.Name, _info.CancelReason);
+                PlatformCore.Current.Logger.Log(LogLevels.Warning, "Background task '{0}' had an OperationCanceledException with reason '{1}'.", taskInstance.Task.Name, _info.CancelReason);
             }
             catch (Exception ex)
             {
                 // Task threw an exception, store/log the error details
                 _info.ExceptionDetails = ex.ToString();
-                PlatformBase.Current.Logger.LogErrorFatal(ex, "Background task '{0}' failed with exception to run to completion: {1}", taskInstance.Task.Name, ex.Message);
+                PlatformCore.Current.Logger.LogErrorFatal(ex, "Background task '{0}' failed with exception to run to completion: {1}", taskInstance.Task.Name, ex.Message);
             }
             finally
             {
                 _info.EndTime = DateTime.UtcNow;
 
                 // Store the task status information
-                PlatformBase.Current.Storage.SaveSetting("TASK_" + taskInstance.Task.Name, _info, ApplicationData.Current.LocalSettings);
+                PlatformCore.Current.Storage.SaveSetting("TASK_" + taskInstance.Task.Name, _info, ApplicationData.Current.LocalSettings);
 
                 // Shutdown the task
-                PlatformBase.Current.AppSuspending();
+                PlatformCore.Current.AppSuspending();
                 deferral.Complete();
             }
         }
     }
 
-    public abstract class PlatformNewBase<VM, L, R> : PlatformBase
+    public abstract class PlatformBase<VM, L, R> : PlatformCore
         where VM : ViewModelBase
         where L : AppSettingsLocalBase
         where R : AppSettingsRoamingBase
@@ -608,7 +608,7 @@ namespace AppFramework.Core
             get { return base.AppSettingsRoaming as R; }
         }
 
-        public PlatformNewBase() : base(typeof(VM))
+        public PlatformBase() : base(typeof(VM))
         {
         }
 

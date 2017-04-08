@@ -9,7 +9,7 @@ using Windows.Services.Maps;
 
 namespace AppFramework.Core
 {
-    public partial class PlatformBase
+    public partial class PlatformCore
     {
         /// <summary>
         /// Gets access to the geocoding service adapter implement of the platform currently executing.

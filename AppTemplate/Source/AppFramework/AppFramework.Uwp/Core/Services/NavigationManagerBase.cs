@@ -20,7 +20,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace AppFramework.Core
 {
-    public partial class PlatformBase
+    public partial class PlatformCore
     {
         /// <summary>
         /// Gets the ability to navigate to different parts of an application specific to the platform currently executing.
@@ -110,7 +110,7 @@ namespace AppFramework.Core.Services
                 var view = frame.Content as IView;
                 if (frame.Content?.GetType() == pageType && view != null && object.Equals(view.ViewParameter, parameter))
                 {
-                    PlatformBase.Current.ShellMenuClose();
+                    PlatformCore.Current.ShellMenuClose();
                     view.ScrollToTop();
                     if (frame.DataContext is ViewModelBase vm)
                         await vm.RefreshAsync(false);
@@ -379,36 +379,36 @@ namespace AppFramework.Core.Services
 
             try
             {
-                PlatformBase.Current.Analytics.Event("HandleActivation", e.Kind);
+                PlatformCore.Current.Analytics.Event("HandleActivation", e.Kind);
 
                 switch (e.Kind)
                 {
                     case ActivationKind.Launch:
                         var launchArg = e as LaunchActivatedEventArgs;
-                        PlatformBase.Current.Logger.Log(LogLevels.Warning, "Calling OnActivation({0})  TileID: {1}  Arguments: {2}", e?.GetType().Name, launchArg.TileId, launchArg.Arguments);
+                        PlatformCore.Current.Logger.Log(LogLevels.Warning, "Calling OnActivation({0})  TileID: {1}  Arguments: {2}", e?.GetType().Name, launchArg.TileId, launchArg.Arguments);
                         handled = this.OnActivation(launchArg);
                         break;
 
                     case ActivationKind.VoiceCommand:
                         var voiceArgs = e as VoiceCommandActivatedEventArgs;
-                        PlatformBase.Current.Logger.Log(LogLevels.Warning, "Calling OnActivation({0})", e?.GetType().Name);
+                        PlatformCore.Current.Logger.Log(LogLevels.Warning, "Calling OnActivation({0})", e?.GetType().Name);
                         handled = this.OnActivation(voiceArgs);
                         break;
 
                     case ActivationKind.ToastNotification:
                         var toastArgs = e as ToastNotificationActivatedEventArgs;
-                        PlatformBase.Current.Logger.Log(LogLevels.Warning, "Calling OnActivation({0})  Arguments: {1}", e?.GetType().Name, toastArgs.Argument);
+                        PlatformCore.Current.Logger.Log(LogLevels.Warning, "Calling OnActivation({0})  Arguments: {1}", e?.GetType().Name, toastArgs.Argument);
                         handled = this.OnActivation(toastArgs);
                         break;
 
                     case ActivationKind.Protocol:
                         var protocolArgs = e as ProtocolActivatedEventArgs;
-                        PlatformBase.Current.Logger.Log(LogLevels.Warning, "Calling OnActivation({0})  Arguments: {1}", e?.GetType().Name, protocolArgs.Uri.ToString());
+                        PlatformCore.Current.Logger.Log(LogLevels.Warning, "Calling OnActivation({0})  Arguments: {1}", e?.GetType().Name, protocolArgs.Uri.ToString());
                         handled = this.OnActivation(protocolArgs);
                         break;
 
                     default:
-                        PlatformBase.Current.Logger.LogError(new Exception(string.Format("Can't call OnActivation({0}) as it's not implemented!", e.Kind)));
+                        PlatformCore.Current.Logger.LogError(new Exception(string.Format("Can't call OnActivation({0}) as it's not implemented!", e.Kind)));
                         handled = false;
                         break;
                 }
@@ -416,11 +416,11 @@ namespace AppFramework.Core.Services
                 if (handled == false || rootFrame?.Content == null)
                     this.Home();
 
-                PlatformBase.Current.Logger.Log(LogLevels.Information, "Completed Navigation.HandleActivation({0}) on RootFrame: {1} --- OnActivation Handled? {2}", e?.GetType().Name, rootFrame?.Content?.GetType().Name, handled);
+                PlatformCore.Current.Logger.Log(LogLevels.Information, "Completed Navigation.HandleActivation({0}) on RootFrame: {1} --- OnActivation Handled? {2}", e?.GetType().Name, rootFrame?.Content?.GetType().Name, handled);
             }
             catch (Exception ex)
             {
-                PlatformBase.Current.Logger.LogError(ex, "Error during App Navigation.HandleActivation({0}) on RootFrame: {1}", e?.GetType().Name, rootFrame?.Content?.GetType().Name);
+                PlatformCore.Current.Logger.LogError(ex, "Error during App Navigation.HandleActivation({0}) on RootFrame: {1}", e?.GetType().Name, rootFrame?.Content?.GetType().Name);
                 throw ex;
             }
         }
@@ -434,7 +434,7 @@ namespace AppFramework.Core.Services
         {
             var handled = this.HandleArgumentsActivation(e.Arguments);
 
-            if (handled == false && PlatformBase.Current.InitializationMode == InitializationModes.Restore)
+            if (handled == false && PlatformCore.Current.InitializationMode == InitializationModes.Restore)
                 handled = true;
 
             return handled;
@@ -457,7 +457,7 @@ namespace AppFramework.Core.Services
         /// <returns></returns>
         private bool OnActivation(ProtocolActivatedEventArgs e)
         {
-            return this.HandleArgumentsActivation(e.Uri.AbsoluteUri.Replace(PlatformBase.Current.AppInfo.ProtocolPrefix, "").Split(':').Last());
+            return this.HandleArgumentsActivation(e.Uri.AbsoluteUri.Replace(PlatformCore.Current.AppInfo.ProtocolPrefix, "").Split(':').Last());
         }
 
         /// <summary>
@@ -481,7 +481,7 @@ namespace AppFramework.Core.Services
             if (string.IsNullOrWhiteSpace(arguments))
                 return false;
 
-            PlatformBase.Current.Logger.Log(LogLevels.Information, "HandleArgumentsActivation: {0}", arguments);
+            PlatformCore.Current.Logger.Log(LogLevels.Information, "HandleArgumentsActivation: {0}", arguments);
 
             try
             {
@@ -490,7 +490,7 @@ namespace AppFramework.Core.Services
             }
             catch (Exception ex)
             {
-                PlatformBase.Current.Logger.LogError(ex, "Could not parse argument '{0}' passed into app.", arguments);
+                PlatformCore.Current.Logger.LogError(ex, "Could not parse argument '{0}' passed into app.", arguments);
                 return false;
             }
         }
@@ -505,7 +505,7 @@ namespace AppFramework.Core.Services
         /// </summary>
         public void Exit()
         {
-            PlatformBase.Current.Analytics.Event("ApplicationExit");
+            PlatformCore.Current.Analytics.Event("ApplicationExit");
             Application.Current.Exit();
         }
 
@@ -534,7 +534,7 @@ namespace AppFramework.Core.Services
             }
             catch (Exception ex)
             {
-                PlatformBase.Current.Logger.LogError(ex, "Could not close all secondary windows on Signout!");
+                PlatformCore.Current.Logger.LogError(ex, "Could not close all secondary windows on Signout!");
                 throw ex;
             }
         }
@@ -548,7 +548,7 @@ namespace AppFramework.Core.Services
             if (loc == null)
                 throw new ArgumentNullException(nameof(loc));
 
-            PlatformBase.Current.Analytics.Event("MapExternal-" + mapOption.ToString());
+            PlatformCore.Current.Analytics.Event("MapExternal-" + mapOption.ToString());
 
             label = System.Net.WebUtility.HtmlEncode(label ?? loc.LocationDisplayName);
             string url = null;
@@ -635,7 +635,7 @@ namespace AppFramework.Core.Services
         /// <param name="webAddress">URL to navigate to.</param>
         public void NavigateToWebBrowser(string webAddress)
         {
-            PlatformBase.Current.Analytics.Event("NavigateToWebBrowser");
+            PlatformCore.Current.Analytics.Event("NavigateToWebBrowser");
             this.NavigateToWeb(webAddress, true);
         }
 
@@ -645,7 +645,7 @@ namespace AppFramework.Core.Services
         /// <param name="webAddress">URL to navigate to.</param>
         public void NavigateToWebView(string webAddress)
         {
-            PlatformBase.Current.Analytics.Event("NavigateToWebView");
+            PlatformCore.Current.Analytics.Event("NavigateToWebView");
             this.NavigateToWeb(webAddress, false);
         }
 
@@ -698,7 +698,7 @@ namespace AppFramework.Core.Services
             if (!string.IsNullOrEmpty(screenname))
                 url += "//user?screen_name=" + (screenname.StartsWith("@") ? screenname.Substring(1) : screenname);
 
-            PlatformBase.Current.Logger.Log(LogLevels.Warning, $"Launching Twitter @{screenname} -- {url}");
+            PlatformCore.Current.Logger.Log(LogLevels.Warning, $"Launching Twitter @{screenname} -- {url}");
             var t = Launcher.LaunchUriAsync(new Uri(url, UriKind.Absolute));
         }
 
@@ -750,7 +750,7 @@ namespace AppFramework.Core.Services
                     ApplicationView.GetForCurrentView().Consolidated += View_Consolidated;
 
 
-                    PlatformBase.Current.Logger.Log(LogLevels.Warning, $"Launched new window");
+                    PlatformCore.Current.Logger.Log(LogLevels.Warning, $"Launched new window");
                 });
 
                 // Run this on the last dispatcher so the windows get positioned correctly
@@ -765,7 +765,7 @@ namespace AppFramework.Core.Services
             }
             catch (Exception ex)
             {
-                PlatformBase.Current.Logger.LogError(ex, "Could not create new window for view type {0}.", viewType.Name);
+                PlatformCore.Current.Logger.LogError(ex, "Could not create new window for view type {0}.", viewType.Name);
                 throw ex;
             }
         }
@@ -773,7 +773,7 @@ namespace AppFramework.Core.Services
         private void View_Consolidated(ApplicationView sender, ApplicationViewConsolidatedEventArgs args)
         {
             var windowID = ApplicationView.GetApplicationViewIdForWindow(CoreWindow.GetForCurrentThread());
-            PlatformBase.Current.Logger.Log(LogLevels.Debug, $"Closed secondary window with ID {windowID}");
+            PlatformCore.Current.Logger.Log(LogLevels.Debug, $"Closed secondary window with ID {windowID}");
             AppWindows.Remove(windowID);
             ApplicationView.GetForCurrentView().Consolidated -= View_Consolidated;
             Window.Current.Close();
@@ -787,7 +787,7 @@ namespace AppFramework.Core.Services
         {
             get
             {
-                return PlatformBase.Current == null ? null : _navigateToNewWindowCommand ?? (_navigateToNewWindowCommand = new GenericCommand<ViewModelBase>("NavigateToNewWindowCommand", async (e) =>
+                return PlatformCore.Current == null ? null : _navigateToNewWindowCommand ?? (_navigateToNewWindowCommand = new GenericCommand<ViewModelBase>("NavigateToNewWindowCommand", async (e) =>
                 {
                     await this.NavigateInNewWindow(e.View.GetType(), e.ViewParameter);
                 }));
@@ -820,7 +820,7 @@ namespace AppFramework.Core.Services
                 {
                     if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher"))
                     {
-                        PlatformBase.Current.Analytics.Event("FeedbackLauncher");
+                        PlatformCore.Current.Analytics.Event("FeedbackLauncher");
                         await Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.GetDefault().LaunchAsync();
                     }
                     else
@@ -917,7 +917,7 @@ namespace AppFramework.Core.Services
         /// <param name="e">Event data describing the conditions that led to the event.</param>
         private void HardwareButtons_BackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
         {
-            PlatformBase.Current.Logger.Log(LogLevels.Debug, "Hardware back button pressed.");
+            PlatformCore.Current.Logger.Log(LogLevels.Debug, "Hardware back button pressed.");
             e.Handled = this.GoBack();
         }
 
@@ -954,14 +954,14 @@ namespace AppFramework.Core.Services
                 if (((int)virtualKey == 166 && noModifiers) ||
                     (virtualKey == VirtualKey.Left && onlyAlt))
                 {
-                    PlatformBase.Current.Logger.Log(LogLevels.Warning, $"Windows accelerator keyboard key pressed to go back: {virtualKey}");
+                    PlatformCore.Current.Logger.Log(LogLevels.Warning, $"Windows accelerator keyboard key pressed to go back: {virtualKey}");
                     e.Handled = this.GoBack();
                 }
                 else if (((int)virtualKey == 167 && noModifiers) ||
                     (virtualKey == VirtualKey.Right && onlyAlt))
                 {
 
-                    PlatformBase.Current.Logger.Log(LogLevels.Warning, $"Windows accelerator key pressed to go forward: {virtualKey}");
+                    PlatformCore.Current.Logger.Log(LogLevels.Warning, $"Windows accelerator key pressed to go forward: {virtualKey}");
                     // When the next key or Alt+Right are pressed navigate forward
                     e.Handled = this.GoForward();
                 }
@@ -990,12 +990,12 @@ namespace AppFramework.Core.Services
             {
                 if (backPressed)
                 {
-                    PlatformBase.Current.Logger.Log(LogLevels.Warning, "Windows accelerator mouse key pressed to go back.");
+                    PlatformCore.Current.Logger.Log(LogLevels.Warning, "Windows accelerator mouse key pressed to go back.");
                     e.Handled = this.GoBack();
                 }
                 if (forwardPressed)
                 {
-                    PlatformBase.Current.Logger.Log(LogLevels.Warning, "Windows accelerator mouse key pressed to go forward.");
+                    PlatformCore.Current.Logger.Log(LogLevels.Warning, "Windows accelerator mouse key pressed to go forward.");
                     e.Handled = this.GoForward();
                 }
             }

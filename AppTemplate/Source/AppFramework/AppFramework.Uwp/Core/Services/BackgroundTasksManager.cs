@@ -7,7 +7,7 @@ using Windows.System;
 
 namespace AppFramework.Core
 {
-    public partial class PlatformBase
+    public partial class PlatformCore
     {
         /// <summary>
         /// Gets access to the geocoding service adapter implement of the platform currently executing.
@@ -55,14 +55,14 @@ namespace AppFramework.Core.Services
         {
             try
             {
-                PlatformBase.Current.Logger.Log(LogLevels.Debug, "Registering background tasks...");
+                PlatformCore.Current.Logger.Log(LogLevels.Debug, "Registering background tasks...");
 
                 // Keep track of the previous version of the app. If the app has been updated, we must first remove the previous task registrations and then re-add them.
-                var previousVersion = PlatformBase.Current.Storage.LoadSetting<string>("PreviousAppVersion");
-                if (previousVersion != PlatformBase.Current.AppInfo.VersionNumber.ToString())
+                var previousVersion = PlatformCore.Current.Storage.LoadSetting<string>("PreviousAppVersion");
+                if (previousVersion != PlatformCore.Current.AppInfo.VersionNumber.ToString())
                 {
                     this.RemoveAll();
-                    PlatformBase.Current.Storage.SaveSetting("PreviousAppVersion", PlatformBase.Current.AppInfo.VersionNumber.ToString());
+                    PlatformCore.Current.Storage.SaveSetting("PreviousAppVersion", PlatformCore.Current.AppInfo.VersionNumber.ToString());
                 }
 
                 // Propmts users to give access to run background tasks.
@@ -78,21 +78,21 @@ namespace AppFramework.Core.Services
                     }
                     catch (Exception ex)
                     {
-                        PlatformBase.Current.Logger.LogError(ex, "Failed to register background tasks.");
+                        PlatformCore.Current.Logger.LogError(ex, "Failed to register background tasks.");
                     }
                 }
                 else
                 {
                     // User did not give the app access to run background tasks
-                    PlatformBase.Current.Logger.Log(LogLevels.Information, "Could not register tasks because background access status is '{0}'.", backgroundAccessStatus);
+                    PlatformCore.Current.Logger.Log(LogLevels.Information, "Could not register tasks because background access status is '{0}'.", backgroundAccessStatus);
                     this.AreTasksRegistered = false;
                 }
 
-                PlatformBase.Current.Logger.Log(LogLevels.Debug, "Completed registering background tasks!");
+                PlatformCore.Current.Logger.Log(LogLevels.Debug, "Completed registering background tasks!");
             }
             catch (Exception ex)
             {
-                PlatformBase.Current.Logger.LogError(ex, "Error during BackgroundTaskManager.RegisterAllAsync()");
+                PlatformCore.Current.Logger.LogError(ex, "Error during BackgroundTaskManager.RegisterAllAsync()");
             }
         }
 
@@ -174,7 +174,7 @@ namespace AppFramework.Core.Services
             }
             catch (Exception ex)
             {
-                PlatformBase.Current.Logger.LogError(ex, "Error while trying to register task '{0}': {1}", taskName, ex.Message);
+                PlatformCore.Current.Logger.LogError(ex, "Error while trying to register task '{0}': {1}", taskName, ex.Message);
                 return null;
             }
         }
@@ -191,8 +191,8 @@ namespace AppFramework.Core.Services
                 if (string.IsNullOrEmpty(name) || taskKeyPair.Value.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase))
                 {
                     taskKeyPair.Value.Unregister(true);
-                    PlatformBase.Current.Storage.SaveSetting("TASK_" + taskKeyPair.Key, null, Windows.Storage.ApplicationData.Current.LocalSettings);
-                    PlatformBase.Current.Logger.Log(LogLevels.Debug, "TaskManager removed background task '{0}'", name);
+                    PlatformCore.Current.Storage.SaveSetting("TASK_" + taskKeyPair.Key, null, Windows.Storage.ApplicationData.Current.LocalSettings);
+                    PlatformCore.Current.Logger.Log(LogLevels.Debug, "TaskManager removed background task '{0}'", name);
                 }
             }
         }

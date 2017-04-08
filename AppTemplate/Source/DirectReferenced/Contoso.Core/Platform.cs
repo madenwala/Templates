@@ -14,14 +14,14 @@ using Windows.ApplicationModel.Background;
 
 namespace Contoso.Core
 {
-    public sealed partial class Platform : PlatformNewBase<MainViewModel, AppSettingsLocal, AppSettingsRoaming>
+    public sealed partial class Platform : PlatformBase<MainViewModel, AppSettingsLocal, AppSettingsRoaming>
     {
         #region Properties
 
         /// <summary>
         /// Provides access to application services.
         /// </summary>
-        public new static Platform Current { get { return PlatformBase.Current as Platform; } private set { PlatformBase.Current = value; } }
+        public new static Platform Current { get { return PlatformCore.Current as Platform; } private set { PlatformCore.Current = value; } }
 
         #endregion
 
@@ -29,7 +29,7 @@ namespace Contoso.Core
 
         static Platform()
         {
-            PlatformBase.Current = new Platform();
+            Platform.Current = new Platform();
         }
 
         private Platform()

@@ -38,28 +38,28 @@ namespace AppFramework.UI.Controls
 
         private void DevCenterAdControl_ErrorOccurred(object sender, Microsoft.Advertising.WinRT.UI.AdErrorEventArgs e)
         {
-            PlatformBase.Current.Logger.Log(LogLevels.Error, $"DevCenterAdControl_ErrorOccurred: {e.ErrorCode} - {e.ErrorMessage}");
+            PlatformCore.Current.Logger.Log(LogLevels.Error, $"DevCenterAdControl_ErrorOccurred: {e.ErrorCode} - {e.ErrorMessage}");
             var dic = new System.Collections.Generic.Dictionary<string, string>();
             dic.Add("ErrorCode", e.ErrorCode.ToString());
             dic.Add("ErrorMessage", e.ErrorMessage);
-            PlatformBase.Current.Analytics.Event("DevCenterAdControl_ErrorOccurred", dic);
+            PlatformCore.Current.Analytics.Event("DevCenterAdControl_ErrorOccurred", dic);
             devCenterAd.Visibility = Visibility.Collapsed;
             adDuplex.Visibility = Visibility.Visible;
         }
 
         private void DevCenterAdControl_AdRefreshed(object sender, RoutedEventArgs e)
         {
-            PlatformBase.Current.Logger.Log(LogLevels.Information, $"DevCenter Ad control refreshed");
+            PlatformCore.Current.Logger.Log(LogLevels.Information, $"DevCenter Ad control refreshed");
             devCenterAd.Visibility = Visibility.Visible;
         }
 
         private void AdDuplex_AdLoadingError(object sender, AdDuplex.Common.Models.AdLoadingErrorEventArgs e)
         {
-            PlatformBase.Current.Logger.Log(LogLevels.Error, $"AdDuplex_AdLoadingError: {e.Error.Message}");
+            PlatformCore.Current.Logger.Log(LogLevels.Error, $"AdDuplex_AdLoadingError: {e.Error.Message}");
             var dic = new System.Collections.Generic.Dictionary<string, string>();
             dic.Add("Error", e.Error.ToString());
             dic.Add("ErrorMessage", e.Error.Message);
-            PlatformBase.Current.Analytics.Event("AdDuplex_AdLoadingError", dic);
+            PlatformCore.Current.Analytics.Event("AdDuplex_AdLoadingError", dic);
             adDuplex.Visibility = Visibility.Collapsed;
             devCenterAd.Visibility = Visibility.Visible;
             try
@@ -72,14 +72,14 @@ namespace AppFramework.UI.Controls
 
         private void AdDuplex_AdClick(object sender, AdDuplex.Banners.Models.AdClickEventArgs e)
         {
-            PlatformBase.Current.Analytics.Event("AdDuplex_AdClick");
-            PlatformBase.Current.Logger.Log(LogLevels.Information, $"AdDuplex_AdClick");
+            PlatformCore.Current.Analytics.Event("AdDuplex_AdClick");
+            PlatformCore.Current.Logger.Log(LogLevels.Information, $"AdDuplex_AdClick");
         }
 
         private void adDuplex_NoAd(object sender, AdDuplex.Common.Models.NoAdEventArgs args)
         {
-            PlatformBase.Current.Analytics.Event("AdDuplex_NoAd");
-            PlatformBase.Current.Logger.Log(LogLevels.Information, $"AdDuplex_NoAd");
+            PlatformCore.Current.Analytics.Event("AdDuplex_NoAd");
+            PlatformCore.Current.Logger.Log(LogLevels.Information, $"AdDuplex_NoAd");
             adDuplex.Visibility = Visibility.Collapsed;
             devCenterAd.Visibility = Visibility.Visible;
             try
@@ -93,12 +93,12 @@ namespace AppFramework.UI.Controls
         private void adDuplex_AdLoaded(object sender, AdDuplex.Banners.Models.BannerAdLoadedEventArgs args)
         {
             devCenterAd.Visibility = Visibility.Visible;
-            PlatformBase.Current.Logger.Log(LogLevels.Information, $"AdDuplex Ad control loaded");
+            PlatformCore.Current.Logger.Log(LogLevels.Information, $"AdDuplex Ad control loaded");
         }
 
         private void adDuplex_AdCovered(object sender, AdDuplex.Banners.Core.AdCoveredEventArgs args)
         {
-            PlatformBase.Current.Logger.Log(LogLevels.Information, $"AdDuplex_AdCovered");
+            PlatformCore.Current.Logger.Log(LogLevels.Information, $"AdDuplex_AdCovered");
         }
     }
 }

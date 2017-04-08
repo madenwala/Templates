@@ -24,8 +24,8 @@ namespace AppFramework.Core.Services.Analytics
 
         protected override Task OnInitializeAsync()
         {
-            _tracker.AppId = PlatformBase.Current.AppInfo.AppID;
-            _tracker.AppVersion = PlatformBase.Current.AppInfo.VersionNumber.ToString();
+            _tracker.AppId = PlatformCore.Current.AppInfo.AppID;
+            _tracker.AppVersion = PlatformCore.Current.AppInfo.VersionNumber.ToString();
             return base.OnInitializeAsync();
         }
 

@@ -24,7 +24,7 @@ namespace AppFramework.Core.Services.Analytics
 
         protected override Task OnInitializeAsync()
         {
-            Api.SetVersion(PlatformBase.Current.AppInfo.VersionNumber.ToString());
+            Api.SetVersion(PlatformCore.Current.AppInfo.VersionNumber.ToString());
             return base.OnInitializeAsync();
         }
 

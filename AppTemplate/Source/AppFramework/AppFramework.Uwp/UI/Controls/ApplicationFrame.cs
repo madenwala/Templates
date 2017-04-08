@@ -40,7 +40,7 @@ namespace AppFramework.UI.Controls
             try
             {
                 // Update the theme when the app settings property changes
-                this.RequestedTheme = (ElementTheme)PlatformBase.Current.AppSettingsRoaming.ApplicationTheme;
+                this.RequestedTheme = (ElementTheme)PlatformCore.Current.AppSettingsRoaming.ApplicationTheme;
             }
             catch { }
         }
@@ -63,29 +63,29 @@ namespace AppFramework.UI.Controls
             try
             {
                 // Watch for changes to the app settings
-                PlatformBase.Current.PropertyChanged += Current_PropertyChangedAsync;
-                PlatformBase.Current.AppSettingsRoaming.PropertyChanged += AppSettingsRoaming_PropertyChangedAsync;
+                PlatformCore.Current.PropertyChanged += Current_PropertyChangedAsync;
+                PlatformCore.Current.AppSettingsRoaming.PropertyChanged += AppSettingsRoaming_PropertyChangedAsync;
 
                 // Set the theme on initialization of the frame
                 this.UpdateUI();
             }
             catch (Exception ex)
             {
-                PlatformBase.Current.Logger.LogError(ex, "Failed to subscribe to events and update UI from ApplicationFrame.Loaded event.");
+                PlatformCore.Current.Logger.LogError(ex, "Failed to subscribe to events and update UI from ApplicationFrame.Loaded event.");
             }
         }
 
         private void ApplicationFrame_Unloaded(object sender, RoutedEventArgs e)
         {
-            PlatformBase.Current.PropertyChanged -= Current_PropertyChangedAsync;
-            PlatformBase.Current.AppSettingsRoaming.PropertyChanged -= AppSettingsRoaming_PropertyChangedAsync;
+            PlatformCore.Current.PropertyChanged -= Current_PropertyChangedAsync;
+            PlatformCore.Current.AppSettingsRoaming.PropertyChanged -= AppSettingsRoaming_PropertyChangedAsync;
         }
 
         private async void Current_PropertyChangedAsync(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(PlatformBase.Current.AppSettingsRoaming))
+            if (e.PropertyName == nameof(PlatformCore.Current.AppSettingsRoaming))
             {
-                PlatformBase.Current.AppSettingsRoaming.PropertyChanged += AppSettingsRoaming_PropertyChangedAsync;
+                PlatformCore.Current.AppSettingsRoaming.PropertyChanged += AppSettingsRoaming_PropertyChangedAsync;
                 await ExecuteAsync();
             }
         }
@@ -94,7 +94,7 @@ namespace AppFramework.UI.Controls
         {
             switch (e.PropertyName)
             {
-                case nameof(PlatformBase.Current.AppSettingsRoaming.ApplicationTheme):
+                case nameof(PlatformCore.Current.AppSettingsRoaming.ApplicationTheme):
                     await ExecuteAsync();
                     break;
             }

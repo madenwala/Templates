@@ -71,8 +71,8 @@ namespace AppFramework.UI.Views
                 return;
 
             // Logging and analytics
-            PlatformBase.Current.Logger.Log(LogLevels.Debug, "New View Instance: {0}", this.GetType().Name);
-            PlatformBase.Current.Analytics.NewPageView(this.GetType());
+            PlatformCore.Current.Logger.Log(LogLevels.Debug, "New View Instance: {0}", this.GetType().Name);
+            PlatformCore.Current.Analytics.NewPageView(this.GetType());
 
             // Wire up events
             this.Loaded += ViewBase_Loaded;
@@ -92,7 +92,7 @@ namespace AppFramework.UI.Views
         private void ViewBase_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             // Update visibility of the BACK button in the titlebar area
-            PlatformBase.Current.NavigationBase.UpdateTitleBarBackButton();
+            PlatformCore.Current.NavigationBase.UpdateTitleBarBackButton();
 
             this.OnLoaded(e);
         }
@@ -123,7 +123,7 @@ namespace AppFramework.UI.Views
                 // Set the datacontext of the frame so that it can appropriately show the busy panel or not when a view model requests it
                 this.Frame.DataContext = this.ViewModel;
 
-                PlatformBase.Current.Logger.Log(LogLevels.Warning, "OnNavigatedTo: {0}\t Mode: {1}\t Parameter: {2}", e.SourcePageType.Name, e.NavigationMode, e.Parameter);
+                PlatformCore.Current.Logger.Log(LogLevels.Warning, "OnNavigatedTo: {0}\t Mode: {1}\t Parameter: {2}", e.SourcePageType.Name, e.NavigationMode, e.Parameter);
 
                 // Chck for data in session state
                 Dictionary<string, Object> dic = null;
@@ -167,7 +167,7 @@ namespace AppFramework.UI.Views
             }
             catch(Exception ex)
             {
-                PlatformBase.Current.Logger.LogError(ex, "Error during {0}.OnNavigatedTo: {1} Parameter: {2}", e.SourcePageType.Name, e.NavigationMode, e.Parameter);
+                PlatformCore.Current.Logger.LogError(ex, "Error during {0}.OnNavigatedTo: {1} Parameter: {2}", e.SourcePageType.Name, e.NavigationMode, e.Parameter);
                 throw ex;
             }
             finally
@@ -215,7 +215,7 @@ namespace AppFramework.UI.Views
                 // Remove the view model instance from the frame's datacontext
                 this.Frame.DataContext = null;
 
-                PlatformBase.Current.Logger.Log(LogLevels.Warning, "OnNavigatedFrom: {0}\t Mode: {1}", e.SourcePageType.Name, e.NavigationMode);
+                PlatformCore.Current.Logger.Log(LogLevels.Warning, "OnNavigatedFrom: {0}\t Mode: {1}", e.SourcePageType.Name, e.NavigationMode);
 
                 // Intialize page state for this page within the current frame
                 var frameState = SuspensionManager.SessionStateForFrame(this.Frame);
@@ -236,7 +236,7 @@ namespace AppFramework.UI.Views
             }
             catch (Exception ex)
             {
-                PlatformBase.Current.Logger.LogError(ex, "Error during {0}.OnNavigatedFrom: {1} Parameter: {2}", e.SourcePageType.Name, e.NavigationMode, e.Parameter);
+                PlatformCore.Current.Logger.LogError(ex, "Error during {0}.OnNavigatedFrom: {1} Parameter: {2}", e.SourcePageType.Name, e.NavigationMode, e.Parameter);
                 throw ex;
             }
         }
@@ -248,17 +248,17 @@ namespace AppFramework.UI.Views
         /// <param name="e"></param>
         private void Application_Resuming(object sender, object e)
         {
-            PlatformBase.Current.Logger.Log(LogLevels.Information, "APPLICATION RESUMED ON VIEW {0}", this.GetType().Name);
+            PlatformCore.Current.Logger.Log(LogLevels.Information, "APPLICATION RESUMED ON VIEW {0}", this.GetType().Name);
             try
             {
                 // Set the ViewModel again on resume of the app as the datacontext on UI elements may not have it after resume
                 this.SetViewModel(this.ViewModel);
                 this.OnApplicationResuming();
-                PlatformBase.Current.ShellMenuClose();
+                PlatformCore.Current.ShellMenuClose();
             }
             catch(Exception ex)
             {
-                PlatformBase.Current.Logger.LogError(ex, "ERROR during Application Resume on view: {0}", this.GetType().Name);
+                PlatformCore.Current.Logger.LogError(ex, "ERROR during Application Resume on view: {0}", this.GetType().Name);
                 throw ex;
             }
             finally
@@ -369,7 +369,7 @@ namespace AppFramework.UI.Views
             var element = Windows.UI.Xaml.Input.FocusManager.GetFocusedElement() as Windows.UI.Xaml.FrameworkElement;
             var name = element?.Name;
             if (string.IsNullOrEmpty(name)) name = "<NotNamed>";
-            PlatformBase.Current.Logger.Log(LogLevels.Debug, "{0}_GotFocus: {1} ({2}) received focus", this.GetType().Name, name, element?.GetType().Name);
+            PlatformCore.Current.Logger.Log(LogLevels.Debug, "{0}_GotFocus: {1} ({2}) received focus", this.GetType().Name, name, element?.GetType().Name);
         }
 
         private void ViewBase_KeyUp(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
@@ -385,10 +385,10 @@ namespace AppFramework.UI.Views
             }
             catch (Exception ex)
             {
-                PlatformBase.Current.Logger.LogError(ex, "Error during " + msg);
+                PlatformCore.Current.Logger.LogError(ex, "Error during " + msg);
             }
 
-            PlatformBase.Current.Logger.Log(LogLevels.Debug, msg);
+            PlatformCore.Current.Logger.Log(LogLevels.Debug, msg);
         }
 
         private void ViewBase_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
@@ -401,7 +401,7 @@ namespace AppFramework.UI.Views
             {
                 var element = e.OriginalSource as FrameworkElement;
                 var msg = string.Format("{0}_KeyDown: {1} was pressed while focus was on {2} ({3})", this.GetType().Name, e.Key, element?.Name, element?.GetType().Name);
-                PlatformBase.Current.Logger.LogError(ex, "Error during " + msg);
+                PlatformCore.Current.Logger.LogError(ex, "Error during " + msg);
             }
         }
 

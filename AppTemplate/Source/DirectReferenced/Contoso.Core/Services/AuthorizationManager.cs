@@ -134,12 +134,12 @@ namespace Contoso.Core.Services
             else
             {
                 // Log user
-                PlatformBase.Current.Analytics.SetUser(user);
+                Platform.Current.Analytics.SetUser(user);
 
                 // Store user data
-                await PlatformBase.Current.Storage.SaveFileAsync(CREDENTIAL_USER_KEYNAME, user, ApplicationData.Current.RoamingFolder, SerializerTypes.Json);
-                PlatformBase.Current.Storage.SaveCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_ACCESSTOKEN_KEYNAME, user.AccessToken);
-                PlatformBase.Current.Storage.SaveCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_REFRESHTOKEN_KEYNAME, user.RefreshToken);
+                await Platform.Current.Storage.SaveFileAsync(CREDENTIAL_USER_KEYNAME, user, ApplicationData.Current.RoamingFolder, SerializerTypes.Json);
+                Platform.Current.Storage.SaveCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_ACCESSTOKEN_KEYNAME, user.AccessToken);
+                Platform.Current.Storage.SaveCredential(CREDENTIAL_USER_KEYNAME, CREDENTIAL_REFRESHTOKEN_KEYNAME, user.RefreshToken);
 
                 // Set properties
                 this.CurrentUser = user;
@@ -158,8 +158,8 @@ namespace Contoso.Core.Services
         /// <returns>Awaitable task is returned.</returns>
         public override async Task SignoutAsync()
         {
-            await PlatformBase.Current.Storage.SaveFileAsync(CREDENTIAL_USER_KEYNAME, null, ApplicationData.Current.RoamingFolder, SerializerTypes.Json);
-            PlatformBase.Current.Storage.SaveCredential(CREDENTIAL_USER_KEYNAME, null, null);
+            await Platform.Current.Storage.SaveFileAsync(CREDENTIAL_USER_KEYNAME, null, ApplicationData.Current.RoamingFolder, SerializerTypes.Json);
+            Platform.Current.Storage.SaveCredential(CREDENTIAL_USER_KEYNAME, null, null);
             this.CurrentUser = null;
             this.AccessToken = null;
             this.RefreshToken = null;

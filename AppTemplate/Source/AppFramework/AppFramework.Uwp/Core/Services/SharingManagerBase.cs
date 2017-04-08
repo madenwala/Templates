@@ -8,7 +8,7 @@ using Windows.ApplicationModel.DataTransfer;
 
 namespace AppFramework.Core
 {
-    public partial class PlatformBase
+    public partial class PlatformCore
     {
         /// <summary>
         /// Gets access to the app info service of the platform currently executing.
@@ -53,13 +53,13 @@ namespace AppFramework.Core.Services
         /// <param name="model"></param>
         public void Share(IModel model)
         {
-            PlatformBase.Current.Analytics.Event("Share");
+            PlatformCore.Current.Analytics.Event("Share");
 
             DataTransferManager.GetForCurrentView().DataRequested += (sender, e) =>
             {
                 try
                 {
-                    PlatformBase.Current.Logger.Log(LogLevels.Information, "SetShareContent - Model: {0}", model?.GetType().Name);
+                    PlatformCore.Current.Logger.Log(LogLevels.Information, "SetShareContent - Model: {0}", model?.GetType().Name);
 
                     if (model is WebBrowserViewModel)
                     {
@@ -71,33 +71,33 @@ namespace AppFramework.Core.Services
                     {
                         try
                         {
-                            var args = PlatformBase.Current.GenerateModelArguments(model);
-                            var url = PlatformBase.Current.AppInfo.GetDeepLink(args);
-                            e.Request.Data.Properties.Title = PlatformBase.Current.AppInfo.AppName;
+                            var args = PlatformCore.Current.GenerateModelArguments(model);
+                            var url = PlatformCore.Current.AppInfo.GetDeepLink(args);
+                            e.Request.Data.Properties.Title = PlatformCore.Current.AppInfo.AppName;
                             if(url != null)
                                 e.Request.Data.Properties.ContentSourceApplicationLink = new Uri(url.Replace("//", ""), UriKind.Absolute);
 
-                            this.SetShareContent(e.Request, model ?? PlatformBase.Current.ViewModel);
+                            this.SetShareContent(e.Request, model ?? PlatformCore.Current.ViewModel);
                         }
                         catch(Exception ex)
                         {
-                            PlatformBase.Current.Logger.LogError(ex, "Failure while calling SetShareContent");
+                            PlatformCore.Current.Logger.LogError(ex, "Failure while calling SetShareContent");
                             throw ex;
                         }
                     }
 
                     if (string.IsNullOrEmpty(e.Request.Data.Properties.Title))
                     {
-                        e.Request.Data.Properties.Title = PlatformBase.Current.AppInfo.AppName;
-                        e.Request.Data.Properties.Description = PlatformBase.Current.AppInfo.AppDescription;
-                        e.Request.Data.Properties.ContentSourceApplicationLink = new Uri(PlatformBase.Current.AppInfo.StoreURL, UriKind.Absolute);
-                        string body = string.Format(Resources.ApplicationSharingBodyText, PlatformBase.Current.AppInfo.AppName, PlatformBase.Current.AppInfo.StoreURL);
+                        e.Request.Data.Properties.Title = PlatformCore.Current.AppInfo.AppName;
+                        e.Request.Data.Properties.Description = PlatformCore.Current.AppInfo.AppDescription;
+                        e.Request.Data.Properties.ContentSourceApplicationLink = new Uri(PlatformCore.Current.AppInfo.StoreURL, UriKind.Absolute);
+                        string body = string.Format(Resources.ApplicationSharingBodyText, PlatformCore.Current.AppInfo.AppName, PlatformCore.Current.AppInfo.StoreURL);
                         e.Request.Data.SetText(body);
                     }
                 }
                 catch (Exception ex)
                 {
-                    PlatformBase.Current.Logger.LogError(ex, "Error in OnDataRequested");
+                    PlatformCore.Current.Logger.LogError(ex, "Error in OnDataRequested");
 #if DEBUG
                     e.Request.FailWithDisplayText(ex.ToString());
 #else
@@ -125,10 +125,10 @@ namespace AppFramework.Core.Services
         protected override void SetShareContent(DataRequest request, IModel model)
         {
             DataPackage dataPackage = request.Data;
-            dataPackage.Properties.Title = PlatformBase.Current.AppInfo.AppName;
-            dataPackage.Properties.Description = PlatformBase.Current.AppInfo.AppDescription;
+            dataPackage.Properties.Title = PlatformCore.Current.AppInfo.AppName;
+            dataPackage.Properties.Description = PlatformCore.Current.AppInfo.AppDescription;
             // TODO localize
-            string body = $"Download {PlatformBase.Current.AppInfo.AppName} from the Windows Store!";
+            string body = $"Download {PlatformCore.Current.AppInfo.AppName} from the Windows Store!";
             dataPackage.SetText(body);
         }
     }
