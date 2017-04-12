@@ -3086,6 +3086,21 @@
             Creates an attached property for all ListViewBase controls allowing binding  a command object to it's ItemClick event.
             </summary>
         </member>
+        <member name="M:AppFramework.UI.Resources.PlatformSpecific.InitializeComponent">
+            <summary>
+            InitializeComponent()
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.Resources.PlatformSpecific.InitializeComponent(System.Uri)">
+            <summary>
+            InitializeComponent()
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.Resources.PlatformSpecific.Connect(System.Int32,System.Object)">
+            <summary>
+            Connect()
+            </summary>
+        </member>
         <member name="M:AppFramework.UI.Resources.Common.InitializeComponent">
             <summary>
             InitializeComponent()

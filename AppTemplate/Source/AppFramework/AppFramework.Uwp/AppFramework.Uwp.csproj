@@ -230,6 +230,9 @@
     <Compile Include="UI\Extensions\ListViewBaseExtensions.cs" />
     <Compile Include="UI\Extensions\ScrollViewerExtensions.cs" />
     <Compile Include="UI\Extensions\SizeExtensions.cs" />
+    <Compile Include="UI\Resources\PlatformSpecific.xaml.cs">
+      <DependentUpon>PlatformSpecific.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Resources\Common.xaml.cs">
       <DependentUpon>Common.xaml</DependentUpon>
     </Compile>
@@ -252,10 +255,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Resources\Common.DeviceFamily-Xbox.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="UI\Resources\PlatformSpecific.xaml">
       <Generator>MSBuild:Compile</Generator>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\Resources\Common.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -264,6 +266,11 @@
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Resources\PlatformSpecific.DeviceFamily-Xbox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
   </ItemGroup>
   <ItemGroup>
