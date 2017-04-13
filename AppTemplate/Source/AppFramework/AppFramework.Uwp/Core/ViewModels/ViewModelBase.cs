@@ -872,7 +872,7 @@ namespace AppFramework.Core.ViewModels
 
         #region Caching
 
-        private const string APP_CACHE_PATH = @"AppDataCache\{0}_{1}.data";
+        private static string APP_CACHE_PATH = $"{StorageManager.DATA_CACHE_FOLDER_NAME}\\{0}_{1}.data";
 
         /// <summary>
         /// Fills a property with data from the app cache if available.
@@ -900,7 +900,7 @@ namespace AppFramework.Core.ViewModels
         {
             try
             {
-                return await PlatformCore.Current.Storage.LoadFileAsync<T>(string.Format(APP_CACHE_PATH, this.GetType().Name, key), Windows.Storage.ApplicationData.Current.LocalCacheFolder);
+                return await PlatformCore.Current.Storage.LoadFileAsync<T>(string.Format(APP_CACHE_PATH, this.GetType().Name, key), Windows.Storage.ApplicationData.Current.TemporaryFolder);
             }
             catch (Exception ex)
             {
@@ -947,7 +947,7 @@ namespace AppFramework.Core.ViewModels
         {
             try
             {
-                await PlatformCore.Current.Storage.SaveFileAsync(string.Format(APP_CACHE_PATH, this.GetType().Name, key), data, Windows.Storage.ApplicationData.Current.LocalCacheFolder);
+                await PlatformCore.Current.Storage.SaveFileAsync(string.Format(APP_CACHE_PATH, this.GetType().Name, key), data, Windows.Storage.ApplicationData.Current.TemporaryFolder);
             }
             catch (Exception ex)
             {

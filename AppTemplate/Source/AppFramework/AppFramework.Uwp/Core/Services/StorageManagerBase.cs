@@ -502,39 +502,43 @@ namespace AppFramework.Core.Services
         /// <summary>
         /// Calculates the size of a folder.
         /// </summary>
-        /// <param name="folderName">Folder name to delete.</param>
         /// <param name="startingFolder">Starting folder location.</param>
+        /// <param name="folderNames">List of sub folder names to get sizes of.</param>
         /// <returns>Formatted string displaying the size of the folder.</returns>
-        public async Task<string> GetFolderSizeAsync(string folderName, StorageFolder startingFolder)
+        internal async Task<string> GetFolderSizeAsync(StorageFolder startingFolder, params string[] folderNames)
         {
-            if (string.IsNullOrEmpty(folderName))
-                throw new ArgumentNullException(nameof(folderName));
+            if(folderNames == null || folderNames.Length == 0)
+                throw new ArgumentNullException(nameof(folderNames));
 
-            try
+            long size = 0;
+
+            // Get to the requested folder destination in the path.
+            foreach (var folderName in folderNames)
             {
-                // Get to the requested folder destination in the path.
-                var folder = await startingFolder.GetFolderAsync(folderName);
-                if (folder != null)
+                try
                 {
-                    long size = 0;
-                    foreach(var file in await folder.GetFilesAsync())
+
+                    var folder = await startingFolder.GetFolderAsync(folderName);
+                    if (folder != null)
                     {
-                        var p = await file.GetBasicPropertiesAsync();
-                        size += (long)p.Size;
+                        foreach (var file in await folder.GetFilesAsync())
+                        {
+                            var p = await file.GetBasicPropertiesAsync();
+                            size += (long)p.Size;
+                        }
                     }
-                    return size.ToStringAsMemory();
+                }
+                catch (FileNotFoundException)
+                {
+                }
+                catch (Exception ex)
+                {
+                    PlatformCore.Current.Logger.LogError(ex, "Could not get folder size for '{0}' in '{1}'", folderName, startingFolder.DisplayName);
+                    throw ex;
                 }
             }
-            catch (FileNotFoundException)
-            {
-            }
-            catch (Exception ex)
-            {
-                PlatformCore.Current.Logger.LogError(ex, "Could not get folder size for '{0}' in '{1}'", folderName, startingFolder.DisplayName);
-                throw ex;
-            }
 
-            return null;
+            return size.ToStringAsMemory();
         }
 
         #endregion
@@ -554,18 +558,21 @@ namespace AppFramework.Core.Services
 
         #region Caching
 
-        public const string DATA_CACHE_FOLDER_NAME = "AppDataCache";
+        internal const string DATA_CACHE_FOLDER_NAME = "AppDataCache";
 
-        public Task<string> GetAppDataCacheFolderSizeAsync()
+        internal Task<string> GetAppDataCacheFolderSizeAsync()
         {
-            return this.GetFolderSizeAsync(DATA_CACHE_FOLDER_NAME, ApplicationData.Current.TemporaryFolder);
+            PlatformCore.Current.Logger.Log(LogLevels.Debug, $"Retrieving size of cache folders: {ApplicationData.Current.TemporaryFolder.Path}");
+            return this.GetFolderSizeAsync(ApplicationData.Current.TemporaryFolder, DATA_CACHE_FOLDER_NAME, "ImageCache");
         }
 
-        public async Task ClearAppDataCacheFolderAsync()
+        internal async Task ClearAppDataCacheFolderAsync()
         {
             try
             {
+                PlatformCore.Current.Logger.Log(LogLevels.Debug, $"Deleting cache folders: {ApplicationData.Current.TemporaryFolder.Path}");
                 await this.DeleteFolderAsync(DATA_CACHE_FOLDER_NAME, ApplicationData.Current.TemporaryFolder);
+                await this.DeleteFolderAsync("ImageCache", ApplicationData.Current.TemporaryFolder);
             }
             catch (Exception ex)
             {

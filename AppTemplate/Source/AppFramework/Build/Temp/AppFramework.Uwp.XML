@@ -2454,12 +2454,12 @@
             <param name="startingFolder">Starting folder location.</param>
             <returns></returns>
         </member>
-        <member name="M:AppFramework.Core.Services.StorageManager.GetFolderSizeAsync(System.String,Windows.Storage.StorageFolder)">
+        <member name="M:AppFramework.Core.Services.StorageManager.GetFolderSizeAsync(Windows.Storage.StorageFolder,System.String[])">
             <summary>
             Calculates the size of a folder.
             </summary>
-            <param name="folderName">Folder name to delete.</param>
             <param name="startingFolder">Starting folder location.</param>
+            <param name="folderNames">List of sub folder names to get sizes of.</param>
             <returns>Formatted string displaying the size of the folder.</returns>
         </member>
         <member name="M:AppFramework.Core.Services.StorageManager.SignoutAsync">
