@@ -1151,7 +1151,7 @@ namespace AppFramework.Core.ViewModels
             return this.WaitForCurrentLocationAsync(ct);
         }
 
-        private async Task<ILocationModel> WaitForCurrentLocationAsync(CancellationToken ct)
+        protected async Task<ILocationModel> WaitForCurrentLocationAsync(CancellationToken ct)
         {
             if (!CurrentLocationTask.IsCompleted)
             {

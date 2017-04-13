@@ -666,6 +666,26 @@
             <param name="obj">Object instance to serialize.</param>
             <returns>JSON string representing the object instance.</returns>
         </member>
+        <member name="P:AppFramework.Core.Strings.WebBrowser.TextGoBack">
+            <summary>
+            Localized resource similar to "Go back"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.WebBrowser.TextGoForward">
+            <summary>
+            Localized resource similar to "Go forward"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.WebBrowser.TextWebDefaultTitle">
+            <summary>
+            Localized resource similar to "Web Browser"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.WebBrowser.TextWebErrorGeneric">
+            <summary>
+            Localized resource similar to "Could not load the requested page. Try again later."
+            </summary>
+        </member>
         <member name="T:AppFramework.Core.TypeUtility">
             <summary>
             TypeUtility tests types to see if they are primitive types.
@@ -678,6 +698,443 @@
             <param name="type">Type to check if primitive.</param>
             <returns>True if the specified type is a primitive else false.</returns>
         </member>
+        <member name="T:AppFramework.Core.ViewModels.CollectionViewModelBase">
+            <summary>
+            ViewModelBase for views that need to display multiple separate sub-views which might have their own ViewModel instances. This 
+            CollectionViewModelBase can contain multiple ViewModels and set a current view model so that the frame can show appropriate 
+            status data specific to the current view model.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.ViewModels.CollectionViewModelBase.CurrentViewModel">
+            <summary>
+            Gets access to the current selected view model.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.ViewModels.CollectionViewModelBase.ViewModels">
+            <summary>
+            Gets access to the collection of sub-viewmodels.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.CollectionViewModelBase.SetCurrentAsync(AppFramework.Core.ViewModels.ViewModelBase)">
+            <summary>
+            Sets the current ViewModel that is active and visible.
+            </summary>
+            <param name="vm"></param>
+        </member>
+        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.PlatformBase">
+            <summary>
+            Gets access to all the platform services.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.Dispatcher">
+            <summary>
+            Gets access to the dispatcher for this view or application.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.View">
+            <summary>
+            Gets or sets access to the page instance associated to this ViewModel instance.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.ViewParameter">
+            <summary>
+            Gets access to the parameter passed to the page.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.IsInitialized">
+            <summary>
+            True or false indicating whether or not the view model has been called at least by a view bound to this view model.
+            </summary>
+        </member>
+        <member name="F:AppFramework.Core.ViewModels.ViewModelBase._Title">
+            <summary>
+            Gets or sets the title for the view specified by this view model.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.IsViewInChildFrame">
+            <summary>
+            Gets a boolean indicating whether or not the view instance is in a child frame of the window.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.ShowHomeButton">
+            <summary>
+            Get a boolean indicating whether or not this view should show a home button.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.OnBackNavigationRequested">
+            <summary>
+            Allows a view model to prevent back navigation if it needs to.
+            </summary>
+            <returns>True if on back navigation should be cancelled else false.</returns>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.OnForwardNavigationRequested">
+            <summary>
+            Allows a view model to prevent forward navigation if it needs to.
+            </summary>
+            <returns>True if on forward navigation should be cancelled else false.</returns>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.LoadStateAsync(Windows.UI.Xaml.Controls.Page,AppFramework.Core.LoadStateEventArgs)">
+            <summary>
+            Called by a view's OnNavigatedTo event, LoadState allows view models to perform initialization logic on initial or subsequent views of this page and view model instance.
+            </summary>
+            <param name="view">View that is being shown.</param>
+            <param name="e">Arguments containing navigation and page state data.</param>
+            <returns>Awaitable task is returned.</returns>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.OnLoadStateAsync(AppFramework.Core.LoadStateEventArgs)">
+            <summary>
+            Inherited view model instances perform any load state logic.
+            </summary>
+            <param name="e">Event args with all navigation data.</param>
+            <returns>Awaitable task is returned.</returns>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.OnSaveStateAsync(AppFramework.Core.SaveStateEventArgs)">
+            <summary>
+            Inherited view model instances perform any save state logic.
+            </summary>
+            <param name="e">Event args with all navigation data.</param>
+            <returns>Awaitable task is returned.</returns>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.SaveStateAsync(AppFramework.Core.SaveStateEventArgs)">
+            <summary>
+            Called by a view's OnNavigatedFrom event, SaveState allows view models to perform suspend logic whenever the page is navigated away from.
+            </summary>
+            <param name="e">Event args with all navigation data.</param>
+            <returns>Awaitable task is returned.</returns>
+        </member>
+        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.StatusIsBusy">
+            <summary>
+            Gets whether or not the view model is in busy status.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.StatusIsBlocking">
+            <summary>
+            Gets whether or not the busy status indicator for this view model should be blocking the UI view.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.StatusProgressValue">
+            <summary>
+            Gets the numerical value of the progress bar that should be displayed by busy status indicator.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.StatusText">
+            <summary>
+            Gets the text that should be displayed by the busy status indicator.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.CopyStatus(AppFramework.Core.ViewModels.ViewModelBase)">
+            <summary>
+            Copies status data from another ViewModel.
+            </summary>
+            <param name="vm">ViewModel to copy status data from.</param>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.ShowStatus(System.String,System.Boolean)">
+            <summary>
+            Show just a status message to the user for a indefinite period of time.
+            </summary>
+            <param name="message">Message to display on the UI</param>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.ShowBusyStatus(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Show the busy UI to the user for an indefinite period of time.
+            </summary>
+            <param name="message">Message to display on the UI</param>
+            <param name="isBlocking">True if full screen blocking UI else false.</param>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.ShowTimedStatus(System.String,System.Int32,System.Boolean)">
+            <summary>
+            Show the busy UI to the user for a definitive period of time.
+            </summary>
+            <param name="message">Message to display on the UI</param>
+            <param name="milliseconds">Time in milliseconds to display the message.</param>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.ClearStatus(System.Object)">
+            <summary>
+            Clears any status messages on the UI.
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.ClearStatus">
+            <summary>
+            Clears any status messages on the UI.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.CancelStatus">
+            <summary>
+            Called when the user hits the cancel button on the blocking status UI. Overridable so inherited VMs can customize experience when user cancels.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.NotifyPropertyChangedOnUI``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>
+            Notify subscribers on the UI thread that a property changed occurred.
+            </summary>
+            <typeparam name="TProperty"></typeparam>
+            <param name="property"></param>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.PreservePropertyState``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>
+            Registers properties to save/retrieve from page state during tombstoning.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="property"></param>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.LoadPropertyFromState(AppFramework.Core.LoadStateEventArgs,System.Reflection.PropertyInfo)">
+            <summary>
+            Loads a property with data from page state if found.
+            </summary>
+            <param name="e">Load state event args for the view.</param>
+            <param name="key">Name of the property.</param>
+            <param name="pi">Property info object.</param>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.SavePropertyToState(AppFramework.Core.SaveStateEventArgs,System.Reflection.PropertyInfo)">
+            <summary>
+            Saves a property to page state.
+            </summary>
+            <param name="e"></param>
+            <param name="pi"></param>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.InvokeOnUIThread(System.Action,Windows.UI.Core.CoreDispatcherPriority)">
+            <summary>
+            Runs a function on the currently executing platform's UI thread.
+            </summary>
+            <param name="action">Code to be executed on the UI thread</param>
+            <param name="priority">Priority to indicate to the system when to prioritize the execution of the code</param>
+            <returns>Task representing the code to be executing</returns>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.ShowMessageBoxAsync(System.Threading.CancellationToken,System.String)">
+            <summary>
+            Displays a message box dialog.
+            </summary>
+            <param name="message">Message to display.</param>
+            <param name="ct">Cancelation token</param>
+            <returns>Awaitable call which returns the index of the button clicked.</returns>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.ShowMessageBoxAsync(System.Threading.CancellationToken,System.String,System.String)">
+            <summary>
+            Displays a message box dialog.
+            </summary>
+            <param name="message">Message to display.</param>
+            <param name="title">Title of the message box.</param>
+            <param name="ct">Cancelation token</param>
+            <returns>Awaitable call which returns the index of the button clicked.</returns>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.ShowMessageBoxAsync(System.Threading.CancellationToken,System.String,System.Collections.Generic.IList{System.String},System.Int32)">
+            <summary>
+            Displays a message box dialog.
+            </summary>
+            <param name="message">Message to display.</param>
+            <param name="buttonNames">List of buttons to display.</param>
+            <param name="defaultIndex">Index of the default button of the dialog box.</param>
+            <param name="ct">Cancelation token</param>
+            <returns>Awaitable call which returns the index of the button clicked.</returns>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.ShowMessageBoxAsync(System.Threading.CancellationToken,System.String,System.String,System.Collections.Generic.IList{System.String},System.Int32)">
+            <summary>
+            Displays a message box dialog.
+            </summary>
+            <param name="message">Message to display.</param>
+            <param name="title">Title of the message box.</param>
+            <param name="buttonNames">List of buttons to display.</param>
+            <param name="defaultIndex">Index of the default button of the dialog box.</param>
+            <param name="ct">Cancelation token</param>
+            <returns>Awaitable call which returns the index of the button clicked.</returns>
+        </member>
+        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.RefreshCommand">
+            <summary>
+            Gets a command instance for refreshing the page.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.UserForcedRefresh">
+            <summary>
+            Gets or sets whether or not the user forced a refresh on the view.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.IsRefreshEnabled">
+            <summary>
+            Gets or sets whether or not the refresh button is enabled or not.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.RefreshAsync">
+            <summary>
+            Refreshes data on the entire page. 
+            </summary>
+            <returns>Task for the operation.</returns>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.RefreshAsync(System.Boolean)">
+            <summary>
+            Refreshes data on the entire page. 
+            </summary>
+            <param name="forceRefresh">Flag indicating a force refresh else refresh only if necessary.</param>
+            <returns>Task for the operation.</returns>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.OnRefreshAsync(System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Inherited view models can implement their own logic as to what happens when a page refresh is requested.
+            </summary>
+            <param name="forceRefresh"></param>
+            <param name="ct"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.LoadFromCacheAsync``1(System.Linq.Expressions.Expression{System.Func{``0}},System.String)">
+            <summary>
+            Fills a property with data from the app cache if available.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="property"></param>
+            <param name="identifier"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.LoadFromCacheAsync``1(System.String)">
+            <summary>
+            Fills a property with data from the app cache if available.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.SaveToCacheAsync``1(System.Linq.Expressions.Expression{System.Func{``0}},System.String)">
+            <summary>
+            Stores a property's data to the app cache.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="property"></param>
+            <param name="identifier"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.SaveToCacheAsync``1(System.String,``0)">
+            <summary>
+            Stores a property's data to the app cache.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">Unique identifier for the data</param>
+            <param name="data">The data to store</param>
+            <returns></returns>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.WaitAllAsync(System.Threading.CancellationToken,System.Threading.Tasks.Task[])">
+            <summary>
+            Waits for a list of task to complete before continuing execution.
+            </summary>
+            <param name="tasks">List of tasks to execute and wait for all to complete.</param>
+            <returns>Awaitable task is returned.</returns>
+        </member>
+        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.IsUserAuthenticated">
+            <summary>
+            Gets whether or not a user is authenticated in this application.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.RequiresAuthorization">
+            <summary>
+            True or false indicating whether or not this view model requires the user to be authenticated.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.NavigateToAccountSignoutCommand">
+            <summary>
+            Command to sign out of the application.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.UserSignoutAsync(System.Boolean)">
+            <summary>
+            Signs a users out of the application.
+            </summary>
+            <param name="isSilent">True to prompt the user else false to sign out immediately.</param>
+            <returns>Awaitable task is returned.</returns>
+        </member>
+        <member name="P:AppFramework.Core.ViewModels.WebBrowserViewModel.ShowNavigation">
+            <summary>
+            Gets whether or not the navigation command bar should be shown.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.ViewModels.WebBrowserViewModel.ForceBrowserGoBackOnNavigationBack">
+            <summary>
+            Gets or sets a flag indicating whether navigating back on the view should skip back override to allow browser back history to be navigated to on back presses.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.ViewModels.WebBrowserViewModel.ShowBrowser">
+            <summary>
+            Gets whether the browser should be visible or not.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.ViewModels.WebBrowserViewModel.BrowserRefreshCommand">
+            <summary>
+            Gets a command used to refresh the current view.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.ViewModels.WebBrowserViewModel.BrowserHomeCommand">
+            <summary>
+            Gets a command used to take the user back to the home webpage.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.ViewModels.WebBrowserViewModel.BrowserCanGoBack">
+            <summary>
+            Returns whether or not the browser can go back or not.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.ViewModels.WebBrowserViewModel.BrowserCanGoForward">
+            <summary>
+            Returns whether or not the browser can go forward or not.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.WebBrowserViewModel.InitialNavigation">
+            <summary>
+            Initial page that should be navigated on launch of the application. 
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.WebBrowserViewModel.Navigating(System.Uri)">
+            <summary>
+            Notify the VM that the browser is in the process of navigating to a particular page and offer the ability for it to cancel the navigation.
+            </summary>
+            <param name="uri"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.WebBrowserViewModel.Navigated(System.Uri,System.String)">
+            <summary>
+            Notify this VM that a page has been navigated to.
+            </summary>
+            <param name="uri"></param>
+            <param name="title"></param>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.WebBrowserViewModel.NavigationFailed(System.Uri,System.Exception,System.String)">
+            <summary>
+            Notify this VM that a navigation failure has occurred.
+            </summary>
+            <param name="uri"></param>
+            <param name="exception"></param>
+            <param name="title"></param>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.WebBrowserViewModel.SetBrowserFunctions(System.Func{System.Boolean},System.Func{System.Boolean})">
+            <summary>
+            Configure the VM to perform execute custom functions when the browser can go back/forward.
+            </summary>
+            <param name="canGoBack"></param>
+            <param name="canGoForward"></param>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.WebBrowserViewModel.BrowserRefresh">
+            <summary>
+            Refreshes the web browser.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.WebBrowserViewModel.BrowserGoBack">
+            <summary>
+            Navigates the web browser backwards.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.WebBrowserViewModel.BrowserGoForward">
+            <summary>
+            Navigates the web browser forward.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.WebBrowserViewModel.BrowserGoHome">
+            <summary>
+            Navigates the web browser to the home page.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.ViewModels.WebBrowserViewModel.NavigateTo(System.String)">
+            <summary>
+            Navigate to a specific web page.
+            </summary>
+            <param name="url">URL to navigate to.</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:AppFramework.Core.ViewModels.WebBrowserViewModel.ViewModel" -->
         <member name="T:AppFramework.Core.InitializationModes">
             <summary>
             Enumeration used to indicate if core code is executing in a new instance of the application, 
@@ -2121,463 +2578,6 @@
             Enumeration describing the level/type of information being logged
             </summary>
         </member>
-        <member name="P:AppFramework.Core.Strings.WebBrowser.TextGoBack">
-            <summary>
-            Localized resource similar to "Go back"
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.WebBrowser.TextGoForward">
-            <summary>
-            Localized resource similar to "Go forward"
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.WebBrowser.TextWebDefaultTitle">
-            <summary>
-            Localized resource similar to "Web Browser"
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.WebBrowser.TextWebErrorGeneric">
-            <summary>
-            Localized resource similar to "Could not load the requested page. Try again later."
-            </summary>
-        </member>
-        <member name="T:AppFramework.Core.ViewModels.CollectionViewModelBase">
-            <summary>
-            ViewModelBase for views that need to display multiple separate sub-views which might have their own ViewModel instances. This 
-            CollectionViewModelBase can contain multiple ViewModels and set a current view model so that the frame can show appropriate 
-            status data specific to the current view model.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.ViewModels.CollectionViewModelBase.CurrentViewModel">
-            <summary>
-            Gets access to the current selected view model.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.ViewModels.CollectionViewModelBase.ViewModels">
-            <summary>
-            Gets access to the collection of sub-viewmodels.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.CollectionViewModelBase.SetCurrentAsync(AppFramework.Core.ViewModels.ViewModelBase)">
-            <summary>
-            Sets the current ViewModel that is active and visible.
-            </summary>
-            <param name="vm"></param>
-        </member>
-        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.PlatformBase">
-            <summary>
-            Gets access to all the platform services.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.Dispatcher">
-            <summary>
-            Gets access to the dispatcher for this view or application.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.View">
-            <summary>
-            Gets or sets access to the page instance associated to this ViewModel instance.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.ViewParameter">
-            <summary>
-            Gets access to the parameter passed to the page.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.IsInitialized">
-            <summary>
-            True or false indicating whether or not the view model has been called at least by a view bound to this view model.
-            </summary>
-        </member>
-        <member name="F:AppFramework.Core.ViewModels.ViewModelBase._Title">
-            <summary>
-            Gets or sets the title for the view specified by this view model.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.IsViewInChildFrame">
-            <summary>
-            Gets a boolean indicating whether or not the view instance is in a child frame of the window.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.ShowHomeButton">
-            <summary>
-            Get a boolean indicating whether or not this view should show a home button.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.OnBackNavigationRequested">
-            <summary>
-            Allows a view model to prevent back navigation if it needs to.
-            </summary>
-            <returns>True if on back navigation should be cancelled else false.</returns>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.OnForwardNavigationRequested">
-            <summary>
-            Allows a view model to prevent forward navigation if it needs to.
-            </summary>
-            <returns>True if on forward navigation should be cancelled else false.</returns>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.LoadStateAsync(Windows.UI.Xaml.Controls.Page,AppFramework.Core.LoadStateEventArgs)">
-            <summary>
-            Called by a view's OnNavigatedTo event, LoadState allows view models to perform initialization logic on initial or subsequent views of this page and view model instance.
-            </summary>
-            <param name="view">View that is being shown.</param>
-            <param name="e">Arguments containing navigation and page state data.</param>
-            <returns>Awaitable task is returned.</returns>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.OnLoadStateAsync(AppFramework.Core.LoadStateEventArgs)">
-            <summary>
-            Inherited view model instances perform any load state logic.
-            </summary>
-            <param name="e">Event args with all navigation data.</param>
-            <returns>Awaitable task is returned.</returns>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.OnSaveStateAsync(AppFramework.Core.SaveStateEventArgs)">
-            <summary>
-            Inherited view model instances perform any save state logic.
-            </summary>
-            <param name="e">Event args with all navigation data.</param>
-            <returns>Awaitable task is returned.</returns>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.SaveStateAsync(AppFramework.Core.SaveStateEventArgs)">
-            <summary>
-            Called by a view's OnNavigatedFrom event, SaveState allows view models to perform suspend logic whenever the page is navigated away from.
-            </summary>
-            <param name="e">Event args with all navigation data.</param>
-            <returns>Awaitable task is returned.</returns>
-        </member>
-        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.StatusIsBusy">
-            <summary>
-            Gets whether or not the view model is in busy status.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.StatusIsBlocking">
-            <summary>
-            Gets whether or not the busy status indicator for this view model should be blocking the UI view.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.StatusProgressValue">
-            <summary>
-            Gets the numerical value of the progress bar that should be displayed by busy status indicator.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.StatusText">
-            <summary>
-            Gets the text that should be displayed by the busy status indicator.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.CopyStatus(AppFramework.Core.ViewModels.ViewModelBase)">
-            <summary>
-            Copies status data from another ViewModel.
-            </summary>
-            <param name="vm">ViewModel to copy status data from.</param>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.ShowStatus(System.String,System.Boolean)">
-            <summary>
-            Show just a status message to the user for a indefinite period of time.
-            </summary>
-            <param name="message">Message to display on the UI</param>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.ShowBusyStatus(System.String,System.Boolean,System.Boolean)">
-            <summary>
-            Show the busy UI to the user for an indefinite period of time.
-            </summary>
-            <param name="message">Message to display on the UI</param>
-            <param name="isBlocking">True if full screen blocking UI else false.</param>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.ShowTimedStatus(System.String,System.Int32,System.Boolean)">
-            <summary>
-            Show the busy UI to the user for a definitive period of time.
-            </summary>
-            <param name="message">Message to display on the UI</param>
-            <param name="milliseconds">Time in milliseconds to display the message.</param>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.ClearStatus(System.Object)">
-            <summary>
-            Clears any status messages on the UI.
-            </summary>
-            <param name="obj"></param>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.ClearStatus">
-            <summary>
-            Clears any status messages on the UI.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.CancelStatus">
-            <summary>
-            Called when the user hits the cancel button on the blocking status UI. Overridable so inherited VMs can customize experience when user cancels.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.NotifyPropertyChangedOnUI``1(System.Linq.Expressions.Expression{System.Func{``0}})">
-            <summary>
-            Notify subscribers on the UI thread that a property changed occurred.
-            </summary>
-            <typeparam name="TProperty"></typeparam>
-            <param name="property"></param>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.PreservePropertyState``1(System.Linq.Expressions.Expression{System.Func{``0}})">
-            <summary>
-            Registers properties to save/retrieve from page state during tombstoning.
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="property"></param>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.LoadPropertyFromState(AppFramework.Core.LoadStateEventArgs,System.Reflection.PropertyInfo)">
-            <summary>
-            Loads a property with data from page state if found.
-            </summary>
-            <param name="e">Load state event args for the view.</param>
-            <param name="key">Name of the property.</param>
-            <param name="pi">Property info object.</param>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.SavePropertyToState(AppFramework.Core.SaveStateEventArgs,System.Reflection.PropertyInfo)">
-            <summary>
-            Saves a property to page state.
-            </summary>
-            <param name="e"></param>
-            <param name="pi"></param>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.InvokeOnUIThread(System.Action,Windows.UI.Core.CoreDispatcherPriority)">
-            <summary>
-            Runs a function on the currently executing platform's UI thread.
-            </summary>
-            <param name="action">Code to be executed on the UI thread</param>
-            <param name="priority">Priority to indicate to the system when to prioritize the execution of the code</param>
-            <returns>Task representing the code to be executing</returns>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.ShowMessageBoxAsync(System.Threading.CancellationToken,System.String)">
-            <summary>
-            Displays a message box dialog.
-            </summary>
-            <param name="message">Message to display.</param>
-            <param name="ct">Cancelation token</param>
-            <returns>Awaitable call which returns the index of the button clicked.</returns>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.ShowMessageBoxAsync(System.Threading.CancellationToken,System.String,System.String)">
-            <summary>
-            Displays a message box dialog.
-            </summary>
-            <param name="message">Message to display.</param>
-            <param name="title">Title of the message box.</param>
-            <param name="ct">Cancelation token</param>
-            <returns>Awaitable call which returns the index of the button clicked.</returns>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.ShowMessageBoxAsync(System.Threading.CancellationToken,System.String,System.Collections.Generic.IList{System.String},System.Int32)">
-            <summary>
-            Displays a message box dialog.
-            </summary>
-            <param name="message">Message to display.</param>
-            <param name="buttonNames">List of buttons to display.</param>
-            <param name="defaultIndex">Index of the default button of the dialog box.</param>
-            <param name="ct">Cancelation token</param>
-            <returns>Awaitable call which returns the index of the button clicked.</returns>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.ShowMessageBoxAsync(System.Threading.CancellationToken,System.String,System.String,System.Collections.Generic.IList{System.String},System.Int32)">
-            <summary>
-            Displays a message box dialog.
-            </summary>
-            <param name="message">Message to display.</param>
-            <param name="title">Title of the message box.</param>
-            <param name="buttonNames">List of buttons to display.</param>
-            <param name="defaultIndex">Index of the default button of the dialog box.</param>
-            <param name="ct">Cancelation token</param>
-            <returns>Awaitable call which returns the index of the button clicked.</returns>
-        </member>
-        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.RefreshCommand">
-            <summary>
-            Gets a command instance for refreshing the page.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.UserForcedRefresh">
-            <summary>
-            Gets or sets whether or not the user forced a refresh on the view.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.IsRefreshEnabled">
-            <summary>
-            Gets or sets whether or not the refresh button is enabled or not.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.RefreshAsync">
-            <summary>
-            Refreshes data on the entire page. 
-            </summary>
-            <returns>Task for the operation.</returns>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.RefreshAsync(System.Boolean)">
-            <summary>
-            Refreshes data on the entire page. 
-            </summary>
-            <param name="forceRefresh">Flag indicating a force refresh else refresh only if necessary.</param>
-            <returns>Task for the operation.</returns>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.OnRefreshAsync(System.Boolean,System.Threading.CancellationToken)">
-            <summary>
-            Inherited view models can implement their own logic as to what happens when a page refresh is requested.
-            </summary>
-            <param name="forceRefresh"></param>
-            <param name="ct"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.LoadFromCacheAsync``1(System.Linq.Expressions.Expression{System.Func{``0}},System.String)">
-            <summary>
-            Fills a property with data from the app cache if available.
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="property"></param>
-            <param name="identifier"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.LoadFromCacheAsync``1(System.String)">
-            <summary>
-            Fills a property with data from the app cache if available.
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.SaveToCacheAsync``1(System.Linq.Expressions.Expression{System.Func{``0}},System.String)">
-            <summary>
-            Stores a property's data to the app cache.
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="property"></param>
-            <param name="identifier"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.SaveToCacheAsync``1(System.String,``0)">
-            <summary>
-            Stores a property's data to the app cache.
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="key">Unique identifier for the data</param>
-            <param name="data">The data to store</param>
-            <returns></returns>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.WaitAllAsync(System.Threading.CancellationToken,System.Threading.Tasks.Task[])">
-            <summary>
-            Waits for a list of task to complete before continuing execution.
-            </summary>
-            <param name="tasks">List of tasks to execute and wait for all to complete.</param>
-            <returns>Awaitable task is returned.</returns>
-        </member>
-        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.IsUserAuthenticated">
-            <summary>
-            Gets whether or not a user is authenticated in this application.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.RequiresAuthorization">
-            <summary>
-            True or false indicating whether or not this view model requires the user to be authenticated.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.ViewModels.ViewModelBase.NavigateToAccountSignoutCommand">
-            <summary>
-            Command to sign out of the application.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.UserSignoutAsync(System.Boolean)">
-            <summary>
-            Signs a users out of the application.
-            </summary>
-            <param name="isSilent">True to prompt the user else false to sign out immediately.</param>
-            <returns>Awaitable task is returned.</returns>
-        </member>
-        <member name="P:AppFramework.Core.ViewModels.WebBrowserViewModel.ShowNavigation">
-            <summary>
-            Gets whether or not the navigation command bar should be shown.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.ViewModels.WebBrowserViewModel.ForceBrowserGoBackOnNavigationBack">
-            <summary>
-            Gets or sets a flag indicating whether navigating back on the view should skip back override to allow browser back history to be navigated to on back presses.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.ViewModels.WebBrowserViewModel.ShowBrowser">
-            <summary>
-            Gets whether the browser should be visible or not.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.ViewModels.WebBrowserViewModel.BrowserRefreshCommand">
-            <summary>
-            Gets a command used to refresh the current view.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.ViewModels.WebBrowserViewModel.BrowserHomeCommand">
-            <summary>
-            Gets a command used to take the user back to the home webpage.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.ViewModels.WebBrowserViewModel.BrowserCanGoBack">
-            <summary>
-            Returns whether or not the browser can go back or not.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.ViewModels.WebBrowserViewModel.BrowserCanGoForward">
-            <summary>
-            Returns whether or not the browser can go forward or not.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.WebBrowserViewModel.InitialNavigation">
-            <summary>
-            Initial page that should be navigated on launch of the application. 
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.WebBrowserViewModel.Navigating(System.Uri)">
-            <summary>
-            Notify the VM that the browser is in the process of navigating to a particular page and offer the ability for it to cancel the navigation.
-            </summary>
-            <param name="uri"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.WebBrowserViewModel.Navigated(System.Uri,System.String)">
-            <summary>
-            Notify this VM that a page has been navigated to.
-            </summary>
-            <param name="uri"></param>
-            <param name="title"></param>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.WebBrowserViewModel.NavigationFailed(System.Uri,System.Exception,System.String)">
-            <summary>
-            Notify this VM that a navigation failure has occurred.
-            </summary>
-            <param name="uri"></param>
-            <param name="exception"></param>
-            <param name="title"></param>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.WebBrowserViewModel.SetBrowserFunctions(System.Func{System.Boolean},System.Func{System.Boolean})">
-            <summary>
-            Configure the VM to perform execute custom functions when the browser can go back/forward.
-            </summary>
-            <param name="canGoBack"></param>
-            <param name="canGoForward"></param>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.WebBrowserViewModel.BrowserRefresh">
-            <summary>
-            Refreshes the web browser.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.WebBrowserViewModel.BrowserGoBack">
-            <summary>
-            Navigates the web browser backwards.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.WebBrowserViewModel.BrowserGoForward">
-            <summary>
-            Navigates the web browser forward.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.WebBrowserViewModel.BrowserGoHome">
-            <summary>
-            Navigates the web browser to the home page.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.ViewModels.WebBrowserViewModel.NavigateTo(System.String)">
-            <summary>
-            Navigate to a specific web page.
-            </summary>
-            <param name="url">URL to navigate to.</param>
-        </member>
-        <!-- Badly formed XML comment ignored for member "P:AppFramework.Core.ViewModels.WebBrowserViewModel.ViewModel" -->
         <member name="T:AppFramework.Core.LoadStateEventHandler">
             <summary>
             Represents the method that will handle the <see cref="!:NavigationHelper.LoadState"/>event
@@ -3329,17 +3329,17 @@
             value is optional and can be provided automatically when invoked from compilers
             that support <see cref="T:System.Runtime.CompilerServices.CallerMemberNameAttribute"/>.</param>
         </member>
-        <member name="M:AppFramework.Uwp.AppFramework_Uwp_XamlTypeInfo.XamlMetaDataProvider.GetXamlType(System.Type)">
+        <member name="M:AppFramework.AppFramework_Uwp_XamlTypeInfo.XamlMetaDataProvider.GetXamlType(System.Type)">
             <summary>
             GetXamlType(Type)
             </summary>
         </member>
-        <member name="M:AppFramework.Uwp.AppFramework_Uwp_XamlTypeInfo.XamlMetaDataProvider.GetXamlType(System.String)">
+        <member name="M:AppFramework.AppFramework_Uwp_XamlTypeInfo.XamlMetaDataProvider.GetXamlType(System.String)">
             <summary>
             GetXamlType(String)
             </summary>
         </member>
-        <member name="M:AppFramework.Uwp.AppFramework_Uwp_XamlTypeInfo.XamlMetaDataProvider.GetXmlnsDefinitions">
+        <member name="M:AppFramework.AppFramework_Uwp_XamlTypeInfo.XamlMetaDataProvider.GetXmlnsDefinitions">
             <summary>
             GetXmlnsDefinitions()
             </summary>

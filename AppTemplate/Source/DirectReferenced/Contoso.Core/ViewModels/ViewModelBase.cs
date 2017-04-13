@@ -71,6 +71,37 @@ namespace Contoso.Core.ViewModels
         #endregion
     }
 
+    public abstract class SettingsViewModelBase: AppFramework.Core.ViewModels.SettingsViewModelBase, IViewModel
+    {
+        #region Properties
+
+        /// <summary>
+        /// Gets access to all the platform services.
+        /// </summary>
+        [Newtonsoft.Json.JsonIgnore()]
+        [System.Runtime.Serialization.IgnoreDataMember()]
+        public Platform Platform { get { return Platform.Current; } }
+
+        public AppSettingsLocal AppSettingsLocal { get { return this.Platform.AppSettingsLocal as AppSettingsLocal; } }
+
+        public AppSettingsRoaming AppSettingsRoaming { get { return this.Platform.AppSettingsRoaming as AppSettingsRoaming; } }
+
+        #endregion
+
+        #region Constructors
+
+        public SettingsViewModelBase()
+        {
+            this.Platform.OnAppSettingsReset += (o, e) =>
+            {
+                this.NotifyPropertyChanged(() => this.AppSettingsLocal);
+                this.NotifyPropertyChanged(() => this.AppSettingsRoaming);
+            };
+        }
+
+        #endregion
+    }
+
     public class WebViewModel : AppFramework.Core.ViewModels.WebBrowserViewModel, IViewModel
     {
         #region Properties

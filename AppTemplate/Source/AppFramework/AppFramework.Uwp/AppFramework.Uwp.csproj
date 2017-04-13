@@ -7,7 +7,7 @@
     <ProjectGuid>{65F2272C-D17A-45BE-982A-C6637407657A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AppFramework.Uwp</RootNamespace>
+    <RootNamespace>AppFramework</RootNamespace>
     <AssemblyName>AppFramework.Uwp</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
@@ -130,7 +130,9 @@
     <Compile Include="Core\Models\ModelBase.cs" />
     <Compile Include="Core\Models\UniqueModelBase.cs" />
     <Compile Include="Core\Serializers.cs" />
+    <Compile Include="Core\Strings\BackgroundTasks.cs" />
     <Compile Include="Core\TypeUtility.cs" />
+    <Compile Include="Core\ViewModels\SettingsViewModelBase.cs" />
     <Compile Include="UI\Controls\ApplicationFrame.cs" />
     <Compile Include="Core\Commands\GenericCommand.cs" />
     <Compile Include="Core\Commands\MapCommands.cs" />

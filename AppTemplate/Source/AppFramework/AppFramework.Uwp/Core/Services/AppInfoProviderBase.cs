@@ -54,6 +54,8 @@ namespace AppFramework.Core.Services
 
         public abstract string AppSupportEmailAddress { get; }
 
+        public abstract string AppSupportTwitterAddress { get; }
+
         public abstract string ProtocolPrefix { get; }
 
         /// <summary>

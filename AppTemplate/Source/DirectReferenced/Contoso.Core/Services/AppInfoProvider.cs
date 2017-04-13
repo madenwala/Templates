@@ -14,6 +14,7 @@ namespace Contoso.Core.Services
         public override string AppName => Resources.ApplicationName;
         public override string AppDescription => Resources.ApplicationDescription;
         public override string AppSupportEmailAddress => Resources.ApplicationSupportEmailAddress;
+        public override string AppSupportTwitterAddress => Resources.ApplicationSupportTwitterUsername;
         public override string ProtocolPrefix => "contoso://";
 
         #endregion

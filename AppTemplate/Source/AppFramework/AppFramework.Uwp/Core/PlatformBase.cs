@@ -114,7 +114,6 @@ namespace AppFramework.Core
             this.Storage = new StorageManager();
             this.Cryptography = new CryptographyProvider();
             this.Geocode = new GeocodingService();
-            this.Geolocation = new GeolocationService();
             this.Ratings = new RatingsManager();
             this.VoiceCommandManager = new VoiceCommandManager();
             this.Jumplist = new JumplistManager();
@@ -205,7 +204,11 @@ namespace AppFramework.Core
             if (mode == InitializationModes.New)
             {
                 // Check for previous app crashes
-                await this.Logger.CheckForFatalErrorReportsAsync(this.ViewModel);
+                if (this.IsXbox == false)
+                {
+                    // TODO Should automatically send error reports to cloud on XBOX
+                    await this.Logger.CheckForFatalErrorReportsAsync(this.ViewModel);
+                }
 
                 // Check to see if the user should be prompted to rate the application
                 await this.Ratings.CheckForRatingsPromptAsync(this.ViewModel);

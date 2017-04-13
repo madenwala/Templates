@@ -40,6 +40,7 @@ namespace Contoso.Core
             this.AppInfo = new AppInfoProvider();
             this.Notifications = new NotificationsService();
             this.SharingManager = new SharingManager();
+            this.Geolocation = new AppFramework.Core.Services.GeolocationService();
         }
 
         #endregion

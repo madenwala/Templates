@@ -1,6 +1,6 @@
 ﻿namespace AppFramework.Core.Strings
 {
-    public static class Account
+    internal static class Account
     {
         public const string TextAuthenticating = "Authenticating...";
         public const string TextNotApplicable = "N/A";

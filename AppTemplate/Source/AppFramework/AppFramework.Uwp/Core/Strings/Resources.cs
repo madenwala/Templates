@@ -1,6 +1,6 @@
 ﻿namespace AppFramework.Core.Strings
 {
-    public static class Resources
+    internal static class Resources
     {
         public const string ApplicationProblemEmailBodyTemplate = "Please describe what you were doing when the problem occurred:\r\n--------------------\r\n\r\n\r\n--------------------";
         public const string ApplicationProblemEmailSubjectTemplate = "{0} {1} auto-generated problem report";
