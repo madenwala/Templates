@@ -490,9 +490,12 @@
                             PullThreshold="{TemplateBinding PullThreshold}"
                             behaviors:ListViewCommandBehavior.Command="{TemplateBinding ClickCommand}">
                             <toolkit:PullToRefreshListView.PullToRefreshContent>
-                                <TextBlock Text="[Pull to refresh]" Style="{StaticResource SubtleTextBlockStyle}" />
+                                <TextBlock Text="Pull to refresh" Style="{StaticResource SubtleTextBlockStyle}" />
                                 <!--TODO x:Uid="/AppFramework.Core.Uwp/Resources/txtPullToRefresh"-->
                             </toolkit:PullToRefreshListView.PullToRefreshContent>
+                            <toolkit:PullToRefreshListView.ReleaseToRefreshContent>
+                                <TextBlock Text="Release to refresh" Style="{StaticResource SubtleTextBlockStyle}" />
+                            </toolkit:PullToRefreshListView.ReleaseToRefreshContent>
                         </toolkit:PullToRefreshListView>
                         <TextBlock 
                             Text="{TemplateBinding NoDataMessage}" 
