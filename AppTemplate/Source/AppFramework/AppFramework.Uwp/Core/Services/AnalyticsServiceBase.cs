@@ -69,7 +69,7 @@ namespace AppFramework.Core.Services
         /// Sets the user to the analytics providers.
         /// </summary>
         /// <param name="user">User object representing the current user.</param>
-        public virtual void SetUser(IUserInformation user)
+        public virtual void SetUser(IAuthenticatedUserProfile user)
         {
             if (user != null)
                 this.SetUser(user.UserID);

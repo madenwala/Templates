@@ -76,9 +76,6 @@ namespace Contoso.Core.ViewModels
         {
             if (forceRefresh || this.Items == null || this.HasLocationChanged)
             {
-                //await this.GetCurrentLocationAsync(false, ct);
-                this.HasLocationChanged = false;
-
                 this.ShowBusyStatus(Resources.TextLoading, this.Items == null || this.Items.Count == 0);
                 using (var api = new ClientApi())
                 {
@@ -87,14 +84,6 @@ namespace Contoso.Core.ViewModels
                 
                 // Save to cache
                 await this.SaveToCacheAsync(() => this.Items);
-                
-                //ct.ThrowIfCancellationRequested();
-                //this.ShowBusyStatus("Updating voice commands and tiles...");
-                //await this.WaitAllAsync(
-                //    ct,
-                //    this.UpdateVoiceCommandsAsync(ct),
-                //    this.Notifications.CreateOrUpdateTileAsync(this)
-                //    );
             }
         }
 

@@ -23,7 +23,7 @@ namespace Contoso.Core.Models
     /// <summary>
     /// Response object from the authentication end point.
     /// </summary>
-    public class UserResponse : ResponseBase, IUserInformation
+    public class UserResponse : ResponseBase, IAuthenticatedUserProfile
     {
         private string _AccessToken;
         public string AccessToken

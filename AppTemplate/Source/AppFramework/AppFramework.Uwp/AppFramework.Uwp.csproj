@@ -125,7 +125,7 @@
     <Compile Include="Core\Extensions\IDictionaryExtensions.cs" />
     <Compile Include="Core\Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Core\Extensions\LongExtensions.cs" />
-    <Compile Include="Core\Models\IUserInformation.cs" />
+    <Compile Include="Core\Models\IAuthenticatedUserProfile.cs" />
     <Compile Include="Core\Models\IView.cs" />
     <Compile Include="Core\Models\ModelBase.cs" />
     <Compile Include="Core\Models\UniqueModelBase.cs" />

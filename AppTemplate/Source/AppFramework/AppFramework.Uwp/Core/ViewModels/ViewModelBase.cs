@@ -822,6 +822,7 @@ namespace AppFramework.Core.ViewModels
                 this.IsRefreshEnabled = false;
                 _cts = new CancellationTokenSource();
                 await this.OnRefreshAsync(forceRefresh, _cts.Token);
+                this.HasLocationChanged = false;
                 this.ClearStatus();
             }
             catch(TaskCanceledException)
@@ -1028,11 +1029,18 @@ namespace AppFramework.Core.ViewModels
                 {
                     var user = await auth.GetRefreshAccessToken(ct);
                     PlatformCore.Current.Logger.Log(LogLevels.Information, "...access token refresh complete!");
-                    return await PlatformCore.GetService<AuthorizationManagerBase>().SetUserAsync(user);
+                    if(user != null)
+                        return await PlatformCore.GetService<AuthorizationManagerBase>().SetUserAsync(user);
+                }
+                catch(UserUnauthorizedException)
+                {
+                    PlatformCore.Current.Logger.Log(LogLevels.Warning, $"UserUnauthorizedException was caught by {this.GetType().FullName}.RefreshAccessTokenAsync");
+                    return false;
                 }
                 catch(Exception ex)
                 {
-                    PlatformCore.Current.Logger.LogError(ex, "Error while trying to refresh access token.");
+                    PlatformCore.Current.Logger.LogError(ex, "Error while trying to refresh access token. Allowing ");
+                    return true;
                 }
             }
 
@@ -1128,7 +1136,7 @@ namespace AppFramework.Core.ViewModels
 
         #region Location
 
-        protected bool HasLocationChanged { get; set; }
+        protected bool HasLocationChanged { get; private set; }
 
         private void Geolocation_LocationChanged(object sender, Services.LocationChangedEventArgs e)
         {
@@ -1143,7 +1151,7 @@ namespace AppFramework.Core.ViewModels
             return this.WaitForCurrentLocationAsync(ct);
         }
 
-        protected async Task<ILocationModel> WaitForCurrentLocationAsync(CancellationToken ct)
+        private async Task<ILocationModel> WaitForCurrentLocationAsync(CancellationToken ct)
         {
             if (!CurrentLocationTask.IsCompleted)
             {

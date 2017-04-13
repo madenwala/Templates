@@ -56,7 +56,7 @@ namespace AppFramework.Core.Services.Analytics
                 HockeyClient.Current.UpdateContactInfo(username, username);
         }
 
-        public override void SetUser(IUserInformation user)
+        public override void SetUser(IAuthenticatedUserProfile user)
         {
             if(user != null)
                 HockeyClient.Current.UpdateContactInfo(user.DisplayName, user.Email);

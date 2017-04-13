@@ -42,7 +42,7 @@ namespace Contoso.Core.Services
             get { return base.CurrentUser as UserResponse; }
         }
 
-        public override IUserInformation CurrentUser
+        public override IAuthenticatedUserProfile CurrentUser
         {
             get => base.CurrentUser;
             protected set
@@ -122,7 +122,7 @@ namespace Contoso.Core.Services
         /// Sets the current user of the app.
         /// </summary>
         /// <param name="userInformation"></param>
-        public override async Task<bool> SetUserAsync(IUserInformation userInformation)
+        public override async Task<bool> SetUserAsync(IAuthenticatedUserProfile userInformation)
         {
             var user = userInformation as UserResponse;
 
@@ -166,7 +166,7 @@ namespace Contoso.Core.Services
             this.NotifyUserAuthenticated();
         }
 
-        protected override async Task<IUserInformation> GetRefreshAccessToken(CancellationToken ct)
+        protected override async Task<IAuthenticatedUserProfile> GetRefreshAccessToken(CancellationToken ct)
         {
             try
             {

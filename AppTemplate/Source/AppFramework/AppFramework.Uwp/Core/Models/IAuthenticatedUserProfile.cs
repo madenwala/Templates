@@ -1,6 +1,6 @@
 ﻿namespace AppFramework.Core.Models
 {
-    public interface IUserInformation : IModel
+    public interface IAuthenticatedUserProfile : IModel
     {
         string UserID { get; }
         string DisplayName { get; }

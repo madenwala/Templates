@@ -1055,7 +1055,7 @@
             </summary>
             <param name="username">Username of the current user.</param>
         </member>
-        <member name="M:AppFramework.Core.Services.AnalyticsServiceBase.SetUser(AppFramework.Core.Models.IUserInformation)">
+        <member name="M:AppFramework.Core.Services.AnalyticsServiceBase.SetUser(AppFramework.Core.Models.IAuthenticatedUserProfile)">
             <summary>
             Sets the user to the analytics providers.
             </summary>
@@ -1148,7 +1148,7 @@
             Notify any subscribers that the user authentication status has changed.
             </summary>
         </member>
-        <member name="M:AppFramework.Core.Services.AuthorizationManagerBase.SetUserAsync(AppFramework.Core.Models.IUserInformation)">
+        <member name="M:AppFramework.Core.Services.AuthorizationManagerBase.SetUserAsync(AppFramework.Core.Models.IAuthenticatedUserProfile)">
             <summary>
             Sets the current user of the app.
             </summary>

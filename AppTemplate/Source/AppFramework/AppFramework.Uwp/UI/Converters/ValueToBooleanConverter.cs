@@ -12,7 +12,11 @@ namespace AppFramework.UI.Converters
         {
             bool boolean = true;
 
-            if (value is bool)
+            if (value == null)
+            {
+                boolean = false;
+            }
+            else if (value is bool)
             {
                 boolean = (bool)value;
             }
@@ -50,12 +54,8 @@ namespace AppFramework.UI.Converters
                 var val = value as IEnumerable;
                 boolean = val.GetEnumerator().MoveNext();
             }
-            else if (value == null)
-            {
-                boolean = false;
-            }
 
-            if (InvertValue || parameter != null)
+            if (this.InvertValue || parameter != null)
                 boolean = !boolean;
 
             return boolean;

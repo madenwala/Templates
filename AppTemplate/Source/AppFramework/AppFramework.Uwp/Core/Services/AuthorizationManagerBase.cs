@@ -34,11 +34,11 @@ namespace AppFramework.Core.Services
 
         #region Properties
 
-        private IUserInformation _currentUser;
+        private IAuthenticatedUserProfile _currentUser;
         /// <summary>
         /// Gets or sets the current user object representing a logged in user.
         /// </summary>
-        public virtual IUserInformation CurrentUser
+        public virtual IAuthenticatedUserProfile CurrentUser
         {
             get { return _currentUser; }
             protected set { this.SetProperty(ref _currentUser, value); }
@@ -66,7 +66,7 @@ namespace AppFramework.Core.Services
         /// Sets the current user of the app.
         /// </summary>
         /// <param name="user"></param>
-        public abstract Task<bool> SetUserAsync(IUserInformation user);
+        public abstract Task<bool> SetUserAsync(IAuthenticatedUserProfile user);
 
         /// <summary>
         /// Signs the user out of the application and removes and credential data from storage / credential locker.
@@ -79,7 +79,7 @@ namespace AppFramework.Core.Services
         /// </summary>
         /// <param name="ct">Cancellation token.</param>
         /// <returns>User object representing the logged in user.</returns>
-        protected internal abstract Task<IUserInformation> GetRefreshAccessToken(CancellationToken ct);
+        protected internal abstract Task<IAuthenticatedUserProfile> GetRefreshAccessToken(CancellationToken ct);
 
         #endregion
     }
