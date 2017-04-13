@@ -103,7 +103,7 @@ namespace AppFramework.Core.Services
 
         #region Constructors
 
-        public LoggingService()
+        internal LoggingService()
         {
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
                 return;
@@ -227,7 +227,7 @@ namespace AppFramework.Core.Services
         /// </summary>
         /// <param name="vm">ViewModel instance that is used to show a message box from.</param>
         /// <returns>Awaitable task is returned.</returns>
-        public async Task CheckForFatalErrorReportsAsync(IViewModel vm)
+        internal async Task CheckForFatalErrorReportsAsync(IViewModel vm)
         {
             try
             {
@@ -259,7 +259,7 @@ namespace AppFramework.Core.Services
         /// <summary>
         /// Sends an email to support with device information.
         /// </summary>
-        public async Task SendSupportEmailAsync()
+        private async Task SendSupportEmailAsync()
         {
             var subject = string.Format(Strings.Resources.ApplicationSupportEmailSubjectTemplate, Windows.ApplicationModel.Package.Current.DisplayName, PlatformCore.Current.AppInfo.VersionNumber);
             var report = PlatformCore.Current.Logger.GenerateApplicationReport();
@@ -276,7 +276,7 @@ namespace AppFramework.Core.Services
         /// </summary>
         /// <param name="ex">Exception object if available.</param>
         /// <returns>String representing the system and app logging data.</returns>
-        public string GenerateApplicationReport(Exception ex = null)
+        internal string GenerateApplicationReport(Exception ex = null)
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("UTC TIME: " + DateTime.Now.ToUniversalTime().ToString());
@@ -402,7 +402,7 @@ namespace AppFramework.Core.Services
         /// <summary>
         /// UWP console debugger from Michael Scherotter (https://blogs.msdn.microsoft.com/synergist/2016/08/20/console-ouptut-my-new-debugging-and-testing-tool-for-windows/)
         /// </summary>
-        public class UwpConsoleOutputProvider : IDisposable, ILogger
+        internal class UwpConsoleOutputProvider : IDisposable, ILogger
         {
             #region Variables
 
