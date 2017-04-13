@@ -84,8 +84,7 @@ namespace Contoso.Core.Services
         /// <returns>True if the user is authenticated else false.</returns>
         public override bool IsAuthenticated()
         {
-            var user = this.CurrentUser as UserResponse;
-            return !string.IsNullOrEmpty(user?.AccessToken);
+            return !string.IsNullOrEmpty(this.CurrentUserData?.AccessToken);
         }
 
         /// <summary>

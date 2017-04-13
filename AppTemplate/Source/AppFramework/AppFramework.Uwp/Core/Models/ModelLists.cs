@@ -359,6 +359,15 @@ namespace AppFramework.Core.Models
                 return this.FirstOrDefault(s => s.ID.Equals(item.ID));
         }
 
+        public int GetIndexByID(string id)
+        {
+            var item = this.GetByID(id);
+            if (item == null)
+                return -1;
+            else
+                return this.IndexOf(item);
+        }
+
         #endregion
     }
 }

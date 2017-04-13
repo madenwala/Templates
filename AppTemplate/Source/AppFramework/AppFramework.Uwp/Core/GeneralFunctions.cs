@@ -59,7 +59,7 @@ namespace AppFramework.Core
         /// </summary>
         /// <param name="querystring">Query string to parse.</param>
         /// <returns>Dictionary of key value pairs found within the query string.</returns>
-        internal static IDictionary<string, string> ParseQuerystring(string querystring)
+        public static IDictionary<string, string> ParseQuerystring(string querystring)
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();
             if (!string.IsNullOrWhiteSpace(querystring))
@@ -76,7 +76,7 @@ namespace AppFramework.Core
         /// </summary>
         /// <param name="parameters">Key/value pairs of parameters.</param>
         /// <returns>Query string from all the key/value pair data supplied in the dictionary.</returns>
-        internal static string CreateQuerystring(IDictionary<string, string> parameters)
+        public static string CreateQuerystring(IDictionary<string, string> parameters)
         {
             if (parameters == null || parameters.Count == 0)
                 return null;

@@ -99,13 +99,14 @@ namespace Contoso.Core
             {
                 return string.Empty;
             }
-            else if (model is ItemModel)
+            else if (model is ItemModel item)
             {
-                var item = model as ItemModel;
                 return "ItemModel_" + item.ID;
             }
             else
                 return null;
+
+            base.GenerateModelTileID
         }
 
         /// <summary>

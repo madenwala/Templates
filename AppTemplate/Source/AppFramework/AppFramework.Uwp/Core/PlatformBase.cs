@@ -460,6 +460,8 @@ namespace AppFramework.Core
         {
             if (model == this.ViewModel)
                 return string.Empty;
+            else if (model is IUniqueModel imodel)
+                return $"{model.GetType().Name}_{imodel.ID}";
             else
                 return null;
         }
