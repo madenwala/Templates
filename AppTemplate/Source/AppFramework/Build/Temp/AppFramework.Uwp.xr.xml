@@ -274,6 +274,7 @@
       <RootProperty Name="SelectionMode" />
       <RootProperty Name="RefreshCommand" />
       <RootProperty Name="PullToRefreshContent" />
+      <RootProperty Name="ReleaseToRefreshContent" />
     </RootType>
     <RootType FullName="AppFramework.UI.Controls.PullToRefreshListView">
       <RootProperty Name="NoDataMessageStyle" />

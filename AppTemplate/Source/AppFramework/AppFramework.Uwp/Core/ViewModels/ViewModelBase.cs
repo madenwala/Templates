@@ -130,13 +130,17 @@ namespace AppFramework.Core.ViewModels
             if (DesignMode.DesignModeEnabled)
                 return;
 
-            PlatformCore.Current.Geolocation.LocationChanged += Geolocation_LocationChanged;
+            if(PlatformCore.Current.Geolocation != null)
+                PlatformCore.Current.Geolocation.LocationChanged += Geolocation_LocationChanged;
         }
 
         static ViewModelBase()
         {
-            CurrentLocationTask = new NotifyTaskCompletion<Geoposition>(async (arg) => await PlatformCore.Current.Geolocation.GetSingleCoordinateAsync(false, 0, arg));
-            CurrentLocationTask.Refresh(true, CancellationToken.None);
+            if (PlatformCore.Current.Geolocation != null)
+            {
+                CurrentLocationTask = new NotifyTaskCompletion<Geoposition>(async (arg) => await PlatformCore.Current.Geolocation.GetSingleCoordinateAsync(false, 0, arg));
+                CurrentLocationTask.Refresh(true, CancellationToken.None);
+            }
         }
 
         #endregion
