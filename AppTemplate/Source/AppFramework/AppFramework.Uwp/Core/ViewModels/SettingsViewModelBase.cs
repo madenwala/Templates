@@ -29,17 +29,10 @@ namespace AppFramework.Core.ViewModels
             private set { this.SetProperty(ref _LocationServicesStatus, value); }
         }
 
-        private bool _CanClearAppDataCache = false;
-        public bool CanClearAppDataCache
+        private GenericCommand _ClearAppDataCacheCommand = null;
+        public GenericCommand ClearAppDataCacheCommand
         {
-            get { return _CanClearAppDataCache; }
-            set { this.SetProperty(ref _CanClearAppDataCache, value); }
-        }
-
-        private CommandBase _ClearAppDataCacheCommand = null;
-        public CommandBase ClearAppDataCacheCommand
-        {
-            get { return _ClearAppDataCacheCommand ?? (_ClearAppDataCacheCommand = new NavigationCommand("ClearAppDataCacheCommand", async () => await this.ClearAppDataCacheAsync(), () => this.CanClearAppDataCache)); }
+            get { return _ClearAppDataCacheCommand ?? (_ClearAppDataCacheCommand = new GenericCommand("ClearAppDataCacheCommand", async () => await this.ClearAppDataCacheAsync())); }
         }
         
         private NotifyTaskCompletion<string> _AppCacheTask;
@@ -47,6 +40,14 @@ namespace AppFramework.Core.ViewModels
         {
             get { return _AppCacheTask; }
             private set { this.SetProperty(ref _AppCacheTask, value); }
+        }
+
+
+        private string _AppCacheText = Resources.ClearAppCacheText;
+        public string AppCacheText
+        {
+            get { return _AppCacheText; }
+            private set { this.SetProperty(ref _AppCacheText, value); }
         }
         
         public bool IsApplicationThemeDefault
@@ -100,8 +101,8 @@ namespace AppFramework.Core.ViewModels
             this.AppCacheTask = new NotifyTaskCompletion<string>(async (ct) => await PlatformCore.Current.Storage.GetAppDataCacheFolderSizeAsync());
             this.AppCacheTask.SuccessfullyCompleted += (s, e) =>
             {
-                this.CanClearAppDataCache = true;
-                this.ClearAppDataCacheCommand.RaiseCanExecuteChanged();
+                this.AppCacheText = $"{Resources.ClearAppCacheText} ({this.AppCacheTask.Result})";
+                this.ClearAppDataCacheCommand.IsEnabled = true;
             };
         }
 
@@ -181,18 +182,9 @@ namespace AppFramework.Core.ViewModels
 
         private async Task ClearAppDataCacheAsync()
         {
-            try
-            {
-                this.CanClearAppDataCache = false;
-                this.ClearAppDataCacheCommand.RaiseCanExecuteChanged();
-                await PlatformCore.Current.Storage.ClearAppDataCacheFolderAsync();
-                await this.AppCacheTask.RefreshAsync(true, CancellationToken.None);
-            }
-            finally
-            {
-                this.CanClearAppDataCache = true;
-                this.ClearAppDataCacheCommand.RaiseCanExecuteChanged();
-            }
+            this.ClearAppDataCacheCommand.IsEnabled = false;
+            await PlatformCore.Current.Storage.ClearAppDataCacheFolderAsync();
+            await this.AppCacheTask.RefreshAsync(true, CancellationToken.None);
         }
 
         #endregion

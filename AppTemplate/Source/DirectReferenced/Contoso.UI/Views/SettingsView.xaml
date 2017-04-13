@@ -70,7 +70,7 @@
                         <Button x:Uid="/Contoso.Core/Account/btnSignout" Content="[Sign out]" Command="{x:Bind ViewModel.NavigateToAccountSignoutCommand}" Visibility="{x:Bind ViewModel.IsUserAuthenticated, Mode=OneWay, Converter={StaticResource visConverter}}" />
                         <Button x:Uid="/Contoso.Core/Resources/btnRateApp" Content="[Rate application]" Command="{x:Bind ViewModel.Platform.Ratings.NavigateToRateAppCommand}" />
                         <Button x:Uid="/Contoso.Core/Resources/btnClearJumplist" Content="[Clear Jumplist]" Command="{x:Bind ViewModel.Platform.Jumplist.ClearCommand}" Visibility="{x:Bind ViewModel.Platform.Jumplist.IsSupported, Converter={StaticResource visConverter}}" />
-                        <Button Content="{x:Bind ViewModel.AppCacheTask.Result, Mode=OneWay, Converter={StaticResource stringFormatConverter}, ConverterParameter='Clear Cache (\{0\})', FallbackValue='Clear Cache'}" Command="{x:Bind ViewModel.ClearAppDataCacheCommand}" />
+                        <Button Content="{x:Bind ViewModel.AppCacheText, Mode=OneWay}" Command="{x:Bind ViewModel.ClearAppDataCacheCommand}" />
                     </controls:WrapPanel>
                     
                     <Border Height="{StaticResource SpacerHeight}" />

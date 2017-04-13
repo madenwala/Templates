@@ -26,5 +26,6 @@
         public const string TextYes = "Yes";
         public const string ViewTitlePrivacyPolicy = "Privacy Policy";
         public const string ViewTitleTermsOfService = "Terms of Service";
+        public const string ClearAppCacheText = "Clear Cache";
     }
 }
