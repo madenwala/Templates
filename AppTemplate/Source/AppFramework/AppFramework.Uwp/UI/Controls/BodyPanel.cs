@@ -71,6 +71,49 @@ namespace AppFramework.UI.Controls
         // Using a DependencyProperty as the backing store for BodyContent.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty BodyContentProperty =
             DependencyProperty.Register(nameof(BodyContent), typeof(object), typeof(BodyPanel), new PropertyMetadata(null));
+        
+        public object HeaderContent
+        {
+            get { return (object)GetValue(HeaderContentProperty); }
+            set { SetValue(HeaderContentProperty, value); }
+        }
+        public static readonly DependencyProperty HeaderContentProperty = DependencyProperty.Register(nameof(HeaderContent), typeof(object), typeof(BodyPanel), new PropertyMetadata(null, new PropertyChangedCallback(OnHeaderContentChanged)));
+        private static void OnHeaderContentChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+        {
+            if (sender is BodyPanel control)
+            {
+                control.IsHeaderHitTestVisible = args.NewValue == null;
+                control.HeaderTextVisibility = control.IsHeaderHitTestVisible ? Visibility.Visible : Visibility.Collapsed;
+                control.HeaderContentVisibility = control.IsHeaderHitTestVisible ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
+
+        public Visibility HeaderContentVisibility
+        {
+            get { return (Visibility)GetValue(HeaderContentVisibilityProperty); }
+            set { SetValue(HeaderContentVisibilityProperty, value); }
+        }
+        // Using a DependencyProperty as the backing store for HeaderContentVisible.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HeaderContentVisibilityProperty =
+            DependencyProperty.Register(nameof(HeaderContentVisibility), typeof(Visibility), typeof(BodyPanel), new PropertyMetadata(Visibility.Collapsed));
+
+        public bool IsHeaderHitTestVisible
+        {
+            get { return (bool)GetValue(IsHeaderHitTestVisibleProperty); }
+            set { SetValue(IsHeaderHitTestVisibleProperty, value); }
+        }
+        // Using a DependencyProperty as the backing store for IsHeaderTextEnabled.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsHeaderHitTestVisibleProperty =
+            DependencyProperty.Register(nameof(IsHeaderHitTestVisible), typeof(bool), typeof(BodyPanel), new PropertyMetadata(true));
+
+        public Visibility HeaderTextVisibility
+        {
+            get { return (Visibility)GetValue(HeaderTextVisibilityProperty); }
+            set { SetValue(HeaderTextVisibilityProperty, value); }
+        }
+        // Using a DependencyProperty as the backing store for HeaderTextVisibility.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HeaderTextVisibilityProperty =
+            DependencyProperty.Register(nameof(HeaderTextVisibility), typeof(Visibility), typeof(BodyPanel), new PropertyMetadata(Visibility.Visible));
 
         #endregion
 

@@ -2119,7 +2119,7 @@
             </summary>
             <param name="request">Request object instance.</param>
         </member>
-        <member name="M:AppFramework.Core.Services.NavigationManagerBase.NavigateInNewWindow(System.Type,System.Object)">
+        <member name="M:AppFramework.Core.Services.NavigationManagerBase.NavigateToNewWindow(System.Type,System.Object)">
             <summary>
             Launches another window with the specified page type.
             </summary>

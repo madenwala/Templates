@@ -105,8 +105,6 @@ namespace Contoso.Core
             }
             else
                 return null;
-
-            base.GenerateModelTileID
         }
 
         /// <summary>

@@ -724,7 +724,7 @@ namespace AppFramework.Core.Services
         /// <param name="viewType">Type of the page requested in the secondary window.</param>
         /// <param name="parameter">Page parameter to pass to the new page instance.</param>
         /// <returns>Awaitable task is returned.</returns>
-        public async Task NavigateInNewWindow(Type viewType, object parameter)
+        public virtual async Task NavigateToNewWindow(Type viewType, object parameter)
         {
             try
             {
@@ -789,7 +789,7 @@ namespace AppFramework.Core.Services
             {
                 return PlatformCore.Current == null ? null : _navigateToNewWindowCommand ?? (_navigateToNewWindowCommand = new GenericCommand<ViewModelBase>("NavigateToNewWindowCommand", async (e) =>
                 {
-                    await this.NavigateInNewWindow(e.View.GetType(), e.ViewParameter);
+                    await this.NavigateToNewWindow(e.View.GetType(), e.ViewParameter);
                 }));
             }
         }

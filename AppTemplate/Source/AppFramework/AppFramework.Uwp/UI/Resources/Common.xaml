@@ -130,21 +130,6 @@
         </Setter>
     </Style>
 
-
-    <Style TargetType="controls:MyControl">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="controls:MyControl">
-                    <Border
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}">
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
     <!-- SplitViewButton -->
     <Style TargetType="controls:SplitViewButton">
         <Setter Property="Height" Value="48" />
@@ -758,9 +743,22 @@
                             VerticalAlignment="Center" 
                             IsTabStop="False" 
                             Command="{Binding ViewModel.ViewScrollToTopCommand, Mode=OneWay}"
+                            IsHitTestVisible="{TemplateBinding IsHeaderHitTestVisible}"
                             Style="{StaticResource TransparentButtonStyle}" >
-                            <TextBlock Text="{Binding ViewModel.Title, Mode=OneWay, FallbackValue='N/A'}" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="12,0" />
+                            <Grid>
+                                <TextBlock 
+                                    Visibility="{TemplateBinding HeaderTextVisibility}"
+                                    Text="{Binding ViewModel.Title, Mode=OneWay, FallbackValue='N/A'}" 
+                                    TextTrimming="CharacterEllipsis"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center" 
+                                    Margin="12,0"  />
+                                <ContentPresenter 
+                                    Visibility="{TemplateBinding HeaderContentVisibility}"
+                                    Content="{TemplateBinding HeaderContent}" />
+                            </Grid>
                         </Button>
+                        
 
                         <!--Body-->
                         <Grid Grid.Row="1" Grid.ColumnSpan="2">

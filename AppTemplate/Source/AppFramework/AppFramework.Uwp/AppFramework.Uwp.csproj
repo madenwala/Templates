@@ -203,7 +203,6 @@
     <Compile Include="UI\Controls\BodyPanelContainer.cs" />
     <Compile Include="UI\Controls\BusyPanel.cs" />
     <Compile Include="UI\Controls\ContentControlBase.cs" />
-    <Compile Include="UI\Controls\MyControl.cs" />
     <Compile Include="UI\Controls\Pivot.cs" />
     <Compile Include="UI\Controls\PullToRefreshListView.cs" />
     <Compile Include="UI\Controls\ScrollToTopHelper.cs" />
