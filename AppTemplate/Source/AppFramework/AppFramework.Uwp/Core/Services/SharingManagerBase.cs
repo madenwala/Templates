@@ -73,7 +73,6 @@ namespace AppFramework.Core.Services
                         {
                             var args = PlatformCore.Current.GenerateModelArguments(model);
                             var url = PlatformCore.Current.AppInfo.GetDeepLink(args);
-                            e.Request.Data.Properties.Title = PlatformCore.Current.AppInfo.AppName;
                             if(url != null)
                                 e.Request.Data.Properties.ContentSourceApplicationLink = new Uri(url.Replace("//", ""), UriKind.Absolute);
 
