@@ -3,6 +3,7 @@ using AppFramework.Core.Extensions;
 using AppFramework.Core.Services;
 using AppFramework.Core.Strings;
 using AppFramework.Core.ViewModels;
+using Microsoft.Toolkit.Uwp;
 using Microsoft.Toolkit.Uwp.Helpers;
 using System;
 using System.Collections.Generic;
@@ -291,7 +292,12 @@ namespace AppFramework.Core.Services
             sb.AppendLine(string.Format("CULTURE: {0}  UI CULTURE: {1}", CultureInfo.CurrentCulture.Name, CultureInfo.CurrentUICulture.Name));
             sb.AppendLine(string.Format("OS: {0} {1} {2} {3}", SystemInformation.OperatingSystem, SystemInformation.OperatingSystemArchitecture, SystemInformation.OperatingSystemVersion, SystemInformation.DeviceFamily));
             sb.AppendLine(string.Format("DEVICE: {0} {1}", SystemInformation.DeviceManufacturer, SystemInformation.DeviceModel));
-            sb.AppendLine(string.Format("INTERNET: {0} AVAILABLE: {1} METERED: {2}", Microsoft.Toolkit.Uwp.ConnectionHelper.ConnectionType, Microsoft.Toolkit.Uwp.ConnectionHelper.IsInternetAvailable, Microsoft.Toolkit.Uwp.ConnectionHelper.IsInternetOnMeteredConnection));
+            sb.AppendLine(string.Format("INTERNET: {0} {3} CONNECTED: {1} METERED: {2}", 
+                NetworkHelper.Instance.ConnectionInformation.ConnectionType, 
+                NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable ? "Yes" : "No", 
+                NetworkHelper.Instance.ConnectionInformation.IsInternetOnMeteredConnection ? "Yes" : "No",
+                NetworkHelper.Instance.ConnectionInformation.SignalStrength));
+            
 
             if (Window.Current != null)
             {
@@ -305,7 +311,7 @@ namespace AppFramework.Core.Services
                 sb.AppendLine(string.Format("SCREEN LOGICAL PIXELS: {0} x {1} - {2}", Window.Current.Bounds.Width.ToString("0.#"), Window.Current.Bounds.Height.ToString("0.#"), di.ResolutionScale));
             }
 
-            sb.AppendLine(string.Format("MEMORY USAGE: {0}  USAGE: {1} / {2} AVAIL: {3:N} MB", Windows.System.MemoryManager.AppMemoryUsageLevel, ((long)Windows.System.MemoryManager.AppMemoryUsage).ToStringAsMemory(), ((long)Windows.System.MemoryManager.AppMemoryUsageLimit).ToStringAsMemory(), SystemInformation.AvailableMemory));
+            sb.AppendLine(string.Format("MEMORY USAGE: {0}  USAGE: {1} / {2}", Windows.System.MemoryManager.AppMemoryUsageLevel, ((long)Windows.System.MemoryManager.AppMemoryUsage).ToStringAsMemory(), ((long)Windows.System.MemoryManager.AppMemoryUsageLimit).ToStringAsMemory()));
 
             if (ex != null)
             {

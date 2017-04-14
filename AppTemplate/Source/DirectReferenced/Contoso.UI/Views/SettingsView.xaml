@@ -33,11 +33,6 @@
         <DataTemplate x:Key="GeneralSettingsDataTemplate" x:DataType="viewmodels:GeneralSettingsViewModel">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <StackPanel Margin="{StaticResource StandardContentBottomMargins}">
-                    <StackPanel.ChildrenTransitions>
-                        <TransitionCollection>
-                            <EntranceThemeTransition/>
-                        </TransitionCollection>
-                    </StackPanel.ChildrenTransitions>
 
                     <TextBlock x:Uid="/Contoso.Core/Resources/tbVersion" Text="[Version]" Style="{StaticResource SubtitleTextBlockStyle}" />
                     <TextBlock Text="{x:Bind ViewModel.Platform.AppInfo.VersionNumber}" />
