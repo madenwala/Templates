@@ -5,14 +5,7 @@ namespace AppFramework.Core
 {
     public partial class PlatformBase
     {
-        /// <summary>
-        /// Gets access to the analytics service of the platform currently executing.
-        /// </summary>
-        public AnalyticsManager Analytics
-        {
-            get { return GetService<AnalyticsManager>(); }
-            private set { SetService(value); }
-        }
+        #region Protected Set
 
         /// <summary>
         /// Gets access to the app info service of the platform currently executing.
@@ -48,6 +41,54 @@ namespace AppFramework.Core
         }
 
         /// <summary>
+        /// Gets access to the location service of the platform currently executing.
+        /// </summary>
+        public GeolocationService Geolocation
+        {
+            get { return GetService<GeolocationService>(); }
+            protected set { SetService(value); }
+        }
+
+        /// <summary>
+        /// Gets access to the notifications service of the platform currently executing. Provides you the ability to display toasts or manage tiles or etc on the executing platform.
+        /// </summary>
+        public NotificationsManagerBase Notifications
+        {
+            get { return GetService<NotificationsManagerBase>(); }
+            protected set { SetService(value); }
+        }
+
+        /// <summary>
+        /// Gets the ability to navigate to different parts of an application specific to the platform currently executing.
+        /// </summary>
+        public NavigationManagerBase NavigationBase
+        {
+            get { return GetService<NavigationManagerBase>(); }
+        }
+
+        /// <summary>
+        /// Gets access to the app info service of the platform currently executing.
+        /// </summary>
+        public SharingManagerBase SharingManager
+        {
+            get { return GetService<SharingManagerBase>(); }
+            protected set { SetService(value); }
+        }
+
+        #endregion
+
+        #region Private Set
+
+        /// <summary>
+        /// Gets access to the analytics service of the platform currently executing.
+        /// </summary>
+        public AnalyticsManager Analytics
+        {
+            get { return GetService<AnalyticsManager>(); }
+            private set { SetService(value); }
+        }
+
+        /// <summary>
         /// Gets access to the cryptography provider of the platform currently executing.
         /// </summary>
         public CryptographyProvider Cryptography
@@ -75,15 +116,6 @@ namespace AppFramework.Core
         }
 
         /// <summary>
-        /// Gets access to the location service of the platform currently executing.
-        /// </summary>
-        public GeolocationService Geolocation
-        {
-            get { return GetService<GeolocationService>(); }
-            protected set { SetService(value); }
-        }
-
-        /// <summary>
         /// Gets access to the app info service of the platform currently executing.
         /// </summary>
         public JumplistManager Jumplist
@@ -91,7 +123,6 @@ namespace AppFramework.Core
             get { return GetService<JumplistManager>(); }
             private set { SetService(value); }
         }
-
 
         /// <summary>
         /// Gets access to the logging service of the platform currently executing.
@@ -103,38 +134,12 @@ namespace AppFramework.Core
         }
 
         /// <summary>
-        /// Gets the ability to navigate to different parts of an application specific to the platform currently executing.
-        /// </summary>
-        public NavigationManagerBase NavigationBase
-        {
-            get { return GetService<NavigationManagerBase>(); }
-        }
-
-        /// <summary>
-        /// Gets access to the notifications service of the platform currently executing. Provides you the ability to display toasts or manage tiles or etc on the executing platform.
-        /// </summary>
-        public NotificationsManagerBase Notifications
-        {
-            get { return GetService<NotificationsManagerBase>(); }
-            protected set { SetService(value); }
-        }
-
-        /// <summary>
         /// Gets access to the ratings manager used to help promote users to rate your application.
         /// </summary>
         public RatingsManager Ratings
         {
             get { return GetService<RatingsManager>(); }
             private set { SetService(value); }
-        }
-
-        /// <summary>
-        /// Gets access to the app info service of the platform currently executing.
-        /// </summary>
-        public SharingManagerBase SharingManager
-        {
-            get { return GetService<SharingManagerBase>(); }
-            protected set { SetService(value); }
         }
 
         /// <summary>
@@ -163,5 +168,7 @@ namespace AppFramework.Core
             get { return GetService<WebAccountManager>(); }
             private set { SetService(value); }
         }
+
+        #endregion
     }
 }
