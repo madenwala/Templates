@@ -26,7 +26,7 @@ namespace Contoso.Core
         /// <summary>
         /// Gets access to the app info service of the platform currently executing.
         /// </summary>
-        internal AppInfoProvider AppInfo
+        public AppInfoProvider AppInfo
         {
             get { return GetService<AppInfoProvider>(); }
             private set { SetService(value); }

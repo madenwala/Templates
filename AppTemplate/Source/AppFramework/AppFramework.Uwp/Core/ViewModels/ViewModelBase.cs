@@ -46,7 +46,7 @@ namespace AppFramework.Core.ViewModels
         /// </summary>
         [Newtonsoft.Json.JsonIgnore()]
         [System.Runtime.Serialization.IgnoreDataMember()]
-        public PlatformBase PlatformBase { get { return PlatformBase.CurrentCore; } }
+        internal PlatformBase PlatformBase { get { return PlatformBase.CurrentCore; } }
 
         /// <summary>
         /// Gets access to the dispatcher for this view or application.

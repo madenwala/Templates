@@ -35,36 +35,36 @@
                 <StackPanel Margin="{StaticResource StandardContentBottomMargins}">
 
                     <TextBlock x:Uid="/Contoso.Core/Resources/tbVersion" Text="[Version]" Style="{StaticResource SubtitleTextBlockStyle}" />
-                    <TextBlock Text="{x:Bind ViewModel.Platform.AppInfo.VersionNumber}" />
+                    <TextBlock Text="{Binding ViewModel.Platform.AppInfo.VersionNumber}" />
 
                     <Border Height="{StaticResource SpacerHeight}" />
 
                     <TextBlock x:Uid="/Contoso.Core/Resources/tbSupport" Text="[Support]" Style="{StaticResource SubtitleTextBlockStyle}" />
                     <HyperlinkButton 
-                        Command="{x:Bind ViewModel.Platform.Navigation.NavigateToWebViewCommand}"
+                        Command="{Binding ViewModel.Platform.Navigation.NavigateToWebViewCommand}"
                         CommandParameter="http://www.adenwala.com"
                         Content="Website" />
                     <HyperlinkButton 
-                        Command="{x:Bind ViewModel.Platform.Navigation.NavigateToTwitterScreenNameCommand}"
+                        Command="{Binding ViewModel.Platform.Navigation.NavigateToTwitterScreenNameCommand}"
                         CommandParameter="{x:Bind ViewModel.TwitterAddress, Mode=OneTime}"
                         Content="{x:Bind ViewModel.TwitterAddress, Mode=OneTime}" />
                     <HyperlinkButton
                         x:Uid="/Contoso.Core/Resources/lnkSendSupportEmail"
-                        Command="{x:Bind ViewModel.Platform.Logger.SendSupportEmailCommand}" 
+                        Command="{Binding ViewModel.Platform.Logger.SendSupportEmailCommand}" 
                         Content="[Send us an e-mail]" />
                     <HyperlinkButton 
                         x:Uid="/Contoso.Core/Resources/btnSubmitFeedback" 
                         Content="[App Feedback]" 
-                        Command="{x:Bind ViewModel.Platform.Navigation.NavigateToFeedbackCommand}" 
-                        Visibility="{x:Bind ViewModel.Platform.Navigation.IsFeedbackEnabled, Converter={StaticResource visConverter}}" />
+                        Command="{Binding ViewModel.Platform.Navigation.NavigateToFeedbackCommand}" 
+                        Visibility="{Binding ViewModel.Platform.Navigation.IsFeedbackEnabled, Converter={StaticResource visConverter}}" />
 
                     <Border Height="{StaticResource SpacerHeight}" />
 
                     <TextBlock x:Uid="/Contoso.Core/Resources/tbManage" Text="[Manage]" Style="{StaticResource SubtitleTextBlockStyle}" />
                     <controls:WrapPanel Orientation="Horizontal">
                         <Button x:Uid="/Contoso.Core/Account/btnSignout" Content="[Sign out]" Command="{x:Bind ViewModel.NavigateToAccountSignoutCommand}" Visibility="{x:Bind ViewModel.IsUserAuthenticated, Mode=OneWay, Converter={StaticResource visConverter}}" />
-                        <Button x:Uid="/Contoso.Core/Resources/btnRateApp" Content="[Rate application]" Command="{x:Bind ViewModel.Platform.Ratings.NavigateToRateAppCommand}" />
-                        <Button x:Uid="/Contoso.Core/Resources/btnClearJumplist" Content="[Clear Jumplist]" Command="{x:Bind ViewModel.Platform.Jumplist.ClearCommand}" Visibility="{x:Bind ViewModel.Platform.Jumplist.IsSupported, Converter={StaticResource visConverter}}" />
+                        <Button x:Uid="/Contoso.Core/Resources/btnRateApp" Content="[Rate application]" Command="{Binding ViewModel.Platform.Ratings.NavigateToRateAppCommand}" />
+                        <Button x:Uid="/Contoso.Core/Resources/btnClearJumplist" Content="[Clear Jumplist]" Command="{Binding ViewModel.Platform.Jumplist.ClearCommand}" Visibility="{Binding ViewModel.Platform.Jumplist.IsSupported, Converter={StaticResource visConverter}}" />
                         <Button Content="{x:Bind ViewModel.AppCacheText, Mode=OneWay}" Command="{x:Bind ViewModel.ClearAppDataCacheCommand}" />
                     </controls:WrapPanel>
                     
@@ -85,7 +85,7 @@
                     <Button  
                         x:Uid="/Contoso.Core/Resources/btnManage"
                         Content="[Manage]"
-                        Command="{x:Bind ViewModel.Platform.Geolocation.ManageLocationServicesCommand}" />
+                        Command="{Binding ViewModel.Platform.Geolocation.ManageLocationServicesCommand}" />
 
                     <Border Height="{StaticResource SpacerHeight}" />
 
@@ -97,7 +97,7 @@
                     <Button 
                         x:Uid="/Contoso.Core/Resources/btnManage"
                         Content="[Manage]"
-                        Command="{x:Bind ViewModel.Platform.BackgroundTasks.ManageBackgroundTasksCommand}" />
+                        Command="{Binding ViewModel.Platform.BackgroundTasks.ManageBackgroundTasksCommand}" />
 
 
                     <Border Height="{StaticResource SpacerHeight}" />
@@ -153,7 +153,7 @@
                     <Border Height="{StaticResource SpacerHeight}" />
 
                     <!--<TextBlock Opacity=".6" Style="{StaticResource CaptionTextBlockStyle}">Logs</TextBlock>
-                        <ListView ItemsSource="{x:Bind ViewModel.Platform.Logger.Messages, Mode=OneWay}" SelectionMode="None" IsSwipeEnabled="false">
+                        <ListView ItemsSource="{Binding ViewModel.Platform.Logger.Messages, Mode=OneWay}" SelectionMode="None" IsSwipeEnabled="false">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding}" />
