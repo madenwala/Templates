@@ -11,7 +11,7 @@ using Windows.System;
 
 namespace AppFramework.Core
 {
-    public partial class PlatformCore
+    public partial class PlatformBase
     {
         /// <summary>
         /// Gets access to the location service of the platform currently executing.
@@ -59,7 +59,7 @@ namespace AppFramework.Core.Services
             {
                 // Return the last saved location if no location found.
                 if (_currentLocation == null)
-                    this.CurrentLocation = PlatformCore.Core.AppSettingsLocal.LocationLastKnown;
+                    this.CurrentLocation = PlatformBase.CurrentCore.AppSettingsLocal.LocationLastKnown;
 
                 return _currentLocation;
             }
@@ -75,7 +75,7 @@ namespace AppFramework.Core.Services
                     _currentLocation.PropertyChanged += CurrentLocationInfo_PropertyChanged;
                     this.NotifyPropertyChanged(() => this.CurrentLocation);
                     this.NotifyLocationChangedEvent();
-                    PlatformCore.Core.AppSettingsLocal.LocationLastKnown = value;
+                    PlatformBase.CurrentCore.AppSettingsLocal.LocationLastKnown = value;
                 }
                 else
                 {
@@ -84,7 +84,7 @@ namespace AppFramework.Core.Services
                     {
                         this.NotifyPropertyChanged(() => this.CurrentLocation);
                         this.NotifyLocationChangedEvent();
-                        PlatformCore.Core.AppSettingsLocal.LocationLastKnown = value;
+                        PlatformBase.CurrentCore.AppSettingsLocal.LocationLastKnown = value;
                     }
                 }
             }
@@ -128,7 +128,7 @@ namespace AppFramework.Core.Services
                 case GeolocationAccessStatus.Allowed:
                     try
                     {
-                        PlatformCore.Core.Logger.Log(LogLevels.Debug, "GetSingleCoordinate Started...");
+                        PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "GetSingleCoordinate Started...");
                         Geolocator geo = new Geolocator();
 
                         geo.DesiredAccuracy = highAccuracy ? PositionAccuracy.High : PositionAccuracy.Default;
@@ -137,33 +137,33 @@ namespace AppFramework.Core.Services
 
                         // Retrieve the current user's location
                         Geoposition loc = await geo.GetGeopositionAsync(new TimeSpan(0, 0, 1), new TimeSpan(0, 0, 60)).AsTask(token.HasValue ? token.Value : CancellationToken.None);
-                        PlatformCore.Core.Logger.Log(LogLevels.Debug, "GetSingleCoordinate Completed!");
+                        PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "GetSingleCoordinate Completed!");
 
                         // Store location and update statuses and analytics
                         this.CurrentLocation = loc.Coordinate.AsLocationModel();
                         this.Status = geo.LocationStatus;
-                        PlatformCore.Core.Analytics.SetCurrentLocation(this.CurrentLocation);
+                        PlatformBase.CurrentCore.Analytics.SetCurrentLocation(this.CurrentLocation);
 
                         // Return location found
                         return loc;
                     }
                     catch (TaskCanceledException)
                     {
-                        PlatformCore.Core.Logger.Log(LogLevels.Debug, "GetSingleCoordinate cancelled!");
+                        PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "GetSingleCoordinate cancelled!");
                         return null;
                     }
                     catch (Exception ex)
                     {
-                        PlatformCore.Core.Logger.Log(LogLevels.Warning, "GetSingleCoordinate exception. Exception.Message = {0}", ex.Message);
+                        PlatformBase.CurrentCore.Logger.Log(LogLevels.Warning, "GetSingleCoordinate exception. Exception.Message = {0}", ex.Message);
                         return null;
                     }
                     
                 case GeolocationAccessStatus.Denied:
-                    PlatformCore.Core.Logger.Log(LogLevels.Warning, "GetSingleCoordinate access denied!");
+                    PlatformBase.CurrentCore.Logger.Log(LogLevels.Warning, "GetSingleCoordinate access denied!");
                     return null;
 
                 case GeolocationAccessStatus.Unspecified:
-                    PlatformCore.Core.Logger.Log(LogLevels.Warning, "GetSingleCoordinate unspecified error!");
+                    PlatformBase.CurrentCore.Logger.Log(LogLevels.Warning, "GetSingleCoordinate unspecified error!");
                     return null;
 
                 default:
@@ -187,7 +187,7 @@ namespace AppFramework.Core.Services
                     {
                         if (_geolocator == null)
                         {
-                            PlatformCore.Core.Logger.Log(LogLevels.Information, "StartTracking Started...");
+                            PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, "StartTracking Started...");
                             _geolocator = new Geolocator();
 
                             // Set locator properties
@@ -200,31 +200,31 @@ namespace AppFramework.Core.Services
                             // Watch for location change events and update properties when updated
                             _geolocator.StatusChanged += (sender, args) =>
                             {
-                                PlatformCore.Core.Logger.Log(LogLevels.Debug, "StartTracking StatusChanged = {0}", args.Status);
+                                PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "StartTracking StatusChanged = {0}", args.Status);
                                 this.Status = args.Status;
                             };
                             _geolocator.PositionChanged += (sender, args) =>
                             {
-                                PlatformCore.Core.Logger.Log(LogLevels.Debug, "StartTracking PositionChanged = {0}, {1}", args.Position.Coordinate.Point.Position.Latitude, args.Position.Coordinate.Point.Position.Longitude);
+                                PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "StartTracking PositionChanged = {0}, {1}", args.Position.Coordinate.Point.Position.Latitude, args.Position.Coordinate.Point.Position.Longitude);
                                 this.CurrentLocation = args.Position.Coordinate.AsLocationModel();
-                                PlatformCore.Core.Analytics.SetCurrentLocation(this.CurrentLocation);
+                                PlatformBase.CurrentCore.Analytics.SetCurrentLocation(this.CurrentLocation);
                             };
                         }
                     }
                     catch (Exception ex)
                     {
-                        PlatformCore.Core.Logger.LogError(ex, "StartTracking exception = {0}", ex.Message);
+                        PlatformBase.CurrentCore.Logger.LogError(ex, "StartTracking exception = {0}", ex.Message);
                         this.StopTracking();
                     }
                     break;
 
                 case GeolocationAccessStatus.Denied:
-                    PlatformCore.Core.Logger.Log(LogLevels.Warning, "StartTracking access denied!");
+                    PlatformBase.CurrentCore.Logger.Log(LogLevels.Warning, "StartTracking access denied!");
                     this.StopTracking();
                     break;
 
                 case GeolocationAccessStatus.Unspecified:
-                    PlatformCore.Core.Logger.Log(LogLevels.Warning, "StartTracking unspecified error!");
+                    PlatformBase.CurrentCore.Logger.Log(LogLevels.Warning, "StartTracking unspecified error!");
                     this.StopTracking();
                     break;
 
@@ -240,7 +240,7 @@ namespace AppFramework.Core.Services
         {
             if (_geolocator != null)
                 _geolocator = null;
-            PlatformCore.Core.Logger.Log(LogLevels.Information, "StopTracking Completed!");
+            PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, "StopTracking Completed!");
         }
 
         /// <summary>

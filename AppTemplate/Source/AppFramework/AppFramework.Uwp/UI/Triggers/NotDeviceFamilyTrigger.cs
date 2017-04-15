@@ -12,7 +12,7 @@ namespace AppFramework.UI.Triggers
         {
             set
             {
-                this.SetActive(PlatformCore.DeviceFamily != value);
+                this.SetActive(PlatformBase.DeviceFamily != value);
             }
         }
     }

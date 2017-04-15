@@ -46,7 +46,7 @@ namespace AppFramework.Core.ViewModels
         /// </summary>
         [Newtonsoft.Json.JsonIgnore()]
         [System.Runtime.Serialization.IgnoreDataMember()]
-        public PlatformCore PlatformBase { get { return PlatformCore.Core; } }
+        public PlatformBase PlatformBase { get { return PlatformBase.CurrentCore; } }
 
         /// <summary>
         /// Gets access to the dispatcher for this view or application.
@@ -115,7 +115,7 @@ namespace AppFramework.Core.ViewModels
         {
             get
             {
-                return PlatformCore.Core.ViewModel.IsInitialized == false
+                return PlatformBase.CurrentCore.ViewModel.IsInitialized == false
                     && this.IsUserAuthenticated
                     && this.PlatformBase.NavigationBase.CanGoBack() == false;
             }
@@ -130,15 +130,15 @@ namespace AppFramework.Core.ViewModels
             if (DesignMode.DesignModeEnabled)
                 return;
 
-            if(PlatformCore.Core.Geolocation != null)
-                PlatformCore.Core.Geolocation.LocationChanged += Geolocation_LocationChanged;
+            if(PlatformBase.CurrentCore.Geolocation != null)
+                PlatformBase.CurrentCore.Geolocation.LocationChanged += Geolocation_LocationChanged;
         }
 
         static ViewModelBase()
         {
-            if (PlatformCore.Core.Geolocation != null)
+            if (PlatformBase.CurrentCore.Geolocation != null)
             {
-                CurrentLocationTask = new NotifyTaskCompletion<Geoposition>(async (arg) => await PlatformCore.Core.Geolocation.GetSingleCoordinateAsync(false, 0, arg));
+                CurrentLocationTask = new NotifyTaskCompletion<Geoposition>(async (arg) => await PlatformBase.CurrentCore.Geolocation.GetSingleCoordinateAsync(false, 0, arg));
                 CurrentLocationTask.Refresh(true, CancellationToken.None);
             }
         }
@@ -196,17 +196,17 @@ namespace AppFramework.Core.ViewModels
         internal async Task LoadStateAsync(Page view, LoadStateEventArgs e)
         {
             // Full screen on Xbox
-            if (PlatformCore.DeviceFamily == DeviceFamily.Xbox && Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().IsFullScreenMode == false)
+            if (PlatformBase.DeviceFamily == DeviceFamily.Xbox && Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().IsFullScreenMode == false)
             {
                 var isFullScreen = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
-                PlatformCore.Core.Logger.Log(LogLevels.Debug, "{0}: TryEnterFullScreenMode returned {1}", this.GetType().Name, isFullScreen);
+                PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "{0}: TryEnterFullScreenMode returned {1}", this.GetType().Name, isFullScreen);
             }
 
             // Store properties and subscribe to events
             this.View = view;
             this.ViewParameter = e.Parameter;
 
-            var auth = PlatformCore.GetService<AuthorizationManagerBase>();
+            var auth = PlatformBase.GetService<AuthorizationManagerBase>();
             if (auth != null)
             {
                 this.IsUserAuthenticated = auth.IsAuthenticated();
@@ -296,10 +296,10 @@ namespace AppFramework.Core.ViewModels
             }
             catch(Exception ex)
             {
-                PlatformCore.Core.Logger.LogError(ex, "Failed to save properties to {0} page state.", this.GetType().Name);
+                PlatformBase.CurrentCore.Logger.LogError(ex, "Failed to save properties to {0} page state.", this.GetType().Name);
             }
 
-            var auth = PlatformCore.GetService<AuthorizationManagerBase>();
+            var auth = PlatformBase.GetService<AuthorizationManagerBase>();
             if(auth != null)
                 auth.UserAuthenticatedStatusChanged -= AuthenticationManager_UserAuthenticated;
 
@@ -316,7 +316,7 @@ namespace AppFramework.Core.ViewModels
             }
             catch (Exception ex)
             {
-                PlatformCore.Core.Logger.LogError(ex, $"Error trying to call RefreshAsync from {this.GetType().Name}.OnApplicationResume()");
+                PlatformBase.CurrentCore.Logger.LogError(ex, $"Error trying to call RefreshAsync from {this.GetType().Name}.OnApplicationResume()");
                 throw ex;
             }
         }
@@ -335,14 +335,14 @@ namespace AppFramework.Core.ViewModels
             if (ex is UserUnauthorizedException)
             {
                 this.ShowBusyStatus(Strings.Account.TextUnauthorizedUser, true);
-                PlatformCore.Core.Logger.LogError(ex, "{0}.{1} - Unauthorized user exception ({0} Parameters: {2}) {3}", this.GetType().Name, callerName, this.ViewParameter, message);
-                var t = PlatformCore.GetService<AuthorizationManagerBase>().SetUserAsync(null);
+                PlatformBase.CurrentCore.Logger.LogError(ex, "{0}.{1} - Unauthorized user exception ({0} Parameters: {2}) {3}", this.GetType().Name, callerName, this.ViewParameter, message);
+                var t = PlatformBase.GetService<AuthorizationManagerBase>().SetUserAsync(null);
             }
             else if (ex is UserFriendlyException)
             {
                 this.ClearStatus();
                 var bex = ex as UserFriendlyException;
-                PlatformCore.Core.Logger.Log(LogLevels.Warning, "{0}.{1} - UserFriendlyException - {4} ({0} Parameters: {2}) {3}", this.GetType().Name, callerName, this.ViewParameter, message, bex.UserMessage);
+                PlatformBase.CurrentCore.Logger.Log(LogLevels.Warning, "{0}.{1} - UserFriendlyException - {4} ({0} Parameters: {2}) {3}", this.GetType().Name, callerName, this.ViewParameter, message, bex.UserMessage);
 
                 switch(bex.DisplayStyle)
                 {
@@ -365,7 +365,7 @@ namespace AppFramework.Core.ViewModels
             else if (ex is OperationCanceledException || ex is TaskCanceledException)
             {
                 this.ShowTimedStatus(Strings.Resources.TextCancellationRequested, 3000);
-                PlatformCore.Core.Logger.Log(LogLevels.Information, "{0}.{1} - Operation canceled ({0} Parameters: {2}) {3}", this.GetType().Name, callerName, this.ViewParameter, message);
+                PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, "{0}.{1} - Operation canceled ({0} Parameters: {2}) {3}", this.GetType().Name, callerName, this.ViewParameter, message);
             }
             else
             {
@@ -377,12 +377,12 @@ namespace AppFramework.Core.ViewModels
                     case E_WINHTTP_TIMEOUT:
                     case -2146233088:
                         this.ShowStatus(Strings.Resources.TextNoInternet);
-                        PlatformCore.Core.Logger.Log(LogLevels.Warning, "{0}.{1} - No internet ({0} Parameters: {2}) {3}", this.GetType().Name, callerName, this.ViewParameter, message);
+                        PlatformBase.CurrentCore.Logger.Log(LogLevels.Warning, "{0}.{1} - No internet ({0} Parameters: {2}) {3}", this.GetType().Name, callerName, this.ViewParameter, message);
                         break;
 
                     default:
                         this.ShowStatus(Strings.Resources.TextErrorGeneric);
-                        PlatformCore.Core.Logger.LogError(ex, "{0}.{1} - threw {2} {3} ({0} Parameters: {4}) {5}", this.GetType().Name, callerName, ex.GetType().Name, ex.HResult, this.ViewParameter, message);
+                        PlatformBase.CurrentCore.Logger.LogError(ex, "{0}.{1} - threw {2} {3} ({0} Parameters: {4}) {5}", this.GetType().Name, callerName, ex.GetType().Name, ex.HResult, this.ViewParameter, message);
                         break;
                 }
             }
@@ -612,7 +612,7 @@ namespace AppFramework.Core.ViewModels
                 var storedValue = e.PageState[pi.Name];
                 if (storedValue != null)
                 {
-                    PlatformCore.Core.Logger.Log(LogLevels.Debug, "{0} - Restoring property {1} from page state of value {2}", this.GetType().Name, pi.Name, storedValue);
+                    PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "{0} - Restoring property {1} from page state of value {2}", this.GetType().Name, pi.Name, storedValue);
                     this.SetPropertyValue(pi, storedValue);
                 }
             }
@@ -638,7 +638,7 @@ namespace AppFramework.Core.ViewModels
             else
                 e.PageState.Add(pi.Name, value);
 
-            PlatformCore.Core.Logger.Log(LogLevels.Debug, "{0} - Saved property {1} to page state of value {2}", this.GetType().Name, pi.Name, value);
+            PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "{0} - Saved property {1} to page state of value {2}", this.GetType().Name, pi.Name, value);
         }
 
         #endregion Property State Methods
@@ -676,7 +676,7 @@ namespace AppFramework.Core.ViewModels
         /// <returns>Awaitable call which returns the index of the button clicked.</returns>
         protected internal Task<int> ShowMessageBoxAsync(CancellationToken ct, string message)
         {
-            return this.ShowMessageBoxAsync(ct, message, PlatformCore.Core.AppInfo.AppName);
+            return this.ShowMessageBoxAsync(ct, message, PlatformBase.CurrentCore.AppInfo.AppName);
         }
 
         /// <summary>
@@ -701,7 +701,7 @@ namespace AppFramework.Core.ViewModels
         /// <returns>Awaitable call which returns the index of the button clicked.</returns>
         protected internal Task<int> ShowMessageBoxAsync(CancellationToken ct, string message, IList<string> buttonNames = null, int defaultIndex = 0)
         {
-            return this.ShowMessageBoxAsync(ct, message, PlatformCore.Core.AppInfo.AppName, buttonNames, defaultIndex);
+            return this.ShowMessageBoxAsync(ct, message, PlatformBase.CurrentCore.AppInfo.AppName, buttonNames, defaultIndex);
         }
 
         /// <summary>
@@ -720,7 +720,7 @@ namespace AppFramework.Core.ViewModels
 
             // Set a default title if no title was specified.
             if (string.IsNullOrWhiteSpace(title))
-                title = PlatformCore.Core.AppInfo.AppName;
+                title = PlatformBase.CurrentCore.AppInfo.AppName;
 
             int result = defaultIndex;
             MessageDialog dialog = new MessageDialog(message, title);
@@ -769,12 +769,12 @@ namespace AppFramework.Core.ViewModels
             {
                 return _RefreshCommand ?? (_RefreshCommand = new GenericCommand("RefreshCommand", async () =>
                 {
-                    PlatformCore.Core.Logger.Log(LogLevels.Warning, $"User pressed refresh on {this.GetType().Name} with paramemter {this.ViewParameter?.ToString()}");
+                    PlatformBase.CurrentCore.Logger.Log(LogLevels.Warning, $"User pressed refresh on {this.GetType().Name} with paramemter {this.ViewParameter?.ToString()}");
                     this.UserForcedRefresh = true;
                     var dic = new Dictionary<string, string>();
                     dic.Add("ViewModel", this.GetType().Name);
                     dic.Add("Parameter", this.ViewParameter?.ToString());
-                    PlatformCore.Core.Analytics.Event("UserRefreshed", dic);
+                    PlatformBase.CurrentCore.Analytics.Event("UserRefreshed", dic);
                     await this.RefreshAsync(true);
                 }, () => this.IsRefreshEnabled));
             }
@@ -817,7 +817,7 @@ namespace AppFramework.Core.ViewModels
         {
             if (_cts != null)
             {
-                PlatformCore.Core.Logger.Log(LogLevels.Debug, $"Cannot refresh {this.GetType().Name} again because it's currently being refreshed.");
+                PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, $"Cannot refresh {this.GetType().Name} again because it's currently being refreshed.");
                 return;
             }
 
@@ -836,7 +836,7 @@ namespace AppFramework.Core.ViewModels
             }
             catch (Exception ex)
             {
-                PlatformCore.Core.Logger.LogError(ex, $"Exception while trying to refresh {this.GetType().Name}.");
+                PlatformBase.CurrentCore.Logger.LogError(ex, $"Exception while trying to refresh {this.GetType().Name}.");
                 this.HandleException(ex);
             }
             finally
@@ -904,11 +904,11 @@ namespace AppFramework.Core.ViewModels
         {
             try
             {
-                return await PlatformCore.Core.Storage.LoadFileAsync<T>(string.Format(APP_CACHE_PATH, this.GetType().Name, key), Windows.Storage.ApplicationData.Current.TemporaryFolder);
+                return await PlatformBase.CurrentCore.Storage.LoadFileAsync<T>(string.Format(APP_CACHE_PATH, this.GetType().Name, key), Windows.Storage.ApplicationData.Current.TemporaryFolder);
             }
             catch (Exception ex)
             {
-                PlatformCore.Core.Logger.LogError(ex, "Error retrieving '{0}' from cache data.", key);
+                PlatformBase.CurrentCore.Logger.LogError(ex, "Error retrieving '{0}' from cache data.", key);
                 return default(T);
             }
         }
@@ -935,7 +935,7 @@ namespace AppFramework.Core.ViewModels
             }
             catch (Exception ex)
             {
-                PlatformCore.Core.Logger.LogError(ex, "Error retrieving data from '{0}' property to save to cache.", pi.Name);
+                PlatformBase.CurrentCore.Logger.LogError(ex, "Error retrieving data from '{0}' property to save to cache.", pi.Name);
             }
             await this.SaveToCacheAsync<T>(key, data);
         }
@@ -951,11 +951,11 @@ namespace AppFramework.Core.ViewModels
         {
             try
             {
-                await PlatformCore.Core.Storage.SaveFileAsync(string.Format(APP_CACHE_PATH, this.GetType().Name, key), data, Windows.Storage.ApplicationData.Current.TemporaryFolder);
+                await PlatformBase.CurrentCore.Storage.SaveFileAsync(string.Format(APP_CACHE_PATH, this.GetType().Name, key), data, Windows.Storage.ApplicationData.Current.TemporaryFolder);
             }
             catch (Exception ex)
             {
-                PlatformCore.Core.Logger.LogError(ex, "Error saving '{0}' to cache data.", key);
+                PlatformBase.CurrentCore.Logger.LogError(ex, "Error saving '{0}' to cache data.", key);
             }
         }
 
@@ -1025,25 +1025,25 @@ namespace AppFramework.Core.ViewModels
 
         private async Task<bool> RefreshAccessTokenAsync(CancellationToken ct)
         {
-            var auth = PlatformCore.GetService<AuthorizationManagerBase>();
+            var auth = PlatformBase.GetService<AuthorizationManagerBase>();
             if (auth != null && auth.IsAuthenticated())
             {
-                PlatformCore.Core.Logger.Log(LogLevels.Information, "Attempting to refresh access token...");
+                PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, "Attempting to refresh access token...");
                 try
                 {
                     var user = await auth.GetRefreshAccessToken(ct);
-                    PlatformCore.Core.Logger.Log(LogLevels.Information, "...access token refresh complete!");
+                    PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, "...access token refresh complete!");
                     if(user != null)
-                        return await PlatformCore.GetService<AuthorizationManagerBase>().SetUserAsync(user);
+                        return await PlatformBase.GetService<AuthorizationManagerBase>().SetUserAsync(user);
                 }
                 catch(UserUnauthorizedException)
                 {
-                    PlatformCore.Core.Logger.Log(LogLevels.Warning, $"UserUnauthorizedException was caught by {this.GetType().FullName}.RefreshAccessTokenAsync");
+                    PlatformBase.CurrentCore.Logger.Log(LogLevels.Warning, $"UserUnauthorizedException was caught by {this.GetType().FullName}.RefreshAccessTokenAsync");
                     return false;
                 }
                 catch(Exception ex)
                 {
-                    PlatformCore.Core.Logger.LogError(ex, "Error while trying to refresh access token. Allowing ");
+                    PlatformBase.CurrentCore.Logger.LogError(ex, "Error while trying to refresh access token. Allowing ");
                     return true;
                 }
             }
@@ -1066,7 +1066,7 @@ namespace AppFramework.Core.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    PlatformCore.Core.Logger.LogError(ex, "Error while performing OnUserAuthenticatedChanged on view model '{0}' with parameters: {1}", this.GetType().Name, this.ViewParameter);
+                    PlatformBase.CurrentCore.Logger.LogError(ex, "Error while performing OnUserAuthenticatedChanged on view model '{0}' with parameters: {1}", this.GetType().Name, this.ViewParameter);
                 }
             });
         }
@@ -1114,17 +1114,17 @@ namespace AppFramework.Core.ViewModels
                     this.NavigateToAccountSignoutCommand.RaiseCanExecuteChanged();
 
                     this.ShowBusyStatus(Strings.Account.TextSigningOut, true);
-                    PlatformCore.Core.Analytics.Event("AccountSignout");
+                    PlatformBase.CurrentCore.Analytics.Event("AccountSignout");
 
                     // Allow the app core to signout
-                    await PlatformCore.Core.SignoutAllAsync();
+                    await PlatformBase.CurrentCore.SignoutAllAsync();
 
                     // Navigate home after successful signout
                     this.PlatformBase.NavigationBase.Home();
                 }
                 catch (Exception ex)
                 {
-                    PlatformCore.Core.Logger.LogError(ex, "Error during ViewModelBase.SignoutAsync");
+                    PlatformBase.CurrentCore.Logger.LogError(ex, "Error during ViewModelBase.SignoutAsync");
                     throw ex;
                 }
                 finally
@@ -1179,7 +1179,7 @@ namespace AppFramework.Core.ViewModels
                 var profile = NetworkInformation.GetInternetConnectionProfile();
                 bool isConnected = profile?.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess;
 
-                PlatformCore.Core.Logger.Log(LogLevels.Warning, $"NetworkStatusChanged - IsConnected: {isConnected}");
+                PlatformBase.CurrentCore.Logger.Log(LogLevels.Warning, $"NetworkStatusChanged - IsConnected: {isConnected}");
 
                 // On network access connected, execute a soft refresh to ensure everything loads automatically
                 if (isConnected)
@@ -1187,7 +1187,7 @@ namespace AppFramework.Core.ViewModels
             }
             catch (Exception ex)
             {
-                PlatformCore.Core.Logger.LogError(ex, "Failure during NetworkStatusChanged event on {0}", this.GetType().Name);
+                PlatformBase.CurrentCore.Logger.LogError(ex, "Failure during NetworkStatusChanged event on {0}", this.GetType().Name);
             }
         }
 

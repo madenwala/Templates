@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AppFramework.Core
 {
-    public partial class PlatformCore
+    public partial class PlatformBase
     {
         /// <summary>
         /// Gets access to the cryptography provider of the platform currently executing.

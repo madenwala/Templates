@@ -8,7 +8,7 @@ using Windows.ApplicationModel.DataTransfer;
 
 namespace AppFramework.Core
 {
-    public partial class PlatformCore
+    public partial class PlatformBase
     {
         /// <summary>
         /// Gets access to the app info service of the platform currently executing.
@@ -53,13 +53,13 @@ namespace AppFramework.Core.Services
         /// <param name="model"></param>
         public void Share(IModel model)
         {
-            PlatformCore.Core.Analytics.Event("Share");
+            PlatformBase.CurrentCore.Analytics.Event("Share");
 
             DataTransferManager.GetForCurrentView().DataRequested += (sender, e) =>
             {
                 try
                 {
-                    PlatformCore.Core.Logger.Log(LogLevels.Information, "SetShareContent - Model: {0}", model?.GetType().Name);
+                    PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, "SetShareContent - Model: {0}", model?.GetType().Name);
 
                     if (model is WebBrowserViewModel)
                     {
@@ -71,32 +71,32 @@ namespace AppFramework.Core.Services
                     {
                         try
                         {
-                            var args = PlatformCore.Core.GenerateModelArguments(model);
-                            var url = PlatformCore.Core.AppInfo.GetDeepLink(args);
+                            var args = PlatformBase.CurrentCore.GenerateModelArguments(model);
+                            var url = PlatformBase.CurrentCore.AppInfo.GetDeepLink(args);
                             if(url != null)
                                 e.Request.Data.Properties.ContentSourceApplicationLink = new Uri(url.Replace("//", ""), UriKind.Absolute);
 
-                            this.SetShareContent(e.Request, model ?? PlatformCore.Core.ViewModel);
+                            this.SetShareContent(e.Request, model ?? PlatformBase.CurrentCore.ViewModel);
                         }
                         catch(Exception ex)
                         {
-                            PlatformCore.Core.Logger.LogError(ex, "Failure while calling SetShareContent");
+                            PlatformBase.CurrentCore.Logger.LogError(ex, "Failure while calling SetShareContent");
                             throw ex;
                         }
                     }
 
                     if (string.IsNullOrEmpty(e.Request.Data.Properties.Title))
                     {
-                        e.Request.Data.Properties.Title = PlatformCore.Core.AppInfo.AppName;
-                        e.Request.Data.Properties.Description = PlatformCore.Core.AppInfo.AppDescription;
-                        e.Request.Data.Properties.ContentSourceApplicationLink = new Uri(PlatformCore.Core.AppInfo.StoreURL, UriKind.Absolute);
-                        string body = string.Format(Resources.ApplicationSharingBodyText, PlatformCore.Core.AppInfo.AppName, PlatformCore.Core.AppInfo.StoreURL);
+                        e.Request.Data.Properties.Title = PlatformBase.CurrentCore.AppInfo.AppName;
+                        e.Request.Data.Properties.Description = PlatformBase.CurrentCore.AppInfo.AppDescription;
+                        e.Request.Data.Properties.ContentSourceApplicationLink = new Uri(PlatformBase.CurrentCore.AppInfo.StoreURL, UriKind.Absolute);
+                        string body = string.Format(Resources.ApplicationSharingBodyText, PlatformBase.CurrentCore.AppInfo.AppName, PlatformBase.CurrentCore.AppInfo.StoreURL);
                         e.Request.Data.SetText(body);
                     }
                 }
                 catch (Exception ex)
                 {
-                    PlatformCore.Core.Logger.LogError(ex, "Error in OnDataRequested");
+                    PlatformBase.CurrentCore.Logger.LogError(ex, "Error in OnDataRequested");
 #if DEBUG
                     e.Request.FailWithDisplayText(ex.ToString());
 #else
@@ -124,10 +124,10 @@ namespace AppFramework.Core.Services
         protected override void SetShareContent(DataRequest request, IModel model)
         {
             DataPackage dataPackage = request.Data;
-            dataPackage.Properties.Title = PlatformCore.Core.AppInfo.AppName;
-            dataPackage.Properties.Description = PlatformCore.Core.AppInfo.AppDescription;
+            dataPackage.Properties.Title = PlatformBase.CurrentCore.AppInfo.AppName;
+            dataPackage.Properties.Description = PlatformBase.CurrentCore.AppInfo.AppDescription;
             // TODO localize
-            string body = $"Download {PlatformCore.Core.AppInfo.AppName} from the Windows Store!";
+            string body = $"Download {PlatformBase.CurrentCore.AppInfo.AppName} from the Windows Store!";
             dataPackage.SetText(body);
         }
     }

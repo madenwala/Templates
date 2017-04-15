@@ -126,7 +126,7 @@ namespace AppFramework.Core.Commands
                 {
                     // Log information
                     string name = string.Format("[{0} - CanExecute] {1}", this.GetType().Name, this.CommandName);
-                    PlatformCore.Core.Logger.Log(LogLevels.Debug, "{0} - Return Value: {1}  Parameter: {2}", name, value, parameter);
+                    PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "{0} - Return Value: {1}  Parameter: {2}", name, value, parameter);
                 }
                 value = _canExecute((T)parameter);
             }
@@ -144,8 +144,8 @@ namespace AppFramework.Core.Commands
             {
                 // Log information
                 string name = string.Format("[{0} - Execute] {1}", this.GetType().Name, this.CommandName);
-                PlatformCore.Core.Analytics.Event(name, parameter);
-                PlatformCore.Core.Logger.Log(LogLevels.Information, "{0} - Parameter: {1}", name, parameter);
+                PlatformBase.CurrentCore.Analytics.Event(name, parameter);
+                PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, "{0} - Parameter: {1}", name, parameter);
             }
 
             if (_execute != null)

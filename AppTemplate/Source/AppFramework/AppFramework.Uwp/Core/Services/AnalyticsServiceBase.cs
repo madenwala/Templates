@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace AppFramework.Core
 {
-    public partial class PlatformCore
+    public partial class PlatformBase
     {
         /// <summary>
         /// Gets access to the analytics service of the platform currently executing.
@@ -123,7 +123,7 @@ namespace AppFramework.Core.Services
 #if !DEBUG
             this.Services.ForEach(s => s.NewPageView(pageType));
 #endif
-            PlatformCore.Core.Logger.Log(LogLevels.Information, $"ANALYTICS: NewPageView({pageType.FullName})");
+            PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, $"ANALYTICS: NewPageView({pageType.FullName})");
         }
 
         public override void Error(Exception ex, string message = null)
@@ -134,7 +134,7 @@ namespace AppFramework.Core.Services
 #if !DEBUG
             this.Services.ForEach(s => s.Error(ex, message));
 #endif
-                PlatformCore.Core.Logger.Log(LogLevels.Information, $"ANALYTICS: Error(\"{message}\", {ex.ToString()})");
+                PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, $"ANALYTICS: Error(\"{message}\", {ex.ToString()})");
         }
 
         public override void Event(string eventName, Dictionary<string, string> properties, Dictionary<string, double> metrics = null)
@@ -145,7 +145,7 @@ namespace AppFramework.Core.Services
 #if !DEBUG
             this.Services.ForEach(s => s.Event(eventName, properties, metrics));
 #endif
-            PlatformCore.Core.Logger.Log(LogLevels.Information, $"ANALYTICS: Event({eventName}, {Serializer.Serialize(properties)}, {Serializer.Serialize(metrics)})");
+            PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, $"ANALYTICS: Event({eventName}, {Serializer.Serialize(properties)}, {Serializer.Serialize(metrics)})");
         }
 
         public override void SetUser(string username)
@@ -153,7 +153,7 @@ namespace AppFramework.Core.Services
             if (!string.IsNullOrWhiteSpace(username))
             {
                 this.Services.ForEach(s => s.SetUser(username));
-                PlatformCore.Core.Logger.Log(LogLevels.Information, $"ANALYTICS: SetUser({username})");
+                PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, $"ANALYTICS: SetUser({username})");
             }
         }
     }

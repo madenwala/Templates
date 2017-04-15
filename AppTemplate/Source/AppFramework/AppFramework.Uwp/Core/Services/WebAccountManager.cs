@@ -10,7 +10,7 @@ using Windows.UI.ApplicationSettings;
 
 namespace AppFramework.Core
 {
-    public partial class PlatformCore
+    public partial class PlatformBase
     {
         /// <summary>
         /// Gets access to the app info service of the platform currently executing.
@@ -165,15 +165,15 @@ namespace AppFramework.Core.Services
                     }
                 }
 
-                e.HeaderText = string.Format(Strings.Account.TextWebAccountManagerSignUpDescription, PlatformCore.Core.AppInfo.AppName);
+                e.HeaderText = string.Format(Strings.Account.TextWebAccountManagerSignUpDescription, PlatformBase.CurrentCore.AppInfo.AppName);
 
                 // You can add links such as privacy policy, help, general account settings
-                e.Commands.Add(new SettingsCommand("privacypolicy", Strings.Resources.ViewTitlePrivacyPolicy, (c) => { PlatformCore.Core.NavigationBase.NavigateToPrivacyPolicyCommand.Execute(null); this.Cleanup(); }));
-                e.Commands.Add(new SettingsCommand("tos", Strings.Resources.ViewTitleTermsOfService, (c) => { PlatformCore.Core.NavigationBase.NavigateToTermsOfServiceCommand.Execute(null); this.Cleanup(); }));
+                e.Commands.Add(new SettingsCommand("privacypolicy", Strings.Resources.ViewTitlePrivacyPolicy, (c) => { PlatformBase.CurrentCore.NavigationBase.NavigateToPrivacyPolicyCommand.Execute(null); this.Cleanup(); }));
+                e.Commands.Add(new SettingsCommand("tos", Strings.Resources.ViewTitleTermsOfService, (c) => { PlatformBase.CurrentCore.NavigationBase.NavigateToTermsOfServiceCommand.Execute(null); this.Cleanup(); }));
             }
             catch(Exception ex)
             {
-                PlatformCore.Core.Logger.LogError(ex, "Failed to display the web account manager UI.");
+                PlatformBase.CurrentCore.Logger.LogError(ex, "Failed to display the web account manager UI.");
                 throw ex;
             }
             finally
@@ -217,14 +217,14 @@ namespace AppFramework.Core.Services
                     wi.Token = webTokenResponse.Token;
                     this.SaveWebAccountInfo(wi);
 
-                    PlatformCore.Core.Logger.Log(LogLevels.Information, string.Format("Web Token request successful for AccountID: {0}", wi.AccountID));
+                    PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, string.Format("Web Token request successful for AccountID: {0}", wi.AccountID));
 
                     // Success Callback
                     _successHandler(pi, wi, result);
                 }
                 else
                 {
-                    PlatformCore.Core.Logger.Log(LogLevels.Information, "Web Token request error: " + result.ResponseStatus + " Code: " + result.ResponseError.ErrorMessage);
+                    PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, "Web Token request error: " + result.ResponseStatus + " Code: " + result.ResponseError.ErrorMessage);
 
                     // Failed Callback
                     _failedHandler(pi, result);
@@ -233,7 +233,7 @@ namespace AppFramework.Core.Services
             }
             catch (Exception ex)
             {
-                PlatformCore.Core.Logger.LogError(ex, "Web Token request failed");
+                PlatformBase.CurrentCore.Logger.LogError(ex, "Web Token request failed");
                 _failedHandler(pi, null);
             }
             finally
@@ -251,18 +251,18 @@ namespace AppFramework.Core.Services
                 if (args.Action == WebAccountAction.Remove)
                 {
                     // Signs the provider out.
-                    PlatformCore.Core.Logger.Log(LogLevels.Information, "Web Account Manager - Remove account called");
+                    PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, "Web Account Manager - Remove account called");
                     await this.SignoutAsync(cmd.WebAccount.WebAccountProvider.Id);
                 }
                 else if (args.Action == WebAccountAction.Manage)
                 {
                     // Display user management UI for this account
-                    PlatformCore.Core.Logger.Log(LogLevels.Information, "Web Account Manager - Manage account called");
+                    PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, "Web Account Manager - Manage account called");
                 }
             }
             catch (Exception ex)
             {
-                PlatformCore.Core.Logger.LogError(ex, "Web Token request failed");
+                PlatformBase.CurrentCore.Logger.LogError(ex, "Web Token request failed");
             }
             finally
             {
@@ -352,7 +352,7 @@ namespace AppFramework.Core.Services
         /// <returns>WebAccountInfo instance if found else null.</returns>
         private WebAccountInfo GetWebAccountInfo(WebAccountTypes type)
         {
-            return PlatformCore.Core.Storage.LoadSetting<WebAccountInfo>("WAM_" + type.ToString(), ApplicationData.Current.RoamingSettings, SerializerTypes.Json);
+            return PlatformBase.CurrentCore.Storage.LoadSetting<WebAccountInfo>("WAM_" + type.ToString(), ApplicationData.Current.RoamingSettings, SerializerTypes.Json);
         }
 
         /// <summary>
@@ -362,7 +362,7 @@ namespace AppFramework.Core.Services
         /// <returns>True if stored info exists else false.</returns>
         private bool HasWebAccountInfo(WebAccountTypes type)
         {
-            return PlatformCore.Core.Storage.ContainsSetting("WAM_" + type.ToString(), ApplicationData.Current.RoamingSettings);
+            return PlatformBase.CurrentCore.Storage.ContainsSetting("WAM_" + type.ToString(), ApplicationData.Current.RoamingSettings);
         }
 
         /// <summary>
@@ -372,7 +372,7 @@ namespace AppFramework.Core.Services
         private void SaveWebAccountInfo(WebAccountInfo wi)
         {
             if(wi != null)
-                PlatformCore.Core.Storage.SaveSetting("WAM_" + wi.Type.ToString(), wi, ApplicationData.Current.RoamingSettings, SerializerTypes.Json);
+                PlatformBase.CurrentCore.Storage.SaveSetting("WAM_" + wi.Type.ToString(), wi, ApplicationData.Current.RoamingSettings, SerializerTypes.Json);
         }
 
         /// <summary>
@@ -381,7 +381,7 @@ namespace AppFramework.Core.Services
         /// <param name="type">Enum type representing the web account to delete.</param>
         private void DeleteUsersWebAccountDetails(WebAccountTypes type)
         {
-            PlatformCore.Core.Storage.SaveSetting("WAM_" + type.ToString(), null, ApplicationData.Current.RoamingSettings, SerializerTypes.Json);
+            PlatformBase.CurrentCore.Storage.SaveSetting("WAM_" + type.ToString(), null, ApplicationData.Current.RoamingSettings, SerializerTypes.Json);
         }
 
         #endregion

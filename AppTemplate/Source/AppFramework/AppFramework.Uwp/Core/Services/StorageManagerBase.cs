@@ -10,7 +10,7 @@ using Windows.Storage.Streams;
 
 namespace AppFramework.Core
 {
-    public partial class PlatformCore
+    public partial class PlatformBase
     {
         /// <summary>
         /// Gets access to the storage system of the platform currently executing.
@@ -189,7 +189,7 @@ namespace AppFramework.Core.Services
             }
             catch (Exception ex)
             {
-                PlatformCore.Core.Logger.LogError(ex, "Error retrieving key '{0}' from container '{1}' using '{2}' serializer.", key, container.Locality, serializerType);
+                PlatformBase.CurrentCore.Logger.LogError(ex, "Error retrieving key '{0}' from container '{1}' using '{2}' serializer.", key, container.Locality, serializerType);
                 return default(T);
             }
         }
@@ -305,12 +305,12 @@ namespace AppFramework.Core.Services
             }
             catch (FileNotFoundException)
             {
-                PlatformCore.Core.Logger.Log(LogLevels.Debug, "File not found! '{0}' in '{1}'", path, folder);
+                PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "File not found! '{0}' in '{1}'", path, folder);
                 return null;
             }
             catch (Exception ex)
             {
-                PlatformCore.Core.Logger.LogError(ex, "Error while attempting to read file '{0}' in '{1}'", path, folder);
+                PlatformBase.CurrentCore.Logger.LogError(ex, "Error while attempting to read file '{0}' in '{1}'", path, folder);
                 return null;
             }
         }
@@ -494,7 +494,7 @@ namespace AppFramework.Core.Services
             }
             catch(Exception ex)
             {
-                PlatformCore.Core.Logger.LogError(ex, "Could not delete folder '{0}' in '{1}'", folderName, startingFolder.DisplayName);
+                PlatformBase.CurrentCore.Logger.LogError(ex, "Could not delete folder '{0}' in '{1}'", folderName, startingFolder.DisplayName);
                 throw ex;
             }
         }
@@ -533,7 +533,7 @@ namespace AppFramework.Core.Services
                 }
                 catch (Exception ex)
                 {
-                    PlatformCore.Core.Logger.LogError(ex, "Could not get folder size for '{0}' in '{1}'", folderName, startingFolder.DisplayName);
+                    PlatformBase.CurrentCore.Logger.LogError(ex, "Could not get folder size for '{0}' in '{1}'", folderName, startingFolder.DisplayName);
                     throw ex;
                 }
             }
@@ -562,7 +562,7 @@ namespace AppFramework.Core.Services
 
         internal Task<string> GetAppDataCacheFolderSizeAsync()
         {
-            PlatformCore.Core.Logger.Log(LogLevels.Debug, $"Retrieving size of cache folders: {ApplicationData.Current.TemporaryFolder.Path}");
+            PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, $"Retrieving size of cache folders: {ApplicationData.Current.TemporaryFolder.Path}");
             return this.GetFolderSizeAsync(ApplicationData.Current.TemporaryFolder, DATA_CACHE_FOLDER_NAME, "ImageCache");
         }
 
@@ -570,13 +570,13 @@ namespace AppFramework.Core.Services
         {
             try
             {
-                PlatformCore.Core.Logger.Log(LogLevels.Debug, $"Deleting cache folders: {ApplicationData.Current.TemporaryFolder.Path}");
+                PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, $"Deleting cache folders: {ApplicationData.Current.TemporaryFolder.Path}");
                 await this.DeleteFolderAsync(DATA_CACHE_FOLDER_NAME, ApplicationData.Current.TemporaryFolder);
                 await this.DeleteFolderAsync("ImageCache", ApplicationData.Current.TemporaryFolder);
             }
             catch (Exception ex)
             {
-                PlatformCore.Core.Logger.LogError(ex, "Error during ClearAppDataCacheFolder");
+                PlatformBase.CurrentCore.Logger.LogError(ex, "Error during ClearAppDataCacheFolder");
             }
         }
 

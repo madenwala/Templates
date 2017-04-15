@@ -24,7 +24,7 @@ namespace AppFramework.Core.Commands
         /// Creates a new command instance for pinning IModel objects to the user's start screen.
         /// </summary>
         public PinTileCommand()
-            : base("PinTileCommand", null, PlatformCore.Core.Notifications.HasTile)
+            : base("PinTileCommand", null, PlatformBase.CurrentCore.Notifications.HasTile)
         {
         }
 
@@ -39,7 +39,7 @@ namespace AppFramework.Core.Commands
             if (parameter is IModel)
             {
                 // Create tile
-                if (await PlatformCore.Core.Notifications.CreateOrUpdateTileAsync(parameter as IModel))
+                if (await PlatformBase.CurrentCore.Notifications.CreateOrUpdateTileAsync(parameter as IModel))
                 {
                     // Tile created, execute post-create actions
                     this.RaiseCanExecuteChanged();
@@ -77,7 +77,7 @@ namespace AppFramework.Core.Commands
         /// Creates a new command instance for removing IModel objects from a user's start screen.
         /// </summary>
         public UnpinTileCommand()
-            : base("UnpinTileCommand", null, PlatformCore.Core.Notifications.HasTile)
+            : base("UnpinTileCommand", null, PlatformBase.CurrentCore.Notifications.HasTile)
         {
         }
 
@@ -92,7 +92,7 @@ namespace AppFramework.Core.Commands
             if (parameter is IModel)
             {
                 // Delete tile
-                if (await PlatformCore.Core.Notifications.DeleteTileAsync(parameter as IModel))
+                if (await PlatformBase.CurrentCore.Notifications.DeleteTileAsync(parameter as IModel))
                 {
                     // Tile was deleted, execute post delete actions
                     this.RaiseCanExecuteChanged();

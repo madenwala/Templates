@@ -6,7 +6,7 @@ using Windows.ApplicationModel.VoiceCommands;
 
 namespace AppFramework.Core
 {
-    public partial class PlatformCore
+    public partial class PlatformBase
     {
         /// <summary>
         /// Gets access to the app info service of the platform currently executing.
@@ -81,7 +81,7 @@ namespace AppFramework.Core.Services
             }
             catch (Exception ex)
             {
-                PlatformCore.Core.Logger.LogError(ex, "Error while updating voice commands!");
+                PlatformBase.CurrentCore.Logger.LogError(ex, "Error while updating voice commands!");
             }
         }
 
