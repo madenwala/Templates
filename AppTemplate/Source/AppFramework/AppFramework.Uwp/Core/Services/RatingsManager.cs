@@ -1,25 +1,9 @@
 ﻿using AppFramework.Core.Commands;
-using AppFramework.Core.Services;
 using AppFramework.Core.ViewModels;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.System;
-
-namespace AppFramework.Core
-{
-    public partial class PlatformBase
-    {
-        /// <summary>
-        /// Gets access to the ratings manager used to help promote users to rate your application.
-        /// </summary>
-        public RatingsManager Ratings
-        {
-            get { return GetService<RatingsManager>(); }
-            private set { SetService(value); }
-        }
-    }
-}
 
 namespace AppFramework.Core.Services
 {

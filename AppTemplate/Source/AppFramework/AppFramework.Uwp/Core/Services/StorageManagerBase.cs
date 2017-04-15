@@ -1,5 +1,4 @@
 ﻿using AppFramework.Core.Extensions;
-using AppFramework.Core.Services;
 using System;
 using System.IO;
 using System.Linq;
@@ -7,21 +6,6 @@ using System.Threading.Tasks;
 using Windows.Security.Credentials;
 using Windows.Storage;
 using Windows.Storage.Streams;
-
-namespace AppFramework.Core
-{
-    public partial class PlatformBase
-    {
-        /// <summary>
-        /// Gets access to the storage system of the platform currently executing.
-        /// </summary>
-        public StorageManager Storage
-        {
-            get { return GetService<StorageManager>(); }
-            private set { SetService(value); }
-        }
-    }
-}
 
 namespace AppFramework.Core.Services
 {

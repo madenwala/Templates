@@ -1,23 +1,7 @@
-﻿using AppFramework.Core.Services;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Email;
 using Windows.Storage;
-
-namespace AppFramework.Core
-{
-    public partial class PlatformBase
-    {
-        /// <summary>
-        /// Gets access to the app info service of the platform currently executing.
-        /// </summary>
-        public EmailProvider EmailProvider
-        {
-            get { return GetService<EmailProvider>(); }
-            private set { SetService(value); }
-        }
-    }
-}
 
 namespace AppFramework.Core.Services
 {

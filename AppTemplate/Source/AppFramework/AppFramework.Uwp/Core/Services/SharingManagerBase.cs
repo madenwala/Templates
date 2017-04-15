@@ -1,25 +1,9 @@
 ﻿using AppFramework.Core.Commands;
 using AppFramework.Core.Models;
-using AppFramework.Core.Services;
 using AppFramework.Core.Strings;
 using AppFramework.Core.ViewModels;
 using System;
 using Windows.ApplicationModel.DataTransfer;
-
-namespace AppFramework.Core
-{
-    public partial class PlatformBase
-    {
-        /// <summary>
-        /// Gets access to the app info service of the platform currently executing.
-        /// </summary>
-        public SharingManagerBase SharingManager
-        {
-            get { return GetService<SharingManagerBase>(); }
-            protected set { SetService(value); }
-        }
-    }
-}
 
 namespace AppFramework.Core.Services
 {

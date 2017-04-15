@@ -1,7 +1,6 @@
 ﻿using AppFramework.Core.Commands;
 using AppFramework.Core.Extensions;
 using AppFramework.Core.Models;
-using AppFramework.Core.Services;
 using AppFramework.Core.ViewModels;
 using AppFramework.UI.Controls;
 using System;
@@ -17,20 +16,6 @@ using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-
-namespace AppFramework.Core
-{
-    public partial class PlatformBase
-    {
-        /// <summary>
-        /// Gets the ability to navigate to different parts of an application specific to the platform currently executing.
-        /// </summary>
-        public NavigationManagerBase NavigationBase
-        {
-            get { return GetService<NavigationManagerBase>(); }
-        }
-    }
-}
 
 namespace AppFramework.Core.Services
 {

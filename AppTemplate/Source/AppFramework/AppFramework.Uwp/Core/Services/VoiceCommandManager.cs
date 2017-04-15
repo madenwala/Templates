@@ -1,23 +1,7 @@
-﻿using AppFramework.Core.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.VoiceCommands;
-
-namespace AppFramework.Core
-{
-    public partial class PlatformBase
-    {
-        /// <summary>
-        /// Gets access to the app info service of the platform currently executing.
-        /// </summary>
-        public VoiceCommandManager VoiceCommandManager
-        {
-            get { return GetService<VoiceCommandManager>(); }
-            private set { SetService(value); }
-        }
-    }
-}
 
 namespace AppFramework.Core.Services
 {

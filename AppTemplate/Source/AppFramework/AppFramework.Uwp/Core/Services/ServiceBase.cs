@@ -2,10 +2,6 @@
 using System;
 using System.Threading.Tasks;
 
-namespace AppFramework.Core
-{
-}
-
 namespace AppFramework.Core.Services
 {
     public interface IServiceSignout

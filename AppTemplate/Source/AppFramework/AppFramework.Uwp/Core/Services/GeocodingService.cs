@@ -1,26 +1,10 @@
 ﻿using AppFramework.Core.Extensions;
 using AppFramework.Core.Models;
-using AppFramework.Core.Services;
 using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.Services.Maps;
-
-namespace AppFramework.Core
-{
-    public partial class PlatformBase
-    {
-        /// <summary>
-        /// Gets access to the geocoding service adapter implement of the platform currently executing.
-        /// </summary>
-        public GeocodingService Geocode
-        {
-            get { return GetService<GeocodingService>(); }
-            private set { SetService(value); }
-        }
-    }
-}
 
 namespace AppFramework.Core.Services
 {

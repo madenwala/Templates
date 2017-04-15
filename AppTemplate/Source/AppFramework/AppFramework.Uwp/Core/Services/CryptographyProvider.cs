@@ -1,24 +1,8 @@
-﻿using AppFramework.Core.Services;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.DataProtection;
 using Windows.Storage.Streams;
-
-namespace AppFramework.Core
-{
-    public partial class PlatformBase
-    {
-        /// <summary>
-        /// Gets access to the cryptography provider of the platform currently executing.
-        /// </summary>
-        public CryptographyProvider Cryptography
-        {
-            get { return GetService<CryptographyProvider>(); }
-            private set { SetService(value); }
-        }
-    }
-}
 
 namespace AppFramework.Core.Services
 {

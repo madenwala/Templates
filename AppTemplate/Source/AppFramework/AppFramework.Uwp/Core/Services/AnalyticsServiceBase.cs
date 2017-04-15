@@ -1,22 +1,6 @@
 ﻿using AppFramework.Core.Models;
-using AppFramework.Core.Services;
 using System;
 using System.Collections.Generic;
-
-namespace AppFramework.Core
-{
-    public partial class PlatformBase
-    {
-        /// <summary>
-        /// Gets access to the analytics service of the platform currently executing.
-        /// </summary>
-        public AnalyticsManager Analytics
-        {
-            get { return GetService<AnalyticsManager>(); }
-            private set { SetService(value); }
-        }
-    }
-}
 
 namespace AppFramework.Core.Services
 {

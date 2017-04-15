@@ -1,5 +1,4 @@
 ﻿using AppFramework.Core.Models;
-using AppFramework.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -7,22 +6,6 @@ using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI.Notifications;
 using Windows.UI.StartScreen;
-
-namespace AppFramework.Core
-{
-    public partial class PlatformBase
-    {
-        /// <summary>
-        /// Gets access to the notifications service of the platform currently executing. Provides you the ability to display toasts or manage tiles or etc on the executing platform.
-        /// </summary>
-        public NotificationsManagerBase Notifications
-        {
-            get { return GetService<NotificationsManagerBase>(); }
-            protected set { SetService(value); }
-        }
-
-    }
-}
 
 namespace AppFramework.Core.Services
 {

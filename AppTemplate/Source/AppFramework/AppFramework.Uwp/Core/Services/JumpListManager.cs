@@ -1,24 +1,8 @@
 ﻿using AppFramework.Core.Commands;
-using AppFramework.Core.Services;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.StartScreen;
-
-namespace AppFramework.Core
-{
-    public partial class PlatformBase
-    {
-        /// <summary>
-        /// Gets access to the app info service of the platform currently executing.
-        /// </summary>
-        public JumplistManager Jumplist
-        {
-            get { return GetService<JumplistManager>(); }
-            private set { SetService(value); }
-        }
-    }
-}
 
 namespace AppFramework.Core.Services
 {

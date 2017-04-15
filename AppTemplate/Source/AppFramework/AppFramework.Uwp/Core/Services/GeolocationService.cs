@@ -1,28 +1,12 @@
 ﻿using AppFramework.Core.Commands;
 using AppFramework.Core.Extensions;
 using AppFramework.Core.Models;
-using AppFramework.Core.Services;
 using System;
 using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.System;
-
-namespace AppFramework.Core
-{
-    public partial class PlatformBase
-    {
-        /// <summary>
-        /// Gets access to the location service of the platform currently executing.
-        /// </summary>
-        public GeolocationService Geolocation
-        {
-            get { return GetService<GeolocationService>(); }
-            protected set { SetService(value); }
-        }
-    }
-}
 
 namespace AppFramework.Core.Services
 {

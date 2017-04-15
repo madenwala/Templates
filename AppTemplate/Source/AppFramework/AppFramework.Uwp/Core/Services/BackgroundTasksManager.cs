@@ -1,24 +1,8 @@
 ﻿using AppFramework.Core.Commands;
-using AppFramework.Core.Services;
 using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using Windows.System;
-
-namespace AppFramework.Core
-{
-    public partial class PlatformBase
-    {
-        /// <summary>
-        /// Gets access to the geocoding service adapter implement of the platform currently executing.
-        /// </summary>
-        public BackgroundTasksManagerBase BackgroundTasks
-        {
-            get { return GetService<BackgroundTasksManagerBase>(); }
-            protected set { SetService(value); }
-        }
-    }
-}
 
 namespace AppFramework.Core.Services
 {

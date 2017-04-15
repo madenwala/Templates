@@ -1,7 +1,5 @@
 ﻿using AppFramework.Core.Commands;
 using AppFramework.Core.Extensions;
-using AppFramework.Core.Services;
-using AppFramework.Core.Strings;
 using AppFramework.Core.ViewModels;
 using Microsoft.Toolkit.Uwp;
 using Microsoft.Toolkit.Uwp.Helpers;
@@ -33,21 +31,6 @@ namespace AppFramework.Core
         Error,
         FatalError,
         Off
-    }
-}
-
-namespace AppFramework.Core
-{
-    public partial class PlatformBase
-    {
-        /// <summary>
-        /// Gets access to the logging service of the platform currently executing.
-        /// </summary>
-        public LoggingService Logger
-        {
-            get { return GetService<LoggingService>(); }
-            private set { SetService(value); }
-        }
     }
 }
 
@@ -408,7 +391,7 @@ namespace AppFramework.Core.Services
         /// <summary>
         /// UWP console debugger from Michael Scherotter (https://blogs.msdn.microsoft.com/synergist/2016/08/20/console-ouptut-my-new-debugging-and-testing-tool-for-windows/)
         /// </summary>
-        internal class UwpConsoleOutputProvider : IDisposable, ILogger
+        private class UwpConsoleOutputProvider : IDisposable, ILogger
         {
             #region Variables
 

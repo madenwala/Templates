@@ -1,32 +1,10 @@
 ﻿using AppFramework.Core.Extensions;
-using AppFramework.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Store;
 using Windows.Storage;
-
-namespace AppFramework.Core
-{
-    public partial class PlatformBase
-    {
-        /// <summary>
-        /// Gets access to the app info service of the platform currently executing.
-        /// </summary>
-        public AppInfoProviderBase AppInfo
-        {
-            get
-            {
-                var service = GetService<AppInfoProviderBase>();
-                if (service == null)
-                    throw new ArgumentNullException("Platform.AppInfo was never set!");
-                return service;
-            }
-            protected set { SetService(value); }
-        }
-    }
-}
 
 namespace AppFramework.Core.Services
 {
