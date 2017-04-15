@@ -107,7 +107,7 @@ namespace AppFramework.Core.Services
             }
             catch(Exception ex)
             {
-                PlatformCore.Current.Logger.LogError(ex, "Could not add to jump list!");
+                PlatformCore.Core.Logger.LogError(ex, "Could not add to jump list!");
             }
         }
 

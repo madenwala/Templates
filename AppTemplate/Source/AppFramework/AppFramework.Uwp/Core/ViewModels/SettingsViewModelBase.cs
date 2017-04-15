@@ -13,7 +13,7 @@ namespace AppFramework.Core.ViewModels
     {
         #region Properties
 
-        public string TwitterAddress { get { return PlatformCore.Current.AppInfo.AppSupportTwitterAddress; } }
+        public string TwitterAddress { get { return PlatformCore.Core.AppInfo.AppSupportTwitterAddress; } }
 
         private string _BackgroundTasksStatus;
         public string BackgroundTasksStatus
@@ -52,12 +52,12 @@ namespace AppFramework.Core.ViewModels
         
         public bool IsApplicationThemeDefault
         {
-            get { return PlatformCore.Current.AppSettingsRoaming.ApplicationTheme == (int)Windows.UI.Xaml.ElementTheme.Default; }
+            get { return PlatformCore.Core.AppSettingsRoaming.ApplicationTheme == (int)Windows.UI.Xaml.ElementTheme.Default; }
             set
             {
                 if (value)
                 {
-                    PlatformCore.Current.AppSettingsRoaming.ApplicationTheme = (int)Windows.UI.Xaml.ElementTheme.Default;
+                    PlatformCore.Core.AppSettingsRoaming.ApplicationTheme = (int)Windows.UI.Xaml.ElementTheme.Default;
                     this.NotifyPropertyChangedOnUI(() => this.IsApplicationThemeDefault);
                 }
             }
@@ -65,12 +65,12 @@ namespace AppFramework.Core.ViewModels
 
         public bool IsApplicationThemeLight
         {
-            get { return PlatformCore.Current.AppSettingsRoaming.ApplicationTheme == (int)Windows.UI.Xaml.ElementTheme.Light; }
+            get { return PlatformCore.Core.AppSettingsRoaming.ApplicationTheme == (int)Windows.UI.Xaml.ElementTheme.Light; }
             set
             {
                 if (value)
                 {
-                    PlatformCore.Current.AppSettingsRoaming.ApplicationTheme = (int)Windows.UI.Xaml.ElementTheme.Light;
+                    PlatformCore.Core.AppSettingsRoaming.ApplicationTheme = (int)Windows.UI.Xaml.ElementTheme.Light;
                     this.NotifyPropertyChangedOnUI(() => this.IsApplicationThemeLight);
                 }
             }
@@ -78,12 +78,12 @@ namespace AppFramework.Core.ViewModels
 
         public bool IsApplicationThemeDark
         {
-            get { return PlatformCore.Current.AppSettingsRoaming.ApplicationTheme == (int)Windows.UI.Xaml.ElementTheme.Dark; }
+            get { return PlatformCore.Core.AppSettingsRoaming.ApplicationTheme == (int)Windows.UI.Xaml.ElementTheme.Dark; }
             set
             {
                 if (value)
                 {
-                    PlatformCore.Current.AppSettingsRoaming.ApplicationTheme = (int)Windows.UI.Xaml.ElementTheme.Dark;
+                    PlatformCore.Core.AppSettingsRoaming.ApplicationTheme = (int)Windows.UI.Xaml.ElementTheme.Dark;
                     this.NotifyPropertyChangedOnUI(() => this.IsApplicationThemeDark);
                 }
             }
@@ -98,7 +98,7 @@ namespace AppFramework.Core.ViewModels
             if (DesignMode.DesignModeEnabled)
                 return;
 
-            this.AppCacheTask = new NotifyTaskCompletion<string>(async (ct) => await PlatformCore.Current.Storage.GetAppDataCacheFolderSizeAsync());
+            this.AppCacheTask = new NotifyTaskCompletion<string>(async (ct) => await PlatformCore.Core.Storage.GetAppDataCacheFolderSizeAsync());
             this.AppCacheTask.SuccessfullyCompleted += (s, e) =>
             {
                 this.AppCacheText = $"{Resources.ClearAppCacheText} ({this.AppCacheTask.Result})";
@@ -120,7 +120,7 @@ namespace AppFramework.Core.ViewModels
 
         protected override Task OnSaveStateAsync(SaveStateEventArgs e)
         {
-            PlatformCore.Current.SaveSettings();
+            PlatformCore.Core.SaveSettings();
             if (this.View != null)
                 this.View.GotFocus -= View_GotFocus;
             return base.OnSaveStateAsync(e);
@@ -146,7 +146,7 @@ namespace AppFramework.Core.ViewModels
 
         private async Task UpdateRefreshLocationStatus()
         {
-            if (PlatformCore.Current.Geolocation == null)
+            if (PlatformCore.Core.Geolocation == null)
                 return;
 
             try
@@ -156,7 +156,7 @@ namespace AppFramework.Core.ViewModels
             }
             catch (Exception ex)
             {
-                PlatformCore.Current.Logger.LogError(ex, "Error during UpdateRefreshLocationStatus()");
+                PlatformCore.Core.Logger.LogError(ex, "Error during UpdateRefreshLocationStatus()");
             }
         }
 
@@ -164,26 +164,26 @@ namespace AppFramework.Core.ViewModels
         {
             try
             {
-                if (PlatformCore.Current.BackgroundTasks == null)
+                if (PlatformCore.Core.BackgroundTasks == null)
                     return;
 
-                var allowed = PlatformCore.Current.BackgroundTasks.CheckIfAllowed();
+                var allowed = PlatformCore.Core.BackgroundTasks.CheckIfAllowed();
 
                 this.BackgroundTasksStatus = !allowed ? BackgroundTasks.TextBackgroundAppDisabledStatus : string.Empty;
 
-                if (!PlatformCore.Current.BackgroundTasks.AreTasksRegistered && allowed)
-                    await PlatformCore.Current.BackgroundTasks.RegisterAllAsync();
+                if (!PlatformCore.Core.BackgroundTasks.AreTasksRegistered && allowed)
+                    await PlatformCore.Core.BackgroundTasks.RegisterAllAsync();
             }
             catch(Exception ex)
             {
-                PlatformCore.Current.Logger.LogError(ex, "Error during UpdateBackgroundTasksStatus()");
+                PlatformCore.Core.Logger.LogError(ex, "Error during UpdateBackgroundTasksStatus()");
             }
         }
 
         private async Task ClearAppDataCacheAsync()
         {
             this.ClearAppDataCacheCommand.IsEnabled = false;
-            await PlatformCore.Current.Storage.ClearAppDataCacheFolderAsync();
+            await PlatformCore.Core.Storage.ClearAppDataCacheFolderAsync();
             await this.AppCacheTask.RefreshAsync(true, CancellationToken.None);
         }
 

@@ -104,7 +104,7 @@ namespace AppFramework.Core
 
         #region Constructors
 
-        protected PlatformCore(Type mainViewModelType)
+        internal PlatformCore(Type mainViewModelType)
         {
             _mainViewModelType = mainViewModelType;
 
@@ -151,7 +151,7 @@ namespace AppFramework.Core
         /// <summary>
         /// Provides access to application services.
         /// </summary>
-        public static PlatformCore Current { get; protected set; }
+        protected internal static PlatformCore Core { get; protected set; }
 
         /// <summary>
         /// Gets the current device family this app is executing on.
@@ -355,13 +355,13 @@ namespace AppFramework.Core
             // Only log this when the debugger is not attached and you're in RELEASE mode
             try
             {
-                PlatformCore.Current.Analytics.Error(e, "Unhandled Exception");
+                PlatformCore.Core.Analytics.Error(e, "Unhandled Exception");
             }
             catch { }
 
             try
             {
-                PlatformCore.Current.Logger.LogErrorFatal(e);
+                PlatformCore.Core.Logger.LogErrorFatal(e);
             }
             catch (Exception exLog)
             {
@@ -529,14 +529,14 @@ namespace AppFramework.Core
                 _info.StartTime = DateTime.UtcNow;
 
                 // Initialize the app
-                await PlatformCore.Current.AppInitializingAsync(InitializationModes.Background);
-                PlatformCore.Current.Logger.Log(LogLevels.Information, "Starting background task '{0}'...", taskInstance.Task.Name);
+                await PlatformCore.Core.AppInitializingAsync(InitializationModes.Background);
+                PlatformCore.Core.Logger.Log(LogLevels.Information, "Starting background task '{0}'...", taskInstance.Task.Name);
 
                 CancellationTokenSource cts = new CancellationTokenSource();
 
                 taskInstance.Canceled += (sender, reason) =>
                 {
-                    PlatformCore.Current.Logger.Log(LogLevels.Warning, "Background task '{0}' is being cancelled due to '{1}'...", taskInstance.Task.Name, reason);
+                    PlatformCore.Core.Logger.Log(LogLevels.Warning, "Background task '{0}' is being cancelled due to '{1}'...", taskInstance.Task.Name, reason);
 
                     // Store info on why this task was cancelled
                     _info.CancelReason = reason.ToString();
@@ -551,28 +551,28 @@ namespace AppFramework.Core
 
                 // Task ran without error
                 _info.RunSuccessfully = true;
-                PlatformCore.Current.Logger.Log(LogLevels.Information, "Completed execution of background task '{0}'!", taskInstance.Task.Name);
+                PlatformCore.Core.Logger.Log(LogLevels.Information, "Completed execution of background task '{0}'!", taskInstance.Task.Name);
             }
             catch (OperationCanceledException)
             {
                 // Task was aborted via the cancelation token
-                PlatformCore.Current.Logger.Log(LogLevels.Warning, "Background task '{0}' had an OperationCanceledException with reason '{1}'.", taskInstance.Task.Name, _info.CancelReason);
+                PlatformCore.Core.Logger.Log(LogLevels.Warning, "Background task '{0}' had an OperationCanceledException with reason '{1}'.", taskInstance.Task.Name, _info.CancelReason);
             }
             catch (Exception ex)
             {
                 // Task threw an exception, store/log the error details
                 _info.ExceptionDetails = ex.ToString();
-                PlatformCore.Current.Logger.LogErrorFatal(ex, "Background task '{0}' failed with exception to run to completion: {1}", taskInstance.Task.Name, ex.Message);
+                PlatformCore.Core.Logger.LogErrorFatal(ex, "Background task '{0}' failed with exception to run to completion: {1}", taskInstance.Task.Name, ex.Message);
             }
             finally
             {
                 _info.EndTime = DateTime.UtcNow;
 
                 // Store the task status information
-                PlatformCore.Current.Storage.SaveSetting("TASK_" + taskInstance.Task.Name, _info, ApplicationData.Current.LocalSettings);
+                PlatformCore.Core.Storage.SaveSetting("TASK_" + taskInstance.Task.Name, _info, ApplicationData.Current.LocalSettings);
 
                 // Shutdown the task
-                PlatformCore.Current.AppSuspending();
+                PlatformCore.Core.AppSuspending();
                 deferral.Complete();
             }
         }

@@ -53,13 +53,13 @@ namespace AppFramework.Core.Services
         /// <param name="model"></param>
         public void Share(IModel model)
         {
-            PlatformCore.Current.Analytics.Event("Share");
+            PlatformCore.Core.Analytics.Event("Share");
 
             DataTransferManager.GetForCurrentView().DataRequested += (sender, e) =>
             {
                 try
                 {
-                    PlatformCore.Current.Logger.Log(LogLevels.Information, "SetShareContent - Model: {0}", model?.GetType().Name);
+                    PlatformCore.Core.Logger.Log(LogLevels.Information, "SetShareContent - Model: {0}", model?.GetType().Name);
 
                     if (model is WebBrowserViewModel)
                     {
@@ -71,32 +71,32 @@ namespace AppFramework.Core.Services
                     {
                         try
                         {
-                            var args = PlatformCore.Current.GenerateModelArguments(model);
-                            var url = PlatformCore.Current.AppInfo.GetDeepLink(args);
+                            var args = PlatformCore.Core.GenerateModelArguments(model);
+                            var url = PlatformCore.Core.AppInfo.GetDeepLink(args);
                             if(url != null)
                                 e.Request.Data.Properties.ContentSourceApplicationLink = new Uri(url.Replace("//", ""), UriKind.Absolute);
 
-                            this.SetShareContent(e.Request, model ?? PlatformCore.Current.ViewModel);
+                            this.SetShareContent(e.Request, model ?? PlatformCore.Core.ViewModel);
                         }
                         catch(Exception ex)
                         {
-                            PlatformCore.Current.Logger.LogError(ex, "Failure while calling SetShareContent");
+                            PlatformCore.Core.Logger.LogError(ex, "Failure while calling SetShareContent");
                             throw ex;
                         }
                     }
 
                     if (string.IsNullOrEmpty(e.Request.Data.Properties.Title))
                     {
-                        e.Request.Data.Properties.Title = PlatformCore.Current.AppInfo.AppName;
-                        e.Request.Data.Properties.Description = PlatformCore.Current.AppInfo.AppDescription;
-                        e.Request.Data.Properties.ContentSourceApplicationLink = new Uri(PlatformCore.Current.AppInfo.StoreURL, UriKind.Absolute);
-                        string body = string.Format(Resources.ApplicationSharingBodyText, PlatformCore.Current.AppInfo.AppName, PlatformCore.Current.AppInfo.StoreURL);
+                        e.Request.Data.Properties.Title = PlatformCore.Core.AppInfo.AppName;
+                        e.Request.Data.Properties.Description = PlatformCore.Core.AppInfo.AppDescription;
+                        e.Request.Data.Properties.ContentSourceApplicationLink = new Uri(PlatformCore.Core.AppInfo.StoreURL, UriKind.Absolute);
+                        string body = string.Format(Resources.ApplicationSharingBodyText, PlatformCore.Core.AppInfo.AppName, PlatformCore.Core.AppInfo.StoreURL);
                         e.Request.Data.SetText(body);
                     }
                 }
                 catch (Exception ex)
                 {
-                    PlatformCore.Current.Logger.LogError(ex, "Error in OnDataRequested");
+                    PlatformCore.Core.Logger.LogError(ex, "Error in OnDataRequested");
 #if DEBUG
                     e.Request.FailWithDisplayText(ex.ToString());
 #else
@@ -124,10 +124,10 @@ namespace AppFramework.Core.Services
         protected override void SetShareContent(DataRequest request, IModel model)
         {
             DataPackage dataPackage = request.Data;
-            dataPackage.Properties.Title = PlatformCore.Current.AppInfo.AppName;
-            dataPackage.Properties.Description = PlatformCore.Current.AppInfo.AppDescription;
+            dataPackage.Properties.Title = PlatformCore.Core.AppInfo.AppName;
+            dataPackage.Properties.Description = PlatformCore.Core.AppInfo.AppDescription;
             // TODO localize
-            string body = $"Download {PlatformCore.Current.AppInfo.AppName} from the Windows Store!";
+            string body = $"Download {PlatformCore.Core.AppInfo.AppName} from the Windows Store!";
             dataPackage.SetText(body);
         }
     }

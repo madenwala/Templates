@@ -48,7 +48,7 @@ namespace AppFramework.Core.Services
             if (toRecipients == null || toRecipients.Length == 0)
                 throw new ArgumentNullException(nameof(toRecipients));
 
-            PlatformCore.Current.Analytics.Event("SendEmail");
+            PlatformCore.Core.Analytics.Event("SendEmail");
             var msg = new EmailMessage();
 
             if (toRecipients != null)

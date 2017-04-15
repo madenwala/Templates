@@ -173,7 +173,7 @@ namespace AppFramework.Core.Services
 
             message = string.Format(CultureInfo.InvariantCulture, "{0} -- {1}", message, ex);
 
-            PlatformCore.Current.Analytics.Error(ex, message);
+            PlatformCore.Core.Analytics.Error(ex, message);
             this.Log(LogLevels.Error, message);
             foreach (ILogger logger in Loggers)
                 logger.LogException(ex, message);
@@ -199,7 +199,7 @@ namespace AppFramework.Core.Services
 
             message = string.Format(CultureInfo.InvariantCulture, "{0} -- FATAL EXCEPTION: {1}", message, ex);
 
-            PlatformCore.Current.Analytics.Error(ex, message);
+            PlatformCore.Core.Analytics.Error(ex, message);
             this.Log(LogLevels.FatalError, message);
             foreach (ILogger logger in Loggers)
                 logger.LogExceptionFatal(ex, message);
@@ -211,7 +211,7 @@ namespace AppFramework.Core.Services
             {
                 try
                 {
-                    await PlatformCore.Current.Storage.SaveFileAsync(ERROR_REPORT_FILENAME, data, ERROR_REPORT_DATA_CONTAINER);
+                    await PlatformCore.Core.Storage.SaveFileAsync(ERROR_REPORT_FILENAME, data, ERROR_REPORT_DATA_CONTAINER);
                     tcs.SetResult(null);
                 }
                 catch (Exception taskEx)
@@ -232,28 +232,28 @@ namespace AppFramework.Core.Services
         {
             try
             {
-                PlatformCore.Current.Logger.Log(LogLevels.Debug, "Checking if application crashed on previous run...");
-                if (await PlatformCore.Current.Storage.DoesFileExistsAsync(ERROR_REPORT_FILENAME, ERROR_REPORT_DATA_CONTAINER))
+                PlatformCore.Core.Logger.Log(LogLevels.Debug, "Checking if application crashed on previous run...");
+                if (await PlatformCore.Core.Storage.DoesFileExistsAsync(ERROR_REPORT_FILENAME, ERROR_REPORT_DATA_CONTAINER))
                 {
-                    PlatformCore.Current.Logger.Log(LogLevels.Debug, "Application crashed on previous run, prompt user to send report.");
+                    PlatformCore.Core.Logger.Log(LogLevels.Debug, "Application crashed on previous run, prompt user to send report.");
                     if (await vm.ShowMessageBoxAsync(CancellationToken.None, Strings.Resources.ApplicationProblemPromptMessage, Strings.Resources.ApplicationProblemPromptTitle, new string[] { Strings.Resources.TextYes, Strings.Resources.TextNo }) == 0)
                     {
-                        string subject = string.Format(Strings.Resources.ApplicationProblemEmailSubjectTemplate, Windows.ApplicationModel.Package.Current.DisplayName, PlatformCore.Current.AppInfo.VersionNumber);
-                        var attachment = await PlatformCore.Current.Storage.GetFileAsync(ERROR_REPORT_FILENAME, ERROR_REPORT_DATA_CONTAINER);
+                        string subject = string.Format(Strings.Resources.ApplicationProblemEmailSubjectTemplate, Windows.ApplicationModel.Package.Current.DisplayName, PlatformCore.Core.AppInfo.VersionNumber);
+                        var attachment = await PlatformCore.Core.Storage.GetFileAsync(ERROR_REPORT_FILENAME, ERROR_REPORT_DATA_CONTAINER);
 
                         string body = Strings.Resources.ApplicationProblemEmailBodyTemplate;
-                        body += await PlatformCore.Current.Storage.ReadFileAsStringAsync(ERROR_REPORT_FILENAME, ERROR_REPORT_DATA_CONTAINER);
-                        PlatformCore.Current.Logger.Log(LogLevels.Information, "PREVIOUS CRASH LOGS: \t" + body);
+                        body += await PlatformCore.Core.Storage.ReadFileAsStringAsync(ERROR_REPORT_FILENAME, ERROR_REPORT_DATA_CONTAINER);
+                        PlatformCore.Core.Logger.Log(LogLevels.Information, "PREVIOUS CRASH LOGS: \t" + body);
 
-                        await PlatformCore.Current.EmailProvider.SendEmailAsync(subject, body, PlatformCore.Current.AppInfo.AppSupportEmailAddress, attachment);
+                        await PlatformCore.Core.EmailProvider.SendEmailAsync(subject, body, PlatformCore.Core.AppInfo.AppSupportEmailAddress, attachment);
                     }
 
-                    await PlatformCore.Current.Storage.DeleteFileAsync(ERROR_REPORT_FILENAME, ERROR_REPORT_DATA_CONTAINER);
+                    await PlatformCore.Core.Storage.DeleteFileAsync(ERROR_REPORT_FILENAME, ERROR_REPORT_DATA_CONTAINER);
                 }
             }
             catch(Exception ex)
             {
-                PlatformCore.Current.Logger.LogError(ex, "Error while attempting to check for fatal error reports!");
+                PlatformCore.Core.Logger.LogError(ex, "Error while attempting to check for fatal error reports!");
             }
         }
 
@@ -262,14 +262,14 @@ namespace AppFramework.Core.Services
         /// </summary>
         private async Task SendSupportEmailAsync()
         {
-            var subject = string.Format(Strings.Resources.ApplicationSupportEmailSubjectTemplate, Windows.ApplicationModel.Package.Current.DisplayName, PlatformCore.Current.AppInfo.VersionNumber);
-            var report = PlatformCore.Current.Logger.GenerateApplicationReport();
-            var attachment = await PlatformCore.Current.Storage.SaveFileAsync("Application.log", report, ApplicationData.Current.TemporaryFolder);
+            var subject = string.Format(Strings.Resources.ApplicationSupportEmailSubjectTemplate, Windows.ApplicationModel.Package.Current.DisplayName, PlatformCore.Core.AppInfo.VersionNumber);
+            var report = PlatformCore.Core.Logger.GenerateApplicationReport();
+            var attachment = await PlatformCore.Core.Storage.SaveFileAsync("Application.log", report, ApplicationData.Current.TemporaryFolder);
 
             var body = Strings.Resources.ApplicationSupportEmailBodyTemplate;
             body += report;
             // TODO move app support email address to app info provider
-            await PlatformCore.Current.EmailProvider.SendEmailAsync(subject, body, PlatformCore.Current.AppInfo.AppSupportEmailAddress, attachment);
+            await PlatformCore.Core.EmailProvider.SendEmailAsync(subject, body, PlatformCore.Core.AppInfo.AppSupportEmailAddress, attachment);
         }
 
         /// <summary>
@@ -281,14 +281,14 @@ namespace AppFramework.Core.Services
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("UTC TIME: " + DateTime.Now.ToUniversalTime().ToString());
-            if (PlatformCore.Current.AppInfo != null)
+            if (PlatformCore.Core.AppInfo != null)
             {
-                sb.AppendLine(string.Format("APP NAME: {0} {1} {2} {3}", Windows.ApplicationModel.Package.Current.DisplayName, PlatformCore.Current.AppInfo.VersionNumber, PlatformCore.Current.AppInfo.IsTrial ? "TRIAL" : "", PlatformCore.Current.AppInfo.IsTrialExpired ? "EXPIRED" : "").Trim());
-                if (PlatformCore.Current.AppInfo.IsTrial && PlatformCore.Current.AppInfo.TrialExpirationDate.Year != 9999)
-                    sb.AppendLine("TRIAL EXPIRATION: " + PlatformCore.Current.AppInfo.TrialExpirationDate);
+                sb.AppendLine(string.Format("APP NAME: {0} {1} {2} {3}", Windows.ApplicationModel.Package.Current.DisplayName, PlatformCore.Core.AppInfo.VersionNumber, PlatformCore.Core.AppInfo.IsTrial ? "TRIAL" : "", PlatformCore.Core.AppInfo.IsTrialExpired ? "EXPIRED" : "").Trim());
+                if (PlatformCore.Core.AppInfo.IsTrial && PlatformCore.Core.AppInfo.TrialExpirationDate.Year != 9999)
+                    sb.AppendLine("TRIAL EXPIRATION: " + PlatformCore.Core.AppInfo.TrialExpirationDate);
                 sb.AppendLine("INSTALLED: " + Windows.ApplicationModel.Package.Current.InstalledDate.DateTime);
             }
-            sb.AppendLine("INITIALIZATION MODE: " + PlatformCore.Current.InitializationMode);
+            sb.AppendLine("INITIALIZATION MODE: " + PlatformCore.Core.InitializationMode);
             sb.AppendLine(string.Format("CULTURE: {0}  UI CULTURE: {1}", CultureInfo.CurrentCulture.Name, CultureInfo.CurrentUICulture.Name));
             sb.AppendLine(string.Format("OS: {0} {1} {2} {3}", SystemInformation.OperatingSystem, SystemInformation.OperatingSystemArchitecture, SystemInformation.OperatingSystemVersion, SystemInformation.DeviceFamily));
             sb.AppendLine(string.Format("DEVICE: {0} {1}", SystemInformation.DeviceManufacturer, SystemInformation.DeviceModel));

@@ -81,7 +81,7 @@ namespace AppFramework.Core.Services
             }
             catch (Exception ex)
             {
-                PlatformCore.Current.Logger.LogError(ex, "Error while updating voice commands!");
+                PlatformCore.Core.Logger.LogError(ex, "Error while updating voice commands!");
             }
         }
 

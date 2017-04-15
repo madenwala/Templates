@@ -45,20 +45,20 @@ namespace AppFramework.UI
         /// <param name="e">Details about the launch request and process.</param>
         protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
-            PlatformCore.Current.Analytics.Event("App.OnLaunched", this.ToDictionary(e));
+            PlatformCore.Core.Analytics.Event("App.OnLaunched", this.ToDictionary(e));
             await this.InitializeAsync(e, e.PrelaunchActivated);
         }
 
         protected override async void OnActivated(IActivatedEventArgs e)
         {
-            PlatformCore.Current.Analytics.Event("App.OnActivated", this.ToDictionary(e));
+            PlatformCore.Core.Analytics.Event("App.OnActivated", this.ToDictionary(e));
             await this.InitializeAsync(e);
             base.OnActivated(e);
         }
 
         protected override async void OnSearchActivated(SearchActivatedEventArgs e)
         {
-            PlatformCore.Current.Analytics.Event("App.OnSearchActivated", this.ToDictionary(e));
+            PlatformCore.Core.Analytics.Event("App.OnSearchActivated", this.ToDictionary(e));
             await this.InitializeAsync(e);
             base.OnSearchActivated(e);
         }
@@ -90,9 +90,9 @@ namespace AppFramework.UI
 
                     // Determine if the app is a new instance or being restored after app suspension
                     if (e.PreviousExecutionState == ApplicationExecutionState.ClosedByUser || e.PreviousExecutionState == ApplicationExecutionState.NotRunning)
-                        await PlatformCore.Current.AppInitializingAsync(InitializationModes.New);
+                        await PlatformCore.Core.AppInitializingAsync(InitializationModes.New);
                     else
-                        await PlatformCore.Current.AppInitializingAsync(InitializationModes.Restore);
+                        await PlatformCore.Core.AppInitializingAsync(InitializationModes.Restore);
                 }
 
                 bool firstWindows = false;
@@ -137,7 +137,7 @@ namespace AppFramework.UI
                 if (preLaunchActivated == false)
                 {
                     // Manage activation and process arguments
-                    PlatformCore.Current.NavigationBase.HandleActivation(e, rootFrame);
+                    PlatformCore.Core.NavigationBase.HandleActivation(e, rootFrame);
 
                     // Ensure the current window is active
                     Window.Current.Activate();
@@ -152,7 +152,7 @@ namespace AppFramework.UI
             }
             catch (Exception ex)
             {
-                PlatformCore.Current.Logger.LogErrorFatal(ex, "Error during App InitializeAsync(e)");
+                PlatformCore.Core.Logger.LogErrorFatal(ex, "Error during App InitializeAsync(e)");
                 throw ex;
             }
         }
@@ -183,7 +183,7 @@ namespace AppFramework.UI
             }
             catch(Exception ex)
             {
-                PlatformCore.Current.Logger.LogError(ex, "Failed to execute OnCustomizeApplicationUI");
+                PlatformCore.Core.Logger.LogError(ex, "Failed to execute OnCustomizeApplicationUI");
             }
         }
 
@@ -207,16 +207,16 @@ namespace AppFramework.UI
             var deferral = e.SuspendingOperation.GetDeferral();
             try
             {
-                PlatformCore.Current.AppSuspending();
+                PlatformCore.Core.AppSuspending();
                 await SuspensionManager.SaveAsync();
             }
             catch (SuspensionManagerException ex)
             {
-                PlatformCore.Current.Logger.LogErrorFatal(ex, "Suspension manager failed during App OnSuspending!");
+                PlatformCore.Core.Logger.LogErrorFatal(ex, "Suspension manager failed during App OnSuspending!");
             }
             catch (Exception ex)
             {
-                PlatformCore.Current.Logger.LogErrorFatal(ex, "Error during App OnSuspending");
+                PlatformCore.Core.Logger.LogErrorFatal(ex, "Error during App OnSuspending");
                 throw ex;
             }
             deferral.Complete();
@@ -233,7 +233,7 @@ namespace AppFramework.UI
         /// <param name="e"></param>
         private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            e.Handled = PlatformCore.Current.AppUnhandledException(e.Exception);
+            e.Handled = PlatformCore.Core.AppUnhandledException(e.Exception);
         }
 
         /// <summary>
@@ -244,7 +244,7 @@ namespace AppFramework.UI
         private void TaskScheduler_UnobservedTaskException(object sender, System.Threading.Tasks.UnobservedTaskExceptionEventArgs e)
         {
             e.SetObserved();
-            PlatformCore.Current.AppUnhandledException(e.Exception);
+            PlatformCore.Core.AppUnhandledException(e.Exception);
         }
 
         /// <summary>
@@ -254,7 +254,7 @@ namespace AppFramework.UI
         /// <param name="e">Details about the binding failure</param>
         private void DebugSettings_BindingFailed(object sender, BindingFailedEventArgs e)
         {
-            PlatformCore.Current.Logger.Log(LogLevels.Error, e.Message);
+            PlatformCore.Core.Logger.Log(LogLevels.Error, e.Message);
         }
 
         /// <summary>

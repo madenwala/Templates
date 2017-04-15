@@ -20,9 +20,9 @@ namespace Contoso.Core.ViewModels
         [System.Runtime.Serialization.IgnoreDataMember()]
         public Platform Platform { get { return Platform.Current; } }
 
-        public AppSettingsLocal AppSettingsLocal { get { return this.Platform.AppSettingsLocal as AppSettingsLocal; } }
+        public AppSettingsLocal AppSettingsLocal { get { return this.Platform.AppSettingsLocal; } }
 
-        public AppSettingsRoaming AppSettingsRoaming { get { return this.Platform.AppSettingsRoaming as AppSettingsRoaming; } }
+        public AppSettingsRoaming AppSettingsRoaming { get { return this.Platform.AppSettingsRoaming; } }
 
         #endregion
 
@@ -51,9 +51,9 @@ namespace Contoso.Core.ViewModels
         [System.Runtime.Serialization.IgnoreDataMember()]
         public Platform Platform { get { return Platform.Current; } }
 
-        public AppSettingsLocal AppSettingsLocal { get { return this.Platform.AppSettingsLocal as AppSettingsLocal; } }
+        public AppSettingsLocal AppSettingsLocal { get { return this.Platform.AppSettingsLocal; } }
 
-        public AppSettingsRoaming AppSettingsRoaming { get { return this.Platform.AppSettingsRoaming as AppSettingsRoaming; } }
+        public AppSettingsRoaming AppSettingsRoaming { get { return this.Platform.AppSettingsRoaming; } }
 
         #endregion
 
@@ -82,9 +82,9 @@ namespace Contoso.Core.ViewModels
         [System.Runtime.Serialization.IgnoreDataMember()]
         public Platform Platform { get { return Platform.Current; } }
 
-        public AppSettingsLocal AppSettingsLocal { get { return this.Platform.AppSettingsLocal as AppSettingsLocal; } }
+        public AppSettingsLocal AppSettingsLocal { get { return this.Platform.AppSettingsLocal; } }
 
-        public AppSettingsRoaming AppSettingsRoaming { get { return this.Platform.AppSettingsRoaming as AppSettingsRoaming; } }
+        public AppSettingsRoaming AppSettingsRoaming { get { return this.Platform.AppSettingsRoaming; } }
 
         #endregion
 
@@ -113,9 +113,9 @@ namespace Contoso.Core.ViewModels
         [System.Runtime.Serialization.IgnoreDataMember()]
         public Platform Platform { get { return Platform.Current; } }
 
-        public AppSettingsLocal AppSettingsLocal { get { return this.PlatformBase.AppSettingsLocal as AppSettingsLocal; } }
+        public AppSettingsLocal AppSettingsLocal { get { return this.Platform.AppSettingsLocal; } }
 
-        public AppSettingsRoaming AppSettingsRoaming { get { return this.PlatformBase.AppSettingsRoaming as AppSettingsRoaming; } }
+        public AppSettingsRoaming AppSettingsRoaming { get { return this.Platform.AppSettingsRoaming; } }
 
         #endregion
 

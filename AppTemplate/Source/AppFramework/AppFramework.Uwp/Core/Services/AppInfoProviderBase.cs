@@ -174,7 +174,7 @@ namespace AppFramework.Core.Services
 
             await this.OnInitializeAsync();
 
-            PlatformCore.Current.Analytics.Event("STORE_PURCHASE_STATUS-" + featureName, result.Status.ToString());
+            PlatformCore.Core.Analytics.Event("STORE_PURCHASE_STATUS-" + featureName, result.Status.ToString());
             switch (result.Status)
             {
                 case ProductPurchaseStatus.AlreadyPurchased:
@@ -186,7 +186,7 @@ namespace AppFramework.Core.Services
 
                 case ProductPurchaseStatus.NotFulfilled:
                 default:
-                    await PlatformCore.Current.ViewModel.ShowMessageBoxAsync(CancellationToken.None, string.Format("Could not purchase Pro-Feature Pack add-on right now. Store return back an error. Please try again later."), "Failed to purchase add-on");
+                    await PlatformCore.Core.ViewModel.ShowMessageBoxAsync(CancellationToken.None, string.Format("Could not purchase Pro-Feature Pack add-on right now. Store return back an error. Please try again later."), "Failed to purchase add-on");
                     return false;
             }
         }
@@ -195,7 +195,7 @@ namespace AppFramework.Core.Services
         {
             try
             {
-                PlatformCore.Current.Analytics.Event("PurchaseAddOn", featureName);
+                PlatformCore.Core.Analytics.Event("PurchaseAddOn", featureName);
                 return await CurrentApp.RequestProductPurchaseAsync(featureName);
             }
             catch
@@ -227,7 +227,7 @@ namespace AppFramework.Core.Services
 
         private void FeaturePurchased(string featureName)
         {
-            PlatformCore.Current.Storage.SaveSetting("InAppPurchase-" + featureName, DateTime.UtcNow, ApplicationData.Current.RoamingSettings);
+            PlatformCore.Core.Storage.SaveSetting("InAppPurchase-" + featureName, DateTime.UtcNow, ApplicationData.Current.RoamingSettings);
         }
 
         private bool FeaturedPreviouslyPurchased(string featureName)
@@ -235,9 +235,9 @@ namespace AppFramework.Core.Services
             try
             {
                 var key = "InAppPurchase-" + featureName;
-                if (PlatformCore.Current.Storage.ContainsSetting(key, ApplicationData.Current.RoamingSettings))
+                if (PlatformCore.Core.Storage.ContainsSetting(key, ApplicationData.Current.RoamingSettings))
                 {
-                    var date = PlatformCore.Current.Storage.LoadSetting<DateTime>(key, ApplicationData.Current.RoamingSettings);
+                    var date = PlatformCore.Core.Storage.LoadSetting<DateTime>(key, ApplicationData.Current.RoamingSettings);
                     if (date.AddDays(7) > DateTime.UtcNow)
                         return true;
                     else
@@ -250,7 +250,7 @@ namespace AppFramework.Core.Services
             }
             catch (Exception ex)
             {
-                PlatformCore.Current.Analytics.Error(ex, $"Failed to check if '{featureName}' feature was previously purchased.");
+                PlatformCore.Core.Analytics.Error(ex, $"Failed to check if '{featureName}' feature was previously purchased.");
                 return false;
             }
         }

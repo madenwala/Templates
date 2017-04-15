@@ -123,7 +123,7 @@ namespace AppFramework.Core.Services
 #if !DEBUG
             this.Services.ForEach(s => s.NewPageView(pageType));
 #endif
-            PlatformCore.Current.Logger.Log(LogLevels.Information, $"ANALYTICS: NewPageView({pageType.FullName})");
+            PlatformCore.Core.Logger.Log(LogLevels.Information, $"ANALYTICS: NewPageView({pageType.FullName})");
         }
 
         public override void Error(Exception ex, string message = null)
@@ -134,7 +134,7 @@ namespace AppFramework.Core.Services
 #if !DEBUG
             this.Services.ForEach(s => s.Error(ex, message));
 #endif
-                PlatformCore.Current.Logger.Log(LogLevels.Information, $"ANALYTICS: Error(\"{message}\", {ex.ToString()})");
+                PlatformCore.Core.Logger.Log(LogLevels.Information, $"ANALYTICS: Error(\"{message}\", {ex.ToString()})");
         }
 
         public override void Event(string eventName, Dictionary<string, string> properties, Dictionary<string, double> metrics = null)
@@ -145,7 +145,7 @@ namespace AppFramework.Core.Services
 #if !DEBUG
             this.Services.ForEach(s => s.Event(eventName, properties, metrics));
 #endif
-            PlatformCore.Current.Logger.Log(LogLevels.Information, $"ANALYTICS: Event({eventName}, {Serializer.Serialize(properties)}, {Serializer.Serialize(metrics)})");
+            PlatformCore.Core.Logger.Log(LogLevels.Information, $"ANALYTICS: Event({eventName}, {Serializer.Serialize(properties)}, {Serializer.Serialize(metrics)})");
         }
 
         public override void SetUser(string username)
@@ -153,7 +153,7 @@ namespace AppFramework.Core.Services
             if (!string.IsNullOrWhiteSpace(username))
             {
                 this.Services.ForEach(s => s.SetUser(username));
-                PlatformCore.Current.Logger.Log(LogLevels.Information, $"ANALYTICS: SetUser({username})");
+                PlatformCore.Core.Logger.Log(LogLevels.Information, $"ANALYTICS: SetUser({username})");
             }
         }
     }

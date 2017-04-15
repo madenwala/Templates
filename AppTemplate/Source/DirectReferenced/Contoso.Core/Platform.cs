@@ -21,7 +21,7 @@ namespace Contoso.Core
         /// <summary>
         /// Provides access to application services.
         /// </summary>
-        public new static Platform Current { get { return PlatformCore.Current as Platform; } private set { PlatformCore.Current = value; } }
+        public static Platform Current { get { return PlatformCore.Core as Platform; } private set { PlatformCore.Core = value; } }
 
         #endregion
 

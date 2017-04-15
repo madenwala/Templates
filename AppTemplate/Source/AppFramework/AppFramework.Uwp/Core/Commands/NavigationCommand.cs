@@ -13,7 +13,7 @@ namespace AppFramework.Core.Commands
         /// Command for navigating to a page based on the IModel parameter passed into the Execute method.
         /// </summary>
         public NavigationCommand()
-            : base("NavigateToModelCommand", PlatformCore.Current.NavigationBase.NavigateTo, null)
+            : base("NavigateToModelCommand", PlatformCore.Core.NavigationBase.NavigateTo, null)
         {
         }
 

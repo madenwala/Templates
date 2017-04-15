@@ -13,7 +13,7 @@ namespace AppFramework.Core.Commands
         /// Creates a new command instance for sharing IModel objects to other apps.
         /// </summary>
         public ShareCommand()
-            : base("ShareCommand", PlatformCore.Current.SharingManager.Share)
+            : base("ShareCommand", PlatformCore.Core.SharingManager.Share)
         {
         }
 

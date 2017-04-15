@@ -26,7 +26,7 @@ namespace AppFramework.UI.Controls
                     }
                     catch (Exception ex)
                     {
-                        PlatformCore.Current.Logger.LogError(ex, "Error while loading child ViewModel of type {1} in CollectionViewModel type {0}", parentVM.GetType().Name, vm.GetType().Name);
+                        PlatformCore.Core.Logger.LogError(ex, "Error while loading child ViewModel of type {1} in CollectionViewModel type {0}", parentVM.GetType().Name, vm.GetType().Name);
                     }
                 }
             }
