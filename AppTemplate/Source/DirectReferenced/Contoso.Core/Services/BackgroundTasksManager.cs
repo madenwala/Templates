@@ -2,7 +2,7 @@
 
 namespace Contoso.Core.Services
 {
-    internal sealed class BackgroundTasksManager : AppFramework.Core.Services.BackgroundTasksManagerBase
+    public sealed class BackgroundTasksManager : AppFramework.Core.Services.BackgroundTasksManagerBase
     {
         protected override void Registrations()
         {

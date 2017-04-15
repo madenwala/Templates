@@ -44,7 +44,7 @@ namespace Contoso.Core
         /// <summary>
         /// Gets access to the geocoding service adapter implement of the platform currently executing.
         /// </summary>
-        internal BackgroundTasksManager BackgroundTasks
+        public BackgroundTasksManager BackgroundTasks
         {
             get { return GetService<BackgroundTasksManager>(); }
             private set { SetService(value); }
