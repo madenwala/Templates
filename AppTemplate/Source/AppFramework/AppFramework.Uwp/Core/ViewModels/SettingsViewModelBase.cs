@@ -52,12 +52,12 @@ namespace AppFramework.Core.ViewModels
         
         public bool IsApplicationThemeDefault
         {
-            get { return PlatformBase.CurrentCore.AppSettingsRoaming.ApplicationTheme == (int)Windows.UI.Xaml.ElementTheme.Default; }
+            get { return PlatformBase.CurrentCore.AppSettingsRoamingCore.ApplicationTheme == (int)Windows.UI.Xaml.ElementTheme.Default; }
             set
             {
                 if (value)
                 {
-                    PlatformBase.CurrentCore.AppSettingsRoaming.ApplicationTheme = (int)Windows.UI.Xaml.ElementTheme.Default;
+                    PlatformBase.CurrentCore.AppSettingsRoamingCore.ApplicationTheme = (int)Windows.UI.Xaml.ElementTheme.Default;
                     this.NotifyPropertyChangedOnUI(() => this.IsApplicationThemeDefault);
                 }
             }
@@ -65,12 +65,12 @@ namespace AppFramework.Core.ViewModels
 
         public bool IsApplicationThemeLight
         {
-            get { return PlatformBase.CurrentCore.AppSettingsRoaming.ApplicationTheme == (int)Windows.UI.Xaml.ElementTheme.Light; }
+            get { return PlatformBase.CurrentCore.AppSettingsRoamingCore.ApplicationTheme == (int)Windows.UI.Xaml.ElementTheme.Light; }
             set
             {
                 if (value)
                 {
-                    PlatformBase.CurrentCore.AppSettingsRoaming.ApplicationTheme = (int)Windows.UI.Xaml.ElementTheme.Light;
+                    PlatformBase.CurrentCore.AppSettingsRoamingCore.ApplicationTheme = (int)Windows.UI.Xaml.ElementTheme.Light;
                     this.NotifyPropertyChangedOnUI(() => this.IsApplicationThemeLight);
                 }
             }
@@ -78,12 +78,12 @@ namespace AppFramework.Core.ViewModels
 
         public bool IsApplicationThemeDark
         {
-            get { return PlatformBase.CurrentCore.AppSettingsRoaming.ApplicationTheme == (int)Windows.UI.Xaml.ElementTheme.Dark; }
+            get { return PlatformBase.CurrentCore.AppSettingsRoamingCore.ApplicationTheme == (int)Windows.UI.Xaml.ElementTheme.Dark; }
             set
             {
                 if (value)
                 {
-                    PlatformBase.CurrentCore.AppSettingsRoaming.ApplicationTheme = (int)Windows.UI.Xaml.ElementTheme.Dark;
+                    PlatformBase.CurrentCore.AppSettingsRoamingCore.ApplicationTheme = (int)Windows.UI.Xaml.ElementTheme.Dark;
                     this.NotifyPropertyChangedOnUI(() => this.IsApplicationThemeDark);
                 }
             }

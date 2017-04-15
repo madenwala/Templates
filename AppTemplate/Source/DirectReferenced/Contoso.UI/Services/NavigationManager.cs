@@ -14,8 +14,16 @@ namespace Contoso.UI.Services
     /// </summary>
     public sealed class NavigationManager : NavigationManagerBase
     {
+        #region Constructors
+
+        internal NavigationManager()
+        {
+        }
+
+        #endregion
+
         #region Handle Activation Methods
-        
+
         protected override bool OnVoiceActivation(VoiceCommandInfo info)
         {
             switch (info.VoiceCommandName)

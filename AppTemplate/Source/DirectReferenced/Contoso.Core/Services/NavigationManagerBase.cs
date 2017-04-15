@@ -1,20 +1,4 @@
 ﻿using AppFramework.Core.Commands;
-using Contoso.Core.Services;
-
-namespace Contoso.Core
-{
-    public partial class Platform
-    {
-        /// <summary>
-        /// Gets the ability to navigate to different parts of an application specific to the platform currently executing.
-        /// </summary>
-        public NavigationManagerBase Navigation
-        {
-            get { return GetService<NavigationManagerBase>(); }
-            set { SetService(value); }
-        }
-    }
-}
 
 namespace Contoso.Core.Services
 {

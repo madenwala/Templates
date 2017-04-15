@@ -43,7 +43,7 @@ namespace AppFramework.Core.Services
             {
                 // Return the last saved location if no location found.
                 if (_currentLocation == null)
-                    this.CurrentLocation = PlatformBase.CurrentCore.AppSettingsLocal.LocationLastKnown;
+                    this.CurrentLocation = PlatformBase.CurrentCore.AppSettingsLocalCore.LocationLastKnown;
 
                 return _currentLocation;
             }
@@ -59,7 +59,7 @@ namespace AppFramework.Core.Services
                     _currentLocation.PropertyChanged += CurrentLocationInfo_PropertyChanged;
                     this.NotifyPropertyChanged(() => this.CurrentLocation);
                     this.NotifyLocationChangedEvent();
-                    PlatformBase.CurrentCore.AppSettingsLocal.LocationLastKnown = value;
+                    PlatformBase.CurrentCore.AppSettingsLocalCore.LocationLastKnown = value;
                 }
                 else
                 {
@@ -68,7 +68,7 @@ namespace AppFramework.Core.Services
                     {
                         this.NotifyPropertyChanged(() => this.CurrentLocation);
                         this.NotifyLocationChangedEvent();
-                        PlatformBase.CurrentCore.AppSettingsLocal.LocationLastKnown = value;
+                        PlatformBase.CurrentCore.AppSettingsLocalCore.LocationLastKnown = value;
                     }
                 }
             }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Contoso.Core.Services
 {
-    public sealed class AppInfoProvider: AppInfoProviderBase
+    internal sealed class AppInfoProvider: AppInfoProviderBase
     {
         #region Properties
 

@@ -115,7 +115,7 @@ namespace AppFramework.Core.ViewModels
         {
             get
             {
-                return PlatformBase.CurrentCore.ViewModel.IsInitialized == false
+                return PlatformBase.CurrentCore.ViewModelCore.IsInitialized == false
                     && this.IsUserAuthenticated
                     && this.PlatformBase.NavigationBase.CanGoBack() == false;
             }

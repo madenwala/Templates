@@ -2,26 +2,10 @@
 using AppFramework.Core.Models;
 using Contoso.Core.Data;
 using Contoso.Core.Models;
-using Contoso.Core.Services;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.Storage;
-
-namespace Contoso.Core
-{
-    public partial class Platform
-    {
-        /// <summary>
-        /// Gets access to the cryptography provider of the platform currently executing.
-        /// </summary>
-        public new AuthorizationManager AuthManager
-        {
-            get { return GetService<AuthorizationManager>(); }
-            private set { SetService(value); }
-        }
-    }
-}
 
 namespace Contoso.Core.Services
 {

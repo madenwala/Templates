@@ -148,7 +148,7 @@
     <Compile Include="Models\ItemModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\NavigationManagerBase.cs" />
-    <Compile Include="Services\NotificationsService.cs" />
+    <Compile Include="Services\NotificationsManager.cs" />
     <Compile Include="Services\SharingManager.cs" />
     <Compile Include="Strings\en-US\Account.cs">
       <DependentUpon>Account.resw</DependentUpon>

@@ -10,7 +10,7 @@ namespace AppFramework.Core
         /// <summary>
         /// Gets access to the app info service of the platform currently executing.
         /// </summary>
-        public AppInfoProviderBase AppInfo
+        internal AppInfoProviderBase AppInfo
         {
             get
             {
@@ -19,25 +19,25 @@ namespace AppFramework.Core
                     throw new ArgumentNullException("Platform.AppInfo was never set!");
                 return service;
             }
-            protected set { SetService(value); }
+            private set { SetService(value); }
         }
 
         /// <summary>
         /// Gets access to the cryptography provider of the platform currently executing.
         /// </summary>
-        public AuthorizationManagerBase AuthManager
+        internal AuthorizationManagerBase AuthManager
         {
             get { return GetService<AuthorizationManagerBase>(); }
-            protected set { SetService(value); }
+            private set { SetService(value); }
         }
 
         /// <summary>
         /// Gets access to the geocoding service adapter implement of the platform currently executing.
         /// </summary>
-        public BackgroundTasksManagerBase BackgroundTasks
+        internal BackgroundTasksManagerBase BackgroundTasks
         {
             get { return GetService<BackgroundTasksManagerBase>(); }
-            protected set { SetService(value); }
+            private set { SetService(value); }
         }
 
         /// <summary>
@@ -52,16 +52,16 @@ namespace AppFramework.Core
         /// <summary>
         /// Gets access to the notifications service of the platform currently executing. Provides you the ability to display toasts or manage tiles or etc on the executing platform.
         /// </summary>
-        public NotificationsManagerBase Notifications
+        internal NotificationsManagerBase Notifications
         {
             get { return GetService<NotificationsManagerBase>(); }
-            protected set { SetService(value); }
+            private set { SetService(value); }
         }
 
         /// <summary>
         /// Gets the ability to navigate to different parts of an application specific to the platform currently executing.
         /// </summary>
-        public NavigationManagerBase NavigationBase
+        internal NavigationManagerBase NavigationBase
         {
             get { return GetService<NavigationManagerBase>(); }
         }
@@ -69,10 +69,10 @@ namespace AppFramework.Core
         /// <summary>
         /// Gets access to the app info service of the platform currently executing.
         /// </summary>
-        public SharingManagerBase SharingManager
+        internal SharingManagerBase SharingManager
         {
             get { return GetService<SharingManagerBase>(); }
-            protected set { SetService(value); }
+            private set { SetService(value); }
         }
 
         #endregion

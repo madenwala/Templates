@@ -23,6 +23,60 @@ namespace Contoso.Core
         /// </summary>
         public static Platform Current { get { return PlatformBase.CurrentCore as Platform; } private set { PlatformBase.CurrentCore = value; } }
 
+        /// <summary>
+        /// Gets access to the app info service of the platform currently executing.
+        /// </summary>
+        internal AppInfoProvider AppInfo
+        {
+            get { return GetService<AppInfoProvider>(); }
+            private set { SetService(value); }
+        }
+
+        /// <summary>
+        /// Gets access to the cryptography provider of the platform currently executing.
+        /// </summary>
+        public AuthorizationManager AuthManager
+        {
+            get { return GetService<AuthorizationManager>(); }
+            private set { SetService(value); }
+        }
+
+        /// <summary>
+        /// Gets access to the geocoding service adapter implement of the platform currently executing.
+        /// </summary>
+        internal BackgroundTasksManager BackgroundTasks
+        {
+            get { return GetService<BackgroundTasksManager>(); }
+            private set { SetService(value); }
+        }
+
+        /// <summary>
+        /// Gets access to the notifications service of the platform currently executing. Provides you the ability to display toasts or manage tiles or etc on the executing platform.
+        /// </summary>
+        internal NotificationsManager Notifications
+        {
+            get { return GetService<NotificationsManager>(); }
+            private set { SetService(value); }
+        }
+
+        /// <summary>
+        /// Gets the ability to navigate to different parts of an application specific to the platform currently executing.
+        /// </summary>
+        public NavigationManagerBase Navigation
+        {
+            get { return GetService<NavigationManagerBase>(); }
+            set { SetService(value); }
+        }
+
+        /// <summary>
+        /// Gets access to the app info service of the platform currently executing.
+        /// </summary>
+        internal SharingManager SharingManager
+        {
+            get { return GetService<SharingManager>(); }
+            private set { SetService(value); }
+        }
+        
         #endregion
 
         #region Constructors
@@ -38,7 +92,7 @@ namespace Contoso.Core
             this.AuthManager = new AuthorizationManager();
             this.BackgroundTasks = new BackgroundTasksManager();
             this.AppInfo = new AppInfoProvider();
-            this.Notifications = new NotificationsService();
+            this.Notifications = new NotificationsManager();
             this.SharingManager = new SharingManager();
             this.Geolocation = new AppFramework.Core.Services.GeolocationService();
         }

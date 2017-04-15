@@ -38,7 +38,7 @@ namespace AppFramework.Core.Services
             ToastNotificationManager.History.Clear();
 
             // Clear primary tile
-            this.ClearTile(PlatformBase.CurrentCore.ViewModel);
+            this.ClearTile(PlatformBase.CurrentCore.ViewModelCore);
 
             // Clear secondary tiles
             IReadOnlyList<SecondaryTile> list = await SecondaryTile.FindAllAsync();

@@ -164,7 +164,7 @@ namespace AppFramework.Core.Services
 
                 case ProductPurchaseStatus.NotFulfilled:
                 default:
-                    await PlatformBase.CurrentCore.ViewModel.ShowMessageBoxAsync(CancellationToken.None, string.Format("Could not purchase Pro-Feature Pack add-on right now. Store return back an error. Please try again later."), "Failed to purchase add-on");
+                    await PlatformBase.CurrentCore.ViewModelCore.ShowMessageBoxAsync(CancellationToken.None, string.Format("Could not purchase Pro-Feature Pack add-on right now. Store return back an error. Please try again later."), "Failed to purchase add-on");
                     return false;
             }
         }

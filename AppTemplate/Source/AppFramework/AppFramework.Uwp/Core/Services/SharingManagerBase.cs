@@ -60,7 +60,7 @@ namespace AppFramework.Core.Services
                             if(url != null)
                                 e.Request.Data.Properties.ContentSourceApplicationLink = new Uri(url.Replace("//", ""), UriKind.Absolute);
 
-                            this.SetShareContent(e.Request, model ?? PlatformBase.CurrentCore.ViewModel);
+                            this.SetShareContent(e.Request, model ?? PlatformBase.CurrentCore.ViewModelCore);
                         }
                         catch(Exception ex)
                         {

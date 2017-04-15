@@ -1,9 +1,8 @@
-﻿using AppFramework.Core.Services;
-using Windows.ApplicationModel.Background;
+﻿using Windows.ApplicationModel.Background;
 
 namespace Contoso.Core.Services
 {
-    internal sealed class BackgroundTasksManager : BackgroundTasksManagerBase
+    internal sealed class BackgroundTasksManager : AppFramework.Core.Services.BackgroundTasksManagerBase
     {
         protected override void Registrations()
         {

@@ -25,7 +25,6 @@ namespace AppFramework.Core
         #region Variables
 
         private static Dictionary<Type, ServiceBase> _services = new Dictionary<Type, ServiceBase>();
-        private Type _mainViewModelType;
 
         #endregion Variables
 
@@ -33,23 +32,11 @@ namespace AppFramework.Core
 
         public event EventHandler OnAppSettingsReset;
 
-        private ViewModelBase _ViewModel;
-        /// <summary>
-        /// Gets the MainViewModel global instance for the application.
-        /// </summary>
-        [Newtonsoft.Json.JsonIgnore()]
-        [System.Runtime.Serialization.IgnoreDataMember()]
-        public ViewModelBase ViewModel
-        {
-            get { return _ViewModel; }
-            protected set { this.SetProperty(ref _ViewModel, value); }
-        }
-
         private AppSettingsLocalBase _AppSettingsLocal;
         /// <summary>
         /// Gets local app settings for this app.
         /// </summary>
-        public AppSettingsLocalBase AppSettingsLocal
+        protected internal AppSettingsLocalBase AppSettingsLocalCore
         {
             get { return _AppSettingsLocal; }
             protected set { this.SetProperty(ref _AppSettingsLocal, value); }
@@ -59,7 +46,7 @@ namespace AppFramework.Core
         /// <summary>
         /// Gets roaming app settings for this app.
         /// </summary>
-        public AppSettingsRoamingBase AppSettingsRoaming
+        protected internal AppSettingsRoamingBase AppSettingsRoamingCore
         {
             get { return _AppSettingsRoaming; }
             protected set { this.SetProperty(ref _AppSettingsRoaming, value); }
@@ -100,14 +87,19 @@ namespace AppFramework.Core
             private set { this.SetProperty(ref _BackgroundRegistrationTask, value); }
         }
 
+        private ViewModelBase _ViewModelCore;
+        protected internal ViewModelBase ViewModelCore
+        {
+            get { return _ViewModelCore; }
+            protected set { this.SetProperty(ref _ViewModelCore, value); }
+        }
+
         #endregion Properties
 
         #region Constructors
 
-        internal PlatformBase(Type mainViewModelType)
+        internal PlatformBase()
         {
-            _mainViewModelType = mainViewModelType;
-
             // Instantiate all the application services.
             this.Logger = new LoggingService();
             this.Analytics = new AnalyticsManager();
@@ -167,7 +159,7 @@ namespace AppFramework.Core
         /// </summary>
         /// <param name="mode">Specifies the mode of this app instance and how it's executing.</param>
         /// <returns>Awaitable task is returned.</returns>
-        public async Task AppInitializingAsync(InitializationModes mode)
+        public virtual async Task AppInitializingAsync(InitializationModes mode)
         {
             this.InitializationMode = mode;
             this.Logger.Log(LogLevels.Warning, "APP INITIALIZING - Initialization mode is {0}", this.InitializationMode);
@@ -197,32 +189,6 @@ namespace AppFramework.Core
             // Register all background agents
             if (mode != InitializationModes.Background && this.BackgroundTasks != null)
                 this.BackgroundRegistrationTask = this.BackgroundTasks.RegisterAllAsync();
-
-            if (this.ViewModel == null)
-                this.ViewModel = Activator.CreateInstance(_mainViewModelType) as ViewModelBase;
-            
-            if (mode == InitializationModes.New)
-            {
-                // Check for previous app crashes
-                if (this.IsXbox == false)
-                {
-                    // TODO Should automatically send error reports to cloud on XBOX
-                    await this.Logger.CheckForFatalErrorReportsAsync(this.ViewModel);
-                }
-
-                // Check to see if the user should be prompted to rate the application
-                await this.Ratings.CheckForRatingsPromptAsync(this.ViewModel);
-            }
-
-            try
-            {
-                await this.OnAppInitializingAsync(mode);
-            }
-            catch(Exception ex)
-            {
-                this.Logger.LogError(ex, "Error while excuting OnAppInitializingAsync");
-                throw ex;
-            }
         }
 
         protected virtual Task OnAppInitializingAsync(InitializationModes mode)
@@ -376,7 +342,7 @@ namespace AppFramework.Core
         /// Logic performed during sign out of a user in this application.
         /// </summary>
         /// <returns>Awaitable task is returned.</returns>
-        internal async Task SignoutAllAsync()
+        internal virtual async Task SignoutAllAsync()
         {
             var services = _services.Values.Where(w => w is IServiceSignout);
             var list = new List<Task>();
@@ -401,7 +367,6 @@ namespace AppFramework.Core
             // to ensure no previous user data is shown on the UI.
             this.ResetAppSettings();
 
-            this.ViewModel = Activator.CreateInstance(_mainViewModelType) as ViewModelBase;
             this.ShellMenuClose();
         }
 
@@ -456,15 +421,7 @@ namespace AppFramework.Core
         /// </summary>
         /// <param name="model">Model to convert into a unique tile ID.</param>
         /// <returns>String representing a unique tile ID for the model else null if not supported.</returns>
-        public virtual string GenerateModelTileID(IModel model)
-        {
-            if (model == this.ViewModel)
-                return string.Empty;
-            else if (model is IUniqueModel imodel)
-                return $"{model.GetType().Name}_{imodel.ID}";
-            else
-                return null;
-        }
+        public abstract string GenerateModelTileID(IModel model);
 
         /// <summary>
         /// Converts a tile ID back into an object instance.
@@ -579,59 +536,114 @@ namespace AppFramework.Core
     }
 
     public abstract class PlatformBase<VM, L, R> : PlatformBase
-        where VM : ViewModelBase
+        where VM : ViewModelBase, new()
         where L : AppSettingsLocalBase
         where R : AppSettingsRoamingBase
     {
         private bool _settingsIsLocalDataDirty = false;
         private bool _settingsIsRoamingDataDirty = false;
 
+        private VM _ViewModel;
         /// <summary>
         /// Gets the MainViewModel global instance for the application.
         /// </summary>
         [Newtonsoft.Json.JsonIgnore()]
         [System.Runtime.Serialization.IgnoreDataMember()]
-        public new VM ViewModel
+        public VM ViewModel
         {
-            get { return base.ViewModel as VM; }
-            protected set { base.ViewModel = value; }
+            get { return _ViewModel; }
+            set { this.SetProperty(ref _ViewModel, value); }
         }
 
         /// <summary>
         /// Gets local app settings for this app.
         /// </summary>
-        public new L AppSettingsLocal
+        public L AppSettingsLocal
         {
-            get { return base.AppSettingsLocal as L; }
+            get { return base.AppSettingsLocalCore as L; }
         }
 
         /// <summary>
         /// Gets roaming app settings for this app.
         /// </summary>
-        public new R AppSettingsRoaming
+        public R AppSettingsRoaming
         {
-            get { return base.AppSettingsRoaming as R; }
+            get { return base.AppSettingsRoamingCore as R; }
         }
 
-        public PlatformBase() : base(typeof(VM))
+        public PlatformBase()
         {
+        }
+
+        public override async Task AppInitializingAsync(InitializationModes mode)
+        {
+            await base.AppInitializingAsync(mode);
+
+            if (this.ViewModel == null)
+                this.ViewModelCore = this.ViewModel = Activator.CreateInstance<VM>();
+
+            if (mode == InitializationModes.New)
+            {
+                // Check for previous app crashes
+                if (this.IsXbox == false)
+                {
+                    // TODO Should automatically send error reports to cloud on XBOX
+                    await this.Logger.CheckForFatalErrorReportsAsync(this.ViewModel);
+                }
+
+                // Check to see if the user should be prompted to rate the application
+                await this.Ratings.CheckForRatingsPromptAsync(this.ViewModel);
+            }
+
+            try
+            {
+                await this.OnAppInitializingAsync(mode);
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex, "Error while excuting OnAppInitializingAsync");
+                throw ex;
+            }
+        }
+
+        internal override async Task SignoutAllAsync()
+        {
+            await base.SignoutAllAsync();
+            this.ViewModelCore = this.ViewModel = Activator.CreateInstance<VM>();
         }
 
         internal override void OnAppSettingsInitializing()
         {
             if (this.AppSettingsLocal == null)
             {
-                base.AppSettingsLocal = this.Storage.LoadSetting<L>("AppSettingsLocal", ApplicationData.Current.LocalSettings) ?? Activator.CreateInstance<L>();
+                base.AppSettingsLocalCore = this.Storage.LoadSetting<L>("AppSettingsLocal", ApplicationData.Current.LocalSettings) ?? Activator.CreateInstance<L>();
+                this.NotifyPropertyChanged(() => this.AppSettingsLocal);
                 this.AppSettingsLocal.PropertyChanged += AppSettingsLocal_PropertyChanged;
             }
             if (this.AppSettingsRoaming == null)
             {
-                base.AppSettingsRoaming = this.Storage.LoadSetting<R>("AppSettingsRoaming", ApplicationData.Current.RoamingSettings) ?? Activator.CreateInstance<R>();
+                base.AppSettingsRoamingCore = this.Storage.LoadSetting<R>("AppSettingsRoaming", ApplicationData.Current.RoamingSettings) ?? Activator.CreateInstance<R>();
+                this.NotifyPropertyChanged(() => this.AppSettingsRoaming);
                 this.AppSettingsRoaming.PropertyChanged += AppSettingsRoaming_PropertyChanged;
             }
 
             this.CheckForFullLogging();
             this.NotifyOnAppSettingsResetEvent();
+        }
+
+        /// <summary>
+        /// Generates a unique tile ID used for secondary tiles based on a model instance.
+        /// </summary>
+        /// <param name="model">Model to convert into a unique tile ID.</param>
+        /// <returns>String representing a unique tile ID for the model else null if not supported.</returns>
+        public override string GenerateModelTileID(IModel model)
+        {
+            if (model == this.ViewModel)
+                return string.Empty;
+            else if (model is IUniqueModel imodel)
+                return $"{model.GetType().Name}_{imodel.ID}";
+            else
+                return null;
         }
 
         /// <summary>
@@ -647,9 +659,11 @@ namespace AppFramework.Core
             _settingsIsLocalDataDirty = true;
             _settingsIsRoamingDataDirty = true;
 
-            base.AppSettingsLocal = Activator.CreateInstance<L>();
+            base.AppSettingsLocalCore = Activator.CreateInstance<L>();
+            this.NotifyPropertyChanged(() => this.AppSettingsLocal);
             this.AppSettingsLocal.PropertyChanged += AppSettingsLocal_PropertyChanged;
-            base.AppSettingsRoaming = Activator.CreateInstance<R>();
+            base.AppSettingsRoamingCore = Activator.CreateInstance<R>();
+            this.NotifyPropertyChanged(() => this.AppSettingsRoaming);
             this.AppSettingsRoaming.PropertyChanged += AppSettingsRoaming_PropertyChanged;
 
             this.SaveSettings();
