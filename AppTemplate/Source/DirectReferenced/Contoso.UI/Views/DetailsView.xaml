@@ -19,8 +19,8 @@
         <controls:BodyPanel.AppBar>
             <CommandBar>
                 <CommandBar.PrimaryCommands>
-                    <AppBarButton x:Uid="/Contoso.Core/Resources/abtnHome" Label="[Home]" Icon="Home" Command="{Binding ViewModel.Platform.Navigation.NavigateToHomeCommand}" Visibility="{x:Bind ViewModel.ShowHomeButton, Converter={StaticResource visConverter}}" />
-                    <AppBarButton x:Uid="/Contoso.Core/Resources/abtnOpenNewWindow" x:Name="btnOpenNewWindow" Label="[Open in new window]" Icon="NewWindow" Command="{Binding ViewModel.Platform.Navigation.NavigateToNewWindowCommand}" CommandParameter="{x:Bind ViewModel, Mode=OneWay}" Visibility="{Binding ViewModel.Platform.IsDesktop, Converter={StaticResource visConverter}}" />
+                    <AppBarButton x:Uid="/Contoso.Core/Resources/abtnHome" Label="[Home]" Icon="Home" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToHomeCommand}" Visibility="{x:Bind ViewModel.ShowHomeButton, Converter={StaticResource visConverter}}" />
+                    <AppBarButton x:Uid="/Contoso.Core/Resources/abtnOpenNewWindow" x:Name="btnOpenNewWindow" Label="[Open in new window]" Icon="NewWindow" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToNewWindowCommand}" CommandParameter="{x:Bind ViewModel, Mode=OneWay}" Visibility="{Binding ViewModel.Platform.IsDesktop, Converter={StaticResource visConverter}}" />
                     <AppBarButton x:Uid="/Contoso.Core/Resources/abtnPin" Label="[Pin to start]" Icon="Pin" Command="{x:Bind ViewModel.PinTileCommand}" CommandParameter="{x:Bind ViewModel.Item, Mode=OneWay}" Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource visConverter}}" />
                     <AppBarButton x:Uid="/Contoso.Core/Resources/abtnUnpin" Label="[Unpin to start]" Icon="UnPin" Command="{x:Bind ViewModel.UnpinTileCommand}" CommandParameter="{x:Bind ViewModel.Item, Mode=OneWay}" Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource visConverter}}" />
                     <AppBarButton x:Uid="/Contoso.Core/Resources/abtnShare" Label="[Share]" Command="{Binding ViewModel.Platform.SharingManager.ShareCommand}" CommandParameter="{x:Bind ViewModel.Item, Mode=OneWay}" Visibility="{Binding ViewModel.Platform.IsXbox, Converter={StaticResource visInvertedConverter}}">
@@ -29,7 +29,7 @@
                     <AppBarButton x:Uid="/Contoso.Core/Resources/abtnRefresh" Label="[Refresh]" Icon="Refresh" Command="{x:Bind ViewModel.RefreshCommand, Mode=OneWay}" />
                 </CommandBar.PrimaryCommands>
                 <CommandBar.SecondaryCommands>
-                    <AppBarButton x:Uid="/Contoso.Core/Resources/abtnSettings" Label="[Settings]" Icon="Setting" Command="{Binding ViewModel.Platform.Navigation.NavigateToSettingsCommand}" />
+                    <AppBarButton x:Uid="/Contoso.Core/Resources/abtnSettings" Label="[Settings]" Icon="Setting" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToSettingsCommand}" />
                 </CommandBar.SecondaryCommands>
             </CommandBar>
         </controls:BodyPanel.AppBar>

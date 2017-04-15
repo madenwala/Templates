@@ -16,7 +16,7 @@
         <controls:BodyPanel.AppBar>
             <CommandBar ClosedDisplayMode="Minimal">
                 <CommandBar.SecondaryCommands>
-                    <AppBarButton x:Uid="/Contoso.Core/Resources/abtnSettings" Label="[Settings]" Icon="Setting" Command="{Binding ViewModel.Platform.Navigation.NavigateToSettingsCommand}" />
+                    <AppBarButton x:Uid="/Contoso.Core/Resources/abtnSettings" Label="[Settings]" Icon="Setting" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToSettingsCommand}" />
                 </CommandBar.SecondaryCommands>
             </CommandBar>
         </controls:BodyPanel.AppBar>
@@ -29,8 +29,8 @@
                         [Welcome to Contoso! Register for an account to enjoy all the service offerings we provide.]
                 </TextBlock>
 
-                <HyperlinkButton x:Uid="/Contoso.Core/Resources/lnkTermsOfService" Content="[Terms of service]" Command="{Binding ViewModel.Platform.Navigation.NavigateToTermsOfServiceCommand}" />
-                <HyperlinkButton x:Uid="/Contoso.Core/Resources/lnkPrivacyPolicy" Content="[Privacy policy]" Command="{Binding ViewModel.Platform.Navigation.NavigateToPrivacyPolicyCommand}" />
+                <HyperlinkButton x:Uid="/Contoso.Core/Resources/lnkTermsOfService" Content="[Terms of service]" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToTermsOfServiceCommand}" />
+                <HyperlinkButton x:Uid="/Contoso.Core/Resources/lnkPrivacyPolicy" Content="[Privacy policy]" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToPrivacyPolicyCommand}" />
 
                 <Button Style="{StaticResource TransparentButtonStyle}" Command="{x:Bind ViewModel.LaunchWebAccountManagerCommand, Mode=OneWay}">
                     <Image Height="24" Source="ms-appx:///Assets/MicrosoftLogo.png" Margin="0,12" />

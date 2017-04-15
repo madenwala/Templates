@@ -90,7 +90,7 @@
 
                     <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
                         <StackPanel>
-                            <controls:SplitViewButton GroupName="ShellNav" x:Uid="/Contoso.Core/Resources/svbHome" x:Name="btnHome" Content="[Home]" Symbol="Home" Command="{Binding ViewModel.Platform.Navigation.NavigateToHomeCommand}" />
+                            <controls:SplitViewButton GroupName="ShellNav" x:Uid="/Contoso.Core/Resources/svbHome" x:Name="btnHome" Content="[Home]" Symbol="Home" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToHomeCommand}" />
                             <controls:SplitViewButton GroupName="ShellNav" x:Uid="/Contoso.Core/Resources/svbSearch" x:Name="btnSearch" Symbol="Find" Click="btnSearch_Click">
                                 <interactivity:Interaction.Behaviors>
                                     <interactions:EventTriggerBehavior EventName="Checked" SourceObject="{Binding ElementName=btnSearch}">
@@ -116,8 +116,8 @@
                         BorderBrush="{ThemeResource SystemControlBackgroundChromeMediumBrush}" BorderThickness="0,2,0,0">
                         <Button
                             x:Uid="/Contoso.Core/Resources/pbtnFeedback"
-                            Command="{Binding ViewModel.Platform.Navigation.NavigateToFeedbackCommand}"
-                            Visibility="{Binding ViewModel.Platform.Navigation.IsFeedbackEnabled, Converter={StaticResource visConverter}}"
+                            Command="{x:Bind ViewModel.Platform.Navigation.NavigateToFeedbackCommand}"
+                            Visibility="{x:Bind ViewModel.Platform.Navigation.IsFeedbackEnabled, Converter={StaticResource visConverter}}"
                             Style="{StaticResource SplitViewPaneButtonStyle}" 
                             Content="&#xE939;" /> <!-- Feedback &#xE939; Smile &#xE76E; />-->
                         <Button
@@ -132,7 +132,7 @@
                         Grid.Row="3" 
                         BorderBrush="{ThemeResource SystemControlBackgroundChromeMediumBrush}" 
                         BorderThickness="0,2,0,0">
-                        <controls:SplitViewButton x:Uid="/Contoso.Core/Resources/svbSignIn" GroupName="ShellNav" Content="[Sign in]" Symbol="Contact" Command="{Binding ViewModel.Platform.Navigation.NavigateToAccountSignInCommand}" Visibility="{x:Bind ViewModel.IsUserAuthenticated, Mode=OneWay, Converter={StaticResource visInvertedConverter}}" />
+                        <controls:SplitViewButton x:Uid="/Contoso.Core/Resources/svbSignIn" GroupName="ShellNav" Content="[Sign in]" Symbol="Contact" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToAccountSignInCommand}" Visibility="{x:Bind ViewModel.IsUserAuthenticated, Mode=OneWay, Converter={StaticResource visInvertedConverter}}" />
                         <controls:SplitViewButton x:Uid="/Contoso.Core/Resources/svbSignout" GroupName="ShellNav" Symbol="Contact" SymbolAlwaysVisible="True" Command="{x:Bind ViewModel.NavigateToAccountSignoutCommand}" Visibility="{x:Bind ViewModel.IsUserAuthenticated, Mode=OneWay, Converter={StaticResource visConverter}}">
                             <controls:SplitViewButton.Icon>
                                 <Ellipse Width="32" Height="32" Visibility="{x:Bind ViewModel.IsUserAuthenticated, Mode=OneWay, Converter={StaticResource visConverter}}">
@@ -150,7 +150,7 @@
                                 <TextBlock x:Uid="/Contoso.Core/Resources/tbSignOut" Text="[Sign out]" />
                             </StackPanel>
                         </controls:SplitViewButton>
-                        <controls:SplitViewButton x:Uid="/Contoso.Core/Resources/svbSettings" GroupName="ShellNav" x:Name="btnSettings" Content="[Settings]" Symbol="Setting" Command="{Binding ViewModel.Platform.Navigation.NavigateToSettingsCommand}" />
+                        <controls:SplitViewButton x:Uid="/Contoso.Core/Resources/svbSettings" GroupName="ShellNav" x:Name="btnSettings" Content="[Settings]" Symbol="Setting" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToSettingsCommand}" />
                     </StackPanel>
                 </Grid>
             </SplitView.Pane>

@@ -16,7 +16,7 @@
         <controls:BodyPanel.AppBar>
             <CommandBar ClosedDisplayMode="Minimal">
                 <CommandBar.SecondaryCommands>
-                    <AppBarButton x:Uid="/Contoso.Core/Resources/abtnSettings" Label="[Settings]" Icon="Setting" Command="{Binding ViewModel.Platform.Navigation.NavigateToSettingsCommand}" />
+                    <AppBarButton x:Uid="/Contoso.Core/Resources/abtnSettings" Label="[Settings]" Icon="Setting" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToSettingsCommand}" />
                 </CommandBar.SecondaryCommands>
             </CommandBar>
         </controls:BodyPanel.AppBar>
@@ -25,7 +25,7 @@
                 <HyperlinkButton
                     x:Uid="/Contoso.Core/Account/lnkForgotPassword"
                     Content="[Forgot your password?]" 
-                    Command="{Binding ViewModel.Platform.Navigation.NavigateToAccountForgotCommand}" 
+                    Command="{x:Bind ViewModel.Platform.Navigation.NavigateToAccountForgotCommand}" 
                     CommandParameter="{x:Bind ViewModel.Username, Mode=OneWay}" />
 
                 <TextBox 
