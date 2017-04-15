@@ -4,6 +4,9 @@ namespace Contoso.Core.Services
 {
     public sealed class BackgroundTasksManager : AppFramework.Core.Services.BackgroundTasksManagerBase
     {
+        public BackgroundTasksManager()
+        { }
+
         protected override void Registrations()
         {
             // Register each of your background tasks here:
