@@ -50,7 +50,7 @@
                         Content="{x:Bind ViewModel.TwitterAddress, Mode=OneTime}" />
                     <HyperlinkButton
                         x:Uid="/Contoso.Core/Resources/lnkSendSupportEmail"
-                        Command="{Binding ViewModel.Platform.Logger.SendSupportEmailCommand}" 
+                        Command="{x:Bind ViewModel.Platform.Logger.SendSupportEmailCommand}" 
                         Content="[Send us an e-mail]" />
                     <HyperlinkButton 
                         x:Uid="/Contoso.Core/Resources/btnSubmitFeedback" 
