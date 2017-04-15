@@ -153,7 +153,7 @@
                     <Border Height="{StaticResource SpacerHeight}" />
 
                     <!--<TextBlock Opacity=".6" Style="{StaticResource CaptionTextBlockStyle}">Logs</TextBlock>
-                        <ListView ItemsSource="{Binding ViewModel.Platform.Logger.Messages, Mode=OneWay}" SelectionMode="None" IsSwipeEnabled="false">
+                        <ListView ItemsSource="{x:Bind ViewModel.Platform.Logger.Messages, Mode=OneWay}" SelectionMode="None" IsSwipeEnabled="false">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding}" />
