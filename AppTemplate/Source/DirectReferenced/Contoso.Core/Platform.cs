@@ -71,7 +71,7 @@ namespace Contoso.Core
         /// <summary>
         /// Gets access to the app info service of the platform currently executing.
         /// </summary>
-        internal SharingManager SharingManager
+        public SharingManager SharingManager
         {
             get { return GetService<SharingManager>(); }
             private set { SetService(value); }
