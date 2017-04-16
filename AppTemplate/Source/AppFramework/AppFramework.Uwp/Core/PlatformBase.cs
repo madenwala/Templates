@@ -29,9 +29,7 @@ namespace AppFramework.Core
         #endregion Variables
 
         #region Properties
-
-        public event EventHandler OnAppSettingsReset;
-
+        
         private AppSettingsLocalBase _AppSettingsLocal;
         /// <summary>
         /// Gets local app settings for this app.
@@ -196,7 +194,7 @@ namespace AppFramework.Core
             return Task.CompletedTask;
         }
 
-        internal abstract void OnAppSettingsInitializing();
+        protected abstract void OnAppSettingsInitializing();
 
         /// <summary>
         /// Global suspension of the app and any custom logic to execute on suspend of the app.
@@ -231,11 +229,6 @@ namespace AppFramework.Core
         /// Saves any app settings only if the data had changed.
         /// </summary>
         public abstract void SaveSettings(bool forceSave = false);
-
-        /// <summary>
-        /// Reset all the app settings back to their defaults.
-        /// </summary>
-        internal abstract void ResetAppSettings();
 
         /// <summary>
         /// Retrieve an instance of a type registered as a platform service.
@@ -292,11 +285,6 @@ namespace AppFramework.Core
                 this.Logger.LogError(ex, $"Failed to execute CheckInitializationAsync for {service.GetType().Name}");
                 throw ex;
             }
-        }
-
-        internal void NotifyOnAppSettingsResetEvent()
-        {
-            this.OnAppSettingsReset?.Invoke(null, null);
         }
 
         #region Application Core
@@ -362,10 +350,6 @@ namespace AppFramework.Core
                     throw;
                 }
             });
-
-            // Instantiate a new instance of settings and the MainViewModel 
-            // to ensure no previous user data is shown on the UI.
-            this.ResetAppSettings();
 
             this.ShellMenuClose();
         }
@@ -609,10 +593,15 @@ namespace AppFramework.Core
         internal override async Task SignoutAllAsync()
         {
             await base.SignoutAllAsync();
+
+            // Instantiate a new instance of settings and the MainViewModel 
+            // to ensure no previous user data is shown on the UI.
+            this.ResetAppSettings();
+
             this.ViewModelCore = this.ViewModel = Activator.CreateInstance<VM>();
         }
 
-        internal override void OnAppSettingsInitializing()
+        protected override void OnAppSettingsInitializing()
         {
             if (this.AppSettingsLocal == null)
             {
@@ -628,7 +617,6 @@ namespace AppFramework.Core
             }
 
             this.CheckForFullLogging();
-            this.NotifyOnAppSettingsResetEvent();
         }
 
         /// <summary>
@@ -649,7 +637,7 @@ namespace AppFramework.Core
         /// <summary>
         /// Reset all the app settings back to their defaults.
         /// </summary>
-        internal override void ResetAppSettings()
+        private void ResetAppSettings()
         {
             if (this.AppSettingsLocal != null)
                 this.AppSettingsLocal.PropertyChanged -= AppSettingsLocal_PropertyChanged;
@@ -668,7 +656,6 @@ namespace AppFramework.Core
 
             this.SaveSettings();
             this.CheckForFullLogging();
-            this.NotifyOnAppSettingsResetEvent();
         }
 
         /// <summary>
