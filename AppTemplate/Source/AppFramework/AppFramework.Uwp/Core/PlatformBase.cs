@@ -152,6 +152,8 @@ namespace AppFramework.Core
 
         #region Methods
 
+        #region App Initializing
+
         /// <summary>
         /// Global initialization of the app and loads all app settings and initializes all services.
         /// </summary>
@@ -161,9 +163,7 @@ namespace AppFramework.Core
         {
             this.InitializationMode = mode;
             this.Logger.Log(LogLevels.Warning, "APP INITIALIZING - Initialization mode is {0}", this.InitializationMode);
-
-            this.OnAppSettingsInitializing();
-
+            
             // Initializes all service
             foreach (var service in _services)
             {
@@ -194,7 +194,30 @@ namespace AppFramework.Core
             return Task.CompletedTask;
         }
 
-        protected abstract void OnAppSettingsInitializing();
+        /// <summary>
+        /// Initializes a service if not already initialized.
+        /// </summary>
+        /// <param name="service">Service instance to intialize.</param>
+        private async Task CheckInitializationAsync(ServiceBase service)
+        {
+            if (service == null)
+                throw new ArgumentNullException(nameof(service));
+
+            try
+            {
+                if (service.Initialized == false)
+                    await service.InitializeAsync();
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex, $"Failed to execute CheckInitializationAsync for {service.GetType().Name}");
+                throw ex;
+            }
+        }
+
+        #endregion
+
+        #region App Suspending
 
         /// <summary>
         /// Global suspension of the app and any custom logic to execute on suspend of the app.
@@ -214,21 +237,52 @@ namespace AppFramework.Core
                 this.Logger.LogError(ex, "Error while excuting OnAppSuspending");
                 throw ex;
             }
-            finally
-            {
-                // Save app settings
-                this.SaveSettings();
-            }
         }
 
         protected virtual void OnAppSuspending()
         {
         }
 
+        #endregion
+
+        #region Signout / Reset Session
+
         /// <summary>
         /// Saves any app settings only if the data had changed.
         /// </summary>
         public abstract void SaveSettings(bool forceSave = false);
+
+        /// <summary>
+        /// Logic performed during sign out of a user in this application.
+        /// </summary>
+        /// <returns>Awaitable task is returned.</returns>
+        internal virtual async Task SignoutAllAsync()
+        {
+            var services = _services.Values.Where(w => w is IServiceSignout);
+            var list = new List<Task>();
+
+            foreach (var service in services)
+                list.Add(((IServiceSignout)service).SignoutAsync());
+
+            await Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    Task.WaitAll(list.ToArray());
+                }
+                catch (Exception ex)
+                {
+                    this.Logger.LogError(ex, "Error while trying to call SignoutAsync on each of the platform services.");
+                    throw;
+                }
+            });
+
+            this.ShellMenuClose();
+        }
+
+        #endregion
+
+        #region Services
 
         /// <summary>
         /// Retrieve an instance of a type registered as a platform service.
@@ -257,7 +311,7 @@ namespace AppFramework.Core
         {
             // Shutdown the old instance of T
             var services = _services.Values.Where(f => f is T).ToArray();
-            foreach(var service in services)
+            foreach (var service in services)
             {
                 Type key = _services.FirstOrDefault(f => f.Value == service).Key;
                 _services.Remove(key);
@@ -266,28 +320,9 @@ namespace AppFramework.Core
             _services.Add(typeof(T), instance);
         }
 
-        /// <summary>
-        /// Initializes a service if not already initialized.
-        /// </summary>
-        /// <param name="service">Service instance to intialize.</param>
-        private async Task CheckInitializationAsync(ServiceBase service)
-        {
-            if (service == null)
-                throw new ArgumentNullException(nameof(service));
+        #endregion
 
-            try
-            {
-                if (service.Initialized == false)
-                    await service.InitializeAsync();
-            }
-            catch (Exception ex)
-            {
-                this.Logger.LogError(ex, $"Failed to execute CheckInitializationAsync for {service.GetType().Name}");
-                throw ex;
-            }
-        }
-
-        #region Application Core
+        #region Error Handling
 
         /// <summary>
         /// Global unhandled exception handler for your application.
@@ -324,34 +359,6 @@ namespace AppFramework.Core
             }
 
             return false;
-        }
-
-        /// <summary>
-        /// Logic performed during sign out of a user in this application.
-        /// </summary>
-        /// <returns>Awaitable task is returned.</returns>
-        internal virtual async Task SignoutAllAsync()
-        {
-            var services = _services.Values.Where(w => w is IServiceSignout);
-            var list = new List<Task>();
-
-            foreach (var service in services)
-                list.Add(((IServiceSignout)service).SignoutAsync());
-
-            await Task.Factory.StartNew(() =>
-            {
-                try
-                {
-                    Task.WaitAll(list.ToArray());
-                }
-                catch (Exception ex)
-                {
-                    this.Logger.LogError(ex, "Error while trying to call SignoutAsync on each of the platform services.");
-                    throw;
-                }
-            });
-
-            this.ShellMenuClose();
         }
 
         #endregion
@@ -444,7 +451,7 @@ namespace AppFramework.Core
 
         #endregion
 
-        #endregion Methods
+        #region Background Tasks
 
         /// <summary>
         /// Executes background task work. This call wraps the work with error handling, deferrals, and instantiating all the appropriate services needed by AppFramework.
@@ -517,6 +524,10 @@ namespace AppFramework.Core
                 deferral.Complete();
             }
         }
+
+        #endregion
+
+        #endregion Methods
     }
 
     public abstract class PlatformBase<VM, L, R> : PlatformBase
@@ -524,8 +535,14 @@ namespace AppFramework.Core
         where L : AppSettingsLocalBase
         where R : AppSettingsRoamingBase
     {
+        #region Variables
+
         private bool _settingsIsLocalDataDirty = false;
         private bool _settingsIsRoamingDataDirty = false;
+
+        #endregion
+
+        #region Properties
 
         private VM _ViewModel;
         /// <summary>
@@ -555,13 +572,36 @@ namespace AppFramework.Core
             get { return base.AppSettingsRoamingCore as R; }
         }
 
+        #endregion
+
+        #region Constructors
+
         public PlatformBase()
         {
         }
 
+        #endregion
+
+        #region Methods
+
         public override async Task AppInitializingAsync(InitializationModes mode)
         {
             await base.AppInitializingAsync(mode);
+
+            if (this.AppSettingsLocal == null)
+            {
+                base.AppSettingsLocalCore = this.Storage.LoadSetting<L>("AppSettingsLocal", ApplicationData.Current.LocalSettings) ?? Activator.CreateInstance<L>();
+                this.NotifyPropertyChanged(() => this.AppSettingsLocal);
+                this.AppSettingsLocal.PropertyChanged += AppSettingsLocal_PropertyChanged;
+            }
+            if (this.AppSettingsRoaming == null)
+            {
+                base.AppSettingsRoamingCore = this.Storage.LoadSetting<R>("AppSettingsRoaming", ApplicationData.Current.RoamingSettings) ?? Activator.CreateInstance<R>();
+                this.NotifyPropertyChanged(() => this.AppSettingsRoaming);
+                this.AppSettingsRoaming.PropertyChanged += AppSettingsRoaming_PropertyChanged;
+            }
+
+            this.CheckForFullLogging();
 
             if (this.ViewModel == null)
                 this.ViewModelCore = this.ViewModel = Activator.CreateInstance<VM>();
@@ -590,6 +630,24 @@ namespace AppFramework.Core
             }
         }
 
+        public override void AppSuspending()
+        {
+            try
+            {
+                base.AppSuspending();
+            }
+            finally
+            {
+                // Save app settings
+                this.SaveSettings();
+            }
+
+            if (this.AppSettingsLocal != null)
+                this.AppSettingsLocal.PropertyChanged -= AppSettingsLocal_PropertyChanged;
+            if (this.AppSettingsRoaming != null)
+                this.AppSettingsRoaming.PropertyChanged -= AppSettingsRoaming_PropertyChanged;
+        }
+
         internal override async Task SignoutAllAsync()
         {
             await base.SignoutAllAsync();
@@ -599,39 +657,6 @@ namespace AppFramework.Core
             this.ResetAppSettings();
 
             this.ViewModelCore = this.ViewModel = Activator.CreateInstance<VM>();
-        }
-
-        protected override void OnAppSettingsInitializing()
-        {
-            if (this.AppSettingsLocal == null)
-            {
-                base.AppSettingsLocalCore = this.Storage.LoadSetting<L>("AppSettingsLocal", ApplicationData.Current.LocalSettings) ?? Activator.CreateInstance<L>();
-                this.NotifyPropertyChanged(() => this.AppSettingsLocal);
-                this.AppSettingsLocal.PropertyChanged += AppSettingsLocal_PropertyChanged;
-            }
-            if (this.AppSettingsRoaming == null)
-            {
-                base.AppSettingsRoamingCore = this.Storage.LoadSetting<R>("AppSettingsRoaming", ApplicationData.Current.RoamingSettings) ?? Activator.CreateInstance<R>();
-                this.NotifyPropertyChanged(() => this.AppSettingsRoaming);
-                this.AppSettingsRoaming.PropertyChanged += AppSettingsRoaming_PropertyChanged;
-            }
-
-            this.CheckForFullLogging();
-        }
-
-        /// <summary>
-        /// Generates a unique tile ID used for secondary tiles based on a model instance.
-        /// </summary>
-        /// <param name="model">Model to convert into a unique tile ID.</param>
-        /// <returns>String representing a unique tile ID for the model else null if not supported.</returns>
-        public override string GenerateModelTileID(IModel model)
-        {
-            if (model == this.ViewModel)
-                return string.Empty;
-            else if (model is IUniqueModel imodel)
-                return $"{model.GetType().Name}_{imodel.ID}";
-            else
-                return null;
         }
 
         /// <summary>
@@ -676,16 +701,6 @@ namespace AppFramework.Core
             }
         }
 
-        public override void AppSuspending()
-        {
-            base.AppSuspending();
-            
-            if (this.AppSettingsLocal != null)
-                this.AppSettingsLocal.PropertyChanged -= AppSettingsLocal_PropertyChanged;
-            if (this.AppSettingsRoaming != null)
-                this.AppSettingsRoaming.PropertyChanged -= AppSettingsRoaming_PropertyChanged;
-        }
-
         private void CheckForFullLogging()
         {
             if (this.AppSettingsRoaming.EnableFullLogging)
@@ -693,6 +708,23 @@ namespace AppFramework.Core
             else
                 this.Logger.CurrentLevel = LogLevels.Warning;
         }
+
+        /// <summary>
+        /// Generates a unique tile ID used for secondary tiles based on a model instance.
+        /// </summary>
+        /// <param name="model">Model to convert into a unique tile ID.</param>
+        /// <returns>String representing a unique tile ID for the model else null if not supported.</returns>
+        public override string GenerateModelTileID(IModel model)
+        {
+            if (model == this.ViewModel)
+                return string.Empty;
+            else if (model is IUniqueModel imodel)
+                return $"{model.GetType().Name}_{imodel.ID}";
+            else
+                return null;
+        }
+
+        #endregion
 
         #region Event Handlers
 

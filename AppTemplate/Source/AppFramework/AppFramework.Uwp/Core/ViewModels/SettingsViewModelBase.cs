@@ -120,7 +120,7 @@ namespace AppFramework.Core.ViewModels
 
         protected override Task OnSaveStateAsync(SaveStateEventArgs e)
         {
-            PlatformBase.CurrentCore.SaveSettings();
+            this.PlatformBase.SaveSettings();
             if (this.View != null)
                 this.View.GotFocus -= View_GotFocus;
             return base.OnSaveStateAsync(e);
