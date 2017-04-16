@@ -137,7 +137,7 @@ namespace Contoso.Core.ViewModels
             }
             catch (Exception ex)
             {
-                this.HandleException(ex, "Error during account sign-in.");
+                await this.HandleExceptionAsync(ex, "Error during account sign-in.");
             }
             finally
             {

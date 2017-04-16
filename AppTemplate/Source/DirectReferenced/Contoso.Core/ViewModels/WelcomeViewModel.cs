@@ -93,7 +93,7 @@ namespace Contoso.Core.ViewModels
             }
             catch(Exception ex)
             {
-                this.HandleException(ex, "Failed to perform work during WAM success");
+                await this.HandleExceptionAsync(ex, "Failed to perform work during WAM success");
             }
             finally
             {
@@ -116,7 +116,7 @@ namespace Contoso.Core.ViewModels
             }
             catch (Exception ex)
             {
-                this.HandleException(ex, "Failed to perform work during WAM failure");
+                await this.HandleExceptionAsync(ex, "Failed to perform work during WAM failure");
             }
         }
 

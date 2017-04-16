@@ -229,7 +229,7 @@ namespace Contoso.Core.ViewModels
             }
             catch (Exception ex)
             {
-                this.HandleException(ex, "Error during account sign-up.");
+                await this.HandleExceptionAsync(ex, "Error during account sign-up.");
             }
             finally
             {

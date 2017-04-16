@@ -189,7 +189,7 @@ namespace Contoso.Core.ViewModels
             }
             catch (Exception ex)
             {
-                this.HandleException(ex, "Error while downloading!");
+                await this.HandleExceptionAsync(ex, "Error while downloading!");
                 this.ShowTimedStatus("Couldn't download data. Try again later.");
             }
             finally

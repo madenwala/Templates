@@ -325,18 +325,19 @@ namespace AppFramework.Core.ViewModels
 
         #region Exception Handling
 
-        protected void HandleException(Exception ex, string message = null, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
+        protected Task HandleExceptionAsync(Exception ex, string message = null, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
         {
-            this.HandleException(CancellationToken.None, ex, message, callerName);
+            return this.HandleExceptionAsync(CancellationToken.None, ex, message, callerName);
         }
 
-        protected void HandleException(CancellationToken ct, Exception ex, string message = null, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
+        protected async Task HandleExceptionAsync(CancellationToken ct, Exception ex, string message = null, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
         {
             if (ex is UserUnauthorizedException)
             {
                 this.ShowBusyStatus(Strings.Account.TextUnauthorizedUser, true);
                 PlatformBase.CurrentCore.Logger.LogError(ex, "{0}.{1} - Unauthorized user exception ({0} Parameters: {2}) {3}", this.GetType().Name, callerName, this.ViewParameter, message);
-                var t = PlatformBase.GetService<AuthorizationManagerBase>().SetUserAsync(null);
+                if (PlatformBase.ContainsService<AuthorizationManagerBase>())
+                    await PlatformBase.GetService<AuthorizationManagerBase>().SetUserAsync(null);
             }
             else if (ex is UserFriendlyException)
             {
@@ -837,7 +838,7 @@ namespace AppFramework.Core.ViewModels
             catch (Exception ex)
             {
                 PlatformBase.CurrentCore.Logger.LogError(ex, $"Exception while trying to refresh {this.GetType().Name}.");
-                this.HandleException(ex);
+                await this.HandleExceptionAsync(ex);
             }
             finally
             {

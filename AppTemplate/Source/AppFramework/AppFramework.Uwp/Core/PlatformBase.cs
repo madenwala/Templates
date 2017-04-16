@@ -320,6 +320,20 @@ namespace AppFramework.Core
             _services.Add(typeof(T), instance);
         }
 
+        protected internal static bool ContainsService<T>() where T : ServiceBase
+        {
+            if (_services.ContainsKey(typeof(T)))
+                return true;
+            else
+            {
+                var value = _services.Values.FirstOrDefault(f => f is T);
+                if (value != null)
+                    return true;
+                else
+                    return false;
+            }
+        }
+
         #endregion
 
         #region Error Handling

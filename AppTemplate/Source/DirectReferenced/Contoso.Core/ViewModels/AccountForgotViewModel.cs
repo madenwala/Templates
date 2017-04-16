@@ -112,7 +112,7 @@ namespace Contoso.Core.ViewModels
             }
             catch (Exception ex)
             {
-                this.HandleException(ex, "Error during account forgot password.");
+                await this.HandleExceptionAsync(ex, "Error during account forgot password.");
             }
             finally
             {

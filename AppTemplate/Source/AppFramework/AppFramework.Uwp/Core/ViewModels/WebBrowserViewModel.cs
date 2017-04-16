@@ -214,7 +214,7 @@ namespace AppFramework.Core.ViewModels
         /// <param name="uri"></param>
         /// <param name="exception"></param>
         /// <param name="title"></param>
-        internal void NavigationFailed(Uri uri, Exception exception, string title = null)
+        internal async void NavigationFailed(Uri uri, Exception exception, string title = null)
         {
             this.HasNavigationFailed = true;
             this.ClearStatus();
@@ -222,7 +222,7 @@ namespace AppFramework.Core.ViewModels
             this.ShowBrowser = false;
             this.PlatformBase.NavigationBase.NavigateGoBackCommand.RaiseCanExecuteChanged();
             this.PlatformBase.NavigationBase.NavigateGoForwardCommand.RaiseCanExecuteChanged();
-            this.HandleException(exception, "Error navigating to " + uri.ToString());
+            await this.HandleExceptionAsync(exception, "Error navigating to " + uri.ToString());
             this.IsBrowserRefreshEnabled = true;
             this.CurrentUrl = null;
         }
