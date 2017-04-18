@@ -57,8 +57,11 @@ namespace AppFramework.Core.Services
                         {
                             var args = PlatformBase.CurrentCore.GenerateModelArguments(model);
                             var url = PlatformBase.CurrentCore.AppInfo.GetDeepLink(args);
-                            if(url != null)
+                            if (url != null)
+                            {
                                 e.Request.Data.Properties.ContentSourceApplicationLink = new Uri(url.Replace("//", ""), UriKind.Absolute);
+                                e.Request.Data.Properties.ContentSourceWebLink = new Uri(url.Replace("//", ""), UriKind.Absolute);
+                            }
 
                             this.SetShareContent(e.Request, model ?? PlatformBase.CurrentCore.ViewModelCore);
                         }
@@ -108,12 +111,11 @@ namespace AppFramework.Core.Services
         /// <param name="model"></param>
         protected override void SetShareContent(DataRequest request, IModel model)
         {
-            DataPackage dataPackage = request.Data;
-            dataPackage.Properties.Title = PlatformBase.CurrentCore.AppInfo.AppName;
-            dataPackage.Properties.Description = PlatformBase.CurrentCore.AppInfo.AppDescription;
+            request.Data.Properties.Title = PlatformBase.CurrentCore.AppInfo.AppName;
+            request.Data.Properties.Description = PlatformBase.CurrentCore.AppInfo.AppDescription;
             // TODO localize
-            string body = $"Download {PlatformBase.CurrentCore.AppInfo.AppName} from the Windows Store!";
-            dataPackage.SetText(body);
+            string body = $"Download {PlatformBase.CurrentCore.AppInfo.AppName} from the Windows Store! {PlatformBase.CurrentCore.AppInfo.StoreURL}";
+            request.Data.SetText(body);
         }
     }
 }
