@@ -1156,11 +1156,11 @@ namespace AppFramework.Core.ViewModels
             return this.WaitForCurrentLocationAsync(ct);
         }
 
-        protected async Task<ILocationModel> WaitForCurrentLocationAsync(CancellationToken ct)
+        protected async Task<ILocationModel> WaitForCurrentLocationAsync(CancellationToken ct, bool isBlocking = true)
         {
             if (!CurrentLocationTask.IsCompleted)
             {
-                this.ShowBusyStatus(Strings.Location.TextDeterminingLocation, true);
+                this.ShowBusyStatus(Strings.Location.TextDeterminingLocation, isBlocking);
                 await this.WaitAllAsync(ct, CurrentLocationTask.Task);
                 this.ClearStatus();
             }
