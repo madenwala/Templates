@@ -215,7 +215,7 @@ namespace AppFramework.UI.Views
                 // Remove the view model instance from the frame's datacontext
                 this.Frame.DataContext = null;
 
-                PlatformBase.CurrentCore.Logger.Log(LogLevels.Warning, "OnNavigatedFrom: {0}\t Mode: {1}", e.SourcePageType.Name, e.NavigationMode);
+                PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, "OnNavigatedFrom: {0}\t Mode: {1}", e.SourcePageType.Name, e.NavigationMode);
 
                 // Intialize page state for this page within the current frame
                 var frameState = SuspensionManager.SessionStateForFrame(this.Frame);
