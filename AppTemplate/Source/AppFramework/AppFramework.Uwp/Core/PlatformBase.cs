@@ -29,7 +29,19 @@ namespace AppFramework.Core
         #endregion Variables
 
         #region Properties
-        
+
+        /// <summary>
+        /// Provides access to application services.
+        /// </summary>
+        protected internal static PlatformBase CurrentCore { get; protected set; }
+
+        /// <summary>
+        /// Gets the current device family this app is executing on.
+        /// </summary>
+        public static DeviceFamily DeviceFamily { get; private set; }
+
+        public static bool IsDebugMode { get; protected set; }
+
         private AppSettingsLocalBase _AppSettingsLocal;
         /// <summary>
         /// Gets local app settings for this app.
@@ -115,6 +127,12 @@ namespace AppFramework.Core
 
         static PlatformBase()
         {
+#if DEBUG
+            IsDebugMode = true;
+#else
+            IsDebugMode = System.Diagnostics.Debugger.IsAttached;
+#endif
+
             Debug.WriteLine("DeviceFamily: " + AnalyticsInfo.VersionInfo.DeviceFamily);
 
             // Determine what device this is running on and store the appropriate enumeration representing that device
@@ -137,16 +155,6 @@ namespace AppFramework.Core
                     break;
             }
         }
-
-        /// <summary>
-        /// Provides access to application services.
-        /// </summary>
-        protected internal static PlatformBase CurrentCore { get; protected set; }
-
-        /// <summary>
-        /// Gets the current device family this app is executing on.
-        /// </summary>
-        public static DeviceFamily DeviceFamily { get; private set; }
 
         #endregion
 

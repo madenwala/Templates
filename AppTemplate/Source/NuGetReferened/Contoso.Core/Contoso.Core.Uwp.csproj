@@ -170,8 +170,8 @@
     <Compile Include="..\..\DirectReferenced\Contoso.Core\Services\NavigationManagerBase.cs">
       <Link>Services\NavigationManagerBase.cs</Link>
     </Compile>
-    <Compile Include="..\..\DirectReferenced\Contoso.Core\Services\NotificationsService.cs">
-      <Link>Services\NotificationsService.cs</Link>
+    <Compile Include="..\..\DirectReferenced\Contoso.Core\Services\NotificationsManager.cs">
+      <Link>Services\NotificationsManager.cs</Link>
     </Compile>
     <Compile Include="..\..\DirectReferenced\Contoso.Core\Services\SharingManager.cs">
       <Link>Services\SharingManager.cs</Link>

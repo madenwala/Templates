@@ -67,7 +67,6 @@ namespace AppFramework.UI
         {
             try
             {
-#if DEBUG
                 if (System.Diagnostics.Debugger.IsAttached)
                 {
                     //this.DebugSettings.EnableFrameRateCounter = true;
@@ -78,12 +77,11 @@ namespace AppFramework.UI
                 }
 
                 if (e.PreviousExecutionState != ApplicationExecutionState.Running)
-                    this.DebugSettings.BindingFailed += DebugSettings_BindingFailed;
-#endif
-
-                if (e.PreviousExecutionState != ApplicationExecutionState.Running)
                 {
                     // No need to run any of this logic if the app is already running
+
+                    if (PlatformBase.IsDebugMode)
+                        this.DebugSettings.BindingFailed += DebugSettings_BindingFailed;
 
                     // Ensure unobserved task exceptions (unawaited async methods returning Task or Task<T>) are handled
                     TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;

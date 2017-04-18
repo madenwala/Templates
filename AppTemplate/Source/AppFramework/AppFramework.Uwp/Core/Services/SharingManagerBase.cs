@@ -81,11 +81,12 @@ namespace AppFramework.Core.Services
                 catch (Exception ex)
                 {
                     PlatformBase.CurrentCore.Logger.LogError(ex, "Error in OnDataRequested");
-#if DEBUG
-                    e.Request.FailWithDisplayText(ex.ToString());
-#else
-                    e.Request.FailWithDisplayText(Strings.Resources.TextErrorGeneric);
-#endif
+
+                    if (PlatformBase.IsDebugMode)
+                        e.Request.FailWithDisplayText(ex.ToString());
+                    else
+                        e.Request.FailWithDisplayText(Strings.Resources.TextErrorGeneric);
+
                 }
             };
             DataTransferManager.ShowShareUI();

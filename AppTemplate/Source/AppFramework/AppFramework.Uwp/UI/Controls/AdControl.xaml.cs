@@ -27,13 +27,14 @@ namespace AppFramework.UI.Controls
             adDuplex.AppKey = AdDuplexAppKey;
             adDuplex.AdUnitId = AdDuplexAdUnitID;
 
-#if DEBUG
-            //adDuplex.IsTest = true;
+            if (PlatformBase.IsDebugMode)
+            {
+                //adDuplex.IsTest = true;
 
-            // Test mode values https://msdn.microsoft.com/en-us/windows/uwp/monetize/test-mode-values
-            devCenterAd.ApplicationId = "3f83fe91-d6be-434d-a0ae-7351c5a997f1";
-            devCenterAd.AdUnitId = "10865270";
-#endif
+                // Test mode values https://msdn.microsoft.com/en-us/windows/uwp/monetize/test-mode-values
+                devCenterAd.ApplicationId = "3f83fe91-d6be-434d-a0ae-7351c5a997f1";
+                devCenterAd.AdUnitId = "10865270";
+            }
         }
 
         private void DevCenterAdControl_ErrorOccurred(object sender, Microsoft.Advertising.WinRT.UI.AdErrorEventArgs e)

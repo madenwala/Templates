@@ -95,15 +95,17 @@ namespace AppFramework.Core.Services
             this.Loggers = new List<ILogger>();
             this.Messages = new ObservableCollection<string>();
             this.Loggers.Add(new DebugLoggerProvider());
-#if DEBUG
-            this.CurrentLevel = LogLevels.Debug;
-            if (PlatformBase.DeviceFamily == DeviceFamily.Desktop && !System.Diagnostics.Debugger.IsAttached)
-                this.Loggers.Add(new UwpConsoleOutputProvider());
-#else
-            this.CurrentLevel = LogLevels.Warning;
-            if (PlatformCore.DeviceFamily == DeviceFamily.Desktop && System.Diagnostics.Debugger.IsAttached)
-                this.Loggers.Add(new UwpConsoleOutputProvider());
-#endif
+
+            if (PlatformBase.IsDebugMode)
+            {
+                this.CurrentLevel = LogLevels.Debug;
+                if (PlatformBase.DeviceFamily == DeviceFamily.Desktop)
+                    this.Loggers.Add(new UwpConsoleOutputProvider());
+            }
+            else
+            {
+                this.CurrentLevel = LogLevels.Warning;
+            }
         }
 
         #endregion Constructor

@@ -78,9 +78,9 @@ namespace AppFramework.UI.Views
             this.Loaded += ViewBase_Loaded;
             this.KeyUp += ViewBase_KeyUp;
             this.KeyDown += ViewBase_KeyDown;
-#if DEBUG
-            this.GotFocus += ViewBase_GotFocus;
-#endif
+
+            if(PlatformBase.IsDebugMode)
+                this.GotFocus += ViewBase_GotFocus;
         }
 
         #endregion

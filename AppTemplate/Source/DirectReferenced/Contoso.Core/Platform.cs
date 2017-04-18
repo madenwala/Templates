@@ -83,6 +83,11 @@ namespace Contoso.Core
 
         static Platform()
         {
+#if DEBUG
+            IsDebugMode = true;
+#else
+            IsDebugMode = System.Diagnostics.Debugger.IsAttached;
+#endif
             Platform.Current = new Platform();
         }
 

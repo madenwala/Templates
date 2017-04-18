@@ -1,8 +1,7 @@
-﻿using System;
+﻿using GoogleAnalytics;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AppFramework.Core.Models;
-using GoogleAnalytics;
 
 namespace AppFramework.Core.Services.Analytics
 {
@@ -16,9 +15,7 @@ namespace AppFramework.Core.Services.Analytics
                 throw new ArgumentNullException(nameof(key));
 
             _tracker = GoogleAnalytics.AnalyticsManager.Current.CreateTracker(key);
-#if DEBUG
-            GoogleAnalytics.AnalyticsManager.Current.IsDebug = true;
-#endif
+            GoogleAnalytics.AnalyticsManager.Current.IsDebug = PlatformBase.IsDebugMode;
             GoogleAnalytics.AnalyticsManager.Current.ReportUncaughtExceptions = true;
         }
 
