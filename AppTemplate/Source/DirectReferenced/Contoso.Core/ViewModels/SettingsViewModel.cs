@@ -11,9 +11,16 @@ namespace Contoso.Core.ViewModels
         PrivacyPolicy
     }
 
-    public partial class SettingsViewModel : CollectionViewModelBase
+    public sealed class SettingsViewModel : CollectionViewModelBase
     {
         #region Properties
+
+        /// <summary>
+        /// Self-reference back to this ViewModel. Used for designtime datacontext on pages to reference itself with the same "ViewModel" accessor used 
+        /// by x:Bind and it's ViewModel property accessor on the View class. This allows you to do find-replace on views for 'Binding' to 'x:Bind'.
+        [Newtonsoft.Json.JsonIgnore()]
+        [System.Runtime.Serialization.IgnoreDataMember()]
+        public SettingsViewModel ViewModel { get { return this; } }
 
         private GeneralSettingsViewModel _GeneralSettingsViewModel = new GeneralSettingsViewModel();
         public GeneralSettingsViewModel GeneralVM
@@ -67,25 +74,5 @@ namespace Contoso.Core.ViewModels
         }
 
         #endregion
-    }
-
-    public partial class SettingsViewModel
-    {
-        /// <summary>
-        /// Self-reference back to this ViewModel. Used for designtime datacontext on pages to reference itself with the same "ViewModel" accessor used 
-        /// by x:Bind and it's ViewModel property accessor on the View class. This allows you to do find-replace on views for 'Binding' to 'x:Bind'.
-        [Newtonsoft.Json.JsonIgnore()]
-        [System.Runtime.Serialization.IgnoreDataMember()]
-        public SettingsViewModel ViewModel { get { return this; } }
-    }
-}
-
-namespace Contoso.Core.ViewModels.Designer
-{
-    public sealed class SettingsViewModel : Contoso.Core.ViewModels.SettingsViewModel
-    {
-        public SettingsViewModel()
-        {
-        }
     }
 }

@@ -7,37 +7,48 @@
 
     public abstract class ViewModelBase : AppFramework.Core.ViewModels.ViewModelBase, IViewModel
     {
+        #region Properties
+
         /// <summary>
         /// Gets access to all the platform services.
         /// </summary>
         [Newtonsoft.Json.JsonIgnore()]
         [System.Runtime.Serialization.IgnoreDataMember()]
         public Platform Platform { get { return Platform.Current; } }
+
+        #endregion
     }
 
     public abstract class CollectionViewModelBase : AppFramework.Core.ViewModels.CollectionViewModelBase, IViewModel
     {
+        #region Properties
+
         /// <summary>
         /// Gets access to all the platform services.
         /// </summary>
         [Newtonsoft.Json.JsonIgnore()]
         [System.Runtime.Serialization.IgnoreDataMember()]
         public Platform Platform { get { return Platform.Current; } }
+
+        #endregion
     }
 
     public abstract class SettingsViewModelBase: AppFramework.Core.ViewModels.SettingsViewModelBase, IViewModel
     {
+        #region Properties
+
         /// <summary>
         /// Gets access to all the platform services.
         /// </summary>
         [Newtonsoft.Json.JsonIgnore()]
         [System.Runtime.Serialization.IgnoreDataMember()]
         public Platform Platform { get { return Platform.Current; } }
+
+        #endregion
     }
 
     public class WebViewModel : AppFramework.Core.ViewModels.WebBrowserViewModel, IViewModel
     {
-
         #region Properties
 
         /// <summary>

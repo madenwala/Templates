@@ -7,9 +7,17 @@ using Windows.ApplicationModel;
 
 namespace Contoso.Core.ViewModels
 {
-    public partial class NewViewModel : ViewModelBase
+    public sealed class NewViewModel : ViewModelBase
     {
         #region Properties
+
+        /// <summary>
+        /// Self-reference back to this ViewModel. Used for designtime datacontext on pages to reference itself with the same "ViewModel" accessor used 
+        /// by x:Bind and it's ViewModel property accessor on the View class. This allows you to do find-replace on views for 'Binding' to 'x:Bind'.
+        /// </summary>
+        [Newtonsoft.Json.JsonIgnore()]
+        [System.Runtime.Serialization.IgnoreDataMember()]
+        public NewViewModel ViewModel { get { return this; } }
 
         /// <summary>
         /// Gets the title to be displayed on the view consuming this ViewModel.
@@ -66,29 +74,5 @@ namespace Contoso.Core.ViewModels
         }
 
         #endregion
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public partial class NewViewModel
-    {
-        /// <summary>
-        /// Self-reference back to this ViewModel. Used for designtime datacontext on pages to reference itself with the same "ViewModel" accessor used 
-        /// by x:Bind and it's ViewModel property accessor on the View class. This allows you to do find-replace on views for 'Binding' to 'x:Bind'.
-        /// </summary>
-        [Newtonsoft.Json.JsonIgnore()]
-        [System.Runtime.Serialization.IgnoreDataMember()]
-        public NewViewModel ViewModel { get { return this; } }
-    }
-}
-
-namespace Contoso.Core.ViewModels.Designer
-{
-    public sealed class NewViewModel : Contoso.Core.ViewModels.NewViewModel
-    {
-        public NewViewModel()
-        {
-        }
     }
 }

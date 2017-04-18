@@ -10,9 +10,16 @@ using Windows.ApplicationModel;
 
 namespace Contoso.Core.ViewModels
 {
-    public partial class AccountForgotViewModel : ViewModelBase
+    public sealed class AccountForgotViewModel : ViewModelBase
     {
         #region Properties
+
+        /// <summary>
+        /// Self-reference back to this ViewModel. Used for designtime datacontext on pages to reference itself with the same "ViewModel" accessor used 
+        /// by x:Bind and it's ViewModel property accessor on the View class. This allows you to do find-replace on views for 'Binding' to 'x:Bind'.
+        [Newtonsoft.Json.JsonIgnore()]
+        [System.Runtime.Serialization.IgnoreDataMember()]
+        public AccountForgotViewModel ViewModel { get { return this; } }
 
         /// <summary>
         /// Command used to submit the form.
@@ -121,26 +128,5 @@ namespace Contoso.Core.ViewModels
         }
 
         #endregion
-    }
-
-    public partial class AccountForgotViewModel
-    {
-        /// <summary>
-        /// Self-reference back to this ViewModel. Used for designtime datacontext on pages to reference itself with the same "ViewModel" accessor used 
-        /// by x:Bind and it's ViewModel property accessor on the View class. This allows you to do find-replace on views for 'Binding' to 'x:Bind'.
-        [Newtonsoft.Json.JsonIgnore()]
-        [System.Runtime.Serialization.IgnoreDataMember()]
-        public AccountForgotViewModel ViewModel { get { return this; } }
-    }
-}
-
-namespace Contoso.Core.ViewModels.Designer
-{
-    public sealed class AccountForgotViewModel : Contoso.Core.ViewModels.AccountForgotViewModel
-    {
-        public AccountForgotViewModel()
-        {
-            this.Username = "TestUsername1";
-        }
     }
 }

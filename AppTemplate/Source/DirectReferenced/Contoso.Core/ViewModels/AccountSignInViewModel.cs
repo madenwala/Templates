@@ -10,7 +10,7 @@ using Windows.ApplicationModel;
 
 namespace Contoso.Core.ViewModels
 {
-    public partial class AccountSignInViewModel : ViewModelBase
+    public sealed class AccountSignInViewModel : ViewModelBase
     {
         #region Variables
 
@@ -19,6 +19,13 @@ namespace Contoso.Core.ViewModels
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Self-reference back to this ViewModel. Used for designtime datacontext on pages to reference itself with the same "ViewModel" accessor used 
+        /// by x:Bind and it's ViewModel property accessor on the View class. This allows you to do find-replace on views for 'Binding' to 'x:Bind'.
+        [Newtonsoft.Json.JsonIgnore()]
+        [System.Runtime.Serialization.IgnoreDataMember()]
+        public AccountSignInViewModel ViewModel { get { return this; } }
 
         /// <summary>
         /// Command used to submit the sign in form.
@@ -179,25 +186,5 @@ namespace Contoso.Core.ViewModels
         }
 
         #endregion
-    }
-
-    public partial class AccountSignInViewModel
-    {
-        /// <summary>
-        /// Self-reference back to this ViewModel. Used for designtime datacontext on pages to reference itself with the same "ViewModel" accessor used 
-        /// by x:Bind and it's ViewModel property accessor on the View class. This allows you to do find-replace on views for 'Binding' to 'x:Bind'.
-        [Newtonsoft.Json.JsonIgnore()]
-        [System.Runtime.Serialization.IgnoreDataMember()]
-        public AccountSignInViewModel ViewModel { get { return this; } }
-    }
-}
-
-namespace Contoso.Core.ViewModels.Designer
-{
-    public sealed class AccountSignInViewModel : Contoso.Core.ViewModels.AccountSignInViewModel
-    {
-        public AccountSignInViewModel()
-        {
-        }
     }
 }

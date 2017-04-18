@@ -9,8 +9,6 @@
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:models="using:AppFramework.Core.Models"
     xmlns:viewmodels="using:Contoso.Core.ViewModels"
-    xmlns:designTime="using:Contoso.Core.ViewModels.Designer"
-    d:DataContext="{d:DesignInstance designTime:SettingsViewModel, IsDesignTimeCreatable=True}"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">

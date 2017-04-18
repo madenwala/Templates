@@ -3,7 +3,7 @@ using Windows.ApplicationModel;
 
 namespace Contoso.Core.ViewModels
 {
-    public partial class TermsOfServiceViewModel : WebViewModel
+    public sealed class TermsOfServiceViewModel : WebViewModel
     {
         #region Properties
 

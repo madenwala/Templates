@@ -11,7 +11,7 @@ using Windows.Security.Authentication.Web.Core;
 
 namespace Contoso.Core.ViewModels
 {
-    public partial class WelcomeViewModel : ViewModelBase
+    public sealed class WelcomeViewModel : ViewModelBase
     {
         #region Variables
 
@@ -20,7 +20,14 @@ namespace Contoso.Core.ViewModels
         #endregion
 
         #region Properties
-        
+
+        /// <summary>
+        /// Self-reference back to this ViewModel. Used for designtime datacontext on pages to reference itself with the same "ViewModel" accessor used 
+        /// by x:Bind and it's ViewModel property accessor on the View class. This allows you to do find-replace on views for 'Binding' to 'x:Bind'.
+        [Newtonsoft.Json.JsonIgnore()]
+        [System.Runtime.Serialization.IgnoreDataMember()]
+        public WelcomeViewModel ViewModel { get { return this; } }
+
         private CommandBase _LaunchWebAccountManagerCommand = null;
         /// <summary>
         /// Command to access Web Account Manager
@@ -132,25 +139,5 @@ namespace Contoso.Core.ViewModels
         }
 
         #endregion Methods
-    }
-
-    public partial class WelcomeViewModel
-    {
-        /// <summary>
-        /// Self-reference back to this ViewModel. Used for designtime datacontext on pages to reference itself with the same "ViewModel" accessor used 
-        /// by x:Bind and it's ViewModel property accessor on the View class. This allows you to do find-replace on views for 'Binding' to 'x:Bind'.
-        [Newtonsoft.Json.JsonIgnore()]
-        [System.Runtime.Serialization.IgnoreDataMember()]
-        public WelcomeViewModel ViewModel { get { return this; } }
-    }
-}
-
-namespace Contoso.Core.ViewModels.Designer
-{
-    public sealed class WelcomeViewModel : Contoso.Core.ViewModels.WelcomeViewModel
-    {
-        public WelcomeViewModel()
-        {
-        }
     }
 }

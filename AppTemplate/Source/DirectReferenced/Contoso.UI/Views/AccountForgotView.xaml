@@ -6,8 +6,6 @@
     xmlns:controls="using:AppFramework.UI.Controls"
     xmlns:behaviors="using:AppFramework.UI.Behaviors"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
-    xmlns:designTime="using:Contoso.Core.ViewModels.Designer"
-    d:DataContext="{d:DesignInstance designTime:AccountForgotViewModel, IsDesignTimeCreatable=True}"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">

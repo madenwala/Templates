@@ -9,9 +9,16 @@ using Windows.ApplicationModel;
 
 namespace Contoso.Core.ViewModels
 {
-    public partial class SearchViewModel : ViewModelBase
+    public sealed class SearchViewModel : ViewModelBase
     {
         #region Properties
+
+        /// <summary>
+        /// Self-reference back to this ViewModel. Used for designtime datacontext on pages to reference itself with the same "ViewModel" accessor used 
+        /// by x:Bind and it's ViewModel property accessor on the View class. This allows you to do find-replace on views for 'Binding' to 'x:Bind'.
+        [Newtonsoft.Json.JsonIgnore()]
+        [System.Runtime.Serialization.IgnoreDataMember()]
+        public SearchViewModel ViewModel { get { return this; } }
 
         private ModelList<ItemModel> _Results;
         /// <summary>
@@ -103,36 +110,5 @@ namespace Contoso.Core.ViewModels
         }
 
         #endregion Methods
-    }
-
-    public partial class SearchViewModel
-    {
-        /// <summary>
-        /// Self-reference back to this ViewModel. Used for designtime datacontext on pages to reference itself with the same "ViewModel" accessor used 
-        /// by x:Bind and it's ViewModel property accessor on the View class. This allows you to do find-replace on views for 'Binding' to 'x:Bind'.
-        [Newtonsoft.Json.JsonIgnore()]
-        [System.Runtime.Serialization.IgnoreDataMember()]
-        public SearchViewModel ViewModel { get { return this; } }
-    }
-}
-
-namespace Contoso.Core.ViewModels.Designer
-{
-    public sealed class SearchViewModel : Contoso.Core.ViewModels.SearchViewModel
-    {
-        public SearchViewModel()
-        {
-            this.Results = new ModelList<ItemModel>();
-            this.Results.Add(new ItemModel()
-            {
-                ID = "0",
-                LineOne = "Mohammed",
-                LineTwo = "Adenwala",
-                LineThree = "hello world!"
-            });
-
-            this.Results.Add(new ItemModel() { ID = "1", LineOne = "runtime one", LineTwo = "Maecenas praesent accumsan bibendum", LineThree = "Facilisi faucibus habitant inceptos interdum lobortis nascetur pharetra placerat pulvinar sagittis senectus sociosqu" });
-            this.Results.Add(new ItemModel() { ID = "2", LineOne = "runtime two", LineTwo = "Dictumst eleifend facilisi faucibus", LineThree = "Suscipit torquent ultrices vehicula volutpat maecenas praesent accumsan bibendum dictumst eleifend facilisi faucibus" });
-        }
     }
 }

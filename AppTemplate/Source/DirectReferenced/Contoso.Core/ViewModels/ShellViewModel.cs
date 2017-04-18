@@ -3,14 +3,20 @@ using AppFramework.Core.Models;
 using Contoso.Core.Strings;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 
 namespace Contoso.Core.ViewModels
 {
-    public partial class ShellViewModel : ViewModelBase
+    public sealed partial class ShellViewModel : ViewModelBase
     {
         #region Properties
+
+        /// <summary>
+        /// Self-reference back to this ViewModel. Used for designtime datacontext on pages to reference itself with the same "ViewModel" accessor used 
+        /// by x:Bind and it's ViewModel property accessor on the View class. This allows you to do find-replace on views for 'Binding' to 'x:Bind'.
+        [Newtonsoft.Json.JsonIgnore()]
+        [System.Runtime.Serialization.IgnoreDataMember()]
+        public ShellViewModel ViewModel { get { return this; } }
 
         public string WelcomeMessage
         {
@@ -68,25 +74,5 @@ namespace Contoso.Core.ViewModels
         }
 
         #endregion Methods
-    }
-
-    public partial class ShellViewModel
-    {
-        /// <summary>
-        /// Self-reference back to this ViewModel. Used for designtime datacontext on pages to reference itself with the same "ViewModel" accessor used 
-        /// by x:Bind and it's ViewModel property accessor on the View class. This allows you to do find-replace on views for 'Binding' to 'x:Bind'.
-        [Newtonsoft.Json.JsonIgnore()]
-        [System.Runtime.Serialization.IgnoreDataMember()]
-        public ShellViewModel ViewModel { get { return this; } }
-    }
-}
-
-namespace Contoso.Core.ViewModels.Designer
-{
-    public sealed class ShellViewModel : Contoso.Core.ViewModels.ShellViewModel
-    {
-        public ShellViewModel()
-        {
-        }
     }
 }

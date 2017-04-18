@@ -9,10 +9,17 @@ using Windows.ApplicationModel.Background;
 
 namespace Contoso.Core.ViewModels
 {
-    public partial class DebuggingViewModel : ViewModelBase
+    public sealed class DebuggingViewModel : ViewModelBase
     {
         #region Properties
-        
+
+        /// <summary>
+        /// Self-reference back to this ViewModel. Used for designtime datacontext on pages to reference itself with the same "ViewModel" accessor used 
+        /// by x:Bind and it's ViewModel property accessor on the View class. This allows you to do find-replace on views for 'Binding' to 'x:Bind'.
+        [Newtonsoft.Json.JsonIgnore()]
+        [System.Runtime.Serialization.IgnoreDataMember()]
+        public DebuggingViewModel ViewModel { get { return this; } }
+
         public ICommand TestAppCrashCommand { get; private set; }
 
         private ModelList<BackgroundTaskRunInfo> _BackgroundTasksInfo = new ModelList<BackgroundTaskRunInfo>();
@@ -64,25 +71,5 @@ namespace Contoso.Core.ViewModels
         }
 
         #endregion Methods
-    }
-
-    public partial class DebuggingViewModel
-    {
-        /// <summary>
-        /// Self-reference back to this ViewModel. Used for designtime datacontext on pages to reference itself with the same "ViewModel" accessor used 
-        /// by x:Bind and it's ViewModel property accessor on the View class. This allows you to do find-replace on views for 'Binding' to 'x:Bind'.
-        [Newtonsoft.Json.JsonIgnore()]
-        [System.Runtime.Serialization.IgnoreDataMember()]
-        public DebuggingViewModel ViewModel { get { return this; } }
-    }
-}
-
-namespace Contoso.Core.ViewModels.Designer
-{
-    public sealed class DebuggingViewModel : Contoso.Core.ViewModels.DebuggingViewModel
-    {
-        public DebuggingViewModel()
-        {
-        }
     }
 }

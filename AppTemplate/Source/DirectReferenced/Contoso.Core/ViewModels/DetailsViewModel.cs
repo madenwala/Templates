@@ -13,9 +13,16 @@ using AppFramework.Core.Extensions;
 
 namespace Contoso.Core.ViewModels
 {
-    public partial class DetailsViewModel : ViewModelBase
+    public sealed class DetailsViewModel : ViewModelBase
     {
         #region Properties
+
+        /// <summary>
+        /// Self-reference back to this ViewModel. Used for designtime datacontext on pages to reference itself with the same "ViewModel" accessor used 
+        /// by x:Bind and it's ViewModel property accessor on the View class. This allows you to do find-replace on views for 'Binding' to 'x:Bind'.
+        [Newtonsoft.Json.JsonIgnore()]
+        [System.Runtime.Serialization.IgnoreDataMember()]
+        public DetailsViewModel ViewModel { get { return this; } }
 
         public override string Title
         {
@@ -199,34 +206,5 @@ namespace Contoso.Core.ViewModels
         }
 
         #endregion
-    }
-
-    public partial class DetailsViewModel
-    {
-        /// <summary>
-        /// Self-reference back to this ViewModel. Used for designtime datacontext on pages to reference itself with the same "ViewModel" accessor used 
-        /// by x:Bind and it's ViewModel property accessor on the View class. This allows you to do find-replace on views for 'Binding' to 'x:Bind'.
-        [Newtonsoft.Json.JsonIgnore()]
-        [System.Runtime.Serialization.IgnoreDataMember()]
-        public DetailsViewModel ViewModel { get { return this; } }
-    }
-}
-
-namespace Contoso.Core.ViewModels.Designer
-{
-    public sealed class DetailsViewModel : Contoso.Core.ViewModels.DetailsViewModel
-    {
-        public DetailsViewModel()
-            : base()
-        {
-            this.Item = new ItemModel()
-            {
-                ID = "0",
-                LineOne = "PinLine1",
-                LineTwo = "PinLine2",
-                LineThree = "PinLine3",
-                LineFour = "PinLine4",
-            };
-        }
     }
 }
