@@ -232,8 +232,6 @@ namespace AppFramework.Core
         /// </summary>
         public virtual void AppSuspending()
         {
-            // TODO dont make this method virtual 
-
             this.Logger.Log(LogLevels.Warning, "APP SUSPENDING - Initialization mode was {0}", this.InitializationMode);
 
             try
