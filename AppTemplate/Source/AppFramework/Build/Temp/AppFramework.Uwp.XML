@@ -1941,6 +1941,12 @@
             Indicates if the Window currently has a child frame. Used for SplitView pages where there is a child frame.
             </summary>
         </member>
+        <member name="M:AppFramework.Core.Services.NavigationManagerBase.Navigate(AppFramework.Core.Models.NavigationRequest)">
+            <summary>
+            Navigates to a page specified in the navigation request object.
+            </summary>
+            <param name="request">Request object instance.</param>
+        </member>
         <member name="M:AppFramework.Core.Services.NavigationManagerBase.SerializeParameter(System.Object)">
             <summary>
             Serializes a parameter to string if not a primitive type so that app suspension can properly happen.
@@ -1966,7 +1972,7 @@
             </summary>
             <returns>True if a back navigation occurred else false.</returns>
         </member>
-        <member name="P:AppFramework.Core.Services.NavigationManagerBase.NavigateGoBackCommand">
+        <member name="P:AppFramework.Core.Services.NavigationManagerBase.GoBackCommand">
             <summary>
             Command to access backwards page navigation..
             </summary>
@@ -1977,7 +1983,7 @@
             </summary>
             <returns>True if a forward navigation occurred else false.</returns>
         </member>
-        <member name="P:AppFramework.Core.Services.NavigationManagerBase.NavigateGoForwardCommand">
+        <member name="P:AppFramework.Core.Services.NavigationManagerBase.GoForwardCommand">
             <summary>
             Command to access forard page navigation.
             </summary>
@@ -2073,50 +2079,44 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="P:AppFramework.Core.Services.NavigationManagerBase.NavigateToMapExternalCommand">
+        <member name="P:AppFramework.Core.Services.NavigationManagerBase.MapExternalCommand">
             <summary>
             Command to access the external maps view.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.Services.NavigationManagerBase.NavigateToMapExternalDrivingCommand">
+        <member name="P:AppFramework.Core.Services.NavigationManagerBase.MapExternalDrivingCommand">
             <summary>
             Command to access the device's map driving directions view.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.Services.NavigationManagerBase.NavigateToMapExternalWalkingCommand">
+        <member name="P:AppFramework.Core.Services.NavigationManagerBase.MapExternalWalkingCommand">
             <summary>
             Command to access the device's map walking directions view.
             </summary>
         </member>
-        <member name="M:AppFramework.Core.Services.NavigationManagerBase.NavigateToWebBrowser(System.String)">
+        <member name="M:AppFramework.Core.Services.NavigationManagerBase.WebBrowser(System.String)">
             <summary>
             Navigates to an external web browser.
             </summary>
             <param name="webAddress">URL to navigate to.</param>
         </member>
-        <member name="M:AppFramework.Core.Services.NavigationManagerBase.NavigateToWebView(System.String)">
+        <member name="M:AppFramework.Core.Services.NavigationManagerBase.WebView(System.String)">
             <summary>
             Navigates to an internal app web browser.
             </summary>
             <param name="webAddress">URL to navigate to.</param>
         </member>
-        <member name="P:AppFramework.Core.Services.NavigationManagerBase.NavigateToWebViewCommand">
+        <member name="P:AppFramework.Core.Services.NavigationManagerBase.WebViewCommand">
             <summary>
             Command to navigate to the internal web view.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.Services.NavigationManagerBase.NavigateToWebBrowserCommand">
+        <member name="P:AppFramework.Core.Services.NavigationManagerBase.WebBrowserCommand">
             <summary>
             Command to navigate to the external web browser.
             </summary>
         </member>
-        <member name="M:AppFramework.Core.Services.NavigationManagerBase.NavigateTo(AppFramework.Core.Models.NavigationRequest)">
-            <summary>
-            Navigates to a page specified in the navigation request object.
-            </summary>
-            <param name="request">Request object instance.</param>
-        </member>
-        <member name="M:AppFramework.Core.Services.NavigationManagerBase.NavigateToNewWindow(System.Type,System.Object)">
+        <member name="M:AppFramework.Core.Services.NavigationManagerBase.NewWindow(System.Type,System.Object)">
             <summary>
             Launches another window with the specified page type.
             </summary>
@@ -2124,33 +2124,33 @@
             <param name="parameter">Page parameter to pass to the new page instance.</param>
             <returns>Awaitable task is returned.</returns>
         </member>
-        <member name="P:AppFramework.Core.Services.NavigationManagerBase.NavigateToNewWindowCommand">
+        <member name="P:AppFramework.Core.Services.NavigationManagerBase.NewWindowCommand">
             <summary>
             Command to navigate to the account forgot crentials view.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.Services.NavigationManagerBase.NavigateToHomeCommand">
+        <member name="P:AppFramework.Core.Services.NavigationManagerBase.HomeCommand">
             <summary>
             Command to access backwards page navigation..
             </summary>
         </member>
-        <member name="P:AppFramework.Core.Services.NavigationManagerBase.NavigateToModelCommand">
+        <member name="P:AppFramework.Core.Services.NavigationManagerBase.ModelCommand">
             <summary>
             Command to access navigating to an instance of a model (Navigation manager handles actually forwarding to the appropriate view for 
             the model pass into a parameter. 
             </summary>
         </member>
-        <member name="P:AppFramework.Core.Services.NavigationManagerBase.NavigateToSettingsCommand">
+        <member name="P:AppFramework.Core.Services.NavigationManagerBase.SettingsCommand">
             <summary>
             Command to navigate to the settings view.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.Services.NavigationManagerBase.NavigateToPrivacyPolicyCommand">
+        <member name="P:AppFramework.Core.Services.NavigationManagerBase.PrivacyPolicyCommand">
             <summary>
             Command to navigate to the application's privacy policy view.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.Services.NavigationManagerBase.NavigateToTermsOfServiceCommand">
+        <member name="P:AppFramework.Core.Services.NavigationManagerBase.TermsOfServiceCommand">
             <summary>
             Command to navigate to the application's terms of service view.
             </summary>

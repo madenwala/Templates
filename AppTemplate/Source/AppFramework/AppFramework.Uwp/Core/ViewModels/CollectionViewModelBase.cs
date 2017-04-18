@@ -126,19 +126,27 @@ namespace AppFramework.Core.ViewModels
                 else
                     this.CopyStatus(this.CurrentViewModel);
 
-                if (!_viewModelsLoaded.Contains(this.CurrentViewModel))
-                {
-                    // Call load state on the sub-viewmodel once its requested to be set to curent.
-                    await this.CurrentViewModel.LoadStateAsync(this.View, _loadState);
-                    _viewModelsLoaded.Add(this.CurrentViewModel);
-                }
-                else
-                    await this.CurrentViewModel.RefreshAsync(false);
+                await this.LoadViewModelAsync(this.CurrentViewModel);
             }
 
             // Update global navigation
             this.PlatformBase.NavigationBase.GoBackCommand.RaiseCanExecuteChanged();
             this.PlatformBase.NavigationBase.GoForwardCommand.RaiseCanExecuteChanged();
+        }
+
+        internal async Task LoadViewModelAsync(ViewModelBase vm)
+        {
+            if (vm == null)
+                return;
+
+            if (!_viewModelsLoaded.Contains(vm))
+            {
+                // Call load state on the sub-viewmodel once its requested to be set to curent.
+                await vm.LoadStateAsync(this.View, _loadState);
+                _viewModelsLoaded.Add(vm);
+            }
+            else
+                await vm.RefreshAsync(false);
         }
 
         protected internal override bool OnBackNavigationRequested()
