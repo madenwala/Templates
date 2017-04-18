@@ -22,9 +22,9 @@
         <controls:BodyPanel.BodyContent>
             <controls:AdaptiveDataView
                 x:Name="list"
-                behaviors:ListViewCommandBehavior.Command="{x:Bind ViewModel.Platform.Navigation.NavigateToModelCommand, Mode=OneWay}"
+                behaviors:ListViewCommandBehavior.Command="{x:Bind ViewModel.Platform.Navigation.ModelCommand, Mode=OneWay}"
                 RefreshCommand="{x:Bind ViewModel.RefreshCommand, Mode=OneWay}"
-                ClickCommand="{x:Bind ViewModel.Platform.Navigation.NavigateToModelCommand, Mode=OneWay}"
+                ClickCommand="{x:Bind ViewModel.Platform.Navigation.ModelCommand, Mode=OneWay}"
                 ItemsSource="{x:Bind ViewModel.Results, Mode=OneWay}"
                 ItemTemplate="{StaticResource ItemDataTemplate}" />
         </controls:BodyPanel.BodyContent>

@@ -106,6 +106,16 @@ namespace AppFramework.Core.Services
         }
 
         /// <summary>
+        /// Navigates to a page specified in the navigation request object.
+        /// </summary>
+        /// <param name="request">Request object instance.</param>
+        public void Navigate(NavigationRequest request)
+        {
+            if (request != null)
+                this.Frame.Navigate(Type.GetType(request.ViewType), this.SerializeParameter(request.ViewParameter));
+        }
+
+        /// <summary>
         /// Serializes a parameter to string if not a primitive type so that app suspension can properly happen.
         /// </summary>
         /// <param name="obj">Parameter object to serialize.</param>
@@ -184,13 +194,13 @@ namespace AppFramework.Core.Services
             return false;
         }
 
-        private CommandBase _navigateGoBackCommand = null;
+        private CommandBase _GoBackCommand = null;
         /// <summary>
         /// Command to access backwards page navigation..
         /// </summary>
-        public CommandBase NavigateGoBackCommand
+        public CommandBase GoBackCommand
         {
-            get { return _navigateGoBackCommand ?? (_navigateGoBackCommand = new NavigationCommand("NavigateGoBackCommand", () => this.GoBack(), this.CanGoBack)); }
+            get { return _GoBackCommand ?? (_GoBackCommand = new NavigationCommand("NavigateGoBackCommand", () => this.GoBack(), this.CanGoBack)); }
         }
 
         /// <summary>
@@ -242,13 +252,13 @@ namespace AppFramework.Core.Services
             return false;
         }
 
-        private CommandBase _navigateGoForwardCommand = null;
+        private CommandBase _GoForwardCommand = null;
         /// <summary>
         /// Command to access forard page navigation.
         /// </summary>
-        public CommandBase NavigateGoForwardCommand
+        public CommandBase GoForwardCommand
         {
-            get { return _navigateGoForwardCommand ?? (_navigateGoForwardCommand = new NavigationCommand("NavigateGoForwardCommand", () => this.GoForward(), this.CanGoForward)); }
+            get { return _GoForwardCommand ?? (_GoForwardCommand = new NavigationCommand("NavigateGoForwardCommand", () => this.GoForward(), this.CanGoForward)); }
         }
 
         /// <summary>
@@ -563,31 +573,31 @@ namespace AppFramework.Core.Services
             }
         }
 
-        private CommandBase _navigateToMapExternalCommand = null;
+        private CommandBase _MapExternalCommand = null;
         /// <summary>
         /// Command to access the external maps view.
         /// </summary>
-        public CommandBase NavigateToMapExternalCommand
+        public CommandBase MapExternalCommand
         {
-            get { return _navigateToMapExternalCommand ?? (_navigateToMapExternalCommand = new MapExternalCommand()); }
+            get { return _MapExternalCommand ?? (_MapExternalCommand = new MapExternalCommand()); }
         }
 
-        private CommandBase _navigateToMapExternalDrivingCommand = null;
+        private CommandBase _MapExternalDrivingCommand = null;
         /// <summary>
         /// Command to access the device's map driving directions view.
         /// </summary>
-        public CommandBase NavigateToMapExternalDrivingCommand
+        public CommandBase MapExternalDrivingCommand
         {
-            get { return _navigateToMapExternalDrivingCommand ?? (_navigateToMapExternalDrivingCommand = new MapExternalCommand(MapExternalOptions.DrivingDirections)); }
+            get { return _MapExternalDrivingCommand ?? (_MapExternalDrivingCommand = new MapExternalCommand(MapExternalOptions.DrivingDirections)); }
         }
 
-        private CommandBase _navigateToMapExternalWalkingCommand = null;
+        private CommandBase _MapExternalWalkingCommand = null;
         /// <summary>
         /// Command to access the device's map walking directions view.
         /// </summary>
-        public CommandBase NavigateToMapExternalWalkingCommand
+        public CommandBase MapExternalWalkingCommand
         {
-            get { return _navigateToMapExternalWalkingCommand ?? (_navigateToMapExternalWalkingCommand = new MapExternalCommand(MapExternalOptions.WalkingDirections)); }
+            get { return _MapExternalWalkingCommand ?? (_MapExternalWalkingCommand = new MapExternalCommand(MapExternalOptions.WalkingDirections)); }
         }
 
         #endregion
@@ -602,10 +612,10 @@ namespace AppFramework.Core.Services
             Windows.ApplicationModel.Calls.PhoneCallManager.ShowPhoneCallUI(phoneNumber, displayName);
         }
 
-        private CommandBase _navigateToPhoneCommand = null;
-        public CommandBase NavigateToPhoneCommand
+        private CommandBase _PhoneCommand = null;
+        public CommandBase PhoneCommand
         {
-            get { return _navigateToPhoneCommand ?? (_navigateToPhoneCommand = new NavigationCommand("NavigateToPhoneCommand", this.Phone)); }
+            get { return _PhoneCommand ?? (_PhoneCommand = new NavigationCommand("NavigateToPhoneCommand", this.Phone)); }
         }
 
         #endregion
@@ -618,23 +628,23 @@ namespace AppFramework.Core.Services
         /// Navigates to an external web browser.
         /// </summary>
         /// <param name="webAddress">URL to navigate to.</param>
-        public void NavigateToWebBrowser(string webAddress)
+        public void WebBrowser(string webAddress)
         {
             PlatformBase.CurrentCore.Analytics.Event("NavigateToWebBrowser");
-            this.NavigateToWeb(webAddress, true);
+            this.Web(webAddress, true);
         }
 
         /// <summary>
         /// Navigates to an internal app web browser.
         /// </summary>
         /// <param name="webAddress">URL to navigate to.</param>
-        public void NavigateToWebView(string webAddress)
+        public void WebView(string webAddress)
         {
             PlatformBase.CurrentCore.Analytics.Event("NavigateToWebView");
-            this.NavigateToWeb(webAddress, false);
+            this.Web(webAddress, false);
         }
 
-        private void NavigateToWeb(string webAddress, bool showExternally)
+        private void Web(string webAddress, bool showExternally)
         {
             if (string.IsNullOrWhiteSpace(webAddress))
                 throw new ArgumentNullException(nameof(webAddress));
@@ -651,26 +661,27 @@ namespace AppFramework.Core.Services
             }
             else
             {
-                this.WebView(webAddress);
+                this.WebView((object)webAddress);
             }
         }
 
-        private CommandBase _navigateToWebViewCommand = null;
+        private CommandBase _WebViewCommand = null;
         /// <summary>
         /// Command to navigate to the internal web view.
         /// </summary>
-        public CommandBase NavigateToWebViewCommand
+        public CommandBase WebViewCommand
         {
-            get { return _navigateToWebViewCommand ?? (_navigateToWebViewCommand = new WebViewCommand()); }
+            get { return _WebViewCommand ?? (_WebViewCommand = new WebViewCommand()); }
         }
 
-        private CommandBase _navigateToWebBrowserCommand = null;
+        private CommandBase _WebBrowserCommand = null;
         /// <summary>
         /// Command to navigate to the external web browser.
         /// </summary>
-        public CommandBase NavigateToWebBrowserCommand
+        public CommandBase WebBrowserCommand
+
         {
-            get { return _navigateToWebBrowserCommand ?? (_navigateToWebBrowserCommand = new WebBrowserCommand()); }
+            get { return _WebBrowserCommand ?? (_WebBrowserCommand = new WebBrowserCommand()); }
         }
 
         #endregion
@@ -691,17 +702,7 @@ namespace AppFramework.Core.Services
 
         #region Secondary Windows
 
-        protected abstract void NavigateToSecondaryWindow(NavigationRequest request);
-
-        /// <summary>
-        /// Navigates to a page specified in the navigation request object.
-        /// </summary>
-        /// <param name="request">Request object instance.</param>
-        public void NavigateTo(NavigationRequest request)
-        {
-            if (request != null)
-                this.Frame.Navigate(Type.GetType(request.ViewType), this.SerializeParameter(request.ViewParameter));
-        }
+        protected abstract void NewWindow(NavigationRequest request);
 
         /// <summary>
         /// Launches another window with the specified page type.
@@ -709,7 +710,7 @@ namespace AppFramework.Core.Services
         /// <param name="viewType">Type of the page requested in the secondary window.</param>
         /// <param name="parameter">Page parameter to pass to the new page instance.</param>
         /// <returns>Awaitable task is returned.</returns>
-        public virtual async Task NavigateToNewWindow(Type viewType, object parameter)
+        public async Task NewWindow(Type viewType, object parameter)
         {
             try
             {
@@ -728,7 +729,7 @@ namespace AppFramework.Core.Services
                     Window.Current.Content = frame;
 
                     // Navigate to a page within the new window based on the parameters of this method
-                    this.NavigateToSecondaryWindow(new NavigationRequest(viewType, this.SerializeParameter(parameter)));
+                    this.NewWindow(new NavigationRequest(viewType, this.SerializeParameter(parameter)));
 
                     // Show the new window
                     Window.Current.Activate();
@@ -764,17 +765,17 @@ namespace AppFramework.Core.Services
             Window.Current.Close();
         }
 
-        private CommandBase _navigateToNewWindowCommand = null;
+        private CommandBase _NewWindowCommand = null;
         /// <summary>
         /// Command to navigate to the account forgot crentials view.
         /// </summary>
-        public CommandBase NavigateToNewWindowCommand
+        public CommandBase NewWindowCommand
         {
             get
             {
-                return PlatformBase.CurrentCore == null ? null : _navigateToNewWindowCommand ?? (_navigateToNewWindowCommand = new GenericCommand<ViewModelBase>("NavigateToNewWindowCommand", async (e) =>
+                return PlatformBase.CurrentCore == null ? null : _NewWindowCommand ?? (_NewWindowCommand = new GenericCommand<ViewModelBase>("NavigateToNewWindowCommand", async (e) =>
                 {
-                    await this.NavigateToNewWindow(e.View.GetType(), e.ViewParameter);
+                    await this.NewWindow(e.View.GetType(), e.ViewParameter);
                 }));
             }
         }
@@ -796,12 +797,12 @@ namespace AppFramework.Core.Services
             }
         }
 
-        private CommandBase _navigateToFeedbackCommand = null;
-        public CommandBase NavigateToFeedbackCommand
+        private CommandBase _FeedbackCommand = null;
+        public CommandBase FeedbackCommand
         {
             get
             {
-                return _navigateToFeedbackCommand ?? (_navigateToFeedbackCommand = new GenericCommand("NavigateToFeedbackCommand", async () =>
+                return _FeedbackCommand ?? (_FeedbackCommand = new GenericCommand("NavigateToFeedbackCommand", async () =>
                 {
                     if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher"))
                     {
@@ -818,10 +819,10 @@ namespace AppFramework.Core.Services
 
         #region Twitter Commands
 
-        private CommandBase _navigateToTwitterScreenNameCommand = null;
-        public CommandBase NavigateToTwitterScreenNameCommand
+        private CommandBase _TwitterScreenNameCommand = null;
+        public CommandBase TwitterScreenNameCommand
         {
-            get { return _navigateToTwitterScreenNameCommand ?? (_navigateToTwitterScreenNameCommand = new GenericCommand<string>("NavigateToTwitterScreenNameCommand", this.NavigateToTwitterScreenName)); }
+            get { return _TwitterScreenNameCommand ?? (_TwitterScreenNameCommand = new GenericCommand<string>("NavigateToTwitterScreenNameCommand", this.NavigateToTwitterScreenName)); }
         }
 
         #endregion
@@ -830,58 +831,58 @@ namespace AppFramework.Core.Services
 
         public abstract void Home(object parameter = null);
 
-        private CommandBase _navigateToHomeCommand = null;
+        private CommandBase _HomeCommand = null;
         /// <summary>
         /// Command to access backwards page navigation..
         /// </summary>
-        public CommandBase NavigateToHomeCommand
+        public CommandBase HomeCommand
         {
-            get { return _navigateToHomeCommand ?? (_navigateToHomeCommand = new NavigationCommand("NavigateToHomeCommand", this.Home)); }
+            get { return _HomeCommand ?? (_HomeCommand = new NavigationCommand("NavigateToHomeCommand", this.Home)); }
         }
 
-        public abstract void NavigateTo(object model);
+        public abstract void Model(object model);
 
-        private CommandBase _navigateToModelCommand = null;
+        private CommandBase _ModelCommand = null;
         /// <summary>
         /// Command to access navigating to an instance of a model (Navigation manager handles actually forwarding to the appropriate view for 
         /// the model pass into a parameter. 
         /// </summary>
-        public CommandBase NavigateToModelCommand
+        public CommandBase ModelCommand
         {
-            get { return _navigateToModelCommand ?? (_navigateToModelCommand = new NavigationCommand()); }
+            get { return _ModelCommand ?? (_ModelCommand = new NavigationCommand()); }
         }
 
         public abstract void Settings(object parameter = null);
 
-        private CommandBase _navigateToSettingsCommand = null;
+        private CommandBase _SettingsCommand = null;
         /// <summary>
         /// Command to navigate to the settings view.
         /// </summary>
-        public CommandBase NavigateToSettingsCommand
+        public CommandBase SettingsCommand
         {
-            get { return _navigateToSettingsCommand ?? (_navigateToSettingsCommand = new NavigationCommand("NavigateToSettingsCommand", this.Settings)); }
+            get { return _SettingsCommand ?? (_SettingsCommand = new NavigationCommand("NavigateToSettingsCommand", this.Settings)); }
         }
 
         public abstract void PrivacyPolicy(object parameter = null);
 
-        private CommandBase _navigateToPrivacyPolicyCommand = null;
+        private CommandBase _PrivacyPolicyCommand = null;
         /// <summary>
         /// Command to navigate to the application's privacy policy view.
         /// </summary>
-        public CommandBase NavigateToPrivacyPolicyCommand
+        public CommandBase PrivacyPolicyCommand
         {
-            get { return _navigateToPrivacyPolicyCommand ?? (_navigateToPrivacyPolicyCommand = new NavigationCommand("NavigateToPrivacyPolicyCommand", this.PrivacyPolicy)); }
+            get { return _PrivacyPolicyCommand ?? (_PrivacyPolicyCommand = new NavigationCommand("NavigateToPrivacyPolicyCommand", this.PrivacyPolicy)); }
         }
 
         public abstract void TermsOfService(object parameter = null);
 
-        private CommandBase _navigateToTermsOfServiceCommand = null;
+        private CommandBase _TermsOfServiceCommand = null;
         /// <summary>
         /// Command to navigate to the application's terms of service view.
         /// </summary>
-        public CommandBase NavigateToTermsOfServiceCommand
+        public CommandBase TermsOfServiceCommand
         {
-            get { return _navigateToTermsOfServiceCommand ?? (_navigateToTermsOfServiceCommand = new NavigationCommand("NavigateToTermsOfServiceCommand", this.TermsOfService)); }
+            get { return _TermsOfServiceCommand ?? (_TermsOfServiceCommand = new NavigationCommand("NavigateToTermsOfServiceCommand", this.TermsOfService)); }
         }
 
         #endregion

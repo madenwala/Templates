@@ -39,11 +39,11 @@
 
                     <TextBlock x:Uid="/Contoso.Core/Resources/tbSupport" Text="[Support]" Style="{StaticResource SubtitleTextBlockStyle}" />
                     <HyperlinkButton 
-                        Command="{x:Bind ViewModel.Platform.Navigation.NavigateToWebViewCommand}"
+                        Command="{x:Bind ViewModel.Platform.Navigation.WebViewCommand}"
                         CommandParameter="http://www.adenwala.com"
                         Content="Website" />
                     <HyperlinkButton 
-                        Command="{x:Bind ViewModel.Platform.Navigation.NavigateToTwitterScreenNameCommand}"
+                        Command="{x:Bind ViewModel.Platform.Navigation.TwitterScreenNameCommand}"
                         CommandParameter="{x:Bind ViewModel.TwitterAddress, Mode=OneTime}"
                         Content="{x:Bind ViewModel.TwitterAddress, Mode=OneTime}" />
                     <HyperlinkButton
@@ -53,7 +53,7 @@
                     <HyperlinkButton 
                         x:Uid="/Contoso.Core/Resources/btnSubmitFeedback" 
                         Content="[App Feedback]" 
-                        Command="{x:Bind ViewModel.Platform.Navigation.NavigateToFeedbackCommand}" 
+                        Command="{x:Bind ViewModel.Platform.Navigation.FeedbackCommand}" 
                         Visibility="{x:Bind ViewModel.Platform.Navigation.IsFeedbackEnabled, Converter={StaticResource visConverter}}" />
 
                     <Border Height="{StaticResource SpacerHeight}" />

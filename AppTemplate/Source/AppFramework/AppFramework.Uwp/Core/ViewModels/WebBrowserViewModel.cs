@@ -196,8 +196,8 @@ namespace AppFramework.Core.ViewModels
             this.Title = title ?? Strings.Resources.TextNotApplicable;
             this.ClearStatus();
             this.ShowBrowser = true;
-            this.PlatformBase.NavigationBase.NavigateGoBackCommand.RaiseCanExecuteChanged();
-            this.PlatformBase.NavigationBase.NavigateGoForwardCommand.RaiseCanExecuteChanged();
+            this.PlatformBase.NavigationBase.GoBackCommand.RaiseCanExecuteChanged();
+            this.PlatformBase.NavigationBase.GoForwardCommand.RaiseCanExecuteChanged();
             this.BrowserHomeCommand.RaiseCanExecuteChanged();
             this.IsBrowserRefreshEnabled = true;
             this.CurrentUrl = uri.ToString();
@@ -220,8 +220,8 @@ namespace AppFramework.Core.ViewModels
             this.ClearStatus();
             this.Title = Strings.Resources.TextNotApplicable;
             this.ShowBrowser = false;
-            this.PlatformBase.NavigationBase.NavigateGoBackCommand.RaiseCanExecuteChanged();
-            this.PlatformBase.NavigationBase.NavigateGoForwardCommand.RaiseCanExecuteChanged();
+            this.PlatformBase.NavigationBase.GoBackCommand.RaiseCanExecuteChanged();
+            this.PlatformBase.NavigationBase.GoForwardCommand.RaiseCanExecuteChanged();
             await this.HandleExceptionAsync(exception, "Error navigating to " + uri.ToString());
             this.IsBrowserRefreshEnabled = true;
             this.CurrentUrl = null;

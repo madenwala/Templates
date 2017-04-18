@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Property Navigation</Title>
+      <Author>Mohammed Adenwala</Author>
+      <Shortcut>propnav</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>NavMethodName</ID>
+          <ToolTip>Replace with a property name.</ToolTip>
+          <Default>MyNavMethod</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="CSharp">
+        <![CDATA[public abstract void $NavMethodName$(object parameter = null);
+
+        private CommandBase _$NavMethodName$Command = null;
+        /// <summary>
+        /// Command to navigate to the $NavMethodName$ view.
+        /// </summary>
+        public CommandBase $NavMethodName$Command
+        {
+            get { return _$NavMethodName$Command ?? (_$NavMethodName$Command = new NavigationCommand("NavigateTo$NavMethodName$Command", this.$NavMethodName$)); }
+        }]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

@@ -52,7 +52,7 @@ namespace Contoso.UI.Views
         protected override async Task OnLoadStateAsync(LoadStateEventArgs e)
         {
             if (e.NavigationEventArgs.NavigationMode == NavigationMode.New && e.Parameter is NavigationRequest)
-                Platform.Current.Navigation.NavigateTo(e.Parameter as NavigationRequest);
+                Platform.Current.Navigation.Navigate(e.Parameter as NavigationRequest);
 
             await base.OnLoadStateAsync(e);
         }

@@ -62,7 +62,7 @@ namespace Contoso.Core.ViewModels
 
             // If the view parameter contains any navigation requests, forward on to the global navigation service
             if (e.NavigationEventArgs.NavigationMode == NavigationMode.New && e.Parameter is NavigationRequest)
-                this.Platform.Navigation.NavigateTo(e.Parameter as NavigationRequest);
+                this.Platform.Navigation.Navigate(e.Parameter as NavigationRequest);
 
             return base.OnLoadStateAsync(e);
         }

@@ -85,7 +85,7 @@ namespace Contoso.UI.Services
             }
         }
 
-        public override void NavigateTo(object parameter)
+        public override void Model(object parameter)
         {
             if (parameter == null)
                 throw new ArgumentNullException(nameof(parameter));
@@ -96,7 +96,7 @@ namespace Contoso.UI.Services
                 throw new NotImplementedException("Navigation not implemented for type " + parameter.GetType().Name);
         }
 
-        protected override void NavigateToSecondaryWindow(NavigationRequest request)
+        protected override void NewWindow(NavigationRequest request)
         {
             this.Navigate(typeof(SecondaryWindowView), request);
         }

@@ -31,7 +31,7 @@
                     <AppBarButton x:Uid="/Contoso.Core/Resources/abtnRefresh" Label="[Refresh]" Icon="Refresh" Command="{x:Bind ViewModel.RefreshCommand, Mode=OneWay}" />
                 </CommandBar.PrimaryCommands>
                 <CommandBar.SecondaryCommands>
-                    <AppBarButton x:Uid="/Contoso.Core/Resources/abtnSettings" Label="[Settings]" Icon="Setting" Command="{x:Bind ViewModel.Platform.Navigation.NavigateToSettingsCommand}" />
+                    <AppBarButton x:Uid="/Contoso.Core/Resources/abtnSettings" Label="[Settings]" Icon="Setting" Command="{x:Bind ViewModel.Platform.Navigation.SettingsCommand}" />
                 </CommandBar.SecondaryCommands>
             </CommandBar>
         </controls:BodyPanel.AppBar>
@@ -39,7 +39,7 @@
             <controls:AdaptiveDataView
                 x:Name="list"
                 RefreshCommand="{x:Bind ViewModel.RefreshCommand, Mode=OneWay}"
-                ClickCommand="{x:Bind ViewModel.Platform.Navigation.NavigateToModelCommand, Mode=OneWay}"
+                ClickCommand="{x:Bind ViewModel.Platform.Navigation.ModelCommand, Mode=OneWay}"
                 ItemsSource="{x:Bind ViewModel.Items, Mode=OneWay}"
                 ItemTemplate="{StaticResource ItemDataTemplate}" />
         </controls:BodyPanel.BodyContent>
