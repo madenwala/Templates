@@ -18,7 +18,7 @@ namespace AppFramework.UI.Controls
 
         // Using a DependencyProperty as the backing store for AutoLoadNextPivot.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty AutoLoadNextPivotProperty =
-            DependencyProperty.Register(nameof(AutoLoadNextPivot), typeof(bool), typeof(Pivot), new PropertyMetadata(false));
+            DependencyProperty.Register(nameof(AutoLoadNextPivot), typeof(bool), typeof(Pivot), new PropertyMetadata(true));
 
         #endregion
 
