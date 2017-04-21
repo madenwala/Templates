@@ -147,6 +147,20 @@ namespace Contoso.Core.Services
                     Duration = ToastDuration.Short
                 };
             }
+            else if(model is MainViewModel)
+            {
+                tc = new ToastContent()
+                {
+                    Visual = new ToastVisual()
+                    {
+                        TitleText = new ToastText() { Text = "Hello world!" }
+                    },
+                    ActivationType = ToastActivationType.Foreground,
+                    Scenario = ToastScenario.Default,
+                    Launch = Platform.Current.GenerateModelArguments(model),
+                    Duration = ToastDuration.Short
+                };
+            }
 
             if (tc != null)
             {

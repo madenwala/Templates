@@ -209,33 +209,35 @@ namespace Contoso.Core
                 if (this.AuthManager?.IsAuthenticated() != true)
                     return;
 
-                // SAMPLE - Load data from your API, do any background work here.
-                using (var api = new ClientApi())
-                {
-                    var data = await api.GetItems(ct);
-                    if (data != null)
-                    {
-                        var items = data.ToObservableCollection();
-                        if (items.Count > 0)
-                        {
-                            var index = DateTime.Now.Second % items.Count;
-                            this.Notifications.DisplayToast(items[index]);
-                        }
-                    }
+                this.Notifications.DisplayToast(this.ViewModel);
+                
+                //// SAMPLE - Load data from your API, do any background work here.
+                //using (var api = new ClientApi())
+                //{
+                //    var data = await api.GetItems(ct);
+                //    if (data != null)
+                //    {
+                //        var items = data.ToObservableCollection();
+                //        if (items.Count > 0)
+                //        {
+                //            var index = DateTime.Now.Second % items.Count;
+                //            this.Notifications.DisplayToast(items[index]);
+                //        }
+                //    }
 
-                    ct.ThrowIfCancellationRequested();
+                //    ct.ThrowIfCancellationRequested();
 
-                    if (BackgroundWorkCost.CurrentBackgroundWorkCost <= BackgroundWorkCostValue.Medium)
-                    {
-                        // Update primary tile
-                        await this.Notifications.CreateOrUpdateTileAsync(new ModelList<ItemModel>(data));
+                //    if (BackgroundWorkCost.CurrentBackgroundWorkCost <= BackgroundWorkCostValue.Medium)
+                //    {
+                //        // Update primary tile
+                //        await this.Notifications.CreateOrUpdateTileAsync(new ModelList<ItemModel>(data));
 
-                        ct.ThrowIfCancellationRequested();
+                //        ct.ThrowIfCancellationRequested();
 
-                        // Update all tiles pinned from this application
-                        await this.Notifications.UpdateAllSecondaryTilesAsync(ct);
-                    }
-                }
+                //        // Update all tiles pinned from this application
+                //        await this.Notifications.UpdateAllSecondaryTilesAsync(ct);
+                //    }
+                //}
             }
             catch (OperationCanceledException)
             {
