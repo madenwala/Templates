@@ -32,23 +32,30 @@ namespace Contoso.Core.Strings
         
         static Account()
         {
-            string executingAssemblyName;
-            executingAssemblyName = Windows.UI.Xaml.Application.Current.GetType().AssemblyQualifiedName;
-            string[] executingAssemblySplit;
-            executingAssemblySplit = executingAssemblyName.Split(',');
-            executingAssemblyName = executingAssemblySplit[1];
-            string currentAssemblyName;
-            currentAssemblyName = typeof(Account).AssemblyQualifiedName;
-            string[] currentAssemblySplit;
-            currentAssemblySplit = currentAssemblyName.Split(',');
-            currentAssemblyName = currentAssemblySplit[1];
-            if (executingAssemblyName.Equals(currentAssemblyName))
+            try
             {
-                resourceLoader = ResourceLoader.GetForCurrentView("Account");
+                string executingAssemblyName;
+                executingAssemblyName = Windows.UI.Xaml.Application.Current.GetType().AssemblyQualifiedName;
+                string[] executingAssemblySplit;
+                executingAssemblySplit = executingAssemblyName.Split(',');
+                executingAssemblyName = executingAssemblySplit[1];
+                string currentAssemblyName;
+                currentAssemblyName = typeof(Account).AssemblyQualifiedName;
+                string[] currentAssemblySplit;
+                currentAssemblySplit = currentAssemblyName.Split(',');
+                currentAssemblyName = currentAssemblySplit[1];
+                if (executingAssemblyName.Equals(currentAssemblyName))
+                {
+                    resourceLoader = ResourceLoader.GetForCurrentView("Account");
+                }
+                else
+                {
+                    resourceLoader = ResourceLoader.GetForCurrentView(currentAssemblyName + "/Account");
+                }
             }
-            else
+            catch
             {
-                resourceLoader = ResourceLoader.GetForCurrentView(currentAssemblyName + "/Account");
+                resourceLoader = ResourceLoader.GetForViewIndependentUse(typeof(Account).AssemblyQualifiedName.Split(',')[1].Trim() + "/" + nameof(Account));
             }
         }
         

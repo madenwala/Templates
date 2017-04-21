@@ -32,23 +32,30 @@ namespace Contoso.Core.Strings
         
         static Location()
         {
-            string executingAssemblyName;
-            executingAssemblyName = Windows.UI.Xaml.Application.Current.GetType().AssemblyQualifiedName;
-            string[] executingAssemblySplit;
-            executingAssemblySplit = executingAssemblyName.Split(',');
-            executingAssemblyName = executingAssemblySplit[1];
-            string currentAssemblyName;
-            currentAssemblyName = typeof(Location).AssemblyQualifiedName;
-            string[] currentAssemblySplit;
-            currentAssemblySplit = currentAssemblyName.Split(',');
-            currentAssemblyName = currentAssemblySplit[1];
-            if (executingAssemblyName.Equals(currentAssemblyName))
+            try
             {
-                resourceLoader = ResourceLoader.GetForCurrentView("Location");
+                string executingAssemblyName;
+                executingAssemblyName = Windows.UI.Xaml.Application.Current.GetType().AssemblyQualifiedName;
+                string[] executingAssemblySplit;
+                executingAssemblySplit = executingAssemblyName.Split(',');
+                executingAssemblyName = executingAssemblySplit[1];
+                string currentAssemblyName;
+                currentAssemblyName = typeof(Location).AssemblyQualifiedName;
+                string[] currentAssemblySplit;
+                currentAssemblySplit = currentAssemblyName.Split(',');
+                currentAssemblyName = currentAssemblySplit[1];
+                if (executingAssemblyName.Equals(currentAssemblyName))
+                {
+                    resourceLoader = ResourceLoader.GetForCurrentView("Location");
+                }
+                else
+                {
+                    resourceLoader = ResourceLoader.GetForCurrentView(currentAssemblyName + "/Location");
+                }
             }
-            else
+            catch
             {
-                resourceLoader = ResourceLoader.GetForCurrentView(currentAssemblyName + "/Location");
+                resourceLoader = ResourceLoader.GetForViewIndependentUse(typeof(Location).AssemblyQualifiedName.Split(',')[1].Trim() + "/" + nameof(Location));
             }
         }
         
