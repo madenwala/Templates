@@ -17,7 +17,7 @@
 // 	This code contains a helper class exposing property representations
 // 	of the string resources defined in the specified .ResW file
 // 
-// 	Generated: 03/17/2017 06:04:49
+// 	Generated: 04/25/2017 00:22:26
 // </auto-generatedInfo>
 // --------------------------------------------------------------------------------------------------
 namespace AppFramework.Core.Strings
@@ -32,23 +32,30 @@ namespace AppFramework.Core.Strings
         
         static Location()
         {
-            string executingAssemblyName;
-            executingAssemblyName = Windows.UI.Xaml.Application.Current.GetType().AssemblyQualifiedName;
-            string[] executingAssemblySplit;
-            executingAssemblySplit = executingAssemblyName.Split(',');
-            executingAssemblyName = executingAssemblySplit[1];
-            string currentAssemblyName;
-            currentAssemblyName = typeof(Location).AssemblyQualifiedName;
-            string[] currentAssemblySplit;
-            currentAssemblySplit = currentAssemblyName.Split(',');
-            currentAssemblyName = currentAssemblySplit[1];
-            if (executingAssemblyName.Equals(currentAssemblyName))
+            try
             {
-                resourceLoader = ResourceLoader.GetForCurrentView("Location");
+                string executingAssemblyName;
+                executingAssemblyName = Windows.UI.Xaml.Application.Current.GetType().AssemblyQualifiedName;
+                string[] executingAssemblySplit;
+                executingAssemblySplit = executingAssemblyName.Split(',');
+                executingAssemblyName = executingAssemblySplit[1];
+                string currentAssemblyName;
+                currentAssemblyName = typeof(Location).AssemblyQualifiedName;
+                string[] currentAssemblySplit;
+                currentAssemblySplit = currentAssemblyName.Split(',');
+                currentAssemblyName = currentAssemblySplit[1];
+                if (executingAssemblyName.Equals(currentAssemblyName))
+                {
+                    resourceLoader = ResourceLoader.GetForCurrentView("Location");
+                }
+                else
+                {
+                    resourceLoader = ResourceLoader.GetForCurrentView(currentAssemblyName + "/Location");
+                }
             }
-            else
+            catch (System.Exception )
             {
-                resourceLoader = ResourceLoader.GetForCurrentView(currentAssemblyName + "/Location");
+                resourceLoader = ResourceLoader.GetForViewIndependentUse(typeof(Location).AssemblyQualifiedName.Split(',')[1].Trim() + "/Location");
             }
         }
         
@@ -93,6 +100,17 @@ namespace AppFramework.Core.Strings
             get
             {
                 return resourceLoader.GetString("TextKilomentersShort");
+            }
+        }
+        
+        /// <summary>
+        /// Localized resource similar to "Location access has not been enabled for this app. Use the manage button and ensure this app has been enabled to use location services."
+        /// </summary>
+        public static string TextLocationServicesDisabledStatus
+        {
+            get
+            {
+                return resourceLoader.GetString("TextLocationServicesDisabledStatus");
             }
         }
         

@@ -118,6 +118,26 @@
       <CustomToolNamespace>AppFramework.Core.Strings</CustomToolNamespace>
     </PRIResource>
     <Compile Include="Core\PlatformBase.Accessors.cs" />
+    <PRIResource Include="Core\Strings\en-US\Resources.resw">
+      <Generator>ReswFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.cs</LastGenOutput>
+      <CustomToolNamespace>AppFramework.Core.Strings</CustomToolNamespace>
+    </PRIResource>
+    <PRIResource Include="Core\Strings\en-US\Location.resw">
+      <Generator>ReswFileCodeGenerator</Generator>
+      <LastGenOutput>Location.cs</LastGenOutput>
+      <CustomToolNamespace>AppFramework.Core.Strings</CustomToolNamespace>
+    </PRIResource>
+    <PRIResource Include="Core\Strings\en-US\Account.resw">
+      <Generator>ReswFileCodeGenerator</Generator>
+      <LastGenOutput>Account.cs</LastGenOutput>
+      <CustomToolNamespace>AppFramework.Core.Strings</CustomToolNamespace>
+    </PRIResource>
+    <PRIResource Include="Core\Strings\en-US\BackgroundTasks.resw">
+      <Generator>ReswFileCodeGenerator</Generator>
+      <LastGenOutput>BackgroundTasks.cs</LastGenOutput>
+      <CustomToolNamespace>AppFramework.Core.Strings</CustomToolNamespace>
+    </PRIResource>
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -131,7 +151,11 @@
     <Compile Include="Core\Models\ModelBase.cs" />
     <Compile Include="Core\Models\UniqueModelBase.cs" />
     <Compile Include="Core\Serializers.cs" />
-    <Compile Include="Core\Strings\BackgroundTasks.cs" />
+    <Compile Include="Core\Strings\en-US\BackgroundTasks.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BackgroundTasks.resw</DependentUpon>
+    </Compile>
     <Compile Include="Core\TypeUtility.cs" />
     <Compile Include="Core\ViewModels\SettingsViewModelBase.cs" />
     <Compile Include="UI\Controls\ApplicationFrame.cs" />
@@ -178,14 +202,26 @@
     <Compile Include="Core\Services\StorageManagerBase.cs" />
     <Compile Include="Core\Services\VoiceCommandManager.cs" />
     <Compile Include="Core\Services\WebAccountManager.cs" />
-    <Compile Include="Core\Strings\Account.cs" />
+    <Compile Include="Core\Strings\en-US\Account.cs">
+      <DependentUpon>Account.resw</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Core\Strings\en-US\Location.cs">
+      <DependentUpon>Location.resw</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Core\Strings\en-US\Resources.cs">
+      <DependentUpon>Resources.resw</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Core\Strings\en-US\WebBrowser.cs">
       <DependentUpon>WebBrowser.resw</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Core\Strings\Location.cs" />
-    <Compile Include="Core\Strings\Resources.cs" />
     <Compile Include="Core\ViewModels\CollectionViewModelBase.cs" />
     <Compile Include="Core\ViewModels\IViewModel.cs" />
     <Compile Include="Core\ViewModels\ViewModelBase.cs" />

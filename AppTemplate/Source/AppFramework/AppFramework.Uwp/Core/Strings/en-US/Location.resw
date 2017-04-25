@@ -129,6 +129,9 @@
   <data name="TextKilomentersShort" xml:space="preserve">
     <value>km</value>
   </data>
+  <data name="TextLocationServicesDisabledStatus" xml:space="preserve">
+    <value>Location access has not been enabled for this app. Use the manage button and ensure this app has been enabled to use location services.</value>
+  </data>
   <data name="TextMilesLong" xml:space="preserve">
     <value>Miles</value>
   </data>

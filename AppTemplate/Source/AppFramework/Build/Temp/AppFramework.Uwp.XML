@@ -899,6 +899,218 @@
             <param name="obj">Object instance to serialize.</param>
             <returns>JSON string representing the object instance.</returns>
         </member>
+        <member name="P:AppFramework.Core.Strings.BackgroundTasks.TextBackgroundAppDisabledStatus">
+            <summary>
+            Localized resource similar to "Background tasks have not been enabled for this app.Use the manage button and ensure this app has been enabled to run in the background."
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Account.TextAuthenticating">
+            <summary>
+            Localized resource similar to "Authenticating..."
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Account.TextNotApplicable">
+            <summary>
+            Localized resource similar to "N/A"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Account.TextSigningOut">
+            <summary>
+            Localized resource similar to "Signing out..."
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Account.TextSignout">
+            <summary>
+            Localized resource similar to "Sign out"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Account.TextSignoutConfirmation">
+            <summary>
+            Localized resource similar to "Are you sure you want to sign out?"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Account.TextUnauthorizedUser">
+            <summary>
+            Localized resource similar to "Unauthorized user..."
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Account.TextWebAccountManagerSignUpDescription">
+            <summary>
+            Localized resource similar to "Sign-In / Sign-Up with an account that you can associate with {0}."
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Location.TextDeterminingLocation">
+            <summary>
+            Localized resource similar to "Finding your location..."
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Location.TextDistanceAwayDisplay">
+            <summary>
+            Localized resource similar to "{0} {1} away"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Location.TextKilomentersLong">
+            <summary>
+            Localized resource similar to "Kilometers"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Location.TextKilomentersShort">
+            <summary>
+            Localized resource similar to "km"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Location.TextLocationServicesDisabledStatus">
+            <summary>
+            Localized resource similar to "Location access has not been enabled for this app. Use the manage button and ensure this app has been enabled to use location services."
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Location.TextMilesLong">
+            <summary>
+            Localized resource similar to "Miles"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Location.TextMilesShort">
+            <summary>
+            Localized resource similar to "mi"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.ApplicationProblemEmailBodyTemplate">
+             <summary>
+             Localized resource similar to "Please describe what you were doing when the problem occurred:
+            --------------------
+            
+            
+            --------------------"
+             </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.ApplicationProblemEmailSubjectTemplate">
+            <summary>
+            Localized resource similar to "{0} {1} auto-generated problem report"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.ApplicationProblemPromptMessage">
+            <summary>
+            Localized resource similar to "A problem occurred the last time you ran this application. Would you like to send us an email to report it?"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.ApplicationProblemPromptTitle">
+            <summary>
+            Localized resource similar to "Problem Report"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.ApplicationSharingBodyText">
+             <summary>
+             Localized resource similar to "Check out {0} from the Windows Store!
+            
+            {1}"
+             </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.ApplicationSupportEmailBodyTemplate">
+             <summary>
+             Localized resource similar to "Please provide and feedback you'd like to share with support:
+            --------------------
+            
+            
+            --------------------
+            
+            "
+             </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.ApplicationSupportEmailSubjectTemplate">
+            <summary>
+            Localized resource similar to "Feedback for {0} {1}"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.ClearAppCacheText">
+            <summary>
+            Localized resource similar to "Clear Cache"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.PromptRateApplicationEmailFeedbackMessage">
+            <summary>
+            Localized resource similar to "Would you like to send an e-mail with feedback instead?"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.PromptRateApplicationEmailFeedbackTitle">
+            <summary>
+            Localized resource similar to "Share feedback"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.PromptRateApplicationMessage">
+            <summary>
+            Localized resource similar to "Would you like to rate this application and provide feedback on how we can make things better?"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.PromptRateApplicationTitle">
+            <summary>
+            Localized resource similar to "Rate Application"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.TextCancel">
+            <summary>
+            Localized resource similar to "Cancel"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.TextCancellationRequested">
+            <summary>
+            Localized resource similar to "Canceled..."
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.TextErrorGeneric">
+            <summary>
+            Localized resource similar to "An unexpected error has occured. We apologize for any inconveniences here and we will be working to resolve this soon."
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.TextListNoData">
+            <summary>
+            Localized resource similar to "No items to display."
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.TextLoading">
+            <summary>
+            Localized resource similar to "Loading..."
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.TextMaybeLater">
+            <summary>
+            Localized resource similar to "Not right now"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.TextNo">
+            <summary>
+            Localized resource similar to "No"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.TextNoInternet">
+            <summary>
+            Localized resource similar to "No internet connection available. Connect to internet and try again."
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.TextNotApplicable">
+            <summary>
+            Localized resource similar to "N/A"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.TextOk">
+            <summary>
+            Localized resource similar to "OK"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.TextYes">
+            <summary>
+            Localized resource similar to "Yes"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.ViewTitlePrivacyPolicy">
+            <summary>
+            Localized resource similar to "Privacy Policy"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.ViewTitleTermsOfService">
+            <summary>
+            Localized resource similar to "Terms of Service"
+            </summary>
+        </member>
         <member name="P:AppFramework.Core.Strings.WebBrowser.TextGoBack">
             <summary>
             Localized resource similar to "Go back"

@@ -17,7 +17,7 @@
 // 	This code contains a helper class exposing property representations
 // 	of the string resources defined in the specified .ResW file
 // 
-// 	Generated: 03/17/2017 06:17:22
+// 	Generated: 04/25/2017 00:20:58
 // </auto-generatedInfo>
 // --------------------------------------------------------------------------------------------------
 namespace AppFramework.Core.Strings
@@ -32,23 +32,30 @@ namespace AppFramework.Core.Strings
         
         static Account()
         {
-            string executingAssemblyName;
-            executingAssemblyName = Windows.UI.Xaml.Application.Current.GetType().AssemblyQualifiedName;
-            string[] executingAssemblySplit;
-            executingAssemblySplit = executingAssemblyName.Split(',');
-            executingAssemblyName = executingAssemblySplit[1];
-            string currentAssemblyName;
-            currentAssemblyName = typeof(Account).AssemblyQualifiedName;
-            string[] currentAssemblySplit;
-            currentAssemblySplit = currentAssemblyName.Split(',');
-            currentAssemblyName = currentAssemblySplit[1];
-            if (executingAssemblyName.Equals(currentAssemblyName))
+            try
             {
-                resourceLoader = ResourceLoader.GetForCurrentView("Account");
+                string executingAssemblyName;
+                executingAssemblyName = Windows.UI.Xaml.Application.Current.GetType().AssemblyQualifiedName;
+                string[] executingAssemblySplit;
+                executingAssemblySplit = executingAssemblyName.Split(',');
+                executingAssemblyName = executingAssemblySplit[1];
+                string currentAssemblyName;
+                currentAssemblyName = typeof(Account).AssemblyQualifiedName;
+                string[] currentAssemblySplit;
+                currentAssemblySplit = currentAssemblyName.Split(',');
+                currentAssemblyName = currentAssemblySplit[1];
+                if (executingAssemblyName.Equals(currentAssemblyName))
+                {
+                    resourceLoader = ResourceLoader.GetForCurrentView("Account");
+                }
+                else
+                {
+                    resourceLoader = ResourceLoader.GetForCurrentView(currentAssemblyName + "/Account");
+                }
             }
-            else
+            catch (System.Exception )
             {
-                resourceLoader = ResourceLoader.GetForCurrentView(currentAssemblyName + "/Account");
+                resourceLoader = ResourceLoader.GetForViewIndependentUse(typeof(Account).AssemblyQualifiedName.Split(',')[1].Trim() + "/Account");
             }
         }
         

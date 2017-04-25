@@ -17,7 +17,7 @@
 // 	This code contains a helper class exposing property representations
 // 	of the string resources defined in the specified .ResW file
 // 
-// 	Generated: 03/17/2017 06:12:01
+// 	Generated: 04/25/2017 00:21:51
 // </auto-generatedInfo>
 // --------------------------------------------------------------------------------------------------
 namespace AppFramework.Core.Strings
@@ -32,24 +32,30 @@ namespace AppFramework.Core.Strings
         
         static Resources()
         {
-            string executingAssemblyName;
-            executingAssemblyName = Windows.UI.Xaml.Application.Current.GetType().AssemblyQualifiedName;
-            string[] executingAssemblySplit;
-            executingAssemblySplit = executingAssemblyName.Split(',');
-            executingAssemblyName = executingAssemblySplit[1];
-            string currentAssemblyName;
-            currentAssemblyName = typeof(Resources).AssemblyQualifiedName;
-            string[] currentAssemblySplit;
-            currentAssemblySplit = currentAssemblyName.Split(',');
-            currentAssemblyName = currentAssemblySplit[1];
-            if (executingAssemblyName.Equals(currentAssemblyName))
+            try
             {
-                resourceLoader = ResourceLoader.GetForCurrentView("Resources");
+                string executingAssemblyName;
+                executingAssemblyName = Windows.UI.Xaml.Application.Current.GetType().AssemblyQualifiedName;
+                string[] executingAssemblySplit;
+                executingAssemblySplit = executingAssemblyName.Split(',');
+                executingAssemblyName = executingAssemblySplit[1];
+                string currentAssemblyName;
+                currentAssemblyName = typeof(Resources).AssemblyQualifiedName;
+                string[] currentAssemblySplit;
+                currentAssemblySplit = currentAssemblyName.Split(',');
+                currentAssemblyName = currentAssemblySplit[1];
+                if (executingAssemblyName.Equals(currentAssemblyName))
+                {
+                    resourceLoader = ResourceLoader.GetForCurrentView("Resources");
+                }
+                else
+                {
+                    resourceLoader = ResourceLoader.GetForCurrentView(currentAssemblyName + "/Resources");
+                }
             }
-            else
+            catch (System.Exception )
             {
-                PlatformBase.Current.Logger.Log(LogLevels.Warning, currentAssemblyName + "/Resources");
-                resourceLoader = ResourceLoader.GetForCurrentView(currentAssemblyName + "/Resources");
+                resourceLoader = ResourceLoader.GetForViewIndependentUse(typeof(Resources).AssemblyQualifiedName.Split(',')[1].Trim() + "/Resources");
             }
         }
         
@@ -139,6 +145,17 @@ namespace AppFramework.Core.Strings
             get
             {
                 return resourceLoader.GetString("ApplicationSupportEmailSubjectTemplate");
+            }
+        }
+        
+        /// <summary>
+        /// Localized resource similar to "Clear Cache"
+        /// </summary>
+        public static string ClearAppCacheText
+        {
+            get
+            {
+                return resourceLoader.GetString("ClearAppCacheText");
             }
         }
         
