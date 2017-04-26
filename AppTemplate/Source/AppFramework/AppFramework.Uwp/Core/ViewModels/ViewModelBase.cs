@@ -877,7 +877,7 @@ namespace AppFramework.Core.ViewModels
 
         #region Caching
 
-        private static string APP_CACHE_PATH = $"{StorageManager.DATA_CACHE_FOLDER_NAME}\\{0}_{1}.data";
+        private static string APP_CACHE_PATH = StorageManager.DATA_CACHE_FOLDER_NAME + "\\{0}_{1}.data";
 
         /// <summary>
         /// Fills a property with data from the app cache if available.

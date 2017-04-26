@@ -4,6 +4,7 @@ using AppFramework.Core.Models;
 using Contoso.Core.Data;
 using Contoso.Core.Models;
 using Contoso.Core.Strings;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -31,6 +32,13 @@ namespace Contoso.Core.ViewModels
         {
             get { return _Items; }
             protected set { this.SetProperty(ref _Items, value); }
+        }
+
+        private DateTime _LastUpdated = DateTime.MinValue;
+        public DateTime LastUpdated
+        {
+            get { return _LastUpdated; }
+            protected set { this.SetProperty(ref _LastUpdated, value); }
         }
 
         public CommandBase SortCommand { get; private set; }
@@ -71,6 +79,7 @@ namespace Contoso.Core.ViewModels
             {
                 // Load from cache
                 this.Items = await this.LoadFromCacheAsync(() => this.Items) ?? new UniqueModelList<ItemModel>();
+                this.LastUpdated = await this.LoadFromCacheAsync(() => this.LastUpdated);
 
                 // Clear primary tile
                 this.Platform.Notifications.ClearTile(this);
@@ -87,10 +96,12 @@ namespace Contoso.Core.ViewModels
                 using (var api = new ClientApi())
                 {
                     this.Items.UpdateRange(await api.GetItems(ct), true);
+                    this.LastUpdated = DateTime.Now;
                 }
-                
+
                 // Save to cache
                 await this.SaveToCacheAsync(() => this.Items);
+                await this.SaveToCacheAsync(() => this.LastUpdated);
             }
         }
 
