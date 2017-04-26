@@ -480,11 +480,13 @@ namespace AppFramework.Core
         /// <param name="work">The work that needs to be performed.</param>
         public async void ExecuteBackgroundWork(IBackgroundTaskInstance taskInstance, Action<CancellationToken> work)
         {
-#if !DEBUG
-            // Check if the app is alread in the foreground and if so, don't run the agent
-            if (AgentSync.IsApplicationLaunched())
-                return;
-#endif
+            if (!PlatformBase.IsDebugMode)
+            {
+                // Check if the app is alread in the foreground and if so, don't run the agent
+                if (AgentSync.IsApplicationLaunched())
+                    return;
+            }
+
             BackgroundTaskRunInfo _info = new BackgroundTaskRunInfo();
 
             // Get a deferral, to prevent the task from closing prematurely 

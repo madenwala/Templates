@@ -1,5 +1,4 @@
 ﻿using AppFramework.Core;
-using AppFramework.Core.Extensions;
 using AppFramework.Core.Models;
 using Contoso.Core.Data;
 using Contoso.Core.Models;
@@ -10,7 +9,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.Background;
 
 namespace Contoso.Core
 {

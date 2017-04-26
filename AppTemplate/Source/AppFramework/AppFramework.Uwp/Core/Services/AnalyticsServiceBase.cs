@@ -104,9 +104,9 @@ namespace AppFramework.Core.Services
 
         public override void NewPageView(Type pageType)
         {
-#if !DEBUG
-            this.Services.ForEach(s => s.NewPageView(pageType));
-#endif
+            if(!PlatformBase.IsDebugMode)
+                this.Services.ForEach(s => s.NewPageView(pageType));
+
             PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, $"ANALYTICS: NewPageView({pageType.FullName})");
         }
 
@@ -115,10 +115,10 @@ namespace AppFramework.Core.Services
             if (ex == null)
                 throw new ArgumentNullException(nameof(ex));
 
-#if !DEBUG
-            this.Services.ForEach(s => s.Error(ex, message));
-#endif
-                PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, $"ANALYTICS: Error(\"{message}\", {ex.ToString()})");
+            if (!PlatformBase.IsDebugMode)
+                this.Services.ForEach(s => s.Error(ex, message));
+
+            PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, $"ANALYTICS: Error(\"{message}\", {ex.ToString()})");
         }
 
         public override void Event(string eventName, Dictionary<string, string> properties, Dictionary<string, double> metrics = null)
@@ -126,9 +126,9 @@ namespace AppFramework.Core.Services
             if (string.IsNullOrWhiteSpace(eventName))
                 throw new ArgumentNullException(nameof(eventName));
 
-#if !DEBUG
-            this.Services.ForEach(s => s.Event(eventName, properties, metrics));
-#endif
+            if (!PlatformBase.IsDebugMode)
+                this.Services.ForEach(s => s.Event(eventName, properties, metrics));
+
             PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, $"ANALYTICS: Event({eventName}, {Serializer.Serialize(properties)}, {Serializer.Serialize(metrics)})");
         }
 
@@ -136,7 +136,8 @@ namespace AppFramework.Core.Services
         {
             if (!string.IsNullOrWhiteSpace(username))
             {
-                this.Services.ForEach(s => s.SetUser(username));
+                if (!PlatformBase.IsDebugMode)
+                    this.Services.ForEach(s => s.SetUser(username));
                 PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, $"ANALYTICS: SetUser({username})");
             }
         }
