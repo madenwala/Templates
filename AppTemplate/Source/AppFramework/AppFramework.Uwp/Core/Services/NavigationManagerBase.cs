@@ -773,9 +773,13 @@ namespace AppFramework.Core.Services
         {
             get
             {
-                return PlatformBase.CurrentCore == null ? null : _NewWindowCommand ?? (_NewWindowCommand = new GenericCommand<ViewModelBase>("NavigateToNewWindowCommand", async (e) =>
+                return _NewWindowCommand ?? (_NewWindowCommand = new GenericCommand<ViewModelBase>("NavigateToNewWindowCommand", async (e) =>
                 {
-                    await this.NewWindow(e.View.GetType(), e.ViewParameter);
+                    if(e != null && e.View != null)
+                        await this.NewWindow(e.View.GetType(), e.ViewParameter);
+                    else
+                    { }
+                        ///PlatformBase.Current.Logger.
                 }));
             }
         }
