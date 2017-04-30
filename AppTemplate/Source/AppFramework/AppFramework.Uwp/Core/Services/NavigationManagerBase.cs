@@ -710,7 +710,7 @@ namespace AppFramework.Core.Services
         /// <param name="viewType">Type of the page requested in the secondary window.</param>
         /// <param name="parameter">Page parameter to pass to the new page instance.</param>
         /// <returns>Awaitable task is returned.</returns>
-        public async Task NewWindow(Type viewType, object parameter)
+        public virtual async Task NewWindow(Type viewType, object parameter)
         {
             try
             {
@@ -778,8 +778,7 @@ namespace AppFramework.Core.Services
                     if(e != null && e.View != null)
                         await this.NewWindow(e.View.GetType(), e.ViewParameter);
                     else
-                    { }
-                        ///PlatformBase.Current.Logger.
+                        PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, $"Could not open a new window with parameter {e.GetType().FullName} because it is not a ViewModelBase or ViewModelBase.View is null.");
                 }));
             }
         }
