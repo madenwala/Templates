@@ -106,16 +106,6 @@ namespace AppFramework.Core.Services
         }
 
         /// <summary>
-        /// Navigates to a page specified in the navigation request object.
-        /// </summary>
-        /// <param name="request">Request object instance.</param>
-        public void Navigate(NavigationRequest request)
-        {
-            if (request != null)
-                this.Frame.Navigate(Type.GetType(request.ViewType), this.SerializeParameter(request.ViewParameter));
-        }
-
-        /// <summary>
         /// Serializes a parameter to string if not a primitive type so that app suspension can properly happen.
         /// </summary>
         /// <param name="obj">Parameter object to serialize.</param>
@@ -705,7 +695,17 @@ namespace AppFramework.Core.Services
 
         #region Secondary Windows
 
-        protected abstract void NewWindow(NavigationRequest request);
+        /// <summary>
+        /// Navigates to a page specified in the navigation request object.
+        /// </summary>
+        /// <param name="request">Request object instance.</param>
+        public void Navigate(NavigationRequest request)
+        {
+            if (request != null)
+                this.Frame.Navigate(Type.GetType(request.ViewType), this.SerializeParameter(request.ViewParameter));
+        }
+
+        protected abstract void SecondaryWindow(NavigationRequest request);
 
         /// <summary>
         /// Launches another window with the specified page type.
@@ -732,7 +732,7 @@ namespace AppFramework.Core.Services
                     Window.Current.Content = frame;
 
                     // Navigate to a page within the new window based on the parameters of this method
-                    this.NewWindow(new NavigationRequest(viewType, this.SerializeParameter(parameter)));
+                    this.SecondaryWindow(new NavigationRequest(viewType, this.SerializeParameter(parameter)));
 
                     // Show the new window
                     Window.Current.Activate();
@@ -1059,13 +1059,9 @@ namespace AppFramework.Core.Models
     /// </summary>
     public sealed class NavigationRequest
     {
-        public NavigationRequest()
+        public NavigationRequest(Type viewType = null, object viewParameter = null)
         {
-        }
-
-        public NavigationRequest(Type viewType, object viewParameter = null)
-        {
-            this.ViewType = viewType.AssemblyQualifiedName;
+            this.ViewType = viewType?.AssemblyQualifiedName;
             this.ViewParameter = viewParameter;
         }
 

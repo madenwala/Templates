@@ -96,7 +96,7 @@ namespace Contoso.UI.Services
                 throw new NotImplementedException("Navigation not implemented for type " + parameter.GetType().Name);
         }
 
-        protected override void NewWindow(NavigationRequest request)
+        protected override void SecondaryWindow(NavigationRequest request)
         {
             this.Navigate(typeof(SecondaryWindowView), request);
         }
