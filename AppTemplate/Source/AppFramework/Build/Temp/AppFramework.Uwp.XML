@@ -2153,12 +2153,6 @@
             Indicates if the Window currently has a child frame. Used for SplitView pages where there is a child frame.
             </summary>
         </member>
-        <member name="M:AppFramework.Core.Services.NavigationManagerBase.Navigate(AppFramework.Core.Models.NavigationRequest)">
-            <summary>
-            Navigates to a page specified in the navigation request object.
-            </summary>
-            <param name="request">Request object instance.</param>
-        </member>
         <member name="M:AppFramework.Core.Services.NavigationManagerBase.SerializeParameter(System.Object)">
             <summary>
             Serializes a parameter to string if not a primitive type so that app suspension can properly happen.
@@ -2327,6 +2321,12 @@
             <summary>
             Command to navigate to the external web browser.
             </summary>
+        </member>
+        <member name="M:AppFramework.Core.Services.NavigationManagerBase.Navigate(AppFramework.Core.Models.NavigationRequest)">
+            <summary>
+            Navigates to a page specified in the navigation request object.
+            </summary>
+            <param name="request">Request object instance.</param>
         </member>
         <member name="M:AppFramework.Core.Services.NavigationManagerBase.NewWindow(System.Type,System.Object)">
             <summary>

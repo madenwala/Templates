@@ -108,10 +108,8 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\DirectReferenced\Contoso.BackgroundTasks\TimedWorkerTask.cs">
-      <Link>TimedWorkerTask.cs</Link>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimedWorkerTask.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Contoso.Core\Contoso.Core.Uwp.csproj">

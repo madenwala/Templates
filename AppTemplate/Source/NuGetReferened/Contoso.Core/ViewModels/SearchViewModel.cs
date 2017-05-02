@@ -27,7 +27,7 @@ namespace Contoso.Core.ViewModels
         public ModelList<ItemModel> Results
         {
             get { return _Results; }
-            protected set { this.SetProperty(ref _Results, value); }
+            private set { this.SetProperty(ref _Results, value); }
         }
 
         private string _SearchText;

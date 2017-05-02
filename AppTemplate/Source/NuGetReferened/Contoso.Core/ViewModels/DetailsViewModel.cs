@@ -41,7 +41,7 @@ namespace Contoso.Core.ViewModels
         public ItemModel Item
         {
             get { return _Item; }
-            protected set
+            private set
             {
                 if (this.SetProperty(ref _Item, value))
                     this.ID = value?.ID;
