@@ -604,7 +604,9 @@ namespace AppFramework.Core.Services
 
         #region Phone
 
-        public abstract void Phone(object model);
+        public virtual void Phone(object model)
+        {
+        }
 
         public void Phone(string phoneNumber, string displayName = null)
         {
