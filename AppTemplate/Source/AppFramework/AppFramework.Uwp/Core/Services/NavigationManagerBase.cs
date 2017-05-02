@@ -606,6 +606,7 @@ namespace AppFramework.Core.Services
 
         public virtual void Phone(object model)
         {
+            throw new NotImplementedException("Phone virtual method has not been overridden!");
         }
 
         public void Phone(string phoneNumber, string displayName = null)
