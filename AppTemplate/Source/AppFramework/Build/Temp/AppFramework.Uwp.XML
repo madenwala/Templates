@@ -16,11 +16,6 @@
             Gets access to the app info service of the platform currently executing.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase.AuthManager">
-            <summary>
-            Gets access to the cryptography provider of the platform currently executing.
-            </summary>
-        </member>
         <member name="P:AppFramework.Core.PlatformBase.BackgroundTasks">
             <summary>
             Gets access to the geocoding service adapter implement of the platform currently executing.
@@ -1798,11 +1793,6 @@
             Event used to notify subscribed objects of when a user logs in or out.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.Services.AuthorizationManagerBase.CurrentUser">
-            <summary>
-            Gets or sets the current user object representing a logged in user.
-            </summary>
-        </member>
         <member name="M:AppFramework.Core.Services.AuthorizationManagerBase.IsAuthenticated">
             <summary>
             Indicates whether or not a user is authenticated into this app.
@@ -1832,6 +1822,11 @@
             </summary>
             <param name="ct">Cancellation token.</param>
             <returns>User object representing the logged in user.</returns>
+        </member>
+        <member name="P:AppFramework.Core.Services.AuthorizationManagerBase`1.CurrentUser">
+            <summary>
+            Gets or sets the current user object representing a logged in user.
+            </summary>
         </member>
         <member name="T:AppFramework.Core.Services.BackgroundTasksManagerBase">
             <summary>

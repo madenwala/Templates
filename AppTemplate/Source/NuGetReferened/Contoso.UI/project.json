@@ -1,6 +1,6 @@
 ﻿{
   "dependencies": {
-    "AppFramework": "0.5.54-beta",
+    "AppFramework": "0.5.55-beta",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.3",
     "Microsoft.Services.Store.SDK": "10.1703.19001"
   },
