@@ -139,10 +139,6 @@
       <LastGenOutput>BackgroundTasks.cs</LastGenOutput>
       <CustomToolNamespace>AppFramework.Core.Strings</CustomToolNamespace>
     </PRIResource>
-    <Content Include="..\Build\VERSION">
-      <Link>VERSION</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -334,6 +330,12 @@
     <SDKReference Include="WindowsMobile, Version=10.0.14393.0">
       <Name>Windows Mobile Extensions for the UWP %28WindowsMobile, Version=10.0.14393.0%29</Name>
     </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Build\VERSION.txt">
+      <Link>VERSION.txt</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.12
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppFramework", "AppFramework", "{CB5D60BA-865B-480F-A205-7410FF7925D9}"
 EndProject
@@ -29,7 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{A48D194A
 		AppFramework\Build\Build.cmd = AppFramework\Build\Build.cmd
 		AppFramework\Build\Download-NuGet.cmd = AppFramework\Build\Download-NuGet.cmd
 		AppFramework\Build\nuget.exe = AppFramework\Build\nuget.exe
-		AppFramework\Build\VERSION = AppFramework\Build\VERSION
+		AppFramework\Build\VERSION.txt = AppFramework\Build\VERSION.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFramework.Uwp", "AppFramework\AppFramework.Uwp\AppFramework.Uwp.csproj", "{65F2272C-D17A-45BE-982A-C6637407657A}"

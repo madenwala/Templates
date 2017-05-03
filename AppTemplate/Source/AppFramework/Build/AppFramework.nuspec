@@ -52,6 +52,7 @@
     
     <!-- The lib file gets copied as a reference -->
     <file target="ref\uap10.0\AppFramework.Uwp\"	src="AppFramework.Uwp\bin\x86\release\*.xr.xml" />
+    <file target="ref\uap10.0\AppFramework.Uwp\"	src="Build\*.txt" />
     
     <!-- Change DLLs to have their platform version removed from it via corflags command https://github.com/NuGet/Home/issues/1221 -->
     <file target="ref\uap10.0\" src="Build\Temp\*" />
