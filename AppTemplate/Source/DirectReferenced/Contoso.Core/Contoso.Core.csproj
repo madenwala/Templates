@@ -108,32 +108,37 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <None Include="project.json" />
-    <PRIResource Include="Strings\en-US\Search.resw">
-      <Generator>ReswFileCodeGenerator</Generator>
-      <LastGenOutput>Search.cs</LastGenOutput>
-      <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
-    </PRIResource>
-    <PRIResource Include="Strings\en-US\Resources.resw">
-      <Generator>ReswFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.cs</LastGenOutput>
-      <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
-    </PRIResource>
-    <PRIResource Include="Strings\en-US\Location.resw">
-      <Generator>ReswFileCodeGenerator</Generator>
-      <LastGenOutput>Location.cs</LastGenOutput>
-      <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
-    </PRIResource>
-    <PRIResource Include="Strings\en-US\BackgroundTasks.resw">
-      <Generator>ReswFileCodeGenerator</Generator>
-      <LastGenOutput>BackgroundTasks.cs</LastGenOutput>
-      <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
-    </PRIResource>
-    <PRIResource Include="Strings\en-US\Account.resw">
+    <PRIResource Include="..\..\NuGetReferened\Contoso.Core\Strings\en-US\Account.resw">
+      <Link>Strings\en-US\Account.resw</Link>
       <Generator>ReswFileCodeGenerator</Generator>
       <LastGenOutput>Account.cs</LastGenOutput>
       <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
     </PRIResource>
+    <PRIResource Include="..\..\NuGetReferened\Contoso.Core\Strings\en-US\BackgroundTasks.resw">
+      <Link>Strings\en-US\BackgroundTasks.resw</Link>
+      <Generator>ReswFileCodeGenerator</Generator>
+      <LastGenOutput>BackgroundTasks.cs</LastGenOutput>
+      <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
+    </PRIResource>
+    <PRIResource Include="..\..\NuGetReferened\Contoso.Core\Strings\en-US\Location.resw">
+      <Link>Strings\en-US\Location.resw</Link>
+      <Generator>ReswFileCodeGenerator</Generator>
+      <LastGenOutput>Location.cs</LastGenOutput>
+      <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
+    </PRIResource>
+    <PRIResource Include="..\..\NuGetReferened\Contoso.Core\Strings\en-US\Resources.resw">
+      <Link>Strings\en-US\Resources.resw</Link>
+      <Generator>ReswFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.cs</LastGenOutput>
+      <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
+    </PRIResource>
+    <PRIResource Include="..\..\NuGetReferened\Contoso.Core\Strings\en-US\Search.resw">
+      <Link>Strings\en-US\Search.resw</Link>
+      <Generator>ReswFileCodeGenerator</Generator>
+      <LastGenOutput>Search.cs</LastGenOutput>
+      <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
+    </PRIResource>
+    <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\NuGetReferened\Contoso.Core\Data\ClientApi.cs">
@@ -177,6 +182,36 @@
     </Compile>
     <Compile Include="..\..\NuGetReferened\Contoso.Core\Services\SharingManager.cs">
       <Link>Services\SharingManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NuGetReferened\Contoso.Core\Strings\en-US\Account.cs">
+      <Link>Strings\en-US\Account.cs</Link>
+      <DependentUpon>Account.resw</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="..\..\NuGetReferened\Contoso.Core\Strings\en-US\BackgroundTasks.cs">
+      <Link>Strings\en-US\BackgroundTasks.cs</Link>
+      <DependentUpon>BackgroundTasks.resw</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="..\..\NuGetReferened\Contoso.Core\Strings\en-US\Location.cs">
+      <Link>Strings\en-US\Location.cs</Link>
+      <DependentUpon>Location.resw</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="..\..\NuGetReferened\Contoso.Core\Strings\en-US\Resources.cs">
+      <Link>Strings\en-US\Resources.cs</Link>
+      <DependentUpon>Resources.resw</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="..\..\NuGetReferened\Contoso.Core\Strings\en-US\Search.cs">
+      <Link>Strings\en-US\Search.cs</Link>
+      <DependentUpon>Search.resw</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="..\..\NuGetReferened\Contoso.Core\ViewModels\AccountForgotViewModel.cs">
       <Link>ViewModels\AccountForgotViewModel.cs</Link>
@@ -222,31 +257,6 @@
     </Compile>
     <Compile Include="..\..\NuGetReferened\Contoso.Core\ViewModels\_NewViewModel.cs">
       <Link>ViewModels\_NewViewModel.cs</Link>
-    </Compile>
-    <Compile Include="Strings\en-US\Account.cs">
-      <DependentUpon>Account.resw</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Strings\en-US\BackgroundTasks.cs">
-      <DependentUpon>BackgroundTasks.resw</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Strings\en-US\Location.cs">
-      <DependentUpon>Location.resw</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Strings\en-US\Resources.cs">
-      <DependentUpon>Resources.resw</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Strings\en-US\Search.cs">
-      <DependentUpon>Search.resw</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
     </Compile>
   </ItemGroup>
   <ItemGroup>
