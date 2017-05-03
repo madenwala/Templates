@@ -9,7 +9,7 @@ using Windows.Storage;
 
 namespace Contoso.Core.Services
 {
-    public sealed class AuthorizationManager : AppFramework.Core.Services.AuthorizationManagerBase
+    public sealed class AuthorizationManager : AppFramework.Core.Services.AuthorizationManagerBase<UserResponse>
     {
         #region Variables
 
@@ -20,21 +20,6 @@ namespace Contoso.Core.Services
         #endregion
 
         #region Properties
-        
-        public UserResponse CurrentUserData
-        {
-            get { return base.CurrentUser as UserResponse; }
-        }
-
-        public override IAuthenticatedUserProfile CurrentUser
-        {
-            get => base.CurrentUser;
-            protected set
-            {
-                base.CurrentUser = value;
-                this.NotifyPropertyChanged(() => this.CurrentUserData);
-            }
-        }
 
         private string _AccessToken;
         public string AccessToken
@@ -68,7 +53,7 @@ namespace Contoso.Core.Services
         /// <returns>True if the user is authenticated else false.</returns>
         public override bool IsAuthenticated()
         {
-            return !string.IsNullOrEmpty(this.CurrentUserData?.AccessToken);
+            return !string.IsNullOrEmpty(this.CurrentUser?.AccessToken);
         }
 
         /// <summary>
@@ -90,8 +75,8 @@ namespace Contoso.Core.Services
             this.CurrentUser = await Platform.Current.Storage.LoadFileAsync<UserResponse>(CREDENTIAL_USER_KEYNAME, ApplicationData.Current.RoamingFolder, SerializerTypes.Json);
             if (this.CurrentUser != null)
             {
-                this.CurrentUserData.AccessToken = this.AccessToken;
-                this.CurrentUserData.RefreshToken = this.RefreshToken;
+                this.CurrentUser.AccessToken = this.AccessToken;
+                this.CurrentUser.RefreshToken = this.RefreshToken;
                 Platform.Current.Analytics.SetUser(this.CurrentUser);
                 this.IsReauthenticationNeeded = true;
             }
@@ -158,7 +143,7 @@ namespace Contoso.Core.Services
             {
                 using (ClientApi api = new ClientApi(true))
                 {
-                    return await api.AuthenticateAsync(this.CurrentUserData.AccessToken, ct);
+                    return await api.AuthenticateAsync(this.CurrentUser.AccessToken, ct);
                 }
             }
             catch (Exception ex)

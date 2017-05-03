@@ -23,15 +23,6 @@ namespace AppFramework.Core
         }
 
         /// <summary>
-        /// Gets access to the cryptography provider of the platform currently executing.
-        /// </summary>
-        internal AuthorizationManagerBase AuthManager
-        {
-            get { return GetService<AuthorizationManagerBase>(); }
-            private set { SetService(value); }
-        }
-
-        /// <summary>
         /// Gets access to the geocoding service adapter implement of the platform currently executing.
         /// </summary>
         internal BackgroundTasksManagerBase BackgroundTasks

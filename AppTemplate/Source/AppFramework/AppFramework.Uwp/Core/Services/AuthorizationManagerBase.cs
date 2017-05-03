@@ -18,17 +18,15 @@ namespace AppFramework.Core.Services
 
         #region Properties
 
-        private IAuthenticatedUserProfile _currentUser;
-        /// <summary>
-        /// Gets or sets the current user object representing a logged in user.
-        /// </summary>
-        public virtual IAuthenticatedUserProfile CurrentUser
-        {
-            get { return _currentUser; }
-            protected set { this.SetProperty(ref _currentUser, value); }
-        }
-
         internal protected bool IsReauthenticationNeeded { internal get; set; }
+
+        #endregion
+
+        #region Constructors
+
+        internal AuthorizationManagerBase()
+        {
+        }
 
         #endregion
 
@@ -66,6 +64,23 @@ namespace AppFramework.Core.Services
         /// <param name="ct">Cancellation token.</param>
         /// <returns>User object representing the logged in user.</returns>
         protected internal abstract Task<IAuthenticatedUserProfile> GetRefreshAccessToken(CancellationToken ct);
+
+        #endregion
+    }
+
+    public abstract class AuthorizationManagerBase<U> : AuthorizationManagerBase where U : IAuthenticatedUserProfile
+    {
+        #region Properties
+
+        private U _currentUser;
+        /// <summary>
+        /// Gets or sets the current user object representing a logged in user.
+        /// </summary>
+        public U CurrentUser
+        {
+            get { return _currentUser; }
+            protected set { this.SetProperty(ref _currentUser, value); }
+        }
 
         #endregion
     }

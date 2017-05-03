@@ -137,7 +137,7 @@
                                     <Ellipse.Fill>
                                         <ImageBrush>
                                             <ImageBrush.ImageSource>
-                                                <BitmapImage DecodePixelHeight="32" DecodePixelWidth="32" UriSource="{Binding ViewModel.Platform.AuthManager.CurrentUserData.ProfileImageURL, Mode=OneWay, FallbackValue={x:Null}}" />
+                                                <BitmapImage DecodePixelHeight="32" DecodePixelWidth="32" UriSource="{Binding ViewModel.Platform.AuthManager.CurrentUser.ProfileImageURL, Mode=OneWay, FallbackValue={x:Null}}" />
                                             </ImageBrush.ImageSource>
                                         </ImageBrush>
                                     </Ellipse.Fill>
