@@ -100,6 +100,8 @@ namespace Contoso.Core
             this.Notifications = new NotificationsManager();
             this.SharingManager = new SharingManager();
             this.Geolocation = new AppFramework.Core.Services.GeolocationService();
+
+            this.IsFirstRunCheckEnabled = true;
         }
 
         #endregion

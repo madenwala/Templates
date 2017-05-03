@@ -104,6 +104,14 @@ namespace AppFramework.Core
             protected set { this.SetProperty(ref _ViewModelCore, value); }
         }
 
+        public bool IsFirstRunCheckEnabled { get; protected set; }
+
+        public bool IsFirstRun { get; private set; }
+
+        public bool IsFirstRunAfterUpdate { get; private set; }
+
+        public Version PreviousAppVersion { get; private set; }
+
         #endregion Properties
 
         #region Constructors
@@ -189,6 +197,9 @@ namespace AppFramework.Core
                 this.Analytics.Event("OS-Version", Microsoft.Toolkit.Uwp.Helpers.SystemInformation.OperatingSystemVersion);
                 this.Analytics.Event("CurrentCulture", System.Globalization.CultureInfo.CurrentCulture.Name);
                 this.Analytics.Event("CurrentUICulture", System.Globalization.CultureInfo.CurrentUICulture.Name);
+
+                if(this.IsFirstRunCheckEnabled)
+                    await this.FirstRunCheck();
             }
             this.Logger.Log(LogLevels.Debug, "Initializing services is complete!");
 
@@ -545,6 +556,42 @@ namespace AppFramework.Core
                 PlatformBase.CurrentCore.AppSuspending();
                 deferral.Complete();
             }
+        }
+
+        #endregion
+
+        #region First Run
+
+        private async Task FirstRunCheck()
+        {
+            this.IsFirstRun = false;
+            this.IsFirstRunAfterUpdate = false;
+            string lastAppVersion = PlatformBase.CurrentCore.Storage.LoadSetting<string>("LastAppVersion");
+            string currentAppVersion = PlatformBase.CurrentCore.AppInfo.VersionNumber.ToString();
+
+            if (string.IsNullOrEmpty(lastAppVersion))
+            {
+                this.IsFirstRun = true;
+                await this.AppFirstRun();
+                this.Storage.SaveSetting("LastAppVersion", currentAppVersion);
+            }
+            else if (lastAppVersion != currentAppVersion)
+            {
+                PlatformBase.CurrentCore.Logger.Log(LogLevels.Warning, "App has been updated from version {0} to version {1}", lastAppVersion, currentAppVersion);
+                this.IsFirstRunAfterUpdate = true;
+                await this.AppFirstRunAfterUpdate(new Version(lastAppVersion));
+                this.Storage.SaveSetting("LastAppVersion", currentAppVersion);
+            }
+        }
+
+        protected virtual Task AppFirstRun()
+        {
+            return Task.CompletedTask;
+        }
+
+        protected virtual Task AppFirstRunAfterUpdate(Version previousVersion)
+        {
+            return Task.CompletedTask;
         }
 
         #endregion
