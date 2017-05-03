@@ -28,15 +28,6 @@ namespace Contoso.Core.ViewModels
         [System.Runtime.Serialization.IgnoreDataMember()]
         public WelcomeViewModel ViewModel { get { return this; } }
 
-        private CommandBase _LaunchWebAccountManagerCommand = null;
-        /// <summary>
-        /// Command to access Web Account Manager
-        /// </summary>
-        public CommandBase LaunchWebAccountManagerCommand
-        {
-            get { return _LaunchWebAccountManagerCommand ?? (_LaunchWebAccountManagerCommand = new GenericCommand("LaunchWebAccountManagerCommand", async () => await this.LaunchWebAccountManager())); }
-        }
-
         #endregion Properties
 
         #region Constructors
@@ -61,7 +52,29 @@ namespace Contoso.Core.ViewModels
 
             return base.OnLoadStateAsync(e);
         }
-        
+
+        public override void Dispose()
+        {
+            // Terminate any open tasks
+            if (_cts?.IsCancellationRequested == false)
+                _cts?.Cancel();
+            _cts?.Dispose();
+            _cts = null;
+
+            base.Dispose();
+        }
+
+        #region MSA Account Support
+
+        private CommandBase _LaunchWebAccountManagerCommand = null;
+        /// <summary>
+        /// Command to access Web Account Manager
+        /// </summary>
+        public CommandBase LaunchWebAccountManagerCommand
+        {
+            get { return _LaunchWebAccountManagerCommand ?? (_LaunchWebAccountManagerCommand = new GenericCommand("LaunchWebAccountManagerCommand", async () => await this.LaunchWebAccountManager())); }
+        }
+
         /// <summary>
         /// Launches the WebAccountManager (WAM)
         /// </summary>
@@ -127,16 +140,7 @@ namespace Contoso.Core.ViewModels
             }
         }
 
-        public override void Dispose()
-        {
-            // Terminate any open tasks
-            if (_cts?.IsCancellationRequested == false)
-                _cts?.Cancel();
-            _cts?.Dispose();
-            _cts = null;
-
-            base.Dispose();
-        }
+        #endregion
 
         #endregion Methods
     }

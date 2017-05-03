@@ -43,15 +43,6 @@ namespace Contoso.Core.ViewModels
             }
         }
 
-        private CommandBase _LaunchWebAccountManagerCommand = null;
-        /// <summary>
-        /// Command to access Web Account Manager
-        /// </summary>
-        public CommandBase LaunchWebAccountManagerCommand
-        {
-            get { return _LaunchWebAccountManagerCommand ?? (_LaunchWebAccountManagerCommand = new GenericCommand("LaunchWebAccountManagerCommand", async () => await this.LaunchWebAccountManager())); }
-        }
-
         private string _FirstName;
         public string FirstName
         {
@@ -183,22 +174,6 @@ namespace Contoso.Core.ViewModels
             return base.OnLoadStateAsync(e);
         }
 
-        internal void Populate(MicrosoftAccountDetails msa)
-        {
-            if (msa == null)
-                return;
-
-            this.FirstName = msa.first_name;
-            this.LastName = msa.last_name;
-            this.Username = msa.emails.account;
-            this.Address1 = msa.addresses?.personal?.street;
-            this.Address2 = msa.addresses?.personal?.street_2?.ToString();
-            this.City = msa.addresses?.personal?.city;
-            this.State = msa.addresses?.personal?.state;
-            this.PostalCode = msa.addresses?.personal?.postal_code;
-            this.DOB = new DateTime(msa.birth_year, msa.birth_month, msa.birth_day);
-        }
-
         private void CheckIfValid()
         {
             this.IsSubmitEnabled =
@@ -242,6 +217,33 @@ namespace Contoso.Core.ViewModels
             {
                 this.CheckIfValid();
             }
+        }
+
+        #region MSA Account Support
+
+        private CommandBase _LaunchWebAccountManagerCommand = null;
+        /// <summary>
+        /// Command to access Web Account Manager
+        /// </summary>
+        public CommandBase LaunchWebAccountManagerCommand
+        {
+            get { return _LaunchWebAccountManagerCommand ?? (_LaunchWebAccountManagerCommand = new GenericCommand("LaunchWebAccountManagerCommand", async () => await this.LaunchWebAccountManager())); }
+        }
+
+        internal void Populate(MicrosoftAccountDetails msa)
+        {
+            if (msa == null)
+                return;
+
+            this.FirstName = msa.first_name;
+            this.LastName = msa.last_name;
+            this.Username = msa.emails.account;
+            this.Address1 = msa.addresses?.personal?.street;
+            this.Address2 = msa.addresses?.personal?.street_2?.ToString();
+            this.City = msa.addresses?.personal?.city;
+            this.State = msa.addresses?.personal?.state;
+            this.PostalCode = msa.addresses?.personal?.postal_code;
+            this.DOB = new DateTime(msa.birth_year, msa.birth_month, msa.birth_day);
         }
 
         private async Task LaunchWebAccountManager()
@@ -289,6 +291,8 @@ namespace Contoso.Core.ViewModels
                 this.Platform.Logger.LogError(ex, "Failed to perform work during WAM failure");
             }
         }
+
+        #endregion
 
         #endregion
     }
