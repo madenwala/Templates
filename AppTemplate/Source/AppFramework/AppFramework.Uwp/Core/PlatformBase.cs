@@ -198,8 +198,6 @@ namespace AppFramework.Core
                 this.Analytics.Event("CurrentCulture", System.Globalization.CultureInfo.CurrentCulture.Name);
                 this.Analytics.Event("CurrentUICulture", System.Globalization.CultureInfo.CurrentUICulture.Name);
 
-                if(this.IsFirstRunCheckEnabled)
-                    await this.FirstRunCheck();
             }
             this.Logger.Log(LogLevels.Debug, "Initializing services is complete!");
 
@@ -562,7 +560,7 @@ namespace AppFramework.Core
 
         #region First Run
 
-        private async Task FirstRunCheck()
+        internal async Task FirstRunCheck()
         {
             this.IsFirstRun = false;
             this.IsFirstRunAfterUpdate = false;
@@ -697,6 +695,9 @@ namespace AppFramework.Core
                 this.Logger.LogError(ex, "Error while excuting OnAppInitializingAsync");
                 throw ex;
             }
+            
+            if (this.IsFirstRunCheckEnabled)
+                await this.FirstRunCheck();
         }
 
         public override void AppSuspending()
