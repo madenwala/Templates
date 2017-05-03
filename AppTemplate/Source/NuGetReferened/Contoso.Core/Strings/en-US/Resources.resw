@@ -422,4 +422,7 @@ Show me details of Runtime 13</value>
   <data name="TextYes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="tbAppFrameworkVersion.Text" xml:space="preserve">
+    <value>App Framework Version</value>
+  </data>
 </root>

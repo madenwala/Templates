@@ -34,7 +34,9 @@
 
                     <TextBlock x:Uid="/Contoso.Core/Resources/tbVersion" Text="[Version]" Style="{StaticResource SubtitleTextBlockStyle}" />
                     <TextBlock Text="{Binding ViewModel.Platform.AppInfo.VersionNumber}" />
-
+                    <Border Height="{StaticResource SpacerHeight}" />
+                    <TextBlock x:Uid="/Contoso.Core/Resources/tbAppFrameworkVersion" Text="[App Framework Version]" Style="{StaticResource SubtitleTextBlockStyle}" />
+                    <TextBlock Text="{x:Bind ViewModel.AppFrameworkVersionNumber, Mode=OneWay}" />
                     <Border Height="{StaticResource SpacerHeight}" />
 
                     <TextBlock x:Uid="/Contoso.Core/Resources/tbSupport" Text="[Support]" Style="{StaticResource SubtitleTextBlockStyle}" />

@@ -1,11 +1,14 @@
 ﻿using AppFramework.Core.Commands;
+using AppFramework.Core.Extensions;
 using AppFramework.Core.Models;
 using AppFramework.Core.Strings;
 using System;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Devices.Geolocation;
+using Windows.Storage;
 
 namespace AppFramework.Core.ViewModels
 {
@@ -41,7 +44,6 @@ namespace AppFramework.Core.ViewModels
             get { return _AppCacheTask; }
             private set { this.SetProperty(ref _AppCacheTask, value); }
         }
-
 
         private string _AppCacheText = Resources.ClearAppCacheText;
         public string AppCacheText
@@ -89,6 +91,14 @@ namespace AppFramework.Core.ViewModels
             }
         }
 
+
+        private string _AppFrameworkVersion;
+        public string AppFrameworkVersionNumber
+        {
+            get { return _AppFrameworkVersion; }
+            private set { this.SetProperty(ref _AppFrameworkVersion, value); }
+        }
+
         #endregion
 
         #region Constructors
@@ -114,6 +124,19 @@ namespace AppFramework.Core.ViewModels
         {
             if(this.View != null)
                 this.View.GotFocus += View_GotFocus;
+            
+            try
+            {
+                var assembly = typeof(TypeUtility).GetTypeInfo().Assembly.GetName().Name;
+                string filename = $"ms-appx:///{assembly}/VERSION";
+                Uri appUri = new Uri(filename);//File name should be prefixed with 'ms-appx:///Assets/* 
+                StorageFile file = StorageFile.GetFileFromApplicationUriAsync(appUri).AsTask().ConfigureAwait(false).GetAwaiter().GetResult();
+                this.AppFrameworkVersionNumber = await file.ReadAllTextAsync();
+            }
+            catch(Exception)
+            {
+                this.AppFrameworkVersionNumber = "N/A";
+            }
 
             await base.OnLoadStateAsync(e);
         }

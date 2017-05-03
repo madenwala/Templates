@@ -272,20 +272,8 @@ namespace AppFramework.Core.Services
                 // Retrieve the file from that folder
                 StorageFile textFile = await destinationFolder.GetFileAsync(Path.GetFileName(path));
 
-                // Read the whole file as a string.
-                string contents = null;
-                using (IRandomAccessStream textStream = await textFile.OpenReadAsync())
-                {
-                    using (DataReader textReader = new DataReader(textStream))
-                    {
-                        uint textLength = (uint)textStream.Size;
-                        await textReader.LoadAsync(textLength);
-                        contents = textReader.ReadString(textLength);
-                    }
-                }
-
                 // Return the entire contents of the file as a string.
-                return contents;
+                return await textFile.ReadAllTextAsync();
             }
             catch (FileNotFoundException)
             {
