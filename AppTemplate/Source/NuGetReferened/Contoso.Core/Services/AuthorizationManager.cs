@@ -78,7 +78,7 @@ namespace Contoso.Core.Services
                 this.CurrentUser.AccessToken = this.AccessToken;
                 this.CurrentUser.RefreshToken = this.RefreshToken;
                 Platform.Current.Analytics.SetUser(this.CurrentUser);
-                this.EnableReauthenticationOnLoad = true;
+                this.IsReauthenticationNeeded = true;
             }
 
             // Notify any subscribers that authentication status has changed
@@ -102,7 +102,7 @@ namespace Contoso.Core.Services
             }
             else
             {
-                this.EnableReauthenticationOnLoad = false;
+                this.IsReauthenticationNeeded = false;
 
                 // Log user
                 Platform.Current.Analytics.SetUser(user);
