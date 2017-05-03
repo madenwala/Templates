@@ -28,6 +28,8 @@ namespace AppFramework.Core.Services
             protected set { this.SetProperty(ref _currentUser, value); }
         }
 
+        internal protected bool IsReauthenticationNeeded { internal get; set; }
+
         #endregion
 
         #region Methods
