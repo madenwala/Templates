@@ -572,24 +572,24 @@ namespace AppFramework.Core
             if (string.IsNullOrEmpty(lastAppVersion))
             {
                 this.IsFirstRun = true;
-                await this.AppFirstRun();
+                await this.OnAppFirstRunAsync();
                 this.Storage.SaveSetting("LastAppVersion", currentAppVersion);
             }
             else if (lastAppVersion != currentAppVersion)
             {
                 PlatformBase.CurrentCore.Logger.Log(LogLevels.Warning, "App has been updated from version {0} to version {1}", lastAppVersion, currentAppVersion);
                 this.IsFirstRunAfterUpdate = true;
-                await this.AppFirstRunAfterUpdate(new Version(lastAppVersion));
+                await this.OnAppFirstRunAfterUpdateAsync(new Version(lastAppVersion));
                 this.Storage.SaveSetting("LastAppVersion", currentAppVersion);
             }
         }
 
-        protected virtual Task AppFirstRun()
+        protected virtual Task OnAppFirstRunAsync()
         {
             return Task.CompletedTask;
         }
 
-        protected virtual Task AppFirstRunAfterUpdate(Version previousVersion)
+        protected virtual Task OnAppFirstRunAfterUpdateAsync(Version previousVersion)
         {
             return Task.CompletedTask;
         }
