@@ -1021,7 +1021,7 @@ namespace AppFramework.Core.ViewModels
         private async Task<bool> RefreshAccessTokenAsync(CancellationToken ct)
         {
             var auth = PlatformBase.GetService<AuthorizationManagerBase>();
-            if (auth != null && auth.IsAuthenticated())
+            if (auth != null)
             {
                 PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, "Attempting to refresh access token...");
                 try
@@ -1038,12 +1038,20 @@ namespace AppFramework.Core.ViewModels
                 }
                 catch(Exception ex)
                 {
-                    PlatformBase.CurrentCore.Logger.LogError(ex, "Error while trying to refresh access token. Allowing ");
-                    return true;
+                    if (GeneralFunctions.IsNoInternetException(ex))
+                    {
+                        PlatformBase.CurrentCore.Logger.LogError(ex, "Could not refresh access token due to no internet. Allowing users to pass refresh token check.");
+                        return true;
+                    }
+                    else
+                    {
+                        PlatformBase.CurrentCore.Logger.LogError(ex, "Error while trying to refresh access token.");
+                        return false;
+                    }
                 }
             }
 
-            return false;
+            return true;
         }
 
         private void AuthenticationManager_UserAuthenticated(object sender, bool e)
