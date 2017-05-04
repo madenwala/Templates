@@ -370,21 +370,15 @@ namespace AppFramework.Core.ViewModels
             }
             else
             {
-                switch (ex.HResult)
+                if (GeneralFunctions.IsNoInternetException(ex))
                 {
-                    case E_WINHTTP_CANNOT_CONNECT:
-                    case E_WINHTTP_CONNECTION_ERROR:
-                    case E_WINHTTP_NAME_NOT_RESOLVED:
-                    case E_WINHTTP_TIMEOUT:
-                    case -2146233088:
-                        this.ShowStatus(Strings.Resources.TextNoInternet);
-                        PlatformBase.CurrentCore.Logger.Log(LogLevels.Warning, "{0}.{1} - No internet ({0} Parameters: {2}) {3}", this.GetType().Name, callerName, this.ViewParameter, message);
-                        break;
-
-                    default:
-                        this.ShowStatus(Strings.Resources.TextErrorGeneric);
-                        PlatformBase.CurrentCore.Logger.LogError(ex, "{0}.{1} - threw {2} {3} ({0} Parameters: {4}) {5}", this.GetType().Name, callerName, ex.GetType().Name, ex.HResult, this.ViewParameter, message);
-                        break;
+                    this.ShowStatus(Strings.Resources.TextNoInternet);
+                    PlatformBase.CurrentCore.Logger.Log(LogLevels.Warning, "{0}.{1} - No internet ({0} Parameters: {2}) {3}", this.GetType().Name, callerName, this.ViewParameter, message);
+                }
+                else
+                {
+                    this.ShowStatus(Strings.Resources.TextErrorGeneric);
+                    PlatformBase.CurrentCore.Logger.LogError(ex, "{0}.{1} - threw {2} {3} ({0} Parameters: {4}) {5}", this.GetType().Name, callerName, ex.GetType().Name, ex.HResult, this.ViewParameter, message);
                 }
             }
         }
