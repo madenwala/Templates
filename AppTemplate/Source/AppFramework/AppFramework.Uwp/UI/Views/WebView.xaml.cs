@@ -9,7 +9,7 @@ namespace AppFramework.UI.Views
     {
     }
 
-    public sealed partial class WebView : WebViewBase
+    public partial class WebView : WebViewBase
     {
         public WebView()
         {
