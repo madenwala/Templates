@@ -101,11 +101,6 @@ namespace Contoso.UI.Services
             this.Navigate(typeof(SecondaryWindowView), request);
         }
 
-        protected override void WebView(object parameter)
-        {
-            this.Navigate(typeof(WebBrowserView), parameter);
-        }
-
         public override void Settings(object parameter = null)
         {
             this.Navigate(typeof(SettingsView), parameter);

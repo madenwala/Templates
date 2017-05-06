@@ -112,6 +112,9 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Compile Include="UI\Views\WebView.xaml.cs">
+      <DependentUpon>WebView.xaml</DependentUpon>
+    </Compile>
     <PRIResource Include="Core\Strings\en-US\WebBrowser.resw">
       <Generator>ReswFileCodeGenerator</Generator>
       <LastGenOutput>WebBrowser.cs</LastGenOutput>
@@ -226,7 +229,7 @@
     <Compile Include="Core\ViewModels\CollectionViewModelBase.cs" />
     <Compile Include="Core\ViewModels\IViewModel.cs" />
     <Compile Include="Core\ViewModels\ViewModelBase.cs" />
-    <Compile Include="Core\ViewModels\WebBrowserViewModel.cs" />
+    <Compile Include="Core\ViewModels\WebViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\App.cs" />
     <Compile Include="UI\Behaviors\EnterKeyBehavior.cs" />
@@ -310,6 +313,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="UI\Views\WebView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

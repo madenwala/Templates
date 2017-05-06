@@ -121,7 +121,7 @@ namespace AppFramework.Core.ViewModels
             {
                 PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "CollectionViewModelBase.SetCurrent to {0}", vm);
                 this.CurrentViewModel.PropertyChanged += CurrentVM_PropertyChanged;
-                if (this.CurrentViewModel is WebBrowserViewModel)
+                if (this.CurrentViewModel is WebViewModel)
                     this.CopyStatus(null);
                 else
                     this.CopyStatus(this.CurrentViewModel);
@@ -200,7 +200,7 @@ namespace AppFramework.Core.ViewModels
                 case nameof(this.StatusIsBlockingCancelable):
                 case nameof(this.StatusProgressValue):
                 case nameof(this.StatusText):
-                    if (this.CurrentViewModel is WebBrowserViewModel)
+                    if (this.CurrentViewModel is WebViewModel)
                         this.CopyStatus(null);
                     else
                         this.CopyStatus(this.CurrentViewModel);

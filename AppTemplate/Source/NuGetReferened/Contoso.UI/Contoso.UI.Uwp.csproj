@@ -147,9 +147,6 @@
       <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ViewBase.cs" />
-    <Compile Include="Views\WebBrowserView.xaml.cs">
-      <DependentUpon>WebBrowserView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\WelcomeView.xaml.cs">
       <DependentUpon>WelcomeView.xaml</DependentUpon>
     </Compile>
@@ -337,10 +334,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ShellView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\WebBrowserView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

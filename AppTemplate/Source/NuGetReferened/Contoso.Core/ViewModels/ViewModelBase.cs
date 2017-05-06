@@ -47,7 +47,7 @@
         #endregion
     }
 
-    public class WebViewModel : AppFramework.Core.ViewModels.WebBrowserViewModel, IViewModel
+    public class WebViewModel : AppFramework.Core.ViewModels.WebViewModel, IViewModel
     {
         #region Properties
 

@@ -305,6 +305,7 @@
       <RootProperty Name="HeaderForeground" />
       <RootProperty Name="HeaderBackground" />
       <RootProperty Name="ContainerTemplate" />
+      <RootProperty Name="BodyContent" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ControlTemplate">
       <RootProperty Name="TargetType" />
@@ -442,5 +443,9 @@
     <RootType FullName="Windows.UI.Xaml.Media.Animation.PointerDownThemeAnimation" />
     <RootType FullName="Windows.UI.Xaml.Media.Animation.PointerUpThemeAnimation" />
     <RootType FullName="AppFramework.UI.Resources.Common" />
+    <RootType FullName="AppFramework.UI.Views.WebViewBase">
+      <RootProperty Name="Content" />
+    </RootType>
+    <RootType FullName="AppFramework.UI.Views.WebView" />
   </Roots.RootTypes>
 </Roots>

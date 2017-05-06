@@ -3,6 +3,7 @@ using AppFramework.Core.Extensions;
 using AppFramework.Core.Models;
 using AppFramework.Core.ViewModels;
 using AppFramework.UI.Controls;
+using AppFramework.UI.Views;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -125,7 +126,7 @@ namespace AppFramework.Core.Services
                 return false;
             else
             {
-                if (this.Frame.DataContext is WebBrowserViewModel && (this.Frame.DataContext as WebBrowserViewModel).BrowserCanGoBack())
+                if (this.Frame.DataContext is WebViewModel && (this.Frame.DataContext as WebViewModel).BrowserCanGoBack())
                     return true;
                 else
                     return this.Frame.CanGoBack || this.ParentFrame.CanGoBack;
@@ -142,7 +143,7 @@ namespace AppFramework.Core.Services
                 return false;
             else
             {
-                if (this.Frame.DataContext is WebBrowserViewModel && (this.Frame.DataContext as WebBrowserViewModel).BrowserCanGoForward())
+                if (this.Frame.DataContext is WebViewModel && (this.Frame.DataContext as WebViewModel).BrowserCanGoForward())
                     return true;
                 else
                     return this.Frame.CanGoForward || this.ParentFrame.CanGoForward;
@@ -200,9 +201,9 @@ namespace AppFramework.Core.Services
         public bool GoForward()
         {
             // Check if the frame contains a WebView and if it can go forward
-            if (this.Frame.DataContext is WebBrowserViewModel)
+            if (this.Frame.DataContext is WebViewModel)
             {
-                var vm = this.Frame.DataContext as WebBrowserViewModel;
+                var vm = this.Frame.DataContext as WebViewModel;
                 if (vm.BrowserCanGoForward())
                 {
                     vm.BrowserGoForward();
@@ -614,8 +615,11 @@ namespace AppFramework.Core.Services
         #endregion
 
         #region Web
-
-        protected abstract void WebView(object parameter);
+        
+        private void WebView(object parameter)
+        {
+            this.Navigate(typeof(UI.Views.WebView), parameter);
+        }
 
         /// <summary>
         /// Navigates to an external web browser.
@@ -637,6 +641,15 @@ namespace AppFramework.Core.Services
             this.Web(webAddress, false);
         }
 
+        /// <summary>
+        /// Navigates to an internal app web browser.
+        /// </summary>
+        /// <param name="vm">WebBrowserViewModel instance to navigate to.</param>
+        public void WebView(WebViewModel vm)
+        {
+            this.WebView(vm);
+        }
+
         private void Web(string webAddress, bool showExternally)
         {
             if (string.IsNullOrWhiteSpace(webAddress))
@@ -654,7 +667,7 @@ namespace AppFramework.Core.Services
             }
             else
             {
-                this.WebView((object)webAddress);
+                this.WebView(webAddress);
             }
         }
 

@@ -185,10 +185,6 @@
     <Compile Include="..\..\NuGetReferened\Contoso.UI\Views\ViewBase.cs">
       <Link>Views\ViewBase.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.UI\Views\WebBrowserView.xaml.cs">
-      <Link>Views\WebBrowserView.xaml.cs</Link>
-      <DependentUpon>WebBrowserView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="..\..\NuGetReferened\Contoso.UI\Views\WelcomeView.xaml.cs">
       <Link>Views\WelcomeView.xaml.cs</Link>
       <DependentUpon>WelcomeView.xaml</DependentUpon>
@@ -533,11 +529,6 @@
     </Page>
     <Page Include="..\..\NuGetReferened\Contoso.UI\Views\ShellView.xaml">
       <Link>Views\ShellView.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\..\NuGetReferened\Contoso.UI\Views\WebBrowserView.xaml">
-      <Link>Views\WebBrowserView.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
