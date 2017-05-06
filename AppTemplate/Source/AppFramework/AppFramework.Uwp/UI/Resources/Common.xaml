@@ -565,7 +565,10 @@
                             SelectionMode="{TemplateBinding SelectionMode}"
                             RefreshCommand="{TemplateBinding RefreshCommand}"
                             PullThreshold="{StaticResource PullToRefreshPullThreshold}"
-                            behaviors:ListViewCommandBehavior.Command="{TemplateBinding ClickCommand}" />
+                            behaviors:ListViewCommandBehavior.Command="{TemplateBinding ClickCommand}"
+                            RightTapped="List_RightTapped"
+                            Holding="List_Holding"
+                            />
                         <GridView 
                             x:Name="gridview" 
                             Visibility="Collapsed" 
@@ -581,7 +584,10 @@
                             IsItemClickEnabled="{TemplateBinding IsItemClickEnabled}"
                             IsSwipeEnabled="{TemplateBinding IsSwipeEnabled}"
                             SelectionMode="{TemplateBinding SelectionMode}"
-                            behaviors:ListViewCommandBehavior.Command="{TemplateBinding ClickCommand}" />
+                            behaviors:ListViewCommandBehavior.Command="{TemplateBinding ClickCommand}"
+                            RightTapped="List_RightTapped"
+                            Holding="List_Holding"
+                            />
                         <TextBlock 
                             Text="{TemplateBinding NoDataMessage}" 
                             Style="{TemplateBinding NoDataMessageStyle}"
