@@ -616,7 +616,7 @@ namespace AppFramework.Core.Services
 
         #region Web
         
-        private void WebView(object parameter)
+        public void WebView(object parameter)
         {
             this.Navigate(typeof(UI.Views.WebView), parameter);
         }
@@ -631,26 +631,7 @@ namespace AppFramework.Core.Services
             this.Web(webAddress, true);
         }
 
-        /// <summary>
-        /// Navigates to an internal app web browser.
-        /// </summary>
-        /// <param name="webAddress">URL to navigate to.</param>
-        public void WebView(string webAddress)
-        {
-            PlatformBase.CurrentCore.Analytics.Event("NavigateToWebView");
-            this.Web(webAddress, false);
-        }
-
-        /// <summary>
-        /// Navigates to an internal app web browser.
-        /// </summary>
-        /// <param name="vm">WebBrowserViewModel instance to navigate to.</param>
-        public void WebView(WebViewModel vm)
-        {
-            this.WebView(vm);
-        }
-
-        private void Web(string webAddress, bool showExternally)
+        private void Web(string webAddress, bool showExternally = false)
         {
             if (string.IsNullOrWhiteSpace(webAddress))
                 throw new ArgumentNullException(nameof(webAddress));
@@ -663,11 +644,12 @@ namespace AppFramework.Core.Services
 
             if (showExternally)
             {
+                PlatformBase.CurrentCore.Analytics.Event("NavigateToExternalWeb", webAddress);
                 var t = Launcher.LaunchUriAsync(new Uri(webAddress, UriKind.Absolute));
             }
             else
             {
-                this.WebView(webAddress);
+                this.Web(webAddress);
             }
         }
 

@@ -4,6 +4,21 @@
         <name>AppFramework.Uwp</name>
     </assembly>
     <members>
+        <member name="T:AppFramework.UI.Behaviors.EnterKeyBehavior">
+            <summary>
+            Enables a control to execute its associated command when an enter key press is detected within the control.
+            </summary>
+        </member>
+        <member name="T:AppFramework.UI.Behaviors.FocusOnLoadBehavior">
+            <summary>
+            Focuses a control on the loaded event.  Useful for setting focus to the first textbox on a page, for example, immediately on load of the page.
+            </summary>
+        </member>
+        <member name="T:AppFramework.UI.Behaviors.ListViewCommandBehavior">
+            <summary>
+            Creates an attached property for all ListViewBase controls allowing binding  a command object to it's ItemClick event.
+            </summary>
+        </member>
         <member name="M:AppFramework.UI.Views.WebView.InitializeComponent">
             <summary>
             InitializeComponent()
@@ -547,21 +562,6 @@
             </summary>
             <param name="sender">The Frame which failed navigation</param>
             <param name="e">Details about the navigation failure</param>
-        </member>
-        <member name="T:AppFramework.UI.Behaviors.EnterKeyBehavior">
-            <summary>
-            Enables a control to execute its associated command when an enter key press is detected within the control.
-            </summary>
-        </member>
-        <member name="T:AppFramework.UI.Behaviors.FocusOnLoadBehavior">
-            <summary>
-            Focuses a control on the loaded event.  Useful for setting focus to the first textbox on a page, for example, immediately on load of the page.
-            </summary>
-        </member>
-        <member name="T:AppFramework.UI.Behaviors.ListViewCommandBehavior">
-            <summary>
-            Creates an attached property for all ListViewBase controls allowing binding  a command object to it's ItemClick event.
-            </summary>
         </member>
         <member name="M:AppFramework.UI.Resources.PlatformSpecific.InitializeComponent">
             <summary>
@@ -2484,6 +2484,12 @@
             <param name="arguments">String representation of the arguments.</param>
             <returns>String representing the deep link.</returns>
         </member>
+        <member name="M:AppFramework.Core.Services.AppInfoProviderBase.GetAppFrameworkVersionAsync">
+            <summary>
+            Gets the version number of the AppFramework package being used in this app.
+            </summary>
+            <returns>Version number of AppFramework package</returns>
+        </member>
         <member name="E:AppFramework.Core.Services.AuthorizationManagerBase.UserAuthenticatedStatusChanged">
             <summary>
             Event used to notify subscribed objects of when a user logs in or out.
@@ -2996,18 +3002,6 @@
             Navigates to an external web browser.
             </summary>
             <param name="webAddress">URL to navigate to.</param>
-        </member>
-        <member name="M:AppFramework.Core.Services.NavigationManagerBase.WebView(System.String)">
-            <summary>
-            Navigates to an internal app web browser.
-            </summary>
-            <param name="webAddress">URL to navigate to.</param>
-        </member>
-        <member name="M:AppFramework.Core.Services.NavigationManagerBase.WebView(AppFramework.Core.ViewModels.WebViewModel)">
-            <summary>
-            Navigates to an internal app web browser.
-            </summary>
-            <param name="vm">WebBrowserViewModel instance to navigate to.</param>
         </member>
         <member name="P:AppFramework.Core.Services.NavigationManagerBase.WebViewCommand">
             <summary>

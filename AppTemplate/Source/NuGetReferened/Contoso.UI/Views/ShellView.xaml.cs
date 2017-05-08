@@ -99,6 +99,8 @@ namespace Contoso.UI.Views
                 btnSearch.IsChecked = true;
             else if (view is MainView || view is DetailsView)
                 btnHome.IsChecked = true;
+            else if (view is HelpView)
+                btnHelp.IsChecked = true;
         }
 
         #endregion
