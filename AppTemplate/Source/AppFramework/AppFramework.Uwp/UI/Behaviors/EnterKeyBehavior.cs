@@ -10,7 +10,7 @@ namespace AppFramework.UI.Behaviors
     /// <summary>
     /// Enables a control to execute its associated command when an enter key press is detected within the control.
     /// </summary>
-    public class EnterKeyBehavior : Behavior<Control>
+    public sealed class EnterKeyBehavior : Behavior<Control>
     {
         protected override void OnAttached()
         {

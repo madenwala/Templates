@@ -7,7 +7,7 @@ namespace AppFramework.UI.Behaviors
     /// <summary>
     /// Focuses a control on the loaded event.  Useful for setting focus to the first textbox on a page, for example, immediately on load of the page.
     /// </summary>
-    public class FocusOnLoadBehavior : Behavior<Control>
+    public sealed class FocusOnLoadBehavior : Behavior<Control>
     {
         protected override void OnAttached()
         {

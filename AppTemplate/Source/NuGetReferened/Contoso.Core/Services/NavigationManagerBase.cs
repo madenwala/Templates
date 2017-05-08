@@ -60,6 +60,17 @@ namespace Contoso.Core.Services
 
         public abstract void Item(object parameter);
 
+        public void Help()
+        {
+            this.WebView("http://www.microsoft.com");
+        }
+
+        private CommandBase _HelpCommand = null;
+        public CommandBase HelpCommand
+        {
+            get { return Platform.Current == null ? null : _HelpCommand ?? (_HelpCommand = new NavigationCommand("NavigateToHelpCommand", Platform.Current.Navigation.Help)); }
+        }
+
         #endregion
     }
 }

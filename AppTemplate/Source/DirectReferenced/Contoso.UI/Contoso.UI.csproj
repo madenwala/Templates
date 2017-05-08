@@ -162,6 +162,9 @@
       <Link>Views\DetailsView.xaml.cs</Link>
       <DependentUpon>DetailsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="..\..\NuGetReferened\Contoso.UI\Views\HelpView.cs">
+      <Link>Views\HelpView.cs</Link>
+    </Compile>
     <Compile Include="..\..\NuGetReferened\Contoso.UI\Views\MainView.xaml.cs">
       <Link>Views\MainView.xaml.cs</Link>
       <DependentUpon>MainView.xaml</DependentUpon>

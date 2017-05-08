@@ -124,19 +124,8 @@ namespace AppFramework.Core.ViewModels
         {
             if(this.View != null)
                 this.View.GotFocus += View_GotFocus;
-            
-            try
-            {
-                var assembly = typeof(TypeUtility).GetTypeInfo().Assembly.GetName().Name;
-                string filename = $"ms-appx:///{assembly}/VERSION.txt";
-                Uri appUri = new Uri(filename);//File name should be prefixed with 'ms-appx:///Assets/* 
-                StorageFile file = StorageFile.GetFileFromApplicationUriAsync(appUri).AsTask().ConfigureAwait(false).GetAwaiter().GetResult();
-                this.AppFrameworkVersionNumber = await file.ReadAllTextAsync();
-            }
-            catch(Exception)
-            {
-                this.AppFrameworkVersionNumber = "N/A";
-            }
+
+            this.AppFrameworkVersionNumber = await PlatformBase.CurrentCore.AppInfo.GetAppFrameworkVersionAsync();
 
             await base.OnLoadStateAsync(e);
         }

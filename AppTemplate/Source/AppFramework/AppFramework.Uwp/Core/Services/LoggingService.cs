@@ -267,7 +267,7 @@ namespace AppFramework.Core.Services
             sb.AppendLine("UTC TIME: " + DateTime.Now.ToUniversalTime().ToString());
             if (PlatformBase.CurrentCore.AppInfo != null)
             {
-                sb.AppendLine(string.Format("APP NAME: {0} {1} {2} {3}", Windows.ApplicationModel.Package.Current.DisplayName, PlatformBase.CurrentCore.AppInfo.VersionNumber, PlatformBase.CurrentCore.AppInfo.IsTrial ? "TRIAL" : "", PlatformBase.CurrentCore.AppInfo.IsTrialExpired ? "EXPIRED" : "").Trim());
+                sb.AppendLine(string.Format("APP NAME: {0} {1} {2} {3} (AF {4})", Windows.ApplicationModel.Package.Current.DisplayName, PlatformBase.CurrentCore.AppInfo.VersionNumber, PlatformBase.CurrentCore.AppInfo.IsTrial ? "TRIAL" : "", PlatformBase.CurrentCore.AppInfo.IsTrialExpired ? "EXPIRED" : "", PlatformBase.CurrentCore.AppInfo.GetAppFrameworkVersionAsync().Result).Trim());
                 if (PlatformBase.CurrentCore.AppInfo.IsTrial && PlatformBase.CurrentCore.AppInfo.TrialExpirationDate.Year != 9999)
                     sb.AppendLine("TRIAL EXPIRATION: " + PlatformBase.CurrentCore.AppInfo.TrialExpirationDate);
                 sb.AppendLine("INSTALLED: " + Windows.ApplicationModel.Package.Current.InstalledDate.DateTime);

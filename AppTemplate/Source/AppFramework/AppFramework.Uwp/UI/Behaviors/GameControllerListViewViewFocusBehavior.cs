@@ -5,7 +5,7 @@ using Windows.UI.Xaml.Input;
 
 namespace AppFramework.UI.Behaviors
 {
-    public class GameControllerListViewFocusBehavior : Behavior<ListView>
+    public sealed class GameControllerListViewFocusBehavior : Behavior<ListView>
     {
         protected override void OnAttached()
         {

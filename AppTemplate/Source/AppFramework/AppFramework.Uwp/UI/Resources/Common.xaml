@@ -5,6 +5,7 @@
     xmlns:controls="using:AppFramework.UI.Controls"
     xmlns:converters="using:AppFramework.UI.Converters"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:AppFramework.UI.Behaviors">
 
     <!--Converters-->
@@ -565,10 +566,7 @@
                             SelectionMode="{TemplateBinding SelectionMode}"
                             RefreshCommand="{TemplateBinding RefreshCommand}"
                             PullThreshold="{StaticResource PullToRefreshPullThreshold}"
-                            behaviors:ListViewCommandBehavior.Command="{TemplateBinding ClickCommand}"
-                            RightTapped="List_RightTapped"
-                            Holding="List_Holding"
-                            />
+                            behaviors:ListViewCommandBehavior.Command="{TemplateBinding ClickCommand}" />
                         <GridView 
                             x:Name="gridview" 
                             Visibility="Collapsed" 
@@ -584,10 +582,7 @@
                             IsItemClickEnabled="{TemplateBinding IsItemClickEnabled}"
                             IsSwipeEnabled="{TemplateBinding IsSwipeEnabled}"
                             SelectionMode="{TemplateBinding SelectionMode}"
-                            behaviors:ListViewCommandBehavior.Command="{TemplateBinding ClickCommand}"
-                            RightTapped="List_RightTapped"
-                            Holding="List_Holding"
-                            />
+                            behaviors:ListViewCommandBehavior.Command="{TemplateBinding ClickCommand}" />
                         <TextBlock 
                             Text="{TemplateBinding NoDataMessage}" 
                             Style="{TemplateBinding NoDataMessageStyle}"

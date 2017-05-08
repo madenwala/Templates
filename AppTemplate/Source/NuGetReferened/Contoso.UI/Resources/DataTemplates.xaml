@@ -7,11 +7,18 @@
     xmlns:controls="using:AppFramework.UI.Controls"
     xmlns:triggers="using:AppFramework.UI.Triggers"
     xmlns:behaviors="using:AppFramework.UI.Behaviors"
-    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
-    >
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity">
 
     <DataTemplate x:Key="ItemDataTemplate" x:DataType="models:ItemModel">
         <StackPanel Margin="0,8">
+            <interactivity:Interaction.Behaviors>
+                <behaviors:ContextMenuRightClickBehavior />
+            </interactivity:Interaction.Behaviors>
+            <FlyoutBase.AttachedFlyout>
+                <MenuFlyout>
+                    <MenuFlyoutItem Text="Open in new window" Click="OpenInNewWindow_Click" />
+                </MenuFlyout>
+            </FlyoutBase.AttachedFlyout>
             <TextBlock Text="{x:Bind LineOne, Mode=OneWay}" TextWrapping="Wrap" Style="{StaticResource TitleTextBlockStyle}" />
             <TextBlock Text="{x:Bind LineTwo, Mode=OneWay}" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" />
             <TextBlock Text="{x:Bind LastUpdated, Mode=OneWay}" TextWrapping="Wrap" Style="{StaticResource SubtleCaptionTextBlockStyle}" />

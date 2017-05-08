@@ -1,6 +1,7 @@
 ﻿using AppFramework.Core.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Store;
@@ -142,6 +143,26 @@ namespace AppFramework.Core.Services
         public string GetDeepLink(string arguments)
         {
             return ProtocolPrefix + arguments;
+        }
+
+        /// <summary>
+        /// Gets the version number of the AppFramework package being used in this app.
+        /// </summary>
+        /// <returns>Version number of AppFramework package</returns>
+        public async Task<string> GetAppFrameworkVersionAsync()
+        {
+            try
+            {
+                var assembly = typeof(TypeUtility).GetTypeInfo().Assembly.GetName().Name;
+                string filename = $"ms-appx:///{assembly}/VERSION.txt";
+                Uri appUri = new Uri(filename);//File name should be prefixed with 'ms-appx:///Assets/* 
+                StorageFile file = StorageFile.GetFileFromApplicationUriAsync(appUri).AsTask().ConfigureAwait(false).GetAwaiter().GetResult();
+                return await file.ReadAllTextAsync();
+            }
+            catch (Exception)
+            {
+                return Strings.Resources.TextNotApplicable;
+            }
         }
 
         #region Store AddOns
