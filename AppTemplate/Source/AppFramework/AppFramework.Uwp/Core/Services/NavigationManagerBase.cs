@@ -82,10 +82,10 @@ namespace AppFramework.Core.Services
 
         protected void Navigate(Type pageType, object parameter = null)
         {
-            this.NavigateAsync(this.Frame, pageType, parameter);
+            this.Navigate(this.Frame, pageType, parameter);
         }
 
-        protected async void NavigateAsync(Frame frame, Type pageType, object parameter = null)
+        protected async void Navigate(Frame frame, Type pageType, object parameter = null)
         {
             if (frame == null)
                 frame = this.Frame;
