@@ -24,8 +24,17 @@
 
         <x:Double x:Key="SpacerHeight">12</x:Double>
 
-        <DataTemplate x:Key="WebBrowserDataTemplate">
-            <controls:WebViewPanel />
+        <DataTemplate x:Key="WebBrowserDataTemplate" x:DataType="viewmodels:WebViewModel">
+            <Grid>
+                <controls:WebViewPanel />
+                <controls:BusyPanel
+                    CustomButtonCommand="{x:Bind ViewModel.StatusIsBlockingCancelableCommand, Mode=OneWay}"
+                    CustomButtonVisibility="{x:Bind ViewModel.StatusIsBlockingCancelable, Mode=OneWay, Converter={StaticResource visConverter}}"
+                    IsActive="{x:Bind ViewModel.StatusIsBusy, Mode=OneWay}"
+                    StatusText="{x:Bind ViewModel.StatusText, Mode=OneWay}"
+                    StatusTextStyle="{StaticResource BodyTextBlockStyle}"
+                    Visibility="{x:Bind ViewModel.StatusIsBlocking, Mode=OneWay, Converter={StaticResource visConverter}, FallbackValue=Collapsed}" />
+            </Grid>
         </DataTemplate>
 
         <DataTemplate x:Key="GeneralSettingsDataTemplate" x:DataType="viewmodels:GeneralSettingsViewModel">

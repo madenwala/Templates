@@ -82,10 +82,10 @@ namespace AppFramework.Core.Services
 
         protected void Navigate(Type pageType, object parameter = null)
         {
-            this.Navigate(this.Frame, pageType, parameter);
+            this.NavigateAsync(this.Frame, pageType, parameter);
         }
 
-        protected async void Navigate(Frame frame, Type pageType, object parameter = null)
+        protected async void NavigateAsync(Frame frame, Type pageType, object parameter = null)
         {
             if (frame == null)
                 frame = this.Frame;
@@ -619,6 +619,11 @@ namespace AppFramework.Core.Services
         {
             this.WebView(new WebViewArguments(webAddress));
         }
+
+        public void WebView(string webAddress, bool showNavigationBar, string title = null)
+        {
+            this.WebView(new WebViewArguments(webAddress, showNavigationBar, title));
+        }
         
         public void WebView(WebViewArguments args)
         {
@@ -1054,9 +1059,9 @@ namespace AppFramework.Core.Models
             }
         }
 
-        public string Title { get; private set; }
+        public string Title { get; set; }
 
-        public bool ShowNavigationBar { get; private set; }
+        public bool ShowNavigationBar { get; set; }
 
         #endregion
 

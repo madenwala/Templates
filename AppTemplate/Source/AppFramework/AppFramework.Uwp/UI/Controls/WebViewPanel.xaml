@@ -5,10 +5,7 @@
     xmlns:controls="using:AppFramework.UI.Controls"
     xmlns:converters="using:AppFramework.UI.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:designTime="using:AppFramework.Core.ViewModels.Designer"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DataContext="{d:DesignInstance designTime:WebBrowserViewModel,
-                                     IsDesignTimeCreatable=True}"
     d:DesignHeight="300"
     d:DesignWidth="400"
     mc:Ignorable="d">
@@ -28,27 +25,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-
         <WebView x:Name="webView" Visibility="{x:Bind ViewModel.ShowBrowser, Mode=OneWay, Converter={StaticResource visConverter}}" />
-
-        <!--<Grid Visibility="{x:Bind ViewModel.StatusText, Mode=OneWay, Converter={StaticResource visConverter}}">
-            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Opacity=".85" />
-            <StackPanel VerticalAlignment="Center" Margin="0,0,0,48">
-                <ProgressRing Width="50" Height="50"
-                              IsEnabled="{x:Bind ViewModel.StatusIsBusy, Mode=OneWay}"
-                              IsActive="{x:Bind ViewModel.StatusIsBusy, Mode=OneWay}" />
-                <TextBlock TextAlignment="Center" TextWrapping="Wrap" Margin="12,0" Text="{x:Bind ViewModel.StatusText, Mode=OneWay}" Style="{StaticResource BodyTextBlockStyle}" />
-            </StackPanel>
-        </Grid>-->
-
-        <controls:BusyPanel
-            CustomButtonCommand="{x:Bind ViewModel.StatusIsBlockingCancelableCommand, Mode=OneWay}"
-            CustomButtonVisibility="{x:Bind ViewModel.StatusIsBlockingCancelable, Mode=OneWay, Converter={StaticResource visConverter}}"
-            IsActive="{x:Bind ViewModel.StatusIsBusy, Mode=OneWay}"
-            StatusText="{x:Bind ViewModel.StatusText, Mode=OneWay}"
-            StatusTextStyle="{StaticResource BodyTextBlockStyle}"
-            Visibility="{x:Bind ViewModel.StatusIsBlocking, Mode=OneWay, Converter={StaticResource visConverter}, FallbackValue=Collapsed}" />
-
         <CommandBar Grid.Row="1" Visibility="{x:Bind ViewModel.Args.ShowNavigationBar, Mode=OneWay, Converter={StaticResource visConverter}}">
             <CommandBar.PrimaryCommands>
                 <AppBarButton
@@ -91,6 +68,5 @@
                     Visibility="{x:Bind ViewModel.IsOpenInExternalBrowserVisible, Mode=OneWay, Converter={StaticResource visConverter}}" />
             </CommandBar.SecondaryCommands>
         </CommandBar>
-
     </Grid>
 </controls:WebViewPanelBase>

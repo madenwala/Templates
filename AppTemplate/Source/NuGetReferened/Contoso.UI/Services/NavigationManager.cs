@@ -66,7 +66,7 @@ namespace Contoso.UI.Services
         {
             if(Platform.Current.AuthManager?.IsAuthenticated() != true)
             {
-                this.Navigate(this.ParentFrame, typeof(WelcomeView), parameter);
+                this.NavigateAsync(this.ParentFrame, typeof(WelcomeView), parameter);
                 this.ClearBackstack();
             }
             else
@@ -75,7 +75,7 @@ namespace Contoso.UI.Services
                 if (this.ParentFrame.Content == null || !(this.ParentFrame.Content is ShellView))
                 {
                     NavigationRequest navParam = parameter as NavigationRequest ?? new NavigationRequest(typeof(MainView), parameter);
-                    this.Navigate(this.ParentFrame, typeof(ShellView), navParam);
+                    this.NavigateAsync(this.ParentFrame, typeof(ShellView), navParam);
                     this.ClearBackstack();
                 }
                 else
@@ -122,17 +122,17 @@ namespace Contoso.UI.Services
 
         public override void AccountSignin(object parameter = null)
         {
-            this.Navigate(this.ParentFrame, typeof(AccountSignInView), parameter);
+            this.NavigateAsync(this.ParentFrame, typeof(AccountSignInView), parameter);
         }
 
         public override void AccountSignup(object parameter = null)
         {
-            this.Navigate(this.ParentFrame, typeof(AccountSignUpView), parameter);
+            this.NavigateAsync(this.ParentFrame, typeof(AccountSignUpView), parameter);
         }
 
         public override void AccountForgot(object parameter = null)
         {
-            this.Navigate(this.ParentFrame, typeof(AccountForgotView), parameter);
+            this.NavigateAsync(this.ParentFrame, typeof(AccountForgotView), parameter);
         }
 
         public override void Item(object parameter)

@@ -242,7 +242,7 @@
             </summary>
             <typeparam name="TViewModel"></typeparam>
         </member>
-        <member name="M:AppFramework.UI.Controls.WebViewPanel.SetCurrentViewModel(AppFramework.Core.ViewModels.WebViewModel)">
+        <member name="M:AppFramework.UI.Controls.WebViewPanel.SetCurrentViewModel(AppFramework.Core.ViewModels.WebViewModelBase)">
             <summary>
             Configures a WebBrowserViewModel instance to get notified of WebView control events.
             </summary>
@@ -2175,62 +2175,57 @@
             <param name="isSilent">True to prompt the user else false to sign out immediately.</param>
             <returns>Awaitable task is returned.</returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "P:AppFramework.Core.ViewModels.WebViewModel.ViewModel" -->
-        <member name="P:AppFramework.Core.ViewModels.WebViewModel.ShowNavigation">
-            <summary>
-            Gets whether or not the navigation command bar should be shown.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.ViewModels.WebViewModel.ForceBrowserGoBackOnNavigationBack">
+        <!-- Badly formed XML comment ignored for member "P:AppFramework.Core.ViewModels.WebViewModelBase.ViewModel" -->
+        <member name="P:AppFramework.Core.ViewModels.WebViewModelBase.ForceBrowserGoBackOnNavigationBack">
             <summary>
             Gets or sets a flag indicating whether navigating back on the view should skip back override to allow browser back history to be navigated to on back presses.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.ViewModels.WebViewModel.ShowBrowser">
+        <member name="P:AppFramework.Core.ViewModels.WebViewModelBase.ShowBrowser">
             <summary>
             Gets whether the browser should be visible or not.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.ViewModels.WebViewModel.BrowserRefreshCommand">
+        <member name="P:AppFramework.Core.ViewModels.WebViewModelBase.BrowserRefreshCommand">
             <summary>
             Gets a command used to refresh the current view.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.ViewModels.WebViewModel.BrowserHomeCommand">
+        <member name="P:AppFramework.Core.ViewModels.WebViewModelBase.BrowserHomeCommand">
             <summary>
             Gets a command used to take the user back to the home webpage.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.ViewModels.WebViewModel.BrowserCanGoBack">
+        <member name="P:AppFramework.Core.ViewModels.WebViewModelBase.BrowserCanGoBack">
             <summary>
             Returns whether or not the browser can go back or not.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.ViewModels.WebViewModel.BrowserCanGoForward">
+        <member name="P:AppFramework.Core.ViewModels.WebViewModelBase.BrowserCanGoForward">
             <summary>
             Returns whether or not the browser can go forward or not.
             </summary>
         </member>
-        <member name="M:AppFramework.Core.ViewModels.WebViewModel.InitialNavigation">
+        <member name="M:AppFramework.Core.ViewModels.WebViewModelBase.InitialNavigation">
             <summary>
             Initial page that should be navigated on launch of the application. 
             </summary>
         </member>
-        <member name="M:AppFramework.Core.ViewModels.WebViewModel.Navigating(System.Uri)">
+        <member name="M:AppFramework.Core.ViewModels.WebViewModelBase.Navigating(System.Uri)">
             <summary>
             Notify the VM that the browser is in the process of navigating to a particular page and offer the ability for it to cancel the navigation.
             </summary>
             <param name="uri"></param>
             <returns></returns>
         </member>
-        <member name="M:AppFramework.Core.ViewModels.WebViewModel.Navigated(System.Uri,System.String)">
+        <member name="M:AppFramework.Core.ViewModels.WebViewModelBase.Navigated(System.Uri,System.String)">
             <summary>
             Notify this VM that a page has been navigated to.
             </summary>
             <param name="uri"></param>
             <param name="title"></param>
         </member>
-        <member name="M:AppFramework.Core.ViewModels.WebViewModel.NavigationFailed(System.Uri,System.Exception,System.String)">
+        <member name="M:AppFramework.Core.ViewModels.WebViewModelBase.NavigationFailed(System.Uri,System.Exception,System.String)">
             <summary>
             Notify this VM that a navigation failure has occurred.
             </summary>
@@ -2238,34 +2233,34 @@
             <param name="exception"></param>
             <param name="title"></param>
         </member>
-        <member name="M:AppFramework.Core.ViewModels.WebViewModel.SetBrowserFunctions(System.Func{System.Boolean},System.Func{System.Boolean})">
+        <member name="M:AppFramework.Core.ViewModels.WebViewModelBase.SetBrowserFunctions(System.Func{System.Boolean},System.Func{System.Boolean})">
             <summary>
             Configure the VM to perform execute custom functions when the browser can go back/forward.
             </summary>
             <param name="canGoBack"></param>
             <param name="canGoForward"></param>
         </member>
-        <member name="M:AppFramework.Core.ViewModels.WebViewModel.BrowserRefresh">
+        <member name="M:AppFramework.Core.ViewModels.WebViewModelBase.BrowserRefresh">
             <summary>
             Refreshes the web browser.
             </summary>
         </member>
-        <member name="M:AppFramework.Core.ViewModels.WebViewModel.BrowserGoBack">
+        <member name="M:AppFramework.Core.ViewModels.WebViewModelBase.BrowserGoBack">
             <summary>
             Navigates the web browser backwards.
             </summary>
         </member>
-        <member name="M:AppFramework.Core.ViewModels.WebViewModel.BrowserGoForward">
+        <member name="M:AppFramework.Core.ViewModels.WebViewModelBase.BrowserGoForward">
             <summary>
             Navigates the web browser forward.
             </summary>
         </member>
-        <member name="M:AppFramework.Core.ViewModels.WebViewModel.BrowserGoHome">
+        <member name="M:AppFramework.Core.ViewModels.WebViewModelBase.BrowserGoHome">
             <summary>
             Navigates the web browser to the home page.
             </summary>
         </member>
-        <member name="M:AppFramework.Core.ViewModels.WebViewModel.NavigateTo(System.String)">
+        <member name="M:AppFramework.Core.ViewModels.WebViewModelBase.NavigateTo(System.String)">
             <summary>
             Navigate to a specific web page.
             </summary>
@@ -2348,32 +2343,32 @@
             <param name="value">Value belonging to the key</param>
             <returns>Dictionary object instance.</returns>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase`3.ViewModel">
+        <member name="P:AppFramework.Core.PlatformBase`4.ViewModel">
             <summary>
             Gets the MainViewModel global instance for the application.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase`3.AppSettingsLocal">
+        <member name="P:AppFramework.Core.PlatformBase`4.AppSettingsLocal">
             <summary>
             Gets local app settings for this app.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.PlatformBase`3.AppSettingsRoaming">
+        <member name="P:AppFramework.Core.PlatformBase`4.AppSettingsRoaming">
             <summary>
             Gets roaming app settings for this app.
             </summary>
         </member>
-        <member name="M:AppFramework.Core.PlatformBase`3.ResetAppSettings">
+        <member name="M:AppFramework.Core.PlatformBase`4.ResetAppSettings">
             <summary>
             Reset all the app settings back to their defaults.
             </summary>
         </member>
-        <member name="M:AppFramework.Core.PlatformBase`3.SaveSettings(System.Boolean)">
+        <member name="M:AppFramework.Core.PlatformBase`4.SaveSettings(System.Boolean)">
             <summary>
             Saves any app settings only if the data had changed.
             </summary>
         </member>
-        <member name="M:AppFramework.Core.PlatformBase`3.GenerateModelTileID(AppFramework.Core.Models.IModel)">
+        <member name="M:AppFramework.Core.PlatformBase`4.GenerateModelTileID(AppFramework.Core.Models.IModel)">
             <summary>
             Generates a unique tile ID used for secondary tiles based on a model instance.
             </summary>

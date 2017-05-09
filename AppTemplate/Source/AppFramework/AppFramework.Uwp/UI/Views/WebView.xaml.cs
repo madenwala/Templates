@@ -23,9 +23,9 @@ namespace AppFramework.UI.Views
             if (e.NavigationEventArgs.NavigationMode == NavigationMode.New || this.ViewModel == null)
             {
                 WebViewModelBase vm = null;
-                if (e.NavigationEventArgs.Parameter is WebViewArguments args)
+                if (e.Parameter is WebViewArguments args)
                     vm = PlatformBase.CurrentCore.CreateWebViewModel(args);
-                else if (e.NavigationEventArgs.Parameter is string webAddress)
+                else if (e.Parameter is string webAddress)
                     vm = PlatformBase.CurrentCore.CreateWebViewModel(new WebViewArguments(webAddress));
                 else if (e.NavigationEventArgs.Parameter != null)
                     throw new System.ArgumentException($"Invalid argument of type {e.NavigationEventArgs.Parameter.GetType().FullName} was supplied to WebView.");
