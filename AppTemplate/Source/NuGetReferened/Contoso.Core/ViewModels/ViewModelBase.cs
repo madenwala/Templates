@@ -1,4 +1,6 @@
-﻿namespace Contoso.Core.ViewModels
+﻿using AppFramework.Core.Models;
+
+namespace Contoso.Core.ViewModels
 {
     public interface IViewModel : AppFramework.Core.ViewModels.IViewModel
     {
@@ -47,7 +49,7 @@
         #endregion
     }
 
-    public class WebViewModel : AppFramework.Core.ViewModels.WebViewModel, IViewModel
+    public class WebViewModel : AppFramework.Core.ViewModels.WebViewModelBase, IViewModel
     {
         #region Properties
 
@@ -62,7 +64,7 @@
 
         #region Constructors
 
-        public WebViewModel(bool showNavigation = true) : base(showNavigation)
+        public WebViewModel(WebViewArguments args) : base(args)
         {
         }
 

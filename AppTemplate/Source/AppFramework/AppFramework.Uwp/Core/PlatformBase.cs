@@ -594,13 +594,20 @@ namespace AppFramework.Core
 
         #endregion
 
+        #region Web View
+
+        protected internal abstract WebViewModelBase CreateWebViewModel(WebViewArguments args);
+
+        #endregion
+
         #endregion Methods
     }
 
-    public abstract class PlatformBase<VM, L, R> : PlatformBase
+    public abstract class PlatformBase<VM, L, R, WVM> : PlatformBase
         where VM : ViewModelBase, new()
         where L : AppSettingsLocalBase
         where R : AppSettingsRoamingBase
+        where WVM : WebViewModelBase
     {
         #region Variables
 
@@ -792,6 +799,11 @@ namespace AppFramework.Core
                 return $"{model.GetType().Name}_{imodel.ID}";
             else
                 return null;
+        }
+
+        protected internal override WebViewModelBase CreateWebViewModel(WebViewArguments args)
+        {
+            return System.Activator.CreateInstance(typeof(WVM), args) as WebViewModelBase;
         }
 
         #endregion

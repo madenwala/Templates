@@ -4,13 +4,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="using:AppFramework.UI.Controls"
     xmlns:converters="using:AppFramework.UI.Converters"
-    xmlns:designTime="using:AppFramework.Core.ViewModels.Designer"
-    d:DataContext="{d:DesignInstance designTime:WebBrowserViewModel, IsDesignTimeCreatable=True}"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:designTime="using:AppFramework.Core.ViewModels.Designer"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance designTime:WebBrowserViewModel,
+                                     IsDesignTimeCreatable=True}"
     d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignWidth="400"
+    mc:Ignorable="d">
 
     <controls:WebViewPanelBase.Resources>
         <converters:ValueToBooleanConverter x:Key="boolConverter" />
@@ -20,7 +21,7 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
-                <EntranceThemeTransition/>
+                <EntranceThemeTransition />
             </TransitionCollection>
         </Grid.ChildrenTransitions>
         <Grid.RowDefinitions>
@@ -30,38 +31,64 @@
 
         <WebView x:Name="webView" Visibility="{x:Bind ViewModel.ShowBrowser, Mode=OneWay, Converter={StaticResource visConverter}}" />
 
-        <Grid Visibility="{x:Bind ViewModel.StatusText, Mode=OneWay, Converter={StaticResource visConverter}}">
+        <!--<Grid Visibility="{x:Bind ViewModel.StatusText, Mode=OneWay, Converter={StaticResource visConverter}}">
             <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Opacity=".85" />
             <StackPanel VerticalAlignment="Center" Margin="0,0,0,48">
-                <ProgressRing Width="50" Height="50" 
-                              IsEnabled="{x:Bind ViewModel.StatusIsBusy, Mode=OneWay}" 
+                <ProgressRing Width="50" Height="50"
+                              IsEnabled="{x:Bind ViewModel.StatusIsBusy, Mode=OneWay}"
                               IsActive="{x:Bind ViewModel.StatusIsBusy, Mode=OneWay}" />
                 <TextBlock TextAlignment="Center" TextWrapping="Wrap" Margin="12,0" Text="{x:Bind ViewModel.StatusText, Mode=OneWay}" Style="{StaticResource BodyTextBlockStyle}" />
             </StackPanel>
-        </Grid>
+        </Grid>-->
 
-        <CommandBar Grid.Row="1" Visibility="{x:Bind ViewModel.ShowNavigation, Mode=OneWay, Converter={StaticResource visConverter}}">
+        <controls:BusyPanel
+            CustomButtonCommand="{x:Bind ViewModel.StatusIsBlockingCancelableCommand, Mode=OneWay}"
+            CustomButtonVisibility="{x:Bind ViewModel.StatusIsBlockingCancelable, Mode=OneWay, Converter={StaticResource visConverter}}"
+            IsActive="{x:Bind ViewModel.StatusIsBusy, Mode=OneWay}"
+            StatusText="{x:Bind ViewModel.StatusText, Mode=OneWay}"
+            StatusTextStyle="{StaticResource BodyTextBlockStyle}"
+            Visibility="{x:Bind ViewModel.StatusIsBlocking, Mode=OneWay, Converter={StaticResource visConverter}, FallbackValue=Collapsed}" />
+
+        <CommandBar Grid.Row="1" Visibility="{x:Bind ViewModel.Args.ShowNavigationBar, Mode=OneWay, Converter={StaticResource visConverter}}">
             <CommandBar.PrimaryCommands>
-                <AppBarButton x:Uid="/AppFramework.Core.Uwp/WebBrowser/abtnGoBack" Label="[Go back]" Icon="Back" Command="{x:Bind ViewModel.PlatformBase.NavigationBase.GoBackCommand}" />
-                <AppBarButton x:Uid="/AppFramework.Core.Uwp/WebBrowser/abtnHome" Label="[Home]" Icon="Home" Command="{x:Bind ViewModel.BrowserHomeCommand}" />
-                <AppBarButton x:Uid="/AppFramework.Core.Uwp/WebBrowser/abtnRefresh" Label="[Refresh]" Icon="Refresh" Command="{x:Bind ViewModel.BrowserRefreshCommand}" />
-                <AppBarButton x:Uid="/AppFramework.Core.Uwp/WebBrowser/abtnGoForward" Label="[Go forward]" Icon="Forward" Command="{x:Bind ViewModel.PlatformBase.NavigationBase.GoForwardCommand}" />
+                <AppBarButton
+                    x:Uid="/AppFramework.Core.Uwp/WebBrowser/abtnGoBack"
+                    Command="{x:Bind ViewModel.PlatformBase.NavigationBase.GoBackCommand}"
+                    Icon="Back"
+                    Label="[Go back]" />
+                <AppBarButton
+                    x:Uid="/AppFramework.Core.Uwp/WebBrowser/abtnHome"
+                    Command="{x:Bind ViewModel.BrowserHomeCommand}"
+                    Icon="Home"
+                    Label="[Home]" />
+                <AppBarButton
+                    x:Uid="/AppFramework.Core.Uwp/WebBrowser/abtnRefresh"
+                    Command="{x:Bind ViewModel.BrowserRefreshCommand}"
+                    Icon="Refresh"
+                    Label="[Refresh]" />
+                <AppBarButton
+                    x:Uid="/AppFramework.Core.Uwp/WebBrowser/abtnGoForward"
+                    Command="{x:Bind ViewModel.PlatformBase.NavigationBase.GoForwardCommand}"
+                    Icon="Forward"
+                    Label="[Go forward]" />
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
-                <AppBarButton x:Uid="/AppFramework.Core.Uwp/WebBrowser/abtnShare" 
-                              Label="[Share]" 
-                              Command="{x:Bind ViewModel.PlatformBase.SharingManager.ShareCommand}" 
-                              CommandParameter="{x:Bind ViewModel, Mode=OneWay}" 
-                              Visibility="{x:Bind ViewModel.IsSharingAllowed, Mode=OneWay, Converter={StaticResource visConverter}}" 
-                              IsEnabled="{x:Bind ViewModel.CurrentUrl, Mode=OneWay, Converter={StaticResource boolConverter}}" >
-                    <FontIcon Glyph="&#xE72D;"/>
+                <AppBarButton
+                    x:Uid="/AppFramework.Core.Uwp/WebBrowser/abtnShare"
+                    Command="{x:Bind ViewModel.PlatformBase.SharingManager.ShareCommand}"
+                    CommandParameter="{x:Bind ViewModel, Mode=OneWay}"
+                    IsEnabled="{x:Bind ViewModel.CurrentUrl, Mode=OneWay, Converter={StaticResource boolConverter}}"
+                    Label="[Share]"
+                    Visibility="{x:Bind ViewModel.IsSharingAllowed, Mode=OneWay, Converter={StaticResource visConverter}}">
+                    <FontIcon Glyph="&#xE72D;" />
                 </AppBarButton>
-                <AppBarButton x:Uid="/AppFramework.Core.Uwp/WebBrowser/abtnOpenInExternalBrowser" 
-                              Label="[Open in external browser]" 
-                              Command="{x:Bind ViewModel.PlatformBase.NavigationBase.WebBrowserCommand}" 
-                              CommandParameter="{x:Bind ViewModel.CurrentUrl, Mode=OneWay}" 
-                              Visibility="{x:Bind ViewModel.IsOpenInExternalBrowserVisible, Mode=OneWay, Converter={StaticResource visConverter}}"
-                              IsEnabled="{x:Bind ViewModel.CurrentUrl, Mode=OneWay, Converter={StaticResource boolConverter}}" />
+                <AppBarButton
+                    x:Uid="/AppFramework.Core.Uwp/WebBrowser/abtnOpenInExternalBrowser"
+                    Command="{x:Bind ViewModel.PlatformBase.NavigationBase.WebBrowserCommand}"
+                    CommandParameter="{x:Bind ViewModel.CurrentUrl, Mode=OneWay}"
+                    IsEnabled="{x:Bind ViewModel.CurrentUrl, Mode=OneWay, Converter={StaticResource boolConverter}}"
+                    Label="[Open in external browser]"
+                    Visibility="{x:Bind ViewModel.IsOpenInExternalBrowserVisible, Mode=OneWay, Converter={StaticResource visConverter}}" />
             </CommandBar.SecondaryCommands>
         </CommandBar>
 

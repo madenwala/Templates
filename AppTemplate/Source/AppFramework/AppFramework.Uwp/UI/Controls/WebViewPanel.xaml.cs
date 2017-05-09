@@ -1,12 +1,11 @@
-﻿using AppFramework.Core;
-using AppFramework.Core.Models;
+﻿using AppFramework.Core.Models;
 using AppFramework.Core.ViewModels;
 using System;
 using Windows.UI.Xaml.Controls;
 
 namespace AppFramework.UI.Controls
 {
-    public abstract class WebViewPanelBase : ViewControlBase<WebViewModel>
+    public abstract class WebViewPanelBase : ViewControlBase<WebViewModelBase>
     {
     }
 
@@ -17,7 +16,7 @@ namespace AppFramework.UI.Controls
         public WebViewPanel()
         {
             this.InitializeComponent();
-            this.DataContextChanged += (sender, args) => this.SetCurrentViewModel(this.DataContext as WebViewModel);
+            this.DataContextChanged += (sender, args) => this.SetCurrentViewModel(this.DataContext as WebViewModelBase);
         }
 
         #endregion
@@ -28,7 +27,7 @@ namespace AppFramework.UI.Controls
         /// Configures a WebBrowserViewModel instance to get notified of WebView control events.
         /// </summary>
         /// <param name="vm"></param>
-        private void SetCurrentViewModel(WebViewModel vm)
+        private void SetCurrentViewModel(WebViewModelBase vm)
         {
             if (this.ViewModel != null)
             {

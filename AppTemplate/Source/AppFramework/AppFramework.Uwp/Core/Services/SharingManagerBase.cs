@@ -45,9 +45,9 @@ namespace AppFramework.Core.Services
                 {
                     PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, "SetShareContent - Model: {0}", model?.GetType().Name);
 
-                    if (model is WebViewModel)
+                    if (model is WebViewModelBase)
                     {
-                        var vm = model as WebViewModel;
+                        var vm = model as WebViewModelBase;
                         e.Request.Data.Properties.Title = vm.Title;
                         e.Request.Data.SetWebLink(new Uri(vm.CurrentUrl, UriKind.Absolute));
                     }

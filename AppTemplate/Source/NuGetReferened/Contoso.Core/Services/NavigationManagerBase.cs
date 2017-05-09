@@ -1,4 +1,7 @@
-﻿using AppFramework.Core.Commands;
+﻿using System;
+using AppFramework.Core.Commands;
+using AppFramework.Core.Models;
+using AppFramework.Core.ViewModels;
 
 namespace Contoso.Core.Services
 {

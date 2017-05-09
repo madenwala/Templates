@@ -14,7 +14,7 @@ using Windows.ApplicationModel.Background;
 
 namespace Contoso.Core
 {
-    public sealed partial class Platform : PlatformBase<MainViewModel, AppSettingsLocal, AppSettingsRoaming>
+    public sealed partial class Platform : PlatformBase<MainViewModel, AppSettingsLocal, AppSettingsRoaming, WebViewModel>
     {
         #region Properties
 

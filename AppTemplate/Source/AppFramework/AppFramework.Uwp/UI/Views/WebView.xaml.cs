@@ -1,11 +1,12 @@
 ﻿using AppFramework.Core;
+using AppFramework.Core.Models;
 using AppFramework.Core.ViewModels;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 
 namespace AppFramework.UI.Views
 {
-    public abstract class WebViewBase : ViewBase<WebViewModel>
+    public abstract class WebViewBase : ViewBase<WebViewModelBase>
     {
     }
 
@@ -21,11 +22,15 @@ namespace AppFramework.UI.Views
         {
             if (e.NavigationEventArgs.NavigationMode == NavigationMode.New || this.ViewModel == null)
             {
-                WebViewModel vm;
-                if (e.NavigationEventArgs.Parameter is WebViewModel wvm)
-                    vm = wvm;
+                WebViewModelBase vm = null;
+                if (e.NavigationEventArgs.Parameter is WebViewArguments args)
+                    vm = PlatformBase.CurrentCore.CreateWebViewModel(args);
+                else if (e.NavigationEventArgs.Parameter is string webAddress)
+                    vm = PlatformBase.CurrentCore.CreateWebViewModel(new WebViewArguments(webAddress));
+                else if (e.NavigationEventArgs.Parameter != null)
+                    throw new System.ArgumentException($"Invalid argument of type {e.NavigationEventArgs.Parameter.GetType().FullName} was supplied to WebView.");
                 else
-                    vm = new WebViewModel();
+                    throw new System.ArgumentNullException("No argument was supplied to WebView.");
                 this.SetViewModel(vm);
             }
 

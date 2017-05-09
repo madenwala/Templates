@@ -3,7 +3,6 @@ using AppFramework.Core.Extensions;
 using AppFramework.Core.Models;
 using AppFramework.Core.ViewModels;
 using AppFramework.UI.Controls;
-using AppFramework.UI.Views;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -126,7 +125,7 @@ namespace AppFramework.Core.Services
                 return false;
             else
             {
-                if (this.Frame.DataContext is WebViewModel && (this.Frame.DataContext as WebViewModel).BrowserCanGoBack())
+                if (this.Frame.DataContext is WebViewModelBase && (this.Frame.DataContext as WebViewModelBase).BrowserCanGoBack())
                     return true;
                 else
                     return this.Frame.CanGoBack || this.ParentFrame.CanGoBack;
@@ -143,7 +142,7 @@ namespace AppFramework.Core.Services
                 return false;
             else
             {
-                if (this.Frame.DataContext is WebViewModel && (this.Frame.DataContext as WebViewModel).BrowserCanGoForward())
+                if (this.Frame.DataContext is WebViewModelBase && (this.Frame.DataContext as WebViewModelBase).BrowserCanGoForward())
                     return true;
                 else
                     return this.Frame.CanGoForward || this.ParentFrame.CanGoForward;
@@ -201,9 +200,9 @@ namespace AppFramework.Core.Services
         public bool GoForward()
         {
             // Check if the frame contains a WebView and if it can go forward
-            if (this.Frame.DataContext is WebViewModel)
+            if (this.Frame.DataContext is WebViewModelBase)
             {
-                var vm = this.Frame.DataContext as WebViewModel;
+                var vm = this.Frame.DataContext as WebViewModelBase;
                 if (vm.BrowserCanGoForward())
                 {
                     vm.BrowserGoForward();
@@ -615,10 +614,15 @@ namespace AppFramework.Core.Services
         #endregion
 
         #region Web
-        
-        public void WebView(object parameter)
+
+        public void WebView(string webAddress)
         {
-            this.Navigate(typeof(UI.Views.WebView), parameter);
+            this.WebView(new WebViewArguments(webAddress));
+        }
+        
+        public void WebView(WebViewArguments args)
+        {
+            this.Navigate(typeof(UI.Views.WebView), args);
         }
 
         /// <summary>
@@ -628,29 +632,7 @@ namespace AppFramework.Core.Services
         public void WebBrowser(string webAddress)
         {
             PlatformBase.CurrentCore.Analytics.Event("NavigateToWebBrowser");
-            this.Web(webAddress, true);
-        }
-
-        private void Web(string webAddress, bool showExternally = false)
-        {
-            if (string.IsNullOrWhiteSpace(webAddress))
-                throw new ArgumentNullException(nameof(webAddress));
-
-            webAddress = webAddress.Trim();
-
-            // if the URL is a twitter handle, forward to Twitter.com
-            if (webAddress.StartsWith("@") && webAddress.Length > 1)
-                webAddress = "https://twitter.com/" + webAddress.Substring(1);
-
-            if (showExternally)
-            {
-                PlatformBase.CurrentCore.Analytics.Event("NavigateToExternalWeb", webAddress);
-                var t = Launcher.LaunchUriAsync(new Uri(webAddress, UriKind.Absolute));
-            }
-            else
-            {
-                this.Web(webAddress);
-            }
+            var t = Launcher.LaunchUriAsync(new Uri(webAddress, UriKind.Absolute));
         }
 
         private CommandBase _WebViewCommand = null;
@@ -1020,7 +1002,6 @@ namespace AppFramework.Core.Services
             }
         }
 
-
         /// <summary>
         /// Deserializes an object if its a string and has serialization info else returns the object as-is.
         /// </summary>
@@ -1049,6 +1030,48 @@ namespace AppFramework.Core.Services
 
 namespace AppFramework.Core.Models
 {
+    public sealed class WebViewArguments
+    {
+        #region Properties
+
+        private string _webAddress;
+        public string WebAddress
+        {
+            get
+            {
+                // if the URL is a twitter handle, forward to Twitter.com
+                if (!string.IsNullOrEmpty(_webAddress) && _webAddress.StartsWith("@") && _webAddress.Length > 1)
+                    return "https://twitter.com/" + _webAddress.Substring(1);
+                else
+                    return _webAddress;
+            }
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                    value = value.Trim();
+
+                _webAddress = value;
+            }
+        }
+
+        public string Title { get; private set; }
+
+        public bool ShowNavigationBar { get; private set; }
+
+        #endregion
+
+        #region Constructors
+
+        public WebViewArguments(string webAddress = null, bool showNavigationBar = false, string title = null)
+        {
+            this.WebAddress = webAddress;
+            this.ShowNavigationBar = showNavigationBar;
+            this.Title = title;
+        }
+
+        #endregion
+    }
+
     /// <summary>
     /// Represents navigation instructions that can be serialized and performed at a later time.
     /// </summary>

@@ -7,7 +7,7 @@ using Windows.ApplicationModel;
 
 namespace AppFramework.Core.ViewModels
 {
-    public class WebViewModel : ViewModelBase
+    public abstract class WebViewModelBase : ViewModelBase
     {
         #region Events
 
@@ -26,19 +26,17 @@ namespace AppFramework.Core.ViewModels
         /// by x:Bind and it's ViewModel property accessor on the View class. This allows you to do find-replace on views for 'Binding' to 'x:Bind'.
         [Newtonsoft.Json.JsonIgnore()]
         [System.Runtime.Serialization.IgnoreDataMember()]
-        public WebViewModel ViewModel { get { return this; } }
+        public WebViewModelBase ViewModel { get { return this; } }
+
+        public WebViewArguments Args { get; private set; }
+
+        public override string Title
+        {
+            get => !string.IsNullOrEmpty(this.Args.Title)? this.Args.Title : base.Title;
+            protected set => base.Title = value;
+        }
 
         public object BrowserInstance { get; set; }
-
-        private bool _ShowNavigation;
-        /// <summary>
-        /// Gets whether or not the navigation command bar should be shown.
-        /// </summary>
-        public bool ShowNavigation
-        {
-            get { return _ShowNavigation; }
-            protected set { this.SetProperty(ref _ShowNavigation, value); }
-        }
 
         /// <summary>
         /// Gets or sets a flag indicating whether navigating back on the view should skip back override to allow browser back history to be navigated to on back presses.
@@ -117,14 +115,15 @@ namespace AppFramework.Core.ViewModels
 
         #region Constructors
 
-        public WebViewModel(bool showNavigation = true)
+        public WebViewModelBase(WebViewArguments args)
         {
             this.Title = Strings.WebBrowser.TextWebDefaultTitle;
 
             if (DesignMode.DesignModeEnabled)
                 return;
 
-            this.ShowNavigation = showNavigation;
+            this.CurrentUrl = args.WebAddress;
+            this.Args = args;
             this.BrowserRefreshCommand = new GenericCommand<IModel>("WebViewViewModel-RefreshCommand", this.BrowserRefresh, () => this.IsBrowserRefreshEnabled);
             this.BrowserHomeCommand = new GenericCommand("WebBrowserViewModel-Home", this.BrowserGoHome, () => this.BrowserCanGoBack());
 
@@ -140,8 +139,12 @@ namespace AppFramework.Core.ViewModels
         /// </summary>
         protected internal virtual void InitialNavigation()
         {
-            if (this.ViewParameter is string)
-                this.NavigateTo(this.ViewParameter.ToString());
+            if (this.ViewParameter is string url)
+                this.NavigateTo(url);
+            else if (this.ViewParameter is WebViewArguments args)
+                this.NavigateTo(args.WebAddress);
+            else if (!string.IsNullOrEmpty(this.Args.WebAddress))
+                this.NavigateTo(this.Args.WebAddress);
         }
 
         protected override Task OnRefreshAsync(bool forceRefresh, CancellationToken ct)
@@ -184,7 +187,7 @@ namespace AppFramework.Core.ViewModels
         internal bool Navigating(Uri uri)
         {
             this.HasNavigationFailed = false;
-            this.ShowBusyStatus(Strings.Resources.TextLoading);
+            this.ShowBusyStatus(Strings.Resources.TextLoading, true);
             this.ShowBrowser = false;
             this.IsBrowserRefreshEnabled = false;
             this.CurrentUrl = null;

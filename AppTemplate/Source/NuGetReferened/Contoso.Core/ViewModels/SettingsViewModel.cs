@@ -29,14 +29,14 @@ namespace Contoso.Core.ViewModels
             private set { this.SetProperty(ref _GeneralSettingsViewModel, value); }
         }
 
-        private PrivacyPolicyViewModel _PrivacyPolicyViewModel = new PrivacyPolicyViewModel(false);
+        private PrivacyPolicyViewModel _PrivacyPolicyViewModel = new PrivacyPolicyViewModel();
         public PrivacyPolicyViewModel PrivacyVM
         {
             get { return _PrivacyPolicyViewModel; }
             private set { this.SetProperty(ref _PrivacyPolicyViewModel, value); }
         }
 
-        private TermsOfServiceViewModel _TermsOfServiceViewModel = new TermsOfServiceViewModel(false);
+        private TermsOfServiceViewModel _TermsOfServiceViewModel = new TermsOfServiceViewModel();
         public TermsOfServiceViewModel TosVM
         {
             get { return _TermsOfServiceViewModel; }
