@@ -5,61 +5,14 @@ using Contoso.Core.Services;
 using Contoso.Core.ViewModels;
 using Contoso.UI.Views;
 using System;
-using System.Collections.Generic;
 
 namespace Contoso.UI.Services
 {
     /// <summary>
     /// NavigationManager instance with implementations specific to this application.
     /// </summary>
-    public sealed class NavigationManager : NavigationManagerBase
+    internal sealed class NavigationManager : NavigationManagerBase
     {
-        #region Constructors
-
-        internal NavigationManager()
-        {
-        }
-
-        #endregion
-
-        #region Handle Activation Methods
-
-        protected override bool OnVoiceActivation(VoiceCommandInfo info)
-        {
-            switch (info.VoiceCommandName)
-            {
-                case "showByName":
-                    // Access the value of the {destination} phrase in the voice command
-                    string name = info.GetSemanticInterpretation("Name");
-                    this.Item(name);
-                    return true;
-
-                default:
-                    // If we can't determine what page to launch, go to the default entry point.
-                    return base.OnVoiceActivation(info);
-            }
-        }
-
-        protected override bool OnHandleArgumentsActivation(string arguments, IDictionary<string, string> dic)
-        {
-            if (dic.ContainsKey("model"))
-            {
-                if (nameof(ItemModel).Equals(dic["model"], StringComparison.CurrentCultureIgnoreCase))
-                {
-                    this.Item(dic["ID"]);
-                    return true;
-                }
-                throw new NotImplementedException(string.Format("No action implemented for model type ", dic["model"]));
-            }
-            else
-            {
-                this.Item(arguments.Replace("/", ""));
-                return true;
-            }
-        }
-
-        #endregion
-
         #region Navigation Methods
 
         public override void Home(object parameter = null)

@@ -1,12 +1,58 @@
-﻿using System;
-using AppFramework.Core.Commands;
+﻿using AppFramework.Core.Commands;
+using AppFramework.Core.Extensions;
 using AppFramework.Core.Models;
-using AppFramework.Core.ViewModels;
+using Contoso.Core.Models;
+using Contoso.Core.ViewModels;
+using System;
+using System.Collections.Generic;
 
 namespace Contoso.Core.Services
 {
     public abstract class NavigationManagerBase : AppFramework.Core.Services.NavigationManagerBase
     {
+        #region Handle Activation Methods
+
+        protected override bool OnVoiceActivation(VoiceCommandInfo info)
+        {
+            switch (info.VoiceCommandName)
+            {
+                case "showByName":
+                    // Access the value of the {destination} phrase in the voice command
+                    string name = info.GetSemanticInterpretation("Name");
+                    this.Item(name);
+                    return true;
+
+                default:
+                    // If we can't determine what page to launch, go to the default entry point.
+                    return base.OnVoiceActivation(info);
+            }
+        }
+
+        protected override bool OnHandleArgumentsActivation(string arguments, IDictionary<string, string> dic)
+        {
+            if (dic.ContainsKey("model"))
+            {
+                if (dic.ContainsKeyAndValue("model", nameof(MainViewModel)))
+                {
+                    this.Home();
+                    return true;
+                }
+                else if (dic.ContainsKeyAndValue("model", nameof(ItemModel)))
+                {
+                    this.Item(dic["ID"]);
+                    return true;
+                }
+                throw new NotImplementedException(string.Format("No action implemented for model type {0}", dic["model"]));
+            }
+            else
+            {
+                this.Item(arguments.Replace("/", ""));
+                return true;
+            }
+        }
+
+        #endregion
+
         #region Search
 
         public abstract void Search(object parameter = null);

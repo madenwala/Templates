@@ -12,7 +12,7 @@ namespace AppFramework.Core.Extensions
         /// <param name="key">Key to check for.</param>
         /// <param name="value">Value to check for.</param>
         /// <returns>True if it contains the combination else false.</returns>
-        public static bool ContainsKeyValueStrings(this IDictionary<string, string> dic, string key, string value)
+        public static bool ContainsKeyAndValue(this IDictionary<string, string> dic, string key, string value)
         {
             return dic.ContainsKey(key) && dic[key].Equals(value, StringComparison.CurrentCultureIgnoreCase);
         }
