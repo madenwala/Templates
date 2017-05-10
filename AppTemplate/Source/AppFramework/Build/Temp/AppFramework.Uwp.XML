@@ -700,7 +700,7 @@
             Trigger to determine when a user enters tablet mode.
             </summary>
         </member>
-        <member name="M:AppFramework.Core.Extensions.IDictionaryExtensions.ContainsKeyValueStrings(System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String)">
+        <member name="M:AppFramework.Core.Extensions.IDictionaryExtensions.ContainsKeyAndValue(System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String)">
             <summary>
             Checks whether or not a string IDictionary contains a particular key and value combination.
             </summary>
