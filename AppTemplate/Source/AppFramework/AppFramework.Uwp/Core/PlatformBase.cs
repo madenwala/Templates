@@ -265,7 +265,7 @@ namespace AppFramework.Core
         /// <summary>
         /// Saves any app settings only if the data had changed.
         /// </summary>
-        public abstract void SaveSettings(bool forceSave = false);
+        internal abstract void SaveSettings(bool forceSave = false);
 
         /// <summary>
         /// Logic performed during sign out of a user in this application.
@@ -596,7 +596,7 @@ namespace AppFramework.Core
 
         #region Web View
 
-        protected internal abstract WebViewModelBase CreateWebViewModel(WebViewArguments args);
+        internal abstract WebViewModelBase CreateWebViewModel(WebViewArguments args);
 
         #endregion
 
@@ -658,7 +658,7 @@ namespace AppFramework.Core
 
         #region Methods
 
-        public override async Task AppInitializingAsync(InitializationModes mode)
+        public sealed override async Task AppInitializingAsync(InitializationModes mode)
         {
             await base.AppInitializingAsync(mode);
 
@@ -707,7 +707,7 @@ namespace AppFramework.Core
                 await this.FirstRunCheck();
         }
 
-        public override void AppSuspending()
+        public sealed override void AppSuspending()
         {
             try
             {
@@ -763,7 +763,7 @@ namespace AppFramework.Core
         /// <summary>
         /// Saves any app settings only if the data had changed.
         /// </summary>
-        public override void SaveSettings(bool forceSave = false)
+        internal override void SaveSettings(bool forceSave = false)
         {
             if (_settingsIsLocalDataDirty || forceSave)
             {
@@ -801,7 +801,7 @@ namespace AppFramework.Core
                 return null;
         }
 
-        protected internal override WebViewModelBase CreateWebViewModel(WebViewArguments args)
+        internal override WebViewModelBase CreateWebViewModel(WebViewArguments args)
         {
             return System.Activator.CreateInstance(typeof(WVM), args) as WebViewModelBase;
         }
