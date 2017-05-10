@@ -43,10 +43,10 @@ namespace AppFramework.Core
         /// <summary>
         /// Gets access to the notifications service of the platform currently executing. Provides you the ability to display toasts or manage tiles or etc on the executing platform.
         /// </summary>
-        internal NotificationsManagerBase Notifications
+        public NotificationsManagerBase Notifications
         {
             get { return GetService<NotificationsManagerBase>(); }
-            private set { SetService(value); }
+            protected set { SetService(value); }
         }
 
         /// <summary>

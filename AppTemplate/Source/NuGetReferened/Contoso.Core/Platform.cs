@@ -51,15 +51,6 @@ namespace Contoso.Core
         }
 
         /// <summary>
-        /// Gets access to the notifications service of the platform currently executing. Provides you the ability to display toasts or manage tiles or etc on the executing platform.
-        /// </summary>
-        internal NotificationsManager Notifications
-        {
-            get { return GetService<NotificationsManager>(); }
-            private set { SetService(value); }
-        }
-
-        /// <summary>
         /// Gets the ability to navigate to different parts of an application specific to the platform currently executing.
         /// </summary>
         public NavigationManagerBase Navigation
