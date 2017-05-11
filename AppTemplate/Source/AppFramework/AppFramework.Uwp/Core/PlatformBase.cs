@@ -265,7 +265,7 @@ namespace AppFramework.Core
         /// <summary>
         /// Saves any app settings only if the data had changed.
         /// </summary>
-        internal abstract void SaveSettings(bool forceSave = false);
+        public abstract void SaveSettings();
 
         /// <summary>
         /// Logic performed during sign out of a user in this application.
@@ -763,15 +763,15 @@ namespace AppFramework.Core
         /// <summary>
         /// Saves any app settings only if the data had changed.
         /// </summary>
-        internal override void SaveSettings(bool forceSave = false)
+        public sealed override void SaveSettings()
         {
-            if (_settingsIsLocalDataDirty || forceSave)
+            if (_settingsIsLocalDataDirty)
             {
                 this.Storage.SaveSetting(nameof(AppSettingsLocal), this.AppSettingsLocal, ApplicationData.Current.LocalSettings);
                 _settingsIsLocalDataDirty = false;
             }
 
-            if (_settingsIsRoamingDataDirty || forceSave)
+            if (_settingsIsRoamingDataDirty)
             {
                 this.Storage.SaveSetting(nameof(AppSettingsRoaming), this.AppSettingsRoaming, ApplicationData.Current.RoamingSettings);
                 _settingsIsRoamingDataDirty = false;

@@ -914,7 +914,7 @@
             Global suspension of the app and any custom logic to execute on suspend of the app.
             </summary>
         </member>
-        <member name="M:AppFramework.Core.PlatformBase.SaveSettings(System.Boolean)">
+        <member name="M:AppFramework.Core.PlatformBase.SaveSettings">
             <summary>
             Saves any app settings only if the data had changed.
             </summary>
@@ -2363,7 +2363,7 @@
             Reset all the app settings back to their defaults.
             </summary>
         </member>
-        <member name="M:AppFramework.Core.PlatformBase`4.SaveSettings(System.Boolean)">
+        <member name="M:AppFramework.Core.PlatformBase`4.SaveSettings">
             <summary>
             Saves any app settings only if the data had changed.
             </summary>
