@@ -81,6 +81,8 @@ namespace AppFramework.UI.Views
 
             if(PlatformBase.IsDebugMode)
                 this.GotFocus += ViewBase_GotFocus;
+
+            this.InitializeInterstitialAd();
         }
 
         #endregion

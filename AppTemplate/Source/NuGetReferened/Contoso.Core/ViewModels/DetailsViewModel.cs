@@ -130,6 +130,7 @@ namespace Contoso.Core.ViewModels
 
             if (forceRefresh || this.Item == null)
             {
+                this.ShowInterstitialAd();
                 try
                 {
                     if (this.Item == null)
