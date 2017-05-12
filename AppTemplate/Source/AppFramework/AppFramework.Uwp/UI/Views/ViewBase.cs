@@ -81,8 +81,6 @@ namespace AppFramework.UI.Views
 
             if(PlatformBase.IsDebugMode)
                 this.GotFocus += ViewBase_GotFocus;
-
-            this.InitializeInterstitialAd();
         }
 
         #endregion
@@ -122,6 +120,8 @@ namespace AppFramework.UI.Views
 
             try
             {
+                this.InitializeInterstitialAdEvents();
+
                 // Set the datacontext of the frame so that it can appropriately show the busy panel or not when a view model requests it
                 this.Frame.DataContext = this.ViewModel;
 
@@ -235,6 +235,8 @@ namespace AppFramework.UI.Views
 
                 // Save session state for the page
                 frameState[_pageKey] = pageState;
+
+                this.TearDownInterstitialAdEvents();
             }
             catch (Exception ex)
             {
