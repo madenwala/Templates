@@ -298,7 +298,7 @@ namespace AppFramework.UI.Views
         /// <returns>True if back navigation should be cancelled else false.</returns>
         public virtual bool OnBackNavigationRequested()
         {
-            return false;
+            return this.CheckIfAdsOpen();
         }
 
         #endregion
