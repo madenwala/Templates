@@ -603,11 +603,11 @@ namespace AppFramework.Core
         #endregion Methods
     }
 
-    public abstract class PlatformBase<VM, L, R, WVM> : PlatformBase
-        where VM : ViewModelBase, new()
-        where L : AppSettingsLocalBase
-        where R : AppSettingsRoamingBase
-        where WVM : WebViewModelBase
+    public abstract class PlatformBase<MainVM, AppSettingsL, AppSettingsR, WebVM> : PlatformBase
+        where MainVM : ViewModelBase, new()
+        where AppSettingsL : AppSettingsLocalBase
+        where AppSettingsR : AppSettingsRoamingBase
+        where WebVM : WebViewModelBase
     {
         #region Variables
 
@@ -618,13 +618,13 @@ namespace AppFramework.Core
 
         #region Properties
 
-        private VM _ViewModel;
+        private MainVM _ViewModel;
         /// <summary>
         /// Gets the MainViewModel global instance for the application.
         /// </summary>
         [Newtonsoft.Json.JsonIgnore()]
         [System.Runtime.Serialization.IgnoreDataMember()]
-        public VM ViewModel
+        public MainVM ViewModel
         {
             get { return _ViewModel; }
             set { this.SetProperty(ref _ViewModel, value); }
@@ -633,17 +633,17 @@ namespace AppFramework.Core
         /// <summary>
         /// Gets local app settings for this app.
         /// </summary>
-        public L AppSettingsLocal
+        public AppSettingsL AppSettingsLocal
         {
-            get { return base.AppSettingsLocalCore as L; }
+            get { return base.AppSettingsLocalCore as AppSettingsL; }
         }
 
         /// <summary>
         /// Gets roaming app settings for this app.
         /// </summary>
-        public R AppSettingsRoaming
+        public AppSettingsR AppSettingsRoaming
         {
-            get { return base.AppSettingsRoamingCore as R; }
+            get { return base.AppSettingsRoamingCore as AppSettingsR; }
         }
 
         #endregion
@@ -664,13 +664,13 @@ namespace AppFramework.Core
 
             if (this.AppSettingsLocal == null)
             {
-                base.AppSettingsLocalCore = this.Storage.LoadSetting<L>("AppSettingsLocal", ApplicationData.Current.LocalSettings) ?? Activator.CreateInstance<L>();
+                base.AppSettingsLocalCore = this.Storage.LoadSetting<AppSettingsL>("AppSettingsLocal", ApplicationData.Current.LocalSettings) ?? Activator.CreateInstance<AppSettingsL>();
                 this.NotifyPropertyChanged(() => this.AppSettingsLocal);
                 this.AppSettingsLocal.PropertyChanged += AppSettingsLocal_PropertyChanged;
             }
             if (this.AppSettingsRoaming == null)
             {
-                base.AppSettingsRoamingCore = this.Storage.LoadSetting<R>("AppSettingsRoaming", ApplicationData.Current.RoamingSettings) ?? Activator.CreateInstance<R>();
+                base.AppSettingsRoamingCore = this.Storage.LoadSetting<AppSettingsR>("AppSettingsRoaming", ApplicationData.Current.RoamingSettings) ?? Activator.CreateInstance<AppSettingsR>();
                 this.NotifyPropertyChanged(() => this.AppSettingsRoaming);
                 this.AppSettingsRoaming.PropertyChanged += AppSettingsRoaming_PropertyChanged;
             }
@@ -678,7 +678,7 @@ namespace AppFramework.Core
             this.CheckForFullLogging();
 
             if (this.ViewModel == null)
-                this.ViewModelCore = this.ViewModel = Activator.CreateInstance<VM>();
+                this.ViewModelCore = this.ViewModel = Activator.CreateInstance<MainVM>();
 
             if (mode == InitializationModes.New)
             {
@@ -733,7 +733,7 @@ namespace AppFramework.Core
             // to ensure no previous user data is shown on the UI.
             this.ResetAppSettings();
 
-            this.ViewModelCore = this.ViewModel = Activator.CreateInstance<VM>();
+            this.ViewModelCore = this.ViewModel = Activator.CreateInstance<MainVM>();
         }
 
         /// <summary>
@@ -749,10 +749,10 @@ namespace AppFramework.Core
             _settingsIsLocalDataDirty = true;
             _settingsIsRoamingDataDirty = true;
 
-            base.AppSettingsLocalCore = Activator.CreateInstance<L>();
+            base.AppSettingsLocalCore = Activator.CreateInstance<AppSettingsL>();
             this.NotifyPropertyChanged(() => this.AppSettingsLocal);
             this.AppSettingsLocal.PropertyChanged += AppSettingsLocal_PropertyChanged;
-            base.AppSettingsRoamingCore = Activator.CreateInstance<R>();
+            base.AppSettingsRoamingCore = Activator.CreateInstance<AppSettingsR>();
             this.NotifyPropertyChanged(() => this.AppSettingsRoaming);
             this.AppSettingsRoaming.PropertyChanged += AppSettingsRoaming_PropertyChanged;
 
@@ -803,7 +803,7 @@ namespace AppFramework.Core
 
         internal override WebViewModelBase CreateWebViewModel(WebViewArguments args)
         {
-            return System.Activator.CreateInstance(typeof(WVM), args) as WebViewModelBase;
+            return System.Activator.CreateInstance(typeof(WebVM), args) as WebViewModelBase;
         }
 
         #endregion
