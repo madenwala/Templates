@@ -3,6 +3,7 @@ using AppFramework.Core.Extensions;
 using AppFramework.UI;
 using Contoso.Core;
 using Contoso.Core.ViewModels;
+using Microsoft.Advertising.WinRT.UI;
 using System;
 using System.Threading.Tasks;
 using Windows.UI.Core;

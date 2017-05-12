@@ -29,8 +29,11 @@ namespace Contoso.UI
             //Platform.Current.Analytics.Register(new HockeyAppService("f83e8cf6e95047d5ba8dfee810a94754", "adenwala@outlook.com"));
             Platform.Current.Analytics.Register(new GoogleAnalyticsService("UA-91538532-2"));
 
-            AdControl.DevCenterAdAppID = "7f0c824b-5c94-4cc6-b4ea-db78b7641398";
+            AdControl.DevCenterAdAppID = "9nblggh5k9hj";
             AdControl.DevCenterAdUnitID = "11641061";
+            AdControl.DevCenterInterstitialVideoAdUnitID = "11683186";
+            AdControl.DevCenterInterstitialBannerAdUnitID = "11683185";
+
             AdControl.AdDuplexAppKey = "45758d4d-6f55-4f90-b646-fcbfc7f8bfa3";
             AdControl.AdDuplexAdUnitID = "199455";
 

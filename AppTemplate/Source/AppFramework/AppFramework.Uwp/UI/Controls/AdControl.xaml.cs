@@ -13,6 +13,10 @@ namespace AppFramework.UI.Controls
 
         public static string DevCenterAdUnitID { get; set; }
 
+        public static string DevCenterInterstitialBannerAdUnitID { get; set; }
+
+        public static string DevCenterInterstitialVideoAdUnitID { get; set; }
+
         public static string AdDuplexAppKey { get; set; }
 
         public static string AdDuplexAdUnitID { get; set; }

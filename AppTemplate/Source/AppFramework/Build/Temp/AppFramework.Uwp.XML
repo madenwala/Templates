@@ -35,6 +35,11 @@
             </summary>
             <typeparam name="TViewModel"></typeparam>
         </member>
+        <member name="M:AppFramework.UI.Views.ViewBase`1.ShowInterstitialAd">
+            <summary>
+            Displays a banner or video interstitial ad (whichever loads first).
+            </summary>
+        </member>
         <member name="P:AppFramework.UI.Views.ViewBase`1.ViewModel">
             <summary>
             Gets access to the view model instance associated to this page. Used for x:Bind capabilities in the page's XAML.

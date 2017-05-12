@@ -1213,6 +1213,16 @@ namespace AppFramework.Core.ViewModels
 
         #endregion
 
+        #region Interstitial Ads
+
+        protected void ShowInterstitialAd()
+        {
+            if(this.View is IView view)
+                view.ShowInterstitialAd();
+        }
+
+        #endregion
+
         #endregion Methods
     }
 }

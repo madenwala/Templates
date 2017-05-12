@@ -10,5 +10,6 @@
         object ViewParameter { get; }
         bool OnForwardNavigationRequested();
         bool OnBackNavigationRequested();
+        void ShowInterstitialAd();
     }
 }
