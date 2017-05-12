@@ -4,6 +4,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
+using Windows.UI.Xaml.Controls;
 
 namespace AppFramework.Core.ViewModels
 {
@@ -134,10 +135,12 @@ namespace AppFramework.Core.ViewModels
 
         #region Methods
 
+        #region Browser Management
+
         /// <summary>
         /// Initial page that should be navigated on launch of the application. 
         /// </summary>
-        protected internal virtual void InitialNavigation()
+        internal void InitialNavigation()
         {
             if (this.ViewParameter is string url)
                 this.NavigateTo(url);
@@ -147,7 +150,7 @@ namespace AppFramework.Core.ViewModels
                 this.NavigateTo(this.Args.WebAddress);
         }
 
-        protected override Task OnRefreshAsync(bool forceRefresh, CancellationToken ct)
+        protected sealed override Task OnRefreshAsync(bool forceRefresh, CancellationToken ct)
         {
             if (this.HasNavigationFailed)
                 this.BrowserRefresh();
@@ -155,7 +158,7 @@ namespace AppFramework.Core.ViewModels
             return base.OnRefreshAsync(forceRefresh, ct);
         }
 
-        protected internal override bool OnBackNavigationRequested()
+        protected internal sealed override bool OnBackNavigationRequested()
         {
             // Allow the browser to tell the global navigation that it should override back navigation and instead nav back in the browser view.
             if (this.ForceBrowserGoBackOnNavigationBack == false && this.BrowserCanGoBack != null && this.BrowserCanGoBack())
@@ -167,7 +170,7 @@ namespace AppFramework.Core.ViewModels
                 return base.OnBackNavigationRequested();
         }
 
-        protected internal override bool OnForwardNavigationRequested()
+        protected internal sealed override bool OnForwardNavigationRequested()
         {
             // Allow the browser to tell the global navigation that it should override forward navigation and instead nav forward in the browser view.
             if (this.BrowserCanGoForward != null && this.BrowserCanGoForward())
@@ -259,7 +262,7 @@ namespace AppFramework.Core.ViewModels
         /// <summary>
         /// Navigates the web browser backwards.
         /// </summary>
-        protected void BrowserGoBack()
+        private void BrowserGoBack()
         {
             this.GoBackwardsRequested?.Invoke(this.BrowserInstance, new EventArgs());
         }
@@ -267,7 +270,7 @@ namespace AppFramework.Core.ViewModels
         /// <summary>
         /// Navigates the web browser forward.
         /// </summary>
-        protected internal void BrowserGoForward()
+        internal void BrowserGoForward()
         {
             this.GoForwardRequested?.Invoke(this.BrowserInstance, new EventArgs());
         }
@@ -275,7 +278,7 @@ namespace AppFramework.Core.ViewModels
         /// <summary>
         /// Navigates the web browser to the home page.
         /// </summary>
-        protected void BrowserGoHome()
+        private void BrowserGoHome()
         {
             this.GoHomeRequested?.Invoke(this.BrowserInstance, new EventArgs());
         }
@@ -289,6 +292,52 @@ namespace AppFramework.Core.ViewModels
             if (!string.IsNullOrEmpty(url))
                 this.NavigateToRequested?.Invoke(this.BrowserInstance, url);
         }
+
+        #endregion 
+
+        #region Browser Manipulation
+
+        protected async Task HideCssClassesAsync(params string[] classNames)
+        {
+            var wv = this.BrowserInstance as WebView;
+            if (wv != null && classNames != null)
+            {
+                foreach (var className in classNames)
+                {
+                    try
+                    {
+                        // https://www.w3schools.com/jsref/met_element_getelementsbytagname.asp
+                        await wv.InvokeScriptAsync("eval", new string[] { "var x = document.getElementsByClassName('" + className + "'); if(x) {x[0].style.display = 'none';}" });
+                    }
+                    catch (Exception ex)
+                    {
+                        PlatformBase.CurrentCore.Logger.LogError(ex, $"{this.GetType().Name} -- could not hide class '{className}' in the WebView via InvokeScriptAsync.");
+                    }
+                }
+            }
+        }
+
+        protected async Task HideElementIdsAsync(params string[] ids)
+        {
+            var wv = this.BrowserInstance as WebView;
+            if (wv != null && ids != null)
+            {
+                foreach (var id in ids)
+                {
+                    try
+                    {
+                        // https://www.w3schools.com/jsref/met_element_getelementsbytagname.asp
+                        await wv.InvokeScriptAsync("eval", new string[] { "var x = document.getElementById('" + id + "'); if(x) {x[0].style.display = 'none';}" });
+                    }
+                    catch (Exception ex)
+                    {
+                        PlatformBase.CurrentCore.Logger.LogError(ex, $"{this.GetType().Name} -- could not hide element ID '{id}' in the WebView via InvokeScriptAsync.");
+                    }
+                }
+            }
+        }
+
+        #endregion
 
         #endregion Methods
     }
