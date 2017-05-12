@@ -2930,12 +2930,6 @@
             Registers the window with all window events.
             </summary>
         </member>
-        <member name="M:AppFramework.Core.Services.NavigationManagerBase.CreateFrame">
-            <summary>
-            Creates an instance of a ApplicationFrame object.
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:AppFramework.Core.Services.NavigationManagerBase.HandleActivation(Windows.ApplicationModel.Activation.IActivatedEventArgs,Windows.UI.Xaml.Controls.Frame)">
             <summary>
             Handle activation of the event and any navigation necessary.
