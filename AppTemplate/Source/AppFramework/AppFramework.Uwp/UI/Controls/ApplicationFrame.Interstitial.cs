@@ -1,6 +1,7 @@
 ﻿using AppFramework.Core;
 using Microsoft.Advertising.WinRT.UI;
 using System;
+using Windows.UI.Xaml;
 
 namespace AppFramework.UI.Controls
 {
@@ -27,6 +28,16 @@ namespace AppFramework.UI.Controls
         #region Properties
 
         public int AdsDisplayedCount { get; private set; }
+        
+        public bool DisableInterstitialAds
+        {
+            get { return (bool)GetValue(DisableInterstitialAdsProperty); }
+            set { SetValue(DisableInterstitialAdsProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for DisableInterstitialAds.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DisableInterstitialAdsProperty =
+            DependencyProperty.Register(nameof(DisableInterstitialAds), typeof(bool), typeof(ApplicationFrame), new PropertyMetadata(false));
 
         #endregion
 
@@ -36,7 +47,7 @@ namespace AppFramework.UI.Controls
         {
             this.AdsDisplayedCount = 0;
 
-            if (Controls.AdControl.DevCenterInterstitialVideoAdUnitID != null)
+            if (Controls.AdControl.DevCenterInterstitialVideoAdUnitID != null && !this.DisableInterstitialAds)
             {
                 _interstitialAdVideo = new InterstitialAd();
                 _interstitialAdVideo.AdReady += Interstitial_Video_AdReady;
@@ -46,7 +57,7 @@ namespace AppFramework.UI.Controls
                 this.RequestInterstitialAdVideo();
             }
 
-            if (Controls.AdControl.DevCenterInterstitialBannerAdUnitID != null)
+            if (Controls.AdControl.DevCenterInterstitialBannerAdUnitID != null && !this.DisableInterstitialAds)
             {
                 _interstitialAdBanner = new InterstitialAd();
                 _interstitialAdBanner.AdReady += Interstitial_Banner_AdReady;
@@ -113,6 +124,9 @@ namespace AppFramework.UI.Controls
 
         private void ShowInterstitialAdBanner()
         {
+            if (this.DisableInterstitialAds)
+                return;
+
             try
             {
                 PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "DevCenter - ShowInterstitialAdBanner");

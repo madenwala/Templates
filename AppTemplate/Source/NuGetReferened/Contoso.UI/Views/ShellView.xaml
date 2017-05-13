@@ -154,7 +154,7 @@
                 </Grid>
             </SplitView.Pane>
 
-            <controls:AdSupportedApplicationFrame x:Name="bodyFrame" />
+            <controls:AdSupportedApplicationFrame x:Name="bodyFrame" DisableInterstitialAds="True" />
 
         </SplitView>
 
