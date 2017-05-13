@@ -440,6 +440,10 @@
     <RootType FullName="Windows.UI.Xaml.Media.Animation.PointerDownThemeAnimation" />
     <RootType FullName="Windows.UI.Xaml.Media.Animation.PointerUpThemeAnimation" />
     <RootType FullName="AppFramework.UI.Resources.Common" />
+    <RootType FullName="AppFramework.UI.Views.SecondaryWindowViewBase">
+      <RootProperty Name="Content" />
+    </RootType>
+    <RootType FullName="AppFramework.UI.Views.SecondaryWindowView" />
     <RootType FullName="AppFramework.UI.Views.WebViewBase">
       <RootProperty Name="Content" />
     </RootType>

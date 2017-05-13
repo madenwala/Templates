@@ -19,126 +19,10 @@
             Creates an attached property for all ListViewBase controls allowing binding  a command object to it's ItemClick event.
             </summary>
         </member>
-        <member name="M:AppFramework.UI.Views.WebView.InitializeComponent">
-            <summary>
-            InitializeComponent()
-            </summary>
-        </member>
-        <member name="M:AppFramework.UI.Views.WebView.Connect(System.Int32,System.Object)">
-            <summary>
-            Connect()
-            </summary>
-        </member>
-        <member name="T:AppFramework.UI.Views.ViewBase`1">
-            <summary>
-            Base class for all pages in your application.
-            </summary>
-            <typeparam name="TViewModel"></typeparam>
-        </member>
-        <member name="M:AppFramework.UI.Views.ViewBase`1.ShowInterstitialAd">
+        <member name="M:AppFramework.UI.Controls.ApplicationFrame.ShowInterstitialAd">
             <summary>
             Displays a banner or video interstitial ad (whichever loads first).
             </summary>
-        </member>
-        <member name="P:AppFramework.UI.Views.ViewBase`1.ViewModel">
-            <summary>
-            Gets access to the view model instance associated to this page. Used for x:Bind capabilities in the page's XAML.
-            </summary>
-        </member>
-        <member name="P:AppFramework.UI.Views.ViewBase`1.IsInView">
-            <summary>
-            True if the view is visible to the user else false.
-            </summary>
-        </member>
-        <member name="E:AppFramework.UI.Views.ViewBase`1.PropertyChanged">
-            <summary>
-            Event for knowing when page properties change.
-            </summary>
-        </member>
-        <member name="M:AppFramework.UI.Views.ViewBase`1.OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs)">
-            <summary>
-            The methods provided in this section are simply used to allow
-            NavigationHelper to respond to the page's navigation methods.
-            <para>
-            Page specific logic should be placed in event handlers for the
-            <see cref="!:NavigationHelper.LoadState"/>
-            and <see cref="!:NavigationHelper.SaveState"/>.
-            The navigation parameter is available in the LoadState method
-            in addition to page state preserved during an earlier session.
-            </para>
-            </summary>
-            <param name="e">Event data that describes how this page was reached.</param>
-        </member>
-        <member name="M:AppFramework.UI.Views.ViewBase`1.OnLoadStateAsync(AppFramework.Core.LoadStateEventArgs)">
-            <summary>
-            Populates the page with content passed during navigation.  Any saved state is also
-            provided when recreating a page from a prior session.
-            </summary>
-            <param name="e">Event data that provides both the navigation parameter passed to
-            <see cref="M:Windows.UI.Xaml.Controls.Frame.Navigate(System.Type,System.Object)"/> when this page was initially requested and
-            a dictionary of state preserved by this page during an earlier
-            session.  The state will be null the first time a page is visited.</param>
-        </member>
-        <member name="M:AppFramework.UI.Views.ViewBase`1.OnSaveStateAsync(AppFramework.Core.SaveStateEventArgs)">
-            <summary>
-            Preserves state associated with this page in case the application is suspended or the
-            page is discarded from the navigation cache.  Values must conform to the serialization
-            requirements of <see cref="P:AppFramework.UI.SuspensionManager.SessionState"/>.
-            </summary>
-            <param name="e">Event data that provides an empty dictionary to be populated with
-            serializable state.</param>
-        </member>
-        <member name="M:AppFramework.UI.Views.ViewBase`1.Application_Resuming(System.Object,System.Object)">
-            <summary>
-            Event handler for application resume
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:AppFramework.UI.Views.ViewBase`1.OnApplicationResuming">
-            <summary>
-            Perform any custom logic for when the OS resumes your app.
-            </summary>
-        </member>
-        <member name="M:AppFramework.UI.Views.ViewBase`1.OnForwardNavigationRequested">
-            <summary>
-            Allows a view to prevent forward navigation if it needs to.
-            </summary>
-            <returns>True if forward navigation should be cancelled else false.</returns>
-        </member>
-        <member name="M:AppFramework.UI.Views.ViewBase`1.OnBackNavigationRequested">
-            <summary>
-            Allows a view to prevent back navigation if it needs to.
-            </summary>
-            <returns>True if back navigation should be cancelled else false.</returns>
-        </member>
-        <member name="M:AppFramework.UI.Views.ViewBase`1.SetViewModel(`0)">
-            <summary>
-            Sets a view model instance to the page for data binding and for x:Bind.
-            </summary>
-            <param name="vm"></param>
-        </member>
-        <member name="M:AppFramework.UI.Views.ViewBase`1.SetProperty``1(``0@,``0,System.String)">
-            <summary>
-            Checks if a property already matches a desired value.  Sets the property and
-            notifies listeners only when necessary.
-            </summary>
-            <typeparam name="T">Type of the property.</typeparam>
-            <param name="storage">Reference to a property with both getter and setter.</param>
-            <param name="value">Desired value for the property.</param>
-            <param name="propertyName">Name of the property used to notify listeners.  This
-            value is optional and can be provided automatically when invoked from compilers that
-            support CallerMemberName.</param>
-            <returns>True if the value was changed, false if the existing value matched the
-            desired value.</returns>
-        </member>
-        <member name="M:AppFramework.UI.Views.ViewBase`1.NotifyPropertyChanged(System.String)">
-            <summary>
-            Notifies listeners that a property value has changed.
-            </summary>
-            <param name="propertyName">Name of the property used to notify listeners.  This
-            value is optional and can be provided automatically when invoked from compilers
-            that support <see cref="T:System.Runtime.CompilerServices.CallerMemberNameAttribute"/>.</param>
         </member>
         <member name="T:AppFramework.UI.Controls.AdControl">
             <summary>
@@ -512,6 +396,132 @@
             True if the first number is close in value to the second, false
             otherwise.
             </returns>
+        </member>
+        <member name="M:AppFramework.UI.Views.SecondaryWindowView.InitializeComponent">
+            <summary>
+            InitializeComponent()
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.Views.SecondaryWindowView.Connect(System.Int32,System.Object)">
+            <summary>
+            Connect()
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.Views.WebView.InitializeComponent">
+            <summary>
+            InitializeComponent()
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.Views.WebView.Connect(System.Int32,System.Object)">
+            <summary>
+            Connect()
+            </summary>
+        </member>
+        <member name="T:AppFramework.UI.Views.ViewBase`1">
+            <summary>
+            Base class for all pages in your application.
+            </summary>
+            <typeparam name="TViewModel"></typeparam>
+        </member>
+        <member name="P:AppFramework.UI.Views.ViewBase`1.ViewModel">
+            <summary>
+            Gets access to the view model instance associated to this page. Used for x:Bind capabilities in the page's XAML.
+            </summary>
+        </member>
+        <member name="P:AppFramework.UI.Views.ViewBase`1.IsInView">
+            <summary>
+            True if the view is visible to the user else false.
+            </summary>
+        </member>
+        <member name="E:AppFramework.UI.Views.ViewBase`1.PropertyChanged">
+            <summary>
+            Event for knowing when page properties change.
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.Views.ViewBase`1.OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs)">
+            <summary>
+            The methods provided in this section are simply used to allow
+            NavigationHelper to respond to the page's navigation methods.
+            <para>
+            Page specific logic should be placed in event handlers for the
+            <see cref="!:NavigationHelper.LoadState"/>
+            and <see cref="!:NavigationHelper.SaveState"/>.
+            The navigation parameter is available in the LoadState method
+            in addition to page state preserved during an earlier session.
+            </para>
+            </summary>
+            <param name="e">Event data that describes how this page was reached.</param>
+        </member>
+        <member name="M:AppFramework.UI.Views.ViewBase`1.OnLoadStateAsync(AppFramework.Core.LoadStateEventArgs)">
+            <summary>
+            Populates the page with content passed during navigation.  Any saved state is also
+            provided when recreating a page from a prior session.
+            </summary>
+            <param name="e">Event data that provides both the navigation parameter passed to
+            <see cref="M:Windows.UI.Xaml.Controls.Frame.Navigate(System.Type,System.Object)"/> when this page was initially requested and
+            a dictionary of state preserved by this page during an earlier
+            session.  The state will be null the first time a page is visited.</param>
+        </member>
+        <member name="M:AppFramework.UI.Views.ViewBase`1.OnSaveStateAsync(AppFramework.Core.SaveStateEventArgs)">
+            <summary>
+            Preserves state associated with this page in case the application is suspended or the
+            page is discarded from the navigation cache.  Values must conform to the serialization
+            requirements of <see cref="P:AppFramework.UI.SuspensionManager.SessionState"/>.
+            </summary>
+            <param name="e">Event data that provides an empty dictionary to be populated with
+            serializable state.</param>
+        </member>
+        <member name="M:AppFramework.UI.Views.ViewBase`1.Application_Resuming(System.Object,System.Object)">
+            <summary>
+            Event handler for application resume
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:AppFramework.UI.Views.ViewBase`1.OnApplicationResuming">
+            <summary>
+            Perform any custom logic for when the OS resumes your app.
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.Views.ViewBase`1.OnForwardNavigationRequested">
+            <summary>
+            Allows a view to prevent forward navigation if it needs to.
+            </summary>
+            <returns>True if forward navigation should be cancelled else false.</returns>
+        </member>
+        <member name="M:AppFramework.UI.Views.ViewBase`1.OnBackNavigationRequested">
+            <summary>
+            Allows a view to prevent back navigation if it needs to.
+            </summary>
+            <returns>True if back navigation should be cancelled else false.</returns>
+        </member>
+        <member name="M:AppFramework.UI.Views.ViewBase`1.SetViewModel(`0)">
+            <summary>
+            Sets a view model instance to the page for data binding and for x:Bind.
+            </summary>
+            <param name="vm"></param>
+        </member>
+        <member name="M:AppFramework.UI.Views.ViewBase`1.SetProperty``1(``0@,``0,System.String)">
+            <summary>
+            Checks if a property already matches a desired value.  Sets the property and
+            notifies listeners only when necessary.
+            </summary>
+            <typeparam name="T">Type of the property.</typeparam>
+            <param name="storage">Reference to a property with both getter and setter.</param>
+            <param name="value">Desired value for the property.</param>
+            <param name="propertyName">Name of the property used to notify listeners.  This
+            value is optional and can be provided automatically when invoked from compilers that
+            support CallerMemberName.</param>
+            <returns>True if the value was changed, false if the existing value matched the
+            desired value.</returns>
+        </member>
+        <member name="M:AppFramework.UI.Views.ViewBase`1.NotifyPropertyChanged(System.String)">
+            <summary>
+            Notifies listeners that a property value has changed.
+            </summary>
+            <param name="propertyName">Name of the property used to notify listeners.  This
+            value is optional and can be provided automatically when invoked from compilers
+            that support <see cref="T:System.Runtime.CompilerServices.CallerMemberNameAttribute"/>.</param>
         </member>
         <member name="T:AppFramework.UI.App">
             <summary>
