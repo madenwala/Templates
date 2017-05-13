@@ -43,8 +43,6 @@ namespace AppFramework.UI.Controls
 
         private void InitializeInterstitialAds()
         {
-            this.AdsDisplayedCount = 0;
-
             if (Controls.AdControl.DevCenterInterstitialVideoAdUnitID != null && !this.DisableInterstitialAds)
             {
                 _interstitialAdVideo = new InterstitialAd();
