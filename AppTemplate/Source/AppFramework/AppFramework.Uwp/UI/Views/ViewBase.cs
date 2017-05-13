@@ -120,7 +120,7 @@ namespace AppFramework.UI.Views
 
             try
             {
-                this.InitializeInterstitialAdEvents();
+                this.InitializeInterstitialAds();
 
                 // Set the datacontext of the frame so that it can appropriately show the busy panel or not when a view model requests it
                 this.Frame.DataContext = this.ViewModel;
@@ -236,7 +236,7 @@ namespace AppFramework.UI.Views
                 // Save session state for the page
                 frameState[_pageKey] = pageState;
 
-                this.TearDownInterstitialAdEvents();
+                this.TeardownInterstitialAds();
             }
             catch (Exception ex)
             {
@@ -298,7 +298,10 @@ namespace AppFramework.UI.Views
         /// <returns>True if back navigation should be cancelled else false.</returns>
         public virtual bool OnBackNavigationRequested()
         {
-            return this.CheckIfAdsOpen();
+            if (PlatformBase.CurrentCore.NavigationBase.ParentFrame is ApplicationFrame frame)
+                return frame.CheckIfAdsOpen();
+            else
+                return false;
         }
 
         #endregion

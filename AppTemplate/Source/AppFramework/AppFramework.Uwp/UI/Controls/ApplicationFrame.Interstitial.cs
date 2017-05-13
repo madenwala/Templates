@@ -6,21 +6,36 @@ namespace AppFramework.UI.Controls
 {
     public partial class ApplicationFrame
     {
-        #region Interstitial Ads
-
         #region Variables
 
         //Initialize the ads:
         private InterstitialAd _interstitialAdVideo;
         private InterstitialAd _interstitialAdBanner;
-        bool _showInterstitialAdWhenReady = false;
+        private bool _showInterstitialAdWhenReady = false;
+
+        #endregion
+
+        #region Events
+
+        public event EventHandler OnInterstitialAdDisplayed;
+        public event EventHandler OnInterstitialAdCompleted;
+        public event EventHandler OnInterstitialAdErrorOccurred;
+        public event EventHandler OnInterstitialAdCancelled;
+
+        #endregion
+
+        #region Properties
+
+        public int AdsDisplayedCount { get; private set; }
 
         #endregion
 
         #region Methods
 
-        private void InitializeInterstitialAd()
+        private void InitializeInterstitialAds()
         {
+            this.AdsDisplayedCount = 0;
+
             if (Controls.AdControl.DevCenterInterstitialVideoAdUnitID != null)
             {
                 _interstitialAdVideo = new InterstitialAd();
@@ -28,7 +43,6 @@ namespace AppFramework.UI.Controls
                 _interstitialAdVideo.ErrorOccurred += Interstitial_ErrorOccurred;
                 _interstitialAdVideo.Completed += Interstitial_Completed;
                 _interstitialAdVideo.Cancelled += Interstitial_Cancelled;
-
                 this.RequestInterstitialAdVideo();
             }
 
@@ -39,9 +53,26 @@ namespace AppFramework.UI.Controls
                 _interstitialAdBanner.ErrorOccurred += Interstitial_ErrorOccurred;
                 _interstitialAdBanner.Completed += Interstitial_Completed;
                 _interstitialAdBanner.Cancelled += Interstitial_Cancelled;
-
                 this.RequestInterstitialAdBanner();
             }
+        }
+
+        internal bool CheckIfAdsOpen()
+        {
+            if (_interstitialAdVideo.State == InterstitialAdState.Showing)
+            {
+                PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "DevCenter - Closing interstitial video ad due to back navigation request.");
+                _interstitialAdVideo.Close();
+                return true;
+            }
+            else if (_interstitialAdBanner.State == InterstitialAdState.Showing)
+            {
+                PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "DevCenter - Closing interstitial banner ad due to back navigation request.");
+                _interstitialAdBanner.Close();
+                return true;
+            }
+            else
+                return false;
         }
 
         /// <summary>
@@ -56,7 +87,10 @@ namespace AppFramework.UI.Controls
             else if (_interstitialAdBanner?.State == InterstitialAdState.Ready)
                 this.ShowInterstitialAdBanner();
             else
+            {
                 _showInterstitialAdWhenReady = true;
+                this.RequestInterstititalAd();
+            }
         }
 
         private void ShowInterstitialAdVideo()
@@ -64,7 +98,7 @@ namespace AppFramework.UI.Controls
             try
             {
                 PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "DevCenter - ShowInterstitialAdVideo");
-                this.OnInterstitialAdReady(_interstitialAdVideo, _interstitialAdVideo.State);
+                this.OnInterstitialAdDisplayed?.Invoke(this, new EventArgs());
             }
             catch (Exception ex)
             {
@@ -72,6 +106,7 @@ namespace AppFramework.UI.Controls
             }
             finally
             {
+                this.AdsDisplayedCount++;
                 _interstitialAdVideo.Show();
             }
         }
@@ -81,7 +116,7 @@ namespace AppFramework.UI.Controls
             try
             {
                 PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "DevCenter - ShowInterstitialAdBanner");
-                this.OnInterstitialAdReady(_interstitialAdBanner, _interstitialAdBanner.State);
+                this.OnInterstitialAdDisplayed?.Invoke(this, new EventArgs());
             }
             catch (Exception ex)
             {
@@ -89,6 +124,7 @@ namespace AppFramework.UI.Controls
             }
             finally
             {
+                this.AdsDisplayedCount++;
                 _interstitialAdBanner.Show();
             }
         }
@@ -119,6 +155,10 @@ namespace AppFramework.UI.Controls
             }
         }
 
+        #endregion
+
+        #region Events
+
         //write the code for the events
         private void Interstitial_Video_AdReady(object sender, object e)
         {
@@ -141,44 +181,16 @@ namespace AppFramework.UI.Controls
             }
         }
 
-        #endregion
-
-        #region Override Methods
-
-        protected virtual void OnInterstitialAdReady(object sender, InterstitialAdState state)
-        {
-        }
-
-        protected virtual void OnInterstitialAdCompleted(object sender, InterstitialAdState state)
-        {
-        }
-
-        protected virtual void OnInterstitialAdErrorOccurred(object sender, InterstitialAdState state)
-        {
-        }
-
-        protected virtual void OnInterstitialAdCancelled(object sender, InterstitialAdState state)
-        {
-        }
-
-        #endregion
-
-        #region Events
-
         private void Interstitial_ErrorOccurred(object sender, AdErrorEventArgs e)
         {
             try
             {
                 PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, $"DevCenter - {this.GetType().Name}.Interstitial_ErrorOccurred {e.ErrorCode} - {e.ErrorMessage}");
-                this.OnInterstitialAdErrorOccurred(sender, _interstitialAdVideo.State);
+                this.OnInterstitialAdErrorOccurred?.Invoke(this, new EventArgs());
             }
             catch (Exception ex)
             {
                 PlatformBase.CurrentCore.Logger.LogError(ex, $"DevCenter - Error occured while executing {this.GetType().Name}.OnInterstitialAdErrorOccurred");
-            }
-            finally
-            {
-                this.RequestInterstititalAd();
             }
         }
 
@@ -187,7 +199,7 @@ namespace AppFramework.UI.Controls
             try
             {
                 PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, $"DevCenter - {this.GetType().Name}.Interstitial_Completed");
-                this.OnInterstitialAdCompleted(sender, _interstitialAdVideo.State);
+                this.OnInterstitialAdCompleted?.Invoke(this, new EventArgs());
             }
             catch (Exception ex)
             {
@@ -195,7 +207,7 @@ namespace AppFramework.UI.Controls
             }
             finally
             {
-                this.RequestInterstititalAd();
+                RequestInterstititalAd();
             }
         }
 
@@ -204,7 +216,7 @@ namespace AppFramework.UI.Controls
             try
             {
                 PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, $"DevCenter - {this.GetType().Name}.Interstitial_Cancelled");
-                this.OnInterstitialAdCancelled(sender, _interstitialAdVideo.State);
+                this.OnInterstitialAdCancelled?.Invoke(this, new EventArgs());
             }
             catch (Exception ex)
             {
@@ -212,11 +224,9 @@ namespace AppFramework.UI.Controls
             }
             finally
             {
-                this.RequestInterstititalAd();
+                RequestInterstititalAd();
             }
         }
-
-        #endregion
 
         #endregion
     }

@@ -6,7 +6,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace AppFramework.UI.Controls
 {
-    public class ApplicationFrame : Frame
+    public partial class ApplicationFrame : Frame
     {
         #region Properties
 
@@ -29,6 +29,8 @@ namespace AppFramework.UI.Controls
             this.DefaultStyleKey = typeof(ApplicationFrame);
             this.Loaded += ApplicationFrame_Loaded;
             this.Unloaded += ApplicationFrame_Unloaded;
+
+            this.InitializeInterstitialAds();
         }
 
         #endregion

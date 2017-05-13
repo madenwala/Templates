@@ -113,6 +113,7 @@
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <Compile Include="UI\Behaviors\ContextMenuRightClickBehavior.cs" />
+    <Compile Include="UI\Controls\ApplicationFrame.Interstitial.cs" />
     <Compile Include="UI\Extensions\FrameworkElementExtensions.cs" />
     <Compile Include="UI\Views\WebView.xaml.cs">
       <DependentUpon>WebView.xaml</DependentUpon>
