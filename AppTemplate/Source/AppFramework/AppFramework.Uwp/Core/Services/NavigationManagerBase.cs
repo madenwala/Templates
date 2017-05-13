@@ -705,7 +705,7 @@ namespace AppFramework.Core.Services
                     this.RegisterCoreWindow();
 
                     // Create a frame for the new window
-                    var frame = new ApplicationFrame();
+                    var frame = new ApplicationFrame(true);
                     Window.Current.Content = frame;
 
                     // Navigate to a page within the new window based on the parameters of this method

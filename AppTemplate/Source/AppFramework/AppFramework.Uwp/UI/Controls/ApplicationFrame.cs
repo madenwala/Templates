@@ -26,16 +26,27 @@ namespace AppFramework.UI.Controls
 
         public ApplicationFrame()
         {
+            this.Initialize();
+        }
+
+        public ApplicationFrame(bool disableInterstitialAds)
+        {
+            this.DisableInterstitialAds = disableInterstitialAds;
+            this.Initialize();
+        }
+
+        #endregion
+
+        #region Methods
+
+        private void Initialize()
+        {
             this.DefaultStyleKey = typeof(ApplicationFrame);
             this.Loaded += ApplicationFrame_Loaded;
             this.Unloaded += ApplicationFrame_Unloaded;
 
             this.InitializeInterstitialAds();
         }
-
-        #endregion
-
-        #region Methods
 
         private void UpdateUI()
         {
