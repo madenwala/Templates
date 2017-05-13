@@ -26,8 +26,6 @@ namespace AppFramework.UI.Controls
         #endregion
 
         #region Properties
-
-        public int AdsDisplayedCount { get; private set; }
         
         public bool DisableInterstitialAds
         {
@@ -117,7 +115,6 @@ namespace AppFramework.UI.Controls
             }
             finally
             {
-                this.AdsDisplayedCount++;
                 _interstitialAdVideo.Show();
             }
         }
@@ -138,7 +135,6 @@ namespace AppFramework.UI.Controls
             }
             finally
             {
-                this.AdsDisplayedCount++;
                 _interstitialAdBanner.Show();
             }
         }
