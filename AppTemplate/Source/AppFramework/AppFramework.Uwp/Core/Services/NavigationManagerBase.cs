@@ -711,7 +711,6 @@ namespace AppFramework.Core.Services
                     Window.Current.Activate();
                     ApplicationView.GetForCurrentView().Consolidated += View_Consolidated;
 
-
                     PlatformBase.CurrentCore.Logger.Log(LogLevels.Warning, $"Launched new window");
                 });
 
