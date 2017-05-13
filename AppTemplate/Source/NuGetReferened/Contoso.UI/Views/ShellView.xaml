@@ -103,7 +103,6 @@
                                     <localControls:SearchBox x:Name="searchBox" Visibility="{x:Bind btnSearch.IsChecked, Mode=OneWay, Converter={StaticResource visConverter}}" />
                                 </Grid>
                             </controls:SplitViewButton>
-                            <controls:SplitViewButton GroupName="ShellNav" x:Name="btnHelp" Content="Help" Symbol="Help" Command="{x:Bind ViewModel.Platform.Navigation.HelpCommand}" />
 
                         </StackPanel>
                     </ScrollViewer>

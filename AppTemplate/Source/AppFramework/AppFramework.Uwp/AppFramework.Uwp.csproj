@@ -115,6 +115,9 @@
     <Compile Include="UI\Behaviors\ContextMenuRightClickBehavior.cs" />
     <Compile Include="UI\Controls\ApplicationFrame.Interstitial.cs" />
     <Compile Include="UI\Extensions\FrameworkElementExtensions.cs" />
+    <Compile Include="UI\Views\SecondaryWindowView.xaml.cs">
+      <DependentUpon>SecondaryWindowView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\WebView.xaml.cs">
       <DependentUpon>WebView.xaml</DependentUpon>
     </Compile>
@@ -317,6 +320,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="UI\Views\SecondaryWindowView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\Views\WebView.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -1,12 +1,11 @@
 ﻿using AppFramework.Core;
 using AppFramework.Core.Extensions;
 using AppFramework.Core.Models;
-using Contoso.Core;
-using Contoso.Core.ViewModels;
+using AppFramework.Core.ViewModels;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 
-namespace Contoso.UI.Views
+namespace AppFramework.UI.Views
 {
     public abstract class SecondaryWindowViewBase : ViewBase<ViewModelBase>
     {
@@ -52,7 +51,7 @@ namespace Contoso.UI.Views
         protected override async Task OnLoadStateAsync(LoadStateEventArgs e)
         {
             if (e.NavigationEventArgs.NavigationMode == NavigationMode.New && e.Parameter is NavigationRequest)
-                Platform.Current.Navigation.Navigate(e.Parameter as NavigationRequest);
+                PlatformBase.CurrentCore.NavigationBase.Navigate(e.Parameter as NavigationRequest);
 
             await base.OnLoadStateAsync(e);
         }

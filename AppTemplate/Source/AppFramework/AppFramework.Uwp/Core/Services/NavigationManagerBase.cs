@@ -3,6 +3,7 @@ using AppFramework.Core.Extensions;
 using AppFramework.Core.Models;
 using AppFramework.Core.ViewModels;
 using AppFramework.UI.Controls;
+using AppFramework.UI.Views;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -678,7 +679,10 @@ namespace AppFramework.Core.Services
                 this.Frame.Navigate(Type.GetType(request.ViewType), this.SerializeParameter(request.ViewParameter));
         }
 
-        protected abstract void SecondaryWindow(NavigationRequest request);
+        protected virtual void SecondaryWindow(NavigationRequest request)
+        {
+            this.Navigate(typeof(SecondaryWindowView), request);
+        }
 
         /// <summary>
         /// Launches another window with the specified page type.

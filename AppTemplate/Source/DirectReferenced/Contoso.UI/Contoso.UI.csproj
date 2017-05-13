@@ -162,9 +162,6 @@
       <Link>Views\DetailsView.xaml.cs</Link>
       <DependentUpon>DetailsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.UI\Views\HelpView.cs">
-      <Link>Views\HelpView.cs</Link>
-    </Compile>
     <Compile Include="..\..\NuGetReferened\Contoso.UI\Views\MainView.xaml.cs">
       <Link>Views\MainView.xaml.cs</Link>
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -172,10 +169,6 @@
     <Compile Include="..\..\NuGetReferened\Contoso.UI\Views\SearchView.xaml.cs">
       <Link>Views\SearchView.xaml.cs</Link>
       <DependentUpon>SearchView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.UI\Views\SecondaryWindowView.xaml.cs">
-      <Link>Views\SecondaryWindowView.xaml.cs</Link>
-      <DependentUpon>SecondaryWindowView.xaml</DependentUpon>
     </Compile>
     <Compile Include="..\..\NuGetReferened\Contoso.UI\Views\SettingsView.xaml.cs">
       <Link>Views\SettingsView.xaml.cs</Link>
@@ -517,11 +510,6 @@
     </Page>
     <Page Include="..\..\NuGetReferened\Contoso.UI\Views\SearchView.xaml">
       <Link>Views\SearchView.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\..\NuGetReferened\Contoso.UI\Views\SecondaryWindowView.xaml">
-      <Link>Views\SecondaryWindowView.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
