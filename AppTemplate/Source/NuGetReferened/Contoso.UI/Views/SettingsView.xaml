@@ -161,7 +161,7 @@
                     <CheckBox
                         x:Uid="/Contoso.Core/Resources/chkEnableFullDebugging"
                         Content="Enable full logging"
-                        IsChecked="{Binding ViewModel.AppSettingsRoaming.EnableFullLogging, Mode=TwoWay, Converter={StaticResource boolConverter}}" />
+                        IsChecked="{x:Bind ViewModel.Platform.AppSettingsRoaming.EnableFullLogging, Mode=TwoWay, Converter={StaticResource boolConverter}}" />
                     <TextBlock
                         x:Uid="/Contoso.Core/Resources/tbEnableFullDebuggingDescription"
                         Style="{StaticResource SubtleTextBlockStyle}"
