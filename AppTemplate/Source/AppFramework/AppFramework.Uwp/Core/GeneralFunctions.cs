@@ -85,13 +85,15 @@ namespace AppFramework.Core
         /// <summary>
         /// Parses a query string into a dictionary of key/value pairs of each parameter in the string.
         /// </summary>
-        /// <param name="querystring">Query string to parse.</param>
+        /// <param name="querystring">Url or querystring string to parse.</param>
         /// <returns>Dictionary of key value pairs found within the query string.</returns>
         public static IDictionary<string, string> ParseQuerystring(string querystring)
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();
             if (!string.IsNullOrWhiteSpace(querystring))
             {
+                if (Uri.IsWellFormedUriString(querystring, UriKind.Absolute))
+                    querystring = new Uri(querystring).Query;
                 WwwFormUrlDecoder decoder = new WwwFormUrlDecoder(querystring);
                 foreach (var entry in decoder)
                     dic.Add(entry.Name, entry.Value);

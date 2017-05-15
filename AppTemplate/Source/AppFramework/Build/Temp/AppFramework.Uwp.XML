@@ -2338,7 +2338,7 @@
             <summary>
             Parses a query string into a dictionary of key/value pairs of each parameter in the string.
             </summary>
-            <param name="querystring">Query string to parse.</param>
+            <param name="querystring">Url or querystring string to parse.</param>
             <returns>Dictionary of key value pairs found within the query string.</returns>
         </member>
         <member name="M:AppFramework.Core.GeneralFunctions.CreateQuerystring(System.Collections.Generic.IDictionary{System.String,System.String})">
