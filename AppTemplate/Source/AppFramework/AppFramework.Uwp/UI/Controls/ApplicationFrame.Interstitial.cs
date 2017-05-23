@@ -26,7 +26,7 @@ namespace AppFramework.UI.Controls
         #endregion
 
         #region Properties
-        
+
         public bool DisableInterstitialAds
         {
             get { return (bool)GetValue(DisableInterstitialAdsProperty); }
@@ -64,22 +64,41 @@ namespace AppFramework.UI.Controls
             }
         }
 
+        public bool IsInterstitialAdOpen
+        {
+            get
+            {
+                return _interstitialAdVideo?.State == InterstitialAdState.Showing || _interstitialAdBanner?.State == InterstitialAdState.Showing;
+            }
+        }
+
         internal bool CheckIfAdsOpen()
         {
-            if (_interstitialAdVideo.State == InterstitialAdState.Showing)
+            if(this.IsInterstitialAdOpen)
             {
                 PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "DevCenter - Closing interstitial video ad due to back navigation request.");
-                _interstitialAdVideo.Close();
-                return true;
-            }
-            else if (_interstitialAdBanner.State == InterstitialAdState.Showing)
-            {
-                PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "DevCenter - Closing interstitial banner ad due to back navigation request.");
-                _interstitialAdBanner.Close();
+                this.CloseInterstitialAd();
                 return true;
             }
             else
                 return false;
+        }
+
+        public void CloseInterstitialAd()
+        {
+            if(this.IsInterstitialAdOpen)
+            {
+                if (_interstitialAdVideo.State == InterstitialAdState.Showing)
+                {
+                    PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "DevCenter - Closing interstitial video ad");
+                    _interstitialAdVideo.Close();
+                }
+                else if (_interstitialAdBanner.State == InterstitialAdState.Showing)
+                {
+                    PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "DevCenter - Closing interstitial banner ad");
+                    _interstitialAdBanner.Close();
+                }
+            }
         }
 
         /// <summary>
