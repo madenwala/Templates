@@ -20,8 +20,4 @@ namespace AppFramework.Core.Models
             MessageBox
         }
     }
-
-    public class UserUnauthorizedException : Exception
-    {
-    }
 }

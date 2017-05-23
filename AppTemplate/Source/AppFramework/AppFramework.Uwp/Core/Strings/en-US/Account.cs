@@ -17,7 +17,7 @@
 // 	This code contains a helper class exposing property representations
 // 	of the string resources defined in the specified .ResW file
 // 
-// 	Generated: 04/25/2017 00:20:58
+// 	Generated: 05/23/2017 11:38:42
 // </auto-generatedInfo>
 // --------------------------------------------------------------------------------------------------
 namespace AppFramework.Core.Strings
@@ -115,13 +115,24 @@ namespace AppFramework.Core.Strings
         }
         
         /// <summary>
-        /// Localized resource similar to "Unauthorized user..."
+        /// Localized resource similar to "Unauthorized user. Check your username/password and try again."
         /// </summary>
         public static string TextUnauthorizedUser
         {
             get
             {
                 return resourceLoader.GetString("TextUnauthorizedUser");
+            }
+        }
+        
+        /// <summary>
+        /// Localized resource similar to "Sign-in failed"
+        /// </summary>
+        public static string TextUnauthorizedUserTitle
+        {
+            get
+            {
+                return resourceLoader.GetString("TextUnauthorizedUserTitle");
             }
         }
         

@@ -1637,7 +1637,12 @@
         </member>
         <member name="P:AppFramework.Core.Strings.Account.TextUnauthorizedUser">
             <summary>
-            Localized resource similar to "Unauthorized user..."
+            Localized resource similar to "Unauthorized user. Check your username/password and try again."
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Account.TextUnauthorizedUserTitle">
+            <summary>
+            Localized resource similar to "Sign-in failed"
             </summary>
         </member>
         <member name="P:AppFramework.Core.Strings.Account.TextWebAccountManagerSignUpDescription">

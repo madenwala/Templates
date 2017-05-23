@@ -332,12 +332,16 @@ namespace AppFramework.Core.ViewModels
 
         protected async Task HandleExceptionAsync(CancellationToken ct, Exception ex, string message = null, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
         {
-            if (ex is UserUnauthorizedException)
+            if (ex == null)
+                throw new ArgumentNullException(nameof(ex));
+
+            if (ex is UnauthorizedAccessException || ex.HResult == -2145844847)
             {
-                this.ShowBusyStatus(Strings.Account.TextUnauthorizedUser, true);
+                this.ShowStatus(Strings.Account.TextUnauthorizedUser);
                 PlatformBase.CurrentCore.Logger.LogError(ex, "{0}.{1} - Unauthorized user exception ({0} Parameters: {2}) {3}", this.GetType().Name, callerName, this.ViewParameter, message);
                 if (PlatformBase.ContainsService<AuthorizationManagerBase>())
                     await PlatformBase.GetService<AuthorizationManagerBase>().SetUserAsync(null);
+                await this.ShowMessageBoxAsync(ct, Strings.Account.TextUnauthorizedUser, Strings.Account.TextUnauthorizedUserTitle);
             }
             else if (ex is UserFriendlyException)
             {
@@ -1031,9 +1035,9 @@ namespace AppFramework.Core.ViewModels
                     if(user != null)
                         return await PlatformBase.GetService<AuthorizationManagerBase>().SetUserAsync(user);
                 }
-                catch(UserUnauthorizedException)
+                catch(UnauthorizedAccessException)
                 {
-                    PlatformBase.CurrentCore.Logger.Log(LogLevels.Warning, $"UserUnauthorizedException was caught by {this.GetType().FullName}.RefreshAccessTokenAsync");
+                    PlatformBase.CurrentCore.Logger.Log(LogLevels.Warning, $"UnauthorizedAccessException was caught by {this.GetType().FullName}.RefreshAccessTokenAsync");
                     return false;
                 }
                 catch(Exception ex)
