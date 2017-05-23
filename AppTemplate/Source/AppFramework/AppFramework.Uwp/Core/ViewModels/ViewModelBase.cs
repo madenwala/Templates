@@ -338,7 +338,7 @@ namespace AppFramework.Core.ViewModels
             if (ex is UnauthorizedAccessException || ex.HResult == -2145844847)
             {
                 this.ShowStatus(Strings.Account.TextUnauthorizedUser);
-                PlatformBase.CurrentCore.Logger.LogError(ex, "{0}.{1} - Unauthorized user exception ({0} Parameters: {2}) {3}", this.GetType().Name, callerName, this.ViewParameter, message);
+                PlatformBase.CurrentCore.Logger.Log(LogLevels.Warning, $"{this.GetType().Name}.{callerName} - Unauthorized user exception (Parameters: {this.ViewParameter}) - {message}");
                 if (PlatformBase.ContainsService<AuthorizationManagerBase>())
                     await PlatformBase.GetService<AuthorizationManagerBase>().SetUserAsync(null);
                 await this.ShowMessageBoxAsync(ct, Strings.Account.TextUnauthorizedUser, Strings.Account.TextUnauthorizedUserTitle);
