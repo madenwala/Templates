@@ -10,7 +10,7 @@
 
     <controls:BodyPanel>
         <controls:BodyPanel.BodyContent>
-            <controls:WebViewPanel />
+            <controls:WebViewPanel x:Name="webViewPanel" />
         </controls:BodyPanel.BodyContent>
     </controls:BodyPanel>
 

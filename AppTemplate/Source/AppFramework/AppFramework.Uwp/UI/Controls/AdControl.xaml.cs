@@ -25,6 +25,8 @@ namespace AppFramework.UI.Controls
         {
             this.InitializeComponent();
 
+            this.IsTabStop = false;
+
             devCenterAd.ApplicationId = DevCenterAdAppID;
             devCenterAd.AdUnitId = DevCenterAdUnitID;
 

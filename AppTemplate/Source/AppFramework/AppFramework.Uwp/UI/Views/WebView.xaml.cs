@@ -3,6 +3,7 @@ using AppFramework.Core.Models;
 using AppFramework.Core.ViewModels;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml;
 
 namespace AppFramework.UI.Views
 {
@@ -35,6 +36,12 @@ namespace AppFramework.UI.Views
             }
 
             return base.OnLoadStateAsync(e);
+        }
+
+        protected override void OnLoaded(RoutedEventArgs e)
+        {
+            webViewPanel.Focus(FocusState.Programmatic);
+            base.OnLoaded(e);
         }
     }
 }
