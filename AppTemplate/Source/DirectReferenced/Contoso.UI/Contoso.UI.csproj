@@ -407,6 +407,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\AppFramework\AppFramework.NetStandard\AppFramework.NetStandard.csproj">
+      <Project>{babc3ad0-0404-47fe-8f7c-4ace7272b8ad}</Project>
+      <Name>AppFramework.NetStandard</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\AppFramework\AppFramework.Uwp\AppFramework.Uwp.csproj">
       <Project>{65f2272c-d17a-45be-982a-c6637407657a}</Project>
       <Name>AppFramework.Uwp</Name>

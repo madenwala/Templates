@@ -159,7 +159,6 @@
     <Compile Include="Core\Extensions\LongExtensions.cs" />
     <Compile Include="Core\Models\IAuthenticatedUserProfile.cs" />
     <Compile Include="Core\Models\IView.cs" />
-    <Compile Include="Core\Models\ModelBase.cs" />
     <Compile Include="Core\Models\UniqueModelBase.cs" />
     <Compile Include="Core\Serializers.cs" />
     <Compile Include="Core\Strings\en-US\BackgroundTasks.cs">
@@ -167,7 +166,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BackgroundTasks.resw</DependentUpon>
     </Compile>
-    <Compile Include="Core\TypeUtility.cs" />
     <Compile Include="Core\ViewModels\SettingsViewModelBase.cs" />
     <Compile Include="UI\Controls\ApplicationFrame.cs" />
     <Compile Include="Core\Commands\GenericCommand.cs" />
@@ -354,6 +352,12 @@
       <Link>VERSION.txt</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AppFramework.NetStandard\AppFramework.NetStandard.csproj">
+      <Project>{babc3ad0-0404-47fe-8f7c-4ace7272b8ad}</Project>
+      <Name>AppFramework.NetStandard</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
