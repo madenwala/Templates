@@ -141,7 +141,7 @@ namespace Contoso.Core.Services
         {
             try
             {
-                using (ClientApi api = new ClientApi(true))
+                using (ClientApi api = new ClientApi())
                 {
                     return await api.AuthenticateAsync(this.CurrentUser.AccessToken, ct);
                 }

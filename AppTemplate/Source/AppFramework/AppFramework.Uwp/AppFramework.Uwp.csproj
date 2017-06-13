@@ -112,6 +112,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Compile Include="Core\Serializers.cs" />
     <Compile Include="UI\Behaviors\ContextMenuRightClickBehavior.cs" />
     <Compile Include="UI\Controls\ApplicationFrame.Interstitial.cs" />
     <Compile Include="UI\Extensions\FrameworkElementExtensions.cs" />
@@ -160,7 +161,6 @@
     <Compile Include="Core\Models\IAuthenticatedUserProfile.cs" />
     <Compile Include="Core\Models\IView.cs" />
     <Compile Include="Core\Models\UniqueModelBase.cs" />
-    <Compile Include="Core\Serializers.cs" />
     <Compile Include="Core\Strings\en-US\BackgroundTasks.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

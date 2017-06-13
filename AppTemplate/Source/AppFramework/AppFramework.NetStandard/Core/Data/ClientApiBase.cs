@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AppFramework.Core.Data
@@ -57,21 +58,42 @@ namespace AppFramework.Core.Data
 
         #region Get
 
-        protected async Task<string> GetAsync(string url)
+        protected async Task<string> GetAsync(string url, CancellationToken ct = default(CancellationToken))
         {
-            var response = await this.GetResponseAsync(url);
+            var response = await this.GetResponseAsync(url, ct);
             return await response.Content.ReadAsStringAsync();
         }
 
-        protected async Task<HttpResponseMessage> GetResponseAsync(string url)
+        protected async Task<HttpResponseMessage> GetResponseAsync(string url, CancellationToken ct = default(CancellationToken))
         {
             if (string.IsNullOrEmpty(url))
                 throw new ArgumentNullException(nameof(url));
 
-            var response = await this.Client.GetAsync(new Uri(this.BaseUri, url));
+            var response = await this.Client.GetAsync(new Uri(this.BaseUri, url), ct);
             this.Log(response);
             response.EnsureSuccessStatusCode();
             return response;
+        }
+
+        /// <summary>
+        /// Gets data from the specified URL.
+        /// </summary>
+        /// <typeparam name="T">Type for the strongly typed class representing data returned from the URL.</typeparam>
+        /// <param name="url">URL to retrieve data from.</param>should be deserialized.</param>
+        /// <param name="retryCount">Number of retry attempts if a call fails. Default is zero.</param>
+        /// <param name="serializerType">Specifies how the data should be deserialized.</param>
+        /// <returns>Instance of the type specified representing the data returned from the URL.</returns>
+        /// <summary>
+        protected async Task<T> GetAsync<T>(string url, CancellationToken ct)
+        {
+            if (string.IsNullOrEmpty(url))
+                throw new ArgumentNullException(nameof(url));
+
+            var response = await this.Client.GetAsync(new Uri(this.BaseUri, url), ct);
+            this.Log(response);
+            response.EnsureSuccessStatusCode();
+            var data = await response.Content.ReadAsStringAsync();
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(data);
         }
 
         #endregion
@@ -86,9 +108,9 @@ namespace AppFramework.Core.Data
         /// <param name="ct">Cancellation token.</param>
         /// <param name="serializerType">Specifies how the data should be deserialized.</param>
         /// <returns>Response contents as string else null if nothing.</returns>
-        protected async Task<string> PostAsync(string url, HttpContent content)
+        protected async Task<string> PostAsync(string url, HttpContent content = default(HttpContent), CancellationToken ct = default(CancellationToken))
         {
-            HttpResponseMessage response = await this.PostAsync(this.GetUri(url), content);
+            HttpResponseMessage response = await this.PostAsync(this.GetUri(url), content, ct);
             return await response.Content?.ReadAsStringAsync();
         }
 
@@ -100,16 +122,31 @@ namespace AppFramework.Core.Data
         /// <param name="ct">Cancellation token.</param>
         /// <param name="serializerType">Specifies how the data should be deserialized.</param>
         /// <returns>Response contents as string else null if nothing.</returns>
-        protected async Task<HttpResponseMessage> PostAsync(Uri uri, HttpContent content)
+        protected async Task<HttpResponseMessage> PostAsync(Uri uri, HttpContent content = default(HttpContent), CancellationToken ct = default(CancellationToken))
         {
             if (uri == null)
                 throw new ArgumentNullException(nameof(uri));
 
-            var response = await this.Client.PostAsync(uri, content);
+            var response = await this.Client.PostAsync(uri, content, ct);
             this.Log(response);
             response.EnsureSuccessStatusCode();
 
             return response;
+        }
+
+        /// <summary>
+        /// Posts data to the specified URL.
+        /// </summary>
+        /// <typeparam name="T">Type for the strongly typed class representing data returned from the URL.</typeparam>
+        /// <param name="url">URL to retrieve data from.</param>
+        /// <param name="contents">Any content that should be passed into the post.</param>
+        /// <param name="ct">Cancellation token.</param>
+        /// <param name="serializerType">Specifies how the data should be deserialized.</param>
+        /// <returns>Instance of the type specified representing the data returned from the URL.</returns>
+        protected async Task<T> PostAsync<T>(string url, HttpContent contents = default(HttpContent), CancellationToken ct = default(CancellationToken))
+        {
+            string data = await this.PostAsync(url, contents, ct);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(data);
         }
 
         //public async Task<JsonValue> PostAsync(string relativeUri)

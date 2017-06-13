@@ -4,716 +4,83 @@
         <name>AppFramework.Uwp</name>
     </assembly>
     <members>
-        <member name="T:AppFramework.UI.Behaviors.EnterKeyBehavior">
+        <member name="T:AppFramework.Core.SerializerTypes">
             <summary>
-            Enables a control to execute its associated command when an enter key press is detected within the control.
+            Serialization methods the application supports.
             </summary>
         </member>
-        <member name="T:AppFramework.UI.Behaviors.FocusOnLoadBehavior">
+        <member name="F:AppFramework.Core.SerializerTypes.Default">
             <summary>
-            Focuses a control on the loaded event.  Useful for setting focus to the first textbox on a page, for example, immediately on load of the page.
+            Use the default serializer for the application.
             </summary>
         </member>
-        <member name="T:AppFramework.UI.Behaviors.ListViewCommandBehavior">
+        <member name="F:AppFramework.Core.SerializerTypes.Json">
             <summary>
-            Creates an attached property for all ListViewBase controls allowing binding  a command object to it's ItemClick event.
+            Use the JSON serializer.
             </summary>
         </member>
-        <member name="M:AppFramework.UI.Controls.ApplicationFrame.ShowInterstitialAd">
+        <member name="F:AppFramework.Core.SerializerTypes.Xml">
             <summary>
-            Displays a banner or video interstitial ad (whichever loads first).
+            Use the XML serializer.
             </summary>
         </member>
-        <member name="T:AppFramework.UI.Controls.AdControl">
+        <member name="T:AppFramework.Core.Serializer">
             <summary>
-            Ad control:  https://msdn.microsoft.com/en-us/windows/uwp/monetize/supported-ad-sizes-for-banner-ads
+            Serialize and deserialize objects.
             </summary>
         </member>
-        <member name="M:AppFramework.UI.Controls.AdControl.InitializeComponent">
+        <member name="P:AppFramework.Core.Serializer.DefaultSerializerType">
             <summary>
-            InitializeComponent()
+            Get or set the default serialization method for the application. If an object that needs serialization/deserialization does not explictly
+            request a particular serializer, the default serializer will be used.
             </summary>
         </member>
-        <member name="M:AppFramework.UI.Controls.AdControl.Connect(System.Int32,System.Object)">
+        <member name="M:AppFramework.Core.Serializer.Serialize(System.Object,AppFramework.Core.SerializerTypes)">
             <summary>
-            Connect()
+            Serialize an object to string.
             </summary>
+            <param name="obj">Object to serialize.</param>
+            <param name="serializerType">Use the default serializer or specific a particular serializer.</param>
+            <returns>String returned from the serializer.</returns>
         </member>
-        <member name="T:AppFramework.UI.Controls.BodyPanel">
+        <member name="M:AppFramework.Core.Serializer.Deserialize``1(System.String,AppFramework.Core.SerializerTypes)">
             <summary>
-            BodyPanel control representing page chrome.
+            Deserializes a string back into an instance of an object.
             </summary>
+            <typeparam name="T">Type of the object to be returned.</typeparam>
+            <param name="data">String data to be deserialized.</param>
+            <param name="serializerType">Use the default serializer or specific a particular serializer.</param>
+            <returns>Object instance from the deserialized data string.</returns>
         </member>
-        <member name="M:AppFramework.UI.Controls.BodyPanel.#ctor">
+        <member name="M:AppFramework.Core.Serializer.DeserializeFromXml``1(System.String)">
             <summary>
-            Constructs an instance of the BodyPanel.
+            Deserializes an XML string back into an object instance.
             </summary>
+            <typeparam name="T">Type of the object to be returned.</typeparam>
+            <param name="xml">XML string to be deserialized.</param>
+            <returns>Object instance deserialized from the string data.</returns>
         </member>
-        <member name="M:AppFramework.UI.Controls.BodyPanel.OnApplyTemplate">
+        <member name="M:AppFramework.Core.Serializer.SerializeToXml(System.Object)">
             <summary>
-            Finds controls within the template of this control.
+            Serializes an object to XML.
             </summary>
+            <param name="obj">Object to be serialized.</param>
+            <returns>String representing the serialized object.</returns>
         </member>
-        <member name="M:AppFramework.UI.Controls.BodyPanel.ScrollToTop">
+        <member name="M:AppFramework.Core.Serializer.DeserializeFromJson``1(System.String)">
             <summary>
-            Scrolls the panel to the top.
+            Deserializes a JSON string into an object instance.
             </summary>
+            <typeparam name="T">Type of the object to be returned.</typeparam>
+            <param name="json">JSON string representing an object.</param>
+            <returns>Instance of an object from the JSON string.</returns>
         </member>
-        <member name="T:AppFramework.UI.Controls.ContentControlBase`1">
+        <member name="M:AppFramework.Core.Serializer.SerializeToJson(System.Object)">
             <summary>
-            Base class for custom controls.  Provides plumbing for view model support and x:Bind just like the ViewBase.
+            Serializes an object into a JSON string.
             </summary>
-            <typeparam name="TViewModel"></typeparam>
-        </member>
-        <member name="M:AppFramework.UI.Controls.ContentControlBase`1.SetProperty``1(``0@,``0,System.String)">
-            <summary>
-            Checks if a property already matches a desired value.  Sets the property and
-            notifies listeners only when necessary.
-            </summary>
-            <typeparam name="T">Type of the property.</typeparam>
-            <param name="storage">Reference to a property with both getter and setter.</param>
-            <param name="value">Desired value for the property.</param>
-            <param name="propertyName">Name of the property used to notify listeners.  This
-            value is optional and can be provided automatically when invoked from compilers that
-            support CallerMemberName.</param>
-            <returns>True if the value was changed, false if the existing value matched the
-            desired value.</returns>
-        </member>
-        <member name="M:AppFramework.UI.Controls.ContentControlBase`1.NotifyPropertyChanged(System.String)">
-            <summary>
-            Notifies listeners that a property value has changed.
-            </summary>
-            <param name="propertyName">Name of the property used to notify listeners.  This
-            value is optional and can be provided automatically when invoked from compilers
-            that support <see cref="T:System.Runtime.CompilerServices.CallerMemberNameAttribute"/>.</param>
-        </member>
-        <member name="T:AppFramework.UI.Controls.ScrollToTopHelper">
-            <summary>
-            Helper class to scroll a control or object to its default position.
-            </summary>
-        </member>
-        <member name="M:AppFramework.UI.Controls.ScrollToTopHelper.ScrollToTop(System.Object)">
-            <summary>
-            Scrolls a control or object that can be scrolled to its default top position.
-            </summary>
-            <param name="content"></param>
-        </member>
-        <member name="T:AppFramework.UI.Controls.SplitViewButton">
-            <summary>
-            User control used in the ShellView page's SplitView control's pane.  Each instance represents a navigation button for the main navigation menu.
-            </summary>
-        </member>
-        <member name="M:AppFramework.UI.Controls.UserControlBase.SetProperty``1(``0@,``0,System.String)">
-            <summary>
-            Checks if a property already matches a desired value.  Sets the property and
-            notifies listeners only when necessary.
-            </summary>
-            <typeparam name="T">Type of the property.</typeparam>
-            <param name="storage">Reference to a property with both getter and setter.</param>
-            <param name="value">Desired value for the property.</param>
-            <param name="propertyName">Name of the property used to notify listeners.  This
-            value is optional and can be provided automatically when invoked from compilers that
-            support CallerMemberName.</param>
-            <returns>True if the value was changed, false if the existing value matched the
-            desired value.</returns>
-        </member>
-        <member name="M:AppFramework.UI.Controls.UserControlBase.NotifyPropertyChanged(System.String)">
-            <summary>
-            Notifies listeners that a property value has changed.
-            </summary>
-            <param name="propertyName">Name of the property used to notify listeners.  This
-            value is optional and can be provided automatically when invoked from compilers
-            that support <see cref="T:System.Runtime.CompilerServices.CallerMemberNameAttribute"/>.</param>
-        </member>
-        <member name="T:AppFramework.UI.Controls.ViewControlBase`1">
-            <summary>
-            Base class for custom controls.  Provides plumbing for view model support and x:Bind just like the ViewBase.
-            </summary>
-            <typeparam name="TViewModel"></typeparam>
-        </member>
-        <member name="M:AppFramework.UI.Controls.WebViewPanel.SetCurrentViewModel(AppFramework.Core.ViewModels.WebViewModelBase)">
-            <summary>
-            Configures a WebBrowserViewModel instance to get notified of WebView control events.
-            </summary>
-            <param name="vm"></param>
-        </member>
-        <member name="M:AppFramework.UI.Controls.WebViewPanel.InitializeComponent">
-            <summary>
-            InitializeComponent()
-            </summary>
-        </member>
-        <member name="M:AppFramework.UI.Controls.WebViewPanel.Connect(System.Int32,System.Object)">
-            <summary>
-            Connect()
-            </summary>
-        </member>
-        <member name="F:AppFramework.UI.Controls.WrapPanel._ignorePropertyChange">
-            <summary>
-            A value indicating whether a dependency property change handler
-            should ignore the next change notification.  This is used to reset
-            the value of properties without performing any of the actions in
-            their change handlers.
-            </summary>
-        </member>
-        <member name="P:AppFramework.UI.Controls.WrapPanel.ItemHeight">
-            <summary>
-            Gets or sets the height of the layout area for each item that is
-            contained in a <see cref="T:AppFramework.UI.Controls.WrapPanel" />.
-            </summary>
-            <value>
-            The height applied to the layout area of each item that is contained
-            within a <see cref="T:AppFramework.UI.Controls.WrapPanel" />.  The
-            default value is <see cref="F:System.Double.NaN" />.
-            </value>
-        </member>
-        <member name="F:AppFramework.UI.Controls.WrapPanel.ItemHeightProperty">
-            <summary>
-            Identifies the
-            <see cref="P:AppFramework.UI.Controls.WrapPanel.ItemHeight" />
-            dependency property.
-            </summary>
-            <value>
-            The identifier for the
-            <see cref="P:AppFramework.UI.Controls.WrapPanel.ItemHeight" />
-            dependency property
-            </value>
-        </member>
-        <member name="P:AppFramework.UI.Controls.WrapPanel.ItemWidth">
-            <summary>
-            Gets or sets the width of the layout area for each item that is
-            contained in a <see cref="T:AppFramework.UI.Controls.WrapPanel" />.
-            </summary>
-            <value>
-            The width that applies to the layout area of each item that is
-            contained in a <see cref="T:AppFramework.UI.Controls.WrapPanel" />.
-            The default value is <see cref="F:System.Double.NaN" />.
-            </value>
-        </member>
-        <member name="F:AppFramework.UI.Controls.WrapPanel.ItemWidthProperty">
-            <summary>
-            Identifies the
-            <see cref="P:AppFramework.UI.Controls.WrapPanel.ItemWidth" />
-            dependency property.
-            </summary>
-            <value>
-            The identifier for the
-            <see cref="P:AppFramework.UI.Controls.WrapPanel.ItemWidth" />
-            dependency property.
-            </value>
-        </member>
-        <member name="P:AppFramework.UI.Controls.WrapPanel.Orientation">
-            <summary>
-            Gets or sets the direction in which child elements are arranged.
-            </summary>
-            <value>
-            One of the <see cref="T:Windows.UI.Xaml.Controls.Orientation" />
-            values.  The default is
-            <see cref="F:Windows.UI.Xaml.Controls.Orientation.Horizontal" />.
-            </value>
-        </member>
-        <member name="F:AppFramework.UI.Controls.WrapPanel.OrientationProperty">
-            <summary>
-            Identifies the
-            <see cref="P:AppFramework.UI.Controls.WrapPanel.Orientation" />
-            dependency property.
-            </summary>
-            <value>
-            The identifier for the
-            <see cref="P:AppFramework.UI.Controls.WrapPanel.Orientation" />
-            dependency property.
-            </value>
-        </member>
-        <member name="M:AppFramework.UI.Controls.WrapPanel.OnOrientationPropertyChanged(Windows.UI.Xaml.DependencyObject,Windows.UI.Xaml.DependencyPropertyChangedEventArgs)">
-            <summary>
-            OrientationProperty property changed handler.
-            </summary>
-            <param name="d">WrapPanel that changed its Orientation.</param>
-            <param name="e">Event arguments.</param>
-        </member>
-        <member name="M:AppFramework.UI.Controls.WrapPanel.OnItemHeightOrWidthPropertyChanged(Windows.UI.Xaml.DependencyObject,Windows.UI.Xaml.DependencyPropertyChangedEventArgs)">
-            <summary>
-            Property changed handler for ItemHeight and ItemWidth.
-            </summary>
-            <param name="d">
-            WrapPanel that changed its ItemHeight or ItemWidth.
-            </param>
-            <param name="e">Event arguments.</param>
-        </member>
-        <member name="M:AppFramework.UI.Controls.WrapPanel.MeasureOverride(Windows.Foundation.Size)">
-            <summary>
-            Measures the child elements of a
-            <see cref="T:AppFramework.UI.Controls.WrapPanel" /> in anticipation
-            of arranging them during the
-            <see cref="M:AppFramework.UI.Controls.WrapPanel.ArrangeOverride(Windows.Foundation.Size)" />
-            pass.
-            </summary>
-            <param name="constraint">
-            The size available to child elements of the wrap panel.
-            </param>
-            <returns>
-            The size required by the
-            <see cref="T:AppFramework.UI.Controls.WrapPanel" /> and its 
-            elements.
-            </returns>
-        </member>
-        <member name="M:AppFramework.UI.Controls.WrapPanel.ArrangeOverride(Windows.Foundation.Size)">
-            <summary>
-            Arranges and sizes the
-            <see cref="T:AppFramework.UI.Controls.WrapPanel" /> control and its
-            child elements.
-            </summary>
-            <param name="finalSize">
-            The area within the parent that the
-            <see cref="T:AppFramework.UI.Controls.WrapPanel" /> should use 
-            arrange itself and its children.
-            </param>
-            <returns>
-            The actual size used by the
-            <see cref="T:AppFramework.UI.Controls.WrapPanel" />.
-            </returns>
-        </member>
-        <member name="M:AppFramework.UI.Controls.WrapPanel.ArrangeLine(System.Int32,System.Int32,System.Nullable{System.Double},System.Double,System.Double)">
-            <summary>
-            Arrange a sequence of elements in a single line.
-            </summary>
-            <param name="lineStart">
-            Index of the first element in the sequence to arrange.
-            </param>
-            <param name="lineEnd">
-            Index of the last element in the sequence to arrange.
-            </param>
-            <param name="directDelta">
-            Optional fixed growth in the primary direction.
-            </param>
-            <param name="indirectOffset">
-            Offset of the line in the indirect direction.
-            </param>
-            <param name="indirectGrowth">
-            Shared indirect growth of the elements on this line.
-            </param>
-        </member>
-        <member name="F:AppFramework.UI.Controls.OrientedSize._orientation">
-            <summary>
-            The orientation of the structure.
-            </summary>
-        </member>
-        <member name="P:AppFramework.UI.Controls.OrientedSize.Orientation">
-            <summary>
-            Gets the orientation of the structure.
-            </summary>
-        </member>
-        <member name="F:AppFramework.UI.Controls.OrientedSize._direct">
-            <summary>
-            The size dimension that grows directly with layout placement.
-            </summary>
-        </member>
-        <member name="P:AppFramework.UI.Controls.OrientedSize.Direct">
-            <summary>
-            Gets or sets the size dimension that grows directly with layout
-            placement.
-            </summary>
-        </member>
-        <member name="F:AppFramework.UI.Controls.OrientedSize._indirect">
-            <summary>
-            The size dimension that grows indirectly with the maximum value of
-            the layout row or column.
-            </summary>
-        </member>
-        <member name="P:AppFramework.UI.Controls.OrientedSize.Indirect">
-            <summary>
-            Gets or sets the size dimension that grows indirectly with the
-            maximum value of the layout row or column.
-            </summary>
-        </member>
-        <member name="P:AppFramework.UI.Controls.OrientedSize.Width">
-            <summary>
-            Gets or sets the width of the size.
-            </summary>
-        </member>
-        <member name="P:AppFramework.UI.Controls.OrientedSize.Height">
-            <summary>
-            Gets or sets the height of the size.
-            </summary>
-        </member>
-        <member name="M:AppFramework.UI.Controls.OrientedSize.#ctor(Windows.UI.Xaml.Controls.Orientation)">
-            <summary>
-            Initializes a new OrientedSize structure.
-            </summary>
-            <param name="orientation">Orientation of the structure.</param>
-        </member>
-        <member name="M:AppFramework.UI.Controls.OrientedSize.#ctor(Windows.UI.Xaml.Controls.Orientation,System.Double,System.Double)">
-            <summary>
-            Initializes a new OrientedSize structure.
-            </summary>
-            <param name="orientation">Orientation of the structure.</param>
-            <param name="width">Un-oriented width of the structure.</param>
-            <param name="height">Un-oriented height of the structure.</param>
-        </member>
-        <member name="T:AppFramework.UI.Controls.NumericExtensions.NanUnion">
-            <summary>
-            NanUnion is a C++ style type union used for efficiently converting
-            a double into an unsigned long, whose bits can be easily
-            manipulated.
-            </summary>
-        </member>
-        <member name="F:AppFramework.UI.Controls.NumericExtensions.NanUnion.FloatingValue">
-            <summary>
-            Floating point representation of the union.
-            </summary>
-        </member>
-        <member name="F:AppFramework.UI.Controls.NumericExtensions.NanUnion.IntegerValue">
-            <summary>
-            Integer representation of the union.
-            </summary>
-        </member>
-        <member name="M:AppFramework.UI.Controls.NumericExtensions.IsNaN(System.Double)">
-            <summary>
-            Check if a number isn't really a number.
-            </summary>
-            <param name="value">The number to check.</param>
-            <returns>
-            True if the number is not a number, false if it is a number.
-            </returns>
-        </member>
-        <member name="M:AppFramework.UI.Controls.NumericExtensions.IsGreaterThan(System.Double,System.Double)">
-            <summary>
-            Determine if one number is greater than another.
-            </summary>
-            <param name="left">First number.</param>
-            <param name="right">Second number.</param>
-            <returns>
-            True if the first number is greater than the second, false
-            otherwise.
-            </returns>
-        </member>
-        <member name="M:AppFramework.UI.Controls.NumericExtensions.AreClose(System.Double,System.Double)">
-            <summary>
-            Determine if two numbers are close in value.
-            </summary>
-            <param name="left">First number.</param>
-            <param name="right">Second number.</param>
-            <returns>
-            True if the first number is close in value to the second, false
-            otherwise.
-            </returns>
-        </member>
-        <member name="M:AppFramework.UI.Views.SecondaryWindowView.InitializeComponent">
-            <summary>
-            InitializeComponent()
-            </summary>
-        </member>
-        <member name="M:AppFramework.UI.Views.SecondaryWindowView.Connect(System.Int32,System.Object)">
-            <summary>
-            Connect()
-            </summary>
-        </member>
-        <member name="M:AppFramework.UI.Views.WebView.InitializeComponent">
-            <summary>
-            InitializeComponent()
-            </summary>
-        </member>
-        <member name="M:AppFramework.UI.Views.WebView.Connect(System.Int32,System.Object)">
-            <summary>
-            Connect()
-            </summary>
-        </member>
-        <member name="T:AppFramework.UI.Views.ViewBase`1">
-            <summary>
-            Base class for all pages in your application.
-            </summary>
-            <typeparam name="TViewModel"></typeparam>
-        </member>
-        <member name="P:AppFramework.UI.Views.ViewBase`1.ViewModel">
-            <summary>
-            Gets access to the view model instance associated to this page. Used for x:Bind capabilities in the page's XAML.
-            </summary>
-        </member>
-        <member name="P:AppFramework.UI.Views.ViewBase`1.IsInView">
-            <summary>
-            True if the view is visible to the user else false.
-            </summary>
-        </member>
-        <member name="E:AppFramework.UI.Views.ViewBase`1.PropertyChanged">
-            <summary>
-            Event for knowing when page properties change.
-            </summary>
-        </member>
-        <member name="M:AppFramework.UI.Views.ViewBase`1.OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs)">
-            <summary>
-            The methods provided in this section are simply used to allow
-            NavigationHelper to respond to the page's navigation methods.
-            <para>
-            Page specific logic should be placed in event handlers for the
-            <see cref="!:NavigationHelper.LoadState"/>
-            and <see cref="!:NavigationHelper.SaveState"/>.
-            The navigation parameter is available in the LoadState method
-            in addition to page state preserved during an earlier session.
-            </para>
-            </summary>
-            <param name="e">Event data that describes how this page was reached.</param>
-        </member>
-        <member name="M:AppFramework.UI.Views.ViewBase`1.OnLoadStateAsync(AppFramework.Core.LoadStateEventArgs)">
-            <summary>
-            Populates the page with content passed during navigation.  Any saved state is also
-            provided when recreating a page from a prior session.
-            </summary>
-            <param name="e">Event data that provides both the navigation parameter passed to
-            <see cref="M:Windows.UI.Xaml.Controls.Frame.Navigate(System.Type,System.Object)"/> when this page was initially requested and
-            a dictionary of state preserved by this page during an earlier
-            session.  The state will be null the first time a page is visited.</param>
-        </member>
-        <member name="M:AppFramework.UI.Views.ViewBase`1.OnSaveStateAsync(AppFramework.Core.SaveStateEventArgs)">
-            <summary>
-            Preserves state associated with this page in case the application is suspended or the
-            page is discarded from the navigation cache.  Values must conform to the serialization
-            requirements of <see cref="P:AppFramework.UI.SuspensionManager.SessionState"/>.
-            </summary>
-            <param name="e">Event data that provides an empty dictionary to be populated with
-            serializable state.</param>
-        </member>
-        <member name="M:AppFramework.UI.Views.ViewBase`1.Application_Resuming(System.Object,System.Object)">
-            <summary>
-            Event handler for application resume
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:AppFramework.UI.Views.ViewBase`1.OnApplicationResuming">
-            <summary>
-            Perform any custom logic for when the OS resumes your app.
-            </summary>
-        </member>
-        <member name="M:AppFramework.UI.Views.ViewBase`1.OnForwardNavigationRequested">
-            <summary>
-            Allows a view to prevent forward navigation if it needs to.
-            </summary>
-            <returns>True if forward navigation should be cancelled else false.</returns>
-        </member>
-        <member name="M:AppFramework.UI.Views.ViewBase`1.OnBackNavigationRequested">
-            <summary>
-            Allows a view to prevent back navigation if it needs to.
-            </summary>
-            <returns>True if back navigation should be cancelled else false.</returns>
-        </member>
-        <member name="M:AppFramework.UI.Views.ViewBase`1.SetViewModel(`0)">
-            <summary>
-            Sets a view model instance to the page for data binding and for x:Bind.
-            </summary>
-            <param name="vm"></param>
-        </member>
-        <member name="M:AppFramework.UI.Views.ViewBase`1.SetProperty``1(``0@,``0,System.String)">
-            <summary>
-            Checks if a property already matches a desired value.  Sets the property and
-            notifies listeners only when necessary.
-            </summary>
-            <typeparam name="T">Type of the property.</typeparam>
-            <param name="storage">Reference to a property with both getter and setter.</param>
-            <param name="value">Desired value for the property.</param>
-            <param name="propertyName">Name of the property used to notify listeners.  This
-            value is optional and can be provided automatically when invoked from compilers that
-            support CallerMemberName.</param>
-            <returns>True if the value was changed, false if the existing value matched the
-            desired value.</returns>
-        </member>
-        <member name="M:AppFramework.UI.Views.ViewBase`1.NotifyPropertyChanged(System.String)">
-            <summary>
-            Notifies listeners that a property value has changed.
-            </summary>
-            <param name="propertyName">Name of the property used to notify listeners.  This
-            value is optional and can be provided automatically when invoked from compilers
-            that support <see cref="T:System.Runtime.CompilerServices.CallerMemberNameAttribute"/>.</param>
-        </member>
-        <member name="T:AppFramework.UI.App">
-            <summary>
-            Provides application-specific behavior to supplement the default Application class.
-            </summary>
-        </member>
-        <member name="M:AppFramework.UI.App.#ctor">
-            <summary>
-            Initializes the singleton application object.  This is the first line of authored code
-            executed, and as such is the logical equivalent of main() or WinMain().
-            </summary>
-        </member>
-        <member name="M:AppFramework.UI.App.OnLaunched(Windows.ApplicationModel.Activation.LaunchActivatedEventArgs)">
-            <summary>
-            Invoked when the application is launched normally by the end user.  Other entry points
-            will be used such as when the application is launched to open a specific file.
-            </summary>
-            <param name="e">Details about the launch request and process.</param>
-        </member>
-        <member name="M:AppFramework.UI.App.OnSuspending(System.Object,Windows.ApplicationModel.SuspendingEventArgs)">
-            <summary>
-            Invoked when application execution is being suspended.  Application state is saved
-            without knowing whether the application will be terminated or resumed with the contents
-            of memory still intact.
-            </summary>
-            <param name="sender">The source of the suspend request.</param>
-            <param name="e">Details about the suspend request.</param>
-        </member>
-        <member name="M:AppFramework.UI.App.App_UnhandledException(System.Object,Windows.UI.Xaml.UnhandledExceptionEventArgs)">
-            <summary>
-            Invoked when an unhandled exception in the application occurs
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:AppFramework.UI.App.TaskScheduler_UnobservedTaskException(System.Object,System.Threading.Tasks.UnobservedTaskExceptionEventArgs)">
-            <summary>
-            Invoked when the task schedule sees an exception occur
-            </summary>
-            <param name="sender"></param>
-            <param name="e">Details about the task exception.</param>
-        </member>
-        <member name="M:AppFramework.UI.App.DebugSettings_BindingFailed(System.Object,Windows.UI.Xaml.BindingFailedEventArgs)">
-            <summary>
-            Invoked when any bindings fail.
-            </summary>
-            <param name="sender">Object which failed with binding</param>
-            <param name="e">Details about the binding failure</param>
-        </member>
-        <member name="M:AppFramework.UI.App.OnNavigationFailed(System.Object,Windows.UI.Xaml.Navigation.NavigationFailedEventArgs)">
-            <summary>
-            Invoked when Navigation to a certain page fails
-            </summary>
-            <param name="sender">The Frame which failed navigation</param>
-            <param name="e">Details about the navigation failure</param>
-        </member>
-        <member name="M:AppFramework.UI.Resources.PlatformSpecific.InitializeComponent">
-            <summary>
-            InitializeComponent()
-            </summary>
-        </member>
-        <member name="M:AppFramework.UI.Resources.PlatformSpecific.InitializeComponent(System.Uri)">
-            <summary>
-            InitializeComponent()
-            </summary>
-        </member>
-        <member name="M:AppFramework.UI.Resources.PlatformSpecific.Connect(System.Int32,System.Object)">
-            <summary>
-            Connect()
-            </summary>
-        </member>
-        <member name="M:AppFramework.UI.Resources.Common.InitializeComponent">
-            <summary>
-            InitializeComponent()
-            </summary>
-        </member>
-        <member name="M:AppFramework.UI.Resources.Common.Connect(System.Int32,System.Object)">
-            <summary>
-            Connect()
-            </summary>
-        </member>
-        <member name="T:AppFramework.UI.SuspensionManager">
-            <summary>
-            SuspensionManager captures global session state to simplify process lifetime management
-            for an application.  Note that session state will be automatically cleared under a variety
-            of conditions and should only be used to store information that would be convenient to
-            carry across sessions, but that should be discarded when an application crashes or is
-            upgraded.
-            </summary>
-        </member>
-        <member name="P:AppFramework.UI.SuspensionManager.SessionState">
-            <summary>
-            Provides access to global session state for the current session.  This state is
-            serialized by <see cref="M:AppFramework.UI.SuspensionManager.SaveAsync"/> and restored by
-            <see cref="M:AppFramework.UI.SuspensionManager.RestoreAsync(System.String)"/>, so values must be serializable by
-            <see cref="T:System.Runtime.Serialization.DataContractSerializer"/> and should be as compact as possible.  Strings
-            and other self-contained data types are strongly recommended.
-            </summary>
-        </member>
-        <member name="P:AppFramework.UI.SuspensionManager.KnownTypes">
-            <summary>
-            List of custom types provided to the <see cref="T:System.Runtime.Serialization.DataContractSerializer"/> when
-            reading and writing session state.  Initially empty, additional types may be
-            added to customize the serialization process.
-            </summary>
-        </member>
-        <member name="M:AppFramework.UI.SuspensionManager.SaveAsync">
-            <summary>
-            Save the current <see cref="P:AppFramework.UI.SuspensionManager.SessionState"/>.  Any <see cref="T:Windows.UI.Xaml.Controls.Frame"/> instances
-            registered with <see cref="M:AppFramework.UI.SuspensionManager.RegisterFrame(Windows.UI.Xaml.Controls.Frame,System.String,System.String)"/> will also preserve their current
-            navigation stack, which in turn gives their active <see cref="T:Windows.UI.Xaml.Controls.Page"/> an opportunity
-            to save its state.
-            </summary>
-            <returns>An asynchronous task that reflects when session state has been saved.</returns>
-        </member>
-        <member name="M:AppFramework.UI.SuspensionManager.RestoreAsync(System.String)">
-            <summary>
-            Restores previously saved <see cref="P:AppFramework.UI.SuspensionManager.SessionState"/>.  Any <see cref="T:Windows.UI.Xaml.Controls.Frame"/> instances
-            registered with <see cref="M:AppFramework.UI.SuspensionManager.RegisterFrame(Windows.UI.Xaml.Controls.Frame,System.String,System.String)"/> will also restore their prior navigation
-            state, which in turn gives their active <see cref="T:Windows.UI.Xaml.Controls.Page"/> an opportunity restore its
-            state.
-            </summary>
-            <param name="sessionBaseKey">An optional key that identifies the type of session.
-            This can be used to distinguish between multiple application launch scenarios.</param>
-            <returns>An asynchronous task that reflects when session state has been read.  The
-            content of <see cref="P:AppFramework.UI.SuspensionManager.SessionState"/> should not be relied upon until this task
-            completes.</returns>
-        </member>
-        <member name="M:AppFramework.UI.SuspensionManager.RegisterFrame(Windows.UI.Xaml.Controls.Frame,System.String,System.String)">
-            <summary>
-            Registers a <see cref="T:Windows.UI.Xaml.Controls.Frame"/> instance to allow its navigation history to be saved to
-            and restored from <see cref="P:AppFramework.UI.SuspensionManager.SessionState"/>.  Frames should be registered once
-            immediately after creation if they will participate in session state management.  Upon
-            registration if state has already been restored for the specified key
-            the navigation history will immediately be restored.  Subsequent invocations of
-            <see cref="M:AppFramework.UI.SuspensionManager.RestoreAsync(System.String)"/> will also restore navigation history.
-            </summary>
-            <param name="frame">An instance whose navigation history should be managed by
-            <see cref="T:AppFramework.UI.SuspensionManager"/></param>
-            <param name="sessionStateKey">A unique key into <see cref="P:AppFramework.UI.SuspensionManager.SessionState"/> used to
-            store navigation-related information.</param>
-            <param name="sessionBaseKey">An optional key that identifies the type of session.
-            This can be used to distinguish between multiple application launch scenarios.</param>
-        </member>
-        <member name="M:AppFramework.UI.SuspensionManager.UnregisterFrame(Windows.UI.Xaml.Controls.Frame)">
-            <summary>
-            Disassociates a <see cref="T:Windows.UI.Xaml.Controls.Frame"/> previously registered by <see cref="M:AppFramework.UI.SuspensionManager.RegisterFrame(Windows.UI.Xaml.Controls.Frame,System.String,System.String)"/>
-            from <see cref="P:AppFramework.UI.SuspensionManager.SessionState"/>.  Any navigation state previously captured will be
-            removed.
-            </summary>
-            <param name="frame">An instance whose navigation history should no longer be
-            managed.</param>
-        </member>
-        <member name="M:AppFramework.UI.SuspensionManager.SessionStateForFrame(Windows.UI.Xaml.Controls.Frame)">
-            <summary>
-            Provides storage for session state associated with the specified <see cref="T:Windows.UI.Xaml.Controls.Frame"/>.
-            Frames that have been previously registered with <see cref="M:AppFramework.UI.SuspensionManager.RegisterFrame(Windows.UI.Xaml.Controls.Frame,System.String,System.String)"/> have
-            their session state saved and restored automatically as a part of the global
-            <see cref="P:AppFramework.UI.SuspensionManager.SessionState"/>.  Frames that are not registered have transient state
-            that can still be useful when restoring pages that have been discarded from the
-            navigation cache.
-            </summary>
-            <remarks>Apps may choose to rely on <see cref="!:NavigationHelper"/> to manage
-            page-specific state instead of working with frame session state directly.</remarks>
-            <param name="frame">The instance for which session state is desired.</param>
-            <returns>A collection of state subject to the same serialization mechanism as
-            <see cref="P:AppFramework.UI.SuspensionManager.SessionState"/>.</returns>
-        </member>
-        <member name="T:AppFramework.UI.Triggers.ContinuumMobileAvailableTrigger">
-            <summary>
-            Trigger for determinging when continuum on Windows Mobile is available for consumption.
-            </summary>
-        </member>
-        <member name="T:AppFramework.UI.Triggers.ContinuumMobileExecutingTrigger">
-            <summary>
-            Trigger to indicate when a window is displayed on a Windows Mobile continuum screen.
-            </summary>
-        </member>
-        <member name="T:AppFramework.UI.Triggers.DeviceFamilyTrigger">
-            <summary>
-            Trigger for when you need do perform device specific customizations.
-            </summary>
-        </member>
-        <member name="T:AppFramework.UI.Triggers.NotDeviceFamilyTrigger">
-            <summary>
-            Trigger for when you need do perform specific customizations NOT on the specified device family.
-            </summary>
-        </member>
-        <member name="T:AppFramework.UI.Triggers.TabletModeTrigger">
-            <summary>
-            Trigger to determine when a user enters tablet mode.
-            </summary>
+            <param name="obj">Object instance to serialize.</param>
+            <returns>JSON string representing the object instance.</returns>
         </member>
         <member name="M:AppFramework.Core.Extensions.IDictionaryExtensions.ContainsKeyAndValue(System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String)">
             <summary>
@@ -1458,84 +825,6 @@
             <summary>
             Object instance to pass in as a parameter.
             </summary>
-        </member>
-        <member name="T:AppFramework.Core.SerializerTypes">
-            <summary>
-            Serialization methods the application supports.
-            </summary>
-        </member>
-        <member name="F:AppFramework.Core.SerializerTypes.Default">
-            <summary>
-            Use the default serializer for the application.
-            </summary>
-        </member>
-        <member name="F:AppFramework.Core.SerializerTypes.Json">
-            <summary>
-            Use the JSON serializer.
-            </summary>
-        </member>
-        <member name="F:AppFramework.Core.SerializerTypes.Xml">
-            <summary>
-            Use the XML serializer.
-            </summary>
-        </member>
-        <member name="T:AppFramework.Core.Serializer">
-            <summary>
-            Serialize and deserialize objects.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Serializer.DefaultSerializerType">
-            <summary>
-            Get or set the default serialization method for the application. If an object that needs serialization/deserialization does not explictly
-            request a particular serializer, the default serializer will be used.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.Serializer.Serialize(System.Object,AppFramework.Core.SerializerTypes)">
-            <summary>
-            Serialize an object to string.
-            </summary>
-            <param name="obj">Object to serialize.</param>
-            <param name="serializerType">Use the default serializer or specific a particular serializer.</param>
-            <returns>String returned from the serializer.</returns>
-        </member>
-        <member name="M:AppFramework.Core.Serializer.Deserialize``1(System.String,AppFramework.Core.SerializerTypes)">
-            <summary>
-            Deserializes a string back into an instance of an object.
-            </summary>
-            <typeparam name="T">Type of the object to be returned.</typeparam>
-            <param name="data">String data to be deserialized.</param>
-            <param name="serializerType">Use the default serializer or specific a particular serializer.</param>
-            <returns>Object instance from the deserialized data string.</returns>
-        </member>
-        <member name="M:AppFramework.Core.Serializer.DeserializeFromXml``1(System.String)">
-            <summary>
-            Deserializes an XML string back into an object instance.
-            </summary>
-            <typeparam name="T">Type of the object to be returned.</typeparam>
-            <param name="xml">XML string to be deserialized.</param>
-            <returns>Object instance deserialized from the string data.</returns>
-        </member>
-        <member name="M:AppFramework.Core.Serializer.SerializeToXml(System.Object)">
-            <summary>
-            Serializes an object to XML.
-            </summary>
-            <param name="obj">Object to be serialized.</param>
-            <returns>String representing the serialized object.</returns>
-        </member>
-        <member name="M:AppFramework.Core.Serializer.DeserializeFromJson``1(System.String)">
-            <summary>
-            Deserializes a JSON string into an object instance.
-            </summary>
-            <typeparam name="T">Type of the object to be returned.</typeparam>
-            <param name="json">JSON string representing an object.</param>
-            <returns>Instance of an object from the JSON string.</returns>
-        </member>
-        <member name="M:AppFramework.Core.Serializer.SerializeToJson(System.Object)">
-            <summary>
-            Serializes an object into a JSON string.
-            </summary>
-            <param name="obj">Object instance to serialize.</param>
-            <returns>JSON string representing the object instance.</returns>
         </member>
         <member name="P:AppFramework.Core.Strings.BackgroundTasks.TextBackgroundAppDisabledStatus">
             <summary>
@@ -3471,6 +2760,717 @@
             Initializes a new instance of the <see cref="T:AppFramework.Core.SaveStateEventArgs"/> class.
             </summary>
             <param name="pageState">An empty dictionary to be populated with serializable state.</param>
+        </member>
+        <member name="T:AppFramework.UI.Behaviors.EnterKeyBehavior">
+            <summary>
+            Enables a control to execute its associated command when an enter key press is detected within the control.
+            </summary>
+        </member>
+        <member name="T:AppFramework.UI.Behaviors.FocusOnLoadBehavior">
+            <summary>
+            Focuses a control on the loaded event.  Useful for setting focus to the first textbox on a page, for example, immediately on load of the page.
+            </summary>
+        </member>
+        <member name="T:AppFramework.UI.Behaviors.ListViewCommandBehavior">
+            <summary>
+            Creates an attached property for all ListViewBase controls allowing binding  a command object to it's ItemClick event.
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.Controls.ApplicationFrame.ShowInterstitialAd">
+            <summary>
+            Displays a banner or video interstitial ad (whichever loads first).
+            </summary>
+        </member>
+        <member name="T:AppFramework.UI.Controls.AdControl">
+            <summary>
+            Ad control:  https://msdn.microsoft.com/en-us/windows/uwp/monetize/supported-ad-sizes-for-banner-ads
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.Controls.AdControl.InitializeComponent">
+            <summary>
+            InitializeComponent()
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.Controls.AdControl.Connect(System.Int32,System.Object)">
+            <summary>
+            Connect()
+            </summary>
+        </member>
+        <member name="T:AppFramework.UI.Controls.BodyPanel">
+            <summary>
+            BodyPanel control representing page chrome.
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.Controls.BodyPanel.#ctor">
+            <summary>
+            Constructs an instance of the BodyPanel.
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.Controls.BodyPanel.OnApplyTemplate">
+            <summary>
+            Finds controls within the template of this control.
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.Controls.BodyPanel.ScrollToTop">
+            <summary>
+            Scrolls the panel to the top.
+            </summary>
+        </member>
+        <member name="T:AppFramework.UI.Controls.ContentControlBase`1">
+            <summary>
+            Base class for custom controls.  Provides plumbing for view model support and x:Bind just like the ViewBase.
+            </summary>
+            <typeparam name="TViewModel"></typeparam>
+        </member>
+        <member name="M:AppFramework.UI.Controls.ContentControlBase`1.SetProperty``1(``0@,``0,System.String)">
+            <summary>
+            Checks if a property already matches a desired value.  Sets the property and
+            notifies listeners only when necessary.
+            </summary>
+            <typeparam name="T">Type of the property.</typeparam>
+            <param name="storage">Reference to a property with both getter and setter.</param>
+            <param name="value">Desired value for the property.</param>
+            <param name="propertyName">Name of the property used to notify listeners.  This
+            value is optional and can be provided automatically when invoked from compilers that
+            support CallerMemberName.</param>
+            <returns>True if the value was changed, false if the existing value matched the
+            desired value.</returns>
+        </member>
+        <member name="M:AppFramework.UI.Controls.ContentControlBase`1.NotifyPropertyChanged(System.String)">
+            <summary>
+            Notifies listeners that a property value has changed.
+            </summary>
+            <param name="propertyName">Name of the property used to notify listeners.  This
+            value is optional and can be provided automatically when invoked from compilers
+            that support <see cref="T:System.Runtime.CompilerServices.CallerMemberNameAttribute"/>.</param>
+        </member>
+        <member name="T:AppFramework.UI.Controls.ScrollToTopHelper">
+            <summary>
+            Helper class to scroll a control or object to its default position.
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.Controls.ScrollToTopHelper.ScrollToTop(System.Object)">
+            <summary>
+            Scrolls a control or object that can be scrolled to its default top position.
+            </summary>
+            <param name="content"></param>
+        </member>
+        <member name="T:AppFramework.UI.Controls.SplitViewButton">
+            <summary>
+            User control used in the ShellView page's SplitView control's pane.  Each instance represents a navigation button for the main navigation menu.
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.Controls.UserControlBase.SetProperty``1(``0@,``0,System.String)">
+            <summary>
+            Checks if a property already matches a desired value.  Sets the property and
+            notifies listeners only when necessary.
+            </summary>
+            <typeparam name="T">Type of the property.</typeparam>
+            <param name="storage">Reference to a property with both getter and setter.</param>
+            <param name="value">Desired value for the property.</param>
+            <param name="propertyName">Name of the property used to notify listeners.  This
+            value is optional and can be provided automatically when invoked from compilers that
+            support CallerMemberName.</param>
+            <returns>True if the value was changed, false if the existing value matched the
+            desired value.</returns>
+        </member>
+        <member name="M:AppFramework.UI.Controls.UserControlBase.NotifyPropertyChanged(System.String)">
+            <summary>
+            Notifies listeners that a property value has changed.
+            </summary>
+            <param name="propertyName">Name of the property used to notify listeners.  This
+            value is optional and can be provided automatically when invoked from compilers
+            that support <see cref="T:System.Runtime.CompilerServices.CallerMemberNameAttribute"/>.</param>
+        </member>
+        <member name="T:AppFramework.UI.Controls.ViewControlBase`1">
+            <summary>
+            Base class for custom controls.  Provides plumbing for view model support and x:Bind just like the ViewBase.
+            </summary>
+            <typeparam name="TViewModel"></typeparam>
+        </member>
+        <member name="M:AppFramework.UI.Controls.WebViewPanel.SetCurrentViewModel(AppFramework.Core.ViewModels.WebViewModelBase)">
+            <summary>
+            Configures a WebBrowserViewModel instance to get notified of WebView control events.
+            </summary>
+            <param name="vm"></param>
+        </member>
+        <member name="M:AppFramework.UI.Controls.WebViewPanel.InitializeComponent">
+            <summary>
+            InitializeComponent()
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.Controls.WebViewPanel.Connect(System.Int32,System.Object)">
+            <summary>
+            Connect()
+            </summary>
+        </member>
+        <member name="F:AppFramework.UI.Controls.WrapPanel._ignorePropertyChange">
+            <summary>
+            A value indicating whether a dependency property change handler
+            should ignore the next change notification.  This is used to reset
+            the value of properties without performing any of the actions in
+            their change handlers.
+            </summary>
+        </member>
+        <member name="P:AppFramework.UI.Controls.WrapPanel.ItemHeight">
+            <summary>
+            Gets or sets the height of the layout area for each item that is
+            contained in a <see cref="T:AppFramework.UI.Controls.WrapPanel" />.
+            </summary>
+            <value>
+            The height applied to the layout area of each item that is contained
+            within a <see cref="T:AppFramework.UI.Controls.WrapPanel" />.  The
+            default value is <see cref="F:System.Double.NaN" />.
+            </value>
+        </member>
+        <member name="F:AppFramework.UI.Controls.WrapPanel.ItemHeightProperty">
+            <summary>
+            Identifies the
+            <see cref="P:AppFramework.UI.Controls.WrapPanel.ItemHeight" />
+            dependency property.
+            </summary>
+            <value>
+            The identifier for the
+            <see cref="P:AppFramework.UI.Controls.WrapPanel.ItemHeight" />
+            dependency property
+            </value>
+        </member>
+        <member name="P:AppFramework.UI.Controls.WrapPanel.ItemWidth">
+            <summary>
+            Gets or sets the width of the layout area for each item that is
+            contained in a <see cref="T:AppFramework.UI.Controls.WrapPanel" />.
+            </summary>
+            <value>
+            The width that applies to the layout area of each item that is
+            contained in a <see cref="T:AppFramework.UI.Controls.WrapPanel" />.
+            The default value is <see cref="F:System.Double.NaN" />.
+            </value>
+        </member>
+        <member name="F:AppFramework.UI.Controls.WrapPanel.ItemWidthProperty">
+            <summary>
+            Identifies the
+            <see cref="P:AppFramework.UI.Controls.WrapPanel.ItemWidth" />
+            dependency property.
+            </summary>
+            <value>
+            The identifier for the
+            <see cref="P:AppFramework.UI.Controls.WrapPanel.ItemWidth" />
+            dependency property.
+            </value>
+        </member>
+        <member name="P:AppFramework.UI.Controls.WrapPanel.Orientation">
+            <summary>
+            Gets or sets the direction in which child elements are arranged.
+            </summary>
+            <value>
+            One of the <see cref="T:Windows.UI.Xaml.Controls.Orientation" />
+            values.  The default is
+            <see cref="F:Windows.UI.Xaml.Controls.Orientation.Horizontal" />.
+            </value>
+        </member>
+        <member name="F:AppFramework.UI.Controls.WrapPanel.OrientationProperty">
+            <summary>
+            Identifies the
+            <see cref="P:AppFramework.UI.Controls.WrapPanel.Orientation" />
+            dependency property.
+            </summary>
+            <value>
+            The identifier for the
+            <see cref="P:AppFramework.UI.Controls.WrapPanel.Orientation" />
+            dependency property.
+            </value>
+        </member>
+        <member name="M:AppFramework.UI.Controls.WrapPanel.OnOrientationPropertyChanged(Windows.UI.Xaml.DependencyObject,Windows.UI.Xaml.DependencyPropertyChangedEventArgs)">
+            <summary>
+            OrientationProperty property changed handler.
+            </summary>
+            <param name="d">WrapPanel that changed its Orientation.</param>
+            <param name="e">Event arguments.</param>
+        </member>
+        <member name="M:AppFramework.UI.Controls.WrapPanel.OnItemHeightOrWidthPropertyChanged(Windows.UI.Xaml.DependencyObject,Windows.UI.Xaml.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Property changed handler for ItemHeight and ItemWidth.
+            </summary>
+            <param name="d">
+            WrapPanel that changed its ItemHeight or ItemWidth.
+            </param>
+            <param name="e">Event arguments.</param>
+        </member>
+        <member name="M:AppFramework.UI.Controls.WrapPanel.MeasureOverride(Windows.Foundation.Size)">
+            <summary>
+            Measures the child elements of a
+            <see cref="T:AppFramework.UI.Controls.WrapPanel" /> in anticipation
+            of arranging them during the
+            <see cref="M:AppFramework.UI.Controls.WrapPanel.ArrangeOverride(Windows.Foundation.Size)" />
+            pass.
+            </summary>
+            <param name="constraint">
+            The size available to child elements of the wrap panel.
+            </param>
+            <returns>
+            The size required by the
+            <see cref="T:AppFramework.UI.Controls.WrapPanel" /> and its 
+            elements.
+            </returns>
+        </member>
+        <member name="M:AppFramework.UI.Controls.WrapPanel.ArrangeOverride(Windows.Foundation.Size)">
+            <summary>
+            Arranges and sizes the
+            <see cref="T:AppFramework.UI.Controls.WrapPanel" /> control and its
+            child elements.
+            </summary>
+            <param name="finalSize">
+            The area within the parent that the
+            <see cref="T:AppFramework.UI.Controls.WrapPanel" /> should use 
+            arrange itself and its children.
+            </param>
+            <returns>
+            The actual size used by the
+            <see cref="T:AppFramework.UI.Controls.WrapPanel" />.
+            </returns>
+        </member>
+        <member name="M:AppFramework.UI.Controls.WrapPanel.ArrangeLine(System.Int32,System.Int32,System.Nullable{System.Double},System.Double,System.Double)">
+            <summary>
+            Arrange a sequence of elements in a single line.
+            </summary>
+            <param name="lineStart">
+            Index of the first element in the sequence to arrange.
+            </param>
+            <param name="lineEnd">
+            Index of the last element in the sequence to arrange.
+            </param>
+            <param name="directDelta">
+            Optional fixed growth in the primary direction.
+            </param>
+            <param name="indirectOffset">
+            Offset of the line in the indirect direction.
+            </param>
+            <param name="indirectGrowth">
+            Shared indirect growth of the elements on this line.
+            </param>
+        </member>
+        <member name="F:AppFramework.UI.Controls.OrientedSize._orientation">
+            <summary>
+            The orientation of the structure.
+            </summary>
+        </member>
+        <member name="P:AppFramework.UI.Controls.OrientedSize.Orientation">
+            <summary>
+            Gets the orientation of the structure.
+            </summary>
+        </member>
+        <member name="F:AppFramework.UI.Controls.OrientedSize._direct">
+            <summary>
+            The size dimension that grows directly with layout placement.
+            </summary>
+        </member>
+        <member name="P:AppFramework.UI.Controls.OrientedSize.Direct">
+            <summary>
+            Gets or sets the size dimension that grows directly with layout
+            placement.
+            </summary>
+        </member>
+        <member name="F:AppFramework.UI.Controls.OrientedSize._indirect">
+            <summary>
+            The size dimension that grows indirectly with the maximum value of
+            the layout row or column.
+            </summary>
+        </member>
+        <member name="P:AppFramework.UI.Controls.OrientedSize.Indirect">
+            <summary>
+            Gets or sets the size dimension that grows indirectly with the
+            maximum value of the layout row or column.
+            </summary>
+        </member>
+        <member name="P:AppFramework.UI.Controls.OrientedSize.Width">
+            <summary>
+            Gets or sets the width of the size.
+            </summary>
+        </member>
+        <member name="P:AppFramework.UI.Controls.OrientedSize.Height">
+            <summary>
+            Gets or sets the height of the size.
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.Controls.OrientedSize.#ctor(Windows.UI.Xaml.Controls.Orientation)">
+            <summary>
+            Initializes a new OrientedSize structure.
+            </summary>
+            <param name="orientation">Orientation of the structure.</param>
+        </member>
+        <member name="M:AppFramework.UI.Controls.OrientedSize.#ctor(Windows.UI.Xaml.Controls.Orientation,System.Double,System.Double)">
+            <summary>
+            Initializes a new OrientedSize structure.
+            </summary>
+            <param name="orientation">Orientation of the structure.</param>
+            <param name="width">Un-oriented width of the structure.</param>
+            <param name="height">Un-oriented height of the structure.</param>
+        </member>
+        <member name="T:AppFramework.UI.Controls.NumericExtensions.NanUnion">
+            <summary>
+            NanUnion is a C++ style type union used for efficiently converting
+            a double into an unsigned long, whose bits can be easily
+            manipulated.
+            </summary>
+        </member>
+        <member name="F:AppFramework.UI.Controls.NumericExtensions.NanUnion.FloatingValue">
+            <summary>
+            Floating point representation of the union.
+            </summary>
+        </member>
+        <member name="F:AppFramework.UI.Controls.NumericExtensions.NanUnion.IntegerValue">
+            <summary>
+            Integer representation of the union.
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.Controls.NumericExtensions.IsNaN(System.Double)">
+            <summary>
+            Check if a number isn't really a number.
+            </summary>
+            <param name="value">The number to check.</param>
+            <returns>
+            True if the number is not a number, false if it is a number.
+            </returns>
+        </member>
+        <member name="M:AppFramework.UI.Controls.NumericExtensions.IsGreaterThan(System.Double,System.Double)">
+            <summary>
+            Determine if one number is greater than another.
+            </summary>
+            <param name="left">First number.</param>
+            <param name="right">Second number.</param>
+            <returns>
+            True if the first number is greater than the second, false
+            otherwise.
+            </returns>
+        </member>
+        <member name="M:AppFramework.UI.Controls.NumericExtensions.AreClose(System.Double,System.Double)">
+            <summary>
+            Determine if two numbers are close in value.
+            </summary>
+            <param name="left">First number.</param>
+            <param name="right">Second number.</param>
+            <returns>
+            True if the first number is close in value to the second, false
+            otherwise.
+            </returns>
+        </member>
+        <member name="M:AppFramework.UI.Views.SecondaryWindowView.InitializeComponent">
+            <summary>
+            InitializeComponent()
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.Views.SecondaryWindowView.Connect(System.Int32,System.Object)">
+            <summary>
+            Connect()
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.Views.WebView.InitializeComponent">
+            <summary>
+            InitializeComponent()
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.Views.WebView.Connect(System.Int32,System.Object)">
+            <summary>
+            Connect()
+            </summary>
+        </member>
+        <member name="T:AppFramework.UI.Views.ViewBase`1">
+            <summary>
+            Base class for all pages in your application.
+            </summary>
+            <typeparam name="TViewModel"></typeparam>
+        </member>
+        <member name="P:AppFramework.UI.Views.ViewBase`1.ViewModel">
+            <summary>
+            Gets access to the view model instance associated to this page. Used for x:Bind capabilities in the page's XAML.
+            </summary>
+        </member>
+        <member name="P:AppFramework.UI.Views.ViewBase`1.IsInView">
+            <summary>
+            True if the view is visible to the user else false.
+            </summary>
+        </member>
+        <member name="E:AppFramework.UI.Views.ViewBase`1.PropertyChanged">
+            <summary>
+            Event for knowing when page properties change.
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.Views.ViewBase`1.OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs)">
+            <summary>
+            The methods provided in this section are simply used to allow
+            NavigationHelper to respond to the page's navigation methods.
+            <para>
+            Page specific logic should be placed in event handlers for the
+            <see cref="!:NavigationHelper.LoadState"/>
+            and <see cref="!:NavigationHelper.SaveState"/>.
+            The navigation parameter is available in the LoadState method
+            in addition to page state preserved during an earlier session.
+            </para>
+            </summary>
+            <param name="e">Event data that describes how this page was reached.</param>
+        </member>
+        <member name="M:AppFramework.UI.Views.ViewBase`1.OnLoadStateAsync(AppFramework.Core.LoadStateEventArgs)">
+            <summary>
+            Populates the page with content passed during navigation.  Any saved state is also
+            provided when recreating a page from a prior session.
+            </summary>
+            <param name="e">Event data that provides both the navigation parameter passed to
+            <see cref="M:Windows.UI.Xaml.Controls.Frame.Navigate(System.Type,System.Object)"/> when this page was initially requested and
+            a dictionary of state preserved by this page during an earlier
+            session.  The state will be null the first time a page is visited.</param>
+        </member>
+        <member name="M:AppFramework.UI.Views.ViewBase`1.OnSaveStateAsync(AppFramework.Core.SaveStateEventArgs)">
+            <summary>
+            Preserves state associated with this page in case the application is suspended or the
+            page is discarded from the navigation cache.  Values must conform to the serialization
+            requirements of <see cref="P:AppFramework.UI.SuspensionManager.SessionState"/>.
+            </summary>
+            <param name="e">Event data that provides an empty dictionary to be populated with
+            serializable state.</param>
+        </member>
+        <member name="M:AppFramework.UI.Views.ViewBase`1.Application_Resuming(System.Object,System.Object)">
+            <summary>
+            Event handler for application resume
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:AppFramework.UI.Views.ViewBase`1.OnApplicationResuming">
+            <summary>
+            Perform any custom logic for when the OS resumes your app.
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.Views.ViewBase`1.OnForwardNavigationRequested">
+            <summary>
+            Allows a view to prevent forward navigation if it needs to.
+            </summary>
+            <returns>True if forward navigation should be cancelled else false.</returns>
+        </member>
+        <member name="M:AppFramework.UI.Views.ViewBase`1.OnBackNavigationRequested">
+            <summary>
+            Allows a view to prevent back navigation if it needs to.
+            </summary>
+            <returns>True if back navigation should be cancelled else false.</returns>
+        </member>
+        <member name="M:AppFramework.UI.Views.ViewBase`1.SetViewModel(`0)">
+            <summary>
+            Sets a view model instance to the page for data binding and for x:Bind.
+            </summary>
+            <param name="vm"></param>
+        </member>
+        <member name="M:AppFramework.UI.Views.ViewBase`1.SetProperty``1(``0@,``0,System.String)">
+            <summary>
+            Checks if a property already matches a desired value.  Sets the property and
+            notifies listeners only when necessary.
+            </summary>
+            <typeparam name="T">Type of the property.</typeparam>
+            <param name="storage">Reference to a property with both getter and setter.</param>
+            <param name="value">Desired value for the property.</param>
+            <param name="propertyName">Name of the property used to notify listeners.  This
+            value is optional and can be provided automatically when invoked from compilers that
+            support CallerMemberName.</param>
+            <returns>True if the value was changed, false if the existing value matched the
+            desired value.</returns>
+        </member>
+        <member name="M:AppFramework.UI.Views.ViewBase`1.NotifyPropertyChanged(System.String)">
+            <summary>
+            Notifies listeners that a property value has changed.
+            </summary>
+            <param name="propertyName">Name of the property used to notify listeners.  This
+            value is optional and can be provided automatically when invoked from compilers
+            that support <see cref="T:System.Runtime.CompilerServices.CallerMemberNameAttribute"/>.</param>
+        </member>
+        <member name="T:AppFramework.UI.App">
+            <summary>
+            Provides application-specific behavior to supplement the default Application class.
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.App.#ctor">
+            <summary>
+            Initializes the singleton application object.  This is the first line of authored code
+            executed, and as such is the logical equivalent of main() or WinMain().
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.App.OnLaunched(Windows.ApplicationModel.Activation.LaunchActivatedEventArgs)">
+            <summary>
+            Invoked when the application is launched normally by the end user.  Other entry points
+            will be used such as when the application is launched to open a specific file.
+            </summary>
+            <param name="e">Details about the launch request and process.</param>
+        </member>
+        <member name="M:AppFramework.UI.App.OnSuspending(System.Object,Windows.ApplicationModel.SuspendingEventArgs)">
+            <summary>
+            Invoked when application execution is being suspended.  Application state is saved
+            without knowing whether the application will be terminated or resumed with the contents
+            of memory still intact.
+            </summary>
+            <param name="sender">The source of the suspend request.</param>
+            <param name="e">Details about the suspend request.</param>
+        </member>
+        <member name="M:AppFramework.UI.App.App_UnhandledException(System.Object,Windows.UI.Xaml.UnhandledExceptionEventArgs)">
+            <summary>
+            Invoked when an unhandled exception in the application occurs
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:AppFramework.UI.App.TaskScheduler_UnobservedTaskException(System.Object,System.Threading.Tasks.UnobservedTaskExceptionEventArgs)">
+            <summary>
+            Invoked when the task schedule sees an exception occur
+            </summary>
+            <param name="sender"></param>
+            <param name="e">Details about the task exception.</param>
+        </member>
+        <member name="M:AppFramework.UI.App.DebugSettings_BindingFailed(System.Object,Windows.UI.Xaml.BindingFailedEventArgs)">
+            <summary>
+            Invoked when any bindings fail.
+            </summary>
+            <param name="sender">Object which failed with binding</param>
+            <param name="e">Details about the binding failure</param>
+        </member>
+        <member name="M:AppFramework.UI.App.OnNavigationFailed(System.Object,Windows.UI.Xaml.Navigation.NavigationFailedEventArgs)">
+            <summary>
+            Invoked when Navigation to a certain page fails
+            </summary>
+            <param name="sender">The Frame which failed navigation</param>
+            <param name="e">Details about the navigation failure</param>
+        </member>
+        <member name="M:AppFramework.UI.Resources.PlatformSpecific.InitializeComponent">
+            <summary>
+            InitializeComponent()
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.Resources.PlatformSpecific.InitializeComponent(System.Uri)">
+            <summary>
+            InitializeComponent()
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.Resources.PlatformSpecific.Connect(System.Int32,System.Object)">
+            <summary>
+            Connect()
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.Resources.Common.InitializeComponent">
+            <summary>
+            InitializeComponent()
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.Resources.Common.Connect(System.Int32,System.Object)">
+            <summary>
+            Connect()
+            </summary>
+        </member>
+        <member name="T:AppFramework.UI.SuspensionManager">
+            <summary>
+            SuspensionManager captures global session state to simplify process lifetime management
+            for an application.  Note that session state will be automatically cleared under a variety
+            of conditions and should only be used to store information that would be convenient to
+            carry across sessions, but that should be discarded when an application crashes or is
+            upgraded.
+            </summary>
+        </member>
+        <member name="P:AppFramework.UI.SuspensionManager.SessionState">
+            <summary>
+            Provides access to global session state for the current session.  This state is
+            serialized by <see cref="M:AppFramework.UI.SuspensionManager.SaveAsync"/> and restored by
+            <see cref="M:AppFramework.UI.SuspensionManager.RestoreAsync(System.String)"/>, so values must be serializable by
+            <see cref="T:System.Runtime.Serialization.DataContractSerializer"/> and should be as compact as possible.  Strings
+            and other self-contained data types are strongly recommended.
+            </summary>
+        </member>
+        <member name="P:AppFramework.UI.SuspensionManager.KnownTypes">
+            <summary>
+            List of custom types provided to the <see cref="T:System.Runtime.Serialization.DataContractSerializer"/> when
+            reading and writing session state.  Initially empty, additional types may be
+            added to customize the serialization process.
+            </summary>
+        </member>
+        <member name="M:AppFramework.UI.SuspensionManager.SaveAsync">
+            <summary>
+            Save the current <see cref="P:AppFramework.UI.SuspensionManager.SessionState"/>.  Any <see cref="T:Windows.UI.Xaml.Controls.Frame"/> instances
+            registered with <see cref="M:AppFramework.UI.SuspensionManager.RegisterFrame(Windows.UI.Xaml.Controls.Frame,System.String,System.String)"/> will also preserve their current
+            navigation stack, which in turn gives their active <see cref="T:Windows.UI.Xaml.Controls.Page"/> an opportunity
+            to save its state.
+            </summary>
+            <returns>An asynchronous task that reflects when session state has been saved.</returns>
+        </member>
+        <member name="M:AppFramework.UI.SuspensionManager.RestoreAsync(System.String)">
+            <summary>
+            Restores previously saved <see cref="P:AppFramework.UI.SuspensionManager.SessionState"/>.  Any <see cref="T:Windows.UI.Xaml.Controls.Frame"/> instances
+            registered with <see cref="M:AppFramework.UI.SuspensionManager.RegisterFrame(Windows.UI.Xaml.Controls.Frame,System.String,System.String)"/> will also restore their prior navigation
+            state, which in turn gives their active <see cref="T:Windows.UI.Xaml.Controls.Page"/> an opportunity restore its
+            state.
+            </summary>
+            <param name="sessionBaseKey">An optional key that identifies the type of session.
+            This can be used to distinguish between multiple application launch scenarios.</param>
+            <returns>An asynchronous task that reflects when session state has been read.  The
+            content of <see cref="P:AppFramework.UI.SuspensionManager.SessionState"/> should not be relied upon until this task
+            completes.</returns>
+        </member>
+        <member name="M:AppFramework.UI.SuspensionManager.RegisterFrame(Windows.UI.Xaml.Controls.Frame,System.String,System.String)">
+            <summary>
+            Registers a <see cref="T:Windows.UI.Xaml.Controls.Frame"/> instance to allow its navigation history to be saved to
+            and restored from <see cref="P:AppFramework.UI.SuspensionManager.SessionState"/>.  Frames should be registered once
+            immediately after creation if they will participate in session state management.  Upon
+            registration if state has already been restored for the specified key
+            the navigation history will immediately be restored.  Subsequent invocations of
+            <see cref="M:AppFramework.UI.SuspensionManager.RestoreAsync(System.String)"/> will also restore navigation history.
+            </summary>
+            <param name="frame">An instance whose navigation history should be managed by
+            <see cref="T:AppFramework.UI.SuspensionManager"/></param>
+            <param name="sessionStateKey">A unique key into <see cref="P:AppFramework.UI.SuspensionManager.SessionState"/> used to
+            store navigation-related information.</param>
+            <param name="sessionBaseKey">An optional key that identifies the type of session.
+            This can be used to distinguish between multiple application launch scenarios.</param>
+        </member>
+        <member name="M:AppFramework.UI.SuspensionManager.UnregisterFrame(Windows.UI.Xaml.Controls.Frame)">
+            <summary>
+            Disassociates a <see cref="T:Windows.UI.Xaml.Controls.Frame"/> previously registered by <see cref="M:AppFramework.UI.SuspensionManager.RegisterFrame(Windows.UI.Xaml.Controls.Frame,System.String,System.String)"/>
+            from <see cref="P:AppFramework.UI.SuspensionManager.SessionState"/>.  Any navigation state previously captured will be
+            removed.
+            </summary>
+            <param name="frame">An instance whose navigation history should no longer be
+            managed.</param>
+        </member>
+        <member name="M:AppFramework.UI.SuspensionManager.SessionStateForFrame(Windows.UI.Xaml.Controls.Frame)">
+            <summary>
+            Provides storage for session state associated with the specified <see cref="T:Windows.UI.Xaml.Controls.Frame"/>.
+            Frames that have been previously registered with <see cref="M:AppFramework.UI.SuspensionManager.RegisterFrame(Windows.UI.Xaml.Controls.Frame,System.String,System.String)"/> have
+            their session state saved and restored automatically as a part of the global
+            <see cref="P:AppFramework.UI.SuspensionManager.SessionState"/>.  Frames that are not registered have transient state
+            that can still be useful when restoring pages that have been discarded from the
+            navigation cache.
+            </summary>
+            <remarks>Apps may choose to rely on <see cref="!:NavigationHelper"/> to manage
+            page-specific state instead of working with frame session state directly.</remarks>
+            <param name="frame">The instance for which session state is desired.</param>
+            <returns>A collection of state subject to the same serialization mechanism as
+            <see cref="P:AppFramework.UI.SuspensionManager.SessionState"/>.</returns>
+        </member>
+        <member name="T:AppFramework.UI.Triggers.ContinuumMobileAvailableTrigger">
+            <summary>
+            Trigger for determinging when continuum on Windows Mobile is available for consumption.
+            </summary>
+        </member>
+        <member name="T:AppFramework.UI.Triggers.ContinuumMobileExecutingTrigger">
+            <summary>
+            Trigger to indicate when a window is displayed on a Windows Mobile continuum screen.
+            </summary>
+        </member>
+        <member name="T:AppFramework.UI.Triggers.DeviceFamilyTrigger">
+            <summary>
+            Trigger for when you need do perform device specific customizations.
+            </summary>
+        </member>
+        <member name="T:AppFramework.UI.Triggers.NotDeviceFamilyTrigger">
+            <summary>
+            Trigger for when you need do perform specific customizations NOT on the specified device family.
+            </summary>
+        </member>
+        <member name="T:AppFramework.UI.Triggers.TabletModeTrigger">
+            <summary>
+            Trigger to determine when a user enters tablet mode.
+            </summary>
         </member>
         <member name="M:AppFramework.AppFramework_Uwp_XamlTypeInfo.XamlMetaDataProvider.GetXamlType(System.Type)">
             <summary>

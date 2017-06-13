@@ -1,4 +1,4 @@
-﻿using AppFramework.Core;
+﻿using AppFramework.Core.Data;
 using Contoso.Core.Models;
 using System.Threading;
 using System.Threading.Tasks;
@@ -36,7 +36,7 @@ namespace Contoso.Core.Data
         public async Task<MicrosoftAccountDetails> GetUserProfile(string token, CancellationToken ct)
         {
             string url = string.Format(URL_PROFILE_DATA, token);
-            return await this.GetAsync<MicrosoftAccountDetails>(url, ct, SerializerTypes.Json);
+            return await this.GetAsync<MicrosoftAccountDetails>(url, ct);
         }
 
         #endregion

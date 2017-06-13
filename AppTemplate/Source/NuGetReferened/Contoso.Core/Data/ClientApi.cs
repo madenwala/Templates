@@ -1,4 +1,5 @@
-﻿
+﻿using AppFramework.Core.Data;
+using AppFramework.Core.Services;
 using Contoso.Core.Models;
 using Contoso.Core.ViewModels;
 using System;
@@ -6,10 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Windows.Web.Http;
-using Windows.Storage.Streams;
-using AppFramework.Core.Models;
-using AppFramework.Core.Services;
 
 namespace Contoso.Core.Data
 {
@@ -30,7 +27,7 @@ namespace Contoso.Core.Data
 
         #region Constructors
 
-        public ClientApi(bool disableCaching = false) : base(BASE_ADDRESS, disableCaching)
+        public ClientApi() : base(BASE_ADDRESS)
         {
             //// Instantiate constructor and all headers
             //this.Client.DefaultRequestHeaders.Accept.Add(new HttpMediaTypeWithQualityHeaderValue("application/json"));
@@ -64,11 +61,9 @@ namespace Contoso.Core.Data
             //dic.Add("username", vm.Username);
             //dic.Add("password", vm.Password);
             //dic.Add("scope", "streaming");
-            //var contents = new HttpFormUrlEncodedContent(dic);
+            //var contents = new System.Net.Http.FormUrlEncodedContent(dic);
 
-            //HttpStringContent content = new HttpStringContent(message.Stringify(), UnicodeEncoding.Utf8, "application/json");
-
-            //return await this.PostAsync<UserResponse>(URL_ACCOUNT_SIGNIN, contents, SerializerTypes.Json);
+            //return await this.PostAsync<UserResponse>(URL_ACCOUNT_SIGNIN, contents, ct);
         }
 
         internal Task ForgotPasswordAsync(AccountForgotViewModel accountForgotViewModel, object none)
@@ -83,16 +78,16 @@ namespace Contoso.Core.Data
         /// <returns>Login reponse with authorization details.</returns>
         internal async Task<UserResponse> AuthenticateAsync(string token, CancellationToken ct)
         {
-            var response = new UserResponse() { AccessToken = "1234567890", RefreshToken = "abcdefghijklmnop", UserID = "ID.john.doe.1234", Email = "john.doe@outlook.com", FirstName = "John", LastName = "Doe" };
-            await Task.Delay(2000, ct);
-            return response;
+            //var response = new UserResponse() { AccessToken = "1234567890", RefreshToken = "abcdefghijklmnop", UserID = "ID.john.doe.1234", Email = "john.doe@outlook.com", FirstName = "John", LastName = "Doe" };
+            //await Task.Delay(2000, ct);
+            //return response;
 
-            //var dic = new Dictionary<string, string>();
-            //dic.Add("access_token", token);
-            //var contents = new HttpStringContent(Newtonsoft.Json.JsonConvert.SerializeObject(dic), UnicodeEncoding.Utf8, "application/json");
+            var dic = new Dictionary<string, string>();
+            dic.Add("access_token", token);
+            var contents = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(dic), System.Text.Encoding.UTF8, "application/json");
 
-            //string url = URL_ACCOUNT_SIGNIN_REFRESH;
-            //return await this.PostAsync<UserResponse>(url, contents, ct, SerializerTypes.Json);
+            string url = URL_ACCOUNT_SIGNIN_REFRESH;
+            return await this.PostAsync<UserResponse>(url, contents, ct);
         }
 
         /// <summary>
