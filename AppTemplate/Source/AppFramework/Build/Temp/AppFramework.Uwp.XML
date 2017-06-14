@@ -1167,6 +1167,12 @@
             <param name="e">Event args with all navigation data.</param>
             <returns>Awaitable task is returned.</returns>
         </member>
+        <member name="M:AppFramework.Core.ViewModels.ViewModelBase.OnViewGotFocus">
+            <summary>
+            Executes when the focused view loses focus.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="P:AppFramework.Core.ViewModels.ViewModelBase.StatusIsBusy">
             <summary>
             Gets whether or not the view model is in busy status.

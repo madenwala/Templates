@@ -48,7 +48,36 @@ namespace AppFramework.Core.Data
 
         #region Methods
 
-        public Uri GetUri(string url)
+        #region Static
+
+        public static bool IsNoInternetException(Exception ex)
+        {
+            if (ex == null)
+                return false;
+
+            switch (ex.HResult)
+            {
+                case E_WINHTTP_TIMEOUT:
+                // The connection to the server timed out.
+                case E_WINHTTP_NAME_NOT_RESOLVED:
+                case E_WINHTTP_CANNOT_CONNECT:
+                case E_WINHTTP_CONNECTION_ERROR:
+                case -2146233088:
+                    // Unable to connect to the server. Check that you have Internet access.
+
+                    return true;
+
+                default:
+                    // "Unexpected error connecting to server: ex.Message
+                    return false;
+            }
+        }
+
+        #endregion
+
+        #region Build Uri
+
+        private Uri GetUri(string url)
         {
             if (string.IsNullOrEmpty(url))
                 throw new ArgumentNullException(nameof(url));
@@ -56,12 +85,35 @@ namespace AppFramework.Core.Data
             return new Uri(this.BaseUri, url);
         }
 
+        #endregion
+
         #region Get
 
         protected async Task<string> GetAsync(string url, CancellationToken ct = default(CancellationToken))
         {
             var response = await this.GetResponseAsync(url, ct);
             return await response.Content.ReadAsStringAsync();
+        }
+
+        /// <summary>
+        /// Gets data from the specified URL.
+        /// </summary>
+        /// <typeparam name="T">Type for the strongly typed class representing data returned from the URL.</typeparam>
+        /// <param name="url">URL to retrieve data from.</param>should be deserialized.</param>
+        /// <param name="retryCount">Number of retry attempts if a call fails. Default is zero.</param>
+        /// <param name="serializerType">Specifies how the data should be deserialized.</param>
+        /// <returns>Instance of the type specified representing the data returned from the URL.</returns>
+        /// <summary>
+        protected async Task<T> GetAsync<T>(string url, CancellationToken ct = default(CancellationToken))
+        {
+            if (string.IsNullOrEmpty(url))
+                throw new ArgumentNullException(nameof(url));
+
+            var response = await this.Client.GetAsync(new Uri(this.BaseUri, url), ct);
+            this.Log(response);
+            response.EnsureSuccessStatusCode();
+            var data = await response.Content.ReadAsStringAsync();
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(data);
         }
 
         protected async Task<HttpResponseMessage> GetResponseAsync(string url, CancellationToken ct = default(CancellationToken))
@@ -75,64 +127,9 @@ namespace AppFramework.Core.Data
             return response;
         }
 
-        /// <summary>
-        /// Gets data from the specified URL.
-        /// </summary>
-        /// <typeparam name="T">Type for the strongly typed class representing data returned from the URL.</typeparam>
-        /// <param name="url">URL to retrieve data from.</param>should be deserialized.</param>
-        /// <param name="retryCount">Number of retry attempts if a call fails. Default is zero.</param>
-        /// <param name="serializerType">Specifies how the data should be deserialized.</param>
-        /// <returns>Instance of the type specified representing the data returned from the URL.</returns>
-        /// <summary>
-        protected async Task<T> GetAsync<T>(string url, CancellationToken ct)
-        {
-            if (string.IsNullOrEmpty(url))
-                throw new ArgumentNullException(nameof(url));
-
-            var response = await this.Client.GetAsync(new Uri(this.BaseUri, url), ct);
-            this.Log(response);
-            response.EnsureSuccessStatusCode();
-            var data = await response.Content.ReadAsStringAsync();
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(data);
-        }
-
         #endregion
 
         #region Post
-
-        /// <summary>
-        /// Posts data to the specified URL.
-        /// </summary>
-        /// <param name="url">URL to retrieve data from.</param>
-        /// <param name="content">Any content that should be passed into the post.</param>
-        /// <param name="ct">Cancellation token.</param>
-        /// <param name="serializerType">Specifies how the data should be deserialized.</param>
-        /// <returns>Response contents as string else null if nothing.</returns>
-        protected async Task<string> PostAsync(string url, HttpContent content = default(HttpContent), CancellationToken ct = default(CancellationToken))
-        {
-            HttpResponseMessage response = await this.PostAsync(this.GetUri(url), content, ct);
-            return await response.Content?.ReadAsStringAsync();
-        }
-
-        /// <summary>
-        /// Posts data to the specified URL.
-        /// </summary>
-        /// <param name="url">URL to retrieve data from.</param>
-        /// <param name="content">Any content that should be passed into the post.</param>
-        /// <param name="ct">Cancellation token.</param>
-        /// <param name="serializerType">Specifies how the data should be deserialized.</param>
-        /// <returns>Response contents as string else null if nothing.</returns>
-        protected async Task<HttpResponseMessage> PostAsync(Uri uri, HttpContent content = default(HttpContent), CancellationToken ct = default(CancellationToken))
-        {
-            if (uri == null)
-                throw new ArgumentNullException(nameof(uri));
-
-            var response = await this.Client.PostAsync(uri, content, ct);
-            this.Log(response);
-            response.EnsureSuccessStatusCode();
-
-            return response;
-        }
 
         /// <summary>
         /// Posts data to the specified URL.
@@ -147,6 +144,40 @@ namespace AppFramework.Core.Data
         {
             string data = await this.PostAsync(url, contents, ct);
             return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(data);
+        }
+
+        /// <summary>
+        /// Posts data to the specified URL.
+        /// </summary>
+        /// <param name="url">URL to retrieve data from.</param>
+        /// <param name="content">Any content that should be passed into the post.</param>
+        /// <param name="ct">Cancellation token.</param>
+        /// <param name="serializerType">Specifies how the data should be deserialized.</param>
+        /// <returns>Response contents as string else null if nothing.</returns>
+        protected async Task<string> PostAsync(string url, HttpContent content = default(HttpContent), CancellationToken ct = default(CancellationToken))
+        {
+            HttpResponseMessage response = await this.PostResponseAsync(url, content, ct);
+            return await response.Content?.ReadAsStringAsync();
+        }
+
+        /// <summary>
+        /// Posts data to the specified URL.
+        /// </summary>
+        /// <param name="url">URL to retrieve data from.</param>
+        /// <param name="content">Any content that should be passed into the post.</param>
+        /// <param name="ct">Cancellation token.</param>
+        /// <param name="serializerType">Specifies how the data should be deserialized.</param>
+        /// <returns>Response contents as string else null if nothing.</returns>
+        protected async Task<HttpResponseMessage> PostResponseAsync(string url, HttpContent content = default(HttpContent), CancellationToken ct = default(CancellationToken))
+        {
+            if (string.IsNullOrEmpty(url))
+                throw new ArgumentNullException(nameof(url));
+
+            var response = await this.Client.PostAsync(this.GetUri(url), content, ct);
+            this.Log(response);
+            response.EnsureSuccessStatusCode();
+
+            return response;
         }
 
         //public async Task<JsonValue> PostAsync(string relativeUri)
@@ -179,7 +210,7 @@ namespace AppFramework.Core.Data
 
         #endregion
 
-        #region Cookies
+        #region Get Cookie
 
         /// <summary>
         /// Gets a cookie by name from a request/response object.
@@ -187,15 +218,50 @@ namespace AppFramework.Core.Data
         /// <param name="response">Response containing the cookie.</param>
         /// <param name="cookieName">Name of the cookie to retrieve.</param>
         /// <returns>Cookie object if found else null.</returns>
-        protected Cookie GetCookie(Uri uri, string cookieName)
+        private Cookie GetCookie(Uri uri, string cookieName)
         {
+            if (string.IsNullOrEmpty(cookieName))
+                throw new ArgumentNullException(nameof(cookieName));
             var responseCookies = this.Cookies.GetCookies(uri).Cast<Cookie>();
             return responseCookies.FirstOrDefault(f => f.Name.Equals(cookieName, StringComparison.CurrentCultureIgnoreCase));
         }
 
-        protected void SetCookie(Uri uri, string name, string value)
+        /// <summary>
+        /// Gets a cookie by name from a request/response object.
+        /// </summary>
+        /// <param name="response">HttpResponseMessage to retrieve cookie from.</param>
+        /// <param name="cookieName">Name of the cookie to retrieve.</param>
+        /// <returns>Cookie object if found else null.</returns>
+        protected Cookie GetCookie(HttpResponseMessage response, string cookieName)
         {
+            return this.GetCookie(response.RequestMessage.RequestUri, cookieName);
+        }
+
+        /// <summary>
+        /// Gets a cookie by name from a request/response object.
+        /// </summary>
+        /// <param name="response">HttpResponseMessage to retrieve cookie from.</param>
+        /// <param name="cookieName">Name of the cookie to retrieve.</param>
+        /// <returns>Cookie object if found else null.</returns>
+        protected Cookie GetCookie(string url, string cookieName)
+        {
+            return this.GetCookie(this.GetUri(url), cookieName);
+        }
+
+        #endregion
+
+        #region Set Cookie
+
+        private void SetCookie(Uri uri, string name, string value)
+        {
+            if (string.IsNullOrEmpty(name))
+                throw new ArgumentNullException(nameof(name));
             this.Cookies.Add(uri, new Cookie(name, value));
+        }
+
+        protected void SetCookie(string url, string name, string value)
+        {
+            this.SetCookie(this.GetUri(url), name, value);
         }
 
         #endregion

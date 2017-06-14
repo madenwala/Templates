@@ -1,4 +1,5 @@
 ﻿using AppFramework.Core.Commands;
+using AppFramework.Core.Data;
 using AppFramework.Core.Extensions;
 using AppFramework.Core.Models;
 using AppFramework.Core.Services;
@@ -205,6 +206,7 @@ namespace AppFramework.Core.ViewModels
             // Store properties and subscribe to events
             this.View = view;
             this.ViewParameter = e.Parameter;
+            this.View.GotFocus += View_GotFocus;
 
             var auth = PlatformBase.GetService<AuthorizationManagerBase>();
             if (auth != null)
@@ -286,6 +288,7 @@ namespace AppFramework.Core.ViewModels
             await this.OnSaveStateAsync(e);
 
             NetworkInformation.NetworkStatusChanged -= NetworkInformation_NetworkStatusChanged;
+            this.View.GotFocus -= View_GotFocus;
             this.View = null;
 
             try
@@ -319,6 +322,30 @@ namespace AppFramework.Core.ViewModels
                 PlatformBase.CurrentCore.Logger.LogError(ex, $"Error trying to call RefreshAsync from {this.GetType().Name}.OnApplicationResume()");
                 throw ex;
             }
+        }
+
+        #endregion
+
+        #region View Focused
+
+        private void View_GotFocus(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.OnViewGotFocus();
+            }
+            catch (Exception ex)
+            {
+                PlatformBase.CurrentCore.Logger.LogError(ex, "Error while performing OnViewGotFocus on view model '{0}' with parameters: {1}", this.GetType().Name, this.ViewParameter);
+            }
+        }
+
+        /// <summary>
+        /// Executes when the focused view loses focus.
+        /// </summary>
+        /// <returns></returns>
+        protected virtual void OnViewGotFocus()
+        {
         }
 
         #endregion
@@ -374,7 +401,7 @@ namespace AppFramework.Core.ViewModels
             }
             else
             {
-                if (GeneralFunctions.IsNoInternetException(ex))
+                if (Data.ClientApiBase.IsNoInternetException(ex))
                 {
                     this.ShowStatus(Strings.Resources.TextNoInternet);
                     PlatformBase.CurrentCore.Logger.Log(LogLevels.Warning, "{0}.{1} - No internet ({0} Parameters: {2}) {3}", this.GetType().Name, callerName, this.ViewParameter, message);
@@ -1042,7 +1069,7 @@ namespace AppFramework.Core.ViewModels
                 }
                 catch(Exception ex)
                 {
-                    if (GeneralFunctions.IsNoInternetException(ex))
+                    if (ClientApiBase.IsNoInternetException(ex))
                     {
                         PlatformBase.CurrentCore.Logger.LogError(ex, "Could not refresh access token due to no internet. Allowing users to pass refresh token check.");
                         return true;
