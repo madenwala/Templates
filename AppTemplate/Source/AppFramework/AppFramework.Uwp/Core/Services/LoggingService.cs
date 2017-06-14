@@ -18,22 +18,6 @@ using Windows.Storage;
 using Windows.System;
 using Windows.UI.Xaml;
 
-namespace AppFramework.Core
-{
-    /// <summary>
-    /// Enumeration describing the level/type of information being logged
-    /// </summary>
-    public enum LogLevels
-    {
-        Debug,
-        Information,
-        Warning,
-        Error,
-        FatalError,
-        Off
-    }
-}
-
 namespace AppFramework.Core.Services
 {
     public sealed class LoggingService : ServiceBase
@@ -341,58 +325,9 @@ namespace AppFramework.Core.Services
         #region Classes
 
         /// <summary>
-        /// Interfaced use to log data to custom sources.
-        /// </summary>
-        private interface ILogger
-        {
-            #region Methods
-
-            void Log(string msg);
-
-            void LogException(Exception ex, string message);
-
-            void LogExceptionFatal(Exception ex, string message);
-
-            #endregion
-        }
-
-        /// <summary>
-        /// Logger implementation for logging to the debug window.
-        /// </summary>
-        private sealed class DebugLoggerProvider : ILogger
-        {
-            #region Constructors
-
-            internal DebugLoggerProvider()
-            {
-            }
-
-            #endregion
-
-            #region Methods
-
-            public void Log(string msg)
-            {
-                Debug.WriteLine(msg);
-            }
-
-            public void LogException(Exception ex, string message)
-            {
-                Debug.WriteLine(string.Format("{0} --- {1}", message, ex.ToString()));
-            }
-
-            public void LogExceptionFatal(Exception ex, string message)
-            {
-                Debug.WriteLine(string.Format("{0} --- {1}", message, ex.ToString()));
-            }
-
-            #endregion
-        }
-
-        /// <summary>
         /// UWP console debugger from Michael Scherotter (https://blogs.msdn.microsoft.com/synergist/2016/08/20/console-ouptut-my-new-debugging-and-testing-tool-for-windows/)
         /// </summary>
-        private class UwpConsoleOutputProvider : IDisposable, ILogger
+        private sealed class UwpConsoleOutputProvider : IDisposable, ILogger
         {
             #region Variables
 
@@ -467,29 +402,47 @@ namespace AppFramework.Core.Services
                 // handle message input from Console Ouptut app
             }
 
-            public async void Log(string msg)
+            public async void Log(string message, params object[] args)
             {
                 if (_appServiceConnection == null)
                     return;
 
-                var message = new ValueSet
+                var msg = new ValueSet
                 {
-                    ["Message"] = msg
+                    ["Message"] = message
                 };
-                await _appServiceConnection.SendMessageAsync(message);
+                await _appServiceConnection.SendMessageAsync(msg);
             }
 
-            public void LogException(Exception ex, string message)
+            public void LogException(Exception ex, string message = null, params object[] args)
             {
-                this.Log(string.Format("{0} --- {1}", message, ex.ToString()));
+                this.Log("EXCEPTION: {0} --- {1}", message, ex);
             }
 
-            public void LogExceptionFatal(Exception ex, string message)
+            public void LogExceptionFatal(Exception ex, string message = null, params object[] args)
             {
-                this.Log(string.Format("{0} --- {1}", message, ex.ToString()));
+                this.Log("FATAL EXCEPTION: {0} --- {1}", message, ex);
             }
 
             #endregion
+        }
+
+        public sealed class PlatformLoggerProvider : ILogger
+        {
+            public void Log(string message, params object[] args)
+            {
+                PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, message, args);
+            }
+
+            public void LogException(Exception ex, string message = null, params object[] args)
+            {
+                PlatformBase.CurrentCore.Logger.LogError(ex, message, args);
+            }
+
+            public void LogExceptionFatal(Exception ex, string message = null, params object[] args)
+            {
+                PlatformBase.CurrentCore.Logger.LogErrorFatal(ex, message, args);
+            }
         }
 
         #endregion Classes

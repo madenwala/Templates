@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppFramework.Core.Services;
+using System;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -14,6 +15,7 @@ namespace AppFramework.Core.Data
     {
         #region Variables
 
+        protected ILogger Logger { get; private set; }
         protected HttpClient Client { get; private set; }
         protected CookieContainer Cookies { get; private set; }
 
@@ -28,8 +30,9 @@ namespace AppFramework.Core.Data
 
         #region Constructors
 
-        public ClientApiBase(string baseURL = null)
+        public ClientApiBase(string baseURL = null, ILogger logger = null)
         {
+            this.Logger = logger ?? new DebugLoggerProvider();
             this.Cookies = new CookieContainer();
             HttpClientHandler handler = new HttpClientHandler();
             handler.CookieContainer = this.Cookies;
@@ -277,21 +280,22 @@ namespace AppFramework.Core.Data
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
 
-            //if (Platform.Current.Logger.CurrentLevel > LogLevels.Debug)
-            //    return;
+            if (this.Logger == null)
+                return;
 
-            //Platform.Current.Logger.Log(LogLevels.Debug,
-            //    Environment.NewLine + "---------------------------------" + Environment.NewLine +
-            //    "WEB REQUEST to {0}" + Environment.NewLine +
-            //    "-Method: {1}" + Environment.NewLine +
-            //    "-Headers: {2}" + Environment.NewLine +
-            //    "-Contents: " + Environment.NewLine + "{3}" + Environment.NewLine +
-            //    "---------------------------------",
-            //    request.RequestUri.OriginalString,
-            //    request.Method.Method,
-            //    request.Headers?.ToString(),
-            //    request.Content?.ReadAsStringAsync().AsTask().Result
-            //    );
+            this.Logger.Log(
+                Environment.NewLine + "---------------------------------" + Environment.NewLine +
+                "WEB REQUEST to {0}" + Environment.NewLine +
+                "-Method: {1}" + Environment.NewLine +
+                "-Headers: {2}" + Environment.NewLine +
+                "-Contents: " + Environment.NewLine + 
+                "{3}" + Environment.NewLine +
+                "---------------------------------",
+                request.RequestUri.OriginalString,
+                request.Method.Method,
+                request.Headers?.ToString(),
+                request.Content?.ReadAsStringAsync().Result
+                );
         }
 
         /// <summary>
@@ -303,24 +307,26 @@ namespace AppFramework.Core.Data
             if (response == null)
                 throw new ArgumentNullException(nameof(response));
 
-            //if (Platform.Current.Logger.CurrentLevel > LogLevels.Debug)
-            //    return;
+            if (this.Logger == null)
+                return;
 
-            //this.Log(response.RequestMessage);
-            //Platform.Current.Logger.Log(LogLevels.Debug,
-            //    Environment.NewLine + "---------------------------------" + Environment.NewLine +
-            //    "WEB RESPONSE to {0}" + Environment.NewLine +
-            //    "-HttpStatus: {1}" + Environment.NewLine +
-            //    "-Reason Phrase: {2}" + Environment.NewLine +
-            //    "-ContentLength: {3:0.00 KB}" + Environment.NewLine +
-            //    "-Contents: " + Environment.NewLine + "{4}" + Environment.NewLine +
-            //    "---------------------------------",
-            //    response.RequestMessage.RequestUri.OriginalString,
-            //    string.Format("{0} {1}", (int)response.StatusCode, response.StatusCode.ToString()),
-            //    response.ReasonPhrase,
-            //    Convert.ToDecimal(Convert.ToDouble(response.Content.Headers.ContentLength) / 1024),
-            //    response.Content?.ReadAsStringAsync().AsTask().Result
-            //    );
+            this.Log(response.RequestMessage);
+
+            this.Logger.Log(
+                Environment.NewLine + "---------------------------------" + Environment.NewLine +
+                "WEB RESPONSE to {0}" + Environment.NewLine +
+                "-HttpStatus: {1}" + Environment.NewLine +
+                "-Reason Phrase: {2}" + Environment.NewLine +
+                "-ContentLength: {3:0.00 KB}" + Environment.NewLine +
+                "-Contents: " + Environment.NewLine +
+                "{4}" + Environment.NewLine +
+                "---------------------------------",
+                response.RequestMessage.RequestUri.OriginalString,
+                string.Format("{0} {1}", (int)response.StatusCode, response.StatusCode.ToString()),
+                response.ReasonPhrase,
+                Convert.ToDecimal(Convert.ToDouble(response.Content.Headers.ContentLength) / 1024),
+                response.Content?.ReadAsStringAsync().Result
+                );
         }
 
         #endregion

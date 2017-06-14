@@ -34,7 +34,6 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <Folder Include="Core\Services\" />
     <Folder Include="Core\ViewModels\" />
     <Folder Include="UI\" />
   </ItemGroup>
@@ -71,6 +70,9 @@
     </Compile>
     <Compile Include="..\AppFramework.NetStandard\Core\Models\UniqueModelBase.cs">
       <Link>Core\Models\UniqueModelBase.cs</Link>
+    </Compile>
+    <Compile Include="..\AppFramework.NetStandard\Core\Services\ILogger.cs">
+      <Link>Core\Services\ILogger.cs</Link>
     </Compile>
     <Compile Include="..\AppFramework.NetStandard\Core\TypeUtility.cs">
       <Link>Core\TypeUtility.cs</Link>

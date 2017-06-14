@@ -4,116 +4,6 @@
         <name>AppFramework.Uwp</name>
     </assembly>
     <members>
-        <member name="T:AppFramework.Core.SerializerTypes">
-            <summary>
-            Serialization methods the application supports.
-            </summary>
-        </member>
-        <member name="F:AppFramework.Core.SerializerTypes.Default">
-            <summary>
-            Use the default serializer for the application.
-            </summary>
-        </member>
-        <member name="F:AppFramework.Core.SerializerTypes.Json">
-            <summary>
-            Use the JSON serializer.
-            </summary>
-        </member>
-        <member name="F:AppFramework.Core.SerializerTypes.Xml">
-            <summary>
-            Use the XML serializer.
-            </summary>
-        </member>
-        <member name="T:AppFramework.Core.Serializer">
-            <summary>
-            Serialize and deserialize objects.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Serializer.DefaultSerializerType">
-            <summary>
-            Get or set the default serialization method for the application. If an object that needs serialization/deserialization does not explictly
-            request a particular serializer, the default serializer will be used.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.Serializer.Serialize(System.Object,AppFramework.Core.SerializerTypes)">
-            <summary>
-            Serialize an object to string.
-            </summary>
-            <param name="obj">Object to serialize.</param>
-            <param name="serializerType">Use the default serializer or specific a particular serializer.</param>
-            <returns>String returned from the serializer.</returns>
-        </member>
-        <member name="M:AppFramework.Core.Serializer.Deserialize``1(System.String,AppFramework.Core.SerializerTypes)">
-            <summary>
-            Deserializes a string back into an instance of an object.
-            </summary>
-            <typeparam name="T">Type of the object to be returned.</typeparam>
-            <param name="data">String data to be deserialized.</param>
-            <param name="serializerType">Use the default serializer or specific a particular serializer.</param>
-            <returns>Object instance from the deserialized data string.</returns>
-        </member>
-        <member name="M:AppFramework.Core.Serializer.DeserializeFromXml``1(System.String)">
-            <summary>
-            Deserializes an XML string back into an object instance.
-            </summary>
-            <typeparam name="T">Type of the object to be returned.</typeparam>
-            <param name="xml">XML string to be deserialized.</param>
-            <returns>Object instance deserialized from the string data.</returns>
-        </member>
-        <member name="M:AppFramework.Core.Serializer.SerializeToXml(System.Object)">
-            <summary>
-            Serializes an object to XML.
-            </summary>
-            <param name="obj">Object to be serialized.</param>
-            <returns>String representing the serialized object.</returns>
-        </member>
-        <member name="M:AppFramework.Core.Serializer.DeserializeFromJson``1(System.String)">
-            <summary>
-            Deserializes a JSON string into an object instance.
-            </summary>
-            <typeparam name="T">Type of the object to be returned.</typeparam>
-            <param name="json">JSON string representing an object.</param>
-            <returns>Instance of an object from the JSON string.</returns>
-        </member>
-        <member name="M:AppFramework.Core.Serializer.SerializeToJson(System.Object)">
-            <summary>
-            Serializes an object into a JSON string.
-            </summary>
-            <param name="obj">Object instance to serialize.</param>
-            <returns>JSON string representing the object instance.</returns>
-        </member>
-        <member name="M:AppFramework.Core.Extensions.IDictionaryExtensions.ContainsKeyAndValue(System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String)">
-            <summary>
-            Checks whether or not a string IDictionary contains a particular key and value combination.
-            </summary>
-            <param name="dic">String IDictionary instance.</param>
-            <param name="key">Key to check for.</param>
-            <param name="value">Value to check for.</param>
-            <returns>True if it contains the combination else false.</returns>
-        </member>
-        <member name="M:AppFramework.Core.Extensions.IEnumerableExtensions.ToObservableCollection``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            Convert this collection into an ObservableCollection instance.
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="collection"></param>
-            <returns>ObservableCollection instance containing items of the type specified.</returns>
-        </member>
-        <member name="M:AppFramework.Core.Extensions.IEnumerableExtensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
-            <summary>
-            Performs an action on each item within the collection.
-            </summary>
-            <typeparam name="T">Type of the item in the collection.</typeparam>
-            <param name="source">Collection source.</param>
-            <param name="action">Action to perform on each item.</param>
-        </member>
-        <member name="M:AppFramework.Core.Extensions.LongExtensions.ToStringAsMemory(System.Int64)">
-            <summary>
-            Converts a long to memory formatted string in bytes/KB/MB/GB.
-            </summary>
-            <param name="sizeInBytes"></param>
-            <returns></returns>
-        </member>
         <member name="M:AppFramework.Core.Extensions.GeocoordinateExtensions.AsLocationModel(Windows.Devices.Geolocation.Geocoordinate)">
             <summary>
             Converts this Geocoordinate object into a LocationModel instance.
@@ -140,488 +30,6 @@
             Converts this PackageVersion instance into a Version instance.
             </summary>
             <returns>Version instance with the version numbers.</returns>
-        </member>
-        <member name="T:AppFramework.Core.PlatformBase">
-            <summary>
-            Base class used to manage application execution and to access all services available to the solution.
-            Provides core app functionality for initializing and suspending your application,
-            handling exceptions, and more.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.PlatformBase.AppInfo">
-            <summary>
-            Gets access to the app info service of the platform currently executing.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.PlatformBase.BackgroundTasks">
-            <summary>
-            Gets access to the geocoding service adapter implement of the platform currently executing.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.PlatformBase.Geolocation">
-            <summary>
-            Gets access to the location service of the platform currently executing.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.PlatformBase.Notifications">
-            <summary>
-            Gets access to the notifications service of the platform currently executing. Provides you the ability to display toasts or manage tiles or etc on the executing platform.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.PlatformBase.NavigationBase">
-            <summary>
-            Gets the ability to navigate to different parts of an application specific to the platform currently executing.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.PlatformBase.SharingManager">
-            <summary>
-            Gets access to the app info service of the platform currently executing.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.PlatformBase.Analytics">
-            <summary>
-            Gets access to the analytics service of the platform currently executing.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.PlatformBase.Cryptography">
-            <summary>
-            Gets access to the cryptography provider of the platform currently executing.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.PlatformBase.EmailProvider">
-            <summary>
-            Gets access to the app info service of the platform currently executing.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.PlatformBase.Geocode">
-            <summary>
-            Gets access to the geocoding service adapter implement of the platform currently executing.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.PlatformBase.Jumplist">
-            <summary>
-            Gets access to the app info service of the platform currently executing.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.PlatformBase.Logger">
-            <summary>
-            Gets access to the logging service of the platform currently executing.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.PlatformBase.Ratings">
-            <summary>
-            Gets access to the ratings manager used to help promote users to rate your application.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.PlatformBase.Storage">
-            <summary>
-            Gets access to the storage system of the platform currently executing.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.PlatformBase.VoiceCommandManager">
-            <summary>
-            Gets access to the app info service of the platform currently executing.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.PlatformBase.WebAccountManager">
-            <summary>
-            Gets access to the app info service of the platform currently executing.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.PlatformBase.CurrentCore">
-            <summary>
-            Provides access to application services.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.PlatformBase.DeviceFamily">
-            <summary>
-            Gets the current device family this app is executing on.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.PlatformBase.AppSettingsLocalCore">
-            <summary>
-            Gets local app settings for this app.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.PlatformBase.AppSettingsRoamingCore">
-            <summary>
-            Gets roaming app settings for this app.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.PlatformBase.IsDesktop">
-            <summary>
-            Gets whether or not the current device is Windows Desktop.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.PlatformBase.IsMobile">
-            <summary>
-            Gets whether or not the current device is Windows Mobile.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.PlatformBase.IsXbox">
-            <summary>
-            Gets whether or not the current device is Xbox.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.PlatformBase.IsMobileContinuumDesktop">
-            <summary>
-            Gets whether or not the current device is executing on Windows Mobile Continuum Desktop.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.PlatformBase.InitializationMode">
-            <summary>
-            Indicates the initialization mode of this app instance.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.PlatformBase.BackgroundRegistrationTask">
-            <summary>
-            Gets the task object which registers all the background tasks in the application.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.PlatformBase.AppInitializingAsync(AppFramework.Core.InitializationModes)">
-            <summary>
-            Global initialization of the app and loads all app settings and initializes all services.
-            </summary>
-            <param name="mode">Specifies the mode of this app instance and how it's executing.</param>
-            <returns>Awaitable task is returned.</returns>
-        </member>
-        <member name="M:AppFramework.Core.PlatformBase.CheckInitializationAsync(AppFramework.Core.Services.ServiceBase)">
-            <summary>
-            Initializes a service if not already initialized.
-            </summary>
-            <param name="service">Service instance to intialize.</param>
-        </member>
-        <member name="M:AppFramework.Core.PlatformBase.AppSuspending">
-            <summary>
-            Global suspension of the app and any custom logic to execute on suspend of the app.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.PlatformBase.SaveSettings">
-            <summary>
-            Saves any app settings only if the data had changed.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.PlatformBase.SignoutAllAsync">
-            <summary>
-            Logic performed during sign out of a user in this application.
-            </summary>
-            <returns>Awaitable task is returned.</returns>
-        </member>
-        <member name="M:AppFramework.Core.PlatformBase.GetService``1">
-            <summary>
-            Retrieve an instance of a type registered as a platform service.
-            </summary>
-            <typeparam name="T">Type reference of the service to retrieve.</typeparam>
-            <returns>Instance of type T if it was already initialized or null if not found.</returns>
-        </member>
-        <member name="M:AppFramework.Core.PlatformBase.SetService``1(``0)">
-            <summary>
-            Registers and intializes an instance of an adapter.
-            </summary>
-            <typeparam name="T">Type reference of the service to register and initialize.</typeparam>
-        </member>
-        <member name="M:AppFramework.Core.PlatformBase.AppUnhandledException(System.Exception)">
-            <summary>
-            Global unhandled exception handler for your application.
-            </summary>
-            <param name="e"></param>
-            <returns>True if the exception was handled else false.</returns>
-        </member>
-        <member name="M:AppFramework.Core.PlatformBase.GenerateModelArguments(AppFramework.Core.Models.IModel)">
-            <summary>
-            Creates a querystring parameter string from a model instance.
-            </summary>
-            <param name="model">Model to convert into a querystring.</param>
-            <returns>Query string representing the model provided.</returns>
-        </member>
-        <member name="M:AppFramework.Core.PlatformBase.OnGenerateModelArguments(System.Collections.Generic.Dictionary{System.String,System.String},AppFramework.Core.Models.IModel)">
-            <summary>
-            Creates a querystring parameter string from a model instance.
-            </summary>
-            <param name="dic">Dictionary of parameters to add to the querystring.</param>
-            <param name="model">Model to convert into a querystring.</param>
-            <returns>Query string representing the model provided.</returns>
-        </member>
-        <member name="M:AppFramework.Core.PlatformBase.GenerateModelTileID(AppFramework.Core.Models.IModel)">
-            <summary>
-            Generates a unique tile ID used for secondary tiles based on a model instance.
-            </summary>
-            <param name="model">Model to convert into a unique tile ID.</param>
-            <returns>String representing a unique tile ID for the model else null if not supported.</returns>
-        </member>
-        <member name="M:AppFramework.Core.PlatformBase.GenerateModelFromTileIdAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Converts a tile ID back into an object instance.
-            </summary>
-            <param name="tileID">Tile ID to retrieve an object instance for.</param>
-            <param name="ct">Cancelation token.</param>
-            <returns>Object instance if found else null.</returns>
-        </member>
-        <member name="E:AppFramework.Core.PlatformBase.NotifyShellMenuToggle">
-            <summary>
-            Event which notifies the shell to open or close the menu.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.PlatformBase.ExecuteBackgroundWork(Windows.ApplicationModel.Background.IBackgroundTaskInstance,System.Action{System.Threading.CancellationToken})">
-            <summary>
-            Executes background task work. This call wraps the work with error handling, deferrals, and instantiating all the appropriate services needed by AppFramework.
-            </summary>
-            <param name="taskInstance">Background task instance.</param>
-            <param name="work">The work that needs to be performed.</param>
-        </member>
-        <member name="T:AppFramework.Core.AgentSync">
-            <summary>
-            AgentSync is used to determine if the main app or a background task is running. You can use this to
-            prevent execution of a background task if the main app is in the foreground.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.AgentSync.Init(Windows.UI.Xaml.Application)">
-            <summary>
-            Initializes the AgentSync so that it can keep track of the application running status.
-            </summary>
-            <param name="app"></param>
-        </member>
-        <member name="M:AppFramework.Core.AgentSync.ApplicationIsLaunched">
-            <summary>
-            Markes the agent sync as running.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.AgentSync.ApplicationIsSuspended">
-            <summary>
-            Marks the agent sync as NOT running
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.AgentSync.IsApplicationLaunched">
-            <summary>
-            Indicates whether or not the main application is currently running.
-            </summary>
-            <returns>True if the application is launched/running else false.</returns>
-        </member>
-        <member name="T:AppFramework.Core.Commands.CommandBase">
-            <summary>
-            Base class for commands.
-            </summary>
-        </member>
-        <member name="E:AppFramework.Core.Commands.CommandBase.CanExecuteChanged">
-            <summary>
-            Raised when RaiseCanExecuteChanged is called.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.Commands.CommandBase.RaiseCanExecuteChanged">
-            <summary>
-            Method used to raise the <see cref="E:AppFramework.Core.Commands.CommandBase.CanExecuteChanged"/> event
-            to indicate that the return value of the <see cref="M:AppFramework.Core.Commands.CommandBase.CanExecute(System.Object)"/>
-            method has changed.
-            </summary>
-        </member>
-        <member name="T:AppFramework.Core.Commands.GenericCommand">
-            <summary>
-            Command used in data binding. GenericCommand is wired up with logging and analytics calls.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.Commands.GenericCommand.#ctor(System.String,System.Action,System.Func{System.Boolean})">
-            <summary>
-            Creates a new command instance.
-            </summary>
-            <param name="commandName">Identifies this command instance, used for logging.</param>
-            <param name="execute">The logic to run when execute is called. No parameter will be passed to this execute action.</param>
-            <param name="canExecute">The function which determines if this command can run or not.</param>
-        </member>
-        <member name="M:AppFramework.Core.Commands.GenericCommand.#ctor(System.String,System.Action{System.Object},System.Func{System.Object,System.Boolean})">
-            <summary>
-            Creates a new command instance.
-            </summary>
-            <param name="commandName">Identifies this command instance, used for logging.</param>
-            <param name="execute">The logic to run when execute is called. Execute parameter object will be passed to this action.</param>
-            <param name="canExecute">The function which determines if this command can run or not.</param>
-        </member>
-        <member name="T:AppFramework.Core.Commands.GenericCommand`1">
-            <summary>
-            Command used in data binding. GenericCommand is wired up with logging and analytics calls.
-            </summary>
-            <typeparam name="T">Type of the command parameter that will be passed in.</typeparam>
-        </member>
-        <member name="P:AppFramework.Core.Commands.GenericCommand`1.IsEnabled">
-            <summary>
-            Gets or sets whether or not this command instance is enabled to execute the provided CanExecute function. If false, CanExecute will always return false. If true, the provided CanExecute method will determine if CanExecute is true/false.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.Commands.GenericCommand`1.#ctor(System.String,System.Action,System.Func{System.Boolean})">
-            <summary>
-            Creates a new command instance.
-            </summary>
-            <param name="commandName">Identifies this command instance, used for logging.</param>
-            <param name="execute">The logic to run when execute is called. No parameter will be passed to this execute action.</param>
-            <param name="canExecute">The execution status logic.</param>
-        </member>
-        <member name="M:AppFramework.Core.Commands.GenericCommand`1.#ctor(System.String,System.Action{`0},System.Func{`0,System.Boolean})">
-            <summary>
-            Creates a new command.
-            </summary>
-            <param name="commandName">Identifies this command instance, used for logging.</param>
-            <param name="execute">The logic to run when execute is called. Execute parameter object must be of the generic type specified else it will be ignored.</param>
-            <param name="canExecute">The function which determines if this command can run or not. CanExecute parameter object must be of the generic type specified else it will be ignored</param>
-        </member>
-        <member name="T:AppFramework.Core.Commands.MapExternalCommand">
-            <summary>
-            Command for launching an external maps app passing an ILocationModel command parameter instance passed to this command.
-            </summary>
-        </member>
-        <member name="T:AppFramework.Core.Commands.NavigationCommand">
-            <summary>
-            Command for navigating to a page.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.Commands.NavigationCommand.#ctor">
-            <summary>
-            Command for navigating to a page based on the IModel parameter passed into the Execute method.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.Commands.NavigationCommand.#ctor(System.String,System.Action,System.Func{System.Boolean})">
-            <summary>
-            Command for navigation to a page.
-            </summary>
-            <param name="commandName">Identifies this command instance, used for logging.</param>
-            <param name="execute">Logic to execute, Execute command object will be ignored.</param>
-            <param name="canExecute">Logic to determine if this command can execute, CanExecute parameter will be ignored.</param>
-        </member>
-        <member name="M:AppFramework.Core.Commands.NavigationCommand.#ctor(System.String,System.Action{System.Object},System.Func{System.Object,System.Boolean})">
-            <summary>
-            Command for navigation to a page.
-            </summary>
-            <param name="commandName">Identifies this command instance, used for logging.</param>
-            <param name="execute">Logic to execute, Execute command object must be an IModel type.</param>
-            <param name="canExecute">Logic to determine if this command can execute, CanExecute parameter must be an IModel type.</param>
-        </member>
-        <member name="T:AppFramework.Core.Commands.PinTileCommand">
-            <summary>
-            Command for pinning tiles.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Commands.PinTileCommand.OnSuccessAction">
-            <summary>
-            Custom action to perform after Execute runs successfully.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.Commands.PinTileCommand.#ctor">
-            <summary>
-            Creates a new command instance for pinning IModel objects to the user's start screen.
-            </summary>
-        </member>
-        <member name="T:AppFramework.Core.Commands.UnpinTileCommand">
-            <summary>
-            Command for unpinning tiles.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Commands.UnpinTileCommand.OnSuccessAction">
-            <summary>
-            Custom action to perform after Execute runs successfully.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.Commands.UnpinTileCommand.#ctor">
-            <summary>
-            Creates a new command instance for removing IModel objects from a user's start screen.
-            </summary>
-        </member>
-        <member name="T:AppFramework.Core.Commands.ShareCommand">
-            <summary>
-            Command for sharing content to the OS.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.Commands.ShareCommand.#ctor">
-            <summary>
-            Creates a new command instance for sharing IModel objects to other apps.
-            </summary>
-        </member>
-        <member name="T:AppFramework.Core.Commands.WebViewCommand">
-            <summary>
-            Command for navigating to an internal web browser to display a webpage within the app.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.Commands.WebViewCommand.#ctor">
-            <summary>
-            Create an instance of the command for internal webpage browsing.
-            </summary>
-        </member>
-        <member name="T:AppFramework.Core.Commands.WebBrowserCommand">
-            <summary>
-            Command for navigating to an external web browser to display a webpage.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.Commands.WebBrowserCommand.#ctor">
-            <summary>
-            Create an instance of the command for external webpage browsing.
-            </summary>
-        </member>
-        <member name="T:AppFramework.Core.Models.UniqueModelBase">
-            <summary>
-            Implementation of <see cref="!:INotifyPropertyChanged"/> to simplify models that have a unique ID to represent the model.
-            </summary>
-        </member>
-        <member name="T:AppFramework.Core.Models.AppSettingsLocalBase">
-            <summary>
-            Container class for local application settings.  Create all your local app setting properties here.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Models.AppSettingsLocalBase.LocationLastKnown">
-            <summary>
-            Gets or sets the last known location for the user.
-            </summary>
-        </member>
-        <member name="T:AppFramework.Core.Models.AppSettingsRoamingBase">
-            <summary>
-            Container class for roaming application settings.  Create all your roaming app setting properties here.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Models.AppSettingsRoamingBase.ApplicationTheme">
-            <summary>
-            Gets or sets the application theme desired by the user.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Models.AppSettingsRoamingBase.EnableFullLogging">
-            <summary>
-            Gets or sets whether or not debug logging is enabled.
-            </summary>
-        </member>
-        <member name="T:AppFramework.Core.Models.BackgroundTaskRunInfo">
-            <summary>
-            Used to hold background tasks execution status information.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Models.BackgroundTaskRunInfo.TaskName">
-            <summary>
-            Gets or sets the name of the task that was executed.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Models.BackgroundTaskRunInfo.StartTime">
-            <summary>
-            Gets or sets the start time of the task execution.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Models.BackgroundTaskRunInfo.EndTime">
-            <summary>
-            Gets or sets the end time of the task execution.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Models.BackgroundTaskRunInfo.RunSuccessfully">
-            <summary>
-            Gets or sets whether or not the task completed successfully or not.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Models.BackgroundTaskRunInfo.CancelReason">
-            <summary>
-            Gets or sets the reason the task was cancelled.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Models.BackgroundTaskRunInfo.ExceptionDetails">
-            <summary>
-            Gets or sets the details of any exception that was thrown during the task execution.
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Models.BackgroundTaskRunInfo.TimeToRun">
-            <summary>
-            Gets the number of milliseconds the task took to run.
-            </summary>
         </member>
         <member name="T:AppFramework.Core.Models.ILocationModel">
             <summary>
@@ -783,6 +191,71 @@
             </summary>
             <typeparam name="TResult"></typeparam>
         </member>
+        <member name="T:AppFramework.Core.Models.AppSettingsLocalBase">
+            <summary>
+            Container class for local application settings.  Create all your local app setting properties here.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Models.AppSettingsLocalBase.LocationLastKnown">
+            <summary>
+            Gets or sets the last known location for the user.
+            </summary>
+        </member>
+        <member name="T:AppFramework.Core.Models.AppSettingsRoamingBase">
+            <summary>
+            Container class for roaming application settings.  Create all your roaming app setting properties here.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Models.AppSettingsRoamingBase.ApplicationTheme">
+            <summary>
+            Gets or sets the application theme desired by the user.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Models.AppSettingsRoamingBase.EnableFullLogging">
+            <summary>
+            Gets or sets whether or not debug logging is enabled.
+            </summary>
+        </member>
+        <member name="T:AppFramework.Core.Models.BackgroundTaskRunInfo">
+            <summary>
+            Used to hold background tasks execution status information.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Models.BackgroundTaskRunInfo.TaskName">
+            <summary>
+            Gets or sets the name of the task that was executed.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Models.BackgroundTaskRunInfo.StartTime">
+            <summary>
+            Gets or sets the start time of the task execution.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Models.BackgroundTaskRunInfo.EndTime">
+            <summary>
+            Gets or sets the end time of the task execution.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Models.BackgroundTaskRunInfo.RunSuccessfully">
+            <summary>
+            Gets or sets whether or not the task completed successfully or not.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Models.BackgroundTaskRunInfo.CancelReason">
+            <summary>
+            Gets or sets the reason the task was cancelled.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Models.BackgroundTaskRunInfo.ExceptionDetails">
+            <summary>
+            Gets or sets the details of any exception that was thrown during the task execution.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Models.BackgroundTaskRunInfo.TimeToRun">
+            <summary>
+            Gets the number of milliseconds the task took to run.
+            </summary>
+        </member>
         <member name="T:AppFramework.Core.Models.VoiceCommandInfo">
             <summary>
             Wrapper for SpeechRecognitionResult class instance improving access to the key data needed to process voice.
@@ -826,242 +299,83 @@
             Object instance to pass in as a parameter.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.Strings.BackgroundTasks.TextBackgroundAppDisabledStatus">
+        <member name="T:AppFramework.Core.SerializerTypes">
             <summary>
-            Localized resource similar to "Background tasks have not been enabled for this app.Use the manage button and ensure this app has been enabled to run in the background."
+            Serialization methods the application supports.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.Strings.Account.TextAuthenticating">
+        <member name="F:AppFramework.Core.SerializerTypes.Default">
             <summary>
-            Localized resource similar to "Authenticating..."
+            Use the default serializer for the application.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.Strings.Account.TextNotApplicable">
+        <member name="F:AppFramework.Core.SerializerTypes.Json">
             <summary>
-            Localized resource similar to "N/A"
+            Use the JSON serializer.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.Strings.Account.TextSigningOut">
+        <member name="F:AppFramework.Core.SerializerTypes.Xml">
             <summary>
-            Localized resource similar to "Signing out..."
+            Use the XML serializer.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.Strings.Account.TextSignout">
+        <member name="T:AppFramework.Core.Serializer">
             <summary>
-            Localized resource similar to "Sign out"
+            Serialize and deserialize objects.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.Strings.Account.TextSignoutConfirmation">
+        <member name="P:AppFramework.Core.Serializer.DefaultSerializerType">
             <summary>
-            Localized resource similar to "Are you sure you want to sign out?"
+            Get or set the default serialization method for the application. If an object that needs serialization/deserialization does not explictly
+            request a particular serializer, the default serializer will be used.
             </summary>
         </member>
-        <member name="P:AppFramework.Core.Strings.Account.TextUnauthorizedUser">
+        <member name="M:AppFramework.Core.Serializer.Serialize(System.Object,AppFramework.Core.SerializerTypes)">
             <summary>
-            Localized resource similar to "Unauthorized user. Check your username/password and try again."
+            Serialize an object to string.
             </summary>
+            <param name="obj">Object to serialize.</param>
+            <param name="serializerType">Use the default serializer or specific a particular serializer.</param>
+            <returns>String returned from the serializer.</returns>
         </member>
-        <member name="P:AppFramework.Core.Strings.Account.TextUnauthorizedUserTitle">
+        <member name="M:AppFramework.Core.Serializer.Deserialize``1(System.String,AppFramework.Core.SerializerTypes)">
             <summary>
-            Localized resource similar to "Sign-in failed"
+            Deserializes a string back into an instance of an object.
             </summary>
+            <typeparam name="T">Type of the object to be returned.</typeparam>
+            <param name="data">String data to be deserialized.</param>
+            <param name="serializerType">Use the default serializer or specific a particular serializer.</param>
+            <returns>Object instance from the deserialized data string.</returns>
         </member>
-        <member name="P:AppFramework.Core.Strings.Account.TextWebAccountManagerSignUpDescription">
+        <member name="M:AppFramework.Core.Serializer.DeserializeFromXml``1(System.String)">
             <summary>
-            Localized resource similar to "Sign-In / Sign-Up with an account that you can associate with {0}."
+            Deserializes an XML string back into an object instance.
             </summary>
+            <typeparam name="T">Type of the object to be returned.</typeparam>
+            <param name="xml">XML string to be deserialized.</param>
+            <returns>Object instance deserialized from the string data.</returns>
         </member>
-        <member name="P:AppFramework.Core.Strings.Location.TextDeterminingLocation">
+        <member name="M:AppFramework.Core.Serializer.SerializeToXml(System.Object)">
             <summary>
-            Localized resource similar to "Finding your location..."
+            Serializes an object to XML.
             </summary>
+            <param name="obj">Object to be serialized.</param>
+            <returns>String representing the serialized object.</returns>
         </member>
-        <member name="P:AppFramework.Core.Strings.Location.TextDistanceAwayDisplay">
+        <member name="M:AppFramework.Core.Serializer.DeserializeFromJson``1(System.String)">
             <summary>
-            Localized resource similar to "{0} {1} away"
+            Deserializes a JSON string into an object instance.
             </summary>
+            <typeparam name="T">Type of the object to be returned.</typeparam>
+            <param name="json">JSON string representing an object.</param>
+            <returns>Instance of an object from the JSON string.</returns>
         </member>
-        <member name="P:AppFramework.Core.Strings.Location.TextKilomentersLong">
+        <member name="M:AppFramework.Core.Serializer.SerializeToJson(System.Object)">
             <summary>
-            Localized resource similar to "Kilometers"
+            Serializes an object into a JSON string.
             </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Location.TextKilomentersShort">
-            <summary>
-            Localized resource similar to "km"
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Location.TextLocationServicesDisabledStatus">
-            <summary>
-            Localized resource similar to "Location access has not been enabled for this app. Use the manage button and ensure this app has been enabled to use location services."
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Location.TextMilesLong">
-            <summary>
-            Localized resource similar to "Miles"
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Location.TextMilesShort">
-            <summary>
-            Localized resource similar to "mi"
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Resources.ApplicationProblemEmailBodyTemplate">
-             <summary>
-             Localized resource similar to "Please describe what you were doing when the problem occurred:
-            --------------------
-            
-            
-            --------------------"
-             </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Resources.ApplicationProblemEmailSubjectTemplate">
-            <summary>
-            Localized resource similar to "{0} {1} auto-generated problem report"
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Resources.ApplicationProblemPromptMessage">
-            <summary>
-            Localized resource similar to "A problem occurred the last time you ran this application. Would you like to send us an email to report it?"
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Resources.ApplicationProblemPromptTitle">
-            <summary>
-            Localized resource similar to "Problem Report"
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Resources.ApplicationSharingBodyText">
-             <summary>
-             Localized resource similar to "Check out {0} from the Windows Store!
-            
-            {1}"
-             </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Resources.ApplicationSupportEmailBodyTemplate">
-             <summary>
-             Localized resource similar to "Please provide and feedback you'd like to share with support:
-            --------------------
-            
-            
-            --------------------
-            
-            "
-             </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Resources.ApplicationSupportEmailSubjectTemplate">
-            <summary>
-            Localized resource similar to "Feedback for {0} {1}"
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Resources.ClearAppCacheText">
-            <summary>
-            Localized resource similar to "Clear Cache"
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Resources.PromptRateApplicationEmailFeedbackMessage">
-            <summary>
-            Localized resource similar to "Would you like to send an e-mail with feedback instead?"
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Resources.PromptRateApplicationEmailFeedbackTitle">
-            <summary>
-            Localized resource similar to "Share feedback"
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Resources.PromptRateApplicationMessage">
-            <summary>
-            Localized resource similar to "Would you like to rate this application and provide feedback on how we can make things better?"
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Resources.PromptRateApplicationTitle">
-            <summary>
-            Localized resource similar to "Rate Application"
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Resources.TextCancel">
-            <summary>
-            Localized resource similar to "Cancel"
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Resources.TextCancellationRequested">
-            <summary>
-            Localized resource similar to "Canceled..."
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Resources.TextErrorGeneric">
-            <summary>
-            Localized resource similar to "An unexpected error has occured. We apologize for any inconveniences here and we will be working to resolve this soon."
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Resources.TextListNoData">
-            <summary>
-            Localized resource similar to "No items to display."
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Resources.TextLoading">
-            <summary>
-            Localized resource similar to "Loading..."
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Resources.TextMaybeLater">
-            <summary>
-            Localized resource similar to "Not right now"
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Resources.TextNo">
-            <summary>
-            Localized resource similar to "No"
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Resources.TextNoInternet">
-            <summary>
-            Localized resource similar to "No internet connection available. Connect to internet and try again."
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Resources.TextNotApplicable">
-            <summary>
-            Localized resource similar to "N/A"
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Resources.TextOk">
-            <summary>
-            Localized resource similar to "OK"
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Resources.TextYes">
-            <summary>
-            Localized resource similar to "Yes"
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Resources.ViewTitlePrivacyPolicy">
-            <summary>
-            Localized resource similar to "Privacy Policy"
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.Resources.ViewTitleTermsOfService">
-            <summary>
-            Localized resource similar to "Terms of Service"
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.WebBrowser.TextGoBack">
-            <summary>
-            Localized resource similar to "Go back"
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.WebBrowser.TextGoForward">
-            <summary>
-            Localized resource similar to "Go forward"
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.WebBrowser.TextWebDefaultTitle">
-            <summary>
-            Localized resource similar to "Web Browser"
-            </summary>
-        </member>
-        <member name="P:AppFramework.Core.Strings.WebBrowser.TextWebErrorGeneric">
-            <summary>
-            Localized resource similar to "Could not load the requested page. Try again later."
-            </summary>
+            <param name="obj">Object instance to serialize.</param>
+            <returns>JSON string representing the object instance.</returns>
         </member>
         <member name="T:AppFramework.Core.ViewModels.CollectionViewModelBase">
             <summary>
@@ -1501,50 +815,636 @@
             </summary>
             <param name="url">URL to navigate to.</param>
         </member>
-        <member name="T:AppFramework.Core.InitializationModes">
+        <member name="T:AppFramework.Core.PlatformBase">
             <summary>
-            Enumeration used to indicate if core code is executing in a new instance of the application, 
-            if it were resumed, or if executing in the background.
+            Base class used to manage application execution and to access all services available to the solution.
+            Provides core app functionality for initializing and suspending your application,
+            handling exceptions, and more.
             </summary>
         </member>
-        <member name="F:AppFramework.Core.InitializationModes.New">
+        <member name="P:AppFramework.Core.PlatformBase.AppInfo">
             <summary>
-            New instance of the application launched.
+            Gets access to the app info service of the platform currently executing.
             </summary>
         </member>
-        <member name="F:AppFramework.Core.InitializationModes.Restore">
+        <member name="P:AppFramework.Core.PlatformBase.BackgroundTasks">
             <summary>
-            App restored from a suspended state.
+            Gets access to the geocoding service adapter implement of the platform currently executing.
             </summary>
         </member>
-        <member name="F:AppFramework.Core.InitializationModes.Background">
+        <member name="P:AppFramework.Core.PlatformBase.Geolocation">
             <summary>
-            App background task launched.
+            Gets access to the location service of the platform currently executing.
             </summary>
         </member>
-        <member name="T:AppFramework.Core.DeviceFamily">
+        <member name="P:AppFramework.Core.PlatformBase.Notifications">
             <summary>
-            Device families supported by Windows.
+            Gets access to the notifications service of the platform currently executing. Provides you the ability to display toasts or manage tiles or etc on the executing platform.
             </summary>
         </member>
-        <member name="T:AppFramework.Core.MapExternalOptions">
+        <member name="P:AppFramework.Core.PlatformBase.NavigationBase">
             <summary>
-            Enumeration representing each way maps can be displayed.
+            Gets the ability to navigate to different parts of an application specific to the platform currently executing.
             </summary>
         </member>
-        <member name="F:AppFramework.Core.MapExternalOptions.Normal">
+        <member name="P:AppFramework.Core.PlatformBase.SharingManager">
             <summary>
-            Standard directions
+            Gets access to the app info service of the platform currently executing.
             </summary>
         </member>
-        <member name="F:AppFramework.Core.MapExternalOptions.DrivingDirections">
+        <member name="P:AppFramework.Core.PlatformBase.Analytics">
             <summary>
-            Directions for driving
+            Gets access to the analytics service of the platform currently executing.
             </summary>
         </member>
-        <member name="F:AppFramework.Core.MapExternalOptions.WalkingDirections">
+        <member name="P:AppFramework.Core.PlatformBase.Cryptography">
             <summary>
-            Directions for walking
+            Gets access to the cryptography provider of the platform currently executing.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.PlatformBase.EmailProvider">
+            <summary>
+            Gets access to the app info service of the platform currently executing.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.PlatformBase.Geocode">
+            <summary>
+            Gets access to the geocoding service adapter implement of the platform currently executing.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.PlatformBase.Jumplist">
+            <summary>
+            Gets access to the app info service of the platform currently executing.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.PlatformBase.Logger">
+            <summary>
+            Gets access to the logging service of the platform currently executing.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.PlatformBase.Ratings">
+            <summary>
+            Gets access to the ratings manager used to help promote users to rate your application.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.PlatformBase.Storage">
+            <summary>
+            Gets access to the storage system of the platform currently executing.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.PlatformBase.VoiceCommandManager">
+            <summary>
+            Gets access to the app info service of the platform currently executing.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.PlatformBase.WebAccountManager">
+            <summary>
+            Gets access to the app info service of the platform currently executing.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.PlatformBase.CurrentCore">
+            <summary>
+            Provides access to application services.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.PlatformBase.DeviceFamily">
+            <summary>
+            Gets the current device family this app is executing on.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.PlatformBase.AppSettingsLocalCore">
+            <summary>
+            Gets local app settings for this app.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.PlatformBase.AppSettingsRoamingCore">
+            <summary>
+            Gets roaming app settings for this app.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.PlatformBase.IsDesktop">
+            <summary>
+            Gets whether or not the current device is Windows Desktop.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.PlatformBase.IsMobile">
+            <summary>
+            Gets whether or not the current device is Windows Mobile.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.PlatformBase.IsXbox">
+            <summary>
+            Gets whether or not the current device is Xbox.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.PlatformBase.IsMobileContinuumDesktop">
+            <summary>
+            Gets whether or not the current device is executing on Windows Mobile Continuum Desktop.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.PlatformBase.InitializationMode">
+            <summary>
+            Indicates the initialization mode of this app instance.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.PlatformBase.BackgroundRegistrationTask">
+            <summary>
+            Gets the task object which registers all the background tasks in the application.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.PlatformBase.AppInitializingAsync(AppFramework.Core.InitializationModes)">
+            <summary>
+            Global initialization of the app and loads all app settings and initializes all services.
+            </summary>
+            <param name="mode">Specifies the mode of this app instance and how it's executing.</param>
+            <returns>Awaitable task is returned.</returns>
+        </member>
+        <member name="M:AppFramework.Core.PlatformBase.CheckInitializationAsync(AppFramework.Core.Services.ServiceBase)">
+            <summary>
+            Initializes a service if not already initialized.
+            </summary>
+            <param name="service">Service instance to intialize.</param>
+        </member>
+        <member name="M:AppFramework.Core.PlatformBase.AppSuspending">
+            <summary>
+            Global suspension of the app and any custom logic to execute on suspend of the app.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.PlatformBase.SaveSettings">
+            <summary>
+            Saves any app settings only if the data had changed.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.PlatformBase.SignoutAllAsync">
+            <summary>
+            Logic performed during sign out of a user in this application.
+            </summary>
+            <returns>Awaitable task is returned.</returns>
+        </member>
+        <member name="M:AppFramework.Core.PlatformBase.GetService``1">
+            <summary>
+            Retrieve an instance of a type registered as a platform service.
+            </summary>
+            <typeparam name="T">Type reference of the service to retrieve.</typeparam>
+            <returns>Instance of type T if it was already initialized or null if not found.</returns>
+        </member>
+        <member name="M:AppFramework.Core.PlatformBase.SetService``1(``0)">
+            <summary>
+            Registers and intializes an instance of an adapter.
+            </summary>
+            <typeparam name="T">Type reference of the service to register and initialize.</typeparam>
+        </member>
+        <member name="M:AppFramework.Core.PlatformBase.AppUnhandledException(System.Exception)">
+            <summary>
+            Global unhandled exception handler for your application.
+            </summary>
+            <param name="e"></param>
+            <returns>True if the exception was handled else false.</returns>
+        </member>
+        <member name="M:AppFramework.Core.PlatformBase.GenerateModelArguments(AppFramework.Core.Models.IModel)">
+            <summary>
+            Creates a querystring parameter string from a model instance.
+            </summary>
+            <param name="model">Model to convert into a querystring.</param>
+            <returns>Query string representing the model provided.</returns>
+        </member>
+        <member name="M:AppFramework.Core.PlatformBase.OnGenerateModelArguments(System.Collections.Generic.Dictionary{System.String,System.String},AppFramework.Core.Models.IModel)">
+            <summary>
+            Creates a querystring parameter string from a model instance.
+            </summary>
+            <param name="dic">Dictionary of parameters to add to the querystring.</param>
+            <param name="model">Model to convert into a querystring.</param>
+            <returns>Query string representing the model provided.</returns>
+        </member>
+        <member name="M:AppFramework.Core.PlatformBase.GenerateModelTileID(AppFramework.Core.Models.IModel)">
+            <summary>
+            Generates a unique tile ID used for secondary tiles based on a model instance.
+            </summary>
+            <param name="model">Model to convert into a unique tile ID.</param>
+            <returns>String representing a unique tile ID for the model else null if not supported.</returns>
+        </member>
+        <member name="M:AppFramework.Core.PlatformBase.GenerateModelFromTileIdAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Converts a tile ID back into an object instance.
+            </summary>
+            <param name="tileID">Tile ID to retrieve an object instance for.</param>
+            <param name="ct">Cancelation token.</param>
+            <returns>Object instance if found else null.</returns>
+        </member>
+        <member name="E:AppFramework.Core.PlatformBase.NotifyShellMenuToggle">
+            <summary>
+            Event which notifies the shell to open or close the menu.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.PlatformBase.ExecuteBackgroundWork(Windows.ApplicationModel.Background.IBackgroundTaskInstance,System.Action{System.Threading.CancellationToken})">
+            <summary>
+            Executes background task work. This call wraps the work with error handling, deferrals, and instantiating all the appropriate services needed by AppFramework.
+            </summary>
+            <param name="taskInstance">Background task instance.</param>
+            <param name="work">The work that needs to be performed.</param>
+        </member>
+        <member name="T:AppFramework.Core.AgentSync">
+            <summary>
+            AgentSync is used to determine if the main app or a background task is running. You can use this to
+            prevent execution of a background task if the main app is in the foreground.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.AgentSync.Init(Windows.UI.Xaml.Application)">
+            <summary>
+            Initializes the AgentSync so that it can keep track of the application running status.
+            </summary>
+            <param name="app"></param>
+        </member>
+        <member name="M:AppFramework.Core.AgentSync.ApplicationIsLaunched">
+            <summary>
+            Markes the agent sync as running.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.AgentSync.ApplicationIsSuspended">
+            <summary>
+            Marks the agent sync as NOT running
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.AgentSync.IsApplicationLaunched">
+            <summary>
+            Indicates whether or not the main application is currently running.
+            </summary>
+            <returns>True if the application is launched/running else false.</returns>
+        </member>
+        <member name="P:AppFramework.Core.Strings.BackgroundTasks.TextBackgroundAppDisabledStatus">
+            <summary>
+            Localized resource similar to "Background tasks have not been enabled for this app.Use the manage button and ensure this app has been enabled to run in the background."
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Account.TextAuthenticating">
+            <summary>
+            Localized resource similar to "Authenticating..."
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Account.TextNotApplicable">
+            <summary>
+            Localized resource similar to "N/A"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Account.TextSigningOut">
+            <summary>
+            Localized resource similar to "Signing out..."
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Account.TextSignout">
+            <summary>
+            Localized resource similar to "Sign out"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Account.TextSignoutConfirmation">
+            <summary>
+            Localized resource similar to "Are you sure you want to sign out?"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Account.TextUnauthorizedUser">
+            <summary>
+            Localized resource similar to "Unauthorized user. Check your username/password and try again."
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Account.TextUnauthorizedUserTitle">
+            <summary>
+            Localized resource similar to "Sign-in failed"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Account.TextWebAccountManagerSignUpDescription">
+            <summary>
+            Localized resource similar to "Sign-In / Sign-Up with an account that you can associate with {0}."
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Location.TextDeterminingLocation">
+            <summary>
+            Localized resource similar to "Finding your location..."
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Location.TextDistanceAwayDisplay">
+            <summary>
+            Localized resource similar to "{0} {1} away"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Location.TextKilomentersLong">
+            <summary>
+            Localized resource similar to "Kilometers"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Location.TextKilomentersShort">
+            <summary>
+            Localized resource similar to "km"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Location.TextLocationServicesDisabledStatus">
+            <summary>
+            Localized resource similar to "Location access has not been enabled for this app. Use the manage button and ensure this app has been enabled to use location services."
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Location.TextMilesLong">
+            <summary>
+            Localized resource similar to "Miles"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Location.TextMilesShort">
+            <summary>
+            Localized resource similar to "mi"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.ApplicationProblemEmailBodyTemplate">
+             <summary>
+             Localized resource similar to "Please describe what you were doing when the problem occurred:
+            --------------------
+            
+            
+            --------------------"
+             </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.ApplicationProblemEmailSubjectTemplate">
+            <summary>
+            Localized resource similar to "{0} {1} auto-generated problem report"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.ApplicationProblemPromptMessage">
+            <summary>
+            Localized resource similar to "A problem occurred the last time you ran this application. Would you like to send us an email to report it?"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.ApplicationProblemPromptTitle">
+            <summary>
+            Localized resource similar to "Problem Report"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.ApplicationSharingBodyText">
+             <summary>
+             Localized resource similar to "Check out {0} from the Windows Store!
+            
+            {1}"
+             </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.ApplicationSupportEmailBodyTemplate">
+             <summary>
+             Localized resource similar to "Please provide and feedback you'd like to share with support:
+            --------------------
+            
+            
+            --------------------
+            
+            "
+             </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.ApplicationSupportEmailSubjectTemplate">
+            <summary>
+            Localized resource similar to "Feedback for {0} {1}"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.ClearAppCacheText">
+            <summary>
+            Localized resource similar to "Clear Cache"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.PromptRateApplicationEmailFeedbackMessage">
+            <summary>
+            Localized resource similar to "Would you like to send an e-mail with feedback instead?"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.PromptRateApplicationEmailFeedbackTitle">
+            <summary>
+            Localized resource similar to "Share feedback"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.PromptRateApplicationMessage">
+            <summary>
+            Localized resource similar to "Would you like to rate this application and provide feedback on how we can make things better?"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.PromptRateApplicationTitle">
+            <summary>
+            Localized resource similar to "Rate Application"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.TextCancel">
+            <summary>
+            Localized resource similar to "Cancel"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.TextCancellationRequested">
+            <summary>
+            Localized resource similar to "Canceled..."
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.TextErrorGeneric">
+            <summary>
+            Localized resource similar to "An unexpected error has occured. We apologize for any inconveniences here and we will be working to resolve this soon."
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.TextListNoData">
+            <summary>
+            Localized resource similar to "No items to display."
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.TextLoading">
+            <summary>
+            Localized resource similar to "Loading..."
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.TextMaybeLater">
+            <summary>
+            Localized resource similar to "Not right now"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.TextNo">
+            <summary>
+            Localized resource similar to "No"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.TextNoInternet">
+            <summary>
+            Localized resource similar to "No internet connection available. Connect to internet and try again."
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.TextNotApplicable">
+            <summary>
+            Localized resource similar to "N/A"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.TextOk">
+            <summary>
+            Localized resource similar to "OK"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.TextYes">
+            <summary>
+            Localized resource similar to "Yes"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.ViewTitlePrivacyPolicy">
+            <summary>
+            Localized resource similar to "Privacy Policy"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.Resources.ViewTitleTermsOfService">
+            <summary>
+            Localized resource similar to "Terms of Service"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.WebBrowser.TextGoBack">
+            <summary>
+            Localized resource similar to "Go back"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.WebBrowser.TextGoForward">
+            <summary>
+            Localized resource similar to "Go forward"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.WebBrowser.TextWebDefaultTitle">
+            <summary>
+            Localized resource similar to "Web Browser"
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Strings.WebBrowser.TextWebErrorGeneric">
+            <summary>
+            Localized resource similar to "Could not load the requested page. Try again later."
+            </summary>
+        </member>
+        <member name="T:AppFramework.Core.Commands.GenericCommand">
+            <summary>
+            Command used in data binding. GenericCommand is wired up with logging and analytics calls.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.Commands.GenericCommand.#ctor(System.String,System.Action,System.Func{System.Boolean})">
+            <summary>
+            Creates a new command instance.
+            </summary>
+            <param name="commandName">Identifies this command instance, used for logging.</param>
+            <param name="execute">The logic to run when execute is called. No parameter will be passed to this execute action.</param>
+            <param name="canExecute">The function which determines if this command can run or not.</param>
+        </member>
+        <member name="M:AppFramework.Core.Commands.GenericCommand.#ctor(System.String,System.Action{System.Object},System.Func{System.Object,System.Boolean})">
+            <summary>
+            Creates a new command instance.
+            </summary>
+            <param name="commandName">Identifies this command instance, used for logging.</param>
+            <param name="execute">The logic to run when execute is called. Execute parameter object will be passed to this action.</param>
+            <param name="canExecute">The function which determines if this command can run or not.</param>
+        </member>
+        <member name="T:AppFramework.Core.Commands.GenericCommand`1">
+            <summary>
+            Command used in data binding. GenericCommand is wired up with logging and analytics calls.
+            </summary>
+            <typeparam name="T">Type of the command parameter that will be passed in.</typeparam>
+        </member>
+        <member name="P:AppFramework.Core.Commands.GenericCommand`1.IsEnabled">
+            <summary>
+            Gets or sets whether or not this command instance is enabled to execute the provided CanExecute function. If false, CanExecute will always return false. If true, the provided CanExecute method will determine if CanExecute is true/false.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.Commands.GenericCommand`1.#ctor(System.String,System.Action,System.Func{System.Boolean})">
+            <summary>
+            Creates a new command instance.
+            </summary>
+            <param name="commandName">Identifies this command instance, used for logging.</param>
+            <param name="execute">The logic to run when execute is called. No parameter will be passed to this execute action.</param>
+            <param name="canExecute">The execution status logic.</param>
+        </member>
+        <member name="M:AppFramework.Core.Commands.GenericCommand`1.#ctor(System.String,System.Action{`0},System.Func{`0,System.Boolean})">
+            <summary>
+            Creates a new command.
+            </summary>
+            <param name="commandName">Identifies this command instance, used for logging.</param>
+            <param name="execute">The logic to run when execute is called. Execute parameter object must be of the generic type specified else it will be ignored.</param>
+            <param name="canExecute">The function which determines if this command can run or not. CanExecute parameter object must be of the generic type specified else it will be ignored</param>
+        </member>
+        <member name="T:AppFramework.Core.Commands.MapExternalCommand">
+            <summary>
+            Command for launching an external maps app passing an ILocationModel command parameter instance passed to this command.
+            </summary>
+        </member>
+        <member name="T:AppFramework.Core.Commands.NavigationCommand">
+            <summary>
+            Command for navigating to a page.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.Commands.NavigationCommand.#ctor">
+            <summary>
+            Command for navigating to a page based on the IModel parameter passed into the Execute method.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.Commands.NavigationCommand.#ctor(System.String,System.Action,System.Func{System.Boolean})">
+            <summary>
+            Command for navigation to a page.
+            </summary>
+            <param name="commandName">Identifies this command instance, used for logging.</param>
+            <param name="execute">Logic to execute, Execute command object will be ignored.</param>
+            <param name="canExecute">Logic to determine if this command can execute, CanExecute parameter will be ignored.</param>
+        </member>
+        <member name="M:AppFramework.Core.Commands.NavigationCommand.#ctor(System.String,System.Action{System.Object},System.Func{System.Object,System.Boolean})">
+            <summary>
+            Command for navigation to a page.
+            </summary>
+            <param name="commandName">Identifies this command instance, used for logging.</param>
+            <param name="execute">Logic to execute, Execute command object must be an IModel type.</param>
+            <param name="canExecute">Logic to determine if this command can execute, CanExecute parameter must be an IModel type.</param>
+        </member>
+        <member name="T:AppFramework.Core.Commands.PinTileCommand">
+            <summary>
+            Command for pinning tiles.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Commands.PinTileCommand.OnSuccessAction">
+            <summary>
+            Custom action to perform after Execute runs successfully.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.Commands.PinTileCommand.#ctor">
+            <summary>
+            Creates a new command instance for pinning IModel objects to the user's start screen.
+            </summary>
+        </member>
+        <member name="T:AppFramework.Core.Commands.UnpinTileCommand">
+            <summary>
+            Command for unpinning tiles.
+            </summary>
+        </member>
+        <member name="P:AppFramework.Core.Commands.UnpinTileCommand.OnSuccessAction">
+            <summary>
+            Custom action to perform after Execute runs successfully.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.Commands.UnpinTileCommand.#ctor">
+            <summary>
+            Creates a new command instance for removing IModel objects from a user's start screen.
+            </summary>
+        </member>
+        <member name="T:AppFramework.Core.Commands.ShareCommand">
+            <summary>
+            Command for sharing content to the OS.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.Commands.ShareCommand.#ctor">
+            <summary>
+            Creates a new command instance for sharing IModel objects to other apps.
+            </summary>
+        </member>
+        <member name="T:AppFramework.Core.Commands.WebViewCommand">
+            <summary>
+            Command for navigating to an internal web browser to display a webpage within the app.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.Commands.WebViewCommand.#ctor">
+            <summary>
+            Create an instance of the command for internal webpage browsing.
+            </summary>
+        </member>
+        <member name="T:AppFramework.Core.Commands.WebBrowserCommand">
+            <summary>
+            Command for navigating to an external web browser to display a webpage.
+            </summary>
+        </member>
+        <member name="M:AppFramework.Core.Commands.WebBrowserCommand.#ctor">
+            <summary>
+            Create an instance of the command for external webpage browsing.
             </summary>
         </member>
         <member name="M:AppFramework.Core.GeneralFunctions.HexToColor(System.String)">
@@ -2050,16 +1950,6 @@
             <param name="ex">Exception object if available.</param>
             <returns>String representing the system and app logging data.</returns>
         </member>
-        <member name="T:AppFramework.Core.Services.LoggingService.ILogger">
-            <summary>
-            Interfaced use to log data to custom sources.
-            </summary>
-        </member>
-        <member name="T:AppFramework.Core.Services.LoggingService.DebugLoggerProvider">
-            <summary>
-            Logger implementation for logging to the debug window.
-            </summary>
-        </member>
         <member name="T:AppFramework.Core.Services.LoggingService.UwpConsoleOutputProvider">
             <summary>
             UWP console debugger from Michael Scherotter (https://blogs.msdn.microsoft.com/synergist/2016/08/20/console-ouptut-my-new-debugging-and-testing-tool-for-windows/)
@@ -2388,21 +2278,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="P:AppFramework.Core.Services.ServiceBase.Initialized">
-            <summary>
-            Indicates whether or not this adapter has been initialized by the PlatformAdaptereCore Initialization method.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.Services.ServiceBase.InitializeAsync">
-            <summary>
-            Initialization logic which is called on launch of this application.
-            </summary>
-        </member>
-        <member name="M:AppFramework.Core.Services.ServiceBase.OnInitializeAsync">
-            <summary>
-            Custom initialization logic for this service.
-            </summary>
-        </member>
         <member name="P:AppFramework.Core.Services.SharingManagerBase.ShareCommand">
             <summary>
             Command to navigate to the share functionality.
@@ -2696,11 +2571,6 @@
             </summary>
             <param name="pi">Provider information to sign out from.</param>
             <returns>Awaitable task is returned.</returns>
-        </member>
-        <member name="T:AppFramework.Core.LogLevels">
-            <summary>
-            Enumeration describing the level/type of information being logged
-            </summary>
         </member>
         <member name="T:AppFramework.Core.LoadStateEventHandler">
             <summary>
