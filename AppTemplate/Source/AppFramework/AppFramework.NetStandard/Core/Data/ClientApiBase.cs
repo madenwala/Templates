@@ -283,19 +283,26 @@ namespace AppFramework.Core.Data
             if (this.Logger == null)
                 return;
 
-            this.Logger.Log(
-                Environment.NewLine + "---------------------------------" + Environment.NewLine +
-                "WEB REQUEST to {0}" + Environment.NewLine +
-                "-Method: {1}" + Environment.NewLine +
-                "-Headers: {2}" + Environment.NewLine +
-                "-Contents: " + Environment.NewLine + 
-                "{3}" + Environment.NewLine +
-                "---------------------------------",
-                request.RequestUri.OriginalString,
-                request.Method.Method,
-                request.Headers?.ToString(),
-                request.Content?.ReadAsStringAsync().Result
-                );
+            try
+            {
+                this.Logger.Log(
+                    Environment.NewLine + "---------------------------------" + Environment.NewLine +
+                    "WEB REQUEST to {0}" + Environment.NewLine +
+                    "-Method: {1}" + Environment.NewLine +
+                    "-Headers: {2}" + Environment.NewLine +
+                    "-Contents: " + Environment.NewLine +
+                    "{3}" + Environment.NewLine +
+                    "---------------------------------",
+                    request.RequestUri.OriginalString,
+                    request.Method.Method,
+                    request.Headers?.ToString(),
+                    request.Content?.ReadAsStringAsync().Result
+                    );
+            }
+            catch(Exception ex)
+            {
+                this.Logger.Log("Failed to log HttpRequestMessage: {0}", ex);
+            }
         }
 
         /// <summary>
@@ -312,21 +319,28 @@ namespace AppFramework.Core.Data
 
             this.Log(response.RequestMessage);
 
-            this.Logger.Log(
-                Environment.NewLine + "---------------------------------" + Environment.NewLine +
-                "WEB RESPONSE to {0}" + Environment.NewLine +
-                "-HttpStatus: {1}" + Environment.NewLine +
-                "-Reason Phrase: {2}" + Environment.NewLine +
-                "-ContentLength: {3:0.00 KB}" + Environment.NewLine +
-                "-Contents: " + Environment.NewLine +
-                "{4}" + Environment.NewLine +
-                "---------------------------------",
-                response.RequestMessage.RequestUri.OriginalString,
-                string.Format("{0} {1}", (int)response.StatusCode, response.StatusCode.ToString()),
-                response.ReasonPhrase,
-                Convert.ToDecimal(Convert.ToDouble(response.Content.Headers.ContentLength) / 1024),
-                response.Content?.ReadAsStringAsync().Result
-                );
+            try
+            {
+                this.Logger.Log(
+                    Environment.NewLine + "---------------------------------" + Environment.NewLine +
+                    "WEB RESPONSE to {0}" + Environment.NewLine +
+                    "-HttpStatus: {1}" + Environment.NewLine +
+                    "-Reason Phrase: {2}" + Environment.NewLine +
+                    "-ContentLength: {3:0.00 KB}" + Environment.NewLine +
+                    "-Contents: " + Environment.NewLine +
+                    "{4}" + Environment.NewLine +
+                    "---------------------------------",
+                    response.RequestMessage.RequestUri.OriginalString,
+                    string.Format("{0} {1}", (int)response.StatusCode, response.StatusCode.ToString()),
+                    response.ReasonPhrase,
+                    Convert.ToDecimal(Convert.ToDouble(response.Content.Headers.ContentLength) / 1024),
+                    response.Content?.ReadAsStringAsync().Result
+                    );
+            }
+            catch (Exception ex)
+            {
+                this.Logger.Log("Failed to log HttpRequestMessage: {0}", ex);
+            }
         }
 
         #endregion
