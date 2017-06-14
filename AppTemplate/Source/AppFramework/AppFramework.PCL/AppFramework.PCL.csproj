@@ -34,14 +34,43 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <Folder Include="Core\Services\" />
+    <Folder Include="Core\ViewModels\" />
     <Folder Include="UI\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AppFramework.NetStandard\Core\Commands\CommandBase.cs">
+      <Link>Core\Commands\CommandBase.cs</Link>
+    </Compile>
     <Compile Include="..\AppFramework.NetStandard\Core\Data\ClientApiBase.cs">
       <Link>Core\Data\ClientApiBase.cs</Link>
     </Compile>
+    <Compile Include="..\AppFramework.NetStandard\Core\Enums.cs">
+      <Link>Core\Enums.cs</Link>
+    </Compile>
+    <Compile Include="..\AppFramework.NetStandard\Core\Extensions\IDictionaryExtensions.cs">
+      <Link>Core\Extensions\IDictionaryExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\AppFramework.NetStandard\Core\Extensions\IEnumerableExtensions.cs">
+      <Link>Core\Extensions\IEnumerableExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\AppFramework.NetStandard\Core\Extensions\LongExtensions.cs">
+      <Link>Core\Extensions\LongExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\AppFramework.NetStandard\Core\Models\CustomExceptions.cs">
+      <Link>Core\Models\CustomExceptions.cs</Link>
+    </Compile>
+    <Compile Include="..\AppFramework.NetStandard\Core\Models\IAuthenticatedUserProfile.cs">
+      <Link>Core\Models\IAuthenticatedUserProfile.cs</Link>
+    </Compile>
+    <Compile Include="..\AppFramework.NetStandard\Core\Models\IView.cs">
+      <Link>Core\Models\IView.cs</Link>
+    </Compile>
     <Compile Include="..\AppFramework.NetStandard\Core\Models\ModelBase.cs">
       <Link>Core\Models\ModelBase.cs</Link>
+    </Compile>
+    <Compile Include="..\AppFramework.NetStandard\Core\Models\UniqueModelBase.cs">
+      <Link>Core\Models\UniqueModelBase.cs</Link>
     </Compile>
     <Compile Include="..\AppFramework.NetStandard\Core\TypeUtility.cs">
       <Link>Core\TypeUtility.cs</Link>
