@@ -16,7 +16,11 @@
     <!--<iconUrl>http://githubusercontent.com/dotnet/WinGASDK/master/TODO_logo_240.png</iconUrl>-->
 
     <dependencies>
-      
+
+      <group targetFramework=".netstandard1.1">
+        <!--.NET Standard 1.1 dependencies go here-->
+        <dependency id="Newtonsoft.Json" version="10.0.2" />        
+      </group>
       <group targetFramework="MonoAndroid">
         <!--MonoAndroid dependencies go here-->
         <dependency id="Newtonsoft.Json" version="10.0.2" />
@@ -26,7 +30,7 @@
         <dependency id="Newtonsoft.Json" version="10.0.2" />
       </group>
       <group targetFramework="uap">
-        <!--uap dependencies go here-->
+        <!--UWP dependencies go here-->
         <dependency id="AdDuplexWin10" version="10.1.1" />
         <dependency id="HockeySDK.UWP" version="4.1.6" />
         <dependency id="Microsoft.NETCore.UniversalWindowsPlatform" version="5.3.3" />
@@ -53,6 +57,7 @@
     <!-- The lib file gets copied as a reference -->
     <file target="ref\uap10.0\AppFramework.Uwp\"	src="AppFramework.Uwp\bin\x86\release\*.xr.xml" />
     <file target="ref\uap10.0\AppFramework.Uwp\"	src="Build\*.txt" />
+    <file target="lib\.netstandard1.1\" src="AppFramework.PCL\bin\Release\*" />
     
     <!-- Change DLLs to have their platform version removed from it via corflags command https://github.com/NuGet/Home/issues/1221 -->
     <file target="ref\uap10.0\" src="Build\Temp\*" />
