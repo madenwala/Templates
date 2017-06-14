@@ -112,7 +112,13 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Compile Include="Core\Extensions\ObjectExtensions.cs" />
+    <Compile Include="Core\Models\LocationModelBase.cs" />
+    <Compile Include="Core\Models\LocationModelList.cs" />
+    <Compile Include="Core\Models\ModelLists.cs" />
+    <Compile Include="Core\Models\NotifyTaskCompletion.cs" />
     <Compile Include="Core\Serializers.cs" />
+    <Compile Include="Core\ViewModels\IViewModel.cs" />
     <Compile Include="UI\Behaviors\ContextMenuRightClickBehavior.cs" />
     <Compile Include="UI\Controls\ApplicationFrame.Interstitial.cs" />
     <Compile Include="UI\Extensions\FrameworkElementExtensions.cs" />
@@ -154,13 +160,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\AgentSync.cs" />
-    <Compile Include="Core\Commands\CommandBase.cs" />
-    <Compile Include="Core\Extensions\IDictionaryExtensions.cs" />
-    <Compile Include="Core\Extensions\IEnumerableExtensions.cs" />
-    <Compile Include="Core\Extensions\LongExtensions.cs" />
-    <Compile Include="Core\Models\IAuthenticatedUserProfile.cs" />
-    <Compile Include="Core\Models\IView.cs" />
-    <Compile Include="Core\Models\UniqueModelBase.cs" />
     <Compile Include="Core\Strings\en-US\BackgroundTasks.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -177,16 +176,10 @@
     <Compile Include="Core\Enums.cs" />
     <Compile Include="Core\Extensions\FrameExtensions.cs" />
     <Compile Include="Core\Extensions\GeocoordinateExtensions.cs" />
-    <Compile Include="Core\Extensions\ObjectExtensions.cs" />
     <Compile Include="Core\Extensions\PackageVersionExtensions.cs" />
     <Compile Include="Core\GeneralFunctions.cs" />
     <Compile Include="Core\Models\AppSettings.cs" />
     <Compile Include="Core\Models\BackgroundTaskRunInfo.cs" />
-    <Compile Include="Core\Models\CustomExceptions.cs" />
-    <Compile Include="Core\Models\LocationModelBase.cs" />
-    <Compile Include="Core\Models\LocationModelList.cs" />
-    <Compile Include="Core\Models\ModelLists.cs" />
-    <Compile Include="Core\Models\NotifyTaskCompletion.cs" />
     <Compile Include="Core\Models\UniqueLocationModelBase.cs" />
     <Compile Include="Core\Models\VoiceCommandInfo.cs" />
     <Compile Include="Core\PlatformBase.cs" />
@@ -206,7 +199,6 @@
     <Compile Include="Core\Services\NavigationManagerBase.cs" />
     <Compile Include="Core\Services\NotificationsManagerBase.cs" />
     <Compile Include="Core\Services\RatingsManager.cs" />
-    <Compile Include="Core\Services\ServiceBase.cs" />
     <Compile Include="Core\Services\SharingManagerBase.cs" />
     <Compile Include="Core\Services\StorageManagerBase.cs" />
     <Compile Include="Core\Services\VoiceCommandManager.cs" />
@@ -232,7 +224,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Core\ViewModels\CollectionViewModelBase.cs" />
-    <Compile Include="Core\ViewModels\IViewModel.cs" />
     <Compile Include="Core\ViewModels\ViewModelBase.cs" />
     <Compile Include="Core\ViewModels\WebViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

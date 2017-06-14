@@ -25,8 +25,9 @@ namespace AppFramework.Core.Services
         /// <summary>
         /// Initialization logic which is called on launch of this application.
         /// </summary>
-        internal async Task InitializeAsync()
+        public async Task InitializeAsync()
         {
+            // TODO make this internal
             await this.OnInitializeAsync();
             this.Initialized = true;
         }

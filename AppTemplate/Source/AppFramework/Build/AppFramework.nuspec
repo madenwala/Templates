@@ -9,7 +9,7 @@
     <licenseUrl>https://github.com/madenwala/Templates/tree/master/UniversalTemplate</licenseUrl>
     <projectUrl>https://github.com/madenwala/Templates/tree/master/UniversalTemplate</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>AppFramework for building UWP applications</description>
+    <description>AppFramework for building .NET applications</description>
     <copyright>Copyright 2017</copyright>
     <tags>Adenwala</tags>
     <releaseNotes>More info at https://github.com/madenwala/Templates/tree/master/UniversalTemplate </releaseNotes>
