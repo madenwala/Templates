@@ -173,7 +173,6 @@
     <Compile Include="Core\Commands\PinTileCommand.cs" />
     <Compile Include="Core\Commands\ShareCommand.cs" />
     <Compile Include="Core\Commands\WebBrowserCommand.cs" />
-    <Compile Include="Core\Enums.cs" />
     <Compile Include="Core\Extensions\FrameExtensions.cs" />
     <Compile Include="Core\Extensions\GeocoordinateExtensions.cs" />
     <Compile Include="Core\Extensions\PackageVersionExtensions.cs" />

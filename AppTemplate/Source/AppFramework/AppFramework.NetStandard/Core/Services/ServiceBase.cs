@@ -16,7 +16,8 @@ namespace AppFramework.Core.Services
         /// <summary>
         /// Indicates whether or not this adapter has been initialized by the PlatformAdaptereCore Initialization method.
         /// </summary>
-        internal bool Initialized { get; private set; }
+        public bool Initialized { get; private set; }
+        // TODO make Initialized internal
 
         #endregion Properties
 
