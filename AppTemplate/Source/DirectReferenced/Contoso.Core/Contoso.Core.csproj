@@ -144,9 +144,6 @@
     <Compile Include="..\..\NuGetReferened\Contoso.Core\Data\ClientApi.cs">
       <Link>Data\ClientApi.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\Data\ClientApiBase.cs">
-      <Link>Data\ClientApiBase.cs</Link>
-    </Compile>
     <Compile Include="..\..\NuGetReferened\Contoso.Core\Data\MicrosoftApi.cs">
       <Link>Data\MicrosoftApi.cs</Link>
     </Compile>

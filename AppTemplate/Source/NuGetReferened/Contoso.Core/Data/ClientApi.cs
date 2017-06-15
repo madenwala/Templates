@@ -198,7 +198,7 @@ namespace Contoso.Core.Data
         /// </summary>
         /// <param name="ct">Cancelation token.</param>
         /// <returns>List of items.</returns>
-        public async Task<IEnumerable<ItemModel>> GetItems(CancellationToken ct)
+        internal async Task<IEnumerable<ItemModel>> GetItems(CancellationToken ct)
         {
             await Task.Delay(2000, ct);
 
@@ -229,7 +229,7 @@ namespace Contoso.Core.Data
         /// <param name="id">ID to retrieve.</param>
         /// <param name="ct">Cancelation token.</param>
         /// <returns>ItemModel instance matching the specified ID.</returns>
-        public async Task<ItemModel> GetItemByID(string id, CancellationToken ct)
+        internal async Task<ItemModel> GetItemByID(string id, CancellationToken ct)
         {
             var items = await this.GetItems(ct);
             ct.ThrowIfCancellationRequested();
