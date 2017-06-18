@@ -21,6 +21,10 @@
         <!--.NET Standard 1.1 dependencies go here-->
         <dependency id="Newtonsoft.Json" version="10.0.2" />        
       </group>
+      <group targetFramework=".netstandard1.4">
+        <!--.NET Standard 1.4 dependencies go here-->
+        <dependency id="Newtonsoft.Json" version="10.0.2" />
+      </group>
       <group targetFramework="MonoAndroid">
         <!--MonoAndroid dependencies go here-->
         <dependency id="Newtonsoft.Json" version="10.0.2" />
@@ -58,6 +62,7 @@
     <file target="ref\uap10.0\AppFramework.Uwp\"	src="AppFramework.Uwp\bin\x86\release\*.xr.xml" />
     <file target="ref\uap10.0\AppFramework.Uwp\"	src="Build\*.txt" />
     <file target="lib\.netstandard1.1\" src="AppFramework.PCL\bin\Release\*" />
+    <file target="lib\.netstandard1.4\" src="AppFramework.NetStandard\bin\Release\netstandard1.4\*" />
     
     <!-- Change DLLs to have their platform version removed from it via corflags command https://github.com/NuGet/Home/issues/1221 -->
     <file target="ref\uap10.0\" src="Build\Temp\*" />

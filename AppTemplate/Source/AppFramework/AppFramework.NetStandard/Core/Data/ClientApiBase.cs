@@ -1,5 +1,6 @@
 ﻿using AppFramework.Core.Services;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -146,7 +147,10 @@ namespace AppFramework.Core.Data
         protected async Task<T> PostAsync<T>(string url, HttpContent contents = default(HttpContent), CancellationToken ct = default(CancellationToken))
         {
             string data = await this.PostAsync(url, contents, ct);
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(data);
+            if (string.IsNullOrEmpty(data))
+                return default(T);
+            else
+                return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(data);
         }
 
         /// <summary>
@@ -181,6 +185,32 @@ namespace AppFramework.Core.Data
             response.EnsureSuccessStatusCode();
 
             return response;
+        }
+
+        protected async Task<T> PostFormContentAsync<T>(string url, IDictionary<string, string> dic, CancellationToken ct = default(CancellationToken))
+        {
+            var contents = new FormUrlEncodedContent(dic);
+            return await this.PostAsync<T>(url, contents);
+        }
+
+        protected async Task<string> PostFormContentAsync(string url, IDictionary<string, string> dic, CancellationToken ct = default(CancellationToken))
+        {
+            var contents = new FormUrlEncodedContent(dic);
+            return await this.PostAsync(url, contents);
+        }
+
+        protected async Task<T> PostStringContentAsync<T>(string url, object model, CancellationToken ct = default(CancellationToken))
+        {
+            if (model == null)
+                throw new ArgumentNullException(nameof(model));
+            var contents = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(model));
+            return await this.PostAsync<T>(url, contents);
+        }
+
+        protected async Task<string> PostStringContentAsync(string url, string data, CancellationToken ct = default(CancellationToken))
+        {
+            var contents = new StringContent(data);
+            return await this.PostAsync(url, contents);
         }
 
         //public async Task<JsonValue> PostAsync(string relativeUri)
