@@ -25,8 +25,8 @@ namespace AppFramework.Core.Models
     {
         #region Constants
 
-        public const int CoordinateDecimalPlaces = 6;
-        public const int DistanceDecimalPlaces = 2;
+        public static int CoordinateDecimalPlaces = 6;
+        public static int DistanceDecimalPlaces = 2;
 
         #endregion Constants
 
@@ -204,6 +204,35 @@ namespace AppFramework.Core.Models
         private double ToRadian(double val)
         {
             return (Math.PI / 180) * val;
+        }
+
+        /// <summary>
+        /// Validates latitude and longitude values.
+        /// </summary>
+        /// <param name="latitude">Latitude value to test.</param>
+        /// <param name="longitude">Longitude value to test.</param>
+        /// <returns>True if valid, else false.</returns>
+        public static bool Validate(double latitude, double longitude)
+        {
+            if (latitude < -90 || latitude > 90)
+                return false;
+            else if (longitude < -180 || latitude > 180)
+                return false;
+            else
+                return true;
+        }
+
+        /// <summary>
+        /// Validates latitude and longitude values.
+        /// </summary>
+        /// <param name="loc">Location model object to validate.</param>
+        /// <returns>True if valid, else false.</returns>
+        public static bool Validate(ILocationModel loc)
+        {
+            if (loc == null)
+                return false;
+            else
+                return Validate(loc.Latitude, loc.Longitude);
         }
 
         #endregion Methods

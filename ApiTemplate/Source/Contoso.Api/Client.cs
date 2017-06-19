@@ -1,8 +1,9 @@
-﻿using Contoso.Api.Models;
+﻿using AppFramework.Core.Data;
+using AppFramework.Core.Services;
+using Contoso.Api.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace Contoso.Api
     /// <summary>
     /// Client class to access Yelp API.
     /// </summary>
-    public sealed class Client : ClientBase
+    public sealed class Client : ClientApiBase
     {
         #region Variables
 
@@ -47,6 +48,14 @@ namespace Contoso.Api
 
         #region Methods
         
+        public async Task<UserResponse> AuthenticateAsync(string username, string password, CancellationToken ct)
+        {
+            var dic = new Dictionary<string, string>();
+            dic.Add("username", username);
+            dic.Add("password", password);
+            return await this.PostFormContentAsync<UserResponse>("api/Authentication", dic, ct);
+        }
+
         #endregion
     }
 }

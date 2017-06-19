@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using AppFramework.Core.Models;
+using Newtonsoft.Json;
 
 namespace Contoso.Api.Models
 {
@@ -15,5 +16,17 @@ namespace Contoso.Api.Models
 
         [JsonProperty("code")]
         public string Code { get; set; }
+    }
+
+    public sealed class UserResponse : ResponseBase
+    {
+        [JsonProperty("accesstoken")]
+        public string AccessToken { get; set; }
+
+        [JsonProperty("username")]
+        public string Username { get; set; }
+
+        [JsonProperty("password")]
+        public string Password { get; set; }
     }
 }

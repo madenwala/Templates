@@ -12,13 +12,13 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
-      C# Portable Class Library for Contoso. Works with Windows 10, Windows 8, Windows Phone, ASP.NET, Xamarin (iOS/Android), Mac, and other .NET projects.
+      C# .NET Standard library for Contoso. Works with Windows 10, Windows 8, Windows Phone, ASP.NET, Xamarin (iOS/Android), Mac, and other .NET projects.
     </releaseNotes>
     <copyright>Copyright 2017</copyright>
-    <tags>Contoso Adenwala</tags>
+    <tags>Contoso</tags>
 
     <dependencies>
-      <dependency id="Newtonsoft.Json" version="10.0" />
+      <dependency id="AppFramework" />
     </dependencies>
     
   </metadata>
