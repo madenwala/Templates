@@ -92,6 +92,21 @@
             <param name="loc">Location object to calculate distance away with.</param>
             <returns>Distance amount.</returns>
         </member>
+        <member name="M:AppFramework.Core.Models.LocationModel.Validate(System.Double,System.Double)">
+            <summary>
+            Validates latitude and longitude values.
+            </summary>
+            <param name="latitude">Latitude value to test.</param>
+            <param name="longitude">Longitude value to test.</param>
+            <returns>True if valid, else false.</returns>
+        </member>
+        <member name="M:AppFramework.Core.Models.LocationModel.Validate(AppFramework.Core.Models.ILocationModel)">
+            <summary>
+            Validates latitude and longitude values.
+            </summary>
+            <param name="loc">Location model object to validate.</param>
+            <returns>True if valid, else false.</returns>
+        </member>
         <member name="T:AppFramework.Core.Models.LocationModelList`1">
             <summary>
             Collection for holding LocationModel instance.

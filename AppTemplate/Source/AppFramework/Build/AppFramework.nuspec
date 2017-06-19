@@ -19,19 +19,19 @@
 
       <group targetFramework=".netstandard1.1">
         <!--.NET Standard 1.1 dependencies go here-->
-        <dependency id="Newtonsoft.Json" version="10.0.2" />        
+        <dependency id="Newtonsoft.Json" version="10.0.3" />        
       </group>
       <group targetFramework=".netstandard1.4">
         <!--.NET Standard 1.4 dependencies go here-->
-        <dependency id="Newtonsoft.Json" version="10.0.2" />
+        <dependency id="Newtonsoft.Json" version="10.0.3" />
       </group>
       <group targetFramework="MonoAndroid">
         <!--MonoAndroid dependencies go here-->
-        <dependency id="Newtonsoft.Json" version="10.0.2" />
+        <dependency id="Newtonsoft.Json" version="10.0.3" />
       </group>
       <group targetFramework="Xamarin.iOS10">
         <!--Xamarin.iOS10 dependencies go here-->
-        <dependency id="Newtonsoft.Json" version="10.0.2" />
+        <dependency id="Newtonsoft.Json" version="10.0.3" />
       </group>
       <group targetFramework="uap">
         <!--UWP dependencies go here-->
@@ -42,7 +42,7 @@
         <dependency id="Microsoft.Toolkit.Uwp" version="1.4.1" />
         <dependency id="Microsoft.Toolkit.Uwp.UI.Controls" version="1.4.1" />
         <dependency id="Microsoft.Xaml.Behaviors.Uwp.Managed" version="2.0.0" />
-        <dependency id="Newtonsoft.Json" version="10.0.2" />
+        <dependency id="Newtonsoft.Json" version="10.0.3" />
         <dependency id="NotificationsExtensions.Win10" version="14332.0.2" />
         <dependency id="UWP.SDKforGoogleAnalytics.Managed" version="1.5.2" />
       </group>

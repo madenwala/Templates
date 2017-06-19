@@ -1,6 +1,6 @@
 ﻿{
   "dependencies": {
-    "AppFramework": "0.6.21-beta",
+    "AppFramework": "0.6.30-beta",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.3"
   },
   "frameworks": {
