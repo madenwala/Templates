@@ -191,27 +191,35 @@ namespace AppFramework.Core.Data
         protected async Task<T> PostFormContentAsync<T>(string url, IDictionary<string, string> dic, CancellationToken ct = default(CancellationToken))
         {
             var contents = new FormUrlEncodedContent(dic);
-            return await this.PostAsync<T>(url, contents);
+            return await this.PostAsync<T>(url, contents, ct);
         }
 
         protected async Task<string> PostFormContentAsync(string url, IDictionary<string, string> dic, CancellationToken ct = default(CancellationToken))
         {
             var contents = new FormUrlEncodedContent(dic);
-            return await this.PostAsync(url, contents);
+            return await this.PostAsync(url, contents, ct);
         }
 
-        protected async Task<T> PostStringContentAsync<T>(string url, object model, CancellationToken ct = default(CancellationToken))
+        protected async Task<T> PostStringContentAsync<T>(string url, object data, CancellationToken ct = default(CancellationToken))
         {
-            if (model == null)
-                throw new ArgumentNullException(nameof(model));
-            var contents = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(model));
-            return await this.PostAsync<T>(url, contents);
+            if (data == null)
+                throw new ArgumentNullException(nameof(data));
+            var contents = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(data));
+            return await this.PostAsync<T>(url, contents, ct);
         }
 
         protected async Task<string> PostStringContentAsync(string url, string data, CancellationToken ct = default(CancellationToken))
         {
             var contents = new StringContent(data);
-            return await this.PostAsync(url, contents);
+            return await this.PostAsync(url, contents, ct);
+        }
+
+        protected async Task<HttpResponseMessage> PostResponseStringContentAsync(string url, object data, CancellationToken ct = default(CancellationToken))
+        {
+            if (data == null)
+                throw new ArgumentNullException(nameof(data));
+            var contents = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(data));
+            return await this.PostResponseAsync(url, contents, ct);
         }
 
         //public async Task<JsonValue> PostAsync(string relativeUri)
