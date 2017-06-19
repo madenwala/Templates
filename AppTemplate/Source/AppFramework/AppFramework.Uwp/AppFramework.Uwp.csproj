@@ -319,11 +319,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="FlurryWin8SDK">
-      <HintPath>..\..\Dependencies\FlurryWin8SDK.winmd</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <SDKReference Include="Microsoft.Advertising.Xaml, Version=10.0">
       <Name>Microsoft Advertising SDK for XAML</Name>
     </SDKReference>
@@ -348,6 +343,11 @@
       <Project>{babc3ad0-0404-47fe-8f7c-4ace7272b8ad}</Project>
       <Name>AppFramework.NetStandard</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="FlurryWin8SDK">
+      <HintPath>..\Dependencies\FlurryWin8SDK.winmd</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
