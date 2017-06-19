@@ -1,9 +1,10 @@
-using System;
+﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Contoso.Api.Models;
+using System.Threading;
 
-namespace Contoso.Api.Test
+namespace Contoso.Api.Tests
 {
-    [TestClass]
     public class UnitTest1
     {
         #region Variables
@@ -19,12 +20,19 @@ namespace Contoso.Api.Test
 
         public UnitTest1()
         {
-            _client = new Client(APP_ID, APP_SECRET);
+            _client = new Client(APP_ID, APP_SECRET, null);
         }
 
         #endregion
 
         #region Methods
+
+        [TestMethod]
+        public void TestAuthentication()
+        {
+            UserResponse response = _client.AuthenticateAsync("username", "password", CancellationToken.None).Result;
+
+        }
 
         [TestMethod]
         public void TestMethod1()
