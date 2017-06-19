@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AppFramework" Version="0.6.26-beta" />
+    <PackageReference Include="AppFramework" Version="0.6.30-beta" />
   </ItemGroup>
 
 </Project>
