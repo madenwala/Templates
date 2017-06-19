@@ -117,6 +117,7 @@ namespace AppFramework.Core.Data
             this.Log(response);
             response.EnsureSuccessStatusCode();
             var data = await response.Content.ReadAsStringAsync();
+            this.Log(data);
             return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(data);
         }
 
@@ -147,6 +148,7 @@ namespace AppFramework.Core.Data
         protected async Task<T> PostAsync<T>(string url, HttpContent contents = default(HttpContent), CancellationToken ct = default(CancellationToken))
         {
             string data = await this.PostAsync(url, contents, ct);
+            this.Log(data);
             if (string.IsNullOrEmpty(data))
                 return default(T);
             else
@@ -183,7 +185,6 @@ namespace AppFramework.Core.Data
             var response = await this.Client.PostAsync(this.GetUri(url), content, ct);
             this.Log(response);
             response.EnsureSuccessStatusCode();
-
             return response;
         }
 
@@ -301,6 +302,13 @@ namespace AppFramework.Core.Data
 
         #region Logging
 
+        private void Log(string message, params object[] args)
+        {
+            if (this.Logger == null)
+                return;
+            this.Logger.Log(message, args);
+        }
+
         /// <summary>
         /// Logs HttpRequest information to the application logger.
         /// </summary>
@@ -309,13 +317,10 @@ namespace AppFramework.Core.Data
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
-
-            if (this.Logger == null)
-                return;
-
+            
             try
             {
-                this.Logger.Log(
+                this.Log(
                     Environment.NewLine + "---------------------------------" + Environment.NewLine +
                     "WEB REQUEST to {0}" + Environment.NewLine +
                     "-Method: {1}" + Environment.NewLine +
@@ -331,7 +336,7 @@ namespace AppFramework.Core.Data
             }
             catch(Exception ex)
             {
-                this.Logger.Log("Failed to log HttpRequestMessage: {0}", ex);
+                this.Logger.LogException(ex, "Failed to log HttpRequestMessage: {0}", ex.Message);
             }
         }
 
@@ -343,15 +348,12 @@ namespace AppFramework.Core.Data
         {
             if (response == null)
                 throw new ArgumentNullException(nameof(response));
-
-            if (this.Logger == null)
-                return;
-
+            
             this.Log(response.RequestMessage);
 
             try
             {
-                this.Logger.Log(
+                this.Log(
                     Environment.NewLine + "---------------------------------" + Environment.NewLine +
                     "WEB RESPONSE to {0}" + Environment.NewLine +
                     "-HttpStatus: {1}" + Environment.NewLine +
@@ -369,7 +371,7 @@ namespace AppFramework.Core.Data
             }
             catch (Exception ex)
             {
-                this.Logger.Log("Failed to log HttpRequestMessage: {0}", ex);
+                this.Logger.LogException(ex, "Failed to log HttpRequestMessage: {0}", ex.Message);
             }
         }
 
