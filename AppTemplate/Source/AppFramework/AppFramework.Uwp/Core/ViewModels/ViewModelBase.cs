@@ -215,7 +215,7 @@ namespace AppFramework.Core.ViewModels
                 auth.UserAuthenticatedStatusChanged += AuthenticationManager_UserAuthenticated;
             }
 
-            if (this.RequiresAuthorization && auth.IsReauthenticationNeeded)
+            if (this.RequiresAuthorization && auth?.IsReauthenticationNeeded == true)
             {
                 if(this.IsUserAuthenticated && (RefreshAccessTokenTask == null || RefreshAccessTokenTask.IsSuccessfullyCompleted == false))
                 {

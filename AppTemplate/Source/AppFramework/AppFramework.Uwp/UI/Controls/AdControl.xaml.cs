@@ -27,11 +27,11 @@ namespace AppFramework.UI.Controls
 
             this.IsTabStop = false;
 
-            devCenterAd.ApplicationId = DevCenterAdAppID;
-            devCenterAd.AdUnitId = DevCenterAdUnitID;
+            if (!string.IsNullOrEmpty(DevCenterAdAppID)) devCenterAd.ApplicationId = DevCenterAdAppID;
+            if (!string.IsNullOrEmpty(DevCenterAdUnitID)) devCenterAd.AdUnitId = DevCenterAdUnitID;
 
-            adDuplex.AppKey = AdDuplexAppKey;
-            adDuplex.AdUnitId = AdDuplexAdUnitID;
+            if (!string.IsNullOrEmpty(AdDuplexAppKey)) adDuplex.AppKey = AdDuplexAppKey;
+            if (!string.IsNullOrEmpty(AdDuplexAdUnitID)) adDuplex.AdUnitId = AdDuplexAdUnitID;
 
             if (PlatformBase.IsDebugMode)
             {
