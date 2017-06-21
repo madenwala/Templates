@@ -103,31 +103,34 @@ namespace AppFramework.Core.Data
         /// Gets data from the specified URL.
         /// </summary>
         /// <typeparam name="T">Type for the strongly typed class representing data returned from the URL.</typeparam>
-        /// <param name="url">URL to retrieve data from.</param>should be deserialized.</param>
-        /// <param name="retryCount">Number of retry attempts if a call fails. Default is zero.</param>
-        /// <param name="serializerType">Specifies how the data should be deserialized.</param>
+        /// <param name="url">URL to retrieve data from should be deserialized.</param>
         /// <returns>Instance of the type specified representing the data returned from the URL.</returns>
-        /// <summary>
         protected async Task<T> GetAsync<T>(string url, CancellationToken ct = default(CancellationToken))
         {
             if (string.IsNullOrEmpty(url))
                 throw new ArgumentNullException(nameof(url));
 
             var response = await this.Client.GetAsync(new Uri(this.BaseUri, url), ct);
-            this.Log(response);
+            await this.LogAsync(response);
             response.EnsureSuccessStatusCode();
             var data = await response.Content.ReadAsStringAsync();
             this.Log(data);
             return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(data);
         }
 
+        /// <summary>
+        /// Gets an HttpResponseMessage from a specified URL.
+        /// </summary>
+        /// <param name="url">URL of the service to call.</param>
+        /// <param name="ct">Cancellation token.</param>
+        /// <returns>Returns an HttpResponseMessage from the URL specified.</returns>
         protected async Task<HttpResponseMessage> GetResponseAsync(string url, CancellationToken ct = default(CancellationToken))
         {
             if (string.IsNullOrEmpty(url))
                 throw new ArgumentNullException(nameof(url));
 
             var response = await this.Client.GetAsync(new Uri(this.BaseUri, url), ct);
-            this.Log(response);
+            await this.LogAsync(response);
             response.EnsureSuccessStatusCode();
             return response;
         }
@@ -143,7 +146,6 @@ namespace AppFramework.Core.Data
         /// <param name="url">URL to retrieve data from.</param>
         /// <param name="contents">Any content that should be passed into the post.</param>
         /// <param name="ct">Cancellation token.</param>
-        /// <param name="serializerType">Specifies how the data should be deserialized.</param>
         /// <returns>Instance of the type specified representing the data returned from the URL.</returns>
         protected async Task<T> PostAsync<T>(string url, HttpContent contents = default(HttpContent), CancellationToken ct = default(CancellationToken))
         {
@@ -161,7 +163,6 @@ namespace AppFramework.Core.Data
         /// <param name="url">URL to retrieve data from.</param>
         /// <param name="content">Any content that should be passed into the post.</param>
         /// <param name="ct">Cancellation token.</param>
-        /// <param name="serializerType">Specifies how the data should be deserialized.</param>
         /// <returns>Response contents as string else null if nothing.</returns>
         protected async Task<string> PostAsync(string url, HttpContent content = default(HttpContent), CancellationToken ct = default(CancellationToken))
         {
@@ -175,7 +176,6 @@ namespace AppFramework.Core.Data
         /// <param name="url">URL to retrieve data from.</param>
         /// <param name="content">Any content that should be passed into the post.</param>
         /// <param name="ct">Cancellation token.</param>
-        /// <param name="serializerType">Specifies how the data should be deserialized.</param>
         /// <returns>Response contents as string else null if nothing.</returns>
         protected async Task<HttpResponseMessage> PostResponseAsync(string url, HttpContent content = default(HttpContent), CancellationToken ct = default(CancellationToken))
         {
@@ -183,7 +183,7 @@ namespace AppFramework.Core.Data
                 throw new ArgumentNullException(nameof(url));
 
             var response = await this.Client.PostAsync(this.GetUri(url), content, ct);
-            this.Log(response);
+            await this.LogAsync(response);
             response.EnsureSuccessStatusCode();
             return response;
         }
@@ -321,13 +321,20 @@ namespace AppFramework.Core.Data
         /// Logs HttpRequest information to the application logger.
         /// </summary>
         /// <param name="request">Request to log.</param>
-        private void Log(HttpRequestMessage request)
+        private async Task LogAsync(HttpRequestMessage request)
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
             
             try
             {
+                string content = null;
+                try
+                {
+                    content = request.Content == null ? null : await request.Content.ReadAsStringAsync();
+                }
+                catch { }
+
                 this.Log(
                     Environment.NewLine + "---------------------------------" + Environment.NewLine +
                     "WEB REQUEST to {0}" + Environment.NewLine +
@@ -339,7 +346,7 @@ namespace AppFramework.Core.Data
                     request.RequestUri.OriginalString,
                     request.Method.Method,
                     request.Headers?.ToString(),
-                    request.Content?.ReadAsStringAsync().Result
+                    content
                     );
             }
             catch(Exception ex)
@@ -352,12 +359,12 @@ namespace AppFramework.Core.Data
         /// Logs the HttpResponse object to the application logger.
         /// </summary>
         /// <param name="response">Response to log.</param>
-        private void Log(HttpResponseMessage response)
+        private async Task LogAsync(HttpResponseMessage response)
         {
             if (response == null)
                 throw new ArgumentNullException(nameof(response));
             
-            this.Log(response.RequestMessage);
+            await this.LogAsync(response.RequestMessage);
 
             try
             {
@@ -374,7 +381,7 @@ namespace AppFramework.Core.Data
                     string.Format("{0} {1}", (int)response.StatusCode, response.StatusCode.ToString()),
                     response.ReasonPhrase,
                     Convert.ToDecimal(Convert.ToDouble(response.Content.Headers.ContentLength) / 1024),
-                    response.Content?.ReadAsStringAsync().Result
+                    await response.Content?.ReadAsStringAsync()
                     );
             }
             catch (Exception ex)
