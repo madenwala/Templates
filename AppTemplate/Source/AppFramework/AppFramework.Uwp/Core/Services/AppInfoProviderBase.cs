@@ -153,7 +153,7 @@ namespace AppFramework.Core.Services
         {
             try
             {
-                var assembly = typeof(TypeUtility).GetTypeInfo().Assembly.GetName().Name;
+                var assembly = typeof(AppInfoProviderBase).GetTypeInfo().Assembly.GetName().Name;
                 string filename = $"ms-appx:///{assembly}/VERSION.txt";
                 Uri appUri = new Uri(filename);//File name should be prefixed with 'ms-appx:///Assets/* 
                 StorageFile file = StorageFile.GetFileFromApplicationUriAsync(appUri).AsTask().ConfigureAwait(false).GetAwaiter().GetResult();
