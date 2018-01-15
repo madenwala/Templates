@@ -17,6 +17,7 @@ namespace AppFramework.Core.Services.Analytics
             _tracker = GoogleAnalytics.AnalyticsManager.Current.CreateTracker(key);
             GoogleAnalytics.AnalyticsManager.Current.IsDebug = PlatformBase.IsDebugMode;
             GoogleAnalytics.AnalyticsManager.Current.ReportUncaughtExceptions = true;
+            GoogleAnalytics.AnalyticsManager.Current.AutoAppLifetimeMonitoring = true;
         }
 
         protected override Task OnInitializeAsync()
@@ -28,7 +29,7 @@ namespace AppFramework.Core.Services.Analytics
 
         public override void Error(Exception ex, string message = null)
         {
-            _tracker.Send(HitBuilder.CreateException(ex.ToString(), false).Build());
+            _tracker.Send(HitBuilder.CreateException("Exception: " + exception.Message + "->" + ex.StackTrace, false).Build());
         }
 
         public override void Event(string eventName, Dictionary<string, string> properties = null, Dictionary<string, double> metrics = null)
