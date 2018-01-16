@@ -1,7 +1,6 @@
 ﻿using AppFramework.Core.Commands;
 using AppFramework.Core.Extensions;
 using AppFramework.Core.ViewModels;
-using Microsoft.Toolkit.Uwp;
 using Microsoft.Toolkit.Uwp.Helpers;
 using System;
 using System.Collections.Generic;
@@ -260,11 +259,12 @@ namespace AppFramework.Core.Services
             sb.AppendLine(string.Format("CULTURE: {0}  UI CULTURE: {1}", CultureInfo.CurrentCulture.Name, CultureInfo.CurrentUICulture.Name));
             sb.AppendLine(string.Format("OS: {0} {1} {2} {3}", SystemInformation.OperatingSystem, SystemInformation.OperatingSystemArchitecture, SystemInformation.OperatingSystemVersion, SystemInformation.DeviceFamily));
             sb.AppendLine(string.Format("DEVICE: {0} {1}", SystemInformation.DeviceManufacturer, SystemInformation.DeviceModel));
-            sb.AppendLine(string.Format("INTERNET: {0} {3} CONNECTED: {1} METERED: {2}", 
-                NetworkHelper.Instance.ConnectionInformation.ConnectionType, 
-                NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable ? "Yes" : "No", 
-                NetworkHelper.Instance.ConnectionInformation.IsInternetOnMeteredConnection ? "Yes" : "No",
-                NetworkHelper.Instance.ConnectionInformation.SignalStrength));
+            // TODO Re-enable this 
+            //      sb.AppendLine(string.Format("INTERNET: {0} {1} CONNECTED: {2} METERED: {3}", 
+            //    NetworkHelper.Instance.ConnectionInformation.ConnectionType,
+            //    NetworkHelper.Instance.ConnectionInformation.SignalStrength, 
+            //    NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable ? "Yes" : "No", 
+            //    NetworkHelper.Instance.ConnectionInformation.IsInternetOnMeteredConnection ? "Yes" : "No"));
             
 
             if (Window.Current != null)

@@ -29,7 +29,7 @@ namespace AppFramework.Core.Services.Analytics
 
         public override void Error(Exception ex, string message = null)
         {
-            _tracker.Send(HitBuilder.CreateException("Exception: " + exception.Message + "->" + ex.StackTrace, false).Build());
+            _tracker.Send(HitBuilder.CreateException("Exception: " + ex.Message + "->" + ex.StackTrace, false).Build());
         }
 
         public override void Event(string eventName, Dictionary<string, string> properties = null, Dictionary<string, double> metrics = null)
