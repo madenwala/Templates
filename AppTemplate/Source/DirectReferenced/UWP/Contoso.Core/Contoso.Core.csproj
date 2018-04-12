@@ -109,31 +109,31 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <PRIResource Include="..\..\NuGetReferened\Contoso.Core\Strings\en-US\Account.resw">
+    <PRIResource Include="..\..\..\NuGetReferened\UWP\Contoso.Core\Strings\en-US\Account.resw">
       <Link>Strings\en-US\Account.resw</Link>
       <Generator>ReswFileCodeGenerator</Generator>
       <LastGenOutput>Account.cs</LastGenOutput>
       <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
     </PRIResource>
-    <PRIResource Include="..\..\NuGetReferened\Contoso.Core\Strings\en-US\BackgroundTasks.resw">
+    <PRIResource Include="..\..\..\NuGetReferened\UWP\Contoso.Core\Strings\en-US\BackgroundTasks.resw">
       <Link>Strings\en-US\BackgroundTasks.resw</Link>
       <Generator>ReswFileCodeGenerator</Generator>
       <LastGenOutput>BackgroundTasks.cs</LastGenOutput>
       <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
     </PRIResource>
-    <PRIResource Include="..\..\NuGetReferened\Contoso.Core\Strings\en-US\Location.resw">
+    <PRIResource Include="..\..\..\NuGetReferened\UWP\Contoso.Core\Strings\en-US\Location.resw">
       <Link>Strings\en-US\Location.resw</Link>
       <Generator>ReswFileCodeGenerator</Generator>
       <LastGenOutput>Location.cs</LastGenOutput>
       <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
     </PRIResource>
-    <PRIResource Include="..\..\NuGetReferened\Contoso.Core\Strings\en-US\Resources.resw">
+    <PRIResource Include="..\..\..\NuGetReferened\UWP\Contoso.Core\Strings\en-US\Resources.resw">
       <Link>Strings\en-US\Resources.resw</Link>
       <Generator>ReswFileCodeGenerator</Generator>
       <LastGenOutput>Resources.cs</LastGenOutput>
       <CustomToolNamespace>Contoso.Core.Strings</CustomToolNamespace>
     </PRIResource>
-    <PRIResource Include="..\..\NuGetReferened\Contoso.Core\Strings\en-US\Search.resw">
+    <PRIResource Include="..\..\..\NuGetReferened\UWP\Contoso.Core\Strings\en-US\Search.resw">
       <Link>Strings\en-US\Search.resw</Link>
       <Generator>ReswFileCodeGenerator</Generator>
       <LastGenOutput>Search.cs</LastGenOutput>
@@ -141,133 +141,123 @@
     </PRIResource>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\Data\ClientApi.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\Data\ClientApi.cs">
       <Link>Data\ClientApi.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\Data\MicrosoftApi.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\Data\MicrosoftApi.cs">
       <Link>Data\MicrosoftApi.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\Models\AppSettings.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\Models\AppSettings.cs">
       <Link>Models\AppSettings.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\Models\ClientApiModels.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\Models\ClientApiModels.cs">
       <Link>Models\ClientApiModels.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\Models\ItemModel.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\Models\ItemModel.cs">
       <Link>Models\ItemModel.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\Platform.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\Platform.cs">
       <Link>Platform.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\Properties\AssemblyInfo.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\Services\AppInfoProvider.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\Services\AppInfoProvider.cs">
       <Link>Services\AppInfoProvider.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\Services\AuthorizationManager.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\Services\AuthorizationManager.cs">
       <Link>Services\AuthorizationManager.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\Services\BackgroundTasksManager.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\Services\BackgroundTasksManager.cs">
       <Link>Services\BackgroundTasksManager.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\Services\NavigationManagerBase.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\Services\NavigationManagerBase.cs">
       <Link>Services\NavigationManagerBase.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\Services\NotificationsManager.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\Services\NotificationsManager.cs">
       <Link>Services\NotificationsManager.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\Services\SharingManager.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\Services\SharingManager.cs">
       <Link>Services\SharingManager.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\Strings\en-US\Account.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\Strings\en-US\Account.cs">
       <Link>Strings\en-US\Account.cs</Link>
       <DependentUpon>Account.resw</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\Strings\en-US\BackgroundTasks.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\Strings\en-US\BackgroundTasks.cs">
       <Link>Strings\en-US\BackgroundTasks.cs</Link>
       <DependentUpon>BackgroundTasks.resw</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\Strings\en-US\Location.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\Strings\en-US\Location.cs">
       <Link>Strings\en-US\Location.cs</Link>
       <DependentUpon>Location.resw</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\Strings\en-US\Resources.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\Strings\en-US\Resources.cs">
       <Link>Strings\en-US\Resources.cs</Link>
       <DependentUpon>Resources.resw</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\Strings\en-US\Search.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\Strings\en-US\Search.cs">
       <Link>Strings\en-US\Search.cs</Link>
       <DependentUpon>Search.resw</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\ViewModels\AccountForgotViewModel.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\ViewModels\AccountForgotViewModel.cs">
       <Link>ViewModels\AccountForgotViewModel.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\ViewModels\AccountSignInViewModel.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\ViewModels\AccountSignInViewModel.cs">
       <Link>ViewModels\AccountSignInViewModel.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\ViewModels\AccountSignUpViewModel.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\ViewModels\AccountSignUpViewModel.cs">
       <Link>ViewModels\AccountSignUpViewModel.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\ViewModels\DebuggingViewModel.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\ViewModels\DebuggingViewModel.cs">
       <Link>ViewModels\DebuggingViewModel.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\ViewModels\DetailsViewModel.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\ViewModels\DetailsViewModel.cs">
       <Link>ViewModels\DetailsViewModel.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\ViewModels\GeneralSettingsViewModel.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\ViewModels\GeneralSettingsViewModel.cs">
       <Link>ViewModels\GeneralSettingsViewModel.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\ViewModels\MainViewModel.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\ViewModels\MainViewModel.cs">
       <Link>ViewModels\MainViewModel.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\ViewModels\PrivacyPolicyViewModel.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\ViewModels\PrivacyPolicyViewModel.cs">
       <Link>ViewModels\PrivacyPolicyViewModel.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\ViewModels\SearchViewModel.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\ViewModels\SearchViewModel.cs">
       <Link>ViewModels\SearchViewModel.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\ViewModels\SettingsViewModel.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\ViewModels\SettingsViewModel.cs">
       <Link>ViewModels\SettingsViewModel.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\ViewModels\ShellViewModel.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\ViewModels\ShellViewModel.cs">
       <Link>ViewModels\ShellViewModel.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\ViewModels\TermsOfServiceViewModel.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\ViewModels\TermsOfServiceViewModel.cs">
       <Link>ViewModels\TermsOfServiceViewModel.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\ViewModels\ViewModelBase.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\ViewModels\ViewModelBase.cs">
       <Link>ViewModels\ViewModelBase.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\ViewModels\WelcomeViewModel.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\ViewModels\WelcomeViewModel.cs">
       <Link>ViewModels\WelcomeViewModel.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.Core\ViewModels\_NewViewModel.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.Core\ViewModels\_NewViewModel.cs">
       <Link>ViewModels\_NewViewModel.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\AppFramework\AppFramework.NetStandard\AppFramework.NetStandard.csproj">
-      <Project>{babc3ad0-0404-47fe-8f7c-4ace7272b8ad}</Project>
-      <Name>AppFramework.NetStandard</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\AppFramework\AppFramework.Uwp\AppFramework.Uwp.csproj">
-      <Project>{65f2272c-d17a-45be-982a-c6637407657a}</Project>
-      <Name>AppFramework.Uwp</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="..\..\NuGetReferened\Contoso.Core\Properties\Contoso.Core.rd.xml">
+    <EmbeddedResource Include="..\..\..\NuGetReferened\UWP\Contoso.Core\Properties\Contoso.Core.rd.xml">
       <Link>Properties\Contoso.Core.rd.xml</Link>
     </EmbeddedResource>
   </ItemGroup>
@@ -275,6 +265,16 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.0.8</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\AppFramework\AppFramework.NetStandard\AppFramework.NetStandard.csproj">
+      <Project>{babc3ad0-0404-47fe-8f7c-4ace7272b8ad}</Project>
+      <Name>AppFramework.NetStandard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\AppFramework\AppFramework.Uwp\AppFramework.Uwp.csproj">
+      <Project>{65f2272c-d17a-45be-982a-c6637407657a}</Project>
+      <Name>AppFramework.Uwp</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

@@ -97,321 +97,321 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <AppxManifest Include="..\..\NuGetReferened\Contoso.UI\Package.appxmanifest">
+    <AppxManifest Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Package.appxmanifest">
       <Link>Package.appxmanifest</Link>
       <SubType>Designer</SubType>
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\NuGetReferened\Contoso.UI\App.xaml.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.UI\App.xaml.cs">
       <Link>App.xaml.cs</Link>
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.UI\Controls\SearchBox.xaml.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Controls\SearchBox.xaml.cs">
       <Link>Controls\SearchBox.xaml.cs</Link>
       <DependentUpon>SearchBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.UI\Properties\AssemblyInfo.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.UI\Resources\Common.xaml.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Resources\Common.xaml.cs">
       <Link>Resources\Common.xaml.cs</Link>
       <DependentUpon>Common.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.UI\Resources\ControlStyles.xaml.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Resources\ControlStyles.xaml.cs">
       <Link>Resources\ControlStyles.xaml.cs</Link>
       <DependentUpon>ControlStyles.xaml</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.UI\Resources\DataTemplates.xaml.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Resources\DataTemplates.xaml.cs">
       <Link>Resources\DataTemplates.xaml.cs</Link>
       <DependentUpon>DataTemplates.xaml</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.UI\Resources\DeviceSpecificOverrides.xaml.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Resources\DeviceSpecificOverrides.xaml.cs">
       <Link>Resources\DeviceSpecificOverrides.xaml.cs</Link>
       <DependentUpon>DeviceSpecificOverrides.xaml</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.UI\Resources\ListStyles.xaml.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Resources\ListStyles.xaml.cs">
       <Link>Resources\ListStyles.xaml.cs</Link>
       <DependentUpon>ListStyles.xaml</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.UI\Resources\TextStyles.xaml.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Resources\TextStyles.xaml.cs">
       <Link>Resources\TextStyles.xaml.cs</Link>
       <DependentUpon>TextStyles.xaml</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.UI\Services\NavigationManager.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Services\NavigationManager.cs">
       <Link>Services\NavigationManager.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.UI\Views\AccountForgotView.xaml.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Views\AccountForgotView.xaml.cs">
       <Link>Views\AccountForgotView.xaml.cs</Link>
       <DependentUpon>AccountForgotView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.UI\Views\AccountSignInView.xaml.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Views\AccountSignInView.xaml.cs">
       <Link>Views\AccountSignInView.xaml.cs</Link>
       <DependentUpon>AccountSignInView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.UI\Views\AccountSignUpView.xaml.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Views\AccountSignUpView.xaml.cs">
       <Link>Views\AccountSignUpView.xaml.cs</Link>
       <DependentUpon>AccountSignUpView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.UI\Views\DetailsView.xaml.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Views\DetailsView.xaml.cs">
       <Link>Views\DetailsView.xaml.cs</Link>
       <DependentUpon>DetailsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.UI\Views\MainView.xaml.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Views\MainView.xaml.cs">
       <Link>Views\MainView.xaml.cs</Link>
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.UI\Views\SearchView.xaml.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Views\SearchView.xaml.cs">
       <Link>Views\SearchView.xaml.cs</Link>
       <DependentUpon>SearchView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.UI\Views\SettingsView.xaml.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Views\SettingsView.xaml.cs">
       <Link>Views\SettingsView.xaml.cs</Link>
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.UI\Views\ShellView.xaml.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Views\ShellView.xaml.cs">
       <Link>Views\ShellView.xaml.cs</Link>
       <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.UI\Views\ViewBase.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Views\ViewBase.cs">
       <Link>Views\ViewBase.cs</Link>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.UI\Views\WelcomeView.xaml.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Views\WelcomeView.xaml.cs">
       <Link>Views\WelcomeView.xaml.cs</Link>
       <DependentUpon>WelcomeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\NuGetReferened\Contoso.UI\Views\_NewView.xaml.cs">
+    <Compile Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Views\_NewView.xaml.cs">
       <Link>Views\_NewView.xaml.cs</Link>
       <DependentUpon>_NewView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\LockScreenLogo.scale-100.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\LockScreenLogo.scale-100.png">
       <Link>Assets\LockScreenLogo.scale-100.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\LockScreenLogo.scale-125.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\LockScreenLogo.scale-125.png">
       <Link>Assets\LockScreenLogo.scale-125.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\LockScreenLogo.scale-150.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\LockScreenLogo.scale-150.png">
       <Link>Assets\LockScreenLogo.scale-150.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\LockScreenLogo.scale-200.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\LockScreenLogo.scale-200.png">
       <Link>Assets\LockScreenLogo.scale-200.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\LockScreenLogo.scale-400.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\LockScreenLogo.scale-400.png">
       <Link>Assets\LockScreenLogo.scale-400.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\MicrosoftLogo.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\MicrosoftLogo.png">
       <Link>Assets\MicrosoftLogo.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\SplashScreen.scale-100.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\SplashScreen.scale-100.png">
       <Link>Assets\SplashScreen.scale-100.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\SplashScreen.scale-125.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\SplashScreen.scale-125.png">
       <Link>Assets\SplashScreen.scale-125.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\SplashScreen.scale-150.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\SplashScreen.scale-150.png">
       <Link>Assets\SplashScreen.scale-150.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\SplashScreen.scale-200.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\SplashScreen.scale-200.png">
       <Link>Assets\SplashScreen.scale-200.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\SplashScreen.scale-400.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\SplashScreen.scale-400.png">
       <Link>Assets\SplashScreen.scale-400.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square150x150Logo.scale-100.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square150x150Logo.scale-100.png">
       <Link>Assets\Square150x150Logo.scale-100.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square150x150Logo.scale-125.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square150x150Logo.scale-125.png">
       <Link>Assets\Square150x150Logo.scale-125.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square150x150Logo.scale-150.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square150x150Logo.scale-150.png">
       <Link>Assets\Square150x150Logo.scale-150.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square150x150Logo.scale-200.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square150x150Logo.scale-200.png">
       <Link>Assets\Square150x150Logo.scale-200.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square150x150Logo.scale-400.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square150x150Logo.scale-400.png">
       <Link>Assets\Square150x150Logo.scale-400.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square310x310Logo.scale-100.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square310x310Logo.scale-100.png">
       <Link>Assets\Square310x310Logo.scale-100.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square310x310Logo.scale-125.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square310x310Logo.scale-125.png">
       <Link>Assets\Square310x310Logo.scale-125.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square310x310Logo.scale-150.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square310x310Logo.scale-150.png">
       <Link>Assets\Square310x310Logo.scale-150.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square310x310Logo.scale-200.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square310x310Logo.scale-200.png">
       <Link>Assets\Square310x310Logo.scale-200.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square310x310Logo.scale-400.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square310x310Logo.scale-400.png">
       <Link>Assets\Square310x310Logo.scale-400.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.scale-100.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.scale-100.png">
       <Link>Assets\Square44x44Logo.scale-100.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.scale-125.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.scale-125.png">
       <Link>Assets\Square44x44Logo.scale-125.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.scale-150.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.scale-150.png">
       <Link>Assets\Square44x44Logo.scale-150.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.scale-200.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.scale-200.png">
       <Link>Assets\Square44x44Logo.scale-200.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.scale-400.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.scale-400.png">
       <Link>Assets\Square44x44Logo.scale-400.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.targetsize-16.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.targetsize-16.png">
       <Link>Assets\Square44x44Logo.targetsize-16.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.targetsize-16_altform-unplated.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.targetsize-16_altform-unplated.png">
       <Link>Assets\Square44x44Logo.targetsize-16_altform-unplated.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.targetsize-20.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.targetsize-20.png">
       <Link>Assets\Square44x44Logo.targetsize-20.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.targetsize-20_altform-unplated.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.targetsize-20_altform-unplated.png">
       <Link>Assets\Square44x44Logo.targetsize-20_altform-unplated.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.targetsize-24.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.targetsize-24.png">
       <Link>Assets\Square44x44Logo.targetsize-24.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
       <Link>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.targetsize-256.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.targetsize-256.png">
       <Link>Assets\Square44x44Logo.targetsize-256.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.targetsize-256_altform-unplated.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.targetsize-256_altform-unplated.png">
       <Link>Assets\Square44x44Logo.targetsize-256_altform-unplated.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.targetsize-30.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.targetsize-30.png">
       <Link>Assets\Square44x44Logo.targetsize-30.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.targetsize-30_altform-unplated.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.targetsize-30_altform-unplated.png">
       <Link>Assets\Square44x44Logo.targetsize-30_altform-unplated.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.targetsize-32.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.targetsize-32.png">
       <Link>Assets\Square44x44Logo.targetsize-32.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.targetsize-32_altform-unplated.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.targetsize-32_altform-unplated.png">
       <Link>Assets\Square44x44Logo.targetsize-32_altform-unplated.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.targetsize-36.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.targetsize-36.png">
       <Link>Assets\Square44x44Logo.targetsize-36.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.targetsize-36_altform-unplated.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.targetsize-36_altform-unplated.png">
       <Link>Assets\Square44x44Logo.targetsize-36_altform-unplated.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.targetsize-40.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.targetsize-40.png">
       <Link>Assets\Square44x44Logo.targetsize-40.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.targetsize-40_altform-unplated.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.targetsize-40_altform-unplated.png">
       <Link>Assets\Square44x44Logo.targetsize-40_altform-unplated.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.targetsize-48.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.targetsize-48.png">
       <Link>Assets\Square44x44Logo.targetsize-48.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.targetsize-48_altform-unplated.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.targetsize-48_altform-unplated.png">
       <Link>Assets\Square44x44Logo.targetsize-48_altform-unplated.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.targetsize-60.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.targetsize-60.png">
       <Link>Assets\Square44x44Logo.targetsize-60.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.targetsize-60_altform-unplated.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.targetsize-60_altform-unplated.png">
       <Link>Assets\Square44x44Logo.targetsize-60_altform-unplated.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.targetsize-64.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.targetsize-64.png">
       <Link>Assets\Square44x44Logo.targetsize-64.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.targetsize-64_altform-unplated.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.targetsize-64_altform-unplated.png">
       <Link>Assets\Square44x44Logo.targetsize-64_altform-unplated.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.targetsize-72.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.targetsize-72.png">
       <Link>Assets\Square44x44Logo.targetsize-72.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.targetsize-72_altform-unplated.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.targetsize-72_altform-unplated.png">
       <Link>Assets\Square44x44Logo.targetsize-72_altform-unplated.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.targetsize-80.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.targetsize-80.png">
       <Link>Assets\Square44x44Logo.targetsize-80.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.targetsize-80_altform-unplated.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.targetsize-80_altform-unplated.png">
       <Link>Assets\Square44x44Logo.targetsize-80_altform-unplated.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.targetsize-96.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.targetsize-96.png">
       <Link>Assets\Square44x44Logo.targetsize-96.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square44x44Logo.targetsize-96_altform-unplated.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square44x44Logo.targetsize-96_altform-unplated.png">
       <Link>Assets\Square44x44Logo.targetsize-96_altform-unplated.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square71x71Logo.scale-100.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square71x71Logo.scale-100.png">
       <Link>Assets\Square71x71Logo.scale-100.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square71x71Logo.scale-125.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square71x71Logo.scale-125.png">
       <Link>Assets\Square71x71Logo.scale-125.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square71x71Logo.scale-150.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square71x71Logo.scale-150.png">
       <Link>Assets\Square71x71Logo.scale-150.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square71x71Logo.scale-200.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square71x71Logo.scale-200.png">
       <Link>Assets\Square71x71Logo.scale-200.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Square71x71Logo.scale-400.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Square71x71Logo.scale-400.png">
       <Link>Assets\Square71x71Logo.scale-400.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\StoreLogo.scale-100.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\StoreLogo.scale-100.png">
       <Link>Assets\StoreLogo.scale-100.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\StoreLogo.scale-125.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\StoreLogo.scale-125.png">
       <Link>Assets\StoreLogo.scale-125.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\StoreLogo.scale-150.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\StoreLogo.scale-150.png">
       <Link>Assets\StoreLogo.scale-150.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\StoreLogo.scale-200.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\StoreLogo.scale-200.png">
       <Link>Assets\StoreLogo.scale-200.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\StoreLogo.scale-400.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\StoreLogo.scale-400.png">
       <Link>Assets\StoreLogo.scale-400.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Wide310x150Logo.scale-100.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Wide310x150Logo.scale-100.png">
       <Link>Assets\Wide310x150Logo.scale-100.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Wide310x150Logo.scale-125.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Wide310x150Logo.scale-125.png">
       <Link>Assets\Wide310x150Logo.scale-125.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Wide310x150Logo.scale-150.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Wide310x150Logo.scale-150.png">
       <Link>Assets\Wide310x150Logo.scale-150.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Wide310x150Logo.scale-200.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Wide310x150Logo.scale-200.png">
       <Link>Assets\Wide310x150Logo.scale-200.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Assets\Wide310x150Logo.scale-400.png">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Assets\Wide310x150Logo.scale-400.png">
       <Link>Assets\Wide310x150Logo.scale-400.png</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Properties\Default.rd.xml">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Properties\Default.rd.xml">
       <Link>Properties\Default.rd.xml</Link>
     </Content>
-    <Content Include="..\..\NuGetReferened\Contoso.UI\Resources\VCD.xml">
+    <Content Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Resources\VCD.xml">
       <Link>Resources\VCD.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\AppFramework\AppFramework.NetStandard\AppFramework.NetStandard.csproj">
+    <ProjectReference Include="..\..\..\AppFramework\AppFramework.NetStandard\AppFramework.NetStandard.csproj">
       <Project>{babc3ad0-0404-47fe-8f7c-4ace7272b8ad}</Project>
       <Name>AppFramework.NetStandard</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\AppFramework\AppFramework.Uwp\AppFramework.Uwp.csproj">
+    <ProjectReference Include="..\..\..\AppFramework\AppFramework.Uwp\AppFramework.Uwp.csproj">
       <Project>{65f2272c-d17a-45be-982a-c6637407657a}</Project>
       <Name>AppFramework.Uwp</Name>
     </ProjectReference>
@@ -436,103 +436,103 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="..\..\NuGetReferened\Contoso.UI\App.xaml">
+    <ApplicationDefinition Include="..\..\..\NuGetReferened\UWP\Contoso.UI\App.xaml">
       <Link>App.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="..\..\NuGetReferened\Contoso.UI\Controls\SearchBox.xaml">
+    <Page Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Controls\SearchBox.xaml">
       <Link>Controls\SearchBox.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\..\NuGetReferened\Contoso.UI\Resources\Common.xaml">
+    <Page Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Resources\Common.xaml">
       <Link>Resources\Common.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\..\NuGetReferened\Contoso.UI\Resources\ControlStyles.xaml">
+    <Page Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Resources\ControlStyles.xaml">
       <Link>Resources\ControlStyles.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="..\..\NuGetReferened\Contoso.UI\Resources\DataTemplates.xaml">
+    <Page Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Resources\DataTemplates.xaml">
       <Link>Resources\DataTemplates.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="..\..\NuGetReferened\Contoso.UI\Resources\DeviceSpecificOverrides.DeviceFamily-Xbox.xaml">
+    <Page Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Resources\DeviceSpecificOverrides.DeviceFamily-Xbox.xaml">
       <Link>Resources\DeviceSpecificOverrides.DeviceFamily-Xbox.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="..\..\NuGetReferened\Contoso.UI\Resources\DeviceSpecificOverrides.xaml">
+    <Page Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Resources\DeviceSpecificOverrides.xaml">
       <Link>Resources\DeviceSpecificOverrides.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="..\..\NuGetReferened\Contoso.UI\Resources\ListStyles.xaml">
+    <Page Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Resources\ListStyles.xaml">
       <Link>Resources\ListStyles.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="..\..\NuGetReferened\Contoso.UI\Resources\TextStyles.xaml">
+    <Page Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Resources\TextStyles.xaml">
       <Link>Resources\TextStyles.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="..\..\NuGetReferened\Contoso.UI\Views\AccountForgotView.xaml">
+    <Page Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Views\AccountForgotView.xaml">
       <Link>Views\AccountForgotView.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\..\NuGetReferened\Contoso.UI\Views\AccountSignInView.xaml">
+    <Page Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Views\AccountSignInView.xaml">
       <Link>Views\AccountSignInView.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\..\NuGetReferened\Contoso.UI\Views\AccountSignUpView.xaml">
+    <Page Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Views\AccountSignUpView.xaml">
       <Link>Views\AccountSignUpView.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\..\NuGetReferened\Contoso.UI\Views\DetailsView.xaml">
+    <Page Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Views\DetailsView.xaml">
       <Link>Views\DetailsView.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\..\NuGetReferened\Contoso.UI\Views\MainView.xaml">
+    <Page Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Views\MainView.xaml">
       <Link>Views\MainView.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\..\NuGetReferened\Contoso.UI\Views\SearchView.xaml">
+    <Page Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Views\SearchView.xaml">
       <Link>Views\SearchView.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\..\NuGetReferened\Contoso.UI\Views\SettingsView.xaml">
+    <Page Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Views\SettingsView.xaml">
       <Link>Views\SettingsView.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\..\NuGetReferened\Contoso.UI\Views\ShellView.xaml">
+    <Page Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Views\ShellView.xaml">
       <Link>Views\ShellView.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\..\NuGetReferened\Contoso.UI\Views\WelcomeView.xaml">
+    <Page Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Views\WelcomeView.xaml">
       <Link>Views\WelcomeView.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\..\NuGetReferened\Contoso.UI\Views\_NewView.xaml">
+    <Page Include="..\..\..\NuGetReferened\UWP\Contoso.UI\Views\_NewView.xaml">
       <Link>Views\_NewView.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
