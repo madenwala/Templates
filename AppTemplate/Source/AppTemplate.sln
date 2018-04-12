@@ -34,9 +34,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{A48D194A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFramework.Uwp", "AppFramework\AppFramework.Uwp\AppFramework.Uwp.csproj", "{65F2272C-D17A-45BE-982A-C6637407657A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFramework.NetStandard", "AppFramework\AppFramework.NetStandard\AppFramework.NetStandard.csproj", "{BABC3AD0-0404-47FE-8F7C-4ACE7272B8AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppFramework.NetStandard", "AppFramework\AppFramework.NetStandard\AppFramework.NetStandard.csproj", "{BABC3AD0-0404-47FE-8F7C-4ACE7272B8AD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFramework.PCL", "AppFramework\AppFramework.PCL\AppFramework.PCL.csproj", "{7E4D5095-590D-48A9-95D8-81C5982547D0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{568029F6-D5F3-4AD5-BB6B-B45F83D95D3F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -217,5 +219,8 @@ Global
 		{65F2272C-D17A-45BE-982A-C6637407657A} = {CB5D60BA-865B-480F-A205-7410FF7925D9}
 		{BABC3AD0-0404-47FE-8F7C-4ACE7272B8AD} = {CB5D60BA-865B-480F-A205-7410FF7925D9}
 		{7E4D5095-590D-48A9-95D8-81C5982547D0} = {CB5D60BA-865B-480F-A205-7410FF7925D9}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {63D89760-7C06-4CF6-8D29-5B6EE54125FA}
 	EndGlobalSection
 EndGlobal

@@ -229,7 +229,7 @@ namespace AppFramework.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        private void App_UnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
         {
             e.Handled = PlatformBase.CurrentCore.AppUnhandledException(e.Exception);
         }
