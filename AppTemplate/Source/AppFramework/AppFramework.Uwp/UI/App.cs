@@ -30,7 +30,7 @@ namespace AppFramework.UI
             this.Suspending += OnSuspending;
             this.UnhandledException += App_UnhandledException;
 
-            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.Xaml.ApplicationRequiresPointerMode"))
+            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent(nameof(Windows.UI.Xaml.ApplicationRequiresPointerMode)))
                 this.RequiresPointerMode = ApplicationRequiresPointerMode.WhenRequested;
         }
 
