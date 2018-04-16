@@ -119,6 +119,7 @@
     <Compile Include="Core\Models\ModelLists.cs" />
     <Compile Include="Core\Models\NotifyTaskCompletion.cs" />
     <Compile Include="Core\Serializers.cs" />
+    <Compile Include="Core\Services\Analytics\AppCenterAnalyticsService.cs" />
     <Compile Include="Core\ViewModels\IViewModel.cs" />
     <Compile Include="UI\Behaviors\ContextMenuRightClickBehavior.cs" />
     <Compile Include="UI\Controls\ApplicationFrame.Interstitial.cs" />
@@ -355,6 +356,12 @@
     </PackageReference>
     <PackageReference Include="HockeySDK.UWP">
       <Version>4.1.6</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AppCenter.Analytics">
+      <Version>1.5.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AppCenter.Crashes">
+      <Version>1.5.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.0.8</Version>
