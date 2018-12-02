@@ -393,9 +393,11 @@ namespace AppFramework.UI.Views
             catch (Exception ex)
             {
                 PlatformBase.CurrentCore.Logger.LogError(ex, "Error during " + msg);
+                throw;
             }
 
-            PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, msg);
+            if(PlatformBase.IsDebugMode)
+                PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, msg);
         }
 
         private void ViewBase_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
