@@ -12,7 +12,7 @@ namespace AppFramework.Core.ViewModels
 {
     /// <summary>
     /// ViewModelBase for views that need to display multiple separate sub-views which might have their own ViewModel instances. This 
-    /// CollectionViewModelBase can contain multiple ViewModels and set a current view model so that the frame can show appropriate 
+    /// <see cref="CollectionViewModelBase"/> can contain multiple ViewModels and set a current view model so that the frame can show appropriate 
     /// status data specific to the current view model.
     /// </summary>
     public abstract class CollectionViewModelBase : ViewModelBase
@@ -72,19 +72,28 @@ namespace AppFramework.Core.ViewModels
                 await this.SetCurrentAsync(this.CurrentViewModel);
         }
 
+        /// <summary>
+        /// Saves state on each ViewModel in the <see cref="ViewModels"/> collection. 
+        /// </summary>
+        /// <param name="e"><see cref="SaveStateEventArgs"/> parameter.</param>
+        /// <returns></returns>
         protected override async Task OnSaveStateAsync(SaveStateEventArgs e)
         {
-            try
+            // Call load on each sub-ViewModel in this collection when displaying this page
+            foreach (var vm in this.ViewModels)
             {
-                // Call load on each sub-ViewModel in this collection when displaying this page
-                foreach (var vm in this.ViewModels)
-                    if (vm != null && vm.IsInitialized)
+                if (vm != null && vm.IsInitialized)
+                {
+                    try
+                    {
                         await vm.SaveStateAsync(e);
-            }
-            catch (Exception ex)
-            {
-                PlatformBase.CurrentCore.Logger.LogError(ex, "Error during CollectionViewModelBase.OnSaveStateAsync calling each individual child ViewModel.SaveStateAsync");
-                throw;
+                    }
+                    catch (Exception ex)
+                    {
+                        PlatformBase.CurrentCore.Logger.LogError(ex, $"Error during CollectionViewModelBase.OnSaveStateAsync calling each calling {vm.GetType().FullName}.SaveStateAsync");
+                        throw;
+                    }
+                }
             }
 
             await base.OnSaveStateAsync(e);
