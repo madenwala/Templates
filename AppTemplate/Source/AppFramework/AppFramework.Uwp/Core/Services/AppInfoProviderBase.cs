@@ -82,26 +82,17 @@ namespace AppFramework.Core.Services
 
         public AppInfoProviderBase()
         {
+            _licenseInfo = CurrentAppSimulator.LicenseInformation;
+
             try
             {
-                _licenseInfo = CurrentApp.LicenseInformation;
+                if (PlatformBase.IsDebugMode == false)
+                    _licenseInfo = CurrentApp.LicenseInformation;
             }
-            catch
+            catch(Exception ex)
             {
-                _licenseInfo = CurrentAppSimulator.LicenseInformation;
+                PlatformBase.CurrentCore.Logger.LogError(ex, "Could not get license information from " + nameof(CurrentApp.LicenseInformation));
             }
-//#if DEBUG
-//            _licenseInfo = CurrentAppSimulator.LicenseInformation;
-//#else
-//            try
-//            {
-//                _licenseInfo = CurrentApp.LicenseInformation;
-//            }
-//            catch
-//            {
-//                _licenseInfo = CurrentAppSimulator.LicenseInformation;
-//            }
-//#endif
         }
 
         #endregion
