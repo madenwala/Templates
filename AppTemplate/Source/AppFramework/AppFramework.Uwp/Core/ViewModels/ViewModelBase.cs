@@ -302,6 +302,7 @@ namespace AppFramework.Core.ViewModels
                 PlatformBase.CurrentCore.Logger.LogError(ex, "Failed to save properties to {0} page state.", this.GetType().Name);
             }
 
+            // Logout of user authentication service
             var auth = PlatformBase.GetService<AuthorizationManagerBase>();
             if(auth != null)
                 auth.UserAuthenticatedStatusChanged -= AuthenticationManager_UserAuthenticated;

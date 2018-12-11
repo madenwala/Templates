@@ -260,3 +260,4 @@ paket-files/
 __pycache__/
 *.pyc
 /UniversalTemplate/Source/AppFramework/Build/Temp
+/AppTemplate/Source/AppFramework/Build/Temp

@@ -5,7 +5,6 @@
     xmlns:views="using:Contoso.UI.Views"
     xmlns:models="using:Contoso.Core.Models"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:was="using:AppStudio.Uwp.Controls"
     xmlns:controls="using:AppFramework.UI.Controls"
     xmlns:triggers="using:AppFramework.UI.Triggers"
     xmlns:behaviors="using:AppFramework.UI.Behaviors"

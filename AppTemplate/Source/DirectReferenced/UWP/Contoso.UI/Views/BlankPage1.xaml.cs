@@ -13,15 +13,18 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace Contoso.UI.UWP
+// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+
+namespace Contoso.UI.Views
 {
-    public sealed partial class MainPage
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
+    public sealed partial class BlankPage1 : Page
     {
-        public MainPage()
+        public BlankPage1()
         {
             this.InitializeComponent();
-
-            LoadApplication(new Contoso.UI.App());
         }
     }
 }

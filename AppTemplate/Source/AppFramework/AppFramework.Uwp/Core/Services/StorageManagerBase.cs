@@ -220,7 +220,7 @@ namespace AppFramework.Core.Services
         /// </summary>
         /// <param name="key">Unique key for the setting.</param>
         /// <param name="obj">Value to store.</param>
-        /// <param name="location">Location the setting should be stored to.</param>
+        /// <param name="container">Container the setting should be stored to.</param>
         /// <param name="serializerType">How the setting should be deserialized from storage.</param>
         public void SaveSetting(string key, object obj, ApplicationDataContainer container, SerializerTypes serializerType = SerializerTypes.Default)
         {

@@ -100,9 +100,7 @@ namespace Contoso.Core.ViewModels
         protected override Task OnLoadStateAsync(LoadStateEventArgs e)
         {
             if (!this.IsInitialized)
-            {
                 this.Username = e.Parameter?.ToString();
-            }
 
             this.ClearStatus();
             this.CheckIfValid();

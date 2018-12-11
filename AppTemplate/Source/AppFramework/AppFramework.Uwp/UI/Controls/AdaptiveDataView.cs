@@ -17,10 +17,12 @@ namespace AppFramework.UI.Controls
         #region Variables
 
         const string PART_ROOT = "root";
+        const string PART_REFRESHCONTAINER = "refreshcontainer";
         const string PART_LISTVIEW = "listview";
         const string PART_GRIDVIEW = "gridview";
 
         private Grid _root;
+        public RefreshContainer RefreshContainer { get; set; }
         public ListView ListView { get; private set; }
         public GridView GridView { get; private set; }
 
@@ -230,9 +232,7 @@ namespace AppFramework.UI.Controls
             set { SetValue(RefreshCommandProperty, value); }
         }
         public static readonly DependencyProperty RefreshCommandProperty = DependencyProperty.Register(nameof(RefreshCommand), typeof(ICommand), typeof(AdaptiveDataView), new PropertyMetadata(null));
-
-
-
+        
         public string NoDataMessage
         {
             get { return (string)GetValue(NoDataMessageProperty); }
@@ -246,7 +246,6 @@ namespace AppFramework.UI.Controls
             set { SetValue(NoDataMessageStyleProperty, value); }
         }
         public static readonly DependencyProperty NoDataMessageStyleProperty = DependencyProperty.Register(nameof(NoDataMessageStyle), typeof(Style), typeof(AdaptiveDataView), new PropertyMetadata(null));
-
 
         public Visibility NoDataMessageVisibility
         {
@@ -288,9 +287,22 @@ namespace AppFramework.UI.Controls
         {
             _root = this.GetTemplateChild(PART_ROOT) as Grid;
 
+            this.RefreshContainer = this.GetTemplateChild(PART_REFRESHCONTAINER) as RefreshContainer;
             this.ListView = this.GetTemplateChild(PART_LISTVIEW) as ListView;
             this.GridView = this.GetTemplateChild(PART_GRIDVIEW) as GridView;
             base.OnApplyTemplate();
+
+            if (this.RefreshContainer != null)
+            {
+                this.RefreshContainer.RefreshRequested += RefreshContainer_RefreshRequested;
+            }
+        }
+
+        private void RefreshContainer_RefreshRequested(RefreshContainer sender, RefreshRequestedEventArgs args)
+        { 
+            // TODO create ICommand with deferral
+            //var deferrel = args.GetDeferral();
+            //this.RefreshCommand.Execute()
         }
 
         #endregion
