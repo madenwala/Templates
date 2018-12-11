@@ -81,12 +81,12 @@ namespace AppFramework.Core.Services
 
         #region Navigation
 
-        protected void Navigate(Type pageType, object parameter = null)
+        protected void Navigate(Type pageType, object parameter = null, bool clearBackstack = false)
         {
-            this.Navigate(this.Frame, pageType, parameter);
+            this.Navigate(this.Frame, pageType, parameter, clearBackstack);
         }
 
-        protected async void Navigate(Frame frame, Type pageType, object parameter = null)
+        protected async void Navigate(Frame frame, Type pageType, object parameter = null, bool clearBackstack = false)
         {
             if (frame == null)
                 frame = this.Frame;
@@ -102,7 +102,28 @@ namespace AppFramework.Core.Services
                         await vm.RefreshAsync(false);
                     return;
                 }
+                if(clearBackstack)
+                    frame.Navigated += Frame_Navigated;
                 frame.Navigate(pageType, this.SerializeParameter(parameter));
+            }
+        }
+
+        private void Frame_Navigated(object sender, Windows.UI.Xaml.Navigation.NavigationEventArgs e)
+        {
+            if (this == null)
+                return;
+
+            if(sender is Frame frame)
+            {
+                frame.Navigated -= Frame_Navigated;
+                try
+                {
+                    this.ClearBackstack();
+                }
+                catch (Exception ex)
+                {
+                    PlatformBase.CurrentCore.Logger.LogError(ex, "Failed to ClearBackstack on frame.");
+                }
             }
         }
 

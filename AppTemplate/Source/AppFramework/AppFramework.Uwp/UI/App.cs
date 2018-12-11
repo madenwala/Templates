@@ -181,7 +181,7 @@ namespace AppFramework.UI
             }
             catch(Exception ex)
             {
-                PlatformBase.CurrentCore.Logger.LogError(ex, "Failed to execute OnCustomizeApplicationUI");
+                PlatformBase.CurrentCore.Logger.LogError(ex, "Failed to execute " + nameof(OnCustomizeApplicationUI));
             }
         }
 

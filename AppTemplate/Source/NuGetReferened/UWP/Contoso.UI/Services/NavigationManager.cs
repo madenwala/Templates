@@ -19,8 +19,7 @@ namespace Contoso.UI.Services
         {
             if(Platform.Current.AuthManager?.IsAuthenticated() != true)
             {
-                this.Navigate(this.ParentFrame, typeof(WelcomeView), parameter);
-                this.ClearBackstack();
+                this.Navigate(this.ParentFrame, typeof(WelcomeView), parameter, true);
             }
             else
             {
@@ -28,12 +27,11 @@ namespace Contoso.UI.Services
                 if (this.ParentFrame.Content == null || !(this.ParentFrame.Content is ShellView))
                 {
                     NavigationRequest navParam = parameter as NavigationRequest ?? new NavigationRequest(typeof(MainView), parameter);
-                    this.Navigate(this.ParentFrame, typeof(ShellView), navParam);
-                    this.ClearBackstack();
+                    this.Navigate(this.ParentFrame, typeof(ShellView), navParam, true);
                 }
                 else
                 {
-                    this.Navigate(typeof(MainView), parameter);
+                    this.Navigate(typeof(MainView), parameter, true);
                 }
             }
         }
