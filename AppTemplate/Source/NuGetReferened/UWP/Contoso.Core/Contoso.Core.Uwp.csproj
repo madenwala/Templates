@@ -189,7 +189,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AppFramework">
-      <Version>0.7.3-beta</Version>
+      <Version>0.8.0-beta</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.2</Version>
