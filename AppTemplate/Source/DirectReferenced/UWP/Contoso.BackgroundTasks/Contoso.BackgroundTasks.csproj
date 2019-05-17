@@ -109,13 +109,21 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\AppFramework\AppFramework.NetStandard\AppFramework.NetStandard.csproj">
-      <Project>{babc3ad0-0404-47fe-8f7c-4ace7272b8ad}</Project>
-      <Name>AppFramework.NetStandard</Name>
+    <ProjectReference Include="..\..\..\..\..\src\AppFramework.Core.Data\AppFramework.Core.Data.csproj">
+      <Project>{71747eed-1a8c-497a-bb4e-55ac0292122d}</Project>
+      <Name>AppFramework.Core.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\AppFramework\AppFramework.Uwp\AppFramework.Uwp.csproj">
+    <ProjectReference Include="..\..\..\..\..\src\AppFramework.Core.Uwp\AppFramework.Uwp.csproj">
       <Project>{65f2272c-d17a-45be-982a-c6637407657a}</Project>
       <Name>AppFramework.Uwp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\src\AppFramework.Core\AppFramework.Core.csproj">
+      <Project>{37c110aa-28eb-4c89-9a3b-12a0effdff7c}</Project>
+      <Name>AppFramework.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\src\AppFramework.UI.Core\AppFramework.UI.Core.csproj">
+      <Project>{a3813afb-a8d6-4798-ab93-1ef890a23a83}</Project>
+      <Name>AppFramework.UI.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Contoso.Core\Contoso.Core.csproj">
       <Project>{9a7ebe07-4655-4eec-b627-f8ade0ee9953}</Project>

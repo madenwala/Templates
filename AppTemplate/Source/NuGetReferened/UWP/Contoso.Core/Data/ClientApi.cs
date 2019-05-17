@@ -13,7 +13,7 @@ namespace Contoso.Core.Data
     /// <summary>
     /// Client SDK to access remote data.
     /// </summary>
-    public sealed class ClientApi : ClientApiBase
+    public sealed class ClientApi : BaseClient
     {
         #region Variables
 
