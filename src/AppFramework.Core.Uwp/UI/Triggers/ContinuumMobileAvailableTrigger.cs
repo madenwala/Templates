@@ -27,7 +27,7 @@ namespace AppFramework.UI.Triggers
 
         private void UpdateTrigger()
         {
-            this.SetActive(ProjectionManager.ProjectionDisplayAvailable && PlatformBase.CurrentCore.IsMobile);
+            this.SetActive(ProjectionManager.ProjectionDisplayAvailable && BasePlatform.CurrentCore.IsMobile);
         }
     }
 }

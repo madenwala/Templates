@@ -76,7 +76,7 @@ namespace AppFramework.UI.Controls
         {
             if(this.IsInterstitialAdOpen)
             {
-                PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "DevCenter - Closing interstitial video ad due to back navigation request.");
+                BasePlatform.CurrentCore.Logger.Log(LogLevels.Debug, "DevCenter - Closing interstitial video ad due to back navigation request.");
                 this.CloseInterstitialAd();
                 return true;
             }
@@ -90,12 +90,12 @@ namespace AppFramework.UI.Controls
             {
                 if (_interstitialAdVideo.State == InterstitialAdState.Showing)
                 {
-                    PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "DevCenter - Closing interstitial video ad");
+                    BasePlatform.CurrentCore.Logger.Log(LogLevels.Debug, "DevCenter - Closing interstitial video ad");
                     _interstitialAdVideo.Close();
                 }
                 else if (_interstitialAdBanner.State == InterstitialAdState.Showing)
                 {
-                    PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "DevCenter - Closing interstitial banner ad");
+                    BasePlatform.CurrentCore.Logger.Log(LogLevels.Debug, "DevCenter - Closing interstitial banner ad");
                     _interstitialAdBanner.Close();
                 }
             }
@@ -123,12 +123,12 @@ namespace AppFramework.UI.Controls
         {
             try
             {
-                PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "DevCenter - ShowInterstitialAdVideo");
+                BasePlatform.CurrentCore.Logger.Log(LogLevels.Debug, "DevCenter - ShowInterstitialAdVideo");
                 this.OnInterstitialAdDisplayed?.Invoke(this, new EventArgs());
             }
             catch (Exception ex)
             {
-                PlatformBase.CurrentCore.Logger.LogError(ex, $"DevCenter - Error occured while executing {this.GetType().Name}.OnInterstitialAdReady");
+                BasePlatform.CurrentCore.Logger.LogError(ex, $"DevCenter - Error occured while executing {this.GetType().Name}.OnInterstitialAdReady");
             }
             finally
             {
@@ -143,12 +143,12 @@ namespace AppFramework.UI.Controls
 
             try
             {
-                PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "DevCenter - ShowInterstitialAdBanner");
+                BasePlatform.CurrentCore.Logger.Log(LogLevels.Debug, "DevCenter - ShowInterstitialAdBanner");
                 this.OnInterstitialAdDisplayed?.Invoke(this, new EventArgs());
             }
             catch (Exception ex)
             {
-                PlatformBase.CurrentCore.Logger.LogError(ex, $"DevCenter - Error occured while executing {this.GetType().Name}.OnInterstitialAdReady");
+                BasePlatform.CurrentCore.Logger.LogError(ex, $"DevCenter - Error occured while executing {this.GetType().Name}.OnInterstitialAdReady");
             }
             finally
             {
@@ -167,7 +167,7 @@ namespace AppFramework.UI.Controls
             // pre-fetch an ad 30-60 seconds before you need it
             if (_interstitialAdVideo != null)
             {
-                PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "DevCenter - Requesting interstitial video ad.");
+                BasePlatform.CurrentCore.Logger.Log(LogLevels.Debug, "DevCenter - Requesting interstitial video ad.");
                 _interstitialAdVideo.RequestAd(AdType.Video, Controls.AdControl.DevCenterAdAppID, Controls.AdControl.DevCenterInterstitialVideoAdUnitID);
             }
         }
@@ -177,7 +177,7 @@ namespace AppFramework.UI.Controls
             // pre-fetch an ad 30-60 seconds before you need it
             if (_interstitialAdBanner != null)
             {
-                PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "DevCenter - Requesting interstitial banner ad.");
+                BasePlatform.CurrentCore.Logger.Log(LogLevels.Debug, "DevCenter - Requesting interstitial banner ad.");
                 _interstitialAdBanner.RequestAd(AdType.Display, Controls.AdControl.DevCenterAdAppID, Controls.AdControl.DevCenterInterstitialBannerAdUnitID);
             }
         }
@@ -189,7 +189,7 @@ namespace AppFramework.UI.Controls
         //write the code for the events
         private void Interstitial_Video_AdReady(object sender, object e)
         {
-            PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "DevCenter - Interstitial video ad ready.");
+            BasePlatform.CurrentCore.Logger.Log(LogLevels.Debug, "DevCenter - Interstitial video ad ready.");
             if (_showInterstitialAdWhenReady)
             {
                 _showInterstitialAdWhenReady = false;
@@ -200,7 +200,7 @@ namespace AppFramework.UI.Controls
         //write the code for the events
         private void Interstitial_Banner_AdReady(object sender, object e)
         {
-            PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "DevCenter - Interstitial banner ad ready.");
+            BasePlatform.CurrentCore.Logger.Log(LogLevels.Debug, "DevCenter - Interstitial banner ad ready.");
             if (_showInterstitialAdWhenReady)
             {
                 _showInterstitialAdWhenReady = false;
@@ -212,12 +212,12 @@ namespace AppFramework.UI.Controls
         {
             try
             {
-                PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, $"DevCenter - {this.GetType().Name}.Interstitial_ErrorOccurred {e.ErrorCode} - {e.ErrorMessage}");
+                BasePlatform.CurrentCore.Logger.Log(LogLevels.Debug, $"DevCenter - {this.GetType().Name}.Interstitial_ErrorOccurred {e.ErrorCode} - {e.ErrorMessage}");
                 this.OnInterstitialAdErrorOccurred?.Invoke(this, new EventArgs());
             }
             catch (Exception ex)
             {
-                PlatformBase.CurrentCore.Logger.LogError(ex, $"DevCenter - Error occured while executing {this.GetType().Name}.OnInterstitialAdErrorOccurred");
+                BasePlatform.CurrentCore.Logger.LogError(ex, $"DevCenter - Error occured while executing {this.GetType().Name}.OnInterstitialAdErrorOccurred");
             }
         }
 
@@ -225,12 +225,12 @@ namespace AppFramework.UI.Controls
         {
             try
             {
-                PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, $"DevCenter - {this.GetType().Name}.Interstitial_Completed");
+                BasePlatform.CurrentCore.Logger.Log(LogLevels.Debug, $"DevCenter - {this.GetType().Name}.Interstitial_Completed");
                 this.OnInterstitialAdCompleted?.Invoke(this, new EventArgs());
             }
             catch (Exception ex)
             {
-                PlatformBase.CurrentCore.Logger.LogError(ex, $"DevCenter - Error occured while executing {this.GetType().Name}.OnInterstitialAdCompleted");
+                BasePlatform.CurrentCore.Logger.LogError(ex, $"DevCenter - Error occured while executing {this.GetType().Name}.OnInterstitialAdCompleted");
             }
             finally
             {
@@ -242,12 +242,12 @@ namespace AppFramework.UI.Controls
         {
             try
             {
-                PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, $"DevCenter - {this.GetType().Name}.Interstitial_Cancelled");
+                BasePlatform.CurrentCore.Logger.Log(LogLevels.Debug, $"DevCenter - {this.GetType().Name}.Interstitial_Cancelled");
                 this.OnInterstitialAdCancelled?.Invoke(this, new EventArgs());
             }
             catch (Exception ex)
             {
-                PlatformBase.CurrentCore.Logger.LogError(ex, $"DevCenter - Error occured while executing {this.GetType().Name}.OnInterstitialAdCancelled");
+                BasePlatform.CurrentCore.Logger.LogError(ex, $"DevCenter - Error occured while executing {this.GetType().Name}.OnInterstitialAdCancelled");
             }
             finally
             {

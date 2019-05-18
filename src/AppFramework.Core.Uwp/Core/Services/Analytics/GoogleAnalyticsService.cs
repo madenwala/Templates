@@ -15,15 +15,15 @@ namespace AppFramework.Core.Services.Analytics
                 throw new ArgumentNullException(nameof(key));
 
             _tracker = GoogleAnalytics.AnalyticsManager.Current.CreateTracker(key);
-            GoogleAnalytics.AnalyticsManager.Current.IsDebug = PlatformBase.IsDebugMode;
+            GoogleAnalytics.AnalyticsManager.Current.IsDebug = BasePlatform.IsDebugMode;
             GoogleAnalytics.AnalyticsManager.Current.ReportUncaughtExceptions = true;
             GoogleAnalytics.AnalyticsManager.Current.AutoAppLifetimeMonitoring = true;
         }
 
         protected override Task OnInitializeAsync()
         {
-            _tracker.AppId = PlatformBase.CurrentCore.AppInfo.AppID;
-            _tracker.AppVersion = PlatformBase.CurrentCore.AppInfo.VersionNumber.ToString();
+            _tracker.AppId = BasePlatform.CurrentCore.AppInfo.AppID;
+            _tracker.AppVersion = BasePlatform.CurrentCore.AppInfo.VersionNumber.ToString();
             return base.OnInitializeAsync();
         }
 

@@ -20,7 +20,7 @@ namespace AppFramework.Core
     /// Provides core app functionality for initializing and suspending your application,
     /// handling exceptions, and more.
     /// </summary>
-    public abstract partial class PlatformBase : BaseModel
+    public abstract partial class BasePlatform : BaseModel
     {
         #region Variables
 
@@ -33,7 +33,7 @@ namespace AppFramework.Core
         /// <summary>
         /// Provides access to application services.
         /// </summary>
-        protected internal static PlatformBase CurrentCore { get; protected set; }
+        protected internal static BasePlatform CurrentCore { get; protected set; }
 
         /// <summary>
         /// Gets the current device family this app is executing on.
@@ -116,7 +116,7 @@ namespace AppFramework.Core
 
         #region Constructors
 
-        internal PlatformBase()
+        internal BasePlatform()
         {
             // Instantiate all the application services.
             this.Logger = new LoggingService();
@@ -133,7 +133,7 @@ namespace AppFramework.Core
             this.Notifications = new DefaultNotificationsManager();
         }
 
-        static PlatformBase()
+        static BasePlatform()
         {
 #if DEBUG
             IsDebugMode = true;
@@ -373,13 +373,13 @@ namespace AppFramework.Core
             // Only log this when the debugger is not attached and you're in RELEASE mode
             try
             {
-                PlatformBase.CurrentCore.Analytics.Error(e, "Unhandled Exception");
+                BasePlatform.CurrentCore.Analytics.Error(e, "Unhandled Exception");
             }
             catch { }
 
             try
             {
-                PlatformBase.CurrentCore.Logger.LogErrorFatal(e);
+                BasePlatform.CurrentCore.Logger.LogErrorFatal(e);
             }
             catch (Exception exLog)
             {
@@ -489,7 +489,7 @@ namespace AppFramework.Core
         /// <param name="work">The work that needs to be performed.</param>
         public async void ExecuteBackgroundWork(IBackgroundTaskInstance taskInstance, Action<CancellationToken> work)
         {
-            if (!PlatformBase.IsDebugMode)
+            if (!BasePlatform.IsDebugMode)
             {
                 // Check if the app is alread in the foreground and if so, don't run the agent
                 if (AgentSync.IsApplicationLaunched())
@@ -508,14 +508,14 @@ namespace AppFramework.Core
                 _info.StartTime = DateTime.UtcNow;
 
                 // Initialize the app
-                await PlatformBase.CurrentCore.AppInitializingAsync(InitializationModes.Background);
-                PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, "Starting background task '{0}'...", taskInstance.Task.Name);
+                await BasePlatform.CurrentCore.AppInitializingAsync(InitializationModes.Background);
+                BasePlatform.CurrentCore.Logger.Log(LogLevels.Information, "Starting background task '{0}'...", taskInstance.Task.Name);
 
                 CancellationTokenSource cts = new CancellationTokenSource();
 
                 taskInstance.Canceled += (sender, reason) =>
                 {
-                    PlatformBase.CurrentCore.Logger.Log(LogLevels.Warning, "Background task '{0}' is being cancelled due to '{1}'...", taskInstance.Task.Name, reason);
+                    BasePlatform.CurrentCore.Logger.Log(LogLevels.Warning, "Background task '{0}' is being cancelled due to '{1}'...", taskInstance.Task.Name, reason);
 
                     // Store info on why this task was cancelled
                     _info.CancelReason = reason.ToString();
@@ -530,28 +530,28 @@ namespace AppFramework.Core
 
                 // Task ran without error
                 _info.RunSuccessfully = true;
-                PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, "Completed execution of background task '{0}'!", taskInstance.Task.Name);
+                BasePlatform.CurrentCore.Logger.Log(LogLevels.Information, "Completed execution of background task '{0}'!", taskInstance.Task.Name);
             }
             catch (OperationCanceledException)
             {
                 // Task was aborted via the cancelation token
-                PlatformBase.CurrentCore.Logger.Log(LogLevels.Warning, "Background task '{0}' had an OperationCanceledException with reason '{1}'.", taskInstance.Task.Name, _info.CancelReason);
+                BasePlatform.CurrentCore.Logger.Log(LogLevels.Warning, "Background task '{0}' had an OperationCanceledException with reason '{1}'.", taskInstance.Task.Name, _info.CancelReason);
             }
             catch (Exception ex)
             {
                 // Task threw an exception, store/log the error details
                 _info.ExceptionDetails = ex.ToString();
-                PlatformBase.CurrentCore.Logger.LogErrorFatal(ex, "Background task '{0}' failed with exception to run to completion: {1}", taskInstance.Task.Name, ex.Message);
+                BasePlatform.CurrentCore.Logger.LogErrorFatal(ex, "Background task '{0}' failed with exception to run to completion: {1}", taskInstance.Task.Name, ex.Message);
             }
             finally
             {
                 _info.EndTime = DateTime.UtcNow;
 
                 // Store the task status information
-                PlatformBase.CurrentCore.Storage.SaveSetting("TASK_" + taskInstance.Task.Name, _info, ApplicationData.Current.LocalSettings);
+                BasePlatform.CurrentCore.Storage.SaveSetting("TASK_" + taskInstance.Task.Name, _info, ApplicationData.Current.LocalSettings);
 
                 // Shutdown the task
-                PlatformBase.CurrentCore.AppSuspending();
+                BasePlatform.CurrentCore.AppSuspending();
                 deferral.Complete();
             }
         }
@@ -564,8 +564,8 @@ namespace AppFramework.Core
         {
             this.IsFirstRun = false;
             this.IsFirstRunAfterUpdate = false;
-            string lastAppVersion = PlatformBase.CurrentCore.Storage.LoadSetting<string>("LastAppVersion");
-            string currentAppVersion = PlatformBase.CurrentCore.AppInfo.VersionNumber.ToString();
+            string lastAppVersion = BasePlatform.CurrentCore.Storage.LoadSetting<string>("LastAppVersion");
+            string currentAppVersion = BasePlatform.CurrentCore.AppInfo.VersionNumber.ToString();
 
             if (string.IsNullOrEmpty(lastAppVersion))
             {
@@ -575,7 +575,7 @@ namespace AppFramework.Core
             }
             else if (lastAppVersion != currentAppVersion)
             {
-                PlatformBase.CurrentCore.Logger.Log(LogLevels.Warning, "App has been updated from version {0} to version {1}", lastAppVersion, currentAppVersion);
+                BasePlatform.CurrentCore.Logger.Log(LogLevels.Warning, "App has been updated from version {0} to version {1}", lastAppVersion, currentAppVersion);
                 this.IsFirstRunAfterUpdate = true;
                 await this.OnAppFirstRunAfterUpdateAsync(new Version(lastAppVersion));
                 this.Storage.SaveSetting("LastAppVersion", currentAppVersion);
@@ -603,7 +603,7 @@ namespace AppFramework.Core
         #endregion Methods
     }
 
-    public abstract class PlatformBase<MainVM, AppSettingsL, AppSettingsR, WebVM> : PlatformBase
+    public abstract class PlatformBase<MainVM, AppSettingsL, AppSettingsR, WebVM> : BasePlatform
         where MainVM : BaseViewModel, new()
         where AppSettingsL : BaseAppSettingsLocal
         where AppSettingsR : BaseAppSettingsRoaming

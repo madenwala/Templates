@@ -39,14 +39,14 @@ namespace AppFramework.Core.Services
         {
             try
             {
-                PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "Registering background tasks...");
+                BasePlatform.CurrentCore.Logger.Log(LogLevels.Debug, "Registering background tasks...");
 
                 // Keep track of the previous version of the app. If the app has been updated, we must first remove the previous task registrations and then re-add them.
-                var previousVersion = PlatformBase.CurrentCore.Storage.LoadSetting<string>("PreviousAppVersion");
-                if (previousVersion != PlatformBase.CurrentCore.AppInfo.VersionNumber.ToString())
+                var previousVersion = BasePlatform.CurrentCore.Storage.LoadSetting<string>("PreviousAppVersion");
+                if (previousVersion != BasePlatform.CurrentCore.AppInfo.VersionNumber.ToString())
                 {
                     this.RemoveAll();
-                    PlatformBase.CurrentCore.Storage.SaveSetting("PreviousAppVersion", PlatformBase.CurrentCore.AppInfo.VersionNumber.ToString());
+                    BasePlatform.CurrentCore.Storage.SaveSetting("PreviousAppVersion", BasePlatform.CurrentCore.AppInfo.VersionNumber.ToString());
                 }
 
                 // Propmts users to give access to run background tasks.
@@ -62,21 +62,21 @@ namespace AppFramework.Core.Services
                     }
                     catch (Exception ex)
                     {
-                        PlatformBase.CurrentCore.Logger.LogError(ex, "Failed to register background tasks.");
+                        BasePlatform.CurrentCore.Logger.LogError(ex, "Failed to register background tasks.");
                     }
                 }
                 else
                 {
                     // User did not give the app access to run background tasks
-                    PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, "Could not register tasks because background access status is '{0}'.", backgroundAccessStatus);
+                    BasePlatform.CurrentCore.Logger.Log(LogLevels.Information, "Could not register tasks because background access status is '{0}'.", backgroundAccessStatus);
                     this.AreTasksRegistered = false;
                 }
 
-                PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "Completed registering background tasks!");
+                BasePlatform.CurrentCore.Logger.Log(LogLevels.Debug, "Completed registering background tasks!");
             }
             catch (Exception ex)
             {
-                PlatformBase.CurrentCore.Logger.LogError(ex, "Error during BackgroundTaskManager.RegisterAllAsync()");
+                BasePlatform.CurrentCore.Logger.LogError(ex, "Error during BackgroundTaskManager.RegisterAllAsync()");
             }
         }
 
@@ -158,7 +158,7 @@ namespace AppFramework.Core.Services
             }
             catch (Exception ex)
             {
-                PlatformBase.CurrentCore.Logger.LogError(ex, "Error while trying to register task '{0}': {1}", taskName, ex.Message);
+                BasePlatform.CurrentCore.Logger.LogError(ex, "Error while trying to register task '{0}': {1}", taskName, ex.Message);
                 return null;
             }
         }
@@ -175,8 +175,8 @@ namespace AppFramework.Core.Services
                 if (string.IsNullOrEmpty(name) || taskKeyPair.Value.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase))
                 {
                     taskKeyPair.Value.Unregister(true);
-                    PlatformBase.CurrentCore.Storage.SaveSetting("TASK_" + taskKeyPair.Key, null, Windows.Storage.ApplicationData.Current.LocalSettings);
-                    PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "TaskManager removed background task '{0}'", name);
+                    BasePlatform.CurrentCore.Storage.SaveSetting("TASK_" + taskKeyPair.Key, null, Windows.Storage.ApplicationData.Current.LocalSettings);
+                    BasePlatform.CurrentCore.Logger.Log(LogLevels.Debug, "TaskManager removed background task '{0}'", name);
                 }
             }
         }

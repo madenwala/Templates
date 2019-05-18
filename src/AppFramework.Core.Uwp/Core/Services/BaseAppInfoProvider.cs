@@ -86,12 +86,12 @@ namespace AppFramework.Core.Services
 
             try
             {
-                if (PlatformBase.IsDebugMode == false)
+                if (BasePlatform.IsDebugMode == false)
                     _licenseInfo = CurrentApp.LicenseInformation;
             }
             catch(Exception ex)
             {
-                PlatformBase.CurrentCore.Logger.LogError(ex, "Could not get license information from " + nameof(CurrentApp.LicenseInformation));
+                BasePlatform.CurrentCore.Logger.LogError(ex, "Could not get license information from " + nameof(CurrentApp.LicenseInformation));
             }
         }
 
@@ -164,7 +164,7 @@ namespace AppFramework.Core.Services
 
             await this.OnInitializeAsync();
 
-            PlatformBase.CurrentCore.Analytics.Event("STORE_PURCHASE_STATUS-" + featureName, result.Status.ToString());
+            BasePlatform.CurrentCore.Analytics.Event("STORE_PURCHASE_STATUS-" + featureName, result.Status.ToString());
             switch (result.Status)
             {
                 case ProductPurchaseStatus.AlreadyPurchased:
@@ -176,7 +176,7 @@ namespace AppFramework.Core.Services
 
                 case ProductPurchaseStatus.NotFulfilled:
                 default:
-                    await PlatformBase.CurrentCore.ViewModelCore.ShowMessageBoxAsync(CancellationToken.None, string.Format("Could not purchase Pro-Feature Pack add-on right now. Store return back an error. Please try again later."), "Failed to purchase add-on");
+                    await BasePlatform.CurrentCore.ViewModelCore.ShowMessageBoxAsync(CancellationToken.None, string.Format("Could not purchase Pro-Feature Pack add-on right now. Store return back an error. Please try again later."), "Failed to purchase add-on");
                     return false;
             }
         }
@@ -185,7 +185,7 @@ namespace AppFramework.Core.Services
         {
             try
             {
-                PlatformBase.CurrentCore.Analytics.Event("PurchaseAddOn", featureName);
+                BasePlatform.CurrentCore.Analytics.Event("PurchaseAddOn", featureName);
                 return await CurrentApp.RequestProductPurchaseAsync(featureName);
             }
             catch
@@ -217,7 +217,7 @@ namespace AppFramework.Core.Services
 
         private void FeaturePurchased(string featureName)
         {
-            PlatformBase.CurrentCore.Storage.SaveSetting("InAppPurchase-" + featureName, DateTime.UtcNow, ApplicationData.Current.RoamingSettings);
+            BasePlatform.CurrentCore.Storage.SaveSetting("InAppPurchase-" + featureName, DateTime.UtcNow, ApplicationData.Current.RoamingSettings);
         }
 
         private bool FeaturedPreviouslyPurchased(string featureName)
@@ -225,9 +225,9 @@ namespace AppFramework.Core.Services
             try
             {
                 var key = "InAppPurchase-" + featureName;
-                if (PlatformBase.CurrentCore.Storage.ContainsSetting(key, ApplicationData.Current.RoamingSettings))
+                if (BasePlatform.CurrentCore.Storage.ContainsSetting(key, ApplicationData.Current.RoamingSettings))
                 {
-                    var date = PlatformBase.CurrentCore.Storage.LoadSetting<DateTime>(key, ApplicationData.Current.RoamingSettings);
+                    var date = BasePlatform.CurrentCore.Storage.LoadSetting<DateTime>(key, ApplicationData.Current.RoamingSettings);
                     if (date.AddDays(7) > DateTime.UtcNow)
                         return true;
                     else
@@ -240,7 +240,7 @@ namespace AppFramework.Core.Services
             }
             catch (Exception ex)
             {
-                PlatformBase.CurrentCore.Analytics.Error(ex, $"Failed to check if '{featureName}' feature was previously purchased.");
+                BasePlatform.CurrentCore.Analytics.Error(ex, $"Failed to check if '{featureName}' feature was previously purchased.");
                 return false;
             }
         }

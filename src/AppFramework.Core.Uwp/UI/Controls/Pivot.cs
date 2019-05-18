@@ -46,7 +46,7 @@ namespace AppFramework.UI.Controls
                     }
                     catch (Exception ex)
                     {
-                        PlatformBase.CurrentCore.Logger.LogError(ex, "Error while loading child ViewModel of type {1} in CollectionViewModel type {0}", parentVM.GetType().Name, vm.GetType().Name);
+                        BasePlatform.CurrentCore.Logger.LogError(ex, "Error while loading child ViewModel of type {1} in CollectionViewModel type {0}", parentVM.GetType().Name, vm.GetType().Name);
                     }
 
                     if(this.AutoLoadNextPivot)
@@ -65,7 +65,7 @@ namespace AppFramework.UI.Controls
                         }
                         catch (Exception ex)
                         {
-                            PlatformBase.CurrentCore.Logger.LogError(ex, "Error while auto loading next PivotItem ViewModel of type {1} in CollectionViewModel type {0}", parentVM.GetType().Name, nextVM?.GetType().Name);
+                            BasePlatform.CurrentCore.Logger.LogError(ex, "Error while auto loading next PivotItem ViewModel of type {1} in CollectionViewModel type {0}", parentVM.GetType().Name, nextVM?.GetType().Name);
                         }
                     }
                 }

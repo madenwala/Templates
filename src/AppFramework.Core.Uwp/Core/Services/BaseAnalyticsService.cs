@@ -104,10 +104,10 @@ namespace AppFramework.Core.Services
 
         public override void NewPageView(Type pageType)
         {
-            if(!PlatformBase.IsDebugMode)
+            if(!BasePlatform.IsDebugMode)
                 this.Services.ForEach(s => s.NewPageView(pageType));
 
-            PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, $"ANALYTICS: NewPageView({pageType.FullName})");
+            BasePlatform.CurrentCore.Logger.Log(LogLevels.Information, $"ANALYTICS: NewPageView({pageType.FullName})");
         }
 
         public override void Error(Exception ex, string message = null)
@@ -115,10 +115,10 @@ namespace AppFramework.Core.Services
             if (ex == null)
                 throw new ArgumentNullException(nameof(ex));
 
-            if (!PlatformBase.IsDebugMode)
+            if (!BasePlatform.IsDebugMode)
                 this.Services.ForEach(s => s.Error(ex, message));
 
-            PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, $"ANALYTICS: Error(\"{message}\", {ex.ToString()})");
+            BasePlatform.CurrentCore.Logger.Log(LogLevels.Information, $"ANALYTICS: Error(\"{message}\", {ex.ToString()})");
         }
 
         public override void Event(string eventName, Dictionary<string, string> properties, Dictionary<string, double> metrics = null)
@@ -126,19 +126,19 @@ namespace AppFramework.Core.Services
             if (string.IsNullOrWhiteSpace(eventName))
                 throw new ArgumentNullException(nameof(eventName));
 
-            if (!PlatformBase.IsDebugMode)
+            if (!BasePlatform.IsDebugMode)
                 this.Services.ForEach(s => s.Event(eventName, properties, metrics));
 
-            PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, $"ANALYTICS: Event({eventName}, {Serializer.Serialize(properties)}, {Serializer.Serialize(metrics)})");
+            BasePlatform.CurrentCore.Logger.Log(LogLevels.Information, $"ANALYTICS: Event({eventName}, {Serializer.Serialize(properties)}, {Serializer.Serialize(metrics)})");
         }
 
         public override void SetUser(string username)
         {
             if (!string.IsNullOrWhiteSpace(username))
             {
-                if (!PlatformBase.IsDebugMode)
+                if (!BasePlatform.IsDebugMode)
                     this.Services.ForEach(s => s.SetUser(username));
-                PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, $"ANALYTICS: SetUser({username})");
+                BasePlatform.CurrentCore.Logger.Log(LogLevels.Information, $"ANALYTICS: SetUser({username})");
             }
         }
     }

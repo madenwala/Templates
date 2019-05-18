@@ -11,7 +11,7 @@
         /// Create an instance of the command for internal webpage browsing.
         /// </summary>
         public WebViewCommand()
-            : base("WebViewCommand", PlatformBase.CurrentCore.NavigationBase.WebView, (address) => { return address is string && !string.IsNullOrWhiteSpace(address.ToString()); })
+            : base("WebViewCommand", BasePlatform.CurrentCore.NavigationBase.WebView, (address) => { return address is string && !string.IsNullOrWhiteSpace(address.ToString()); })
         {
         }
 
@@ -29,7 +29,7 @@
         /// Create an instance of the command for external webpage browsing.
         /// </summary>
         public WebBrowserCommand()
-            : base("WebBrowserCommand", PlatformBase.CurrentCore.NavigationBase.WebBrowser, (address) => { return address is string && !string.IsNullOrWhiteSpace(address.ToString()); })
+            : base("WebBrowserCommand", BasePlatform.CurrentCore.NavigationBase.WebBrowser, (address) => { return address is string && !string.IsNullOrWhiteSpace(address.ToString()); })
         {
         }
 

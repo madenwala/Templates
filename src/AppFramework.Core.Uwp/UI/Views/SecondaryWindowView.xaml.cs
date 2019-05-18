@@ -51,7 +51,7 @@ namespace AppFramework.UI.Views
         protected override async Task OnLoadStateAsync(LoadStateEventArgs e)
         {
             if (e.NavigationEventArgs.NavigationMode == NavigationMode.New && e.Parameter is NavigationRequest)
-                PlatformBase.CurrentCore.NavigationBase.Navigate(e.Parameter as NavigationRequest);
+                BasePlatform.CurrentCore.NavigationBase.Navigate(e.Parameter as NavigationRequest);
 
             await base.OnLoadStateAsync(e);
         }

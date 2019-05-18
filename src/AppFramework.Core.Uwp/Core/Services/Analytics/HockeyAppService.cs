@@ -18,7 +18,7 @@ namespace AppFramework.Core.Services.Analytics
             HockeyClient.Current.Configure(key,
                 new TelemetryConfiguration() { EnableDiagnostics = true })
                 .SetContactInfo("DemoUser", supportEmailAddress)
-                .SetExceptionDescriptionLoader((Exception ex) => PlatformBase.CurrentCore.Logger.GenerateApplicationReport(ex));
+                .SetExceptionDescriptionLoader((Exception ex) => BasePlatform.CurrentCore.Logger.GenerateApplicationReport(ex));
         }
 
         public override void NewPageView(Type pageType)

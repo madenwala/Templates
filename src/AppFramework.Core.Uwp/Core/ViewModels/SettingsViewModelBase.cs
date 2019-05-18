@@ -18,7 +18,7 @@ namespace AppFramework.Core.ViewModels
     {
         #region Properties
 
-        public string TwitterAddress { get { return PlatformBase.CurrentCore.AppInfo.AppSupportTwitterAddress; } }
+        public string TwitterAddress { get { return BasePlatform.CurrentCore.AppInfo.AppSupportTwitterAddress; } }
 
         private string _BackgroundTasksStatus;
         public string BackgroundTasksStatus
@@ -56,12 +56,12 @@ namespace AppFramework.Core.ViewModels
         
         public bool IsApplicationThemeDefault
         {
-            get { return PlatformBase.CurrentCore.AppSettingsRoamingCore.ApplicationTheme == (int)Windows.UI.Xaml.ElementTheme.Default; }
+            get { return BasePlatform.CurrentCore.AppSettingsRoamingCore.ApplicationTheme == (int)Windows.UI.Xaml.ElementTheme.Default; }
             set
             {
                 if (value)
                 {
-                    PlatformBase.CurrentCore.AppSettingsRoamingCore.ApplicationTheme = (int)Windows.UI.Xaml.ElementTheme.Default;
+                    BasePlatform.CurrentCore.AppSettingsRoamingCore.ApplicationTheme = (int)Windows.UI.Xaml.ElementTheme.Default;
                     this.NotifyPropertyChangedOnUI(() => this.IsApplicationThemeDefault);
                 }
             }
@@ -69,12 +69,12 @@ namespace AppFramework.Core.ViewModels
 
         public bool IsApplicationThemeLight
         {
-            get { return PlatformBase.CurrentCore.AppSettingsRoamingCore.ApplicationTheme == (int)Windows.UI.Xaml.ElementTheme.Light; }
+            get { return BasePlatform.CurrentCore.AppSettingsRoamingCore.ApplicationTheme == (int)Windows.UI.Xaml.ElementTheme.Light; }
             set
             {
                 if (value)
                 {
-                    PlatformBase.CurrentCore.AppSettingsRoamingCore.ApplicationTheme = (int)Windows.UI.Xaml.ElementTheme.Light;
+                    BasePlatform.CurrentCore.AppSettingsRoamingCore.ApplicationTheme = (int)Windows.UI.Xaml.ElementTheme.Light;
                     this.NotifyPropertyChangedOnUI(() => this.IsApplicationThemeLight);
                 }
             }
@@ -82,12 +82,12 @@ namespace AppFramework.Core.ViewModels
 
         public bool IsApplicationThemeDark
         {
-            get { return PlatformBase.CurrentCore.AppSettingsRoamingCore.ApplicationTheme == (int)Windows.UI.Xaml.ElementTheme.Dark; }
+            get { return BasePlatform.CurrentCore.AppSettingsRoamingCore.ApplicationTheme == (int)Windows.UI.Xaml.ElementTheme.Dark; }
             set
             {
                 if (value)
                 {
-                    PlatformBase.CurrentCore.AppSettingsRoamingCore.ApplicationTheme = (int)Windows.UI.Xaml.ElementTheme.Dark;
+                    BasePlatform.CurrentCore.AppSettingsRoamingCore.ApplicationTheme = (int)Windows.UI.Xaml.ElementTheme.Dark;
                     this.NotifyPropertyChangedOnUI(() => this.IsApplicationThemeDark);
                 }
             }
@@ -110,7 +110,7 @@ namespace AppFramework.Core.ViewModels
             if (DesignMode.DesignModeEnabled)
                 return;
 
-            this.AppCacheTask = new NotifyTaskCompletion<string>(async (ct) => await PlatformBase.CurrentCore.Storage.GetAppDataCacheFolderSizeAsync());
+            this.AppCacheTask = new NotifyTaskCompletion<string>(async (ct) => await BasePlatform.CurrentCore.Storage.GetAppDataCacheFolderSizeAsync());
             this.AppCacheTask.SuccessfullyCompleted += (s, e) =>
             {
                 this.AppCacheText = $"{Resources.ClearAppCacheText} ({this.AppCacheTask.Result})";
@@ -127,7 +127,7 @@ namespace AppFramework.Core.ViewModels
             if(this.View is Page view)
                 view.GotFocus += View_GotFocus;
 
-            this.AppFrameworkVersionNumber = await PlatformBase.CurrentCore.AppInfo.GetAppFrameworkVersionAsync();
+            this.AppFrameworkVersionNumber = await BasePlatform.CurrentCore.AppInfo.GetAppFrameworkVersionAsync();
 
             await base.OnLoadStateAsync(e);
         }
@@ -160,7 +160,7 @@ namespace AppFramework.Core.ViewModels
 
         private async Task UpdateRefreshLocationStatus()
         {
-            if (PlatformBase.CurrentCore.Geolocation == null)
+            if (BasePlatform.CurrentCore.Geolocation == null)
                 return;
 
             try
@@ -170,7 +170,7 @@ namespace AppFramework.Core.ViewModels
             }
             catch (Exception ex)
             {
-                PlatformBase.CurrentCore.Logger.LogError(ex, "Error during UpdateRefreshLocationStatus()");
+                BasePlatform.CurrentCore.Logger.LogError(ex, "Error during UpdateRefreshLocationStatus()");
             }
         }
 
@@ -178,26 +178,26 @@ namespace AppFramework.Core.ViewModels
         {
             try
             {
-                if (PlatformBase.CurrentCore.BackgroundTasks == null)
+                if (BasePlatform.CurrentCore.BackgroundTasks == null)
                     return;
 
-                var allowed = PlatformBase.CurrentCore.BackgroundTasks.CheckIfAllowed();
+                var allowed = BasePlatform.CurrentCore.BackgroundTasks.CheckIfAllowed();
 
                 this.BackgroundTasksStatus = !allowed ? BackgroundTasks.TextBackgroundAppDisabledStatus : string.Empty;
 
-                if (!PlatformBase.CurrentCore.BackgroundTasks.AreTasksRegistered && allowed)
-                    await PlatformBase.CurrentCore.BackgroundTasks.RegisterAllAsync();
+                if (!BasePlatform.CurrentCore.BackgroundTasks.AreTasksRegistered && allowed)
+                    await BasePlatform.CurrentCore.BackgroundTasks.RegisterAllAsync();
             }
             catch(Exception ex)
             {
-                PlatformBase.CurrentCore.Logger.LogError(ex, "Error during UpdateBackgroundTasksStatus()");
+                BasePlatform.CurrentCore.Logger.LogError(ex, "Error during UpdateBackgroundTasksStatus()");
             }
         }
 
         private async Task ClearAppDataCacheAsync()
         {
             this.ClearAppDataCacheCommand.IsEnabled = false;
-            await PlatformBase.CurrentCore.Storage.ClearAppDataCacheFolderAsync();
+            await BasePlatform.CurrentCore.Storage.ClearAppDataCacheFolderAsync();
             await this.AppCacheTask.RefreshAsync(true, CancellationToken.None);
         }
 

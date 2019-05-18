@@ -80,10 +80,10 @@ namespace AppFramework.Core.Services
             this.Messages = new ObservableCollection<string>();
             // TODO this.Loggers.Add(new DebugLoggerProvider());
 
-            if (PlatformBase.IsDebugMode)
+            if (BasePlatform.IsDebugMode)
             {
                 this.CurrentLevel = LogLevels.Debug;
-                if (PlatformBase.DeviceFamily == DeviceFamily.Desktop)
+                if (BasePlatform.DeviceFamily == DeviceFamily.Desktop)
                     this.Loggers.Add(new UwpConsoleOutputProvider());
             }
             else
@@ -142,7 +142,7 @@ namespace AppFramework.Core.Services
 
             message = string.Format(CultureInfo.InvariantCulture, "{0} -- {1}", message, ex);
 
-            PlatformBase.CurrentCore.Analytics.Error(ex, message);
+            BasePlatform.CurrentCore.Analytics.Error(ex, message);
             this.Log(LogLevels.Error, message);
             foreach (ILogger logger in Loggers)
                 logger.LogException(ex, message);
@@ -168,7 +168,7 @@ namespace AppFramework.Core.Services
 
             message = string.Format(CultureInfo.InvariantCulture, "{0} -- FATAL EXCEPTION: {1}", message, ex);
 
-            PlatformBase.CurrentCore.Analytics.Error(ex, message);
+            BasePlatform.CurrentCore.Analytics.Error(ex, message);
             this.Log(LogLevels.FatalError, message);
             foreach (ILogger logger in Loggers)
                 logger.LogExceptionFatal(ex, message);
@@ -180,7 +180,7 @@ namespace AppFramework.Core.Services
             {
                 try
                 {
-                    await PlatformBase.CurrentCore.Storage.SaveFileAsync(ERROR_REPORT_FILENAME, data, ERROR_REPORT_DATA_CONTAINER);
+                    await BasePlatform.CurrentCore.Storage.SaveFileAsync(ERROR_REPORT_FILENAME, data, ERROR_REPORT_DATA_CONTAINER);
                     tcs.SetResult(null);
                 }
                 catch (Exception taskEx)
@@ -201,28 +201,28 @@ namespace AppFramework.Core.Services
         {
             try
             {
-                PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "Checking if application crashed on previous run...");
-                if (await PlatformBase.CurrentCore.Storage.DoesFileExistsAsync(ERROR_REPORT_FILENAME, ERROR_REPORT_DATA_CONTAINER))
+                BasePlatform.CurrentCore.Logger.Log(LogLevels.Debug, "Checking if application crashed on previous run...");
+                if (await BasePlatform.CurrentCore.Storage.DoesFileExistsAsync(ERROR_REPORT_FILENAME, ERROR_REPORT_DATA_CONTAINER))
                 {
-                    PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "Application crashed on previous run, prompt user to send report.");
+                    BasePlatform.CurrentCore.Logger.Log(LogLevels.Debug, "Application crashed on previous run, prompt user to send report.");
                     if (await vm.ShowMessageBoxAsync(CancellationToken.None, Strings.Resources.ApplicationProblemPromptMessage, Strings.Resources.ApplicationProblemPromptTitle, new string[] { Strings.Resources.TextYes, Strings.Resources.TextNo }) == 0)
                     {
-                        string subject = string.Format(Strings.Resources.ApplicationProblemEmailSubjectTemplate, Windows.ApplicationModel.Package.Current.DisplayName, PlatformBase.CurrentCore.AppInfo.VersionNumber);
-                        var attachment = await PlatformBase.CurrentCore.Storage.GetFileAsync(ERROR_REPORT_FILENAME, ERROR_REPORT_DATA_CONTAINER);
+                        string subject = string.Format(Strings.Resources.ApplicationProblemEmailSubjectTemplate, Windows.ApplicationModel.Package.Current.DisplayName, BasePlatform.CurrentCore.AppInfo.VersionNumber);
+                        var attachment = await BasePlatform.CurrentCore.Storage.GetFileAsync(ERROR_REPORT_FILENAME, ERROR_REPORT_DATA_CONTAINER);
 
                         string body = Strings.Resources.ApplicationProblemEmailBodyTemplate;
-                        body += await PlatformBase.CurrentCore.Storage.ReadFileAsStringAsync(ERROR_REPORT_FILENAME, ERROR_REPORT_DATA_CONTAINER);
-                        PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, "PREVIOUS CRASH LOGS: \t" + body);
+                        body += await BasePlatform.CurrentCore.Storage.ReadFileAsStringAsync(ERROR_REPORT_FILENAME, ERROR_REPORT_DATA_CONTAINER);
+                        BasePlatform.CurrentCore.Logger.Log(LogLevels.Information, "PREVIOUS CRASH LOGS: \t" + body);
 
-                        await PlatformBase.CurrentCore.EmailProvider.SendEmailAsync(subject, body, PlatformBase.CurrentCore.AppInfo.AppSupportEmailAddress, attachment);
+                        await BasePlatform.CurrentCore.EmailProvider.SendEmailAsync(subject, body, BasePlatform.CurrentCore.AppInfo.AppSupportEmailAddress, attachment);
                     }
 
-                    await PlatformBase.CurrentCore.Storage.DeleteFileAsync(ERROR_REPORT_FILENAME, ERROR_REPORT_DATA_CONTAINER);
+                    await BasePlatform.CurrentCore.Storage.DeleteFileAsync(ERROR_REPORT_FILENAME, ERROR_REPORT_DATA_CONTAINER);
                 }
             }
             catch(Exception ex)
             {
-                PlatformBase.CurrentCore.Logger.LogError(ex, "Error while attempting to check for fatal error reports!");
+                BasePlatform.CurrentCore.Logger.LogError(ex, "Error while attempting to check for fatal error reports!");
             }
         }
 
@@ -231,13 +231,13 @@ namespace AppFramework.Core.Services
         /// </summary>
         private async Task SendSupportEmailAsync()
         {
-            var subject = string.Format(Strings.Resources.ApplicationSupportEmailSubjectTemplate, Windows.ApplicationModel.Package.Current.DisplayName, PlatformBase.CurrentCore.AppInfo.VersionNumber);
-            var report = PlatformBase.CurrentCore.Logger.GenerateApplicationReport();
-            var attachment = await PlatformBase.CurrentCore.Storage.SaveFileAsync("Application.log", report, ApplicationData.Current.TemporaryFolder);
+            var subject = string.Format(Strings.Resources.ApplicationSupportEmailSubjectTemplate, Windows.ApplicationModel.Package.Current.DisplayName, BasePlatform.CurrentCore.AppInfo.VersionNumber);
+            var report = BasePlatform.CurrentCore.Logger.GenerateApplicationReport();
+            var attachment = await BasePlatform.CurrentCore.Storage.SaveFileAsync("Application.log", report, ApplicationData.Current.TemporaryFolder);
 
             var body = Strings.Resources.ApplicationSupportEmailBodyTemplate;
             body += report;
-            await PlatformBase.CurrentCore.EmailProvider.SendEmailAsync(subject, body, PlatformBase.CurrentCore.AppInfo.AppSupportEmailAddress, attachment);
+            await BasePlatform.CurrentCore.EmailProvider.SendEmailAsync(subject, body, BasePlatform.CurrentCore.AppInfo.AppSupportEmailAddress, attachment);
         }
 
         /// <summary>
@@ -249,14 +249,14 @@ namespace AppFramework.Core.Services
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("UTC TIME: " + DateTime.Now.ToUniversalTime().ToString());
-            if (PlatformBase.CurrentCore.AppInfo != null)
+            if (BasePlatform.CurrentCore.AppInfo != null)
             {
-                sb.AppendLine(string.Format("APP NAME: {0} {1} {2} {3} (AF {4})", Windows.ApplicationModel.Package.Current.DisplayName, PlatformBase.CurrentCore.AppInfo.VersionNumber, PlatformBase.CurrentCore.AppInfo.IsTrial ? "TRIAL" : "", PlatformBase.CurrentCore.AppInfo.IsTrialExpired ? "EXPIRED" : "", PlatformBase.CurrentCore.AppInfo.GetAppFrameworkVersionAsync().Result).Trim());
-                if (PlatformBase.CurrentCore.AppInfo.IsTrial && PlatformBase.CurrentCore.AppInfo.TrialExpirationDate.Year != 9999)
-                    sb.AppendLine("TRIAL EXPIRATION: " + PlatformBase.CurrentCore.AppInfo.TrialExpirationDate);
+                sb.AppendLine(string.Format("APP NAME: {0} {1} {2} {3} (AF {4})", Windows.ApplicationModel.Package.Current.DisplayName, BasePlatform.CurrentCore.AppInfo.VersionNumber, BasePlatform.CurrentCore.AppInfo.IsTrial ? "TRIAL" : "", BasePlatform.CurrentCore.AppInfo.IsTrialExpired ? "EXPIRED" : "", BasePlatform.CurrentCore.AppInfo.GetAppFrameworkVersionAsync().Result).Trim());
+                if (BasePlatform.CurrentCore.AppInfo.IsTrial && BasePlatform.CurrentCore.AppInfo.TrialExpirationDate.Year != 9999)
+                    sb.AppendLine("TRIAL EXPIRATION: " + BasePlatform.CurrentCore.AppInfo.TrialExpirationDate);
                 sb.AppendLine("INSTALLED: " + Windows.ApplicationModel.Package.Current.InstalledDate.DateTime);
             }
-            sb.AppendLine("INITIALIZATION MODE: " + PlatformBase.CurrentCore.InitializationMode);
+            sb.AppendLine("INITIALIZATION MODE: " + BasePlatform.CurrentCore.InitializationMode);
             sb.AppendLine(string.Format("CULTURE: {0}  UI CULTURE: {1}", CultureInfo.CurrentCulture.Name, CultureInfo.CurrentUICulture.Name));
             sb.AppendLine(string.Format("OS: {0} {1} {2} {3}", SystemInformation.OperatingSystem, SystemInformation.OperatingSystemArchitecture, SystemInformation.OperatingSystemVersion, SystemInformation.DeviceFamily));
             sb.AppendLine(string.Format("DEVICE: {0} {1}", SystemInformation.DeviceManufacturer, SystemInformation.DeviceModel));
@@ -432,17 +432,17 @@ namespace AppFramework.Core.Services
         {
             public void Log(string message, params object[] args)
             {
-                PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, message, args);
+                BasePlatform.CurrentCore.Logger.Log(LogLevels.Debug, message, args);
             }
 
             public void LogException(Exception ex, string message = null, params object[] args)
             {
-                PlatformBase.CurrentCore.Logger.LogError(ex, message, args);
+                BasePlatform.CurrentCore.Logger.LogError(ex, message, args);
             }
 
             public void LogExceptionFatal(Exception ex, string message = null, params object[] args)
             {
-                PlatformBase.CurrentCore.Logger.LogErrorFatal(ex, message, args);
+                BasePlatform.CurrentCore.Logger.LogErrorFatal(ex, message, args);
             }
         }
 

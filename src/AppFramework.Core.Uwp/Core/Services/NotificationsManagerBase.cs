@@ -38,7 +38,7 @@ namespace AppFramework.Core.Services
             ToastNotificationManager.History.Clear();
 
             // Clear primary tile
-            this.ClearTile(PlatformBase.CurrentCore.ViewModelCore);
+            this.ClearTile(BasePlatform.CurrentCore.ViewModelCore);
 
             // Clear secondary tiles
             IReadOnlyList<SecondaryTile> list = await SecondaryTile.FindAllAsync();
@@ -54,7 +54,7 @@ namespace AppFramework.Core.Services
         /// <returns>True if a tile exists associated to the model specified or false if no tile was found.</returns>
         public bool HasTile(IModel model)
         {
-            var tileID = PlatformBase.CurrentCore.GenerateModelTileID(model);
+            var tileID = BasePlatform.CurrentCore.GenerateModelTileID(model);
             if (tileID == string.Empty)
                 return true;
             else if (!string.IsNullOrEmpty(tileID))
@@ -72,7 +72,7 @@ namespace AppFramework.Core.Services
             var list = await SecondaryTile.FindAllAsync();
             foreach (var tile in list)
             {
-                var model = await PlatformBase.CurrentCore.GenerateModelFromTileIdAsync(tile.TileId, ct);
+                var model = await BasePlatform.CurrentCore.GenerateModelFromTileIdAsync(tile.TileId, ct);
                 ct.ThrowIfCancellationRequested();
 
                 if (model != null)
@@ -90,7 +90,7 @@ namespace AppFramework.Core.Services
         /// <param name="model">Model which contains the data necessary to find the tile to delete.</param>
         public async Task<bool> DeleteTileAsync(IModel model)
         {
-            var tileID = PlatformBase.CurrentCore.GenerateModelTileID(model);
+            var tileID = BasePlatform.CurrentCore.GenerateModelTileID(model);
             if (!string.IsNullOrEmpty(tileID))
             {
                 SecondaryTile tile = new SecondaryTile(tileID);
@@ -107,7 +107,7 @@ namespace AppFramework.Core.Services
         /// <param name="model">Model which contains the data necessary to find the tile to clear.</param>
         public void ClearTile(IModel model)
         {
-            var tileID = PlatformBase.CurrentCore.GenerateModelTileID(model);
+            var tileID = BasePlatform.CurrentCore.GenerateModelTileID(model);
             if (tileID == string.Empty)
                 TileUpdateManager.CreateTileUpdaterForApplication().Clear();
             else if (!string.IsNullOrEmpty(tileID))

@@ -3,7 +3,7 @@ using System;
 
 namespace AppFramework.Core
 {
-    public partial class PlatformBase
+    public partial class BasePlatform
     {
         #region Protected Set
 

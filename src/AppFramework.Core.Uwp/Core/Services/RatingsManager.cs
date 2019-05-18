@@ -51,7 +51,7 @@ namespace AppFramework.Core.Services
             bool showPrompt = false;
 
             // PLACE YOUR CUSTOM RATE PROMPT LOGIC HERE!
-            this.LastPromptedForRating = PlatformBase.CurrentCore.Storage.LoadSetting<DateTime>(LAST_PROMPTED_FOR_RATING, Windows.Storage.ApplicationData.Current.RoamingSettings);
+            this.LastPromptedForRating = BasePlatform.CurrentCore.Storage.LoadSetting<DateTime>(LAST_PROMPTED_FOR_RATING, Windows.Storage.ApplicationData.Current.RoamingSettings);
 
             //long launchCount = PlatformBase.Current.Storage.LoadSetting<long>(LAUNCH_COUNT);
             //launchCount++;
@@ -59,9 +59,9 @@ namespace AppFramework.Core.Services
 
             // If trial, not expired, and less than 2 days away from expiring, set as TRUE
             bool preTrialExpiredBasedPrompt = 
-                PlatformBase.CurrentCore.AppInfo.IsTrial 
-                && !PlatformBase.CurrentCore.AppInfo.IsTrialExpired 
-                && DateTime.Now.AddDays(2) > PlatformBase.CurrentCore.AppInfo.TrialExpirationDate;
+                BasePlatform.CurrentCore.AppInfo.IsTrial 
+                && !BasePlatform.CurrentCore.AppInfo.IsTrialExpired 
+                && DateTime.Now.AddDays(2) > BasePlatform.CurrentCore.AppInfo.TrialExpirationDate;
 
             if (preTrialExpiredBasedPrompt && this.LastPromptedForRating == DateTime.MinValue)
             {
@@ -92,7 +92,7 @@ namespace AppFramework.Core.Services
             var result = await vm.ShowMessageBoxAsync(CancellationToken.None, Strings.Resources.PromptRateApplicationMessage, Strings.Resources.PromptRateApplicationTitle, new string[] { Strings.Resources.TextYes, Strings.Resources.TextMaybeLater }, 1);
 
             // Store the time the user was prompted
-            PlatformBase.CurrentCore.Storage.SaveSetting(LAST_PROMPTED_FOR_RATING, DateTime.Now);
+            BasePlatform.CurrentCore.Storage.SaveSetting(LAST_PROMPTED_FOR_RATING, DateTime.Now);
 
             if (result == 0)
             {
@@ -107,7 +107,7 @@ namespace AppFramework.Core.Services
         /// <returns></returns>
         public async Task RateApplicationAsync()
         {
-            PlatformBase.CurrentCore.Analytics.Event("RateApplication");
+            BasePlatform.CurrentCore.Analytics.Event("RateApplication");
             await Launcher.LaunchUriAsync(new Uri(string.Format("ms-windows-store:REVIEW?PFN={0}", global::Windows.ApplicationModel.Package.Current.Id.FamilyName)));
         }
 

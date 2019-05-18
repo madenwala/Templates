@@ -92,7 +92,7 @@ namespace AppFramework.Core.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        PlatformBase.CurrentCore.Logger.LogError(ex, $"Error during CollectionViewModelBase.OnSaveStateAsync calling each calling {vm.GetType().FullName}.SaveStateAsync");
+                        BasePlatform.CurrentCore.Logger.LogError(ex, $"Error during CollectionViewModelBase.OnSaveStateAsync calling each calling {vm.GetType().FullName}.SaveStateAsync");
                         throw;
                     }
                 }
@@ -130,7 +130,7 @@ namespace AppFramework.Core.ViewModels
 
             if (this.CurrentViewModel != null)
             {
-                PlatformBase.CurrentCore.Logger.Log(LogLevels.Debug, "CollectionViewModelBase.SetCurrent to {0}", vm);
+                BasePlatform.CurrentCore.Logger.Log(LogLevels.Debug, "CollectionViewModelBase.SetCurrent to {0}", vm);
                 this.CurrentViewModel.PropertyChanged += CurrentVM_PropertyChanged;
                 if (this.CurrentViewModel is WebViewModelBase)
                     this.CopyStatus(null);

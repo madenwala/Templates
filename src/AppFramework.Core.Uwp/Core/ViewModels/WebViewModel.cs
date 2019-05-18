@@ -311,7 +311,7 @@ namespace AppFramework.Core.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        PlatformBase.CurrentCore.Logger.LogError(ex, $"{this.GetType().Name} -- could not hide class '{className}' in the WebView via InvokeScriptAsync.");
+                        BasePlatform.CurrentCore.Logger.LogError(ex, $"{this.GetType().Name} -- could not hide class '{className}' in the WebView via InvokeScriptAsync.");
                     }
                 }
             }
@@ -331,7 +331,7 @@ namespace AppFramework.Core.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        PlatformBase.CurrentCore.Logger.LogError(ex, $"{this.GetType().Name} -- could not hide element ID '{id}' in the WebView via InvokeScriptAsync.");
+                        BasePlatform.CurrentCore.Logger.LogError(ex, $"{this.GetType().Name} -- could not hide element ID '{id}' in the WebView via InvokeScriptAsync.");
                     }
                 }
             }

@@ -16,7 +16,7 @@ namespace AppFramework.UI.Triggers
 
         private void UpdateTrigger()
         {
-            if (PlatformBase.CurrentCore.IsMobileContinuumDesktop)
+            if (BasePlatform.CurrentCore.IsMobileContinuumDesktop)
                 this.SetActive(true);
             else
                 this.SetActive(false);

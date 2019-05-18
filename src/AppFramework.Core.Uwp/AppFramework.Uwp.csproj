@@ -143,7 +143,7 @@
     </Compile>
     <Compile Include="UI\Views\ViewBase.InterstitialAds.cs" />
     <Compile Include="Core\Extensions\IStorageFileExtensions.cs" />
-    <Compile Include="Core\PlatformBase.Accessors.cs" />
+    <Compile Include="Core\BasePlatform.Accessors.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\AgentSync.cs" />
@@ -160,7 +160,7 @@
     <Compile Include="Core\Extensions\PackageVersionExtensions.cs" />
     <Compile Include="Core\GeneralFunctions.cs" />
     <Compile Include="Core\Models\VoiceCommandInfo.cs" />
-    <Compile Include="Core\PlatformBase.cs" />
+    <Compile Include="Core\BasePlatform.cs" />
     <Compile Include="Core\Services\BaseAnalyticsService.cs" />
     <Compile Include="Core\Services\Analytics\GoogleAnalyticsService.cs" />
     <Compile Include="Core\Services\Analytics\HockeyAppService.cs" />

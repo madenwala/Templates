@@ -11,13 +11,13 @@ namespace AppFramework.UI.Views
 
         public void ShowInterstitialAd()
         {
-            if (PlatformBase.CurrentCore.NavigationBase.ParentFrame is ApplicationFrame frame)
+            if (BasePlatform.CurrentCore.NavigationBase.ParentFrame is ApplicationFrame frame)
                 frame.ShowInterstitialAd();
         }
 
         private void InitializeInterstitialAds()
         {
-            if (PlatformBase.CurrentCore.NavigationBase.ParentFrame is ApplicationFrame frame)
+            if (BasePlatform.CurrentCore.NavigationBase.ParentFrame is ApplicationFrame frame)
             {
                 frame.OnInterstitialAdCancelled += OnInterstitialAdCancelled;
                 frame.OnInterstitialAdCompleted += OnInterstitialAdCompleted;
@@ -28,7 +28,7 @@ namespace AppFramework.UI.Views
 
         private void TeardownInterstitialAds()
         {
-            if (PlatformBase.CurrentCore.NavigationBase.ParentFrame is ApplicationFrame frame)
+            if (BasePlatform.CurrentCore.NavigationBase.ParentFrame is ApplicationFrame frame)
             {
                 frame.OnInterstitialAdCancelled -= OnInterstitialAdCancelled;
                 frame.OnInterstitialAdCompleted -= OnInterstitialAdCompleted;
