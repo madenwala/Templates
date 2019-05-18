@@ -8,8 +8,4 @@
     <ProjectReference Include="..\AppFramework.Core.Data\AppFramework.Core.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-
 </Project>

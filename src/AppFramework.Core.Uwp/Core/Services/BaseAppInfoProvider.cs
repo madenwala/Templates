@@ -12,7 +12,7 @@ namespace AppFramework.Core.Services
     /// <summary>
     /// Base class providing access to the application currently executing specific to the platform this app is executing on.
     /// </summary>
-    public abstract class AppInfoProviderBase : BaseService
+    public abstract class BaseAppInfoProvider : BaseService
     {
         #region Variables
 
@@ -80,7 +80,7 @@ namespace AppFramework.Core.Services
 
         #region Constructors
 
-        public AppInfoProviderBase()
+        public BaseAppInfoProvider()
         {
             _licenseInfo = CurrentAppSimulator.LicenseInformation;
 
@@ -144,7 +144,7 @@ namespace AppFramework.Core.Services
         {
             try
             {
-                var assembly = typeof(AppInfoProviderBase).GetTypeInfo().Assembly.GetName().Name;
+                var assembly = typeof(BaseAppInfoProvider).GetTypeInfo().Assembly.GetName().Name;
                 string filename = $"ms-appx:///{assembly}/VERSION.txt";
                 Uri appUri = new Uri(filename);//File name should be prefixed with 'ms-appx:///Assets/* 
                 StorageFile file = StorageFile.GetFileFromApplicationUriAsync(appUri).AsTask().ConfigureAwait(false).GetAwaiter().GetResult();

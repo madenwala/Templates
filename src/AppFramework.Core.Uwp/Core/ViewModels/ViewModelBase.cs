@@ -4,6 +4,9 @@ using AppFramework.Core.Extensions;
 using AppFramework.Core.Models;
 using AppFramework.Core.Services;
 using AppFramework.UI.Core;
+using AppFramework.UI.Core.Models;
+using AppFramework.UI.Core.Views;
+using AppFramework.UI.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,15 +28,6 @@ namespace AppFramework.Core.ViewModels
 {
     public abstract class BaseViewModel : BaseModel, IDisposable, IViewModel
     {
-        #region Constants
-
-        private const int E_WINHTTP_TIMEOUT = unchecked((int)0x80072ee2);
-        private const int E_WINHTTP_NAME_NOT_RESOLVED = unchecked((int)0x80072ee7);
-        private const int E_WINHTTP_CANNOT_CONNECT = unchecked((int)0x80072efd);
-        private const int E_WINHTTP_CONNECTION_ERROR = unchecked((int)0x80072efe);
-
-        #endregion
-
         #region Variables
 
         private DispatcherTimer _statusTimer = null;
@@ -57,8 +51,8 @@ namespace AppFramework.Core.ViewModels
         {
             get
             {
-                if (this.View != null)
-                    return this.View.Dispatcher;
+                if (this.View is Page view)
+                    return view.Dispatcher;
 
                 var coreWindow1 = CoreWindow.GetForCurrentThread();
                 if (coreWindow1 != null)
@@ -72,11 +66,11 @@ namespace AppFramework.Core.ViewModels
             }
         }
 
-        private Page _View;
+        private IView _View;
         /// <summary>
         /// Gets or sets access to the page instance associated to this ViewModel instance.
         /// </summary>
-        public Page View
+        public IView View
         {
             get { return _View; }
             set { _View = value; }
@@ -205,11 +199,11 @@ namespace AppFramework.Core.ViewModels
             }
 
             // Store properties and subscribe to events
-            this.View = view;
+            this.View = view as IView;
             this.ViewParameter = e.Parameter;
-            this.View.GotFocus += View_GotFocus;
+            view.GotFocus += View_GotFocus;
 
-            var auth = PlatformBase.GetService<AuthorizationManagerBase>();
+            var auth = PlatformBase.GetService<BaseAuthorizationManager>();
             if (auth != null)
             {
                 this.IsUserAuthenticated = auth.IsAuthenticated();
@@ -289,7 +283,7 @@ namespace AppFramework.Core.ViewModels
             await this.OnSaveStateAsync(e);
 
             NetworkInformation.NetworkStatusChanged -= NetworkInformation_NetworkStatusChanged;
-            this.View.GotFocus -= View_GotFocus;
+            (this.View as Page).GotFocus -= View_GotFocus;
             this.View = null;
 
             try
@@ -303,7 +297,7 @@ namespace AppFramework.Core.ViewModels
                 PlatformBase.CurrentCore.Logger.LogError(ex, "Failed to save properties to {0} page state.", this.GetType().Name);
             }
 
-            var auth = PlatformBase.GetService<AuthorizationManagerBase>();
+            var auth = PlatformBase.GetService<BaseAuthorizationManager>();
             if(auth != null)
                 auth.UserAuthenticatedStatusChanged -= AuthenticationManager_UserAuthenticated;
 
@@ -367,8 +361,8 @@ namespace AppFramework.Core.ViewModels
             {
                 this.ShowStatus(Strings.Account.TextUnauthorizedUser);
                 PlatformBase.CurrentCore.Logger.Log(LogLevels.Warning, $"{this.GetType().Name}.{callerName} - Unauthorized user exception (Parameters: {this.ViewParameter}) - {message}");
-                if (PlatformBase.ContainsService<AuthorizationManagerBase>())
-                    await PlatformBase.GetService<AuthorizationManagerBase>().SetUserAsync(null);
+                if (PlatformBase.ContainsService<BaseAuthorizationManager>())
+                    await PlatformBase.GetService<BaseAuthorizationManager>().SetUserAsync(null);
                 await this.ShowMessageBoxAsync(ct, Strings.Account.TextUnauthorizedUser, Strings.Account.TextUnauthorizedUserTitle);
             }
             else if (ex is UserFriendlyException)
@@ -912,7 +906,7 @@ namespace AppFramework.Core.ViewModels
         /// <param name="property"></param>
         /// <param name="identifier"></param>
         /// <returns></returns>
-        protected Task<T> LoadFromCacheAsync<T>(Expression<Func<T>> property, string identifier = null)
+        public Task<T> LoadFromCacheAsync<T>(Expression<Func<T>> property, string identifier = null)
         {
             if (property == null)
                 return Task.FromResult<T>(default(T));
@@ -927,7 +921,7 @@ namespace AppFramework.Core.ViewModels
         /// <typeparam name="T"></typeparam>
         /// <param name="key"></param>
         /// <returns></returns>
-        protected internal async Task<T> LoadFromCacheAsync<T>(string key)
+        public async Task<T> LoadFromCacheAsync<T>(string key)
         {
             try
             {
@@ -947,7 +941,7 @@ namespace AppFramework.Core.ViewModels
         /// <param name="property"></param>
         /// <param name="identifier"></param>
         /// <returns></returns>
-        protected async Task SaveToCacheAsync<T>(Expression<Func<T>> property, string identifier = null)
+        public async Task SaveToCacheAsync<T>(Expression<Func<T>> property, string identifier = null)
         {
             if (property == null)
                 return;
@@ -974,7 +968,7 @@ namespace AppFramework.Core.ViewModels
         /// <param name="key">Unique identifier for the data</param>
         /// <param name="data">The data to store</param>
         /// <returns></returns>
-        protected internal async Task SaveToCacheAsync<T>(string key, T data)
+        public async Task SaveToCacheAsync<T>(string key, T data)
         {
             try
             {
@@ -1052,7 +1046,7 @@ namespace AppFramework.Core.ViewModels
 
         private async Task<bool> RefreshAccessTokenAsync(CancellationToken ct)
         {
-            var auth = PlatformBase.GetService<AuthorizationManagerBase>();
+            var auth = PlatformBase.GetService<BaseAuthorizationManager>();
             if (auth != null)
             {
                 PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, "Attempting to refresh access token...");
@@ -1061,7 +1055,7 @@ namespace AppFramework.Core.ViewModels
                     var user = await auth.GetRefreshAccessToken(ct);
                     PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, "...access token refresh complete!");
                     if(user != null)
-                        return await PlatformBase.GetService<AuthorizationManagerBase>().SetUserAsync(user);
+                        return await PlatformBase.GetService<BaseAuthorizationManager>().SetUserAsync(user);
                 }
                 catch(UnauthorizedAccessException)
                 {

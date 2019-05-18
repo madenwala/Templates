@@ -2,6 +2,7 @@
 using AppFramework.Core.Extensions;
 using AppFramework.Core.Models;
 using AppFramework.Core.Strings;
+using AppFramework.UI.Core.Models;
 using System;
 using System.Reflection;
 using System.Threading;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Devices.Geolocation;
 using Windows.Storage;
+using Windows.UI.Xaml.Controls;
 
 namespace AppFramework.Core.ViewModels
 {
@@ -122,8 +124,8 @@ namespace AppFramework.Core.ViewModels
 
         protected override async Task OnLoadStateAsync(LoadStateEventArgs e)
         {
-            if(this.View != null)
-                this.View.GotFocus += View_GotFocus;
+            if(this.View is Page view)
+                view.GotFocus += View_GotFocus;
 
             this.AppFrameworkVersionNumber = await PlatformBase.CurrentCore.AppInfo.GetAppFrameworkVersionAsync();
 
@@ -133,8 +135,8 @@ namespace AppFramework.Core.ViewModels
         protected override Task OnSaveStateAsync(SaveStateEventArgs e)
         {
             this.PlatformBase.SaveSettings();
-            if (this.View != null)
-                this.View.GotFocus -= View_GotFocus;
+            if (this.View is Page view)
+                view.GotFocus -= View_GotFocus;
             return base.OnSaveStateAsync(e);
         }
 

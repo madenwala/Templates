@@ -1,6 +1,7 @@
 ﻿using AppFramework.Core.Commands;
 using AppFramework.Core.Extensions;
 using AppFramework.Core.ViewModels;
+using AppFramework.UI.Core.Views;
 using Microsoft.Toolkit.Uwp.Helpers;
 using System;
 using System.Collections.Generic;

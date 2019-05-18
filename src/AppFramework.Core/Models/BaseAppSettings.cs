@@ -1,11 +1,9 @@
-﻿using Windows.UI.Xaml;
-
-namespace AppFramework.Core.Models
+﻿namespace AppFramework.Core.Models
 {
     /// <summary>
     /// Container class for local application settings.  Create all your local app setting properties here.
     /// </summary>
-    public abstract class AppSettingsLocalBase : BaseModel
+    public abstract class BaseAppSettingsLocal : BaseModel
     {
         #region Properties
 
@@ -25,11 +23,11 @@ namespace AppFramework.Core.Models
     /// <summary>
     /// Container class for roaming application settings.  Create all your roaming app setting properties here.
     /// </summary>
-    public abstract class AppSettingsRoamingBase : BaseModel
+    public abstract class BaseAppSettingsRoaming : BaseModel
     {
         #region Properties
 
-        private int _ApplicationTheme = (int)ElementTheme.Default;
+        private int _ApplicationTheme = 0;
         /// <summary>
         /// Gets or sets the application theme desired by the user.
         /// </summary>

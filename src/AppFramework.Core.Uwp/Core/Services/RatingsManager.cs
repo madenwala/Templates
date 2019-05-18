@@ -1,5 +1,6 @@
 ﻿using AppFramework.Core.Commands;
 using AppFramework.Core.ViewModels;
+using AppFramework.UI.Core.Views;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

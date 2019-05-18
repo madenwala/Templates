@@ -1,4 +1,4 @@
-﻿using AppFramework.Core.Models;
+﻿using AppFramework.UI.Core.Models;
 using Windows.UI.Xaml.Controls;
 
 namespace AppFramework.UI.Resources

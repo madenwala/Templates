@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace AppFramework.Core.Services.Analytics
 {
-    public sealed class GoogleAnalyticsService : AnalyticsServiceBase
+    public sealed class GoogleAnalyticsService : BaseAnalyticsService
     {
         private Tracker _tracker;
 

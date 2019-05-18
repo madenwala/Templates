@@ -114,11 +114,8 @@
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <Compile Include="Core\Extensions\ObjectExtensions.cs" />
-    <Compile Include="Core\Models\AppSettings.cs" />
     <Compile Include="Core\Models\LocationModelList.cs" />
     <Compile Include="Core\Models\ModelLists.cs" />
-    <Compile Include="Core\Models\NotifyTaskCompletion.cs" />
-    <Compile Include="Core\Serializers.cs" />
     <Compile Include="Core\Services\Analytics\AppCenterAnalyticsService.cs" />
     <Compile Include="Core\Strings\en-US\Account.cs">
       <DependentUpon>Account.resw</DependentUpon>
@@ -135,7 +132,6 @@
     <Compile Include="Core\Strings\en-US\WebBrowser.cs">
       <DependentUpon>WebBrowser.resw</DependentUpon>
     </Compile>
-    <Compile Include="Core\ViewModels\IViewModel.cs" />
     <Compile Include="UI\Behaviors\ContextMenuRightClickBehavior.cs" />
     <Compile Include="UI\Controls\ApplicationFrame.Interstitial.cs" />
     <Compile Include="UI\Extensions\FrameworkElementExtensions.cs" />
@@ -163,14 +159,13 @@
     <Compile Include="Core\Extensions\GeocoordinateExtensions.cs" />
     <Compile Include="Core\Extensions\PackageVersionExtensions.cs" />
     <Compile Include="Core\GeneralFunctions.cs" />
-    <Compile Include="Core\Models\BackgroundTaskRunInfo.cs" />
     <Compile Include="Core\Models\VoiceCommandInfo.cs" />
     <Compile Include="Core\PlatformBase.cs" />
-    <Compile Include="Core\Services\AnalyticsServiceBase.cs" />
+    <Compile Include="Core\Services\BaseAnalyticsService.cs" />
     <Compile Include="Core\Services\Analytics\GoogleAnalyticsService.cs" />
     <Compile Include="Core\Services\Analytics\HockeyAppService.cs" />
-    <Compile Include="Core\Services\AppInfoProviderBase.cs" />
-    <Compile Include="Core\Services\AuthorizationManagerBase.cs" />
+    <Compile Include="Core\Services\BaseAppInfoProvider.cs" />
+    <Compile Include="Core\Services\BaseAuthorizationManager.cs" />
     <Compile Include="Core\Services\BackgroundTasksManager.cs" />
     <Compile Include="Core\Services\CryptographyProvider.cs" />
     <Compile Include="Core\Services\EmailProvider.cs" />
@@ -178,11 +173,11 @@
     <Compile Include="Core\Services\GeolocationService.cs" />
     <Compile Include="Core\Services\JumpListManager.cs" />
     <Compile Include="Core\Services\LoggingService.cs" />
-    <Compile Include="Core\Services\NavigationManagerBase.cs" />
+    <Compile Include="Core\Services\BaseNavigationManager.cs" />
     <Compile Include="Core\Services\NotificationsManagerBase.cs" />
     <Compile Include="Core\Services\RatingsManager.cs" />
-    <Compile Include="Core\Services\SharingManagerBase.cs" />
-    <Compile Include="Core\Services\StorageManagerBase.cs" />
+    <Compile Include="Core\Services\BaseSharingManager.cs" />
+    <Compile Include="Core\Services\StorageManager.cs" />
     <Compile Include="Core\Services\VoiceCommandManager.cs" />
     <Compile Include="Core\Services\WebAccountManager.cs" />
     <Compile Include="Core\ViewModels\CollectionViewModelBase.cs" />

@@ -47,7 +47,7 @@ namespace Contoso.Core.Models
         }
 
         private string _Email;
-        public string Email
+        public string Username
         {
             get { return _Email; }
             set { this.SetProperty(ref _Email, value); }

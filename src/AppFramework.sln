@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppFramework", "AppFramework", "{CB5D60BA-865B-480F-A205-7410FF7925D9}"
+	ProjectSection(SolutionItems) = preProject
+		Build\VERSION.txt = Build\VERSION.txt
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGetReferenced", "NuGetReferenced", "{05D999C1-BCBF-4CE3-B327-A9B9502180B9}"
 EndProject
@@ -45,11 +48,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.UI.iOS", "..\AppTem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.UI.UWP", "..\AppTemplate\Source\DirectReferenced\XamarinForms\Contoso.UI.UWP\Contoso.UI.UWP.csproj", "{6F0C826B-A53B-4F3F-B2AF-12125A2A8C81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFramework.Core.Data", "AppFramework.Core.Data\AppFramework.Core.Data.csproj", "{71747EED-1A8C-497A-BB4E-55AC0292122D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppFramework.Core.Data", "AppFramework.Core.Data\AppFramework.Core.Data.csproj", "{71747EED-1A8C-497A-BB4E-55AC0292122D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFramework.Core", "AppFramework.Core\AppFramework.Core.csproj", "{37C110AA-28EB-4C89-9A3B-12A0EFFDFF7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppFramework.Core", "AppFramework.Core\AppFramework.Core.csproj", "{37C110AA-28EB-4C89-9A3B-12A0EFFDFF7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFramework.UI.Core", "AppFramework.UI.Core\AppFramework.UI.Core.csproj", "{A3813AFB-A8D6-4798-AB93-1EF890A23A83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppFramework.UI.Core", "AppFramework.UI.Core\AppFramework.UI.Core.csproj", "{A3813AFB-A8D6-4798-AB93-1EF890A23A83}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppFramework.Uwp", "AppFramework.Core.Uwp\AppFramework.Uwp.csproj", "{65F2272C-D17A-45BE-982A-C6637407657A}"
 EndProject

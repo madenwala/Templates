@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Runtime.Serialization;
 
 namespace AppFramework.Core
 {
@@ -24,7 +23,7 @@ namespace AppFramework.Core
         /// <summary>
         /// Use the XML serializer.
         /// </summary>
-        Xml
+        //Xml
     }
 
     #endregion
@@ -72,8 +71,8 @@ namespace AppFramework.Core
 
             switch (serializerType)
             {
-                case SerializerTypes.Xml:
-                    return SerializeToXml(obj);
+                //case SerializerTypes.Xml:
+                //    return SerializeToXml(obj);
                 case SerializerTypes.Json:
                     return SerializeToJson(obj);
                 default:
@@ -95,8 +94,8 @@ namespace AppFramework.Core
 
             switch (serializerType)
             {
-                case SerializerTypes.Xml:
-                    return DeserializeFromXml<T>(data);
+                //case SerializerTypes.Xml:
+                //    return DeserializeFromXml<T>(data);
                 case SerializerTypes.Json:
                     return DeserializeFromJson<T>(data);
                 default:
@@ -108,48 +107,50 @@ namespace AppFramework.Core
 
         #region XML Serialization
 
-        /// <summary>
-        /// Deserializes an XML string back into an object instance.
-        /// </summary>
-        /// <typeparam name="T">Type of the object to be returned.</typeparam>
-        /// <param name="xml">XML string to be deserialized.</param>
-        /// <returns>Object instance deserialized from the string data.</returns>
-        private static T DeserializeFromXml<T>(string xml)
-        {
-            if (string.IsNullOrWhiteSpace(xml))
-                return default(T);
+        // TODO XML serialization needs to be implemented
 
-            using (Stream stream = new MemoryStream())
-            {
-                byte[] data = System.Text.Encoding.UTF8.GetBytes(xml);
-                stream.Write(data, 0, data.Length);
-                stream.Position = 0;
-                DataContractSerializer deserializer = new DataContractSerializer(typeof(T));
-                return (T)deserializer.ReadObject(stream);
-            }
-        }
+        ///// <summary>
+        ///// Deserializes an XML string back into an object instance.
+        ///// </summary>
+        ///// <typeparam name="T">Type of the object to be returned.</typeparam>
+        ///// <param name="xml">XML string to be deserialized.</param>
+        ///// <returns>Object instance deserialized from the string data.</returns>
+        //private static T DeserializeFromXml<T>(string xml)
+        //{
+        //    if (string.IsNullOrWhiteSpace(xml))
+        //        return default(T);
 
-        /// <summary>
-        /// Serializes an object to XML.
-        /// </summary>
-        /// <param name="obj">Object to be serialized.</param>
-        /// <returns>String representing the serialized object.</returns>
-        private static string SerializeToXml(object obj)
-        {
-            if (obj == null)
-                return null;
+        //    using (Stream stream = new MemoryStream())
+        //    {
+        //        byte[] data = System.Text.Encoding.UTF8.GetBytes(xml);
+        //        stream.Write(data, 0, data.Length);
+        //        stream.Position = 0;
+        //        DataContractSerializer deserializer = new DataContractSerializer(typeof(T));
+        //        return (T)deserializer.ReadObject(stream);
+        //    }
+        //}
 
-            MemoryStream stream = new MemoryStream();
-            DataContractSerializer serializer = new DataContractSerializer(obj.GetType());
-            serializer.WriteObject(stream, obj);
-            stream.Position = 0;
-            string result = null;
-            using (StreamReader sr = new StreamReader(stream))
-            {
-                result = sr.ReadToEnd();
-            }
-            return result;
-        }
+        ///// <summary>
+        ///// Serializes an object to XML.
+        ///// </summary>
+        ///// <param name="obj">Object to be serialized.</param>
+        ///// <returns>String representing the serialized object.</returns>
+        //private static string SerializeToXml(object obj)
+        //{
+        //    if (obj == null)
+        //        return null;
+
+        //    MemoryStream stream = new MemoryStream();
+        //    DataContractSerializer serializer = new DataContractSerializer(obj.GetType());
+        //    serializer.WriteObject(stream, obj);
+        //    stream.Position = 0;
+        //    string result = null;
+        //    using (StreamReader sr = new StreamReader(stream))
+        //    {
+        //        result = sr.ReadToEnd();
+        //    }
+        //    return result;
+        //}
 
         #endregion XML Serialization
 
@@ -159,14 +160,22 @@ namespace AppFramework.Core
         /// Deserializes a JSON string into an object instance.
         /// </summary>
         /// <typeparam name="T">Type of the object to be returned.</typeparam>
-        /// <param name="json">JSON string representing an object.</param>
+        /// <param name="data">JSON string representing an object.</param>
         /// <returns>Instance of an object from the JSON string.</returns>
-        private static T DeserializeFromJson<T>(string json)
+        private static T DeserializeFromJson<T>(string data)
         {
-            if (string.IsNullOrWhiteSpace(json))
+            if (string.IsNullOrWhiteSpace(data))
                 return default(T);
-            
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(json);
+
+            // TODO
+            //    var settings = new JsonSerializerSettings
+            //    {
+            //        NullValueHandling = NullValueHandling.Ignore,
+            //        MissingMemberHandling = MissingMemberHandling.Ignore
+            //    };
+            //    return JsonConvert.DeserializeObject<T>(data, settings);
+
+            return default(T);
         }
 
         /// <summary>
@@ -179,7 +188,8 @@ namespace AppFramework.Core
             if (obj == null)
                 return null;
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(obj);
+            return null;
+            // TODO return Newtonsoft.Json.JsonConvert.SerializeObject(obj);
         }
 
         #endregion JSON Serialization

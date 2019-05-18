@@ -1,4 +1,5 @@
 ﻿using AppFramework.Core.Models;
+using AppFramework.UI.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -7,7 +7,7 @@ using Windows.ApplicationModel.DataTransfer;
 
 namespace AppFramework.Core.Services
 {
-    public abstract class SharingManagerBase : BaseService
+    public abstract class BaseSharingManager : BaseService
     {
         #region Properties
 
@@ -98,7 +98,7 @@ namespace AppFramework.Core.Services
         #endregion Sharing
     }
 
-    internal sealed class DefaultSharingManager : SharingManagerBase
+    internal sealed class DefaultSharingManager : BaseSharingManager
     {
         internal DefaultSharingManager()
         {

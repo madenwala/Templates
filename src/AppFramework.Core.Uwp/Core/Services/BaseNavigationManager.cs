@@ -21,7 +21,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace AppFramework.Core.Services
 {
-    public abstract class NavigationManagerBase : BaseService, IServiceSignout
+    public abstract class BaseNavigationManager : BaseService, IServiceSignout
     {
         #region Variables
 
@@ -69,7 +69,7 @@ namespace AppFramework.Core.Services
 
         #region Constructors
 
-        static NavigationManagerBase()
+        static BaseNavigationManager()
         {
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
                 return;

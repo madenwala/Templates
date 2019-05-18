@@ -33,6 +33,7 @@
         Xbox,
         Desktop,
         Mobile,
+        Teams,
         IoT,
     }
 

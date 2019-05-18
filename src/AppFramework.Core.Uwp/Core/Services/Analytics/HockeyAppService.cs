@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace AppFramework.Core.Services.Analytics
 {
-    public sealed class HockeyAppService : AnalyticsServiceBase
+    public sealed class HockeyAppService : BaseAnalyticsService
     {
         public HockeyAppService(string key, string supportEmailAddress)
         {
@@ -59,7 +59,7 @@ namespace AppFramework.Core.Services.Analytics
         public override void SetUser(IAuthenticatedUserProfile user)
         {
             if(user != null)
-                HockeyClient.Current.UpdateContactInfo(user.DisplayName, user.Email);
+                HockeyClient.Current.UpdateContactInfo(user.DisplayName, user.Username);
         }
     }
 }

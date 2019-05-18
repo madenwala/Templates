@@ -9,7 +9,7 @@ namespace AppFramework.Core.Extensions
         {
             var data = await response.Content?.ReadAsStringAsync();
             if (response.IsSuccessStatusCode && !string.IsNullOrEmpty(data))
-                return data.Deserialize<T>();
+                return Serializer.Deserialize<T>(data);
             else
                 return default(T);
         }

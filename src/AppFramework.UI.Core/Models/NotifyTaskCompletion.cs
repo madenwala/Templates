@@ -1,9 +1,10 @@
-﻿using AppFramework.Core.ViewModels;
+﻿using AppFramework.Core.Models;
+using AppFramework.UI.Core.Views;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AppFramework.Core.Models
+namespace AppFramework.UI.Core.Models
 {
     public interface INotifyTaskCompletion
     {
@@ -38,7 +39,7 @@ namespace AppFramework.Core.Models
         #region Properties
 
         private string Key { get; set; }
-        private BaseViewModel VM { get; set; }
+        private IViewModel VM { get; set; }
         private Func<CancellationToken, Task<TResult>> FuncTask { get; set; }
 
         private Task<TResult> _Task;
@@ -91,7 +92,7 @@ namespace AppFramework.Core.Models
         {
         }
 
-        public NotifyTaskCompletion(Func<CancellationToken, Task<TResult>> funcTask, BaseViewModel vm, string key)
+        public NotifyTaskCompletion(Func<CancellationToken, Task<TResult>> funcTask, IViewModel vm, string key)
         {
             if (funcTask == null)
                 throw new NullReferenceException(nameof(funcTask));

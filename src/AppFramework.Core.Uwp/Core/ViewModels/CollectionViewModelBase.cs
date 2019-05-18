@@ -7,6 +7,8 @@ using Windows.UI.Xaml.Navigation;
 using System.Threading;
 using Windows.UI.Xaml.Input;
 using AppFramework.Core.Services;
+using AppFramework.UI.Core;
+using Windows.UI.Xaml.Controls;
 
 namespace AppFramework.Core.ViewModels
 {
@@ -151,7 +153,7 @@ namespace AppFramework.Core.ViewModels
             if (!_viewModelsLoaded.Contains(vm))
             {
                 // Call load state on the sub-viewmodel once its requested to be set to curent.
-                await vm.LoadStateAsync(this.View, _loadState);
+                await vm.LoadStateAsync(this.View as Page, _loadState);
                 _viewModelsLoaded.Add(vm);
             }
             else

@@ -50,7 +50,7 @@ namespace Contoso.Core.Data
         /// <returns>Login reponse with authorization details.</returns>
         internal async Task<UserResponse> AuthenticateAsync(AccountSignInViewModel vm, CancellationToken ct)
         {
-            var response = new UserResponse() { AccessToken = "1234567890", RefreshToken = "abcdefghijklmnop", UserID = vm.Username, Email = vm.Username, FirstName = "John", LastName = "Doe" };
+            var response = new UserResponse() { AccessToken = "1234567890", RefreshToken = "abcdefghijklmnop", UserID = vm.Username, Username = vm.Username, FirstName = "John", LastName = "Doe" };
             await Task.Delay(2000, ct);
             return response;
 
@@ -97,7 +97,7 @@ namespace Contoso.Core.Data
         /// <returns>Login response and authorization information if the account creation process was successful.</returns>
         internal async Task<UserResponse> RegisterAsync(AccountSignUpViewModel vm, CancellationToken ct)
         {
-            var response = new UserResponse() { AccessToken = "0987654321", RefreshToken = "qrstuvwxwyz", UserID = vm.Username, Email = vm.Username, FirstName = vm.FirstName, LastName = vm.LastName };
+            var response = new UserResponse() { AccessToken = "0987654321", RefreshToken = "qrstuvwxwyz", UserID = vm.Username, Username = vm.Username, FirstName = vm.FirstName, LastName = vm.LastName };
             await Task.Delay(2000, ct);
             return response;
 
