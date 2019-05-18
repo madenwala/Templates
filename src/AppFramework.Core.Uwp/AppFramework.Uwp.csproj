@@ -172,7 +172,6 @@
     <Compile Include="Core\Services\GeocodingService.cs" />
     <Compile Include="Core\Services\GeolocationService.cs" />
     <Compile Include="Core\Services\JumpListManager.cs" />
-    <Compile Include="Core\Services\LoggingService.cs" />
     <Compile Include="Core\Services\BaseNavigationManager.cs" />
     <Compile Include="Core\Services\NotificationsManagerBase.cs" />
     <Compile Include="Core\Services\RatingsManager.cs" />
