@@ -338,12 +338,7 @@
       <Link>VERSION.txt</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AppFramework.NetStandard\AppFramework.NetStandard.csproj">
-      <Project>{babc3ad0-0404-47fe-8f7c-4ace7272b8ad}</Project>
-      <Name>AppFramework.NetStandard</Name>
-    </ProjectReference>
+    <Content Include="nuget.exe" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FlurryWin8SDK">
@@ -387,6 +382,15 @@
     <PackageReference Include="UWP.SDKforGoogleAnalytics.Managed">
       <Version>1.5.2</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AppFramework.Uwp.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AppFramework.PCL\AppFramework.PCL.csproj">
+      <Project>{7e4d5095-590d-48a9-95d8-81c5982547d0}</Project>
+      <Name>AppFramework.PCL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

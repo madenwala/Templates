@@ -1,0 +1,42 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>AppFramework.UWP</id>
+    <version>0.8.3-beta</version>
+    <title>AppFramework.UWP</title>
+    <authors>Mohammed Adenwala</authors>
+    <projectUrl>https://github.com/madenwala/Templates</projectUrl>
+    <releaseNotes>Sample release notes</releaseNotes>
+    <description>AppFramework.UWP</description>
+    <copyright>Copyright © 2019</copyright>
+    <tags>AppFramework</tags>
+  </metadata>
+  <!--<files>
+    <file src="bin\Release\**.*" target="lib\uap10.0.14393"/>
+    <file src="VisualStudioToolsManifest.xml" target="tools"/>
+    <file src="..\ManagedPackage.Design\bin\Release\ManagedPackage.Design.dll" target="lib\uap10.0.14393\Design"/>
+  </files>-->
+
+
+  <files>
+
+    <!--Targets file-->
+    <file target="build\native\AppFramework.targets" src="..\Build\AppFramework.targets" />
+
+    <!-- XAML controls -->
+    <file target="ref\uap10.0\AppFramework\Themes\" src="Themes\*.xaml" />
+
+    <!-- The lib file gets copied as a reference -->
+    <file target="ref\uap10.0\AppFramework.Uwp\"	src="bin\x86\release\*.xr.xml" />
+    <file target="ref\uap10.0\AppFramework.Uwp\"	src="*.txt" />
+    <file target="lib\.netstandard1.4\" src="..\AppFramework.NetStandard\bin\Release\netstandard1.4\*" />
+
+    <!--Copy each platform specific output to each platform specific folder-->
+    <file target="runtimes\win10-x64\lib\uap10.0\"	src="bin\x64\release\*" />
+    <file target="runtimes\win10-x86\lib\uap10.0\"	src="bin\x86\release\*" />
+    <file target="runtimes\win10-arm\lib\uap10.0\"	src="bin\arm\release\*" />
+
+  </files>
+  
+  
+</package>

@@ -76,6 +76,9 @@
     <Compile Include="..\AppFramework.NetStandard\Core\Services\ILogger.cs">
       <Link>Core\Services\ILogger.cs</Link>
     </Compile>
+    <Compile Include="..\AppFramework.NetStandard\Core\Services\ServiceBase.cs">
+      <Link>Core\Services\ServiceBase.cs</Link>
+    </Compile>
     <Compile Include="..\AppFramework.NetStandard\Core\TypeUtility.cs">
       <Link>Core\TypeUtility.cs</Link>
     </Compile>

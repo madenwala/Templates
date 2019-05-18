@@ -16,10 +16,10 @@
     <!--<iconUrl>http://githubusercontent.com/dotnet/WinGASDK/master/TODO_logo_240.png</iconUrl>-->
 
     <dependencies>
-      <group targetFramework=".netstandard2.0">
-        <!--.NET Standard 2.0 dependencies go here-->
+      <!--<group targetFramework=".netstandard2.0">
+        --><!--.NET Standard 2.0 dependencies go here--><!--
         <dependency id="Newtonsoft.Json" version="11.0.2" />
-      </group>
+      </group>-->
       <group targetFramework=".netstandard1.4">
         <!--.NET Standard 1.4 dependencies go here-->
         <dependency id="Newtonsoft.Json" version="10.0.3" />
@@ -41,7 +41,7 @@
         <dependency id="Microsoft.Toolkit.Uwp" version="2.2.0" />
         <dependency id="Microsoft.Toolkit.Uwp.UI.Controls" version="2.2.0" />
         <dependency id="Microsoft.Xaml.Behaviors.Uwp.Managed" version="2.0.0" />
-        <dependency id="Newtonsoft.Json" version="11.0.2" />
+        <dependency id="Newtonsoft.Json" version="10.0.3" />
         <dependency id="NotificationsExtensions.Win10" version="14332.0.2" />
         <dependency id="UWP.SDKforGoogleAnalytics.Managed" version="1.5.2" />
       </group>
@@ -60,9 +60,7 @@
     <!-- The lib file gets copied as a reference -->
     <file target="ref\uap10.0\AppFramework.Uwp\"	src="AppFramework.Uwp\bin\x86\release\*.xr.xml" />
     <file target="ref\uap10.0\AppFramework.Uwp\"	src="Build\*.txt" />
-    <file target="lib\.netstandard1.1\" src="AppFramework.PCL\bin\Release\*" />
     <file target="lib\.netstandard1.4\" src="AppFramework.NetStandard\bin\Release\netstandard1.4\*" />
-    <file target="lib\.netstandard2.0\" src="AppFramework.NetStandard\bin\Release\netstandard2.0\*" />
     
     <!-- Change DLLs to have their platform version removed from it via corflags command https://github.com/NuGet/Home/issues/1221 -->
     <file target="ref\uap10.0\" src="Build\Temp\*" />

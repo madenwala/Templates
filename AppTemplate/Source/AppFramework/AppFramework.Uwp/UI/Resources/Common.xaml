@@ -9,7 +9,7 @@
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls">
 
     <!--  Converters  -->
-    <converters:StringLowerCasingConverter x:Key="lowerCasingConverter" />
+    <!--<converters:StringLowerCasingConverter x:Key="lowerCasingConverter" />
     <converters:StringUpperCasingConverter x:Key="upperCasingConverter" />
     <converters:StringFormatConverter x:Key="stringFormatConverter" />
     <converters:ValueToBooleanConverter x:Key="boolConverter" />
@@ -26,7 +26,7 @@
     <converters:ValueToThicknessConverter
         x:Key="isMenuHiddenConverter"
         FalseValue="0"
-        TrueValue="48,0,0,0" />
+        TrueValue="48,0,0,0" />-->
 
     <!--  Snap points for responsive design  -->
     <x:Double x:Key="SnapPoint27">2560</x:Double>
@@ -38,7 +38,7 @@
 
     <GridLength x:Key="StandardElementGridLength">48</GridLength>
 
-    <Style
+    <!--<Style
         x:Key="StatusTextBlockStyle"
         BasedOn="{StaticResource CaptionTextBlockStyle}"
         TargetType="TextBlock">
@@ -139,7 +139,7 @@
         </Setter>
     </Style>
 
-    <!--  SplitViewButton  -->
+    --><!--  SplitViewButton  --><!--
     <Style TargetType="controls:SplitViewButton">
         <Setter Property="Height" Value="48" />
         <Setter Property="Background" Value="Transparent" />
@@ -243,7 +243,7 @@
         </Setter>
     </Style>
 
-    <!--  Pivots  -->
+    --><!--  Pivots  --><!--
     <Style x:Key="StylizedPivot" TargetType="Pivot">
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />
@@ -567,7 +567,7 @@
     </Style>
     <Style BasedOn="{StaticResource StylizedPivot}" TargetType="controls:Pivot" />
 
-    <!--  List/Grid Styles  -->
+    --><!--  List/Grid Styles  --><!--
     <Style TargetType="ListView">
         <Setter Property="IsSwipeEnabled" Value="False" />
         <Setter Property="IsItemClickEnabled" Value="True" />
@@ -578,20 +578,20 @@
         <Setter Property="IsItemClickEnabled" Value="True" />
         <Setter Property="SelectionMode" Value="None" />
     </Style>
-    <Style TargetType="toolkit:AdaptiveGridView">
+    --><!--<Style TargetType="toolkit:AdaptiveGridView">
         <Setter Property="IsSwipeEnabled" Value="False" />
         <Setter Property="IsItemClickEnabled" Value="True" />
         <Setter Property="SelectionMode" Value="None" />
-    </Style>
+    </Style>-->
 
-    <!--  Pull To Refresh  -->
+    <!--  Pull To Refresh  --><!--
     <x:Double x:Key="PullToRefreshPullThreshold">100</x:Double>
-    <Style TargetType="toolkit:PullToRefreshListView">
+    --><!--<Style TargetType="toolkit:PullToRefreshListView">
         <Setter Property="IsSwipeEnabled" Value="False" />
         <Setter Property="IsItemClickEnabled" Value="True" />
         <Setter Property="SelectionMode" Value="None" />
         <Setter Property="PullThreshold" Value="{StaticResource PullToRefreshPullThreshold}" />
-    </Style>
+    </Style>--><!--
     <Style TargetType="controls:PullToRefreshListView">
         <Setter Property="NoDataMessageStyle" Value="{StaticResource StatusTextBlockStyle}" />
         <Setter Property="IsItemClickEnabled" Value="True" />
@@ -623,7 +623,7 @@
                             Style="{TemplateBinding ListViewStyle}">
                             <toolkit:PullToRefreshListView.PullToRefreshContent>
                                 <TextBlock Style="{StaticResource SubtleTextBlockStyle}" Text="Pull to refresh" />
-                                <!--  TODO x:Uid="/AppFramework.Core.Uwp/Resources/txtPullToRefresh"  -->
+                                --><!--  TODO x:Uid="/AppFramework.Core.Uwp/Resources/txtPullToRefresh"  --><!--
                             </toolkit:PullToRefreshListView.PullToRefreshContent>
                             <toolkit:PullToRefreshListView.ReleaseToRefreshContent>
                                 <TextBlock Style="{StaticResource SubtleTextBlockStyle}" Text="Release to refresh" />
@@ -639,7 +639,7 @@
         </Setter>
     </Style>
 
-    <!--  TaskPanel  -->
+    --><!--  TaskPanel  --><!--
     <Style TargetType="controls:TaskPanel">
         <Setter Property="Template">
             <Setter.Value>
@@ -647,13 +647,13 @@
                     <StackPanel>
                         <StackPanel Margin="0,12,0,24" Visibility="{Binding IsFaulted, Mode=OneWay, Converter={StaticResource visConverter}, FallbackValue=Collapsed}">
                             <TextBlock Style="{StaticResource ErrorTextBlockStyle}" Text="[An expected error has occurred.]" />
-                            <!--  TODO x:Uid="/Contoso.Core/Resources/tbTryAgain"  -->
+                            --><!--  TODO x:Uid="/Contoso.Core/Resources/tbTryAgain"  --><!--
                             <Button
                                 Click="btnTryAgain_Click"
                                 Content="[Try again]"
                                 IsEnabled="{Binding IsCompleted, Mode=OneWay}"
                                 Style="{StaticResource PrimaryButtonStyle}" />
-                            <!--  TODO x:Uid="/Contoso.Core/Resources/btnTryAgain"  -->
+                            --><!--  TODO x:Uid="/Contoso.Core/Resources/btnTryAgain"  --><!--
                         </StackPanel>
                         <ProgressRing
                             IsActive="{Binding IsNotCompleted, Mode=OneWay, FallbackValue=False}"
@@ -666,7 +666,7 @@
         </Setter>
     </Style>
 
-    <!--  AdaptiveDataView  -->
+    --><!--  AdaptiveDataView  --><!--
     <Style TargetType="controls:AdaptiveDataView">
         <Setter Property="GridViewItemContainerStyle" Value="{StaticResource AdaptiveGridViewItemStyle}" />
         <Setter Property="IsItemClickEnabled" Value="True" />
@@ -680,7 +680,7 @@
                         x:Name="root"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch">
-                        <toolkit:PullToRefreshListView
+                        --><!--<toolkit:PullToRefreshListView
                             x:Name="listview"
                             behaviors:ListViewCommandBehavior.Command="{TemplateBinding ClickCommand}"
                             x:DeferLoadStrategy="Lazy"
@@ -697,7 +697,7 @@
                             RefreshCommand="{TemplateBinding RefreshCommand}"
                             SelectionMode="{TemplateBinding SelectionMode}"
                             Style="{TemplateBinding ListViewStyle}"
-                            Visibility="Collapsed" />
+                            Visibility="Collapsed" />--><!--
                         <GridView
                             x:Name="gridview"
                             behaviors:ListViewCommandBehavior.Command="{TemplateBinding ClickCommand}"
@@ -744,7 +744,7 @@
         </Setter>
     </Style>
 
-    <!--  BusyPanel  -->
+    --><!--  BusyPanel  --><!--
     <Style TargetType="controls:BusyPanel">
         <Setter Property="Template">
             <Setter.Value>
@@ -771,7 +771,7 @@
         </Setter>
     </Style>
 
-    <!--  ApplicationFrame  -->
+    --><!--  ApplicationFrame  --><!--
     <Style TargetType="controls:ApplicationFrame">
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="BorderThickness" Value="0" />
@@ -812,7 +812,7 @@
         </Setter>
     </Style>
 
-    <!--  AdSupportedApplicationFrame  -->
+    --><!--  AdSupportedApplicationFrame  --><!--
     <Style TargetType="controls:AdSupportedApplicationFrame">
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="BorderThickness" Value="0" />
@@ -851,14 +851,14 @@
                             StatusText="{Binding ViewModel.StatusText, Mode=OneWay}"
                             StatusTextStyle="{StaticResource BodyTextBlockStyle}"
                             Visibility="{Binding ViewModel.StatusIsBlocking, Mode=OneWay, Converter={StaticResource visConverter}, FallbackValue=Collapsed}" />
-                        <controls:AdControl Grid.Row="1" />
+                        --><!--<controls:AdControl Grid.Row="1" />--><!--
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <!--  BodyPanel  -->
+    --><!--  BodyPanel  --><!--
     <Style TargetType="controls:BodyPanel">
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Background" Value="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
@@ -885,10 +885,10 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
-                        <!--  Header Background  -->
+                        --><!--  Header Background  --><!--
                         <Grid Grid.ColumnSpan="2" Background="{TemplateBinding HeaderBackground}" />
 
-                        <!--  Title  -->
+                        --><!--  Title  --><!--
                         <Button
                             Margin="{Binding ViewModel.View.Frame.IsMenuHidden, Mode=OneWay, Converter={StaticResource isMenuHiddenConverter}}"
                             HorizontalAlignment="Stretch"
@@ -911,7 +911,7 @@
                         </Button>
 
 
-                        <!--  Body  -->
+                        --><!--  Body  --><!--
                         <Grid Grid.Row="1" Grid.ColumnSpan="2">
                             <Grid.ChildrenTransitions>
                                 <TransitionCollection>
@@ -923,7 +923,7 @@
                             </controls:BodyPanelContainer>
                         </Grid>
 
-                        <!--  AppBar  -->
+                        --><!--  AppBar  --><!--
                         <ContentControl
                             x:Name="appbar"
                             Grid.Row="2"
@@ -934,7 +934,7 @@
                             Content="{TemplateBinding AppBar}"
                             IsTabStop="False" />
 
-                        <!--  Progress Bars  -->
+                        --><!--  Progress Bars  --><!--
                         <Grid Grid.ColumnSpan="2" VerticalAlignment="Top">
                             <ProgressBar IsIndeterminate="{Binding ViewModel.StatusIsBusy, Mode=OneWay, FallbackValue=False}" Visibility="{Binding ViewModel.StatusIsBusy, Converter={StaticResource visConverter}, Mode=OneWay, FallbackValue=Collapsed}" />
                             <ProgressBar
@@ -945,7 +945,7 @@
                                 Value="{Binding ViewModel.StatusProgressValue, Mode=OneWay, Converter={StaticResource doubleConverter}}" />
                         </Grid>
 
-                        <!--  StatusText  -->
+                        --><!--  StatusText  --><!--
                         <StackPanel
                             Margin="{Binding ViewModel.View.Frame.IsMenuHidden, Mode=OneWay, Converter={StaticResource isMenuHiddenConverter}}"
                             VerticalAlignment="Top"
@@ -955,11 +955,11 @@
                                 Text="{Binding ViewModel.StatusText, Mode=OneWay}"
                                 Visibility="{Binding ViewModel.StatusText, Mode=OneWay, Converter={StaticResource visConverter}}" />
                         </StackPanel>
-                        <!--  Responsive VisualStates  -->
+                        --><!--  Responsive VisualStates  --><!--
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup>
                                 <VisualState>
-                                    <!--  VisualState for 8" tablet portrait  -->
+                                    --><!--  VisualState for 8" tablet portrait  --><!--
                                     <VisualState.StateTriggers>
                                         <AdaptiveTrigger MinWindowWidth="{StaticResource SnapPoint8Portrait}" />
                                     </VisualState.StateTriggers>
@@ -976,6 +976,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style>-->
 
 </ResourceDictionary>

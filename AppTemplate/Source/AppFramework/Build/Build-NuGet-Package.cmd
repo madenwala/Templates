@@ -40,7 +40,7 @@ SET NUGET_ARGS=^
 nuget pack %PACKAGENAME%.nuspec %NUGET_ARGS%
     IF %ERRORLEVEL% NEQ 0 GOTO END
 
-nuget push Output\%PACKAGENAME%.%VERSION%.nupkg -Source https://www.nuget.org/api/v2/package
+//nuget push Output\%PACKAGENAME%.%VERSION%.nupkg -Source https://www.nuget.org/api/v2/package
  
 :END
 

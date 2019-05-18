@@ -8,8 +8,8 @@
     xmlns:behaviors="using:AppFramework.UI.Behaviors">
 
     <ResourceDictionary.MergedDictionaries>
-        <resources:Common />
-        <resources:PlatformSpecific />
+        <!--<resources:Common />
+        <resources:PlatformSpecific />-->
     </ResourceDictionary.MergedDictionaries>
     
 </ResourceDictionary>
