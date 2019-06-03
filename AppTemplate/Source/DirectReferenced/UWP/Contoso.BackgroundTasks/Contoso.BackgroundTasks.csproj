@@ -113,10 +113,6 @@
       <Project>{71747eed-1a8c-497a-bb4e-55ac0292122d}</Project>
       <Name>AppFramework.Core.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\src\AppFramework.Core.Uwp\AppFramework.Uwp.csproj">
-      <Project>{65f2272c-d17a-45be-982a-c6637407657a}</Project>
-      <Name>AppFramework.Uwp</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\..\..\src\AppFramework.Core\AppFramework.Core.csproj">
       <Project>{37c110aa-28eb-4c89-9a3b-12a0effdff7c}</Project>
       <Name>AppFramework.Core</Name>
