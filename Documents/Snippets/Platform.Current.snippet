@@ -2,13 +2,23 @@
 <CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
   <CodeSnippet Format="1.0.0">
     <Header>
-      <Title>PlatformAdapter.Current</Title>
+      <Title>Platform.Current</Title>
+      <Description>Code snippet for Platform.Current command</Description>
       <Author>Mohammed Adenwala</Author>
       <Shortcut>pla</Shortcut>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
     </Header>
     <Snippet>
+      <Declarations>
+        <Literal Editable="false">
+          <ID>PlatformCurrent</ID>
+          <Function>SimpleTypeName(global::AppFramework.Core)</Function>
+        </Literal>
+      </Declarations>
       <Code Language="CSharp">
-        <![CDATA[Platform.Current]]>
+        <![CDATA[$PlatformCurrent$.Platform.Current]]>
       </Code>
     </Snippet>
   </CodeSnippet>

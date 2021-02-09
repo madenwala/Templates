@@ -2,9 +2,10 @@
 <CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
   <CodeSnippet Format="1.0.0">
     <Header>
-      <Title>Property UserControl</Title>
+      <Title>Xamarin Bindable Property</Title>
+      <Description>Creates a binding property for a Xamarin project.</Description>
       <Author>Mohammed Adenwala</Author>
-      <Shortcut>propuc</Shortcut>
+      <Shortcut>propbp</Shortcut>
     </Header>
     <Snippet>
       <Declarations>
@@ -31,14 +32,14 @@
             get { return ($PropType$)GetValue($PropName$Property); }
             set { SetValue($PropName$Property, value); }
         }
-        public static readonly DependencyProperty $PropName$Property = DependencyProperty.Register(nameof($PropName$), typeof($PropType$), typeof($classname$), new PropertyMetadata(null, new PropertyChangedCallback($PropName$PropertyChanged)));
+        public static readonly BindableProperty $PropName$Property = BindableProperty.Create(nameof($PropName$), typeof($PropType$), typeof($classname$), default($PropType$), BindingMode.OneWay, propertyChanged: $PropName$PropertyChanged);
         
-        private static void $PropName$PropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+        private static void $PropName$PropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            if (sender is $classname$ control)
+            if (bindable is $classname$ control)
             {
-                // TODO Manage new/old values
-                // control.??? = ($PropType$)args.NewValue;
+                // TODO Manage new/old value
+                // control.??? = ($PropType$)newValue;
             }
         }]]>
       </Code>
