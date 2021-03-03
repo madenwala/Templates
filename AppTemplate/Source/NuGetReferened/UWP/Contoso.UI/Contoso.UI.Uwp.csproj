@@ -11,8 +11,8 @@
     <AssemblyName>Contoso.UI</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.17763.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.19041.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -232,6 +232,14 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\AppFramework\AppFramework.NetStandard\AppFramework.csproj">
+      <Project>{babc3ad0-0404-47fe-8f7c-4ace7272b8ad}</Project>
+      <Name>AppFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\AppFramework\AppFramework.Uwp\AppFramework.Uwp.csproj">
+      <Project>{65f2272c-d17a-45be-982a-c6637407657a}</Project>
+      <Name>AppFramework.Uwp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Contoso.BackgroundTasks\Contoso.BackgroundTasks.Uwp.csproj">
       <Project>{d4785f25-1c67-4914-b049-6aa70d447212}</Project>
       <Name>Contoso.BackgroundTasks.Uwp</Name>
@@ -337,11 +345,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="AppFramework">
-      <Version>0.8.0-beta</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.0.8</Version>
+      <Version>6.2.12</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Services.Store.SDK">
       <Version>10.1705.16001</Version>

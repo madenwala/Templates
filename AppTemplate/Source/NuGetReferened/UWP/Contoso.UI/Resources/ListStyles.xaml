@@ -28,7 +28,7 @@
         <Setter Property="SelectionMode" Value="None" />
     </Style>
 
-    <!--PullToRefresh Styles-->
+    <!--PullToRefresh Styles--><!--
     <x:Double x:Key="PullToRefreshPullThreshold">100</x:Double>
     <Style TargetType="controls:PullToRefreshListView">
         <Setter Property="IsSwipeEnabled" Value="False" />
@@ -42,7 +42,7 @@
         <Setter Property="IsItemClickEnabled" Value="True" />
         <Setter Property="SelectionMode" Value="None" />
         <Setter Property="PullThreshold" Value="{StaticResource PullToRefreshPullThreshold}" />
-    </Style>
+    </Style>-->
 
     <!--ListViews-->
     <Style x:Key="HorizontalListViewStyle" TargetType="ListView">

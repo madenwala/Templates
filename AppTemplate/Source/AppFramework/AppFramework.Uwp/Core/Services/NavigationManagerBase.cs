@@ -793,9 +793,9 @@ namespace AppFramework.Core.Services
             // https://visualstudiogallery.msdn.microsoft.com/229b7858-2c6a-4073-886e-cbb79e851211/view/Reviews?sortBy=RatingDescending
             get
             {
-                if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher"))
-                    return Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.IsSupported();
-                else
+                //if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher"))
+                //    return Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.IsSupported();
+                //else
                     return false;
             }
         }
@@ -807,12 +807,12 @@ namespace AppFramework.Core.Services
             {
                 return _FeedbackCommand ?? (_FeedbackCommand = new GenericCommand("NavigateToFeedbackCommand", async () =>
                 {
-                    if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher"))
-                    {
-                        PlatformBase.CurrentCore.Analytics.Event("FeedbackLauncher");
-                        await Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.GetDefault().LaunchAsync();
-                    }
-                    else
+                    //if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher"))
+                    //{
+                    //    PlatformBase.CurrentCore.Analytics.Event("FeedbackLauncher");
+                    //    await Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.GetDefault().LaunchAsync();
+                    //}
+                    //else
                         await Task.CompletedTask;
                 }, () => this.IsFeedbackEnabled));
             }

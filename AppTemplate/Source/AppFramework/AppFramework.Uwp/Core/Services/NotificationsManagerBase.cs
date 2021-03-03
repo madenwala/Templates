@@ -18,8 +18,8 @@ namespace AppFramework.Core.Services
         /// </summary>
         protected override async Task OnInitializeAsync()
         {
-            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Microsoft.Services.Store.Engagement.StoreServicesEngagementManager"))
-                await Microsoft.Services.Store.Engagement.StoreServicesEngagementManager.GetDefault().RegisterNotificationChannelAsync();
+            //if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Microsoft.Services.Store.Engagement.StoreServicesEngagementManager"))
+            //    await Microsoft.Services.Store.Engagement.StoreServicesEngagementManager.GetDefault().RegisterNotificationChannelAsync();
             await base.OnInitializeAsync();
         }
 

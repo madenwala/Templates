@@ -3,12 +3,13 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:adduplex="using:AdDuplex"
-    xmlns:ads="using:Microsoft.Advertising.WinRT.UI"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="control"
     Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}"
     mc:Ignorable="d">
+
+    <!--xmlns:ads="using:Microsoft.Advertising.WinRT.UI"-->
 
     <UserControl.Resources>
         <!--  Snap points for responsive design  -->
@@ -31,8 +32,8 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource SnapPoint27}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="devCenterAd.Width" Value="728" />
-                        <Setter Target="devCenterAd.Height" Value="90" />
+                        <!--<Setter Target="devCenterAd.Width" Value="728" />
+                        <Setter Target="devCenterAd.Height" Value="90" />-->
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>
@@ -41,8 +42,8 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource SnapPoint23}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="devCenterAd.Width" Value="728" />
-                        <Setter Target="devCenterAd.Height" Value="90" />
+                        <!--<Setter Target="devCenterAd.Width" Value="728" />
+                        <Setter Target="devCenterAd.Height" Value="90" />-->
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>
@@ -51,8 +52,8 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource SnapPoint13}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="devCenterAd.Width" Value="640" />
-                        <Setter Target="devCenterAd.Height" Value="100" />
+                        <!--<Setter Target="devCenterAd.Width" Value="640" />
+                        <Setter Target="devCenterAd.Height" Value="100" />-->
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>
@@ -61,8 +62,8 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource SnapPoint8Landscape}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="devCenterAd.Width" Value="640" />
-                        <Setter Target="devCenterAd.Height" Value="100" />
+                        <!--<Setter Target="devCenterAd.Width" Value="640" />
+                        <Setter Target="devCenterAd.Height" Value="100" />-->
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>
@@ -71,8 +72,8 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource SnapPoint8Portrait}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="devCenterAd.Width" Value="320" />
-                        <Setter Target="devCenterAd.Height" Value="50" />
+                        <!--<Setter Target="devCenterAd.Width" Value="320" />
+                        <Setter Target="devCenterAd.Height" Value="50" />-->
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>
@@ -81,20 +82,20 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource SnapPointMinimum}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="devCenterAd.Width" Value="300" />
-                        <Setter Target="devCenterAd.Height" Value="50" />
+                        <!--<Setter Target="devCenterAd.Width" Value="300" />
+                        <Setter Target="devCenterAd.Height" Value="50" />-->
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <ads:AdControl
+        <!--<ads:AdControl
             x:Name="devCenterAd"
             Width="640"
             Height="100"
             VerticalAlignment="Center"
             AdRefreshed="DevCenterAdControl_AdRefreshed"
             ErrorOccurred="DevCenterAdControl_ErrorOccurred"
-            IsTapEnabled="False" />
+            IsTapEnabled="False" />-->
         <adduplex:AdControl
             x:Name="adDuplex"
             VerticalAlignment="Center"
