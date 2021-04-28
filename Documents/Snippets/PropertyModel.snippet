@@ -23,9 +23,34 @@
         <![CDATA[private $PropType$ _$PropName$;
         public $PropType$ $PropName$
         {
-            get { return _$PropName$; }
-            set { this.SetProperty(ref _$PropName$, value); }
+            get => _$PropName$;
+            set => SetProperty(ref _$PropName$, value);
         }]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Property Command</Title>
+      <Author>Mohammed Adenwala</Author>
+      <Shortcut>propc</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>PropType</ID>
+          <ToolTip>Replace with a property type.</ToolTip>
+          <Default>AsyncCommand</Default>
+        </Literal>
+        <Literal>
+          <ID>PropName</ID>
+          <ToolTip>Replace with a property name.</ToolTip>
+          <Default>MyPropertyName</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="CSharp">
+        <![CDATA[private $PropType$ _$PropName$;
+        public ICommand $PropName$ => _$PropName$ ??= new(null);]]>
       </Code>
     </Snippet>
   </CodeSnippet>
