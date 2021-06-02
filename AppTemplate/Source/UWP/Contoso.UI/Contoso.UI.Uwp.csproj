@@ -232,6 +232,14 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\AppFramework\AppFramework.NetStandard\AppFramework.NetStandard.csproj">
+      <Project>{babc3ad0-0404-47fe-8f7c-4ace7272b8ad}</Project>
+      <Name>AppFramework.NetStandard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AppFramework\AppFramework.Uwp\AppFramework.Uwp.csproj">
+      <Project>{65f2272c-d17a-45be-982a-c6637407657a}</Project>
+      <Name>AppFramework.Uwp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Contoso.BackgroundTasks\Contoso.BackgroundTasks.Uwp.csproj">
       <Project>{d4785f25-1c67-4914-b049-6aa70d447212}</Project>
       <Name>Contoso.BackgroundTasks.Uwp</Name>
@@ -337,9 +345,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="AppFramework">
-      <Version>0.8.0-beta</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.2</Version>
     </PackageReference>
