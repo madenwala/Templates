@@ -187,6 +187,8 @@ namespace AppFramework.Core
                 await this.CheckInitializationAsync(service.Value);
             }
 
+            this.Logger.Log(LogLevels.Debug, "Initializing services is complete!");
+
             //// Record the userID to analytics
             //this.Analytics.SetUser(this.AppInfo.UserID);
 
@@ -199,7 +201,6 @@ namespace AppFramework.Core
                 this.Analytics.Event("CurrentUICulture", System.Globalization.CultureInfo.CurrentUICulture.Name);
 
             }
-            this.Logger.Log(LogLevels.Debug, "Initializing services is complete!");
 
             // Register all background agents
             if (mode != InitializationModes.Background && this.BackgroundTasks != null)
