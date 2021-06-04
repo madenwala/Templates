@@ -6,17 +6,14 @@ using System.Runtime.CompilerServices;
 
 namespace AppFramework.Core.Models
 {
-    /// <summary>
-    /// Interface that all model objects should implement.
-    /// </summary>
     public interface IModel
-    {
+    { 
     }
 
     /// <summary>
     /// Implementation of <see cref="INotifyPropertyChanged"/> to simplify models.
     /// </summary>
-    public abstract class ModelBase : INotifyPropertyChanged, IModel
+    public abstract class BaseModel : INotifyPropertyChanged, IModel
     {
         #region Events
 

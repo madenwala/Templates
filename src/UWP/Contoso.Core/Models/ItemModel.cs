@@ -6,7 +6,7 @@ namespace Contoso.Core.Models
     /// <summary>
     /// Sample model class.
     /// </summary>
-    public sealed class ItemModel : UniqueModelBase
+    public sealed class ItemModel : BaseUniqueModel
     {
         #region Properties
 

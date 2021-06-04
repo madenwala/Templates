@@ -10,7 +10,7 @@ namespace AppFramework.Core.Models
     /// <summary>
     /// Implementation of <see cref="INotifyPropertyChanged"/> to simplify models that have a unique ID to represent the model.
     /// </summary>
-    public abstract class UniqueModelBase : ModelBase, IUniqueModel, IEquatable<IUniqueModel>
+    public abstract class BaseUniqueModel : BaseModel, IUniqueModel, IEquatable<IUniqueModel>
     {
         #region Properties
 
@@ -45,12 +45,12 @@ namespace AppFramework.Core.Models
             return this.ID.GetHashCode();
         }
 
-        public static bool operator ==(UniqueModelBase obj1, IUniqueModel obj2)
+        public static bool operator ==(BaseUniqueModel obj1, IUniqueModel obj2)
         {
             return (object)obj1 == null || (object)obj2 == null ? Equals(obj1, obj2) : obj1.Equals(obj2);
         }
 
-        public static bool operator !=(UniqueModelBase obj1, IUniqueModel obj2)
+        public static bool operator !=(BaseUniqueModel obj1, IUniqueModel obj2)
         {
             return obj1 == null || obj2 == null ? !Equals(obj1, obj2) : !obj1.Equals(obj2);
         }

@@ -9,7 +9,7 @@ namespace AppFramework.Core.Services
         Task SignoutAsync();
     }
 
-    public abstract class ServiceBase : ModelBase, IDisposable
+    public abstract class ServiceBase : BaseModel, IDisposable
     {
         #region Properties
 

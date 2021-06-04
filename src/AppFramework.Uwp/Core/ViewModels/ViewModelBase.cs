@@ -22,7 +22,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace AppFramework.Core.ViewModels
 {
-    public abstract class ViewModelBase : ModelBase, IDisposable, IViewModel
+    public abstract class ViewModelBase : BaseModel, IDisposable, IViewModel
     {
         #region Constants
 

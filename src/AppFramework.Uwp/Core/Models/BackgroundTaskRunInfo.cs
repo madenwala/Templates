@@ -5,7 +5,7 @@ namespace AppFramework.Core.Models
     /// <summary>
     /// Used to hold background tasks execution status information.
     /// </summary>
-    public class BackgroundTaskRunInfo : ModelBase
+    public class BackgroundTaskRunInfo : BaseModel
     {
         /// <summary>
         /// Gets or sets the name of the task that was executed.

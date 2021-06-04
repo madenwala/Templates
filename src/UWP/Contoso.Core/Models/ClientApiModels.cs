@@ -7,7 +7,7 @@ namespace Contoso.Core.Models
     /// Base class for any response object returned by your client API.
     /// </summary>
     [JsonObject(Title = "RootObject")]
-    public abstract class ResponseBase : ModelBase
+    public abstract class ResponseBase : BaseModel
     {
     }
 

@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace AppFramework.Core.Models
 {
-    public abstract class TrackedChangesModelBase : ModelBase
+    public abstract class BaseTrackedChangesModel : BaseModel
     {
         private List<string> _changedProperties = new List<string>();
 

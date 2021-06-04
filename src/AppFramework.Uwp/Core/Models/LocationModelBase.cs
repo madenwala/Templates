@@ -21,7 +21,7 @@ namespace AppFramework.Core.Models
     /// Models that contain latitude/longitude can inherit from this class to gain ModelBase + ILocationModel functionality and
     /// any other functionality common to location based models.
     /// </summary>
-    public class LocationModel : ModelBase, ILocationModel
+    public class LocationModel : BaseModel, ILocationModel
     {
         #region Constants
 

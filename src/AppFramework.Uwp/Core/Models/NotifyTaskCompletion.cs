@@ -20,7 +20,7 @@ namespace AppFramework.Core.Models
     /// Task wrapper for async operations that are UI bindable. See https://msdn.microsoft.com/en-us/magazine/dn605875.aspx
     /// </summary>
     /// <typeparam name="TResult"></typeparam>
-    public sealed class NotifyTaskCompletion<TResult> : ModelBase, IDisposable, INotifyTaskCompletion
+    public sealed class NotifyTaskCompletion<TResult> : BaseModel, IDisposable, INotifyTaskCompletion
     {
         #region Variables
 

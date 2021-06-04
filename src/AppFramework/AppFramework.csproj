@@ -8,4 +8,8 @@
     <PackageReference Include="Microsoft.Maui" Version="6.0.100-preview.4.634" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Core\Commands\" />
+  </ItemGroup>
+
 </Project>

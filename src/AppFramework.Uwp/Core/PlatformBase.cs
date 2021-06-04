@@ -20,7 +20,7 @@ namespace AppFramework.Core
     /// Provides core app functionality for initializing and suspending your application,
     /// handling exceptions, and more.
     /// </summary>
-    public abstract partial class PlatformBase : ModelBase
+    public abstract partial class PlatformBase : BaseModel
     {
         #region Variables
 
