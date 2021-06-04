@@ -20,9 +20,12 @@
     <Compile Include="..\AppFramework\Core\Models\CustomExceptions.cs" Link="Core\Models\CustomExceptions.cs" />
     <Compile Include="..\AppFramework\Core\Models\IAuthenticatedUserProfile.cs" Link="Core\Models\IAuthenticatedUserProfile.cs" />
     <Compile Include="..\AppFramework\Core\Models\IView.cs" Link="Core\Models\IView.cs" />
+    <Compile Include="..\AppFramework\Core\Services\BaseService.cs" Link="Core\Services\BaseService.cs" />
+    <Compile Include="..\AppFramework\Core\Services\ILogger.cs" Link="Core\Services\ILogger.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Core\Services\" />
     <Folder Include="Core\ViewModels\" />
   </ItemGroup>
 

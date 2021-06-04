@@ -5,7 +5,7 @@ using Windows.ApplicationModel.VoiceCommands;
 
 namespace AppFramework.Core.Services
 {
-    public sealed class VoiceCommandManager : ServiceBase, IServiceSignout
+    public sealed class VoiceCommandManager : BaseService, IServiceSignout
     {
         #region Constructors
 

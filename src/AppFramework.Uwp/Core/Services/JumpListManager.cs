@@ -9,7 +9,7 @@ namespace AppFramework.Core.Services
     /// <summary>
     /// Base class providing access to the application currently executing specific to the platform this app is executing on.
     /// </summary>
-    public sealed class JumplistManager : ServiceBase, IServiceSignout
+    public sealed class JumplistManager : BaseService, IServiceSignout
     {
         #region Properties
 

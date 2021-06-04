@@ -24,7 +24,7 @@ namespace AppFramework.Core
     {
         #region Variables
 
-        private static Dictionary<Type, ServiceBase> _services = new Dictionary<Type, ServiceBase>();
+        private static Dictionary<Type, BaseService> _services = new Dictionary<Type, BaseService>();
 
         #endregion Variables
 
@@ -215,7 +215,7 @@ namespace AppFramework.Core
         /// Initializes a service if not already initialized.
         /// </summary>
         /// <param name="service">Service instance to intialize.</param>
-        private async Task CheckInitializationAsync(ServiceBase service)
+        private async Task CheckInitializationAsync(BaseService service)
         {
             if (service == null)
                 throw new ArgumentNullException(nameof(service));
@@ -304,7 +304,7 @@ namespace AppFramework.Core
         /// </summary>
         /// <typeparam name="T">Type reference of the service to retrieve.</typeparam>
         /// <returns>Instance of type T if it was already initialized or null if not found.</returns>
-        protected internal static T GetService<T>() where T : ServiceBase
+        protected internal static T GetService<T>() where T : BaseService
         {
             if (_services.ContainsKey(typeof(T)))
                 return (T)_services[typeof(T)];
@@ -322,7 +322,7 @@ namespace AppFramework.Core
         /// Registers and intializes an instance of an adapter.
         /// </summary>
         /// <typeparam name="T">Type reference of the service to register and initialize.</typeparam>
-        protected internal static void SetService<T>(T instance) where T : ServiceBase
+        protected internal static void SetService<T>(T instance) where T : BaseService
         {
             // Shutdown the old instance of T
             var services = _services.Values.Where(f => f is T).ToArray();
@@ -335,7 +335,7 @@ namespace AppFramework.Core
             _services.Add(typeof(T), instance);
         }
 
-        protected internal static bool ContainsService<T>() where T : ServiceBase
+        protected internal static bool ContainsService<T>() where T : BaseService
         {
             if (_services.ContainsKey(typeof(T)))
                 return true;

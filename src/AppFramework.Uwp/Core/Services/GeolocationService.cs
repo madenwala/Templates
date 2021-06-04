@@ -10,7 +10,7 @@ using Windows.System;
 
 namespace AppFramework.Core.Services
 {
-    public sealed class GeolocationService : ServiceBase
+    public sealed class GeolocationService : BaseService
     {
         #region Variables
 

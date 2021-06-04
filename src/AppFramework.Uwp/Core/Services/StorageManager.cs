@@ -12,7 +12,7 @@ namespace AppFramework.Core.Services
     /// <summary>
     /// Base class for accessing storage on the platform currently being executed.
     /// </summary>
-    public sealed class StorageManager : ServiceBase, IServiceSignout
+    public sealed class StorageManager : BaseService, IServiceSignout
     {
         #region Constructors
 

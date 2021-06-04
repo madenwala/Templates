@@ -12,7 +12,7 @@ namespace AppFramework.Core.Services.Analytics
     /// <summary>
     /// Analytics wrapper for Flurry analytics service.
     /// </summary>
-    public sealed class FlurryAnalyticsService : AnalyticsServiceBase
+    public sealed class FlurryAnalyticsService : BaseAnalyticsService
     {
         public FlurryAnalyticsService(string key)
         {

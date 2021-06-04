@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace AppFramework.Core.Services.Analytics
 {
-    public sealed class AppCenterAnalyticsService : AnalyticsServiceBase
+    public sealed class AppCenterAnalyticsService : BaseAnalyticsService
     {
         public AppCenterAnalyticsService(string key)
         {

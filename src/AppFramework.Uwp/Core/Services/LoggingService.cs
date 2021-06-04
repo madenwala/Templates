@@ -19,7 +19,7 @@ using Windows.UI.Xaml;
 
 namespace AppFramework.Core.Services
 {
-    public sealed class LoggingService : ServiceBase
+    public sealed class LoggingService : BaseService
     {
         #region Constants 
 

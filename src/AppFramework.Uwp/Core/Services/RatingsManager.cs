@@ -10,7 +10,7 @@ namespace AppFramework.Core.Services
     /// <summary>
     /// Used to determine when and if a user should be prompted to rate the application being executed.
     /// </summary>
-    public sealed class RatingsManager : ServiceBase
+    public sealed class RatingsManager : BaseService
     {
         #region Properties
 

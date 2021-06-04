@@ -25,6 +25,7 @@ namespace AppFramework.Core.Services
     public interface ILogger
     {
         #region Methods
+
         void Log(string message, params object[] args);
 
         void LogException(Exception ex, string message= null, params object[] args);

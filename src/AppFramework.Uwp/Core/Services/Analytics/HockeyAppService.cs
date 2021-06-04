@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace AppFramework.Core.Services.Analytics
 {
-    public sealed class HockeyAppService : AnalyticsServiceBase
+    public sealed class HockeyAppService : BaseAnalyticsService
     {
         public HockeyAppService(string key, string supportEmailAddress)
         {

@@ -7,7 +7,7 @@ namespace AppFramework.Core.Services
     /// <summary>
     /// Base class providing access to the analytics service for the platform currently executing.
     /// </summary>
-    public abstract class AnalyticsServiceBase : ServiceBase
+    public abstract class BaseAnalyticsService : BaseService
     {
         #region Methods
         
@@ -85,16 +85,16 @@ namespace AppFramework.Core.Services
     /// If no analytics service was specified, this dummy class will be used which implements AnalyticsProviderBase but does not do anything.
     /// Used to prevent null value exceptions when any code tries to log to the analytics adapter.
     /// </summary>
-    public sealed class AnalyticsManager : AnalyticsServiceBase
+    public sealed class AnalyticsManager : BaseAnalyticsService
     {
         internal AnalyticsManager()
         {
-            this.Services = new List<AnalyticsServiceBase>();
+            this.Services = new List<BaseAnalyticsService>();
         }
 
-        private List<AnalyticsServiceBase> Services { get; set; }
+        private List<BaseAnalyticsService> Services { get; set; }
 
-        public void Register(AnalyticsServiceBase service)
+        public void Register(BaseAnalyticsService service)
         {
             if (service == null)
                 throw new ArgumentNullException(nameof(service));

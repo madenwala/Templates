@@ -10,11 +10,11 @@ namespace AppFramework.Core
         /// <summary>
         /// Gets access to the app info service of the platform currently executing.
         /// </summary>
-        internal AppInfoProviderBase AppInfo
+        internal BaseAppInfoProvider AppInfo
         {
             get
             {
-                var service = GetService<AppInfoProviderBase>();
+                var service = GetService<BaseAppInfoProvider>();
                 if (service == null)
                     throw new ArgumentNullException("Platform.AppInfo was never set!");
                 return service;
@@ -43,26 +43,26 @@ namespace AppFramework.Core
         /// <summary>
         /// Gets access to the notifications service of the platform currently executing. Provides you the ability to display toasts or manage tiles or etc on the executing platform.
         /// </summary>
-        public NotificationsManagerBase Notifications
+        public BaseNotificationsManager Notifications
         {
-            get { return GetService<NotificationsManagerBase>(); }
+            get { return GetService<BaseNotificationsManager>(); }
             protected set { SetService(value); }
         }
 
         /// <summary>
         /// Gets the ability to navigate to different parts of an application specific to the platform currently executing.
         /// </summary>
-        internal NavigationManagerBase NavigationBase
+        internal BaseNavigationManager NavigationBase
         {
-            get { return GetService<NavigationManagerBase>(); }
+            get { return GetService<BaseNavigationManager>(); }
         }
 
         /// <summary>
         /// Gets access to the app info service of the platform currently executing.
         /// </summary>
-        internal SharingManagerBase SharingManager
+        internal BaseSharingManager SharingManager
         {
-            get { return GetService<SharingManagerBase>(); }
+            get { return GetService<BaseSharingManager>(); }
             private set { SetService(value); }
         }
 

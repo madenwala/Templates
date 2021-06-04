@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace AppFramework.Core.Services
 {
-    public abstract class AuthorizationManagerBase : ServiceBase, IServiceSignout
+    public abstract class BaseAuthorizationManager : BaseService, IServiceSignout
     {
         #region Events
 
@@ -24,7 +24,7 @@ namespace AppFramework.Core.Services
 
         #region Constructors
 
-        internal AuthorizationManagerBase()
+        internal BaseAuthorizationManager()
         {
         }
 
@@ -68,7 +68,7 @@ namespace AppFramework.Core.Services
         #endregion
     }
 
-    public abstract class AuthorizationManagerBase<U> : AuthorizationManagerBase where U : IAuthenticatedUserProfile
+    public abstract class BaseAuthorizationManager<U> : BaseAuthorizationManager where U : IAuthenticatedUserProfile
     {
         #region Properties
 

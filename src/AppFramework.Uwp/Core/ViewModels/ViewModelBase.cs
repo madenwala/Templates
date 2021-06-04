@@ -208,7 +208,7 @@ namespace AppFramework.Core.ViewModels
             this.ViewParameter = e.Parameter;
             this.View.GotFocus += View_GotFocus;
 
-            var auth = PlatformBase.GetService<AuthorizationManagerBase>();
+            var auth = PlatformBase.GetService<BaseAuthorizationManager>();
             if (auth != null)
             {
                 this.IsUserAuthenticated = auth.IsAuthenticated();
@@ -303,7 +303,7 @@ namespace AppFramework.Core.ViewModels
             }
 
             // Logout of user authentication service
-            var auth = PlatformBase.GetService<AuthorizationManagerBase>();
+            var auth = PlatformBase.GetService<BaseAuthorizationManager>();
             if(auth != null)
                 auth.UserAuthenticatedStatusChanged -= AuthenticationManager_UserAuthenticated;
 
@@ -367,8 +367,8 @@ namespace AppFramework.Core.ViewModels
             {
                 this.ShowStatus(Strings.Account.TextUnauthorizedUser);
                 PlatformBase.CurrentCore.Logger.Log(LogLevels.Warning, $"{this.GetType().Name}.{callerName} - Unauthorized user exception (Parameters: {this.ViewParameter}) - {message}");
-                if (PlatformBase.ContainsService<AuthorizationManagerBase>())
-                    await PlatformBase.GetService<AuthorizationManagerBase>().SetUserAsync(null);
+                if (PlatformBase.ContainsService<BaseAuthorizationManager>())
+                    await PlatformBase.GetService<BaseAuthorizationManager>().SetUserAsync(null);
                 await this.ShowMessageBoxAsync(ct, Strings.Account.TextUnauthorizedUser, Strings.Account.TextUnauthorizedUserTitle);
             }
             else if (ex is UserFriendlyException)
@@ -1052,7 +1052,7 @@ namespace AppFramework.Core.ViewModels
 
         private async Task<bool> RefreshAccessTokenAsync(CancellationToken ct)
         {
-            var auth = PlatformBase.GetService<AuthorizationManagerBase>();
+            var auth = PlatformBase.GetService<BaseAuthorizationManager>();
             if (auth != null)
             {
                 PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, "Attempting to refresh access token...");
@@ -1061,7 +1061,7 @@ namespace AppFramework.Core.ViewModels
                     var user = await auth.GetRefreshAccessToken(ct);
                     PlatformBase.CurrentCore.Logger.Log(LogLevels.Information, "...access token refresh complete!");
                     if(user != null)
-                        return await PlatformBase.GetService<AuthorizationManagerBase>().SetUserAsync(user);
+                        return await PlatformBase.GetService<BaseAuthorizationManager>().SetUserAsync(user);
                 }
                 catch(UnauthorizedAccessException)
                 {

@@ -144,7 +144,7 @@ namespace AppFramework.UI
                     {
                         var view = CoreApplication.GetCurrentView();
                         
-                        NavigationManagerBase.AppWindows.Add(ApplicationView.GetApplicationViewIdForWindow(view.CoreWindow), view);
+                        BaseNavigationManager.AppWindows.Add(ApplicationView.GetApplicationViewIdForWindow(view.CoreWindow), view);
                     }
                 }
             }

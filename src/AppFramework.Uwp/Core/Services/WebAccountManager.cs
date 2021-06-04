@@ -9,7 +9,7 @@ using Windows.UI.ApplicationSettings;
 
 namespace AppFramework.Core.Services
 {
-    public sealed class WebAccountManager : ServiceBase, IServiceSignout
+    public sealed class WebAccountManager : BaseService, IServiceSignout
     {
         #region Enums
 

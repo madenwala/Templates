@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace Contoso.Core.Services
 {
-    public abstract class NavigationManagerBase : AppFramework.Core.Services.NavigationManagerBase
+    public abstract class NavigationManagerBase : AppFramework.Core.Services.BaseNavigationManager
     {
         #region Handle Activation Methods
 

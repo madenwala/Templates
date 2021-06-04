@@ -9,7 +9,7 @@ using Windows.UI.StartScreen;
 
 namespace AppFramework.Core.Services
 {
-    public abstract partial class NotificationsManagerBase : ServiceBase, IServiceSignout
+    public abstract partial class BaseNotificationsManager : BaseService, IServiceSignout
     {
         #region Methods
 
@@ -186,7 +186,7 @@ namespace AppFramework.Core.Services
         #endregion
     }
 
-    internal sealed class DefaultNotificationsManager : NotificationsManagerBase
+    internal sealed class DefaultNotificationsManager : BaseNotificationsManager
     {
         internal DefaultNotificationsManager()
         {

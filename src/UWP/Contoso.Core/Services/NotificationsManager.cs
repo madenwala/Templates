@@ -12,7 +12,7 @@ using Windows.UI.StartScreen;
 
 namespace Contoso.Core.Services
 {
-    internal sealed class NotificationsManager : NotificationsManagerBase
+    internal sealed class NotificationsManager : BaseNotificationsManager
     {
         #region Methods
 

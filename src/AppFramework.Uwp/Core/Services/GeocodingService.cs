@@ -11,7 +11,7 @@ namespace AppFramework.Core.Services
     /// <summary>
     /// Base class providing access to the geocoding service on the executing platform.
     /// </summary>
-    public sealed class GeocodingService : ServiceBase
+    public sealed class GeocodingService : BaseService
     {
         #region Constructors
 

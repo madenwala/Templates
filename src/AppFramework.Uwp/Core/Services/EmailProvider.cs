@@ -5,7 +5,7 @@ using Windows.Storage;
 
 namespace AppFramework.Core.Services
 {
-    public sealed class EmailProvider : ServiceBase
+    public sealed class EmailProvider : BaseService
     {
         #region Constructors
 

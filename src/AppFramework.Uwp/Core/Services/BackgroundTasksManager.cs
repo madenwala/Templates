@@ -9,7 +9,7 @@ namespace AppFramework.Core.Services
     /// <summary>
     /// Task manager is responsible for registering and unregistering all background tasks used by this application.
     /// </summary>
-    public abstract class BackgroundTasksManagerBase : ServiceBase, IServiceSignout
+    public abstract class BackgroundTasksManagerBase : BaseService, IServiceSignout
     {
         #region Properties
 

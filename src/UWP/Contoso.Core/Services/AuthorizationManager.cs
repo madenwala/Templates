@@ -9,7 +9,7 @@ using Windows.Storage;
 
 namespace Contoso.Core.Services
 {
-    public sealed class AuthorizationManager : AppFramework.Core.Services.AuthorizationManagerBase<UserResponse>
+    public sealed class AuthorizationManager : AppFramework.Core.Services.BaseAuthorizationManager<UserResponse>
     {
         #region Variables
 

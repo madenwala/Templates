@@ -9,7 +9,7 @@ namespace AppFramework.Core.Services
     /// <summary>
     /// Interface used to access the cryptography functions of the executing platform. Additional details of encryption implementation method: http://msdn.microsoft.com/en-us/library/windows/apps/windows.security.cryptography.dataprotection.dataprotectionprovider.aspx
     /// </summary>
-    public sealed class CryptographyProvider : ServiceBase
+    public sealed class CryptographyProvider : BaseService
     {
         #region Constructors
 
