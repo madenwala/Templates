@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="..\AppFramework\Core\Extensions\ObjectExtensions.cs" Link="Core\Extensions\ObjectExtensions.cs" />
     <Compile Include="..\AppFramework\Core\Models\BaseModel.cs" Link="Core\Models\BaseModel.cs" />
     <Compile Include="..\AppFramework\Core\Models\BaseTrackedChangesModel.cs" Link="Core\Models\BaseTrackedChangesModel.cs" />
     <Compile Include="..\AppFramework\Core\Models\BaseUniqueModel.cs" Link="Core\Models\BaseUniqueModel.cs" />

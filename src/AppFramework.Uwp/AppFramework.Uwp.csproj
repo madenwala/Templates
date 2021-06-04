@@ -113,7 +113,6 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <Compile Include="Core\Extensions\ObjectExtensions.cs" />
     <Compile Include="Core\Models\LocationModelBase.cs" />
     <Compile Include="Core\Models\LocationModelList.cs" />
     <Compile Include="Core\Models\ModelLists.cs" />
