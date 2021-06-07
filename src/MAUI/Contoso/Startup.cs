@@ -10,7 +10,7 @@ namespace Contoso
 		{
 			appBuilder
 				.UseFormsCompatibility()
-				.UseMauiApp<App>()
+				.UseMauiApp<Contoso.UI.App>()
 				.ConfigureFonts(fonts =>
 				{
 					fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

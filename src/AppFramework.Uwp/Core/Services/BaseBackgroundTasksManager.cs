@@ -9,7 +9,7 @@ namespace AppFramework.Core.Services
     /// <summary>
     /// Task manager is responsible for registering and unregistering all background tasks used by this application.
     /// </summary>
-    public abstract class BackgroundTasksManagerBase : BaseService, IServiceSignout
+    public abstract class BaseBackgroundTasksManager : BaseService, IServiceSignout
     {
         #region Properties
 
@@ -22,7 +22,7 @@ namespace AppFramework.Core.Services
         public CommandBase ManageBackgroundTasksCommand
         {
             // Deep linking to Settings app sections: https://msdn.microsoft.com/en-us/library/windows/apps/mt228342.aspx
-            get { return _ManageBackgroundTasksCommand ?? (_ManageBackgroundTasksCommand = new GenericCommand("ManageBackgroundTasksCommand", async () => await Launcher.LaunchUriAsync(new Uri("ms-settings:privacy-backgroundapps")))); }
+            get { return _ManageBackgroundTasksCommand ??= new GenericCommand("ManageBackgroundTasksCommand", async () => await Launcher.LaunchUriAsync(new Uri("ms-settings:privacy-backgroundapps"))); }
         }
 
         #endregion

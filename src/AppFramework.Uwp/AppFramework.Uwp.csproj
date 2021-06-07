@@ -116,6 +116,44 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Compile Include="..\AppFramework\Core\Enums.cs">
+      <Link>Core\Enums.cs</Link>
+    </Compile>
+    <Compile Include="..\AppFramework\Core\Extensions\ObjectExtensions.cs">
+      <Link>Core\Extensions\ObjectExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\AppFramework\Core\Models\BaseModel.cs">
+      <Link>Core\Models\BaseModel.cs</Link>
+    </Compile>
+    <Compile Include="..\AppFramework\Core\Models\BaseTrackedChangesModel.cs">
+      <Link>Core\Models\BaseTrackedChangesModel.cs</Link>
+    </Compile>
+    <Compile Include="..\AppFramework\Core\Models\BaseUniqueModel.cs">
+      <Link>Core\Models\BaseUniqueModel.cs</Link>
+    </Compile>
+    <Compile Include="..\AppFramework\Core\Models\CustomExceptions.cs">
+      <Link>Core\Models\CustomExceptions.cs</Link>
+    </Compile>
+    <Compile Include="..\AppFramework\Core\Models\IAuthenticatedUserProfile.cs">
+      <Link>Core\Models\IAuthenticatedUserProfile.cs</Link>
+    </Compile>
+    <Compile Include="..\AppFramework\Core\Models\IView.cs">
+      <Link>Core\Models\IView.cs</Link>
+    </Compile>
+    <Compile Include="..\AppFramework\Core\Services\BaseService.cs">
+      <Link>Core\Services\BaseService.cs</Link>
+    </Compile>
+    <Compile Include="..\AppFramework\Core\Services\ILogger.cs">
+      <Link>Core\Services\ILogger.cs</Link>
+    </Compile>
+    <Compile Include="..\AppFramework\Core\TypeUtility.cs">
+      <Link>Core\TypeUtility.cs</Link>
+    </Compile>
+    <Compile Include="Core\Commands\CommandBase.cs" />
+    <Compile Include="Core\Data\ClientApiBase.cs" />
+    <Compile Include="Core\Extensions\IDictionaryExtensions.cs" />
+    <Compile Include="Core\Extensions\IEnumerableExtensions.cs" />
+    <Compile Include="Core\Extensions\LongExtensions.cs" />
     <Compile Include="Core\Models\LocationModelBase.cs" />
     <Compile Include="Core\Models\LocationModelList.cs" />
     <Compile Include="Core\Models\ModelLists.cs" />
@@ -191,7 +229,7 @@
     <Compile Include="Core\Services\Analytics\HockeyAppService.cs" />
     <Compile Include="Core\Services\BaseAppInfoProvider.cs" />
     <Compile Include="Core\Services\BaseAuthorizationManager.cs" />
-    <Compile Include="Core\Services\BackgroundTasksManager.cs" />
+    <Compile Include="Core\Services\BaseBackgroundTasksManager.cs" />
     <Compile Include="Core\Services\CryptographyProvider.cs" />
     <Compile Include="Core\Services\EmailProvider.cs" />
     <Compile Include="Core\Services\GeocodingService.cs" />
@@ -340,12 +378,6 @@
       <Link>VERSION.txt</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AppFramework.NetStandard\AppFramework.NetStandard.csproj">
-      <Project>{babc3ad0-0404-47fe-8f7c-4ace7272b8ad}</Project>
-      <Name>AppFramework.NetStandard</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FlurryWin8SDK">

@@ -2,11 +2,11 @@
 
 namespace Contoso.Core.Models
 {
-    public sealed class AppSettingsLocal : AppSettingsLocalBase
+    public sealed class AppSettingsLocal : BaseAppSettingsLocal
     {
     }
 
-    public sealed class AppSettingsRoaming : AppSettingsRoamingBase
+    public sealed class AppSettingsRoaming : BaseAppSettingsRoaming
     {
     }
 }

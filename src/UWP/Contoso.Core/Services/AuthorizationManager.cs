@@ -1,5 +1,6 @@
 ﻿using AppFramework.Core;
 using AppFramework.Core.Models;
+using AppFramework.Core.Services;
 using Contoso.Core.Data;
 using Contoso.Core.Models;
 using System;
@@ -9,7 +10,7 @@ using Windows.Storage;
 
 namespace Contoso.Core.Services
 {
-    public sealed class AuthorizationManager : AppFramework.Core.Services.BaseAuthorizationManager<UserResponse>
+    public sealed class AuthorizationManager : BaseAuthorizationManager<UserResponse>
     {
         #region Variables
 

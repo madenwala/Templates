@@ -25,9 +25,9 @@ namespace AppFramework.Core
         /// <summary>
         /// Gets access to the geocoding service adapter implement of the platform currently executing.
         /// </summary>
-        internal BackgroundTasksManagerBase BackgroundTasks
+        internal BaseBackgroundTasksManager BackgroundTasks
         {
-            get { return GetService<BackgroundTasksManagerBase>(); }
+            get { return GetService<BaseBackgroundTasksManager>(); }
             private set { SetService(value); }
         }
 

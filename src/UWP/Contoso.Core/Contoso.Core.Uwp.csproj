@@ -196,10 +196,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\AppFramework.NetStandard\AppFramework.NetStandard.csproj">
-      <Project>{950e95ae-312d-4584-b9fc-25350c3889e6}</Project>
-      <Name>AppFramework.NetStandard</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\AppFramework.Uwp\AppFramework.Uwp.csproj">
       <Project>{65f2272c-d17a-45be-982a-c6637407657a}</Project>
       <Name>AppFramework.Uwp</Name>

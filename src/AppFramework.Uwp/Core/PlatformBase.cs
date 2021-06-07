@@ -42,21 +42,21 @@ namespace AppFramework.Core
 
         public static bool IsDebugMode { get; protected set; }
 
-        private AppSettingsLocalBase _AppSettingsLocal;
+        private BaseAppSettingsLocal _AppSettingsLocal;
         /// <summary>
         /// Gets local app settings for this app.
         /// </summary>
-        protected internal AppSettingsLocalBase AppSettingsLocalCore
+        protected internal BaseAppSettingsLocal AppSettingsLocalCore
         {
             get { return _AppSettingsLocal; }
             protected set { this.SetProperty(ref _AppSettingsLocal, value); }
         }
 
-        private AppSettingsRoamingBase _AppSettingsRoaming;
+        private BaseAppSettingsRoaming _AppSettingsRoaming;
         /// <summary>
         /// Gets roaming app settings for this app.
         /// </summary>
-        protected internal AppSettingsRoamingBase AppSettingsRoamingCore
+        protected internal BaseAppSettingsRoaming AppSettingsRoamingCore
         {
             get { return _AppSettingsRoaming; }
             protected set { this.SetProperty(ref _AppSettingsRoaming, value); }
@@ -606,8 +606,8 @@ namespace AppFramework.Core
 
     public abstract class PlatformBase<MainVM, AppSettingsL, AppSettingsR, WebVM> : PlatformBase
         where MainVM : ViewModelBase, new()
-        where AppSettingsL : AppSettingsLocalBase
-        where AppSettingsR : AppSettingsRoamingBase
+        where AppSettingsL : BaseAppSettingsLocal
+        where AppSettingsR : BaseAppSettingsRoaming
         where WebVM : WebViewModelBase
     {
         #region Variables

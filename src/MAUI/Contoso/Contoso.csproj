@@ -49,7 +49,18 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\..\AppFramework\AppFramework.csproj" />
-	  <ProjectReference Include="..\Contoso.Core\Contoso.Core.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Core\Models\" />
+	  <Folder Include="Core\Data\" />
+	  <Folder Include="Core\Extensions\" />
+	  <Folder Include="Core\Services\" />
+	  <Folder Include="Core\ViewModels\" />
+	  <Folder Include="UI\Controls\" />
+	  <Folder Include="UI\Behaviors\" />
+	  <Folder Include="UI\Extensions\" />
+	  <Folder Include="UI\Resources\" />
+	  <Folder Include="UI\Triggers\" />
 	</ItemGroup>
 
 </Project>

@@ -261,3 +261,4 @@ __pycache__/
 *.pyc
 /UniversalTemplate/Source/AppFramework/Build/Temp
 /AppTemplate/Source/AppFramework/Build/Temp
+/src/UWP/Contoso.UI/Services/AppInfoProvider.cs

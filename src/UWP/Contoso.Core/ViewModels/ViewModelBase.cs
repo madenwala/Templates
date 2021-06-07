@@ -1,4 +1,5 @@
 ﻿using AppFramework.Core.Models;
+using Contoso.Core;
 
 namespace Contoso.Core.ViewModels
 {
