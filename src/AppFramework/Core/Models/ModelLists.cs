@@ -7,10 +7,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.UI.Xaml.Data;
 
 namespace AppFramework.Core.Models
 {
@@ -18,7 +15,7 @@ namespace AppFramework.Core.Models
     /// Collection for holding model instances.
     /// </summary>
     /// <typeparam name="TItem">Type representing the items in this collection.</typeparam>
-    public class ModelList<TItem> : ObservableCollection<TItem>, IModel, ISupportIncrementalLoading, INotifyPropertyChanged where TItem : IModel
+    public class ModelList<TItem> : ObservableCollection<TItem>, IModel, INotifyPropertyChanged where TItem : IModel
     {
         #region Events
 
@@ -37,7 +34,6 @@ namespace AppFramework.Core.Models
 
         public ModelList(IEnumerable<TItem> items)
         {
-            this.CurrentPage = 1;
             if (items != null)
                 this.AddRange(items);
         }
@@ -213,66 +209,6 @@ namespace AppFramework.Core.Models
 
         #endregion
 
-        #region Paging Support
-
-        private bool _IsLoadingMore;
-        public bool IsLoadingMore
-        {
-            get { return _IsLoadingMore; }
-            private set { this.SetProperty(ref _IsLoadingMore, value); }
-        }
-
-        private bool _hasMoreItems = false;
-        public bool HasMoreItems
-        {
-            get { return _hasMoreItems; }
-            set { _hasMoreItems = value; }
-        }
-
-        public int CurrentPage { get; private set; }
-
-        public IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint count)
-        {
-            if (this.IsLoadingMore)
-                throw new InvalidOperationException("Only one operation in flight at a time");
-
-            IsLoadingMore = true;
-
-            return System.Runtime.InteropServices.WindowsRuntime.AsyncInfo.Run((c) => LoadMoreItemsAsync(c, count));
-        }
-
-        private async Task<LoadMoreItemsResult> LoadMoreItemsAsync(CancellationToken ct, uint count)
-        {
-            try
-            {
-                if (this.LoadMoreItemsFunction != null)
-                {
-                    var items = await this.LoadMoreItemsFunction();
-
-                    if (items != null)
-                    {
-                        this.CurrentPage++;
-                        var baseIndex = this.Count;
-                        this.AddRange(items);
-
-                        this.HasMoreItems = items.Count != 0;
-                        return new LoadMoreItemsResult { Count = (uint)items.Count };
-                    }
-                }
-            }
-            finally
-            {
-                this.IsLoadingMore = false;
-            }
-
-            this.HasMoreItems = false;
-            return new LoadMoreItemsResult { Count = 0 };
-        }
-
-        public Func<Task<IList<TItem>>> LoadMoreItemsFunction { private get; set; }
-
-        #endregion
-
         #endregion
     }
 
@@ -322,10 +258,8 @@ namespace AppFramework.Core.Models
         public void AddRange(IEnumerable<TItem> items, bool mergeProperties)
         {
             if (items != null)
-            {
                 foreach (var item in items)
                     this.Add(item, mergeProperties);
-            }
         }
 
         public void UpdateRange(IEnumerable<TItem> items, bool mergeProperties = false)

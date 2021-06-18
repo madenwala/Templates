@@ -140,6 +140,9 @@
     <Compile Include="..\AppFramework\Core\Models\IView.cs">
       <Link>Core\Models\IView.cs</Link>
     </Compile>
+    <Compile Include="..\AppFramework\Core\Models\ModelLists.cs">
+      <Link>Core\Models\ModelLists.cs</Link>
+    </Compile>
     <Compile Include="..\AppFramework\Core\Services\BaseService.cs">
       <Link>Core\Services\BaseService.cs</Link>
     </Compile>
@@ -156,7 +159,7 @@
     <Compile Include="Core\Extensions\LongExtensions.cs" />
     <Compile Include="Core\Models\LocationModelBase.cs" />
     <Compile Include="Core\Models\LocationModelList.cs" />
-    <Compile Include="Core\Models\ModelLists.cs" />
+    <Compile Include="Core\Models\PagingModelLists.cs" />
     <Compile Include="Core\Models\NotifyTaskCompletion.cs" />
     <Compile Include="Core\Serializers.cs" />
     <Compile Include="Core\Services\Analytics\AppCenterAnalyticsService.cs" />
