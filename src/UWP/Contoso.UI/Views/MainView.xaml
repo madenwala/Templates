@@ -1,4 +1,4 @@
-﻿<views:MainViewBase
+﻿<views:BaseMainView
     x:Name="pageRoot"
     x:Class="Contoso.UI.Views.MainView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -50,4 +50,4 @@
         </controls:BodyPanel.BodyContent>
     </controls:BodyPanel>
 
-</views:MainViewBase>
+</views:BaseMainView>

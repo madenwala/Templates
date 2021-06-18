@@ -10,7 +10,7 @@ namespace AppFramework.UI.Controls
     /// Base class for custom controls.  Provides plumbing for view model support and x:Bind just like the ViewBase.
     /// </summary>
     /// <typeparam name="TViewModel"></typeparam>
-    public abstract class ContentControlBase<TViewModel> : ContentControl where TViewModel : ViewModelBase
+    public abstract class ContentControlBase<TViewModel> : ContentControl where TViewModel : BaseViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

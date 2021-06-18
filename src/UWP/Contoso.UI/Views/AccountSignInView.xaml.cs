@@ -1,4 +1,5 @@
 ﻿using AppFramework.Core;
+using AppFramework.UI.Views;
 using Contoso.Core.ViewModels;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
@@ -6,11 +7,11 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Contoso.UI.Views
 {
-    public abstract class AccountSignInViewBase : ViewBase<AccountSignInViewModel>
+    public abstract class BaseAccountSignInView : BaseView<AccountSignInViewModel>
     {
     }
 
-    public sealed partial class AccountSignInView : AccountSignInViewBase
+    public sealed partial class AccountSignInView : BaseAccountSignInView
     {
         public AccountSignInView()
         {

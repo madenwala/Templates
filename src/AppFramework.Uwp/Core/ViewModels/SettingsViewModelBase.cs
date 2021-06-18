@@ -12,7 +12,7 @@ using Windows.Storage;
 
 namespace AppFramework.Core.ViewModels
 {
-    public abstract partial class SettingsViewModelBase : ViewModelBase
+    public abstract partial class SettingsViewModelBase : BaseViewModel
     {
         #region Properties
 

@@ -1,4 +1,4 @@
-﻿<views:AccountForgetViewBase
+﻿<views:BaseAccountForgetView
     x:Class="Contoso.UI.Views.AccountForgotView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -43,4 +43,4 @@
         </controls:BodyPanel.BodyContent>
     </controls:BodyPanel>
     
-</views:AccountForgetViewBase>
+</views:BaseAccountForgetView>

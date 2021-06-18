@@ -1,4 +1,5 @@
 ﻿using AppFramework.Core;
+using AppFramework.UI.Views;
 using Contoso.Core.ViewModels;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
@@ -6,11 +7,11 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Contoso.UI.Views
 {
-    public abstract class AccountForgetViewBase : ViewBase<AccountForgotViewModel>
+    public abstract class BaseAccountForgetView : BaseView<AccountForgotViewModel>
     {
     }
 
-    public sealed partial class AccountForgotView : AccountForgetViewBase
+    public sealed partial class AccountForgotView : BaseAccountForgetView
     {
         public AccountForgotView()
         {

@@ -98,7 +98,7 @@ namespace AppFramework.Core.Services
                 {
                     PlatformBase.CurrentCore.ShellMenuClose();
                     view.ScrollToTop();
-                    if (frame.DataContext is ViewModelBase vm)
+                    if (frame.DataContext is BaseViewModel vm)
                         await vm.RefreshAsync(false);
                     return;
                 }
@@ -259,9 +259,9 @@ namespace AppFramework.Core.Services
         /// <returns>True if allowed else false.</returns>
         private bool ViewModelHandleBackNavigation(Frame frame)
         {
-            if (frame.DataContext is ViewModelBase)
+            if (frame.DataContext is BaseViewModel)
             {
-                var vm = frame.DataContext as ViewModelBase;
+                var vm = frame.DataContext as BaseViewModel;
                 return vm.BackNavigationRequested();
             }
             else
@@ -275,9 +275,9 @@ namespace AppFramework.Core.Services
         /// <returns>True if allowed else false.</returns>
         private bool ViewModelHandleForwardNavigation(Frame frame)
         {
-            if (frame.DataContext is ViewModelBase)
+            if (frame.DataContext is BaseViewModel)
             {
-                var vm = frame.DataContext as ViewModelBase;
+                var vm = frame.DataContext as BaseViewModel;
                 return vm.ForwardNavigationRequested();
             }
             else
@@ -752,7 +752,7 @@ namespace AppFramework.Core.Services
         {
             get
             {
-                return _NewWindowCommand ?? (_NewWindowCommand = new GenericCommand<ViewModelBase>("NavigateToNewWindowCommand", async (e) =>
+                return _NewWindowCommand ?? (_NewWindowCommand = new GenericCommand<BaseViewModel>("NavigateToNewWindowCommand", async (e) =>
                 {
                     if(e != null && e.View != null)
                         await this.NewWindow(e.View.GetType(), e.ViewParameter);

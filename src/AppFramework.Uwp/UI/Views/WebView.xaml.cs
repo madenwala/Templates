@@ -7,7 +7,7 @@ using Windows.UI.Xaml;
 
 namespace AppFramework.UI.Views
 {
-    public abstract class WebViewBase : ViewBase<WebViewModelBase>
+    public abstract class WebViewBase : BaseView<WebViewModelBase>
     {
     }
 

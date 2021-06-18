@@ -1,4 +1,5 @@
 ﻿using AppFramework.Core;
+using AppFramework.UI.Views;
 using Contoso.Core;
 using Contoso.Core.ViewModels;
 using System.Threading.Tasks;
@@ -7,11 +8,11 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Contoso.UI.Views
 {
-    public abstract class MainViewBase : ViewBase<MainViewModel>
+    public abstract class BaseMainView : BaseView<MainViewModel>
     {
     }
 
-    public sealed partial class MainView : MainViewBase
+    public sealed partial class MainView : BaseMainView
     {
         public MainView()
         {

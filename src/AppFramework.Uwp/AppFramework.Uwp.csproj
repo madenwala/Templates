@@ -170,7 +170,7 @@
     <Compile Include="UI\Views\WebView.xaml.cs">
       <DependentUpon>WebView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Views\ViewBase.InterstitialAds.cs" />
+    <Compile Include="UI\Views\BaseView.InterstitialAds.cs" />
     <PRIResource Include="Core\Strings\en-US\WebBrowser.resw">
       <Generator>ReswFileCodeGenerator</Generator>
       <LastGenOutput>WebBrowser.cs</LastGenOutput>
@@ -264,7 +264,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Core\ViewModels\CollectionViewModelBase.cs" />
-    <Compile Include="Core\ViewModels\ViewModelBase.cs" />
+    <Compile Include="Core\ViewModels\BaseViewModel.cs" />
     <Compile Include="Core\ViewModels\WebViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\App.cs" />
@@ -321,7 +321,7 @@
     <Compile Include="UI\Triggers\NotDeviceFamilyTrigger.cs" />
     <Compile Include="UI\Triggers\SplitViewTrigger.cs" />
     <Compile Include="UI\Triggers\TabletModeTrigger.cs" />
-    <Compile Include="UI\Views\ViewBase.cs" />
+    <Compile Include="UI\Views\BaseView.cs" />
     <EmbeddedResource Include="Properties\AppFramework.Uwp.rd.xml" />
   </ItemGroup>
   <ItemGroup>

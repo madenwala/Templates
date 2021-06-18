@@ -18,7 +18,7 @@ namespace AppFramework.UI.Views
     /// Base class for all pages in your application.
     /// </summary>
     /// <typeparam name="TViewModel"></typeparam>
-    public abstract partial class ViewBase<TViewModel> : Page, IView, INotifyPropertyChanged, IViewScrollToTop where TViewModel : ViewModelBase
+    public abstract partial class BaseView<TViewModel> : Page, IView, INotifyPropertyChanged, IViewScrollToTop where TViewModel : BaseViewModel
     {
         #region Properties
 
@@ -63,7 +63,7 @@ namespace AppFramework.UI.Views
 
         #region Constructors
 
-        public ViewBase()
+        public BaseView()
         {
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
 

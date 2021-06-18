@@ -8,7 +8,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace AppFramework.Core.ViewModels
 {
-    public abstract class WebViewModelBase : ViewModelBase
+    public abstract class WebViewModelBase : BaseViewModel
     {
         #region Events
 

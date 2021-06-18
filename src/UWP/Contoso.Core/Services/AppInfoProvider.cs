@@ -54,7 +54,7 @@ namespace Contoso.Core.Services
             return base.OnInitializeAsync();
         }
 
-        public async Task<bool> PromptIfNoProPackEnabledAsync(ViewModelBase vm, CancellationToken ct = default(CancellationToken))
+        public async Task<bool> PromptIfNoProPackEnabledAsync(BaseViewModel vm, CancellationToken ct = default(CancellationToken))
         {
             if (this.IsProPackEnabled == false)
             {

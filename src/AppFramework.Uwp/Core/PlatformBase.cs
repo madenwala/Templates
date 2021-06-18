@@ -97,8 +97,8 @@ namespace AppFramework.Core
             private set { this.SetProperty(ref _BackgroundRegistrationTask, value); }
         }
 
-        private ViewModelBase _ViewModelCore;
-        protected internal ViewModelBase ViewModelCore
+        private BaseViewModel _ViewModelCore;
+        protected internal BaseViewModel ViewModelCore
         {
             get { return _ViewModelCore; }
             protected set { this.SetProperty(ref _ViewModelCore, value); }
@@ -605,7 +605,7 @@ namespace AppFramework.Core
     }
 
     public abstract class PlatformBase<MainVM, AppSettingsL, AppSettingsR, WebVM> : PlatformBase
-        where MainVM : ViewModelBase, new()
+        where MainVM : BaseViewModel, new()
         where AppSettingsL : BaseAppSettingsLocal
         where AppSettingsR : BaseAppSettingsRoaming
         where WebVM : WebViewModelBase

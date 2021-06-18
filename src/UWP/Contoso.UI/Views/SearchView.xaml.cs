@@ -1,15 +1,16 @@
 ﻿using AppFramework.Core;
+using AppFramework.UI.Views;
 using Contoso.Core.ViewModels;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 
 namespace Contoso.UI.Views
 {
-    public abstract class SearchViewBase : ViewBase<SearchViewModel>
+    public abstract class BaseSearchView : BaseView<SearchViewModel>
     {
     }
 
-    public sealed partial class SearchView : SearchViewBase
+    public sealed partial class SearchView : BaseSearchView
     {
         public SearchView()
         {

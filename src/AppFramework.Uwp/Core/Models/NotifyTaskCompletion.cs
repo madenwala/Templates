@@ -38,7 +38,7 @@ namespace AppFramework.Core.Models
         #region Properties
 
         private string Key { get; set; }
-        private ViewModelBase VM { get; set; }
+        private BaseViewModel VM { get; set; }
         private Func<CancellationToken, Task<TResult>> FuncTask { get; set; }
 
         private Task<TResult> _Task;
@@ -91,7 +91,7 @@ namespace AppFramework.Core.Models
         {
         }
 
-        public NotifyTaskCompletion(Func<CancellationToken, Task<TResult>> funcTask, ViewModelBase vm, string key)
+        public NotifyTaskCompletion(Func<CancellationToken, Task<TResult>> funcTask, BaseViewModel vm, string key)
         {
             if (funcTask == null)
                 throw new NullReferenceException(nameof(funcTask));

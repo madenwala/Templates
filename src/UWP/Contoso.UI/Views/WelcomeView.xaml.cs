@@ -1,4 +1,5 @@
 ﻿using AppFramework.Core;
+using AppFramework.UI.Views;
 using Contoso.Core.ViewModels;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
@@ -6,11 +7,11 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Contoso.UI.Views
 {
-    public abstract class WelcomeViewBase : ViewBase<WelcomeViewModel>
+    public abstract class BaseWelcomeView : BaseView<WelcomeViewModel>
     {
     }
 
-    public sealed partial class WelcomeView : WelcomeViewBase
+    public sealed partial class WelcomeView : BaseWelcomeView
     {
         public WelcomeView()
         {

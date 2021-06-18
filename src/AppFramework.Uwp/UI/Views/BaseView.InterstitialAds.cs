@@ -5,7 +5,7 @@ using System;
 
 namespace AppFramework.UI.Views
 {
-    public abstract partial class ViewBase<TViewModel> where TViewModel : ViewModelBase
+    public abstract partial class BaseView<TViewModel> where TViewModel : BaseViewModel
     {
         #region Interstitial Ads
 

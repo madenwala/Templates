@@ -1,6 +1,7 @@
 ﻿using AppFramework.Core;
 using AppFramework.Core.Extensions;
 using AppFramework.UI;
+using AppFramework.UI.Views;
 using Contoso.Core;
 using Contoso.Core.ViewModels;
 using Microsoft.Advertising.WinRT.UI;
@@ -14,11 +15,11 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Contoso.UI.Views
 {
-    public abstract class ShellViewBase : ViewBase<ShellViewModel>
+    public abstract class BaseShellView : BaseView<ShellViewModel>
     {
     }
     
-    public sealed partial class ShellView : ShellViewBase
+    public sealed partial class ShellView : BaseShellView
     {
         #region Constructors
 

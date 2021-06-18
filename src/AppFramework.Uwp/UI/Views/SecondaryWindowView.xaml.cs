@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace AppFramework.UI.Views
 {
-    public abstract class SecondaryWindowViewBase : ViewBase<ViewModelBase>
+    public abstract class SecondaryWindowViewBase : BaseView<BaseViewModel>
     {
     }
 

@@ -1,15 +1,16 @@
 ﻿using AppFramework.Core;
+using AppFramework.UI.Views;
 using Contoso.Core.ViewModels;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 
 namespace Contoso.UI.Views
 {
-    public abstract class DetailsViewBase : ViewBase<DetailsViewModel>
+    public abstract class BaseDetailsView : BaseView<DetailsViewModel>
     {
     }
 
-    public sealed partial class DetailsView : DetailsViewBase
+    public sealed partial class DetailsView : BaseDetailsView
     {
         public DetailsView()
         {

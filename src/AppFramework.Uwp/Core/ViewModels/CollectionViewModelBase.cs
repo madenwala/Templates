@@ -15,32 +15,32 @@ namespace AppFramework.Core.ViewModels
     /// <see cref="CollectionViewModelBase"/> can contain multiple ViewModels and set a current view model so that the frame can show appropriate 
     /// status data specific to the current view model.
     /// </summary>
-    public abstract class CollectionViewModelBase : ViewModelBase
+    public abstract class CollectionViewModelBase : BaseViewModel
     {
         #region Variables
         
         private LoadStateEventArgs _loadState;
-        private ModelList<ViewModelBase> _viewModelsLoaded = new ModelList<ViewModelBase>();
+        private ModelList<BaseViewModel> _viewModelsLoaded = new ModelList<BaseViewModel>();
 
         #endregion
 
         #region Properties
         
-        private ViewModelBase _CurrentViewModel;
+        private BaseViewModel _CurrentViewModel;
         /// <summary>
         /// Gets access to the current selected view model.
         /// </summary>
-        public ViewModelBase CurrentViewModel
+        public BaseViewModel CurrentViewModel
         {
             get { return _CurrentViewModel ?? this.ViewModels.FirstOrDefault(); }
             private set { this.SetProperty(ref _CurrentViewModel, value); }
         }
 
-        private ModelList<ViewModelBase> _ViewModels = new ModelList<ViewModelBase>();
+        private ModelList<BaseViewModel> _ViewModels = new ModelList<BaseViewModel>();
         /// <summary>
         /// Gets access to the collection of sub-viewmodels.
         /// </summary>
-        protected ModelList<ViewModelBase> ViewModels
+        protected ModelList<BaseViewModel> ViewModels
         {
             get { return _ViewModels; }
             private set { this.SetProperty(ref _ViewModels, value); }
@@ -113,7 +113,7 @@ namespace AppFramework.Core.ViewModels
         /// Sets the current ViewModel that is active and visible.
         /// </summary>
         /// <param name="vm"></param>
-        internal async Task SetCurrentAsync(ViewModelBase vm)
+        internal async Task SetCurrentAsync(BaseViewModel vm)
         {
             if (vm == this)
                 return;
@@ -143,7 +143,7 @@ namespace AppFramework.Core.ViewModels
             this.PlatformBase.NavigationBase.GoForwardCommand.RaiseCanExecuteChanged();
         }
 
-        internal async Task LoadViewModelAsync(ViewModelBase vm)
+        internal async Task LoadViewModelAsync(BaseViewModel vm)
         {
             if (vm == null)
                 return;

@@ -1,4 +1,4 @@
-﻿<views:DetailsViewBase
+﻿<views:BaseDetailsView
     x:Class="Contoso.UI.Views.DetailsView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -55,4 +55,4 @@
         </controls:BodyPanel.BodyContent>
     </controls:BodyPanel>
     
-</views:DetailsViewBase>
+</views:BaseDetailsView>

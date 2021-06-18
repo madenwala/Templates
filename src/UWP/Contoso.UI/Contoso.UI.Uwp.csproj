@@ -143,7 +143,6 @@
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ViewBase.cs" />
     <Compile Include="Views\WelcomeView.xaml.cs">
       <DependentUpon>WelcomeView.xaml</DependentUpon>
     </Compile>

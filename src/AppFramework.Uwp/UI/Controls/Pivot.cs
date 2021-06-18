@@ -38,7 +38,7 @@ namespace AppFramework.UI.Controls
         {
             if (this.DataContext is CollectionViewModelBase parentVM)
             {
-                if (args.Item.DataContext is ViewModelBase vm)
+                if (args.Item.DataContext is BaseViewModel vm)
                 {
                     try
                     {
@@ -51,14 +51,14 @@ namespace AppFramework.UI.Controls
 
                     if(this.AutoLoadNextPivot)
                     {
-                        ViewModelBase nextVM = null;
+                        BaseViewModel nextVM = null;
                         try
                         {
                             var currentIndex = sender.Items.IndexOf(args.Item);
                             var nextIndex = currentIndex + 1;
                             nextIndex = nextIndex < sender.Items.Count ? nextIndex : 0;
                             var nextPi = sender.Items[nextIndex] as PivotItem;
-                            nextVM = nextPi.DataContext as ViewModelBase;
+                            nextVM = nextPi.DataContext as BaseViewModel;
 
                             // Load the next VM
                             await parentVM.LoadViewModelAsync(nextVM);

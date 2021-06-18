@@ -1,4 +1,4 @@
-﻿<views:SearchViewBase
+﻿<views:BaseSearchView
     x:Class="Contoso.UI.Views.SearchView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -35,4 +35,4 @@
         </controls:BodyPanel.BodyContent>
     </controls:BodyPanel>
 
-</views:SearchViewBase>
+</views:BaseSearchView>

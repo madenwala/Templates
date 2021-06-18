@@ -1,15 +1,16 @@
 ﻿using AppFramework.Core;
+using AppFramework.UI.Views;
 using Contoso.Core.ViewModels;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 
 namespace Contoso.UI.Views
 {
-    public abstract class NewViewBase : ViewBase<NewViewModel>
+    public abstract class BaseNewView : BaseView<NewViewModel>
     {
     }
 
-    public sealed partial class NewView : NewViewBase
+    public sealed partial class NewView : BaseNewView
     {
         public NewView()
         {

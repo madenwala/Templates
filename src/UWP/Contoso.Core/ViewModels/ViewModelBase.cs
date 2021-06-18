@@ -8,7 +8,7 @@ namespace Contoso.Core.ViewModels
         Platform Platform { get; }
     }
 
-    public abstract class ViewModelBase : AppFramework.Core.ViewModels.ViewModelBase, IViewModel
+    public abstract class ViewModelBase : AppFramework.Core.ViewModels.BaseViewModel, IViewModel
     {
         #region Properties
 

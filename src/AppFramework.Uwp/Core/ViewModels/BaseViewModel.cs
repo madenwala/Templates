@@ -22,7 +22,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace AppFramework.Core.ViewModels
 {
-    public abstract class ViewModelBase : BaseModel, IDisposable, IViewModel
+    public abstract class BaseViewModel : BaseModel, IDisposable, IViewModel
     {
         #region Constants
 
@@ -126,7 +126,7 @@ namespace AppFramework.Core.ViewModels
 
         #region Constructors
 
-        public ViewModelBase()
+        public BaseViewModel()
         {
             if (DesignMode.DesignModeEnabled)
                 return;
@@ -135,7 +135,7 @@ namespace AppFramework.Core.ViewModels
                 PlatformBase.CurrentCore.Geolocation.LocationChanged += Geolocation_LocationChanged;
         }
 
-        static ViewModelBase()
+        static BaseViewModel()
         {
             if (PlatformBase.CurrentCore.Geolocation != null)
             {
@@ -480,7 +480,7 @@ namespace AppFramework.Core.ViewModels
         /// Copies status data from another ViewModel.
         /// </summary>
         /// <param name="vm">ViewModel to copy status data from.</param>
-        protected void CopyStatus(ViewModelBase vm)
+        protected void CopyStatus(BaseViewModel vm)
         {
             if (vm != null)
             {

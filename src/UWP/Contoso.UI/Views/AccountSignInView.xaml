@@ -1,4 +1,4 @@
-﻿<views:AccountSignInViewBase
+﻿<views:BaseAccountSignInView
     x:Class="Contoso.UI.Views.AccountSignInView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -57,4 +57,4 @@
         </controls:BodyPanel.BodyContent>
     </controls:BodyPanel>
     
-</views:AccountSignInViewBase>
+</views:BaseAccountSignInView>

@@ -1,4 +1,5 @@
 ﻿using AppFramework.Core;
+using AppFramework.UI.Views;
 using Contoso.Core;
 using Contoso.Core.ViewModels;
 using System;
@@ -7,11 +8,11 @@ using Windows.UI.Xaml;
 
 namespace Contoso.UI.Views
 {
-    public abstract class SettingsViewBase : ViewBase<SettingsViewModel>
+    public abstract class BaseSettingsView : BaseView<SettingsViewModel>
     {
     }
 
-    public sealed partial class SettingsView : SettingsViewBase
+    public sealed partial class SettingsView : BaseSettingsView
     {
         private const string LAST_SELECTED_INDEX = "LastSelectedIndex";
 
